@@ -54,9 +54,9 @@ than the first two decades bought, and the record has not moved since 2024.
 Every step in the series is a human proof. There is no AI-attributed entry, and
 the flat 2026 shaded band is the point of drawing it.
 
-The chart's own corner note counts the improvements since 2010 and their combined
-size at plot time, so it cannot fall out of step with the vendored chronology. It
-currently reads seven improvements worth 0.0042 together.
+The chart's own corner note takes the 2010 record as its baseline and counts the
+six further improvements after it, so it cannot mix the 1990–2010 step into the
+fourteen-year comparison. They are worth 0.0024 together.
 
 ## How the chart was built
 
@@ -66,18 +66,14 @@ reads `matrix-multiplication-omega.csv` and plots the `omega` column against
 visible as a plateau rather than ending in mid-air, with every row also drawn as
 a point in human blue. A dotted horizontal line at 2 is labelled "conjectured
 limit = 2". Three rows are annotated by matching the `discoverer` column against
-Strassen, Coppersmith–Winograd and Alman et al. The axis is linear and clipped to
+Strassen, Coppersmith–Winograd and Alman et al.; when a name occurs more than
+once, the latest record is labelled. The axis is linear and clipped to
 1.96 to 2.9, which is what makes the post-1990 stretch readable at all; January
 2026 onward is shaded, and the legend carries the collection's shared human and
 AI key even though only human points exist.
 
 There is no `fetch.py` here. The chronology is transcribed by hand from a
 published record list, one `source_url` per row, so the CSV is edited directly.
-
-One artefact of the annotation is worth knowing before reading labels off the
-figure. `discoverer` is matched with a first-match lookup and the name
-Coppersmith–Winograd appears twice, at 2.496 in 1981 and 2.3755 in 1990, so the
-label lands on the earlier row.
 
 ## What it cannot support
 
@@ -93,8 +89,6 @@ label lands on the earlier row.
 - **Sixth-decimal-place movements are not comparable with percentage speedups**
   elsewhere in this collection. Nothing converts a change in an exponent into a
   quantity that can be set beside an 8% solver release or a 23% speedrun step.
-- **The label placement is a first-match lookup,** as noted above, so a
-  discoverer who set two records is labelled at the earlier one.
 - **An absence of AI steps on this axis says nothing about the finite problem.**
   The 4×4 complex result exists and is not plotted, by design.
 

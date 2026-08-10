@@ -71,10 +71,10 @@ than an endpoint ratio so that one noisy first or last observation cannot set
 the rate on its own. The seven fastest go in the left panel and the five fastest
 in the right.
 
-The three AI rates are not fitted. They are quotations, hardcoded as `AI_RATES`
-in the figure code with the interval each source published — Epoch AI's estimate
-for language-model pretraining, the ImageNet algorithmic-advances estimate, and
-the compute-to-AlexNet figure — and the entry each came from is named in the
+The three AI rates are not fitted. They are quotations read from
+`ai-efficiency-rates.csv` with the interval each source published — Epoch AI's
+estimate for language-model pretraining, the ImageNet algorithmic-advances
+estimate, and the compute-to-AlexNet figure — and the entry each came from is named in the
 constant. Keeping them as constants rather than recomputing them is deliberate:
 they are other people's published numbers, and this folder's arithmetic should
 not be mistaken for a re-estimate.

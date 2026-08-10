@@ -39,7 +39,8 @@ def main() -> None:
     ax.axhline(2, color=VENDOR, linestyle=":", linewidth=1)
     ax.text(1970, 2.025, "conjectured limit = 2", fontsize=8, color="#555555")
     for target in ("Strassen", "Coppersmith–Winograd", "Alman et al."):
-        row = next(row for row in rows if row["discoverer"] == target)
+        # Use the latest record when a discoverer appears more than once.
+        row = next(row for row in reversed(rows) if row["discoverer"] == target)
         ax.annotate(
             target,
             (int(row["year"]), float(row["omega"])),
@@ -56,13 +57,13 @@ def main() -> None:
     ax.legend(handles=common_legend(), frameon=False, fontsize=8)
     # Counted at plot time rather than written into the caption, so re-vendoring
     # the chronology cannot leave the annotation asserting a stale count.
-    recent = [value for year, value in zip(years, values) if year >= 2010]
-    earlier = [value for year, value in zip(years, values) if year < 2010]
+    baseline = next(value for year, value in zip(years, values) if year == 2010)
+    recent = [value for year, value in zip(years, values) if year > 2010]
     ax.text(
         0.98,
         0.22,
-        f"{len(recent)} human improvements since 2010, worth "
-        f"{earlier[-1] - recent[-1]:.4f} together;\nno LLM-attributed step in the series.",
+        f"{len(recent)} further human improvements after 2010, worth "
+        f"{baseline - recent[-1]:.4f} together;\nno LLM-attributed step in the series.",
         transform=ax.transAxes,
         fontsize=8.5,
         color="#333333",

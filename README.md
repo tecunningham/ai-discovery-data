@@ -49,13 +49,18 @@ the prose that reads these folders, not in a composite chart.
 
 ## Reproducing
 
-Figures need only Python and matplotlib, and no network:
+Figures need Python 3.12 and the pinned plotting dependencies, and no network:
 
 ```bash
+python3 -m pip install -r requirements.txt
 make figures                    # every folder redraws its own PNG
 make figure PROBLEM=cyber-curl  # or just one
 make check                      # every folder accounts for its data and sources
 ```
+
+The exact dependency versions are committed because matplotlib and its image
+stack can change PNG bytes between releases. CI runs the full byte-for-byte
+figure check from a clean install.
 
 Figures are byte-for-byte reproducible: run `make figures` twice and git should
 report nothing. If it does report something, that is a bug in the generator, not

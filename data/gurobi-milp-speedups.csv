@@ -1,0 +1,5 @@
+release,date,release_speedup,credit,source,source_url,note
+v10,2022-11-14,1.13,vendor,Gurobi 10.0 release announcement,https://www.gurobi.com/whats-new-gurobi-10-0/,13% overall performance improvement over v9.5 on the vendor benchmark
+v11,2023-12-04,1.086,vendor,Gurobi 11.0 release announcement,https://www.gurobi.com/whats-new-gurobi-11-0/,8.6% overall performance improvement over v10 on the vendor benchmark
+v12,2024-11-19,1.131,vendor,Gurobi 12.0 release announcement,https://www.gurobi.com/whats-new-gurobi-12-0/,13.1% overall performance improvement over v11 on the vendor benchmark
+v13,2025-11-18,1.082,vendor,Gurobi 13.0 release announcement,https://www.gurobi.com/whats-new-gurobi-13-0/,8.2% overall performance improvement over v12 on the vendor benchmark

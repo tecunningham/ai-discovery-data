@@ -1,0 +1,1527 @@
+project,year,finder,category,cves
+curl,2000,zillion,other,1
+curl,2003,Daniel Stenberg,other,1
+curl,2005,iDEFENSE,other,2
+curl,2005,Stefan Esser,other,1
+curl,2006,Ulf Harnhammar,other,1
+curl,2007,Kees Cook,other,1
+curl,2009,Scott Cantor,other,1
+curl,2009,David Kierznowski,other,1
+curl,2010,Dan Fandrich,other,1
+curl,2010,Wesley Miaw,other,1
+curl,2011,Richard Silverman,other,1
+curl,2012,product-security at Apple,other,1
+curl,2012,Dan Fandrich,other,1
+curl,2013,Marc Deslauriers,other,1
+curl,2013,Scott Cantor,other,1
+curl,2013,Timo Sirainen,other,1
+curl,2013,YAMADA Yasuharu,other,1
+curl,2013,Volema,other,1
+curl,2014,Tim Ruehsen,other,2
+curl,2014,Symeon Paraschoudis,other,1
+curl,2014,David Ryskalczyk,other,1
+curl,2014,Roland Moriz,other,1
+curl,2014,Richard Moore,other,1
+curl,2014,Steve Holme,other,1
+curl,2014,Paras Sethia,other,1
+curl,2015,Hanno Böck,other,2
+curl,2015,Daniel Stenberg,other,1
+curl,2015,Tomas Tomecek,other,1
+curl,2015,Kamil Dudka,other,1
+curl,2015,Yehezkel Horowitz,other,1
+curl,2015,Oren Souroujon,other,1
+curl,2015,Isaac Boukris,other,1
+curl,2015,Paras Sethia,other,1
+curl,2015,Marc Hesse at RethinkDB,other,1
+curl,2015,Andrey Labunets (Facebook),other,1
+curl,2016,Cure53,other,7
+curl,2016,Dan McNulty,other,2
+curl,2016,Luật Nguyễn,other,2
+curl,2016,Fernando Muñoz,other,2
+curl,2016,Kamil Dudka,other,1
+curl,2016,Daniel Stenberg,other,1
+curl,2016,Christian Heimes,other,1
+curl,2016,the Mitre CVE Assignment Team,other,1
+curl,2016,Red Hat,other,1
+curl,2016,Bru Rom,other,1
+curl,2016,the curl security team,other,1
+curl,2016,Marcelo Echeverria,other,1
+curl,2016,Guohui from Huawei WeiRan Labs,other,1
+curl,2016,Moti Avrahami,other,1
+curl,2016,Ray Satiro (Jay),other,1
+curl,2016,Isaac Boukris,other,1
+curl,2017,Brian Carpenter (Geeknik Labs),other,2
+curl,2017,Even Rouault,other,2
+curl,2017,John Schoenick,other,1
+curl,2017,OSS-Fuzz,fuzz,1
+curl,2017,Alex Nichols,other,1
+curl,2017,0xd34db347,other,1
+curl,2017,Max Dymond,other,1
+curl,2017,Brian Carpenter,other,1
+curl,2017,Yongji Ouyang,other,1
+curl,2017,Marcel Raad,other,1
+curl,2017,lijian996 on github,other,1
+curl,2017,Marcus Hoffmann,other,1
+curl,2018,Brian Carpenter (Geeknik Labs),other,2
+curl,2018,Dario Weisser,other,2
+curl,2018,Harry Sintonen,other,1
+curl,2018,Zhaoyang Wu,other,1
+curl,2018,Peter Wu,other,1
+curl,2018,OSS-Fuzz,fuzz,1
+curl,2018,OSS-fuzz,fuzz,1
+curl,2018,Duy Phan Thanh,other,1
+curl,2018,Craig de Stigter,other,1
+curl,2018,Zhouyihai Ding,other,1
+curl,2019,Thomas Vegas,other,2
+curl,2019,Wenxiang Qian of Tencent Blade Team,other,2
+curl,2019,Rich Mirch,other,1
+curl,2019,l00p3r,other,1
+curl,2019,Wenchao Li,other,1
+curl,2019,Brian Carpenter (Geeknik Labs),other,1
+curl,2020,Ospoco,other,1
+curl,2020,xnynx on github,other,1
+curl,2020,Varnavas Papaioannou,other,1
+curl,2020,Marc Aldorasi,other,1
+curl,2020,sn on hackerone,other,1
+curl,2020,Marek Szlagor,other,1
+curl,2020,Gregory Jefferis,other,1
+curl,2020,Jeroen Ooms,other,1
+curl,2021,Harry Sintonen,other,7
+curl,2021,Patrick Monnerat,other,2
+curl,2021,z2_,other,1
+curl,2021,Red Hat Product Security,other,1
+curl,2021,Mingtao Yang (Facebook),other,1
+curl,2021,Viktor Szakats,other,1
+curl,2022,Harry Sintonen,other,9
+curl,2022,Axel Chong,other,4
+curl,2022,Hiroki Kurosawa,other,3
+curl,2022,Trail of Bits,other,2
+curl,2022,Robby Simpson,other,1
+curl,2022,Florian Kohnhäuser,other,1
+curl,2022,Patrick Monnerat,other,1
+curl,2023,Harry Sintonen,other,9
+curl,2023,Hiroki Kurosawa,other,3
+curl,2023,Maksymilian Arciemowicz,other,1
+curl,2023,w0x42 on hackerone,other,1
+curl,2023,Jay Satiro,other,1
+curl,2023,selmelc on hackerone,other,1
+curl,2023,Wei Chong Tan,other,1
+curl,2023,Patrick Monnerat,other,1
+curl,2024,Hiroki Kurosawa,other,2
+curl,2024,z2_,other,2
+curl,2024,Harry Sintonen,other,1
+curl,2024,newfunction,other,1
+curl,2024,Dov Murik (Transmit Security),other,1
+curl,2024,Frank Yueh,other,1
+curl,2024,w0x42 on hackerone,other,1
+curl,2024,Dexter Gerig,other,1
+curl,2024,Dan Fandrich,other,1
+curl,2025,Hiroki Kurosawa,other,2
+curl,2025,Stanislav Fort (Aisle Research),ai,1
+curl,2025,Calvin Ruocco (Vector Informatik GmbH),other,1
+curl,2025,Google Big Sleep,ai,1
+curl,2025,z2_ on hackerone,other,1
+curl,2025,z2_,other,1
+curl,2025,Ankom Coper,other,1
+curl,2025,Christian Heusel,other,1
+curl,2025,Yihang Zhou,other,1
+curl,2026,Joshua Rogers (Aisle Research),ai,6
+curl,2026,Muhamad Arga Reksapati,other,4
+curl,2026,Stanislav Fort (Aisle Research),ai,3
+curl,2026,Harry Sintonen,other,2
+curl,2026,alienowo on hackerone (AntAISecurityLab),ai,1
+curl,2026,jjchuck on hackerone,other,1
+curl,2026,evergarden1123 on hackerone (AntAISecurityLab),ai,1
+curl,2026,Filipe Casal of Trail of Bits in collaboration with OpenAI,ai,1
+curl,2026,vectorqueue on hackerone (AntAISecurityLab),ai,1
+curl,2026,renjian on hackerone,other,1
+curl,2026,Eunsoo Kim (Autonomous Code Security team at Microsoft),ai,1
+curl,2026,Guannan Wang,other,1
+curl,2026,Zhanpeng Liu,other,1
+curl,2026,Jiashuo Liang,other,1
+curl,2026,Guancheng Li,other,1
+curl,2026,Ady Elouej,other,1
+curl,2026,vegagent on hackerone,other,1
+curl,2026,Andrew Nesbitt (powered by Mythos),ai,1
+curl,2026,Carlos Carrillo,other,1
+curl,2026,Dwij Mehta (O2 Lab,other,1
+curl,2026,Texas A&M University),other,1
+curl,2026,Osama Hamad,other,1
+curl,2026,Quac Tran and Ngoc Hieu,other,1
+curl,2026,Arkadi Vainbrand,other,1
+curl,2026,Daniel Wade,other,1
+curl,2026,Muhamad Arga Reksapati (HackerOne: nobcoder),other,1
+curl,2026,spectreglobalsec on hackerone,other,1
+curl,2026,Zhicheng Chen,other,1
+curl,2026,anonymous237 on hackerone,other,1
+firefox,2016,Nils,other,19
+firefox,2016,Mozilla developers,other,12
+firefox,2016,Abhishek Arya,other,7
+firefox,2016,Holger Fuhrmannek,other,6
+firefox,2016,Atte Kettunen,other,5
+firefox,2016,Multiple people,other,5
+firefox,2016,Samuel Groß,other,4
+firefox,2016,Wladimir Palant,other,4
+firefox,2016,Mei Wang,other,3
+firefox,2016,Brian Carpenter,other,3
+firefox,2016,Philipp,other,3
+firefox,2016,André Bargull,other,3
+firefox,2016,Yuyang Zhou,other,3
+firefox,2016,Franziskus Kiefer,other,3
+firefox,2016,echo,other,3
+firefox,2016,Andrew Krasichkov,other,3
+firefox,2016,Aral,other,3
+firefox,2016,insertscript,other,3
+firefox,2016,Jann Horn,other,3
+firefox,2016,Catalin Dumitru,other,2
+firefox,2016,Kris Maglione,other,2
+firefox,2016,Ken Okuyama,other,2
+firefox,2016,Rafael Gieschke,other,1
+firefox,2016,Richard Newman,other,1
+firefox,2016,Gavin Sharp,other,1
+firefox,2016,Developers at Cliqz.com,other,1
+firefox,2016,Daniel Browning,other,1
+firefox,2016,Raphael,other,1
+firefox,2016,Bob Owen,other,1
+firefox,2016,Markus Stange,other,1
+firefox,2016,Jordi Chancel,other,1
+firefox,2016,Daniel D.,other,1
+firefox,2016,Abdulrahman Alqabandi,other,1
+firefox,2016,Will Bamberg,other,1
+firefox,2016,Mats Palmgren,other,1
+firefox,2016,Gustavo Grieco,other,1
+firefox,2016,Xiaoyin Liu,other,1
+firefox,2016,Alexander Inführ,other,1
+firefox,2016,Obscured Team,other,1
+firefox,2016,Filipe Gomes,other,1
+firefox,2017,Nils,other,88
+firefox,2017,Mozilla developers and community,other,33
+firefox,2017,Nicolas Grégoire,other,15
+firefox,2017,Ivan Fratric of Google Project Zero,other,12
+firefox,2017,Chamal De Silva,other,12
+firefox,2017,Atte Kettunen,other,11
+firefox,2017,Holger Fuhrmannek,other,10
+firefox,2017,Jun Kokatsu,other,10
+firefox,2017,Jerri Rice,other,9
+firefox,2017,Jordi Chancel,other,8
+firefox,2017,Rh0,other,7
+firefox,2017,Abdulrahman Alqabandi,other,7
+firefox,2017,Anonymous,other,7
+firefox,2017,Abhishek Arya,other,7
+firefox,2017,Muneaki Nishimura,other,6
+firefox,2017,Seb Patane,other,6
+firefox,2017,Jann Horn,other,5
+firefox,2017,Looben Yang,other,5
+firefox,2017,Haik Aftandilian,other,5
+firefox,2017,Jose María Acuña,other,5
+firefox,2017,Anton Eliasson,other,4
+firefox,2017,David Kohlbrenner,other,4
+firefox,2017,Eric Lawrence of Chrome Security,other,4
+firefox,2017,Ronald Crane,other,4
+firefox,2017,Takeshi Terada,other,4
+firefox,2017,Chun Han Hsiao,other,4
+firefox,2017,Huzaifa Sidhpurwala,other,4
+firefox,2017,Petr Cerny,other,4
+firefox,2017,"Vladimir Klebanov, Franziskus Kiefer",other,4
+firefox,2017,Filipe Gomes,other,3
+firefox,2017,Armin Ebert,other,3
+firefox,2017,Anonymous working with Trend Micro's Zero Day Initiative,other,3
+firefox,2017,Heather Miller of Google Skia team,other,3
+firefox,2017,Tobias Klein,other,3
+firefox,2017,"Yuji Tounai of NTT Communications, Eili Masami of Tachibana Lab",other,3
+firefox,2017,F. Alonso (revskills),other,3
+firefox,2017,"Holger Fuhrmannek, Tyson Smith",other,3
+firefox,2017,Nicolas Trippar of Zimperium zLabs,other,3
+firefox,2017,Michał Bentkowski,other,3
+firefox,2017,Samuel Erb,other,3
+firefox,2017,Jonathan Birch and Microsoft Vulnerability Research,other,3
+firefox,2017,Frederik Braun,other,3
+firefox,2017,SkyLined,other,3
+firefox,2017,Oliver Wagner,other,3
+firefox,2017,Mathias Karlsson,other,3
+firefox,2017,Fraser Tweedale,other,3
+firefox,2017,Stephen Fewer,other,3
+firefox,2017,Arthur Edelstein,other,3
+firefox,2017,Rhys Enniks,other,3
+firefox,2017,"Omair, Andre Weissflog",other,3
+firefox,2017,Martin Thomson,other,3
+firefox,2017,François Marier,other,3
+firefox,2017,Khalil Zhani,other,3
+firefox,2017,Omair,other,3
+firefox,2017,cure53,other,3
+firefox,2017,Radek 'sysKin' Czyz,other,2
+firefox,2017,Jed Davis,other,2
+firefox,2017,Chris Hamono,other,2
+firefox,2017,Alex Bolton,other,2
+firefox,2017,Paul Theriault,other,2
+firefox,2017,Julian Hector,other,2
+firefox,2017,Oriol Brufau,other,2
+firefox,2017,Konark,other,2
+firefox,2017,Kris Maglione,other,1
+firefox,2017,"Paul Stone, Alex Chapman",other,1
+firefox,2017,Honza Bambas,other,1
+firefox,2017,Stuart Colville,other,1
+firefox,2017,Mustafa Hasan,other,1
+firefox,2017,Cullen Jennings,other,1
+firefox,2017,Jim Chen,other,1
+firefox,2017,Michal Zalewski,other,1
+firefox,2017,Mike Kaply,other,1
+firefox,2017,Chaitin Security Research Lab via Trend Micro's Zero Day Initiative,other,1
+firefox,2017,Haosheng Wang,other,1
+firefox,2017,Daniel Veditz,other,1
+firefox,2017,"Bob Clary, Looben Yang",other,1
+firefox,2017,Antonio Sanso,other,1
+firefox,2017,Amit Sangra,other,1
+firefox,2017,Xiaoyin Liu,other,1
+firefox,2017,Matt Howell,other,1
+firefox,2017,Anne van Kesteren,other,1
+firefox,2017,Raphael Saniyazov,other,1
+firefox,2017,Tooru Fujisawa,other,1
+firefox,2017,Kestrel,other,1
+firefox,2017,Thanh Bui,other,1
+firefox,2017,Jonathan Kew,other,1
+firefox,2017,Rayyan Bijoora,other,1
+firefox,2017,Ben Kelly,other,1
+firefox,2017,Ezra Caltum,other,1
+firefox,2017,Corey Bonnell,other,1
+firefox,2017,Eric Lawrence,other,1
+firefox,2017,Hanno Böck,other,1
+firefox,2017,Daniel Jackson,other,1
+firefox,2017,Sabri Haddouche,other,1
+firefox,2018,Nils,other,61
+firefox,2018,Mozilla developers and community,other,37
+firefox,2018,Abdulrahman Alqabandi,other,16
+firefox,2018,R at Zero Day LLC,other,9
+firefox,2018,Jun Kokatsu,other,8
+firefox,2018,Wladimir Palant,other,8
+firefox,2018,OSS-Fuzz,fuzz,7
+firefox,2018,Rob Wu,other,6
+firefox,2018,Alex Gaynor,other,6
+firefox,2018,"Damian Poddebniak, Christian Dresen, Jens Müller, Fabian Ising, Sebastian Schinzel, Simon Friedberger, Juraj Somorovsky, Jörg Schwenk",other,5
+firefox,2018,F. Alonso (revskills),other,5
+firefox,2018,David Black,other,5
+firefox,2018,Andrea Marchesini,other,4
+firefox,2018,Root Object,other,4
+firefox,2018,James Lee (@Windowsrcer) of Kryptos Logic,other,4
+firefox,2018,Looben Yang,other,3
+firefox,2018,Anonymous,other,3
+firefox,2018,xisigr of Tencent's Xuanwu Lab,other,3
+firefox,2018,James Grant,other,3
+firefox,2018,Ben Kelly,other,3
+firefox,2018,Masato Kinugawa,other,3
+firefox,2018,Ivan Fratric,other,3
+firefox,2018,Jimmy,other,3
+firefox,2018,anonymous,other,3
+firefox,2018,Zhanjia Song,other,3
+firefox,2018,Holger Fuhrmannek,other,3
+firefox,2018,Filippo Cavallarin,other,3
+firefox,2018,Jurgen Gaeremyn,other,3
+firefox,2018,Philipp,other,3
+firefox,2018,Omair,other,3
+firefox,2018,Atte Kettunen,other,3
+firefox,2018,Khalil Zhani,other,2
+firefox,2018,Tony Paloma,other,2
+firefox,2018,Andy McKay,other,2
+firefox,2018,Richard Zhu via Trend Micro's Zero Day Initiative,other,2
+firefox,2018,Jordi Chancel,other,2
+firefox,2018,Mozilla Developers,other,2
+firefox,2018,cure53,other,2
+firefox,2018,Jonathan Kingston,other,2
+firefox,2018,Jana Squires,other,2
+firefox,2018,"Rob Wu, Andrew Swan",other,2
+firefox,2018,James Lee of Kryptos Logic,other,2
+firefox,2018,Andreas Pehrson,other,1
+firefox,2018,Ron Warholic,other,1
+firefox,2018,Mario Gomes,other,1
+firefox,2018,Inko,other,1
+firefox,2018,Jerry Decime,other,1
+firefox,2018,Ronen Zilberman,other,1
+firefox,2018,Paul Theriault,other,1
+firefox,2018,Casper of Tencent's Xuanwu Lab,other,1
+firefox,2018,François Lajeunesse-Robert,other,1
+firefox,2018,rugk,other,1
+firefox,2018,Zohar,other,1
+firefox,2018,Huzaifa Sidhpurwala,other,1
+firefox,2018,Jesse Schwartzentruber,other,1
+firefox,2018,Andreas Perhson,other,1
+firefox,2018,Dennis Fuchs,other,1
+firefox,2018,Nicolas B. Pierron,other,1
+firefox,2018,Francois Lajeunesse Robert,other,1
+firefox,2018,Tadj Youssouf,other,1
+firefox,2018,Guyio,other,1
+firefox,2018,David Parks,other,1
+firefox,2018,Yannic Bonenberger,other,1
+firefox,2018,Ivan Fratric of Google Project Zero,other,1
+firefox,2018,Hanno Boeck,other,1
+firefox,2018,"Niklas Baumstark, Samuel Groß, Bruno Keith via Beyond Security’s SecuriTeam Secure Disclosure program",other,1
+firefox,2018,"Bruno Keith, Niklas Baumstark via Beyond Security’s SecuriTeam Secure Disclosure program",other,1
+firefox,2018,cgvwzq,other,1
+firefox,2018,"Björn Ruytenberg, 1lastBr3ath",other,1
+firefox,2018,Mathias Wu,other,1
+firefox,2018,Konark Modi,other,1
+firefox,2018,Yiğit Can Yilmaz,other,1
+firefox,2018,Omair working with iDefense Labs,other,1
+firefox,2018,Kestrel,other,1
+firefox,2018,Hanno Böck,other,1
+firefox,2019,Mozilla developers and community,other,36
+firefox,2019,Nils,other,34
+firefox,2019,Samuel Groß of Google Project Zero,other,9
+firefox,2019,Zhanjia Song,other,8
+firefox,2019,Hanno Böck,other,7
+firefox,2019,Rakesh Mane,other,7
+firefox,2019,AaylaSecura1138,other,6
+firefox,2019,Abdulrahman Alqabandi,other,6
+firefox,2019,Tran Tien Hung of Viettel Cyber Security,other,5
+firefox,2019,Paul Stone,other,5
+firefox,2019,Yoav Weiss,other,5
+firefox,2019,Anonymous,other,4
+firefox,2019,Luis Merino of X41 D-Sec,other,4
+firefox,2019,Boris Zbarsky,other,4
+firefox,2019,Gregory Smiley of Security Compass,other,4
+firefox,2019,Jonas Allmann,other,4
+firefox,2019,Linus Särud,other,4
+firefox,2019,Tyson Smith,other,4
+firefox,2019,Henry Corrigan-Gibbs,other,4
+firefox,2019,Luigi Gubello,other,4
+firefox,2019,Niklas Baumstark via TrendMicro's Zero Day Initiative,other,4
+firefox,2019,Yaniv Frank with SophosLabs,other,3
+firefox,2019,Jed Davis,other,3
+firefox,2019,Jann Horn,other,3
+firefox,2019,Ivan Fratric of Google Project Zero,other,3
+firefox,2019,Brandon Wieser,other,3
+firefox,2019,Bruno Keith & Niklas Baumstark from the phoenhex team,other,3
+firefox,2019,Joshua Graham,other,3
+firefox,2019,Daniel Veditz,other,3
+firefox,2019,Richard Zhu and Amat Cama via Trend Micro's Zero Day Initiative,other,3
+firefox,2019,Niklas Baumstark via Trend Micro's Zero Day Initiative,other,3
+firefox,2019,"<a href=""https://mdsattacks.com/#People"">Multiple independent researchers</a>",other,3
+firefox,2019,Luật Nguyễn,other,3
+firefox,2019,Thomas Imbert,other,3
+firefox,2019,crixer,other,3
+firefox,2019,"OSS-Fuzz, Eddie Lee",fuzz,3
+firefox,2019,Jeremy Fetiveau of SSD Secure Disclosure,other,3
+firefox,2019,Niklas Baumstark,other,3
+firefox,2019,Holger Fuhrmannek,other,3
+firefox,2019,Sebastian Pipping,other,3
+firefox,2019,Guido Vranken,other,3
+firefox,2019,Cody Crews,other,3
+firefox,2019,Kris Maglione,other,3
+firefox,2019,Gareth Heyes,other,3
+firefox,2019,Looben Yang,other,3
+firefox,2019,Alexandru Michis,other,3
+firefox,2019,Craig Disselkoen,other,3
+firefox,2019,Robert Strong,other,3
+firefox,2019,Mirko Brodesser,other,3
+firefox,2019,Paul Theriault,other,2
+firefox,2019,James Lee,other,2
+firefox,2019,"Samuel Groß of Google Project Zero, Coinbase Security",other,2
+firefox,2019,Coinbase Security,other,2
+firefox,2019,Chris Hacking,other,2
+firefox,2019,Andreas Wagner,other,2
+firefox,2019,Frederik Braun,other,2
+firefox,2019,Andrey,other,2
+firefox,2019,Hubert Kario,other,2
+firefox,2019,"Trishita Tiwari, Ari Trachtenberg",other,2
+firefox,2019,Ping Fan (Zetta) Ke of VXRL working with iDefense Labs,other,2
+firefox,2019,Seb Patane,other,2
+firefox,2019,Jan-Ivar Bruaroey,other,2
+firefox,2019,Andreas Pehrson,other,2
+firefox,2019,Qixun Zhao of Qihoo 360 Vulcan Team,other,2
+firefox,2019,Wladimir Palant,other,2
+firefox,2019,Thomas Henlich,other,2
+firefox,2019,"Jens Müller, Marcus Brinkmann, Damian Poddebniak, Sebastian Schinzel, Jörg Schwenk",other,2
+firefox,2019,Markus Vervier of X41 D-SEC GmbH,other,1
+firefox,2019,Wayne Mery,other,1
+firefox,2019,Brandon Perry,other,1
+firefox,2019,"Hanno Böck, Damian Poddebniak",other,1
+firefox,2019,Damian Poddebniak,other,1
+firefox,2019,Jeff Gilbert,other,1
+firefox,2019,Stephen Fewer,other,1
+firefox,2019,"Xiaoyin Liu, Vinothkumar Nagasayanan",other,1
+firefox,2019,potatoe,other,1
+firefox,2019,mlfbrown,other,1
+firefox,2019,"Hanno Böck, Anca Soncutean",other,1
+firefox,2019,"schattendeatroth, Hanno Böck",other,1
+firefox,2019,Jun Kokatsu,other,1
+firefox,2019,bignis,other,1
+firefox,2019,tzachyr,other,1
+firefox,2019,Peter af Geijerstam,other,1
+firefox,2019,Mark Banner,other,1
+firefox,2019,None,other,1
+firefox,2019,Zhen Zhou of NSFOCUS Security Team,other,1
+firefox,2019,Xiaoyin Liu,other,1
+firefox,2019,Johann Hofmann,other,1
+firefox,2019,Falko Strenzke,other,1
+firefox,2019,Google Project Zero,other,1
+firefox,2019,Emilio Cobos Álvarez,other,1
+firefox,2019,Adrian Karolak from ING Tech Poland,other,1
+firefox,2019,Yangzheng Li,other,1
+firefox,2019,Matheus Vrech,other,1
+firefox,2019,Kevin Brosnan,other,1
+firefox,2019,J.C. Jones,other,1
+firefox,2020,Mozilla developers and community,other,23
+firefox,2020,Mozilla developers,other,22
+firefox,2020,Natalie Silvanovich of Google Project Zero,other,11
+firefox,2020,Thomas Imbert,other,8
+firefox,2020,"Sohaib ul Hassan, Iaroslav Gridin, Ignacio M. Delgado-Lozano, Cesar Pereida García, Jesús-Javier Chi-Domínguez, Alejandro Cabrera Aldaya, and Billy Bob Brumley, Network and Information Security (NISEC) Group, Tampere University, Finland",other,8
+firefox,2020,Deian Stefan,other,7
+firefox,2020,Marcin 'Icewall' Noga of Cisco Talos,other,7
+firefox,2020,Kaizer Soze,other,7
+firefox,2020,Michał Bentkowski,other,6
+firefox,2020,Sergei Glazunov of Google Project Zero,other,6
+firefox,2020,Ophir LOJKINE,other,6
+firefox,2020,Irvan Kurniawan (@sourc7),other,6
+firefox,2020,Mikhail Oblozhikhin,other,5
+firefox,2020,Reported by Pawel Wylecial of REDTEAM.PL,other,5
+firefox,2020,Muneaki Nishimura,other,5
+firefox,2020,Xiaoyin Liu,other,5
+firefox,2020,Jason Kratzer,other,5
+firefox,2020,Francisco Alonso @revskills working with Javier Marcos of @JMPSec,other,4
+firefox,2020,worcester12345,other,4
+firefox,2020,Byron Campen,other,4
+firefox,2020,"Chuck Harmston, Robert Hardy",other,4
+firefox,2020,bo13oy,other,3
+firefox,2020,Vladimir Metnew,other,3
+firefox,2020,terjanq,other,3
+firefox,2020,Brian Carpenter,other,3
+firefox,2020,C.M.Chang,other,3
+firefox,2020,Jan-Ivar Bruaroey,other,3
+firefox,2020,"Jeff Gilbert, Kenneth Russell",other,3
+firefox,2020,Looben Yang,other,3
+firefox,2020,David Yesland,other,3
+firefox,2020,Cesar Pereida Garcia and the Network and Information Security Group (NISEC) at Tampere University,other,3
+firefox,2020,Iain Ireland,other,3
+firefox,2020,Pedro Oliveira,other,3
+firefox,2020,Rob Wu,other,3
+firefox,2020,Anne van Kesteren,other,3
+firefox,2020,"Carl Smith, working with Google Project Zero",other,3
+firefox,2020,belden,other,3
+firefox,2020,Steve Nyan Lin,other,3
+firefox,2020,SophosLabs Offensive Security team,other,3
+firefox,2020,Richard Thomas and Tom Chothia of University of Birmingham,other,3
+firefox,2020,Daniel Fröjdendahl,other,3
+firefox,2020,Lukas Bernhard,other,3
+firefox,2020,Mark Wodrich of Google,other,3
+firefox,2020,Aleksejs Popovs,other,3
+firefox,2020,Abdulrahman Alqabandi of Microsoft Browser Vulnerability Research,other,3
+firefox,2020,Moti Harmats,other,3
+firefox,2020,Bharadwaj Machiraju,other,3
+firefox,2020,Zijie Zhao,other,3
+firefox,2020,Gabriel Corona,other,3
+firefox,2020,Makoto Kato,other,3
+firefox,2020,tiebuchen,other,3
+firefox,2020,André Bargull,other,3
+firefox,2020,"Omair, Abraruddin Khan",other,3
+firefox,2020,Kai Engert,other,3
+firefox,2020,Pham Bao of VinCSS (Member of Vingroup),other,3
+firefox,2020,"Samy Kamkar, Ben Seri, and Gregory Vishnepolsky",other,3
+firefox,2020,Yassine Tioual,other,3
+firefox,2020,Samuel Attard via the Chrome Security Team,other,3
+firefox,2020,Christian Holler,other,3
+firefox,2020,Qihoo 360 ATA,other,2
+firefox,2020,Joshua Graham & Brendan Scarvell,other,2
+firefox,2020,Chiaki ISHIKAWA,other,2
+firefox,2020,Vinoth Kumar,other,2
+firefox,2020,James Forshaw of Google Project Zero,other,2
+firefox,2020,Niklas Baumstark,other,2
+firefox,2020,Giorgio Maone,other,2
+firefox,2020,Rayyan Bijoora,other,2
+firefox,2020,Kevin Higgs,other,2
+firefox,2020,Alex Mayorga,other,2
+firefox,2020,Ronald Crane,other,2
+firefox,2020,Riccardo Ancarani,other,2
+firefox,2020,Paul Theriault,other,2
+firefox,2020,Bruno Keith,other,2
+firefox,2020,Frederik Braun,other,2
+firefox,2020,Gunes Acar,other,2
+firefox,2020,Tyson Smith,other,2
+firefox,2020,Brian Carpenter via the ASAN Nightly project,other,2
+firefox,2020,Siye Lui,other,1
+firefox,2020,Prithwish Kumar Pal,other,1
+firefox,2020,Matthew Somerville,other,1
+firefox,2020,Google oss-fuzz,fuzz,1
+firefox,2020,Jurgen Gaeremyn,other,1
+firefox,2020,Stephan Lauffer,other,1
+firefox,2020,Abdulrahman Alqabandi,other,1
+firefox,2020,Jan Biniok,other,1
+firefox,2020,Avi Drissman of the Chrome security team,other,1
+firefox,2020,Matheus Vrech,other,1
+firefox,2020,Leon Visscher,other,1
+firefox,2020,Matthew Noorenberghe,other,1
+firefox,2020,fatal0,other,1
+firefox,2020,Juho Nurminen of Mattermost,other,1
+firefox,2020,Kestrel,other,1
+firefox,2020,Ahmed Elsobky (@0xSobky),other,1
+firefox,2020,Nicolas Silva,other,1
+firefox,2020,Damian Poddebniak,other,1
+firefox,2020,Konark Modi - @konarkmodi,other,1
+firefox,2020,Magnus Melin,other,1
+firefox,2020,"Andrea Palazzo, Pedro Oliveira",other,1
+firefox,2020,superxx,other,1
+firefox,2020,Luan Herrera,other,1
+firefox,2020,crixer,other,1
+firefox,2020,Karol Frejlich,other,1
+firefox,2020,Caelum van Ispelen,other,1
+firefox,2020,Rotem Kerner,other,1
+firefox,2020,Alon Zakai,other,1
+firefox,2020,Lijo A.T.,other,1
+firefox,2020,Cure53,other,1
+firefox,2020,360政企安全漏洞研究院 in Tianfu Cup 2020 International Cybersecurity Contest,other,1
+firefox,2020,Gary Kwong,other,1
+firefox,2020,Kevin Brosnan,other,1
+firefox,2020,Paul Stone,other,1
+firefox,2020,Sachin Raste,other,1
+firefox,2020,Chiaki Ishikawa,other,1
+firefox,2020,Andrew Sutherland,other,1
+firefox,2020,andrew g,other,1
+firefox,2020,David Schütz,other,1
+firefox,2021,Irvan Kurniawan,other,36
+firefox,2021,Mozilla developers and community,other,28
+firefox,2021,Mozilla developers,other,18
+firefox,2021,Rob Wu,other,7
+firefox,2021,Ademar Nowasky Junior,other,7
+firefox,2021,Armin Ebert,other,7
+firefox,2021,Yangkang of 360 ATA Team,other,7
+firefox,2021,"Samy Kamkar, Ben Seri, and Gregory Vishnepolsky",other,6
+firefox,2021,Abraruddin Khan and Omair,other,6
+firefox,2021,Lukas Bernhard,other,6
+firefox,2021,Gary Kwong,other,5
+firefox,2021,Cure53,other,5
+firefox,2021,Wladimir Palant working with Include Security,other,5
+firefox,2021,James Lee,other,5
+firefox,2021,Paul Zühlcke,other,4
+firefox,2021,pahhur,other,4
+firefox,2021,Marcin 'Icewall' Noga of Cisco Talos,other,4
+firefox,2021,Muneaki Nishimura,other,3
+firefox,2021,Masato Kinugawa,other,3
+firefox,2021,Andreas Pehrson,other,3
+firefox,2021,James Forshaw,other,3
+firefox,2021,Jordi Chancel,other,3
+firefox,2021,Nika Layzell,other,3
+firefox,2021,Daniel Santos,other,3
+firefox,2021,Christian Holler,other,3
+firefox,2021,Frederik Braun,other,3
+firefox,2021,Ronald Crane,other,3
+firefox,2021,(Unknown),other,3
+firefox,2021,Maor Kleinberger,other,3
+firefox,2021,Julien Cristau,other,3
+firefox,2021,Sergey Galich,other,3
+firefox,2021,Takeshi Terada,other,3
+firefox,2021,Raphael,other,3
+firefox,2021,Hou JingYi,other,3
+firefox,2021,Sunwoo Kim and Youngmin Kim of SNU CompSec Lab,other,3
+firefox,2021,bo13oy of Cyber Kunlun Lab,other,3
+firefox,2021,Irvan Kurniawan (@sourc7),other,3
+firefox,2021,Asumu Takikawa and Ioanna Dimitriou,other,3
+firefox,2021,chriscla,other,3
+firefox,2021,Raphael Smolik,other,3
+firefox,2021,Daniel Veditz,other,3
+firefox,2021,Ned Williamson,other,2
+firefox,2021,Jan-Ivar Bruaroey,other,2
+firefox,2021,Andrew Sutherland,other,2
+firefox,2021,"Hany Ragab, Enrico Barberis, Herbert Bos, and Cristiano Giuffrida from the VUSec group at VU Amsterdam",other,2
+firefox,2021,"Mozilla Developers, Abraruddin Khan and Omair",other,2
+firefox,2021,Neal Walfield,other,2
+firefox,2021,Abdulrahman Alqabandi,other,1
+firefox,2021,Eliya Stein,other,1
+firefox,2021,Chiaki ISHIKAWA,other,1
+firefox,2021,Damian Poddebniak,other,1
+firefox,2021,Abraruddin Khan and Omair working with Trend Micro Zero Day Initiative,other,1
+firefox,2021,J. Ryan Stinnett,other,1
+firefox,2021,Masato Kinugawa and Michał Bentkowski,other,1
+firefox,2021,Luca Moretto,other,1
+firefox,2021,fatal0,other,1
+firefox,2021,Vijay Tikudave,other,1
+firefox,2021,Brian Carpenter of Geeknik Labs & Farm,other,1
+firefox,2021,Anonymous working with Trend Micro's Zero Day Initiative,other,1
+firefox,2021,Tuan Vu Pham,other,1
+firefox,2021,Colin D. Munro,other,1
+firefox,2021,Andrew McCreight,other,1
+firefox,2021,Tyson Smith,other,1
+firefox,2021,Torsten Trumm,other,1
+firefox,2021,Participants on the Thunderbird E2EE Mailing List,other,1
+firefox,2021,Harshit Mahendra,other,1
+firefox,2021,Sebastian Hengst,other,1
+firefox,2021,Pascal Chevrel,other,1
+firefox,2021,Arturo Mejia,other,1
+firefox,2021,Peter Gerber,other,1
+firefox,2021,Damian Poddebniak and Fabian Ising,other,1
+firefox,2021,Muhammad R. Maulana,other,1
+firefox,2021,Youssef Sammouda,other,1
+firefox,2021,Amy Burnett working with Include Security,other,1
+firefox,2021,Jonathan Kingston,other,1
+firefox,2021,Rohan Sharma,other,1
+firefox,2021,Mattias Jacobsson,other,1
+firefox,2021,Hafiizh,other,1
+firefox,2021,Taiga Shirakura,other,1
+firefox,2021,Tavis Ormandy,other,1
+firefox,2021,Tavis Ormandy of Google Project Zero,other,1
+firefox,2021,Atila Butkovits,other,1
+firefox,2021,Jake Heath,other,1
+firefox,2021,Irwan,other,1
+firefox,2021,Pedro Batista,other,1
+firefox,2021,Kai Engert,other,1
+firefox,2021,brevilo,other,1
+firefox,2022,Irvan Kurniawan,other,39
+firefox,2022,Mozilla developers and community,other,37
+firefox,2022,Armin Ebert,other,34
+firefox,2022,Mozilla developers,other,15
+firefox,2022,Atte Kettunen,other,12
+firefox,2022,bo13oy of Cyber Kunlun Lab,other,9
+firefox,2022,Gary Kwong,other,9
+firefox,2022,Alesandro Ortiz,other,6
+firefox,2022,Luan Herrera,other,6
+firefox,2022,Mozilla Fuzzing Team,fuzz,5
+firefox,2022,Manfred Paul via Trend Micro's Zero Day Initiative,other,5
+firefox,2022,Ronald Crane,other,5
+firefox,2022,Gijs Kruitbosch,other,5
+firefox,2022,Sarah Jamie Lewis,other,5
+firefox,2022,Samuel Groß,other,5
+firefox,2022,Jannis Rautenstrauch,other,4
+firefox,2022,Rob Wu,other,4
+firefox,2022,James Lee,other,4
+firefox,2022,Gijs,other,4
+firefox,2022,Lukas Bernhard,other,4
+firefox,2022,Hafiizh,other,4
+firefox,2022,Peter Van der Beken,other,3
+firefox,2022,Mattias Jacobsson,other,3
+firefox,2022,Tavis Ormandy,other,3
+firefox,2022,Seb Patane,other,3
+firefox,2022,Abdulrahman Alqabandi,other,3
+firefox,2022,Johan Carlsson,other,3
+firefox,2022,Mart Gil Robles (Mart at FlowCrypt),other,3
+firefox,2022,Ed McManus,other,3
+firefox,2022,Mozilla Fuzzing Team and Hossein Lotfi of Trend Micro Zero Day Initiative,fuzz,3
+firefox,2022,Randell Jesup,other,3
+firefox,2022,Axel '0vercl0k' Souchet,other,3
+firefox,2022,Kirin,other,3
+firefox,2022,prada960808,other,3
+firefox,2022,Addison Crump and Jan-Erik Rediger,other,3
+firefox,2022,Mateusz Sionkowski,other,3
+firefox,2022,Trung Pham,other,3
+firefox,2022,Matheus Vrech,other,3
+firefox,2022,Chaobin Zhang,other,3
+firefox,2022,Cybeats PSI Team,other,3
+firefox,2022,Michal,other,3
+firefox,2022,Gertjan,other,3
+firefox,2022,Laurent Bigonville,other,3
+firefox,2022,akucybersec,other,3
+firefox,2022,Willy R. Vasquez at UT Austin,other,3
+firefox,2022,Axel Chong (@Haxatron),other,3
+firefox,2022,Satoki Tsuji,other,3
+firefox,2022,"Martin R. Albrecht and Dan Jones from the Information Security Group at Royal Holloway University London, Benjamin Dowling from Security of Advanced Systems Group, University of Sheffield and Sofía Celi from Brave Software",other,3
+firefox,2022,Karl and an Anonymous ASAN Nightly User,other,3
+firefox,2022,Andrei Enache,other,3
+firefox,2022,Anne van Kesteren and Karl Tomlinson,other,3
+firefox,2022,Dongsung Kim,other,3
+firefox,2022,scarlet,other,3
+firefox,2022,"Erik Kraft, Martin Schwarzl, and Andrew McCreight",other,3
+firefox,2022,Suhwan Song of SNU CompSec Lab,other,3
+firefox,2022,Nika Layzell,other,3
+firefox,2022,Matthias Zoellner,other,3
+firefox,2022,Dohyun Lee,other,3
+firefox,2022,"Wang Gang, Liu Jialei, Du Sihang, Huang Yi & Yang Kang of 360 ATA",other,2
+firefox,2022,attila,other,2
+firefox,2022,Muneaki Nishimura,other,2
+firefox,2022,Marian Laza,other,2
+firefox,2022,Thunderbird Team,other,2
+firefox,2022,Jed Davis,other,1
+firefox,2022,Wladimir Palant working with Include Security,other,1
+firefox,2022,"Kirtikumar Anandrao Ramchandani, Toshihito Kikuchi",other,1
+firefox,2022,Jack Wrenn,other,1
+firefox,2022,James Graham,other,1
+firefox,2022,"Kirtikumar Anandrao Ramchandani, Patrick Walker & Eric Lawrence",other,1
+firefox,2022,"DoHyun Lee (@l33d0hyun) of DNSLab, Korea University",other,1
+firefox,2022,Young Min Kim,other,1
+firefox,2022,Leo Balter,other,1
+firefox,2022,Aryan Sinha,other,1
+firefox,2022,Thunderbird user Johannes König,other,1
+firefox,2022,Mark B,other,1
+firefox,2022,Sohom Datta,other,1
+firefox,2022,Thunderbird team,other,1
+firefox,2022,Andrew McCreight,other,1
+firefox,2022,Linus Särud,other,1
+firefox,2022,Jonathan von Niessen,other,1
+firefox,2022,Attila Suszter,other,1
+firefox,2022,Eduardo Braun Prado,other,1
+firefox,2022,Gustavo Grieco,other,1
+firefox,2022,Amazon Malvertising Team,other,1
+firefox,2022,Peter Gerber,other,1
+firefox,2022,jannis,other,1
+firefox,2022,Gareth Heyes,other,1
+firefox,2022,Nickolay Olshevsky,other,1
+firefox,2022,Irwan,other,1
+firefox,2022,Hiroshige Hayashizaki,other,1
+firefox,2022,Agi Sferro,other,1
+firefox,2022,Christian Holler,other,1
+firefox,2022,Val Lorentz,other,1
+firefox,2022,Koh M. Nakagawa,other,1
+firefox,2022,None,other,1
+firefox,2022,Samuel Groß and Carl Smith of Google V8 Security,other,1
+firefox,2022,Timothy Nikkel,other,1
+firefox,2022,Sergey Galich,other,1
+firefox,2022,Axel Chong,other,1
+firefox,2022,Rhodri James,other,1
+firefox,2022,Jefferson Scher and Jayateertha Guruprasad,other,1
+firefox,2022,Kagami,other,1
+firefox,2022,Mozilla Developers,other,1
+firefox,2022,Pete Freitag,other,1
+firefox,2023,Irvan Kurniawan,other,30
+firefox,2023,Mozilla developers and community,other,23
+firefox,2023,Lukas Bernhard,other,22
+firefox,2023,sonakkbi,other,22
+firefox,2023,Hafiizh,other,20
+firefox,2023,Ronald Crane,other,17
+firefox,2023,Axel Chong (@Haxatron),other,11
+firefox,2023,Shaheen Fazim,other,10
+firefox,2023,P Umar Farooq,other,9
+firefox,2023,Yangkang of 360 ATA Team,other,9
+firefox,2023,Nika Layzell,other,7
+firefox,2023,Luan Herrera,other,6
+firefox,2023,Mozilla Developers,other,6
+firefox,2023,Holger Fuhrmannek,other,6
+firefox,2023,DoHyun Lee,other,6
+firefox,2023,Marco Squarcina,other,6
+firefox,2023,Max Vlasov,other,5
+firefox,2023,Alexander Guryanov,other,5
+firefox,2023,Mark Brand,other,5
+firefox,2023,"Dianna Smith, Ryan VanderMeulen, Timothy Nikkel, and the Mozilla Fuzzing Team",fuzz,5
+firefox,2023,fffvr,other,5
+firefox,2023,Umar Farooq (@Puf),other,5
+firefox,2023,"Randell Jesup, Andrew McCreight, the Mozilla Fuzzing Team",fuzz,5
+firefox,2023,Tom Schuster,other,4
+firefox,2023,Ameen Basha M K,other,4
+firefox,2023,Vadim,other,3
+firefox,2023,Dave Vandyke,other,3
+firefox,2023,Dan Veditz,other,3
+firefox,2023,Johan Carlsson,other,3
+firefox,2023,Christian Holler,other,3
+firefox,2023,Samuel Groß,other,3
+firefox,2023,Mark,other,3
+firefox,2023,Vitor Torres,other,3
+firefox,2023,Ameen Basha M K and Shaheen Fazim,other,3
+firefox,2023,Goras Francesco,other,3
+firefox,2023,zx from qriousec,other,3
+firefox,2023,Trung Pham,other,3
+firefox,2023,Shaheen Fazim and Ameen Basha M K,other,3
+firefox,2023,JunYoung Park,other,3
+firefox,2023,Alesandro Ortiz,other,3
+firefox,2023,P1umer and xmzyshypnc,other,3
+firefox,2023,Edward Prior,other,3
+firefox,2023,zx,other,3
+firefox,2023,"Andrew McCreight, Matthew Gaudet, Tom Ritter, and the Mozilla Fuzzing Team,",fuzz,3
+firefox,2023,ycdxsb,other,3
+firefox,2023,The Mozilla Fuzzing Team,fuzz,3
+firefox,2023,Armin Ebert,other,3
+firefox,2023,Irvan Kurniawan (@sourc7),other,3
+firefox,2023,Harveer Singh,other,3
+firefox,2023,"Dohyun Lee (@l33d0hyun) of SSD-Disclosure Labs & DNSLab, Korea Univ.",other,3
+firefox,2023,Thejaka Maldeniya,other,3
+firefox,2023,"Donal Meehan, Sebastian Hengst, and the Mozilla Fuzzing Team",fuzz,3
+firefox,2023,"Chris Peterson, Andrew McCreight, André Bargull, Nika Layzell and the Mozilla Fuzzing Team",fuzz,3
+firefox,2023,Kelsey Gilbert,other,3
+firefox,2023,pwn2car,other,3
+firefox,2023,Edgar Chen and Hafiizh,other,3
+firefox,2023,Marco Bonardo,other,3
+firefox,2023,anbu,other,3
+firefox,2023,JSec of Hayyim Security,other,3
+firefox,2023,turistu,other,3
+firefox,2023,Rachmat Abdul Rokhim,other,3
+firefox,2023,Muneaki Nishimura,other,3
+firefox,2023,Jed Davis,other,3
+firefox,2023,Andrew Osmond,other,3
+firefox,2023,Mozilla developers,other,2
+firefox,2023,Paul Menzel,other,2
+firefox,2023,Irwan,other,2
+firefox,2023,Gabriele Svelto,other,2
+firefox,2023,Andrew McCreight,other,2
+firefox,2023,이준성 (Junsung Lee),other,2
+firefox,2023,Umar Farooq,other,2
+firefox,2023,"Randell Jesup, Andrew McCreight, Jed Davis, and the Mozilla Fuzzing Team",fuzz,2
+firefox,2023,Jan Varga,other,2
+firefox,2023,Randell Jesup,other,2
+firefox,2023,"Andrew McCreight, Karl Tomlinson, Valentin Gosu, Randell Jesup, Yury Delendik, and the Mozilla Fuzzing Team",fuzz,2
+firefox,2023,Marcus Brinkmann,other,2
+firefox,2023,Niklas Baumstark,other,1
+firefox,2023,Kazuki Nomoto of Waseda University,other,1
+firefox,2023,pyakovlev & Alexander Volkov,other,1
+firefox,2023,Dohyun Lee (@l33d0hyun) of SSD Labs,other,1
+firefox,2023,Kai Engert,other,1
+firefox,2023,Chris Peterson,other,1
+firefox,2023,Kirtikumar Anandrao Ramchandani,other,1
+firefox,2023,Kagami Rosylight,other,1
+firefox,2023,Rob Wu,other,1
+firefox,2023,Khiem Tran,other,1
+firefox,2023,Matrix Security Team,other,1
+firefox,2023,Shaheen Fazim and Hafiizh,other,1
+firefox,2023,Looben Yang,other,1
+firefox,2023,Alexis aka zoracon,other,1
+firefox,2023,Ribose RNP Team,other,1
+firefox,2023,Anne van Kesteren,other,1
+firefox,2023,Sam Ezeh,other,1
+firefox,2023,Tyson Smith,other,1
+firefox,2023,Jun Kokatsu,other,1
+firefox,2023,Martin Hostettler,other,1
+firefox,2023,Paul Nickerson and Ameen Basha M K,other,1
+firefox,2023,Rohan Sharma,other,1
+firefox,2023,Simon Descarpentries,other,1
+firefox,2023,"Andrew McCreight, and the Mozilla Fuzzing Team",fuzz,1
+firefox,2023,Kazuki Nomoto,other,1
+firefox,2023,Artem Chaykin,other,1
+firefox,2023,Andrew McCreight and the Mozilla Fuzzing Team,fuzz,1
+firefox,2023,Malte Jürgens,other,1
+firefox,2023,Matthias Gerstner,other,1
+firefox,2023,Apple Security Engineering and Architecture (SEAR) and The Citizen Lab at The University of Toronto's Munk School,other,1
+firefox,2023,Mozilla Fuzzing Team,fuzz,1
+firefox,2023,Clément Lecigne of Google's Threat Analysis Group,other,1
+firefox,2023,annevk,other,1
+firefox,2023,Daniel Veditz,other,1
+firefox,2023,"Jed Davis, Andrew McCreight, Randell Jesup, and the Mozilla Fuzzing Team",fuzz,1
+firefox,2023,"Steve Fink, Stefan Arentz, and the Mozilla Fuzzing Team",fuzz,1
+firefox,2023,Godson Bastin,other,1
+firefox,2023,M. Coolie,other,1
+firefox,2023,Hubert Kario,other,1
+firefox,2023,George Pantela (Red Hat) and Hubert Kario (Red Hat),other,1
+firefox,2023,John-Mark Gurney,other,1
+firefox,2023,Oriol Brufau,other,1
+firefox,2023,"Edward ""JankhJankh"" Prior",other,1
+firefox,2023,honorton via Tor Browser,other,1
+firefox,2023,"Andrew McCreight, Randell Jesup, Valentin Gosu, Karl Tomlinson, and the Mozilla Fuzzing Team,",fuzz,1
+firefox,2023,"Andrew McCreight, Yury Delendik",other,1
+firefox,2024,Hafiizh,other,30
+firefox,2024,Irvan Kurniawan,other,26
+firefox,2024,Shaheen Fazim,other,25
+firefox,2024,Masato Kinugawa,other,23
+firefox,2024,Nils Bars,other,22
+firefox,2024,Ronald Crane,other,21
+firefox,2024,James Lee,other,18
+firefox,2024,Lukas Bernhard,other,14
+firefox,2024,Rob Wu,other,12
+firefox,2024,Gary Kwong,other,12
+firefox,2024,Satoki Tsuji,other,7
+firefox,2024,dalmurino,other,7
+firefox,2024,the Mozilla Fuzzing Team,fuzz,7
+firefox,2024,Tyson Smith,other,7
+firefox,2024,"Dohyun Lee (@l33d0hyun) of USELab, Korea University & Youngho Choi of CEL, Korea University & Geumhwan Cho of USELab, Korea University",other,6
+firefox,2024,Umar Farooq,other,6
+firefox,2024,The Mozilla Fuzzing Team,fuzz,5
+firefox,2024,s48gs.w,other,5
+firefox,2024,Norisz Fay,other,5
+firefox,2024,Gregory Pappas,other,5
+firefox,2024,"Jan Drescher and David Klein from IAS, TU Braunschweig",other,5
+firefox,2024,"Andrew Osmond, Sebastian Hengst, Andrew McCreight",other,5
+firefox,2024,Karl Tomlinson,other,5
+firefox,2024,Hanno Böck,other,4
+firefox,2024,Muneaki Nishimura,other,4
+firefox,2024,Nan Wang,other,4
+firefox,2024,pwn2car,other,4
+firefox,2024,Andreas Farre,other,4
+firefox,2024,Marten Richter,other,4
+firefox,2024,Andrei Enache,other,4
+firefox,2024,Kang Ali and Nur Fadhillah of Punggawa Cybersecurity,other,4
+firefox,2024,Kagami Rosylight,other,4
+firefox,2024,"Andrew McCreight, the Mozilla Fuzzing Team",fuzz,4
+firefox,2024,Marco Bonardo,other,4
+firefox,2024,Renwa Hiwa,other,4
+firefox,2024,Kang Ali of Punggawa Cybersecurity,other,4
+firefox,2024,Renan Rios,other,3
+firefox,2024,Andrew McCreight,other,3
+firefox,2024,John Schanck,other,3
+firefox,2024,Cornel Ionce,other,3
+firefox,2024,Seongil Wi,other,3
+firefox,2024,"Daniel Holbert, Andrew Osmond, and the Mozilla Fuzzing Team",fuzz,3
+firefox,2024,Alfred Peters,other,3
+firefox,2024,Johan Carlsson,other,3
+firefox,2024,"Andrew McCreight, Randell Jesup, Gabriele Svelto, Paul Bone, and the Mozilla Fuzzing Team",fuzz,3
+firefox,2024,goodbyeselene,other,3
+firefox,2024,Hubert Kario,other,3
+firefox,2024,Georg Felber and Marco Squarcina (TU Wien),other,3
+firefox,2024,"Noah Lokocz, Kevin Brosnan, Ryan VanderMeulen and the Mozilla Fuzzing Team",fuzz,3
+firefox,2024,Manfred Paul via Trend Micro's Zero Day Initiative,other,3
+firefox,2024,Logan Stratton,other,3
+firefox,2024,Kershaw Chang,other,3
+firefox,2024,Eduardo Braun Prado working with Trend Micro Zero Day Initiative,other,3
+firefox,2024,Bartek Nowotarski via CERT,other,3
+firefox,2024,Paul Bone,other,3
+firefox,2024,Thomas Rinsma of Codean Labs,other,3
+firefox,2024,Kim Do Hun via Tor Browser,other,3
+firefox,2024,Raphael,other,3
+firefox,2024,Daniel Holbert and the Mozilla Fuzzing Team,fuzz,3
+firefox,2024,Luan Herrera,other,3
+firefox,2024,Kirtikumar Anandrao Ramchandani,other,3
+firefox,2024,Jason Kratzer,other,3
+firefox,2024,Om Apip,other,3
+firefox,2024,Lars Eggert,other,3
+firefox,2024,Seunghyun Lee,other,3
+firefox,2024,D7,other,3
+firefox,2024,"Shaheen Fazim, Hafiizh",other,3
+firefox,2024,Kestrel,other,2
+firefox,2024,Christian Holler,other,2
+firefox,2024,Ryan VanderMeulen and Dan Minor,other,2
+firefox,2024,Raphael Shaniyazov,other,2
+firefox,2024,Pedro Bernardo,other,2
+firefox,2024,Aidan Stephenson & Yannik Marchand,other,2
+firefox,2024,Randell Jesup,other,2
+firefox,2024,Mozilla developers,other,2
+firefox,2024,"the Mozilla Fuzzing Team, Yury Delendik",fuzz,2
+firefox,2024,"Andrew Osmond, Sebastian Hengst, Andrew McCreight, Yury Delendik, the Mozilla Fuzzing Team,",fuzz,2
+firefox,2024,"Andrew Osmond, Andrew McCreight, Sebastian Hengst, Yury Delendik, the Mozilla Fuzzing Team",fuzz,2
+firefox,2024,Damien Schaeffer from ESET,other,2
+firefox,2024,Several reporters,other,2
+firefox,2024,Daniel Holbert,other,2
+firefox,2024,coffeys,other,2
+firefox,2024,Marc Schoenefeld,other,2
+firefox,2024,Serban Stanca,other,2
+firefox,2024,"Andrew McCreight, Akmat Suleimanov",other,2
+firefox,2024,"Akmat Suleimanov, Andrew McCreight",other,2
+firefox,2024,Yangkang of 360 ATA Team,other,1
+firefox,2024,Young Min Kim,other,1
+firefox,2024,Nika Layzell,other,1
+firefox,2024,scarlet,other,1
+firefox,2024,Narendra Bhati,other,1
+firefox,2024,"Andrew McCreight, Randell Jesup, and the Mozilla Fuzzing Team",fuzz,1
+firefox,2024,Several community reporters,other,1
+firefox,2024,P1umer,other,1
+firefox,2024,Max Inden,other,1
+firefox,2024,Paul Bone and the Mozilla Fuzzing Team,fuzz,1
+firefox,2024,Chaykin Artem,other,1
+firefox,2024,"the Mozilla Fuzzing Team, Simon Friedberger, Andrew McCreight",fuzz,1
+firefox,2024,Jan-Ivar Bruaroey,other,1
+firefox,2024,Dana Keeler,other,1
+firefox,2024,Islam,other,1
+firefox,2024,Anthony De Los Santos,other,1
+firefox,2024,Mozilla Fuzzing Team,fuzz,1
+firefox,2024,jackyzy823,other,1
+firefox,2024,Fabian Fäßler,other,1
+firefox,2024,Raphael Shaniyazov and Axel Chong (@Haxatron),other,1
+firefox,2024,Wil Clouser,other,1
+firefox,2024,Konstantin Preißer,other,1
+firefox,2024,Randell Jesup and the Mozilla Fuzzing Team,fuzz,1
+firefox,2024,Adam Berry,other,1
+firefox,2024,Lohith Gowda M,other,1
+firefox,2024,"Shaheen Fazim, Raphael Saniyazov, Rifa&apos;i Rejal Maynando, James Lee, P Umar Farooq, Hafiizh",other,1
+firefox,2024,"Yury Delendik, the Mozilla Fuzzing Team",fuzz,1
+firefox,2024,"the Mozilla Fuzzing Team, Andrew McCreight",fuzz,1
+firefox,2024,Thunderbird Team,other,1
+firefox,2024,Thomas Orlita,other,1
+firefox,2024,Atte Kettunen,other,1
+firefox,2024,Erik van Straten,other,1
+firefox,2024,Multiple Reporters,other,1
+firefox,2024,Bharat Adhikari,other,1
+firefox,2024,Patrick Cloke,other,1
+firefox,2025,Ameen Basha M K,other,33
+firefox,2025,Oskar L,other,33
+firefox,2025,Irvan Kurniawan,other,29
+firefox,2025,The Mozilla Fuzzing Team,fuzz,21
+firefox,2025,Nils Bars,other,17
+firefox,2025,Ivan Fratric of Google Project Zero,other,14
+firefox,2025,Masato Kinugawa,other,13
+firefox,2025,the Mozilla Fuzzing Team,fuzz,13
+firefox,2025,Andrew McCreight,other,12
+firefox,2025,Nan Wang,other,12
+firefox,2025,Dario Weißer,other,12
+firefox,2025,Igor Morgenstern,other,12
+firefox,2025,Gary Kwong,other,11
+firefox,2025,Atte Kettunen,other,9
+firefox,2025,Shaheen Fazim,other,9
+firefox,2025,Renwa,other,8
+firefox,2025,Hafiizh,other,8
+firefox,2025,Maurice Dauer and the Mozilla Fuzzing Team,fuzz,8
+firefox,2025,Andrew McCreight and the Mozilla Fuzzing Team,fuzz,7
+firefox,2025,Randell Jesup,other,7
+firefox,2025,Oskar,other,7
+firefox,2025,Tom Van Goethem,other,7
+firefox,2025,Mirko Brodesser,other,6
+firefox,2025,Tom Schuster,other,6
+firefox,2025,Joe Turki,other,6
+firefox,2025,James Lee,other,5
+firefox,2025,"Andrew McCreight, Tooru Fujisawa, and the Mozilla Fuzzing Team",fuzz,5
+firefox,2025,dalmurino,other,5
+firefox,2025,sherkito,other,5
+firefox,2025,Xiangwei Zhang and kkdong of Tencent Security YUNDING LAB,other,5
+firefox,2025,"the Mozilla Fuzzing Team, Andrew McCreight",fuzz,5
+firefox,2025,Dong-uk Kim (@justlikebono),other,5
+firefox,2025,un3xploitable & GF,other,5
+firefox,2025,Nika Layzell,other,5
+firefox,2025,Edouard Bochin and Tao Yan from Palo Alto Networks working with Trend Micro's Zero Day Initiative,other,5
+firefox,2025,Manfred Paul working with Trend Micro's Zero Day Initiative,other,5
+firefox,2025,terjanq,other,5
+firefox,2025,LJP and HexRabbit (DEVCORE Research Team),other,5
+firefox,2025,Rob Wu,other,5
+firefox,2025,Andrew Creskey,other,5
+firefox,2025,EntryHi,other,5
+firefox,2025,Hafiizh & kang ali,other,5
+firefox,2025,Andrew Osmond,other,5
+firefox,2025,tiebuchen,other,5
+firefox,2025,Lingming Zhang,other,5
+firefox,2025,Google Android,other,4
+firefox,2025,Paul Gerste,other,4
+firefox,2025,Andrew Osmond and the Mozilla Fuzzing Team,fuzz,4
+firefox,2025,Maruf Bin Murtuza,other,4
+firefox,2025,Theemathas,other,4
+firefox,2025,"Sebastian Hengst, Maurice Dauer and the Mozilla Fuzzing Team",fuzz,4
+firefox,2025,anbu,other,4
+firefox,2025,Surya Dev Singh,other,4
+firefox,2025,"Julien Wajsberg, the Mozilla Fuzzing Team",fuzz,4
+firefox,2025,Renwa Hiwa,other,4
+firefox,2025,"Sylvestre Ledru, Paul Bone and the Mozilla Fuzzing Team",fuzz,4
+firefox,2025,Ivan Fratric,other,4
+firefox,2025,Jakub Szymsza,other,4
+firefox,2025,"the Mozilla Fuzzing Team, Masayuki Nakano",fuzz,4
+firefox,2025,pwn2car,other,4
+firefox,2025,Daniil Satyaev (Positive Technologies),other,4
+firefox,2025,Viktor Bocz,other,4
+firefox,2025,Uku Sõrmus,other,4
+firefox,2025,Laurin Weger,other,4
+firefox,2025,Sören Hentzschel,other,4
+firefox,2025,"Andrew McCreight, Ashley Zebrowski",other,4
+firefox,2025,"Paul Bone, Ryan VanderMeulen and the Mozilla Fuzzing Team",fuzz,4
+firefox,2025,Daniel Holbert,other,4
+firefox,2025,Ibuki Sato,other,4
+firefox,2025,Mochammad Nosa Shandy Prastyo,other,4
+firefox,2025,Daniel Veditz,other,4
+firefox,2025,Andreas Pehrson,other,4
+firefox,2025,zx,other,4
+firefox,2025,satrya wira yudha,other,4
+firefox,2025,Rong Bao,other,4
+firefox,2025,Axel Chong (@Haxatron),other,3
+firefox,2025,Eemeli Aro,other,3
+firefox,2025,Umar Farooq,other,2
+firefox,2025,Jurrie Overgoor,other,2
+firefox,2025,"Akmat Suleimanov, Jed Davis, André Bargull, and the Mozilla Fuzzing Team",fuzz,2
+firefox,2025,"Andrew McCreight, Randell Jesup, Andrew Osmond, Akmat Suleimanov and the Mozilla Fuzzing Team",fuzz,2
+firefox,2025,Ronald Crane,other,2
+firefox,2025,"Randell Jesup, Andrew McCreight, Andrew Osmond, Akmat Suleimanov and the Mozilla Fuzzing Team",fuzz,2
+firefox,2025,r3m0t3nu11,other,2
+firefox,2025,Fabian Densborn,other,2
+firefox,2025,"the Mozilla Fuzzing Team, Andrew McCreight, Sebastian Hengst, Randell Jesup",fuzz,2
+firefox,2025,Marcus Brinkmann,other,2
+firefox,2025,Daniel Huigens,other,2
+firefox,2025,Thinker Li,other,2
+firefox,2025,Chris P. Fredrickson,other,2
+firefox,2025,Seongyun Jeong,other,2
+firefox,2025,"Randell Jesup, Jens Stutte, and the Mozilla Fuzzing Team",fuzz,2
+firefox,2025,xh4vm,other,2
+firefox,2025,xiulou,other,2
+firefox,2025,Satoki Tsuji,other,2
+firefox,2025,"the Mozilla Fuzzing Team, Andrew Osmond",fuzz,2
+firefox,2025,Alan Li (lebr0nli),other,2
+firefox,2025,Albert,other,2
+firefox,2025,Simon,other,2
+firefox,2025,hafiizh & kang ali,other,2
+firefox,2025,"Andrew McCreight, Gabriele Svelto, Beth Rennie (she/her), Steven Michaud, the Mozilla Fuzzing Team",fuzz,2
+firefox,2025,"Akmat Suleimanov, Andrew McCreight",other,2
+firefox,2025,"Andy Leiserson, Maurice Dauer, Sebastian Hengst and the Mozilla Fuzzing Team",fuzz,2
+firefox,2025,Muneaki Nishimura,other,2
+firefox,2025,Hafiizh & Kang Ali,other,2
+firefox,2025,Nikolaos Mourousias,other,2
+firefox,2025,Emma Zühlcke,other,2
+firefox,2025,Filip Štamcar,other,2
+firefox,2025,None,other,2
+firefox,2025,Project KillFuzz of Qrious Secure,fuzz,2
+firefox,2025,Jamie Nicol,other,2
+firefox,2025,Caro Kann,other,2
+firefox,2025,"Jon Coppeard, Maurice Dauer and the Mozilla Fuzzing Team",fuzz,2
+firefox,2025,Patrick Cloke,other,1
+firefox,2025,Khalil Zhani,other,1
+firefox,2025,"Andrew Osmond, Randell Jesup, Andrew McCreight, Akmat Suleimanov and the Mozilla Fuzzing Team",fuzz,1
+firefox,2025,Abhinav Khanna,other,1
+firefox,2025,Philipp Beer,other,1
+firefox,2025,MasterSplinter,other,1
+firefox,2025,Matthew Noorenberghe,other,1
+firefox,2025,Yannis Juglaret and Steven Michaud,other,1
+firefox,2025,Egor Filatov (Positive Technologies),other,1
+firefox,2025,Raul Bucata,other,1
+firefox,2025,Chris Peterson and Kirtikumar Anandrao Ramchandani,other,1
+firefox,2025,alayersattackers,other,1
+firefox,2025,Rifa'i Rejal Maynando and Ameen Basha M K,other,1
+firefox,2025,Narendra Bhati,other,1
+firefox,2025,Kevin Brosnan,other,1
+firefox,2025,Antoine Morin,other,1
+firefox,2025,Bharat,other,1
+firefox,2025,Rebeca Tudor,other,1
+firefox,2025,msd,other,1
+firefox,2025,Michel Le Bihan,other,1
+firefox,2025,Aisle Research,ai,1
+firefox,2025,Azril,other,1
+firefox,2026,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic",ai,121
+firefox,2026,Sajeeb Lohani,other,95
+firefox,2026,Oskar L,other,46
+firefox,2026,Yaqoub Aldurayhim,other,44
+firefox,2026,Tomoya Nakanishi,other,25
+firefox,2026,Steven Julian,other,16
+firefox,2026,Atsushi Sada,other,16
+firefox,2026,Gary Kwong,other,15
+firefox,2026,Zijie Zhao,other,15
+firefox,2026,Satoki Tsuji,other,14
+firefox,2026,The Mozilla Fuzzing Team,fuzz,14
+firefox,2026,Mihalis Haatainen,other,14
+firefox,2026,Rintaro Kawasugi,other,14
+firefox,2026,Inseo An,other,13
+firefox,2026,ggwhyp,other,13
+firefox,2026,5up3rh3i,other,13
+firefox,2026,Jun Yang,other,12
+firefox,2026,Richard Belisle,other,11
+firefox,2026,jmwebdevelopement,other,11
+firefox,2026,Haruto Kimura,other,11
+firefox,2026,lebr0nli,other,11
+firefox,2026,satyamasd,other,11
+firefox,2026,Amy Burnett of OpenAI,ai,11
+firefox,2026,Nan Wang,other,10
+firefox,2026,choeseyeong,other,10
+firefox,2026,Xuehao Guo,other,10
+firefox,2026,zx,other,10
+firefox,2026,pakhunov.anton.n,other,10
+firefox,2026,"Brian Grinstead, Christian Holler, Tom Schuster and the Mozilla Fuzzing Team",fuzz,9
+firefox,2026,Nebula Security,other,9
+firefox,2026,Quy Pham,other,9
+firefox,2026,Josh Aas,other,8
+firefox,2026,Ameen Basha M K,other,8
+firefox,2026,jayjayjazz,other,7
+firefox,2026,x0e,other,6
+firefox,2026,Cody,other,6
+firefox,2026,Surya Dev Singh,other,6
+firefox,2026,crixer,other,6
+firefox,2026,Muneaki Nishimura,other,6
+firefox,2026,Mingi Jung (정민기입니다),other,5
+firefox,2026,Randell Jesup,other,5
+firefox,2026,Igor Morgenstern,other,5
+firefox,2026,Clay Ver Valen,other,5
+firefox,2026,"Andrew McCreight, Christian Holler",other,5
+firefox,2026,Fabius Artrel,other,5
+firefox,2026,Tom Ritter,other,5
+firefox,2026,Sota Wada,other,5
+firefox,2026,maxpl0it working with Trend Micro Zero Day Initiative,other,5
+firefox,2026,Matej Smycka,other,5
+firefox,2026,"Christian Holler, Timothy Nikkel, Tom Schuster and the Mozilla Fuzzing Team",fuzz,5
+firefox,2026,Farras Givari,other,5
+firefox,2026,sseehra,other,5
+firefox,2026,"Andrew McCreight, Ashley Zebrowski, Brian Grinstead, Christian Holler, Maurice Dauer, Tom Schuster and the Mozilla Fuzzing Team",fuzz,5
+firefox,2026,"C.M.Chang, Christian Holler, Steve Fink and the Mozilla Fuzzing Team",fuzz,5
+firefox,2026,Kevin Brosnan,other,5
+firefox,2026,"Andrew McCreight, Christian Holler, Lee Salzman, Maurice Dauer, Tom Schuster, Wayne Mery and the Mozilla Fuzzing Team",fuzz,5
+firefox,2026,Hafiizh,other,5
+firefox,2026,"Andrew McCreight, Valentin Gosu, Nika Layzell, Tom Schuster and the Mozilla Fuzzing Team",fuzz,5
+firefox,2026,Hyeonjun Ahn,other,5
+firefox,2026,Securin,other,5
+firefox,2026,"Andrew McCreight, Randell Jesup, Tom Ritter and the Mozilla Fuzzing Team",fuzz,5
+firefox,2026,Tran Quac,other,5
+firefox,2026,fedek,other,5
+firefox,2026,Hcamael,other,5
+firefox,2026,Jacolon Walker,other,5
+firefox,2026,"Andrew McCreight, Jan de Mooij, Tom Ritter, Vincent Hilla and the Mozilla Fuzzing Team",fuzz,5
+firefox,2026,stevej,other,5
+firefox,2026,Vladislav Plyatsok,other,4
+firefox,2026,Gary Kwong and Nan Wang,other,4
+firefox,2026,Irvan Kurniawan,other,4
+firefox,2026,Lyra Rebane,other,4
+firefox,2026,Edgar Chen,other,4
+firefox,2026,"Andrew McCreight, Dennis Jackson and the Mozilla Fuzzing Team",fuzz,4
+firefox,2026,André Bargull,other,4
+firefox,2026,Alex Mayorga,other,4
+firefox,2026,RyotaK of GMO Flatt Security Inc.,other,4
+firefox,2026,Kanaru Sato,other,4
+firefox,2026,D. Santos,other,4
+firefox,2026,"Andrew McCreight, Maurice Dauer, Olli Pettay, Ryan Hunt",other,4
+firefox,2026,Atte Kettunen,other,4
+firefox,2026,Lorenzo,other,4
+firefox,2026,pizzahunthack1,other,4
+firefox,2026,Pwn2addr,other,4
+firefox,2026,Jan Horak,other,4
+firefox,2026,"Christian Holler, Gabriele Svelto, Tom Schuster and the Mozilla Fuzzing Team",fuzz,4
+firefox,2026,Rintaro Kobayashi,other,4
+firefox,2026,Joren Afman,other,4
+firefox,2026,Steven Michaud,other,4
+firefox,2026,kiyong,other,4
+firefox,2026,Florian,other,4
+firefox,2026,ABDULAZIZ ALASAIQAH,other,4
+firefox,2026,Dai,other,4
+firefox,2026,Rayhan Hanaputra,other,4
+firefox,2026,LatticeBased,other,4
+firefox,2026,"Alex Franchuk, Andrew McCreight, Brian Grinstead, Christian Holler, Jan de Mooij, Maurice Dauer, Sebastian Hengst, Tom Schuster and the Mozilla Fuzzing Team",fuzz,4
+firefox,2026,"Ryan Hunt, Steve Fink and the Mozilla Fuzzing Team",fuzz,4
+firefox,2026,Michael Froman,other,4
+firefox,2026,q1,other,4
+firefox,2026,Jakub Szymsza,other,4
+firefox,2026,Mateusz Dobrzyński,other,4
+firefox,2026,Manojkumar Jaganathan,other,4
+firefox,2026,Tristan Madani,other,4
+firefox,2026,"Nika Layzell, Randell Jesup, Timothy Nikkel, Tom Schuster and the Mozilla Fuzzing Team",fuzz,4
+firefox,2026,Haruka Yamazaki,other,4
+firefox,2026,Carl Pearson,other,4
+firefox,2026,evyatar,other,4
+firefox,2026,Nguyen Minh,other,4
+firefox,2026,"Christian Holler, Jens Stutte, Nika Layzell, Randell Jesup, Tom Schuster and the Mozilla Fuzzing Team",fuzz,4
+firefox,2026,Michael Bommarito,other,4
+firefox,2026,Khanh Nguyen,other,4
+firefox,2026,Nikola Kojic,other,4
+firefox,2026,Shu Takahashi,other,4
+firefox,2026,Ibuki Sato and Tomoya Nakanishi,other,4
+firefox,2026,Souma Ohsawa,other,4
+firefox,2026,"Christian Holler, Frederik Braun, Justin Link, Simon Friedberger, Tom Ritter, Tom Schuster and the Mozilla Fuzzing Team",fuzz,4
+firefox,2026,Qadhafy Muhammad Tera,other,3
+firefox,2026,Renwa,other,3
+firefox,2026,Mozilla Fuzzing Team,fuzz,3
+firefox,2026,Christian Holler,other,3
+firefox,2026,Andrew McCreight,other,2
+firefox,2026,Pier Angelo Vendrame,other,2
+firefox,2026,"Elysee Franchuk, Caleb Lerch",other,2
+firefox,2026,"Hiroyuki Ikezoe, Jon Coppeard, Maurice Dauer and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,Caro Kann,other,2
+firefox,2026,"Leon Trampert, Daniel Weber, Christian Rossow, Michael Schwarz",other,2
+firefox,2026,hafiizh & kang ali,other,2
+firefox,2026,Skywarp,other,2
+firefox,2026,"Agi Sferro, Andrew McCreight, Randell Jesup, Tom Schuster",other,2
+firefox,2026,Renwa Hiwa,other,2
+firefox,2026,Nika Layzell,other,2
+firefox,2026,Hanno Boeck,other,2
+firefox,2026,Aswinkumar Gokulakannan,other,2
+firefox,2026,"Christian Holler, Fatih Kilic, Tom Schuster and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,Eemeli Aro,other,2
+firefox,2026,"Brian Grinstead, Christian Holler and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,paranoidmoth,other,2
+firefox,2026,b00rito,other,2
+firefox,2026,chanhokim,other,2
+firefox,2026,Yuki Umemura,other,2
+firefox,2026,"Ben Visness, Brian Grinstead, Christian Holler, Dimi Lee, Jens Stutte, Jim Mathies, John Schanck, Jon Coppeard, Karl Tomlinson, Maurice Dauer, Nika Layzell, Randell Jesup, Tom Schuster and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,"Andy Leiserson, Jan de Mooij, Michael Froman and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,Shihab Mirza,other,2
+firefox,2026,"Andrew Creskey, Andrew Osmond, Dana Keeler, Henri Sivonen, Jed Davis, John Schanck, Jon Coppeard, Justin Link, Michael Froman, Nika Layzell, Noah Lokocz, Randell Jesup, Steve Fink, Tom Schuster and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,superhei,other,2
+firefox,2026,Niklas,other,2
+firefox,2026,Michal Andryskowski,other,2
+firefox,2026,Frederik Braun,other,2
+firefox,2026,Frédéric Wang Nélar,other,2
+firefox,2026,Av0id,other,2
+firefox,2026,JunYoung Park,other,2
+firefox,2026,Abdan Alkayyis,other,2
+firefox,2026,Jody Ritonga,other,2
+firefox,2026,"Ashley Zebrowski, Christian Holler, Dan Baker, Jan de Mooij, Jon Coppeard, Maurice Dauer, Nicolas B. Pierron, Nika Layzell, Randell Jesup, Rob Wu, Ryan Hunt, Steve Fink, Tom Schuster, Tomoya Nakanishi, Yannis Juglaret, Serge Guelton and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,tiebuchen,other,2
+firefox,2026,Farhad Sajid Barbhuiya,other,2
+firefox,2026,Nithissh,other,2
+firefox,2026,Brian Carpenter,other,2
+firefox,2026,Kai Martin,other,2
+firefox,2026,bug2own,other,2
+firefox,2026,Artur Cygan of Trail of Bits in partnership with OpenAI,ai,2
+firefox,2026,"C.M.Chang, Christian Holler, David Parks, Dennis Jackson, Gabriele Svelto, Hafiizh, Henrik Skupin, Jan de Mooij, Jens Stutte, Paul Theriault, Randell Jesup, Rob Wu, Tom Ritter, Tom Schuster and the Mozilla Fuzzing Team",fuzz,2
+firefox,2026,"Claude, Kai Engert",ai,2
+firefox,2026,Masato Kinugawa,other,1
+firefox,2026,Hiroyuki Ikezoe,other,1
+firefox,2026,Crixer,other,1
+firefox,2026,Jon Coppeard and the Mozilla Fuzzing Team,fuzz,1
+firefox,2026,Hafiizh & Kang Ali,other,1
+firefox,2026,"OpenAI Preparedness, Bill Demirkapi",ai,1
+firefox,2026,Daisuke Hatakeyama and Shota Matsuda,other,1
+firefox,2026,yfbug123,other,1
+firefox,2026,Barath Stalin K,other,1
+firefox,2026,taiho kim,other,1
+firefox,2026,"Christian Holler, Gabriele Svelto, Greg Stoll and the Mozilla Fuzzing Team",fuzz,1
+firefox,2026,Azza Tegar Naufal Ataullah,other,1
+firefox,2026,Khiem Tran,other,1
+openssl,2002,OpenSSL Group (A.L. Digital),other,3
+openssl,2003,NISCC,other,3
+openssl,2003,Novell,other,1
+openssl,2004,OpenSSL group,other,2
+openssl,2004,OpenSSL group (Stephen Henson),other,1
+openssl,2005,researcher,other,1
+openssl,2006,openssl,other,5
+openssl,2007,Geoff Lowe,other,1
+openssl,2007,Andy Polyakov,other,1
+openssl,2007,Moritz Jodeit,other,1
+openssl,2008,codenomicon,other,2
+openssl,2009,"Daniel Mentz, Robin Seggelmann",other,3
+openssl,2009,Alex Lam,other,1
+openssl,2009,"Ivan Nestlerode, IBM",other,1
+openssl,2009,Paolo Ganci,other,1
+openssl,2009,Robin Seggelmann,other,1
+openssl,2009,google,other,1
+openssl,2010,Martin Rex,other,1
+openssl,2010,Sebastian Martini,other,1
+openssl,2010,Rob Hulswit,other,1
+openssl,2010,Ronald Moesbergen,other,1
+openssl,2010,Peter-Michael Hager,other,1
+openssl,2010,Bodo Moeller and Adam Langley (Google),other,1
+openssl,2010,"Martin Olsson, Neel Mehta",other,1
+openssl,2010,"Todd Rinaldo, Tomas Hoger (Red Hat)",other,1
+openssl,2010,Michael K Johnson and Andy Grimm (rPath),other,1
+openssl,2011,Kaspar Brand,other,1
+openssl,2011,Adam Langley,other,1
+openssl,2011,Neel Mehta,other,1
+openssl,2012,Codenomicon,other,1
+openssl,2012,Red Hat,other,1
+openssl,2012,Tavis Ormandy,other,1
+openssl,2012,Ivan Nestlerode,other,1
+openssl,2012,Nadhem Alfardan and Kenny Paterson,other,1
+openssl,2012,Ben Laurie,other,1
+openssl,2012,Adam Langley,other,1
+openssl,2012,Andrew Chi,other,1
+openssl,2012,George Kadianakis,other,1
+openssl,2012,Andrey Kulikov,other,1
+openssl,2012,Antonio Martin,other,1
+openssl,2013,Ron Barber,other,1
+openssl,2013,Dmitry Sobinov,other,1
+openssl,2013,Adam Langley and Wolfgang Ettlinger,other,1
+openssl,2013,Stephen Henson,other,1
+openssl,2013,"Nadhem J. AlFardan and Kenneth G. Paterson of the Information Security Group Royal Holloway, University of London",other,1
+openssl,2014,Adam Langley (Google),other,2
+openssl,2014,Frank Schmirler,other,1
+openssl,2014,LibreSSL project,other,1
+openssl,2014,Akamai Technologies,other,1
+openssl,2014,Adam Langley and Wan-Teh Chang (Google),other,1
+openssl,2014,Ivan Fratric (Google),other,1
+openssl,2014,Gabor Tyukasz (LogMeIn Inc),other,1
+openssl,2014,Felix Gröbert (Google),other,1
+openssl,2014,David Benjamin and Adam Langley (Google),other,1
+openssl,2014,"Sean Devlin and Watson Ladd (Cryptography Services, NCC Group)",other,1
+openssl,2014,Joonas Kuorilehto and Riku Hietamäki (Codenomicon),other,1
+openssl,2014,Jüri Aedla,other,1
+openssl,2014,Imre Rad (Search-Lab Ltd.),other,1
+openssl,2014,KIKUCHI Masashi (Lepidum Co. Ltd.),other,1
+openssl,2014,Felix Gröbert and Ivan Fratrić (Google),other,1
+openssl,2014,Neel Mehta,other,1
+openssl,2014,Yuval Yarom and Naomi Benger,other,1
+openssl,2014,Anton Johansson,other,1
+openssl,2015,Karthikeyan Bhargavan of the PROSECCO team at INRIA,other,3
+openssl,2015,Michal Zalewski (Google),other,2
+openssl,2015,Brian Carpenter,other,2
+openssl,2015,Matt Caswell (OpenSSL development team),other,2
+openssl,2015,Hanno Böck,other,1
+openssl,2015,Loïc Jonas Etienne (Qnective AG),other,1
+openssl,2015,Adam Langley (Google/BoringSSL) using libFuzzer,fuzz,1
+openssl,2015,Stephen Henson (OpenSSL),other,1
+openssl,2015,Guy Leaver (Cisco),other,1
+openssl,2015,Adam Langley and David Benjamin (Google/BoringSSL),other,1
+openssl,2015,"Praveen Kariyanahalli, and subsequently by Ivan Fratric and Felix Groebert (Google)",other,1
+openssl,2015,Joseph Birr-Pixton,other,1
+openssl,2015,Robert Święcki (Google Security Team) and Hanno Böck,other,1
+openssl,2015,Johannes Bauer,other,1
+openssl,2015,Emilia Käsper (OpenSSL),other,1
+openssl,2015,Per Allansson,other,1
+openssl,2015,The BoringSSL project,other,1
+openssl,2015,Stephen Henson (OpenSSL development team),other,1
+openssl,2015,Emilia Käsper (OpenSSL development team),other,1
+openssl,2015,Daniel Danner and Rainer Mueller,other,1
+openssl,2015,David Ramos (Stanford University),other,1
+openssl,2015,"Robert Dugal, also David Ramos, also Huzaifa Sidhpurwala (Red Hat)",other,1
+openssl,2015,Sean Burford (Google) and Emilia Käsper (OpenSSL development team),other,1
+openssl,2015,Pieter Wuille (Blockstream),other,1
+openssl,2015,Chris Mueller,other,1
+openssl,2015,"Markus Stenberg of Cisco Systems, Inc",other,1
+openssl,2015,Antti Karjalainen and Tuomo Untinen from the Codenomicon CROSS program/Konrad Kraszewski from Google,other,1
+openssl,2016,"Shi Lei (Gear Team, Qihoo 360 Inc.)",other,8
+openssl,2016,Guido Vranken,other,6
+openssl,2016,Robert Święcki (Google Security Team),other,2
+openssl,2016,David Adrian and J.Alex Halderman (University of Michigan),other,2
+openssl,2016,Nimrod Aviram and Sebastian Schinzel,other,2
+openssl,2016,Tyler Nighswander (ForAllSecure),other,1
+openssl,2016,Publicly reported,other,1
+openssl,2016,Bruce Stephens and Thomas Jakobi,other,1
+openssl,2016,Alex Gaynor,other,1
+openssl,2016,Karthik Bhargavan and Gaetan Leurent from Inria,other,1
+openssl,2016,Quan Luo,other,1
+openssl,2016,OCAP audit team,other,1
+openssl,2016,"César Pereida (Aalto University), Billy Brumley (Tampere University of Technology), and Yuval Yarom (The University of Adelaide and NICTA)",other,1
+openssl,2016,Juraj Somorovsky,other,1
+openssl,2016,"Huzaifa Sidhpurwala (Red Hat), Hanno Böck, David Benjamin (Google)",other,1
+openssl,2016,Brian Carpenter,other,1
+openssl,2016,"Yuval Yarom, The University of Adelaide and NICTA, Daniel Genkin, Technion and Tel Aviv University, and Nadia Heninger, University of Pennsylvania",other,1
+openssl,2016,Adam Langley (Google/BoringSSL),other,1
+openssl,2016,Emilia Käsper (OpenSSL),other,1
+openssl,2016,Antonio Sanso (Adobe),other,1
+openssl,2017,Google OSS-Fuzz,fuzz,2
+openssl,2017,David Benjamin (Google),other,1
+openssl,2017,David Benjamin (Google)/Google OSS-Fuzz,fuzz,1
+openssl,2017,Joe Orton (Red Hat),other,1
+openssl,2017,Guido Vranken,other,1
+openssl,2017,Robert Święcki of Google,other,1
+openssl,2017,OSS-Fuzz project,fuzz,1
+openssl,2018,Samuel Weiser,other,2
+openssl,2018,"Alejandro Cabrera Aldaya, Billy Brumley, Sohaib ul Hassan, Cesar Pereida Garcia and Nicola Tuveri",other,1
+openssl,2018,Guido Vranken,other,1
+openssl,2018,"Alejandro Cabrera Aldaya, Billy Brumley, Cesar Pereida Garcia and Luis Manuel Alvarez Tapia",other,1
+openssl,2018,Peter Waltenberg (IBM),other,1
+openssl,2018,OSS-fuzz,fuzz,1
+openssl,2019,OSS-Fuzz and Guido Vranken,fuzz,1
+openssl,2019,"Cesar Pereida García, Sohaib ul Hassan, Nicola Tuveri, Iaroslav Gridin, Alejandro Cabrera Aldaya, and Billy Brumley",other,1
+openssl,2019,Matt Caswell,other,1
+openssl,2019,Bernd Edlinger,other,1
+openssl,2019,Rich Mirch,other,1
+openssl,2019,Joran Dirk Greef of Ronomon,other,1
+openssl,2019,"Juraj Somorovsky, Robert Merget and Nimrod Aviram, with additional investigation by Steven Collison and Andrew Hourselt",other,1
+openssl,2020,David Benjamin (Google),other,1
+openssl,2020,"Robert Merget, Marcus Brinkmann, Nimrod Aviram, and Juraj Somorovsky",other,1
+openssl,2020,Bernd Edlinger,other,1
+openssl,2021,Tobias Nießen,other,1
+openssl,2021,John Ouyang,other,1
+openssl,2021,Ingo Schwarze,other,1
+openssl,2021,Peter Kästle (Nokia) and Samuel Sapalski (Nokia),other,1
+openssl,2021,"Benjamin Kaduk (Akamai), Xiang Ding (Akamai), others at Akamai",other,1
+openssl,2021,D. Katz and Joel Luellwitz (Trustwave),other,1
+openssl,2021,Paul Kehrer,other,1
+openssl,2021,Tavis Ormandy (Google),other,1
+openssl,2022,Polar Bear,other,2
+openssl,2022,Viktor Dukhovni,other,1
+openssl,2022,Chris Rapier (Pittsburgh Supercomputing Center),other,1
+openssl,2022,Alex Chernyakhovsky,other,1
+openssl,2022,Xi Ruoyao,other,1
+openssl,2022,Chancen (Qingteng 73lab),other,1
+openssl,2022,Elison Niven (Sophos),other,1
+openssl,2022,Raul Metsma,other,1
+openssl,2022,Tom Colley (Broadcom),other,1
+openssl,2022,Aliaksei Levin,other,1
+openssl,2022,Tavis Ormandy (Google),other,1
+openssl,2022,Bernd Edlinger,other,1
+openssl,2023,David Benjamin (Google),other,5
+openssl,2023,Tony Battersby (Cybernetics),other,1
+openssl,2023,Zach Wilson,other,1
+openssl,2023,Bernd Edlinger,other,1
+openssl,2023,OSSfuzz,fuzz,1
+openssl,2023,Juerg Wullschleger (Google),other,1
+openssl,2023,OSSFuzz and Matt Caswell,fuzz,1
+openssl,2023,Anton Romanov (Amazon),other,1
+openssl,2023,Corey Bonnell from Digicert,other,1
+openssl,2023,Hubert Kario from Red Hat,other,1
+openssl,2023,"CarpetFuzz, Dawei Wang and Marc Schönefeld",fuzz,1
+openssl,2023,Octavio Galland (Max Planck Institute for Security and Privacy) and Marcel Böhme (Max Planck Institute for Security and Privacy),other,1
+openssl,2023,Marc Schönefeld,other,1
+openssl,2023,Kurt Roeckx,other,1
+openssl,2023,Hubert Kario (Red Hat) and Dmitry Belyavsky (Red Hat),other,1
+openssl,2024,OSS-Fuzz,fuzz,2
+openssl,2024,Google OSS-Fuzz-Gen,fuzz,1
+openssl,2024,David Benjamin (Google),other,1
+openssl,2024,Joseph Birr-Pixton,other,1
+openssl,2024,William Ahern (Akamai),other,1
+openssl,2024,Manish Patidar (Hewlett Packard Enterprise),other,1
+openssl,2024,Bahaa Naamneh (Crosspoint Labs),other,1
+openssl,2024,Sverker Eriksson,other,1
+openssl,2025,Stanislav Fort (Aisle Research),ai,3
+openssl,2025,Alexandr Sosedkin (Red Hat),other,1
+openssl,2025,Apple Inc.,other,1
+openssl,2025,George Pantelakis (Red Hat) and Alicja Kario (Red Hat),other,1
+openssl,2026,Alex Gaynor (Anthropic),ai,5
+openssl,2026,Stanislav Fort (Aisle Research),ai,5
+openssl,2026,Luigino Camastra (Aisle Research),ai,4
+openssl,2026,Igor Morgenstern (Aisle Research),ai,2
+openssl,2026,Frank Buss,other,1
+openssl,2026,Pavol Žáčik (Red Hat) and Alex Gaynor (Anthropic),ai,1
+openssl,2026,"Asim Viladi Oglu Manizada, Alex Gaynor (Anthropic), Ying Dong and Haiyang Huang",ai,1
+openssl,2026,Abhinav Agarwal,other,1
+openssl,2026,"Wang Kenaz (University of Illinois), Guido Vranken (Aisle Research) and Aaron Grattafiori (Nvidia)",ai,1
+openssl,2026,"Sunwoo Lee (KENTECH), Hyuk Lim (KENTECH) and Seunghyun Yoon (KENTECH)",other,1
+openssl,2026,Joshua Rogers (Aisle Research),ai,1
+openssl,2026,"Mayank Jangid, Kushal Khemka, Hari Priandana, Bhabani Sankar Das and Qifan Zhang (Palo Alto Networks)",other,1
+openssl,2026,"Zhanpeng Liu (Tencent Xuanwu Lab), Guannan Wang (Tencent Xuanwu Lab), Guancheng Li (Tencent Xuanwu Lab) and Bhabani Sankar Das",other,1
+openssl,2026,TrendAI Zero Day Initiative,other,1
+openssl,2026,Thai Duong (Calif.io in collaboration with Claude and Anthropic Research),ai,1
+openssl,2026,Zehua Qiao and Jinwen He,other,1
+openssl,2026,Bhabani Sankar Das and Haruki Oyama (Waseda University),other,1
+openssl,2026,"Stanislav Fort (Aisle Research), Pavel Kohout (Aisle Research) and Alex Gaynor (Anthropic)",ai,1
+openssl,2026,"Nathan Sportsman (Praetorian), Daniel Rhea, Jaeho Nam (Seoul National University), Muhammad Daffa, Zhanpeng Liu (Tencent Xuanwu Lab), Guannan Wang (Tencent Xuan",other,1
+openssl,2026,"Muhammad Daffa, Zhanpeng Liu (Tencent Xuanwu Lab), Guannan Wang (Tencent Xuanwu Lab), Guancheng Li (Tencent Xuanwu Lab), Joshua Rogers (Aisle Research) and Chan",ai,1
+openssl,2026,Quoc Tran (Xint.io - US Team),other,1
+openssl,2026,Simo Sorce (Red Hat),other,1
+openssl,2026,Viktor Dukhovni,other,1
+openssl,2026,"Stanislav Fort (Aisle Research), Petr Šimeček (Aisle Research) and Hamza (Metadust)",ai,1
+openssl,2026,Tomas Dulka (Aisle Research) and Stanislav Fort (Aisle Research),ai,1
+openssl,2026,Petr Šimeček (Aisle Research) and Stanislav Fort (Aisle Research),ai,1

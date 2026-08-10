@@ -1,0 +1,18 @@
+series,date,program,author,total_bytes,award,note
+hutter_enwik8,2006-03-24,paq8f -7,Matt Mahoney,18324887,no,pre-prize baseline
+hutter_enwik8,2006-09-25,paq8hp5 -7,Alexander Rhatushnyak,17073018,yes,1st winner
+hutter_enwik8,2007-05-14,paq8hp12 -7,Alexander Rhatushnyak,16481655,yes,2nd winner
+hutter_enwik8,2009-05-23,decomp8,Alexander Rhatushnyak,15949688,yes,3rd winner
+hutter_enwik8,2017-11-04,phda9,Alexander Rhatushnyak,15284944,yes,4th winner
+hutter_enwik9,2019-07-04,phda9v1.8,Alexander Rhatushnyak,116673681,no,pre-prize baseline for the 2020 10x expansion
+hutter_enwik9,2021-05-31,starlit,Artemiy Margaritov,115352938,yes,5th winner
+hutter_enwik9,2023-07-16,fast cmix,Saurabh Kumar,114156155,yes,6th winner
+hutter_enwik9,2024-02-02,fx-cmix,Kaido Orav,112578322,yes,7th winner
+hutter_enwik9,2024-09-03,fx2-cmix,Kaido Orav & Byron Knoll,110793128,yes,8th winner
+hutter_enwik9,2026-06-26,cmix-lex,Ibrahim Marcouch,109190109,pending,announced on LTCB; not yet an awarded record on the prize site as of 2026-07-28
+ltcb_enwik9,2019-07-04,phda9 1.8,Alexander Rhatushnyak,116587793,,LTCB total incl. decompressor
+ltcb_enwik9,2021-01-03,nncp v2,Fabrice Bellard,114317255,,as printed on LTCB; likely omits the 99671-byte decompressor
+ltcb_enwik9,2021-02-06,nncp v2.1,Fabrice Bellard,112319355,,
+ltcb_enwik9,2021-04-24,nncp v3,Fabrice Bellard,110231784,,
+ltcb_enwik9,2021-06-01,nncp v3.1,Fabrice Bellard,108579652,,
+ltcb_enwik9,2023-10-23,nncp v3.2,Fabrice Bellard,107261318,,still ranked 1 as of the page's 2026-07-08 update

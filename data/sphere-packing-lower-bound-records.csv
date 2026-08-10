@@ -1,0 +1,9 @@
+year,finder,bound_asymptotic,constant_c,note,source_url
+1905,Minkowski (Minkowski-Hlawka; Hlawka 1943 general),theta(d) >= 2*zeta(d)*2^-d,~2,"trivial saturation gives 2^-d; Minkowski-Hlawka improves by factor ~2",https://arxiv.org/abs/2606.13313
+1947,Rogers,theta(d) >= c*d*2^-d with c=2/e,0.736,"first asymptotically-growing (factor d) improvement over Minkowski-Hlawka",https://arxiv.org/abs/2606.13313
+1947,Davenport-Rogers,theta(d) >= c*d*2^-d,1.68,improved Rogers constant,https://arxiv.org/abs/2606.13313
+1992,Keith Ball,theta(d) >= c*d*2^-d,2,"IMRN 1992; improved constant to 2 (lattice packings)",https://arxiv.org/abs/2606.13313
+2011,Stephanie Vance,theta(d) >= c*d*2^-d,6/e (~2.21),"for d divisible by 4; via Hurwitz lattices",https://arxiv.org/abs/1105.3779
+2013,Akshay Venkatesh,theta(d) >= c*d*log log d*2^-d (sparse d); and c up to 65963,65963,"first super-linear-in-d factor, but only along a sparse sequence of dimensions",https://arxiv.org/abs/2606.13313
+2023,"Campos, Jenssen, Michelen, Sahasrabudhe",theta(d) >= (1-o(1))*d*log d*2^-(d+1),,"first asymptotically-growing (factor log d) improvement to Rogers for ALL d, since 1947",https://arxiv.org/abs/2312.10026
+2025,Boaz Klartag,delta_n^L >= c*n^2*2^-n,,"jumps another whole power of n (factor n^2); new probabilistic/stochastic-ellipsoid method; announced 2025",https://arxiv.org/abs/2606.13313

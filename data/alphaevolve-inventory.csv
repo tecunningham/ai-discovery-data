@@ -1,0 +1,66 @@
+problem,index,title,topic_group,status,status_mapping,n_citations,cited_refs,n_cited_years,earliest_cited_year,latest_cited_year,cited_years,stated_bound
+6.1,1,Kakeya and Nikodym sets,Finite field Kakeya and Nikodym sets,world_record,assumed,7,31;49;90;156;205;276;281,6,2005,2025,2005;2013;2015;2018;2021;2025,
+6.2,2,,Autocorrelation inequalities,world_record,assumed,3,59;88;210,3,2010,2025,2010;2017;2025,1.28 ≤ 𝐶6.2 ≤ 1.50992
+6.3,3,,Autocorrelation inequalities,former_record,assumed,2,42;210,2,2010,2025,2010;2025,0.88922 ≤ 𝐶6.3 ≤ 1
+6.4,4,,Autocorrelation inequalities,world_record,assumed,2,210;290,1,2010,2010,2010,𝐶6.4 ≤ 1.4993
+6.5,5,,Autocorrelation inequalities,world_record,assumed,5,1;2;103;164;299,5,1955,2025,1955;2006;2016;2023;2025,0.379005 ≤ 𝐶6.5 ≤ 0.3809268534330870
+6.6,6,,Autocorrelation inequalities,worse_than_record,assumed,2,17;71,2,2020,2025,2020;2025,0.37 ≤ 𝐶6.6 ≤ 0.411.
+6.7,7,Difference bases,Difference bases,world_record,assumed,5,16;143;192;240;260,5,1938,2019,1938;1949;1956;1972;2019,
+6.8,8,Kissing numbers,Kissing numbers,world_record,assumed,9,1;66;69;92;137;193;195;218;226,5,1972,2025,1972;1979;2008;2024;2025,
+6.9,9,Kakeya needle problem,Kakeya needle problem,world_record,assumed,3,28;78;178,3,1919,1999,1919;1977;1999,
+6.10,10,3D Kakeya problem,Kakeya needle problem,world_record,assumed,2,188;294,1,2025,2025,2025,
+6.11,11,Uncertainty principle,Sphere packing and uncertainty principles,worse_than_record,assumed,8,61;62;68;145;146;159;183;289,6,2003,2025,2003;2005;2017;2019;2023;2025,0.2025 ≤ 𝐶6.11 ≤ 0.353.
+6.12,12,Sphere packing,Sphere packing and uncertainty principles,,,1,61,1,2003,2003,2003,
+6.13,13,Linear programming bound,Sphere packing and uncertainty principles,,,3,61;124;198,3,1999,2003,1999;2001;2003,
+6.14,14,Hausdorff–Young,Classical inequalities,matched_optimal,assumed,5,1;2;9;10;20,5,1961,2025,1961;1975;2006;2024;2025,
+6.15,15,Gagliardo–Nirenberg,Classical inequalities,matched_optimal,assumed,1,1,1,2025,2025,2025,
+6.16,16,Special case of Gagliardo–Nirenberg,Classical inequalities,matched_optimal,assumed,1,298,1,1983,1983,1983,
+6.17,17,Young’s convolution inequality,Classical inequalities,matched_optimal,assumed,1,20,1,1975,1975,1975,
+6.18,18,Hardy–Littlewood maximal inequality,Classical inequalities,worse_than_record,assumed,3,4;212;213,3,1998,2003,1998;2002;2003,𝐶6.18 ≥ 1.
+6.19,19,Ovals problem,The Ovals problem,matched_optimal,assumed,6,2;7;22;50;51;199,5,2003,2009,2003;2004;2005;2006;2009,1 < 𝐶6.19 ≤ 1
+6.20,20,Sendov’s conjecture,Sendov’s conjecture and its variants,,,9,35;38;46;47;48;211;229;256;279,9,1969,2022,1969;1972;1985;1991;1995;1996;1997;1999;2022,1 ≤ 𝐶6.20 (𝑛) ≤ 21
+6.21,21,Schmeisser’s conjecture,Sendov’s conjecture and its variants,,,2,251;252,2,1969,1977,1969;1977,
+6.22,22,Borcea’s conjecture,Sendov’s conjecture and its variants,,,1,181,1,2011,2011,2011,
+6.23,23,Smale’s problem,Sendov’s conjecture and its variants,,,5,19;76;80;135;265,4,1981,2007,1981;2002;2006;2007,1 ≤ 𝐶6.23 (𝑛) ≤ 4
+6.24,24,de Bruin–Sharma,Sendov’s conjecture and its variants,,,4,58;89;181;278,4,1997,2025,1997;2006;2011;2025,
+6.25,25,Crouzeix’s conjecture,Crouzeix’s conjecture,,,9,23;82;83;153;154;155;228;235;288,7,1965,2018,1965;1966;1999;2004;2014;2017;2018,2 ≤ 𝐶6.25 ≤ 1
+6.26,26,Sidorenko’s conjecture,Sidorenko’s conjecture,,,10,1;72;73;74;75;163;182;197;259;273,8,1993,2025,1993;2010;2011;2014;2016;2018;2021;2025,
+6.27,27,Prime number theorem,The prime number theorem,worse_than_record,assumed,3,57;95;272,3,1852,1982,1852;1870;1982,𝐶6.27 = 1.
+6.28,28,Golay’s merit factor,Flat polynomials and Golay’s merit factor conjecture,worse_than_record,assumed,10,12;39;106;143;144;150;170;200;225;227,9,1962,2020,1962;1966;1972;1977;2008;2013;2016;2018;2020,
+6.29,29,Blocks stacking problem,Blocks Stacking,matched_optimal,assumed,0,,0,,,,
+6.30,30,Arithmetic Kakeya conjecture,The arithmetic Kakeya conjecture,world_record,assumed,5,151;173;174;194;282,5,1999,2025,1999;2002;2015;2019;2025,"1.77898 ≤ 𝐶6.30 ({0, 1, ∞}; −1) ≤ 11"
+6.31,31,Furstenberg–Sárközy problem,Furstenberg–Sárközy theorem,,,5,136;152;196;245;247,5,1977,2024,1977;1978;1984;2015;2024,
+6.32,32,Spherical designs,Spherical designs,world_record,assumed,10,37;64;91;162;171;186;246;264;266;285,8,1904,2017,1904;1977;1993;1997;1998;2010;2013;2017,
+6.33,33,Thomson problem,The Thomson and Tammes problems,,,14,14;15;63;67;102;141;191;234;246;255;277;292,12,1930,2025,1930;1956;1990;1991;1992;1994;1997;2006;2007;2009;2013;2025,
+6.34,34,Tammes problem,The Thomson and Tammes problems,,,11,65;86;93;189;217;219;234;241;254;263;286,9,1943,2023,1943;1951;1961;1986;1994;2010;2012;2015;2023,
+6.35,35,Packing in a dilate,Packing problems,world_record,assumed,7,1;112;126;131;134;176;249,5,1975,2025,1975;2002;2005;2019;2025,
+6.36,36,Circle packing in a square,Packing problems,former_record,assumed,4,25;94;128;129,3,2011,2025,2011;2012;2025,
+6.37,37,Turán hypergraph problem for the tetrahedron,The Turán number of the tetrahedron,,,3,177;187;236,3,1982,2011,1982;2010;2011,5 ≤ 𝐶6.37 ≤ 0.561666
+6.38,38,Factoring factorials,Factoring 𝑁! into 𝑁 numbers,former_record,assumed,1,5,1,2025,2025,2025,
+6.39,39,Beat the average game,Beat the average game,worse_than_record,assumed,2,21;209,1,2024,2024,2024,0.400695 ≤ 𝐶6.39 ≤ 0.417
+6.40,40,Erdős discrepancy problem,Erdős discrepancy problem,worse_than_record,assumed,4,104;121;185;280,4,1957,2016,1957;1964;2015;2016,
+6.41,41,Fejes–Tóth problem,Points on sphere maximizing the volume,,,7,24;44;81;161;168;220;262,7,1970,2016,1970;1991;1994;1995;2002;2005;2016,
+6.42,42,,Sums and differences problems,world_record,assumed,1,244,1,1996,1996,1996,𝐶6.42 ≤ 2
+6.43,43,,Sums and differences problems,worse_than_record,assumed,2,125;166,2,1973,1999,1973;1999,
+6.44,44,,Sums and differences problems,former_record,assumed,4,1;33;138;158,3,2007,2025,2007;2024;2025,6.44 ≤ 𝐶6.44 ≥ 1
+6.45,45,Sum-product problem,Sum-product problems,,,3,34;115;214,3,1983,2025,1983;2023;2025,
+6.46,46,Minimal triangle (density,Triangle density in graphs,matched_optimal,assumed,13,1;29;30;36;99;123;147;179;204;215;223;237,11,1959,2025,1959;1962;1963;1976;1978;1983;1989;2007;2008;2012;2025,
+6.47,47,,Matrix multiplications and AM-GM inequalities,,,2,99;169,2,2012,2016,2012;2016,
+6.48,48,Heilbronn problem in a fixed bounding box,Heilbronn problems,world_record,assumed,8,53;60;98;118;130;184;303;304,7,1982,2025,1982;1992;1995;2007;2015;2024;2025,
+6.49,49,Heilbronn problem in an arbitrary convex bounding box,Heilbronn problems,world_record,assumed,3,127;132;133,2,2007,2024,2007;2024,
+6.50,50,Max to min ratios,Max to min ratios,world_record,assumed,8,8;18;25;27;54;55;118;238,6,1951,2025,1951;1999;2006;2009;2010;2025,
+6.51,51,Erdős–Gyárfás problem,Erdős–Gyárfás conjecture,,,1,203,1,2023,2023,2023,
+6.52,52,Erdős squarefree problem,Erdős squarefree problem,,,3,105;118;248,2,1992,2025,1992;2025,
+6.53,53,Erdős equidistant points in convex polygons problem,Equidistant points in convex polygons,,,7,107;108;109;110;111;118;122,6,1961,2025,1961;1990;1992;1995;1997;2025,
+6.54,54,Touching cylinders,Pairwise touching cylinders,matched_optimal,assumed,9,26;43;44;96;100;201;222;230;231,7,1968,2025,1968;1990;2004;2005;2009;2014;2025,
+6.55,55,Squares in square,Erdős squares in a square problem,,,7,3;11;52;116;117;160;232,5,1984,2024,1984;1994;1995;2005;2024,
+6.56,56,Szemerédi–Trotter,Good asymptotic constructions of Szemerédi–Trotter,,,5,13;85;157;269;275,3,1983,2025,1983;2023;2025,
+6.57,57,Rudin problem,Rudin problem for polynomials,,,5,40;41;84;113;175,5,1935,2016,1935;1962;1968;1985;2016,
+6.58,58,Happy ending problem,Erdős–Szekeres Happy Ending problem,,,6,114;167;172;207;250;274,5,1960,2020,1960;1970;2006;2019;2020,1 ≤ 𝐶6.58 (𝑘) ≤ 2
+6.59,59,Subsets of grid with no isosceles triangles,Subsets of the grid with no isosceles triangles,world_record,assumed,5,56;100;101;268;300,5,1904,2025,1904;2016;2023;2024;2025,
+6.60,60,,The “no 5 on a sphere” problem,world_record,assumed,13,8;10;45;56;64;79;100;140;180;253;258;270,9,1994,2025,1994;1995;1997;1999;2005;2008;2010;2024;2025,
+6.61,61,Ring Loading Problem Discrepancy,The Ring Loading Problem,world_record,assumed,3,216;253;261,3,1966,2016,1966;1999;2016,101 ≤ 𝐶6.61 ≤ 23
+6.62,62,Classic sofa,Moving sofa problem,matched_optimal,assumed,3,1;10;139,3,1992,2025,1992;2024;2025,𝐶6.62 ≥ 2.2195
+6.63,63,Ambidextrous sofa,Moving sofa problem,matched_optimal,assumed,2,1;243,2,2018,2025,2018;2025,𝐶6.63 ≥ 1.6449
+6.64,64,Three-dimensional sofa,Moving sofa problem,world_record,assumed,1,208,1,2022,2022,2022,
+6.65,65,"IMO 2025, Problem 614",International Mathematical Olympiad (IMO) 2025: Problem 6,matched_optimal,assumed,3,206;233;267,3,1986,2025,1986;2019;2025,

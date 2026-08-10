@@ -1,0 +1,550 @@
+% Bibliography for the problem documents in problems/.
+%
+% Conventions, enforced loosely by tools/check.py (which only verifies that
+% every [@key] cited in a document resolves here):
+%
+% - One field per line, with a trailing comma.
+% - Every entry carries a `url`, and a `doi` or `eprint` where one exists.
+% - arXiv entries use https://arxiv.org/abs/<id> plus eprint and archiveprefix.
+% - Keys are authorlastnameYYYYshortword, or organisationYYYYshortword for
+%   vendor and press material with no individual author.
+% - Vendor blog posts and press coverage are cited as @misc with the publisher
+%   as author, because several load-bearing claims in this area exist nowhere
+%   else. The problem documents say when a figure rests on one.
+
+@misc{aalto2025kissing,
+  title           = {Researcher cracks new kissing number bounds, besting AI in the process},
+  author          = {{Aalto University}},
+  year            = {2025},
+  note            = {Press release of 2025-10-23 covering Ganzhinov's peer-reviewed constructions, which beat AlphaEvolve in dimensions 10 and 14 and fell one short of its 593 in dimension 11},
+  url             = {https://www.aalto.fi/en/news/researcher-cracks-new-kissing-number-bounds-besting-ai-in-the-process},
+}
+
+@misc{afp2026jacobian,
+  title           = {Jacobian counterexample},
+  year            = {2026},
+  note            = {Archive of Formal Proofs entry name, giving the independent Isabelle verification of the same counterexample; the entry itself was not read here},
+  url             = {https://isa-afp.org/entries/Jacobian_Counterexample.html},
+}
+
+@misc{aisle2026,
+  title          = {AI cybersecurity after Mythos: the jagged frontier},
+  author         = {{Aisle Research}},
+  year           = {2026},
+  note           = {Vendor commentary; Aisle researchers hold many of the AI-credited curl and OpenSSL findings},
+  url            = {https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier},
+}
+
+@misc{anthropicmythos2026,
+  title          = {Mythos preview},
+  author         = {{Anthropic}},
+  year           = {2026},
+  note           = {Vendor claim of ``thousands'' of previously unknown vulnerabilities; unaudited},
+  url            = {https://red.anthropic.com/2026/mythos-preview/},
+}
+
+@misc{arxiv2026horizonmath,
+  title           = {HorizonMath},
+  year            = {2026},
+  note            = {Title is the benchmark name as recorded in the source log. Over 100 predominantly unsolved problems chosen so that discovery is hard but ``verification is computationally efficient and simple''; most state-of-the-art models score near 0\%},
+  eprint          = {2603.15617},
+  archiveprefix   = {arXiv},
+  url             = {https://arxiv.org/abs/2603.15617},
+}
+
+@misc{arxiv2026spherepacking,
+  title           = {A recent survey recording the asymptotic sphere-packing lower-bound ladder},
+  year            = {2026},
+  note            = {Title is this repository's description of the linked preprint, which is the per-row source for most of the ladder in sphere-packing-lower-bound-records.csv; its authorship and published title were not established here},
+  eprint          = {2606.13313},
+  archiveprefix   = {arXiv},
+  url             = {https://arxiv.org/abs/2606.13313},
+}
+
+@misc{bianchi2026collective,
+  title           = {Harnessing the collective intelligence of AI agents in the wild for new discoveries},
+  author          = {Bianchi and Kwon and Pappu and Zou},
+  year            = {2026},
+  note            = {Cited by Cohn's kissing-number table for the dimension-11 lower bound of 604; author initials were not established here},
+  eprint          = {2606.10402},
+  archiveprefix   = {arXiv},
+  url             = {https://arxiv.org/abs/2606.10402},
+}
+
+@inproceedings{biere2023satmuseum,
+  title          = {The SAT Museum},
+  author         = {Biere, Armin and Fleury, Mathias and Froleyks, Nils and Heule, Marijn J. H.},
+  booktitle      = {Proceedings of the 14th International Workshop on Pragmatics of SAT},
+  series         = {CEUR Workshop Proceedings},
+  volume         = {3545},
+  year           = {2023},
+  note           = {Historic solvers recompiled and rerun on one machine, so the measured gain is pure software},
+  url            = {https://ceur-ws.org/Vol-3545/paper6.pdf},
+}
+
+@article{bixby2012history,
+  title          = {A brief history of linear and mixed-integer programming computation},
+  author         = {Bixby, Robert E.},
+  journal        = {Documenta Mathematica, Extra Volume: Optimization Stories},
+  pages          = {107--121},
+  year           = {2012},
+  doi            = {10.4171/DMS/6/16},
+  note           = {Bixby founded Gurobi, so the Gurobi-era figures are self-reported; the CPLEX-era measurement predates the company},
+  url            = {https://www.maths.tcd.ie/EMIS/journals/DMJDMV/vol-ismp/25_bixby-robert.pdf},
+}
+
+@misc{bloomberg2026recordflaws,
+  title          = {AI hunts for cyber flaws, finding record numbers in tech sector},
+  author         = {{Bloomberg}},
+  year           = {2026},
+  url            = {https://www.bloomberg.com/news/articles/2026-07-27/ai-hunts-for-cyber-flaws-finding-record-numbers-in-tech-sector},
+}
+
+@misc{campos2023sphere,
+  title           = {The 2023 asymptotically growing improvement to the sphere-packing lower bound},
+  author          = {Campos and Jenssen and Michelen and Sahasrabudhe},
+  year            = {2023},
+  note            = {Title is this repository's description; the published title and author initials were not established here. The first asymptotically growing improvement on Rogers valid for all dimensions, after seventy-six years},
+  eprint          = {2312.10026},
+  archiveprefix   = {arXiv},
+  url             = {https://arxiv.org/abs/2312.10026},
+}
+
+@misc{cisa2026kev,
+  title          = {Known Exploited Vulnerabilities catalog},
+  author         = {{CISA}},
+  year           = {2026},
+  note           = {Catalogue of vulnerabilities observed being exploited; entries are dated by when CISA added them},
+  url            = {https://www.cisa.gov/known-exploited-vulnerabilities-catalog},
+}
+
+@misc{clay2000millennium,
+  title           = {Millennium Prize Problems},
+  author          = {{Clay Mathematics Institute}},
+  year            = {2000},
+  note            = {The seven prize problems and their status; the ledger source for the Millennium series},
+  url             = {https://www.claymath.org/millennium-problems/},
+}
+
+@misc{cohn2026kissing,
+  title           = {Kissing numbers},
+  author          = {Cohn, Henry},
+  year            = {2026},
+  note            = {Records table by dimension; the dimension-11 lower bound of 604 is listed as of 2026-06-22, credited to a collective AI-agent platform},
+  url             = {https://cohn.mit.edu/kissing-numbers},
+}
+
+@misc{darpa2016cgc,
+  title          = {Cyber Grand Challenge winners},
+  author         = {{DARPA}},
+  year           = {2016},
+  note           = {The first all-machine cyber hacking tournament; autonomous find-and-patch with no language model involved},
+  url            = {https://www.darpa.mil/news/2016/cyber-grand-challenge-winners},
+}
+
+@misc{darpa2025aixcc,
+  title          = {AI Cyber Challenge (AIxCC) results},
+  author         = {{DARPA}},
+  year           = {2025},
+  note           = {Seven autonomous systems on 54 million lines of code; the only fixed task set in this domain measured twice a year apart},
+  url            = {https://www.darpa.mil/news/2025/aixcc-results},
+}
+
+@misc{deepmind2023funsearch,
+  title           = {FunSearch: making new discoveries in mathematical sciences using large language models},
+  author          = {{Google DeepMind}},
+  year            = {2023},
+  note            = {Announcement of the Nature paper of 2023-12-14, https://www.nature.com/articles/s41586-023-06924-6; the first case of an LLM producing a new result on a recognised open mathematical problem},
+  url             = {https://deepmind.google/blog/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models/},
+}
+
+@misc{deepmind2025problems,
+  title           = {AlphaEvolve repository of problems},
+  author          = {{Google DeepMind}},
+  year            = {2025},
+  note            = {Companion repository to the AlphaEvolve mathematics paper, arXiv 2511.02864; carries a per-problem page, a notebook for most problems, and a status.json classification. Self-described as ``a live repository which we expect to expand and improve over time''; per-problem pages at https://google-deepmind.github.io/alphaevolve\_repository\_of\_problems/},
+  url             = {https://github.com/google-deepmind/alphaevolve_repository_of_problems},
+}
+
+@misc{deepmind2026nexus,
+  title           = {AlphaProof Nexus},
+  author          = {{Google DeepMind}},
+  year            = {2026},
+  note            = {Title is the system name as recorded in the source log; the arXiv title was not read here. Reports 9 of 353 open Erd\H{o}s problems resolved and 44 of 492 OEIS conjectures proved. arXiv 2026-05-21, v2 2026-06-08},
+  eprint          = {2605.22763},
+  archiveprefix   = {arXiv},
+  url             = {https://arxiv.org/abs/2605.22763},
+}
+
+@misc{demaine2001topp,
+  title           = {The Open Problems Project},
+  author          = {Demaine, Erik D. and Mitchell, Joseph S. B. and O'Rourke, Joseph},
+  year            = {2001},
+  note            = {78 computational-geometry problems with maintainer-set status lines; the rows here are transcribed from the project's GitHub sources},
+  url             = {https://topp.openproblem.net/},
+}
+
+@misc{epoch2026driver,
+  title          = {The least understood driver of AI progress},
+  author         = {{Epoch AI}},
+  year           = {2026},
+  note           = {The quoted best guess of about 10x a year, with an 80\% interval of 2x to 50x, is Anson Ho's; it is a stated estimate rather than a measured series},
+  url            = {https://epoch.ai/gradient-updates/the-least-understood-driver-of-ai-progress},
+}
+
+@misc{erdosproblems2026catalogue,
+  title           = {Erd\H{o}s problems},
+  author          = {{Erd\H{o}s Problems project}},
+  year            = {2026},
+  note            = {The catalogue itself, and the source of the site's own warning that an open-to-solved status change can follow the underlying solution by weeks, months, or decades. Snapshot statistics are kept at https://github.com/teorth/erdosproblems},
+  url             = {https://www.erdosproblems.com/},
+}
+
+@misc{erdosproblems2026wiki,
+  title           = {AI contributions to Erd\H{o}s problems},
+  author          = {{Erd\H{o}s Problems project}},
+  year            = {2026},
+  note            = {Community-maintained wiki, data frozen 2026-06-30 and no longer updated. States that the list ``is not a benchmark'' and that ``absence of past progress may reflect obscurity rather than difficulty''},
+  url             = {https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems},
+}
+
+@article{fawzi2022alphatensor,
+  title          = {Discovering faster matrix multiplication algorithms with reinforcement learning},
+  author         = {Fawzi, Alhussein and Balog, Matej and Huang, Aja and others},
+  journal        = {Nature},
+  year           = {2022},
+  doi            = {10.1038/s41586-022-05172-4},
+  note           = {Reinforcement learning with no language model involved; the control for how much of the current results should be attributed to LLMs specifically},
+  url            = {https://www.nature.com/articles/s41586-022-05172-4},
+}
+
+@misc{folkerts2026cyberattack,
+  author         = {Folkerts, Linus and Payne, Will and Inman, Simon and Giavridis, Philippos and Skinner, Joe and Deverett, Sam and Aung, James and Zorer, Ekin and Schmatz, Michael and Ghanem, Mahmoud and Wilkinson, John and Steer, Alan and Hong, Vy and Wang, Jessica},
+  title          = {Measuring AI Agents' Progress on Multi-Step Cyber Attack Scenarios},
+  year           = {2026},
+  eprint         = {2603.11214},
+  archiveprefix  = {arXiv},
+  primaryclass   = {cs.AI},
+  url            = {https://arxiv.org/abs/2603.11214},
+}
+
+@misc{fulcrum2026fable,
+  title          = {Fable on the CIFAR-10 speedrun},
+  author         = {{Fulcrum}},
+  year           = {2026},
+  note           = {Lab self-report of a 1.828-second result; unacknowledged by the record-keeper and documenting specification gaming alongside the change},
+  url            = {https://fulcrum.inc/2026/07/09/fable-cifar-speedrun.html},
+}
+
+@misc{google2026ossfuzz,
+  title          = {OSS-Fuzz},
+  author         = {{Google}},
+  year           = {2026},
+  note           = {Continuous fuzzing service for open-source software},
+  url            = {https://google.github.io/oss-fuzz/},
+}
+
+@misc{googlebigsleep2024,
+  title          = {Big Sleep: using large language models to catch vulnerabilities in real-world code},
+  author         = {{Google Project Zero and Google DeepMind}},
+  year           = {2024},
+  note           = {Vendor self-report; later disclosures summarised in the Cloud CISO perspectives post},
+  url            = {https://cloud.google.com/blog/products/identity-security/cloud-ciso-perspectives-our-big-sleep-agent-makes-big-leap},
+}
+
+@techreport{grace2013algorithmic,
+  title          = {Algorithmic progress in six domains},
+  author         = {Grace, Katja},
+  institution    = {Machine Intelligence Research Institute},
+  year           = {2013},
+  note           = {Source of the chess rate of about fifty Elo a year and of MIP algorithms having roughly doubled in speed each year; the report states its own optimistic selection bias},
+  url            = {https://intelligence.org/files/AlgorithmicProgress.pdf},
+}
+
+@misc{gurobi2025release13,
+  title          = {What is new in Gurobi 13.0},
+  author         = {{Gurobi Optimization}},
+  year           = {2025},
+  note           = {Release announcement of 2025-11-18 giving the 8.2\% overall MILP improvement over version 12; the per-release URLs for versions 10 to 13 are carried row by row in gurobi-milp-speedups.csv},
+  url            = {https://www.gurobi.com/whats-new-gurobi-13-0/},
+}
+
+@misc{gurobi2026performance,
+  title          = {Gurobi Optimizer delivers unmatched performance},
+  author         = {{Gurobi Optimization}},
+  year           = {2026},
+  note           = {Vendor performance page; source of the test-set description and of the cumulative MILP claims, read from dated captures},
+  url            = {https://www.gurobi.com/features/gurobi-optimizer-delivers-unmatched-performance/},
+}
+
+@misc{hackerone2025autonomy,
+  title          = {HackerOne report finds 210\% spike in AI vulnerability reports amid rise in AI autonomy},
+  author         = {{HackerOne}},
+  year           = {2025},
+  note           = {Vendor platform self-report; the body of the release says ``more than 200\%'' where the headline says 210\%},
+  url            = {https://www.hackerone.com/press-release/hackerone-report-finds-210-spike-ai-vulnerability-reports-amid-rise-ai-autonomy},
+}
+
+@misc{hiverge2025cifar,
+  title          = {CIFAR speedrun},
+  author         = {{Hiverge}},
+  year           = {2025},
+  note           = {Vendor self-report of the first acknowledged AI-set CIFAR-10 record, at 1.99 seconds},
+  url            = {https://www.hiverge.ai/blog/cifar-speedrun},
+}
+
+@misc{hutter2026prize,
+  title          = {Hutter Prize for lossless compression of human knowledge},
+  author         = {Hutter, Marcus},
+  year           = {2026},
+  note           = {Standing cash prize; the record table, the resource cap and the 1\% improvement hurdle are read from the prize site, which is served over plain HTTP},
+  url            = {http://prize.hutter1.net/},
+}
+
+@misc{jordan2024airbench,
+  title          = {cifar10-airbench},
+  author         = {Jordan, Keller},
+  year           = {2024},
+  note           = {GitHub repository; carries no dates, which is why the CIFAR-10 series had to be assembled from releases and announcements},
+  url            = {https://github.com/KellerJordan/cifar10-airbench},
+}
+
+@misc{karpathy2026autoresearch,
+  title          = {Autoresearch tuning nanochat},
+  author         = {Karpathy, Andrej},
+  year           = {2026},
+  note           = {Self-reported two-day agent run of 2026-03-06; the agent found the changes and Karpathy himself tested, transferred and stacked them before measuring the 11\% improvement},
+  url            = {https://x.com/karpathy/status/2031135152349524125},
+}
+
+@misc{kellerjordan2026moddednanogpt,
+  title          = {modded-nanogpt},
+  author         = {Jordan, Keller and contributors},
+  year           = {2026},
+  note           = {GitHub repository; the README carries the full dated record table vendored as nanogpt-records.csv},
+  url            = {https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md},
+}
+
+@misc{mahoney2026ltcb,
+  title          = {Large Text Compression Benchmark},
+  author         = {Mahoney, Matt},
+  year           = {2026},
+  note           = {The uncapped leaderboard on the same corpus; admits GPU and TPU compressors and reports totals on its own measurement convention},
+  url            = {http://mattmahoney.net/dc/text.html},
+}
+
+@misc{mittelmann2024benchmarks,
+  title          = {Benchmarks for optimization software},
+  author         = {Mittelmann, Hans D.},
+  year           = {2024},
+  note           = {Records the end of independent solver benchmarking: IBM and FICO withdrew after 2018, and Gurobi withdrew in August 2024},
+  url            = {https://plato.asu.edu/bench.html},
+}
+
+@misc{mozilla2026advisories,
+  title          = {Mozilla advisory repository (foundation-security-advisories)},
+  author         = {{Mozilla}},
+  year           = {2026},
+  note           = {One YAML file per advisory, with a reporter string against each CVE; rendered at mozilla.org/security/advisories},
+  url            = {https://github.com/mozilla/foundation-security-advisories},
+}
+
+@misc{nextchessmove2026devbuilds,
+  title          = {Stockfish development build tests},
+  author         = {{nextchessmove.com}},
+  year           = {2026},
+  note           = {Third-party measurement: 20,000 games per build against Stockfish 15 on fixed hardware and time control},
+  url            = {https://nextchessmove.com/dev-builds},
+}
+
+@misc{nist2026cvegrowth,
+  title          = {NIST updates NVD operations to address record CVE growth},
+  author         = {{NIST}},
+  year           = {2026},
+  note           = {Reports 263\% growth in submissions between 2020 and 2025, and enrichment of nearly 42,000 CVEs in 2025 still failing to keep pace},
+  url            = {https://www.nist.gov/news-events/news/2026/04/nist-updates-nvd-operations-address-record-cve-growth},
+}
+
+@article{novikov2025alphaevolve,
+  title          = {AlphaEvolve: a coding agent for scientific and algorithmic discovery},
+  author         = {Novikov, Alexander and V{\~u}, Ng{\^a}n and Eisenberger, Marvin and Dupont, Emilien and Huang, Po-Sen and Wagner, Adam Zsolt and Shirobokov, Sergey and Kozlovskii, Borislav and Ruiz, Francisco J. R. and Mehrabian, Abbas and Kumar, M. Pawan and See, Abigail and Chaudhuri, Swarat and Holland, George and Davies, Alex and Nowozin, Sebastian and Kohli, Pushmeet and Balog, Matej},
+  journal        = {arXiv preprint},
+  volume         = {arXiv:2506.13131},
+  year           = {2025},
+  eprint         = {2506.13131},
+  archiveprefix  = {arXiv},
+  doi            = {10.48550/arXiv.2506.13131},
+  note           = {Source of the 48-multiplication 4x4 complex-matrix result, the 23\% kernel speedup, and the production figures, which are vendor self-reports},
+  url            = {https://arxiv.org/abs/2506.13131},
+}
+
+@misc{nvd2026api,
+  title          = {NVD API},
+  author         = {{NIST National Vulnerability Database}},
+  year           = {2026},
+  note           = {Query interface behind the annual disclosure counts; windows are capped at 120 days and unkeyed callers are rate-limited},
+  url            = {https://services.nvd.nist.gov/rest/json/cves/2.0},
+}
+
+@misc{openai2026discretegeometry,
+  title           = {Model disproves discrete geometry conjecture},
+  author          = {{OpenAI}},
+  year            = {2026},
+  note            = {Vendor announcement, 2026-05-20, of the disproof of Erd\H{o}s's 1946 unit-distance growth conjecture; independently digested by nine mathematicians in arXiv 2605.20695, with Sawin's explicit exponent in arXiv 2605.20579},
+  url             = {https://openai.com/index/model-disproves-discrete-geometry-conjecture/},
+}
+
+@misc{openssl2026index,
+  title          = {OpenSSL vulnerability index},
+  author         = {{OpenSSL Project}},
+  year           = {2026},
+  note           = {Per-CVE index with publication date, severity, and a ``Found by'' credit; no machine-readable feed},
+  url            = {https://openssl-library.org/news/vulnerabilities/},
+}
+
+@misc{osv2026ossfuzz,
+  title          = {OSV OSS-Fuzz archive},
+  author         = {{OSV}},
+  year           = {2026},
+  note           = {Published OSS-Fuzz findings as dated OSV records; the archive carries no finder credit},
+  url            = {https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip},
+}
+
+@misc{satcompetition2025results,
+  title          = {SAT Competition 2025: results},
+  author         = {{SAT Competition 2025 organisers}},
+  year           = {2025},
+  note           = {Official results slides, dated 2025-08-14; AE-Kissat-MAB solved 327 of 400 instances against 321 for Kissat-public},
+  url            = {https://satcompetition.github.io/2025/satcomp25slides.pdf},
+}
+
+@article{sherry2021fast,
+  title           = {How fast do algorithms improve?},
+  author          = {Sherry, Yash and Thompson, Neil C.},
+  journal         = {Proceedings of the IEEE},
+  volume          = {109},
+  number          = {11},
+  pages           = {1768--1777},
+  year            = {2021},
+  publisher       = {IEEE},
+  doi             = {10.1109/JPROC.2021.3107219},
+  url             = {https://ide.mit.edu/wp-content/uploads/2021/09/How_Fast_Do_Algorithms_Improve.pdf},
+}
+
+@misc{stenberg2026bounty,
+  title          = {curl ends its bug bounty programme},
+  author         = {{The Register}},
+  year           = {2026},
+  note           = {Reports the closure after AI-assisted submissions reached about 20\% of entries while genuine yield fell},
+  url            = {https://www.theregister.com/2026/01/21/curl_ends_bug_bounty/},
+}
+
+@misc{stockfish2020nnue,
+  title          = {Introducing NNUE evaluation},
+  author         = {{The Stockfish team}},
+  year           = {2020},
+  note           = {Announcement of the August 2020 evaluation change that dominates the fixed-hardware Elo series},
+  url            = {https://stockfishchess.org/blog/2020/introducing-nnue-evaluation/},
+}
+
+@misc{stockfish2026llmcommit,
+  title          = {Stockfish master commit db98633b},
+  author         = {{official-stockfish contributors}},
+  year           = {2026},
+  note           = {The only master commit crediting a language model; a 0.60\% speed patch whose message records that a human maintainer rewrote much of it},
+  url            = {https://github.com/official-stockfish/Stockfish/commit/db98633b1f8bbcad850bee892ec143ff8723ba80},
+}
+
+@misc{tao2025antedb,
+  title           = {Analytic Number Theory Exponent Database (ANTEDB)},
+  author          = {Tao, Terence and Trudgian, Timothy and Yang, Andrew},
+  year            = {2025},
+  note            = {The database itself: a LaTeX blueprint plus a Python codebase recording theorems, conjectures, and relations between analytic-number-theory exponents. Blueprint site at https://teorth.github.io/expdb/; blueprint PDF dated 2026-07-03},
+  url             = {https://github.com/teorth/expdb},
+}
+
+@misc{tao2025exploration,
+  title          = {Mathematical exploration and discovery at scale},
+  author         = {Tao, Terence},
+  year           = {2025},
+  note           = {Co-author's account of AlphaEvolve across 67 mathematical problems, including its recorded failure on analytic number theory},
+  url            = {https://terrytao.wordpress.com/2025/11/05/mathematical-exploration-and-discovery-at-scale/},
+}
+
+@article{tao2025exponent,
+  title           = {New exponent pairs, zero density estimates, and zero additive energy estimates: a systematic approach},
+  author          = {Tao, Terence and Trudgian, Timothy and Yang, Andrew},
+  journal         = {arXiv preprint},
+  volume          = {arXiv:2501.16779},
+  year            = {2025},
+  eprint          = {2501.16779},
+  archiveprefix   = {arXiv},
+  url             = {https://arxiv.org/abs/2501.16779},
+}
+
+@misc{tao2025launch,
+  title           = {New exponent pairs, zero density estimates, and zero additive energy estimates: a systematic approach},
+  author          = {Tao, Terence},
+  year            = {2025},
+  note            = {Launch post for the exponent database, 2025-01-28, and the source of the statement that the automated searches improved the state of the art ``without introducing any substantial new inputs from analytic number theory''},
+  url             = {https://terrytao.wordpress.com/2025/01/28/new-exponent-pairs-zero-density-estimates-and-zero-additive-energy-estimates-a-systematic-approach/},
+}
+
+@misc{tao2026interview,
+  title           = {Terence Tao on AI and mathematics},
+  author          = {Tao, Terence and Patel, Dwarkesh},
+  year            = {2026},
+  note            = {Interview transcript, 2026-03-20; title is descriptive. Source of the ``jumping machines'' and ``fifty-odd problems \dots\ six hundred to go'' remarks},
+  url             = {https://www.dwarkesh.com/p/terence-tao},
+}
+
+@misc{tysam2023hlbcifar10,
+  title          = {hlb-CIFAR10},
+  author         = {{tysam-code}},
+  year           = {2023},
+  note           = {GitHub repository; release notes supply the 2022--2023 CIFAR-10 speedrun times},
+  url            = {https://github.com/tysam-code/hlb-CIFAR10},
+}
+
+@misc{wikipedia2026hilbert,
+  title           = {Hilbert's problems},
+  author          = {{Wikipedia}},
+  year            = {2026},
+  note            = {The secondary-consensus ledger from which the Hilbert rows are transcribed, including the contested and vague classifications},
+  url             = {https://en.wikipedia.org/wiki/Hilbert%27s_problems},
+}
+
+@misc{wikipedia2026matmul,
+  title          = {Matrix multiplication algorithm: sub-cubic algorithms},
+  author         = {{Wikipedia contributors}},
+  year           = {2026},
+  note           = {Published record chronology for the exponent omega; recorded as the per-row source in matrix-multiplication-omega.csv},
+  url            = {https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms},
+}
+
+@misc{wikipedia2026smale,
+  title           = {Smale's problems},
+  author          = {{Wikipedia}},
+  year            = {2026},
+  note            = {The ledger from which the four pre-2026 Smale resolutions are transcribed},
+  url             = {https://en.wikipedia.org/wiki/Smale%27s_problems},
+}
+
+@article{yuksekgonul2026learning,
+  title          = {Learning to discover at test time},
+  author         = {Yuksekgonul, Mert and Koceja, Daniel and Li, Xinhao and Bianchi, Federico and McCaleb, Jed and Wang, Xiaolong and Kautz, Jan and Choi, Yejin and Zou, James and Guestrin, Carlos and Sun, Yu},
+  journal        = {arXiv preprint},
+  volume         = {arXiv:2601.16175},
+  year           = {2026},
+  eprint         = {2601.16175},
+  archiveprefix  = {arXiv},
+  note           = {TriMul GPU kernels 15 to 51\% faster than the best human submission, found by test-time training on an open model rather than by a new base-model generation},
+  url            = {https://arxiv.org/abs/2601.16175},
+}
+
+@misc{zenodo2026jacobian,
+  title           = {Independent Lean verification of the Smale 16 counterexample},
+  year            = {2026},
+  note            = {Title is the source log's description of the deposit; the record itself was not read here. Kernel-checks the determinant and collision in the Alp\"oge--Claude Fable counterexample to the Jacobian conjecture},
+  url             = {https://zenodo.org/records/21514514},
+}

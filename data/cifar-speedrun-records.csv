@@ -1,0 +1,14 @@
+date,date_precision,seconds,holder,agent,acknowledged,note
+2018-11-01,undated,26.0,David Page (How to Train Your ResNet),human,yes,26 V100-seconds 2018-2019; airbench README calls it >=8 A100-seconds — earlier hardware so not strictly comparable
+2022-12-29,day,18.1,tysam-code hlb-CIFAR10 v0.1.0,human,yes,release-note time on A100
+2023-01-15,day,12.31,tysam-code hlb-CIFAR10 v0.2.0,human,yes,
+2023-01-30,day,9.91,tysam-code hlb-CIFAR10 v0.3.0,human,yes,
+2023-02-13,day,7.68,tysam-code hlb-CIFAR10 v0.4.0,human,yes,
+2023-02-20,day,6.98,tysam-code hlb-CIFAR10 v0.5.0,human,yes,
+2023-04-17,day,6.84,tysam-code hlb-CIFAR10 v0.6.0,human,yes,
+2023-11-07,day,6.29,tysam-code hlb-CIFAR10 v0.7.0,human,yes,
+2024-04-04,day,3.29,Keller Jordan airbench,human,yes,arXiv 2404.00498
+2024-07-15,undated,2.73,Keller Jordan (proto-Muon),human,yes,exact date not established; between April and November 2024 — referenced as previous record in the 2.59s tweet
+2024-11-10,day,2.59,Keller Jordan (Muon),human,yes,tweet 2024-11-10
+2025-10-15,day,1.99,Hiverge (the Hive discovery engine),ai,yes,run summer 2025; announced by Keller Jordan 2025-10-15; repo says 1.98
+2026-07-09,day,1.828,Fulcrum researchers running the Fable model,ai,no,lab writeup only; not acknowledged on the record-holder's account as of 2026-07-28; writeup also documents specification gaming alongside the legitimate change

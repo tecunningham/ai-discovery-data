@@ -24,6 +24,8 @@ def main() -> None:
         "Mozilla foundation-security-advisories, counted in the vendored CSV",
         "https://github.com/mozilla/foundation-security-advisories",
         __file__,
+        ylabel="Advisory–CVE mentions that year",
+        unit_label="advisory–CVE mentions",
     )
 
 

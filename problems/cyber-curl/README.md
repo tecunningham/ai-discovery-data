@@ -28,9 +28,10 @@ not a count of bugs introduced or bugs remaining.
 
 ## What the chart shows
 
-Roughly ten disclosures a year from 2017 through 2025, then 36 in the first half
-of 2026 alone — with 15 of those crediting an AI system or an AI-security firm.
-Annualized, 2026 is running near 72 a year against 13.1 a year across 2014–2023.
+Roughly twelve disclosures a year from 2017 through 2025, then 36 through
+24 June 2026 alone — with 15 of those crediting an AI system or an AI-security
+firm. Annualized from that exact date, 2026 is running near 75 a year against
+13.1 a year across 2014–2023.
 
 This is the clearest bend in any series in the collection, and the one place
 where a collective-progress curve visibly changes slope in the agent era.

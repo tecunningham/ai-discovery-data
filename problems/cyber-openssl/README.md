@@ -35,7 +35,7 @@ page could not be given a date and are absent from the counts.
 
 Single digits for most of a decade, then a step: 3 disclosures in 2020, 8 in
 2021, 13 in 2022, 19 in 2023, 9 in 2024, 6 in 2025, and 39 through 5 August
-2026. Of those 39, 26 credit an AI system or an AI-security firm — about two
+2026. Of those 39, 27 credit an AI system or an AI-security firm — about two
 thirds, the highest AI share of any series in this collection, against 3 of 6
 in 2025 and none in any earlier year.
 
@@ -86,9 +86,9 @@ fuzzer is automated without being a model.
 
 ## LLM contributions
 
-The 26 AI-credited CVEs of 2026 come from a very small group. Counting the
-credit lines in `openssl-finders.csv`, 18 name Aisle Research and 9 name
-Anthropic, with one line naming both, which accounts for all 26. Stanislav Fort
+The 27 AI-credited CVEs of 2026 come from a very small group. Counting the
+credit lines in `openssl-finders.csv`, 19 name Aisle Research and 9 name
+Anthropic, with one line naming both, which accounts for all 27. Stanislav Fort
 of Aisle Research is the single largest finder, credited alone on 5 and sharing
 4 more; Alex Gaynor of Anthropic is credited on 5; Luigino Camastra of Aisle
 Research on 4; Igor Morgenstern of Aisle Research on 2; and one names Claude

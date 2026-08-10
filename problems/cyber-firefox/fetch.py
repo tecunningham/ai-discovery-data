@@ -70,41 +70,64 @@ def records() -> list[dict]:
                 parsed = yaml.safe_load(text) or {}
             except Exception:
                 continue
+            announced_text = str(parsed.get("announced") or "")
+            try:
+                announced_date = datetime.strptime(
+                    announced_text, "%B %d, %Y"
+                ).date().isoformat()
+            except ValueError:
+                announced_date = ""
             for key, value in (parsed.get("advisories") or {}).items():
                 if not str(key).startswith("CVE"):
                     continue
                 reporter = (
                     str(value.get("reporter", "")) if isinstance(value, dict) else ""
                 )
-                rows.append({"year": year, "reporter": reporter})
+                rows.append({
+                    "year": year,
+                    "announced": announced_date,
+                    "cve": str(key),
+                    "reporter": reporter,
+                })
     return rows
 
 
 def build_annual(rows: list[dict]) -> list[dict]:
     per_year: dict[int, Counter] = defaultdict(Counter)
+    unique_cves: dict[int, set[str]] = defaultdict(set)
+    unique_ai_cves: dict[int, set[str]] = defaultdict(set)
     ai_reporters: Counter = Counter()
     for record in rows:
         bucket = per_year[record["year"]]
         bucket["total"] += 1
+        unique_cves[record["year"]].add(record["cve"])
         category = classify(record["reporter"], ai=FIREFOX_AI)
         bucket[f"{category}_attributed"] += 1
         if category == "ai":
             ai_reporters[record["reporter"][:90]] += 1
+            unique_ai_cves[record["year"]].add(record["cve"])
     this_year = datetime.now(timezone.utc).year
+    latest = max(
+        (record["announced"] for record in rows if record["announced"]),
+        default="",
+    )
     annual = [
         {
             "year": year,
             "total": per_year[year]["total"],
+            "unique_cves": len(unique_cves[year]),
             "ai_attributed": per_year[year]["ai_attributed"],
+            "unique_ai_cves": len(unique_ai_cves[year]),
             "fuzz_attributed": per_year[year]["fuzz_attributed"],
             "other_attributed": per_year[year]["other_attributed"],
             "partial_year": "yes" if year == this_year else "no",
+            "data_through": latest if year == this_year else "",
         }
         for year in sorted(per_year)
         if per_year[year]["total"]
     ]
     print(
-        f"firefox: {sum(r['total'] for r in annual)} CVEs, "
+        f"firefox: {sum(r['total'] for r in annual)} advisory-CVE mentions, "
         f"{annual[0]['year']}–{annual[-1]['year']}"
     )
     print(
@@ -135,7 +158,8 @@ def build_finders(rows: list[dict]) -> list[dict]:
     print(f"firefox finders: {len(out)} year-finder rows, {len(ai)} AI-credited")
     if ai:
         top = max(ai, key=lambda row: row["cves"])
-        print(f"  top AI finder {top['cves']} CVEs — {top['finder'][:56]}")
+        print(f"  top AI finder {top['cves']} advisory-CVE mentions — "
+              f"{top['finder'][:56]}")
     return out
 
 

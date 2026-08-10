@@ -47,6 +47,9 @@ def cyber_stacked(
     source_label: str,
     source_url: str,
     built_by: str,
+    *,
+    ylabel: str = "Vulnerabilities disclosed that year",
+    unit_label: str = "disclosures",
 ) -> None:
     rows = read_csv(csv_path)
     years = [int(row["year"]) for row in rows]
@@ -84,25 +87,31 @@ def cyber_stacked(
     ax.set_xlim(min(years) - 1, right)
     ax.set_ylim(0, max(totals) * 1.23)
     shade_era(ax, right, annual=True)
-    style(ax, "Vulnerabilities disclosed that year")
+    style(ax, ylabel)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=7))
     ax.legend(handles=common_legend(fuzz=any(fuzz)), frameon=False, fontsize=8, ncol=3)
-    latest = rows[-1]
-    ax.text(
-        0.02,
-        0.9,
-        f"{latest['total']} disclosures in partial 2026\n"
-        f"{latest['ai_attributed']} explicitly AI-credited",
-        transform=ax.transAxes,
-        fontsize=9,
-        color="#333333",
-        va="top",
-    )
+    if partial:
+        latest = rows[partial[-1]]
+        through = (
+            f" through {latest['data_through']}"
+            if latest.get("data_through") else ""
+        )
+        ax.text(
+            0.02,
+            0.9,
+            f"{latest['total']} {unit_label} in partial {latest['year']}{through}\n"
+            f"{latest['ai_attributed']} explicitly AI-credited",
+            transform=ax.transAxes,
+            fontsize=9,
+            color="#333333",
+            va="top",
+        )
     source_note(fig, f"Source: {source_label}. Finder credits are floors, not audited causation.")
     save(
         fig,
         out_path,
-        f"{title}. Annual finder-attributed vulnerability disclosures; 2026 is partial.",
+        f"{title}. Annual finder-attributed {unit_label}; "
+        + (f"{rows[partial[-1]]['year']} is partial." if partial else "complete years."),
         [source_url],
         built_by,
     )

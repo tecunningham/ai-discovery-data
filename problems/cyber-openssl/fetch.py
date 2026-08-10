@@ -41,7 +41,7 @@ PATTERN = re.compile(
     + r"(?:" + GAP + r"Severity" + GAP + r"([A-Za-z]+))?"
     + GAP + r"Published at" + GAP + r"(\d{1,2} [A-Z][a-z]+ \d{4})"
     + r"(?:" + GAP + r"Title" + GAP + r"[^|]{0,200})?"
-    + r"(?:" + GAP + r"Found by" + GAP + r"([^|]{0,160}))?"
+    + r"(?:" + GAP + r"Found by" + GAP + r"([^|]*))?"
 )
 
 
@@ -63,6 +63,9 @@ def records() -> tuple[list[dict], int]:
             {
                 "cve": cve,
                 "year": int(match.group(3).split()[-1]),
+                "published": datetime.strptime(
+                    match.group(3), "%d %B %Y"
+                ).date().isoformat(),
                 "finder": (match.group(4) or "").strip(),
             }
         )
@@ -81,6 +84,7 @@ def build_annual(rows: list[dict], named: int) -> list[dict]:
         if category == "ai":
             ai_names[record["finder"][:70]] += 1
     this_year = datetime.now(timezone.utc).year
+    latest = max((record["published"] for record in rows), default="")
     annual = [
         {
             "year": year,
@@ -89,6 +93,7 @@ def build_annual(rows: list[dict], named: int) -> list[dict]:
             "fuzz_attributed": per_year[year]["fuzz_attributed"],
             "other_attributed": per_year[year]["other_attributed"],
             "partial_year": "yes" if year == this_year else "no",
+            "data_through": latest if year == this_year else "",
         }
         for year in sorted(per_year)
     ]

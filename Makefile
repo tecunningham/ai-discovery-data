@@ -1,4 +1,4 @@
-.PHONY: help figures fetch check index sync clean
+.PHONY: help figures fetch drift check index sync clean
 
 BLOG ?= $(HOME)/tecunningham.github.io
 
@@ -7,10 +7,12 @@ help:
 	@echo "check    verify every series has a figure, a doc, and a source"
 	@echo "index    rewrite the generated series table in README.md"
 	@echo "fetch    refetch the automatable series from upstream (network)"
-	@echo "sync     copy data/ and figures/ into the blog repo (BLOG=$(BLOG))"
+	@echo "drift    report upstream drift without rewriting the CSVs (network)"
+	@echo "sync     copy figures/ into the blog repo (BLOG=$(BLOG))"
 
 figures:
 	python3 tools/make_figures.py
+	python3 tools/make_omnibus.py
 
 check:
 	python3 tools/check.py
@@ -24,7 +26,12 @@ fetch:
 	python3 tools/fetch/collective_progress.py
 	python3 tools/fetch/alphaevolve_records.py
 	python3 tools/fetch/alphaevolve_inventory.py
+	python3 tools/fetch/refresh_series.py --write
 	@echo "antedb_extract.py needs a checkout of github.com/teorth/expdb; run it by hand"
+
+# Report drift in the living series without touching the vendored copies.
+drift:
+	python3 tools/fetch/refresh_series.py
 
 sync:
 	python3 tools/sync_to_blog.py --blog $(BLOG)

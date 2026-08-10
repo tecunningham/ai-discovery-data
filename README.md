@@ -16,9 +16,11 @@ can be checked and rebuilt from public sources by someone who did not write them
 | `data/` | One CSV per series, vendored from a public source. The canonical copy. |
 | `figures/` | One PNG per series, generated from `data/`. Committed, never hand-edited. |
 | `problems/` | One markdown file per series: what the problem is, how the chart was built, what the data cannot support, and the literature. |
-| `tools/make_figures.py` | Generates every figure in `figures/` from `data/`. |
+| `tools/make_figures.py` | One chart per series: the 23 `discovery-*.png`. |
+| `tools/make_omnibus.py` | The cross-series comparisons; see [figures/README.md](figures/README.md). |
 | `tools/fetch/` | Scripts that rebuild the CSVs from their upstream sources. |
 | `tools/check.py` | Consistency checks: every series has a doc, a figure, and a source. |
+| `tools/sync_to_blog.py` | Copies the figures into the blog checkout that renders them. |
 | `references.bib` | Bibliography for the problem documents. |
 
 ## Reproducing
@@ -26,9 +28,13 @@ can be checked and rebuilt from public sources by someone who did not write them
 Figures need only Python and matplotlib, and no network:
 
 ```bash
-make figures      # data/*.csv -> figures/*.png
+make figures      # data/*.csv -> figures/*.png, both generators
 make check        # every series has a figure, a doc, and an upstream source
 ```
+
+Figures are byte-for-byte reproducible: run `make figures` twice and git should
+report nothing. If it does report something, that is a bug in the generator, not
+noise to be committed.
 
 Rebuilding the data itself needs the network, and is deliberately a separate
 step because several upstream sources rate-limit, change shape, or require
@@ -44,12 +50,14 @@ the Gurobi release notes, the matrix-multiplication record chronology — are
 transcribed by hand, with the source URL recorded per row in the CSV. The
 per-problem document says which category each series is in.
 
-One file is not this repository's to regenerate. `famous-open-problem-lists.csv`
-holds the Hilbert, Smale, Millennium and TOPP status ledgers, which are
-transcribed by hand inside the blog repository's own figure code and written out
-from there. What is here is a vendored snapshot to plot from, and `make sync`
-deliberately skips it so a transcription made in the blog cannot be reverted by
-a sync from here.
+`famous-open-problem-lists.csv` is the extreme case: its Hilbert, Smale,
+Millennium and TOPP status ledgers are transcribed by hand inside
+`famous_problem_lists()` in `tools/make_omnibus.py`, which writes the CSV as a
+side effect. Edit the ledger in the code, not the CSV.
+
+The living series — arXiv submissions, Crossref DOIs, PyPI projects, Stack
+Overflow questions, git pushes — move under you, so `make drift` reports what
+upstream now says without touching the vendored copies.
 
 ## What the numbers are and are not
 
@@ -106,6 +114,15 @@ contributed anything.
 | [Stockfish development builds on fixed hardware](problems/algorithms-stockfish.md) | algorithms | Elo relative to Stockfish 15, from 20,000 games per build on one fixed machine and time control | 2013-04-30 to 2026-07-26, 2,542 tested development builds | no acceleration |
 | [Matrix-multiplication exponent ω](problems/matrix-omega.md) | algorithms | best proved upper bound on the asymptotic exponent ω of n×n matrix multiplication; lower is better | 1969 to 2024, fifteen recorded steps | declining — the asymptotic record is slowing, and no step in it is AI-attributed |
 <!-- END GENERATED: series-index -->
+
+## Who reads this
+
+The blog at [tecunningham.github.io](https://tecunningham.github.io) renders the
+argument these series support. It reads the CSVs here directly rather than
+holding copies, so a number that goes stale in its prose fails its audit rather
+than quietly disagreeing with the data. Its only copies are the PNGs, which
+Quarto has to find inside its own tree to publish; `make sync` puts them there
+and `python3 tools/sync_to_blog.py --check` says whether they are current.
 
 ## Provenance and licence
 

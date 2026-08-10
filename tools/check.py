@@ -34,14 +34,14 @@ SECTIONS = ("The problem", "What the chart shows", "How the chart was built",
             "What it cannot support", "LLM contributions", "Related literature")
 VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive", "baseline"}
 
-# Support files: vendored and documented, but not plotted on their own. Each is
-# named by the document that uses it, so the exemption is not a silent hole.
+# Support files: vendored on purpose, but not the subject of a chart of their
+# own. Each carries the reason, so the exemption cannot become a silent hole.
 SUPPORTING = {
-    "discovery-finders.csv",
-    "curl-vulnerabilities-quarterly.csv",
-    "nvd-kev-by-quarter.csv",
-    "antedb-bounds.csv",
-    "alphaevolve-inventory.csv",
+    "discovery-finders.csv": "per-finder rows behind the concentration claim; cited by cyber-curl",
+    "curl-vulnerabilities-quarterly.csv": "finer-grained view of the curl series",
+    "nvd-kev-by-quarter.csv": "finer-grained view of the two aggregate series",
+    "antedb-bounds.csv": "the six named slices; the sweep CSV is what gets plotted",
+    "alphaevolve-inventory.csv": "problem-level inventory behind the funnel figure",
 }
 
 INDEX_BEGIN = "<!-- BEGIN GENERATED: series-index -->"
@@ -137,13 +137,29 @@ def main() -> int:
         for key in sorted(doc.citations - keys):
             failures.append(f"{doc.slug}: citation @{key} has no bibliography entry")
 
+    # Cross-series figures have no per-series document, so the figures ledger is
+    # the second place a figure or a CSV can be accounted for.
+    ledger = FIGURES / "README.md"
+    ledger_text = ledger.read_text(encoding="utf-8") if ledger.exists() else ""
+    if not ledger_text:
+        failures.append("figures/README.md is missing; cross-series figures would go unexplained")
+    # Only the table rows count as accounting for a file; the prose around them
+    # also names figures built elsewhere.
+    rows = "\n".join(l for l in ledger_text.splitlines() if l.startswith("| `"))
+    ledger_figures = set(re.findall(r"`([a-z0-9-]+\.png)`", rows))
+    ledger_csvs = set(re.findall(r"`([a-z0-9-]+\.csv)`", rows))
+
     for figure in sorted(p.name for p in FIGURES.glob("*.png")):
-        if figure not in documented_figures:
+        if figure not in documented_figures and figure not in ledger_figures:
             failures.append(f"figure {figure} is generated but no document explains it")
+    for figure in sorted(ledger_figures):
+        if not (FIGURES / figure).exists():
+            failures.append(f"figures/README.md lists {figure}, which is not on disk")
 
     for csv_path in sorted(DATA.glob("*.csv")):
-        if csv_path.name not in documented_csvs and csv_path.name not in SUPPORTING:
-            failures.append(f"data/{csv_path.name} is vendored but no document uses it")
+        name = csv_path.name
+        if name not in documented_csvs and name not in ledger_csvs and name not in SUPPORTING:
+            failures.append(f"data/{name} is vendored but no document uses it")
 
     if args.write_index and README.exists():
         text = README.read_text(encoding="utf-8")
@@ -157,8 +173,10 @@ def main() -> int:
         else:
             failures.append("README.md has no series-index markers")
 
-    print(f"{len(docs)} documents, {len(documented_figures)} figures, "
-          f"{len(documented_csvs)} data files, {len(keys)} bibliography entries")
+    print(f"{len(docs)} documents, {len(documented_figures)} per-series figures, "
+          f"{len(ledger_figures)} cross-series figures, "
+          f"{len(documented_csvs | ledger_csvs)} data files accounted for "
+          f"({len(SUPPORTING)} supporting), {len(keys)} bibliography entries")
     for failure in failures:
         print(f"  FAIL {failure}")
     print("ok" if not failures else f"{len(failures)} failure(s)")

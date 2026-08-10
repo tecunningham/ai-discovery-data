@@ -1,0 +1,26 @@
+domain,date,record,digits,bits,who,method,ai_involved,source_url
+integer_factorization,1991-04-01,RSA-100,100,330,Arjen K. Lenstra & Mark Manasse,quadratic sieve (ppmpqs),no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,1992-04-14,RSA-110,110,364,Arjen K. Lenstra & Mark Manasse,quadratic sieve (ppmpqs),no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,1993-06-09,RSA-120,120,397,Denny/Dodson/Lenstra/Manasse/Lioen/te Riele,quadratic sieve (ppmpqs),no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,1994-04-26,RSA-129,129,426,Atkins/Graff/Lenstra/Leyland + 600 volunteers,quadratic sieve (MPQS),no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,1996-04-10,RSA-130,130,430,Lenstra/Cowie/Montgomery/Weber/Zayer et al.,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,1999-02-02,RSA-140,140,463,te Riele/Cavallar/Lenstra/Montgomery/Zimmermann et al.,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,1999-08-22,RSA-155,155,512,te Riele/Cavallar/Montgomery/Zimmermann et al.,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2003-04-01,RSA-160,160,530,Franke/Bahr/Kleinjung/Lochter/Boehm (Univ. Bonn/BSI),GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2003-12-03,RSA-576,174,576,Franke/Kleinjung (Univ. Bonn),GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2004-04-16,RSA-150,150,496,Aoki et al.,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2005-05-09,RSA-200,200,663,Bahr/Boehm/Franke/Kleinjung (Univ. Bonn/BSI),GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2005-11-02,RSA-640,193,640,Bahr/Boehm/Franke/Kleinjung (BSI),GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2009-12-12,RSA-768,232,768,Kleinjung/Aoki/Franke/Lenstra/Thome/Gaudry/Montgomery/te Riele/Zimmermann et al.,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2009-12-29,RSA-170,170,563,Bonenberger & Krone,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2010-05-08,RSA-180,180,596,Danilov & Popovyan (Moscow State Univ.),GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2010-11-08,RSA-190,190,629,Popovyan & Timofeev,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2012-07-02,RSA-704,212,704,Bai/Thome/Zimmermann,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2013-09-26,RSA-210,210,696,Ryan Propper,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2016-05-13,RSA-220,220,729,Bai/Gaudry/Kruppa/Thome/Zimmermann,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2018-08-15,RSA-230,230,762,Samuel S. Gross (Noblis),GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2019-12-02,RSA-240,240,795,Boudot/Gaudry/Guillevic/Heninger/Thome/Zimmermann,GNFS (CADO-NFS),no,https://caramba.loria.fr/dlp240-rsa240.txt
+integer_factorization,2020-02-17,RSA-232,232,768,Zamarashkin/Zheltkov/Matveev,GNFS,no,https://en.wikipedia.org/wiki/RSA_numbers
+integer_factorization,2020-02-28,RSA-250,250,829,Boudot/Gaudry/Guillevic/Heninger/Thome/Zimmermann,GNFS (CADO-NFS),no,https://caramba.loria.fr/rsa250.txt
+discrete_logarithm,2019-12-02,DLP-240 (795-bit safe prime RSA-240+49204),240,795,Boudot/Gaudry/Guillevic/Heninger/Thome/Zimmermann,Number Field Sieve (CADO-NFS),no,https://caramba.loria.fr/dlp240-rsa240.txt
+hash_collision,2017-02-23,SHAttered (first SHA-1 collision),,,Stevens/Bursztein/Karpman/Albertini/Markov (Google + CWI Amsterdam),differential path + brute force (2^63.1 SHA-1 evals),no,https://en.wikipedia.org/wiki/SHA-1

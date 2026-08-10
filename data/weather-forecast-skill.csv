@@ -1,0 +1,9 @@
+year,metric,hemisphere_or_region,value,units,note,source_url
+1980,useful_forecast_length_ACC0.6_500hPa_Z,northern_hemisphere,5.5,days,"text-stated anchor (12-month avg lead-time where 500hPa Z ACC drops to 0.6); ECMWF, cited in Krishnamurti et al. 2003 MWR",https://www.math.fsu.edu/~aluffi/archive/paper161.pdf
+1985,useful_forecast_length_ACC0.6_500hPa_Z,northern_hemisphere,6.5,days,"text-stated anchor; same source; implies ~1 day gained over 5 years in early-1980s ECMWF",https://www.math.fsu.edu/~aluffi/archive/paper161.pdf
+1980,day5_ACC_500hPa_Z,northern_hemisphere,0.60,correlation,"start-of-1980s value; Kalnay 1991 summary cited in Krishnamurti et al. 2003",https://www.math.fsu.edu/~aluffi/archive/paper161.pdf
+1990,day5_ACC_500hPa_Z,northern_hemisphere,0.75,correlation,"end-of-1980s value; Kalnay 1991 summary cited in Krishnamurti et al. 2003",https://www.math.fsu.edu/~aluffi/archive/paper161.pdf
+1980,day5_ACC_500hPa_Z,southern_hemisphere,0.40,correlation,"start-of-1980s value; Kalnay 1991 summary cited in Krishnamurti et al. 2003",https://www.math.fsu.edu/~aluffi/archive/paper161.pdf
+1990,day5_ACC_500hPa_Z,southern_hemisphere,0.625,correlation,"end-of-1980s value; SH improved faster than NH, i.e. hemispheres converging",https://www.math.fsu.edu/~aluffi/archive/paper161.pdf
+2015,skill_gain_rate_500hPa_Z,northern_and_southern,1.0,days_per_decade,"canonical rate claim over ~40yr (Bauer, Thorpe & Brunet 2015, Nature 525:47); today's 6-day forecast ~= 5-day forecast 10 years ago",https://www.nature.com/articles/nature14956
+2015,NH_SH_skill_gap,northern_vs_southern,converged,qualitative,"Bauer 2015 Fig.1: NH and SH 500hPa Z ACC curves, far apart in 1981, had largely converged by ~2010s as satellite data assimilation matured",https://www.nature.com/articles/nature14956

@@ -1,0 +1,26 @@
+quarter,git_pushes,repositories,developers,note
+2020-Q1,80818507,122435835,45478340,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2020-Q2,97826757,131344838,49504193,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2020-Q3,90342286,139783519,53248431,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2020-Q4,95305074,148841391,57102973,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2021-Q1,100124471,158145816,60958885,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2021-Q2,106274154,168292701,64820144,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2021-Q3,99170316,178669508,68834671,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2021-Q4,107413770,189422371,72973877,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2022-Q1,117027199,201630254,78157383,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2022-Q2,125509146,213352044,82925785,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2022-Q3,125575542,225008094,87669771,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2022-Q4,135432974,236976800,92469733,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2023-Q1,144228396,249269143,98055745,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2023-Q2,147009169,261958738,104004958,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2023-Q3,141334665,274085233,109933535,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2023-Q4,149427748,286680464,115546343,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2024-Q1,153037523,299711891,122294466,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2024-Q2,158300927,312806520,127678376,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2024-Q3,152879513,325655062,133336845,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2024-Q4,167788463,339496216,139576363,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2025-Q1,177693914,354242319,147168716,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2025-Q2,209236125,370919525,155321068,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2025-Q3,214957089,388185398,166552398,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2025-Q4,246758015,406484821,178660558,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included
+2026-Q1,319841623,427792765,192326991,sum over economies in github/innovationgraph data (EU aggregate row excluded); economies below 100-developer reporting threshold not included

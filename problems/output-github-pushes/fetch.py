@@ -34,7 +34,10 @@ def build() -> list[dict]:
     for metric in METRICS:
         raw = fetch(URL.format(metric=metric)).decode("utf-8")
         for record in csv.DictReader(io.StringIO(raw)):
-            if record.get("iso2") == "EU":
+            # Innovation Graph renamed this field from iso2 to iso2_code in
+            # 2026. Accept both so the aggregate EU row is never double-counted.
+            economy = record.get("iso2_code") or record.get("iso2")
+            if economy == "EU":
                 continue
             quarter = f"{record['year']}-Q{record['quarter']}"
             sums.setdefault(quarter, {})

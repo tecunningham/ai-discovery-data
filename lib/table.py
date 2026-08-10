@@ -46,8 +46,13 @@ def write_csv(path: Path, rows: list[dict], fieldnames: list[str] | None = None)
     if not rows:
         raise ValueError(f"refusing to write an empty {path.name}")
     fields = fieldnames or list(rows[0].keys())
+    # Preserve a vendored file's established newline style so a refresh changes
+    # data rows, not every line in the file. New files use LF.
+    line_ending = (
+        "\r\n" if path.exists() and b"\r\n" in path.read_bytes() else "\n"
+    )
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator=line_ending)
         writer.writeheader()
         writer.writerows(rows)
     print(f"wrote {path.name} ({len(rows)} rows)")

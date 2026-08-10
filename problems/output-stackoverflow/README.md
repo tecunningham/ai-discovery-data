@@ -77,7 +77,8 @@ series has no authorship field at all.
 ## LLM contributions
 
 This is the one series in the collection where timing does most of the work. The
-fall begins at ChatGPT's release and runs to near zero over three and a half
+fall begins at ChatGPT's release and runs to roughly one percent of that level
+over three and a half
 years, and asking a public question is directly substitutable by asking a model,
 which makes substitution the natural reading.
 
@@ -97,5 +98,5 @@ other rising artifact counts, and [Crossref](../output-crossref/README.md) is
 the control on all of them. Set the whole group against
 [curl](../cyber-curl/README.md), where a fixed codebase yields a step change in
 disclosures, and against the mathematics folders, where the records barely move:
-this is the only series here that changes by two orders of magnitude, and it
+this is the only series here that changes by almost two orders of magnitude, and it
 measures nobody discovering anything.

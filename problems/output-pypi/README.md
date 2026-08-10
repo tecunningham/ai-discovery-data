@@ -2,12 +2,12 @@
 
 **Domain:** outside the three domains
 **Metric:** code output; total projects registered on the Python Package Index, a stock rather than a flow
-**Coverage:** 2019-01 to 2026-07, roughly quarterly readings of the front-page counter
+**Coverage:** 2019-01 to 2026-08, roughly quarterly readings of the front-page counter
 **Data:** [`pypi-projects-over-time.csv`](pypi-projects-over-time.csv)
 **Upstream:** <https://pypi.org/>
 **Verdict:** accelerating — on volume, which is not discovery
 
-![Total projects registered on PyPI, January 2019 to July 2026, one marker per dated reading of the front-page counter.](output-pypi-projects.png)
+![Total projects registered on PyPI, January 2019 to August 2026, one marker per dated reading of the front-page counter.](output-pypi-projects.png)
 
 ## The problem
 
@@ -27,9 +27,9 @@ about any particular year; only the slope does.
 
 ## What the chart shows
 
-The counter stood at 163,524 projects on 3 January 2019 and 861,282 on 28 July
+The counter stood at 163,524 projects on 3 January 2019 and 870,277 on 10 August
 2026. The slope steepens after 2024: 78,630 names were added across 2023 and
-141,914 in the first seven months of 2026 alone, which is more than any complete
+150,909 in 2026 through that date, which is more than any complete
 year in the series, 2025 included at 122,378.
 
 Each marker is one dated reading rather than an interpolated month, so the
@@ -46,8 +46,8 @@ on the day it is taken.
 
 There is no `fetch.py` in this folder and nothing here can be refetched. PyPI
 publishes a current total only, so the history was collected by hand, from 31
-dated Wayback captures of the front-page counter plus one live reading taken on
-28 July 2026. Each row of the CSV carries the capture URL it was transcribed
+dated Wayback captures of the front-page counter plus live readings taken on
+28 July and 10 August 2026. Each row of the CSV carries the capture URL it was transcribed
 from, so any reading can be checked against the page it came from. Extending the
 series means finding another capture and adding a row by hand.
 

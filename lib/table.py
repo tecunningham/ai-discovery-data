@@ -9,12 +9,34 @@ as a spurious diff.
 from __future__ import annotations
 
 import csv
+from collections import Counter
 from pathlib import Path
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with Path(path).open(encoding="utf-8", newline="") as handle:
-        return list(csv.DictReader(handle))
+        reader = csv.DictReader(handle)
+        if reader.fieldnames is None:
+            raise ValueError(f"{path}: CSV has no header")
+        duplicate_fields = [
+            field for field, count in Counter(reader.fieldnames).items() if count > 1
+        ]
+        if duplicate_fields:
+            raise ValueError(
+                f"{path}: duplicate CSV column(s): {', '.join(duplicate_fields)}"
+            )
+        rows = list(reader)
+    for line_number, row in enumerate(rows, 2):
+        if None in row:
+            raise ValueError(
+                f"{path}:{line_number}: row has {len(row[None])} extra field(s)"
+            )
+        missing = [field for field, value in row.items() if value is None]
+        if missing:
+            raise ValueError(
+                f"{path}:{line_number}: row is missing field(s): {', '.join(missing)}"
+            )
+    return rows
 
 
 def write_csv(path: Path, rows: list[dict], fieldnames: list[str] | None = None) -> None:

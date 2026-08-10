@@ -31,10 +31,12 @@ different situation from the reverse.
 from __future__ import annotations
 
 import argparse
+import csv
 import re
 import subprocess
 import sys
 import textwrap
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -205,6 +207,8 @@ class Problem:
             if csv_path.name not in self.linked_csvs:
                 self.fail("Data", f"{csv_path.name} is vendored but the document "
                                   "does not link it")
+            for message in csv_errors(csv_path):
+                self.fail("Data", message)
         for name in sorted(self.linked_csvs):
             if not (self.folder / name).exists():
                 self.fail("Data", f"links {name}, which is not in the folder")
@@ -235,6 +239,36 @@ def bib_keys() -> set[str]:
     if not BIB.exists():
         return set()
     return set(re.findall(r"^@[a-zA-Z]+\{([^,\s]+)", BIB.read_text(encoding="utf-8"), re.M))
+
+
+def csv_errors(path: Path) -> list[str]:
+    """Report structural CSV damage before a figure silently ignores it."""
+    try:
+        with path.open(encoding="utf-8", newline="") as handle:
+            rows = csv.reader(handle, strict=True)
+            header = next(rows, None)
+            if header is None:
+                return [f"{path.name} is empty"]
+            errors = []
+            duplicate_fields = [
+                field for field, count in Counter(header).items() if count > 1
+            ]
+            if duplicate_fields:
+                errors.append(
+                    f"{path.name} has duplicate column(s): "
+                    f"{', '.join(duplicate_fields)}"
+                )
+            if any(not field.strip() for field in header):
+                errors.append(f"{path.name} has an empty column name")
+            for line_number, row in enumerate(rows, 2):
+                if len(row) != len(header):
+                    errors.append(
+                        f"{path.name}:{line_number} has {len(row)} fields; "
+                        f"header has {len(header)}"
+                    )
+            return errors
+    except (OSError, UnicodeError, csv.Error) as error:
+        return [f"{path.name} cannot be parsed as CSV: {error}"]
 
 
 def reproduce(problems: list[Problem]) -> None:

@@ -2,7 +2,8 @@
 """Consistency checks over problems/, lib/ and references.bib.
 
     python3 tools/check.py                 # report, exit non-zero on failure
-    python3 tools/check.py --write-index   # also rewrite README's series table
+    python3 tools/check.py --reproduce     # also redraw every figure and compare
+    python3 tools/check.py --write-index   # rewrite README's two generated tables
 
 What this is for. The repository's claim is that every chart can be traced to a
 public source, so the failure mode that matters is a file arriving without the
@@ -18,12 +19,20 @@ left lying outside a folder.
 
 Metadata is parsed out of the prose rather than hidden in front matter, because a
 reader of the document should see the same source and coverage the checker does.
+
+Every check belongs to one of the six groups the README's status table has a
+column for, so a red cell there and a FAIL line here are the same fact stated
+twice. The grouping is the only reason the checks are collected into named
+buckets rather than one list: a reader wants to know which kind of thing is
+wrong with a series, and "the figure is fine but the data is unlinked" is a
+different situation from the reverse.
 """
 
 from __future__ import annotations
 
 import argparse
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -44,6 +53,9 @@ VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive",
 DOMAIN_ORDER = ("vulnerabilities", "mathematics", "algorithms",
                 "outside the three domains")
 
+CHECKS = ("Document", "Data", "Figure", "Literature", "Refetch", "Reproduces")
+PASS, FAIL, HAND, SKIP = "✅", "❌", "✍️", "➖"
+
 # A folder with no fetch.py has to say how its CSV is maintained, in the section
 # a reader goes to for exactly that, so a series nobody can refetch is a stated
 # fact rather than an omission. Checked as vocabulary rather than as a fixed
@@ -57,6 +69,12 @@ NO_FETCHER_REASONS = re.compile(
 
 INDEX_BEGIN = "<!-- BEGIN GENERATED: series-index -->"
 INDEX_END = "<!-- END GENERATED: series-index -->"
+CHECKS_BEGIN = "<!-- BEGIN GENERATED: checks-table -->"
+CHECKS_END = "<!-- END GENERATED: checks-table -->"
+
+# Wide enough that the shape of a series is readable in the index, narrow enough
+# that four columns of prose still fit beside it.
+THUMB_WIDTH = 240
 
 
 class Problem:
@@ -78,6 +96,9 @@ class Problem:
             match = re.search(rf"^\*\*{field}:\*\*\s*(.+)$", self.text, re.M)
             if match:
                 self.fields[field] = match.group(1).strip()
+        # Reproduction is off unless asked for, since it redraws every figure.
+        self.status = {name: SKIP for name in CHECKS}
+        self.failures: dict[str, list[str]] = {}
 
     @property
     def figures(self) -> list[Path]:
@@ -91,60 +112,84 @@ class Problem:
     def domain(self) -> str:
         return self.fields.get("Domain", "?")
 
-    def check(self, keys: set[str], slugs: set[str]) -> list[str]:
-        out: list[str] = []
-        say = lambda msg: out.append(f"{self.slug}: {msg}")  # noqa: E731
+    def fail(self, group: str, message: str) -> None:
+        self.failures.setdefault(group, []).append(message)
+        self.status[group] = FAIL
 
+    def check(self, keys: set[str], slugs: set[str]) -> None:
         if not self.doc.exists():
-            return [f"{self.slug}: no README.md"]
+            for group in CHECKS:
+                self.status[group] = FAIL
+            self.fail("Document", "no README.md")
+            return
+
         for field in FIELDS:
             if field not in self.fields:
-                say(f"no **{field}:** line")
+                self.fail("Document", f"no **{field}:** line")
         verdict = self.fields.get("Verdict", "").split(" —")[0].strip()
         if verdict and verdict not in VERDICTS:
-            say(f"verdict {verdict!r} not one of {sorted(VERDICTS)}")
+            self.fail("Document",
+                      f"verdict {verdict!r} not one of {sorted(VERDICTS)}")
         for section in SECTIONS:
             if f"## {section}" not in self.text:
-                say(f"no '## {section}' section")
+                self.fail("Document", f"no '## {section}' section")
         if "http" not in self.fields.get("Upstream", ""):
-            say("**Upstream:** names no URL")
+            self.fail("Document", "**Upstream:** names no URL")
+        for sibling in sorted(self.siblings - slugs):
+            self.fail("Document",
+                      f"links ../{sibling}/README.md, which does not exist")
 
         figure_script = self.folder / "figure.py"
         if not figure_script.exists():
-            say("no figure.py")
+            self.fail("Figure", "no figure.py")
         if not self.figures:
-            say("no figure on disk")
-        script_text = figure_script.read_text(encoding="utf-8") if figure_script.exists() else ""
+            self.fail("Figure", "no figure on disk")
+        script_text = (figure_script.read_text(encoding="utf-8")
+                       if figure_script.exists() else "")
         for figure in self.figures:
             if figure.name not in self.embedded:
-                say(f"{figure.name} is generated but the document does not embed it")
+                self.fail("Figure", f"{figure.name} is generated but the document "
+                                    "does not embed it")
             if figure.name not in script_text:
-                say(f"{figure.name} is not named in figure.py, so nothing rebuilds it")
+                self.fail("Figure", f"{figure.name} is not named in figure.py, so "
+                                    "nothing rebuilds it")
         for name in sorted(self.embedded):
             if not (self.folder / name).exists():
-                say(f"embeds {name}, which is not in the folder")
+                self.fail("Figure", f"embeds {name}, which is not in the folder")
 
         if not self.csvs:
-            say("holds no CSV")
+            self.fail("Data", "holds no CSV")
         for csv_path in self.csvs:
             if csv_path.name not in self.linked_csvs:
-                say(f"{csv_path.name} is vendored but the document does not link it")
+                self.fail("Data", f"{csv_path.name} is vendored but the document "
+                                  "does not link it")
         for name in sorted(self.linked_csvs):
             if not (self.folder / name).exists():
-                say(f"links {name}, which is not in the folder")
+                self.fail("Data", f"links {name}, which is not in the folder")
 
-        if not (self.folder / "fetch.py").exists():
+        for key in sorted(self.citations - keys):
+            self.fail("Literature", f"citation @{key} has no bibliography entry")
+
+        if (self.folder / "fetch.py").exists():
+            self.status["Refetch"] = PASS
+        else:
             built = re.search(r"## How the chart was built\n(.*?)(?=\n## |\Z)",
                               self.text, re.S)
-            if not (built and NO_FETCHER_REASONS.search(built.group(1))):
-                say("has no fetch.py, and 'How the chart was built' does not say how "
-                    "the data is maintained instead")
+            if built and NO_FETCHER_REASONS.search(built.group(1)):
+                self.status["Refetch"] = HAND
+            else:
+                self.fail("Refetch", "has no fetch.py, and 'How the chart was "
+                                     "built' does not say how the data is "
+                                     "maintained instead")
 
-        for sibling in sorted(self.siblings - slugs):
-            say(f"links ../{sibling}/README.md, which does not exist")
-        for key in sorted(self.citations - keys):
-            say(f"citation @{key} has no bibliography entry")
-        return out
+        for group in ("Document", "Data", "Figure", "Literature"):
+            if self.status[group] == SKIP:
+                self.status[group] = PASS
+
+    def messages(self) -> list[str]:
+        return [f"{self.slug}: {message}"
+                for group in CHECKS
+                for message in self.failures.get(group, [])]
 
 
 def bib_keys() -> set[str]:
@@ -153,24 +198,48 @@ def bib_keys() -> set[str]:
     return set(re.findall(r"^@[a-zA-Z]+\{([^,\s]+)", BIB.read_text(encoding="utf-8"), re.M))
 
 
-def index_rows(problems: list[Problem]) -> str:
-    domains = list(DOMAIN_ORDER) + sorted(
-        {p.domain for p in problems} - set(DOMAIN_ORDER)
-    )
-    lines = ["| Series | Domain | Metric | Coverage | Acceleration? |",
-             "|---|---|---|---|---|"]
-    for domain in domains:
-        for problem in sorted((p for p in problems if p.domain == domain),
-                              key=lambda p: p.slug):
-            lines.append(
-                f"| [{problem.title}](problems/{problem.slug}/) | {domain} | "
-                f"{problem.fields.get('Metric', '')} | "
-                f"{problem.fields.get('Coverage', '')} | "
-                f"{problem.fields.get('Verdict', '')} |")
-    return "\n".join(lines)
+def reproduce(problems: list[Problem]) -> None:
+    """Redraw every figure and check the committed PNG is what its script draws.
+
+    The claim this repository makes is that a chart can be rebuilt from the CSV
+    beside it, which is only worth anything if the file in git is the one the
+    script produces today. A figure hand-edited after generation, or left behind
+    when its data was refetched, is invisible to every other check here.
+
+    The original bytes are put back afterwards, so a stale figure is reported
+    rather than quietly staged for commit.
+    """
+    print(f"redrawing {len(problems)} folders to compare with the committed "
+          f"figures (no network)", flush=True)
+    for problem in problems:
+        script = problem.folder / "figure.py"
+        if not script.exists():
+            problem.status["Reproduces"] = FAIL
+            continue
+        before = {path: path.read_bytes() for path in problem.figures}
+        run = subprocess.run([sys.executable, str(script)], cwd=ROOT,
+                             capture_output=True, text=True)
+        stale = [path for path, data in before.items() if path.read_bytes() != data]
+        for path in stale:  # leave the tree as it was found
+            path.write_bytes(before[path])
+        if run.returncode != 0:
+            said = (run.stderr or run.stdout).strip().splitlines()
+            problem.fail("Reproduces", f"figure.py exited {run.returncode}: "
+                                       f"{said[-1] if said else 'no output'}")
+            continue
+        if stale:
+            problem.fail("Reproduces",
+                         f"{', '.join(p.name for p in stale)} differs from what "
+                         "figure.py draws today, so the committed figure is stale")
+        for path in problem.figures:
+            if path not in before:
+                problem.fail("Reproduces", f"figure.py wrote {path.name}, which "
+                                           "was not committed")
+        if problem.status["Reproduces"] == SKIP:
+            problem.status["Reproduces"] = PASS
 
 
-def duplicate_names(problems: list[Problem]) -> list[str]:
+def duplicate_names(problems: list[Problem]) -> None:
     """Filenames must be unique across folders, not just within one.
 
     The blog repository reads these CSVs by name through its own resolver, since
@@ -178,16 +247,17 @@ def duplicate_names(problems: list[Problem]) -> list[str]:
     holding a `finders.csv` would make that lookup ambiguous, so the names carry
     the series: `curl-finders.csv`, not `finders.csv`.
     """
-    seen: dict[str, str] = {}
-    out = []
+    seen: dict[str, Problem] = {}
     for problem in problems:
         for path in problem.csvs + problem.figures:
-            if path.name in seen:
-                out.append(f"{problem.slug}/{path.name} collides with "
-                           f"{seen[path.name]}/{path.name}; names must be unique "
-                           "across folders")
-            seen[path.name] = problem.slug
-    return out
+            first = seen.get(path.name)
+            if first is not None:
+                group = "Data" if path.suffix == ".csv" else "Figure"
+                problem.fail(group, f"{path.name} collides with the one in "
+                                    f"{first.slug}/; names must be unique across "
+                                    "folders")
+            seen[path.name] = problem
+    return None
 
 
 def strays() -> list[str]:
@@ -207,9 +277,89 @@ def strays() -> list[str]:
     return out
 
 
+def in_reading_order(problems: list[Problem]) -> list[Problem]:
+    """Domain order, then slug — the order both generated tables use."""
+    rank = {domain: i for i, domain in enumerate(DOMAIN_ORDER)}
+    return sorted(problems, key=lambda p: (rank.get(p.domain, len(rank)), p.slug))
+
+
+def thumbnails(problem: Problem) -> str:
+    """The folder's figures as links into it, sized to sit in a table cell.
+
+    Written as HTML because markdown image syntax has no width, and a chart at
+    its natural 1600 pixels makes the index unreadable. A folder with several
+    figures stacks them, since a table cell is as wide as its contents and three
+    thumbnails in a row would push the prose columns off the screen.
+    """
+    return "<br>".join(
+        f'<a href="problems/{problem.slug}/">'
+        f'<img src="problems/{problem.slug}/{figure.name}" width="{THUMB_WIDTH}" '
+        f'alt="{problem.title}"></a>'
+        for figure in problem.figures)
+
+
+def index_rows(problems: list[Problem]) -> str:
+    out: list[str] = []
+    for domain in DOMAIN_ORDER + tuple(sorted(
+            {p.domain for p in problems} - set(DOMAIN_ORDER))):
+        rows = [p for p in in_reading_order(problems) if p.domain == domain]
+        if not rows:
+            continue
+        out += [f"### {domain[:1].upper()}{domain[1:]}", "",
+                "| Chart | Series | Metric | Coverage | Acceleration? |",
+                "|---|---|---|---|---|"]
+        out += [f"| {thumbnails(problem)} | "
+                f"[{problem.title}](problems/{problem.slug}/) | "
+                f"{problem.fields.get('Metric', '')} | "
+                f"{problem.fields.get('Coverage', '')} | "
+                f"{problem.fields.get('Verdict', '')} |"
+                for problem in rows]
+        out.append("")
+    return "\n".join(out).rstrip()
+
+
+def checks_rows(problems: list[Problem]) -> str:
+    rows = in_reading_order(problems)
+    out = ["| Problem | " + " | ".join(CHECKS) + " |",
+           "|---|" + "---|" * len(CHECKS)]
+    out += [f"| [{problem.title}](problems/{problem.slug}/) | "
+            + " | ".join(problem.status[group] for group in CHECKS) + " |"
+            for problem in rows]
+
+    fetched = sum(p.status["Refetch"] == PASS for p in problems)
+    hand = sum(p.status["Refetch"] == HAND for p in problems)
+    red = sum(p.status[group] == FAIL for p in problems for group in CHECKS)
+    out += ["", f"{len(problems)} problems holding {sum(len(p.figures) for p in problems)} "
+                f"figures and {sum(len(p.csvs) for p in problems)} data files. "
+                f"{fetched} refetch from upstream and {hand} are maintained by hand "
+                f"and say so. {red or 'No'} failing "
+                f"{'cell' if red == 1 else 'cells'}."]
+    if red:
+        out += ["", "Failing:"]
+        out += [f"- `{problem.slug}` {group}: {message}"
+                for problem in rows
+                for group in CHECKS
+                for message in problem.failures.get(group, [])]
+    return "\n".join(out)
+
+
+def rewrite(text: str, begin: str, end: str, body: str) -> str | None:
+    if begin not in text or end not in text:
+        return None
+    head, rest = text.split(begin, 1)
+    _, tail = rest.split(end, 1)
+    return f"{head}{begin}\n{body}\n{end}{tail}"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write-index", action="store_true")
+    parser.add_argument("--reproduce", action="store_true",
+                        help="redraw every figure and compare it with the "
+                             "committed one (slow, no network)")
+    parser.add_argument("--write-index", action="store_true",
+                        help="rewrite README's series and status tables; implies "
+                             "--reproduce, so the status table never reports a "
+                             "column it did not run")
     args = parser.parse_args()
 
     folders = sorted(p for p in PROBLEMS.iterdir() if p.is_dir())
@@ -217,25 +367,29 @@ def main() -> int:
     slugs = {problem.slug for problem in problems}
     keys = bib_keys()
 
-    failures: list[str] = []
+    for problem in problems:
+        problem.check(keys, slugs)
+    duplicate_names(problems)
+    if args.reproduce or args.write_index:
+        reproduce(problems)
+
+    failures = [message for problem in problems for message in problem.messages()]
+    failures += strays()
     if not problems:
         failures.append("problems/ has no folders")
-    for problem in problems:
-        failures.extend(problem.check(keys, slugs))
-    failures.extend(duplicate_names(problems))
-    failures.extend(strays())
 
-    if args.write_index and README.exists():
-        text = README.read_text(encoding="utf-8")
-        if INDEX_BEGIN in text and INDEX_END in text:
-            head, rest = text.split(INDEX_BEGIN, 1)
-            _, tail = rest.split(INDEX_END, 1)
-            README.write_text(
-                f"{head}{INDEX_BEGIN}\n{index_rows(problems)}\n{INDEX_END}{tail}",
-                encoding="utf-8")
-            print("rewrote the series index in README.md")
-        else:
-            failures.append("README.md has no series-index markers")
+    if args.write_index:
+        text = README.read_text(encoding="utf-8") if README.exists() else ""
+        for begin, end, body, what in (
+                (INDEX_BEGIN, INDEX_END, index_rows(problems), "series index"),
+                (CHECKS_BEGIN, CHECKS_END, checks_rows(problems), "status table")):
+            written = rewrite(text, begin, end, body)
+            if written is None:
+                failures.append(f"README.md has no {what} markers")
+            else:
+                text = written
+        README.write_text(text, encoding="utf-8")
+        print("rewrote the series index and the status table in README.md")
 
     figures = sum(len(p.figures) for p in problems)
     csvs = sum(len(p.csvs) for p in problems)

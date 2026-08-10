@@ -1,4 +1,4 @@
-.PHONY: help figures figure check index fetch fetch-one sync clean
+.PHONY: help figures figure check check-figures index fetch fetch-one sync clean
 
 BLOG ?= $(HOME)/tecunningham.github.io
 
@@ -13,7 +13,8 @@ help:
 	@echo "figures            redraw every problems/*/*.png from its folder's CSVs (no network)"
 	@echo "figure PROBLEM=x   redraw one folder"
 	@echo "check              verify every folder accounts for its data, figure and sources"
-	@echo "index              rewrite the generated series table in README.md"
+	@echo "check-figures      also redraw every figure and compare it with the committed one"
+	@echo "index              rewrite README's series index and status table (runs check-figures)"
 	@echo "fetch              refetch every automatable series from upstream (network, slow)"
 	@echo "fetch-one PROBLEM=x  refetch one folder"
 	@echo "sync               copy the figures into the blog repo (BLOG=$(BLOG))"
@@ -26,6 +27,11 @@ figure:
 
 check:
 	python3 tools/check.py
+
+# Separate from `check` only because it is ten seconds rather than one: it runs
+# every figure.py and compares the result with what is committed.
+check-figures:
+	python3 tools/check.py --reproduce
 
 index:
 	python3 tools/check.py --write-index

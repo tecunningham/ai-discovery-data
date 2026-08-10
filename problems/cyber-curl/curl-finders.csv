@@ -1,0 +1,156 @@
+year,finder,category,cves
+2000,zillion,other,1
+2003,Daniel Stenberg,other,1
+2005,iDEFENSE,other,2
+2005,Stefan Esser,other,1
+2006,Ulf Harnhammar,other,1
+2007,Kees Cook,other,1
+2009,Scott Cantor,other,1
+2009,David Kierznowski,other,1
+2010,Dan Fandrich,other,1
+2010,Wesley Miaw,other,1
+2011,Richard Silverman,other,1
+2012,product-security at Apple,other,1
+2012,Dan Fandrich,other,1
+2013,Marc Deslauriers,other,1
+2013,Scott Cantor,other,1
+2013,Timo Sirainen,other,1
+2013,YAMADA Yasuharu,other,1
+2013,Volema,other,1
+2014,Tim Ruehsen,other,2
+2014,Symeon Paraschoudis,other,1
+2014,David Ryskalczyk,other,1
+2014,Roland Moriz,other,1
+2014,Richard Moore,other,1
+2014,Steve Holme,other,1
+2014,Paras Sethia,other,1
+2015,Hanno Böck,other,2
+2015,Daniel Stenberg,other,1
+2015,Tomas Tomecek,other,1
+2015,Kamil Dudka,other,1
+2015,Yehezkel Horowitz,other,1
+2015,Oren Souroujon,other,1
+2015,Isaac Boukris,other,1
+2015,Paras Sethia,other,1
+2015,Marc Hesse at RethinkDB,other,1
+2015,Andrey Labunets (Facebook),other,1
+2016,Cure53,other,7
+2016,Dan McNulty,other,2
+2016,Luật Nguyễn,other,2
+2016,Fernando Muñoz,other,2
+2016,Kamil Dudka,other,1
+2016,Daniel Stenberg,other,1
+2016,Christian Heimes,other,1
+2016,the Mitre CVE Assignment Team,other,1
+2016,Red Hat,other,1
+2016,Bru Rom,other,1
+2016,the curl security team,other,1
+2016,Marcelo Echeverria,other,1
+2016,Guohui from Huawei WeiRan Labs,other,1
+2016,Moti Avrahami,other,1
+2016,Ray Satiro (Jay),other,1
+2016,Isaac Boukris,other,1
+2017,Brian Carpenter (Geeknik Labs),other,2
+2017,Even Rouault,other,2
+2017,John Schoenick,other,1
+2017,OSS-Fuzz,fuzz,1
+2017,Alex Nichols,other,1
+2017,0xd34db347,other,1
+2017,Max Dymond,other,1
+2017,Brian Carpenter,other,1
+2017,Yongji Ouyang,other,1
+2017,Marcel Raad,other,1
+2017,lijian996 on github,other,1
+2017,Marcus Hoffmann,other,1
+2018,Brian Carpenter (Geeknik Labs),other,2
+2018,Dario Weisser,other,2
+2018,Harry Sintonen,other,1
+2018,Zhaoyang Wu,other,1
+2018,Peter Wu,other,1
+2018,OSS-Fuzz,fuzz,1
+2018,OSS-fuzz,fuzz,1
+2018,Duy Phan Thanh,other,1
+2018,Craig de Stigter,other,1
+2018,Zhouyihai Ding,other,1
+2019,Thomas Vegas,other,2
+2019,Wenxiang Qian of Tencent Blade Team,other,2
+2019,Rich Mirch,other,1
+2019,l00p3r,other,1
+2019,Wenchao Li,other,1
+2019,Brian Carpenter (Geeknik Labs),other,1
+2020,Ospoco,other,1
+2020,xnynx on github,other,1
+2020,Varnavas Papaioannou,other,1
+2020,Marc Aldorasi,other,1
+2020,sn on hackerone,other,1
+2020,Marek Szlagor,other,1
+2020,Gregory Jefferis,other,1
+2020,Jeroen Ooms,other,1
+2021,Harry Sintonen,other,7
+2021,Patrick Monnerat,other,2
+2021,z2_,other,1
+2021,Red Hat Product Security,other,1
+2021,Mingtao Yang (Facebook),other,1
+2021,Viktor Szakats,other,1
+2022,Harry Sintonen,other,9
+2022,Axel Chong,other,4
+2022,Hiroki Kurosawa,other,3
+2022,Trail of Bits,other,2
+2022,Robby Simpson,other,1
+2022,Florian Kohnhäuser,other,1
+2022,Patrick Monnerat,other,1
+2023,Harry Sintonen,other,9
+2023,Hiroki Kurosawa,other,3
+2023,Maksymilian Arciemowicz,other,1
+2023,w0x42 on hackerone,other,1
+2023,Jay Satiro,other,1
+2023,selmelc on hackerone,other,1
+2023,Wei Chong Tan,other,1
+2023,Patrick Monnerat,other,1
+2024,Hiroki Kurosawa,other,2
+2024,z2_,other,2
+2024,Harry Sintonen,other,1
+2024,newfunction,other,1
+2024,Dov Murik (Transmit Security),other,1
+2024,Frank Yueh,other,1
+2024,w0x42 on hackerone,other,1
+2024,Dexter Gerig,other,1
+2024,Dan Fandrich,other,1
+2025,Hiroki Kurosawa,other,2
+2025,Stanislav Fort (Aisle Research),ai,1
+2025,Calvin Ruocco (Vector Informatik GmbH),other,1
+2025,Google Big Sleep,ai,1
+2025,z2_ on hackerone,other,1
+2025,z2_,other,1
+2025,Ankom Coper,other,1
+2025,Christian Heusel,other,1
+2025,Yihang Zhou,other,1
+2026,Joshua Rogers (Aisle Research),ai,6
+2026,Muhamad Arga Reksapati,other,4
+2026,Stanislav Fort (Aisle Research),ai,3
+2026,Harry Sintonen,other,2
+2026,alienowo on hackerone (AntAISecurityLab),ai,1
+2026,jjchuck on hackerone,other,1
+2026,evergarden1123 on hackerone (AntAISecurityLab),ai,1
+2026,Filipe Casal of Trail of Bits in collaboration with OpenAI,ai,1
+2026,vectorqueue on hackerone (AntAISecurityLab),ai,1
+2026,renjian on hackerone,other,1
+2026,Eunsoo Kim (Autonomous Code Security team at Microsoft),ai,1
+2026,Guannan Wang,other,1
+2026,Zhanpeng Liu,other,1
+2026,Jiashuo Liang,other,1
+2026,Guancheng Li,other,1
+2026,Ady Elouej,other,1
+2026,vegagent on hackerone,other,1
+2026,Andrew Nesbitt (powered by Mythos),ai,1
+2026,Carlos Carrillo,other,1
+2026,Dwij Mehta (O2 Lab,other,1
+2026,Texas A&M University),other,1
+2026,Osama Hamad,other,1
+2026,Quac Tran and Ngoc Hieu,other,1
+2026,Arkadi Vainbrand,other,1
+2026,Daniel Wade,other,1
+2026,Muhamad Arga Reksapati (HackerOne: nobcoder),other,1
+2026,spectreglobalsec on hackerone,other,1
+2026,Zhicheng Chen,other,1
+2026,anonymous237 on hackerone,other,1

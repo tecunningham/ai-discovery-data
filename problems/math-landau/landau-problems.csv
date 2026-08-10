@@ -1,0 +1,5 @@
+list_id,list_name,list_year,problem_id,short_name,status,resolved_year,resolver,notes,source
+landau,Landau's problems,1912,goldbach,Goldbach conjecture,open,,,,Wikipedia Landau's problems
+landau,Landau's problems,1912,twin_primes,Twin prime conjecture,open,,,,Wikipedia Landau's problems
+landau,Landau's problems,1912,legendre,Legendre's conjecture,open,,,,Wikipedia Landau's problems
+landau,Landau's problems,1912,n2_plus_1,Primes of the form n^2+1,open,,,,Wikipedia Landau's problems

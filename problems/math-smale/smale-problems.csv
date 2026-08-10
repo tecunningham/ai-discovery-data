@@ -1,0 +1,20 @@
+list_id,list_name,list_year,problem_id,short_name,status,resolved_year,resolver,notes,source
+smale,Smale's problems,1998,1,Riemann hypothesis,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,2,Poincaré conjecture,resolved,2003,Perelman,,Wikipedia Smale's problems
+smale,Smale's problems,1998,3,P versus NP,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,4,Shub–Smale tau-conjecture,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,5,Diophantine decision in exponential time,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,6,Finiteness of n-body central configurations,open,,,Partial results for almost-all five-body systems,Wikipedia Smale's problems
+smale,Smale's problems,1998,7,Point distributions minimizing a log-energy on S^2,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,8,General equilibrium with price adjustments,contested,,,Results exist; no consensus the problem is settled,Wikipedia Smale's problems
+smale,Smale's problems,1998,9,Strongly polynomial LP,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,10,Pugh closing lemma (higher smoothness),open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,11a,One-dimensional complex dynamics / hyperbolicity,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,11b,Smooth interval maps approximated by hyperbolic,resolved,2007,Kozlovski–Shen–van Strien,One of two subquestions of Smale 11,Wikipedia Smale's problems
+smale,Smale's problems,1998,12,Trivial centralizers dense in Diff^r,open,,,Settled in C^1; open for r>1,Wikipedia Smale's problems
+smale,Smale's problems,1998,13,Hilbert's 16th problem,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,14,Lorenz attractor is strange,resolved,2002,Tucker,Computer-assisted proof,Wikipedia Smale's problems
+smale,Smale's problems,1998,15,Navier–Stokes regularity,open,,,,Wikipedia Smale's problems
+smale,Smale's problems,1998,16,Jacobian conjecture,resolved,2026,Levent Alpöge; Claude Fable 5,"Negative resolution in dimension 3, hence all dimensions at least 3; independently kernel-checked in Lean and Isabelle; dimension 2 remains open",Independent Lean and Isabelle verifications (2026)
+smale,Smale's problems,1998,17,Solving polynomial equations in average polynomial time,resolved,2016,Beltrán–Pardo; Lairez,Probabilistic algorithms from 2008; deterministic average-poly-time by Lairez 2016,Wikipedia Smale's problems
+smale,Smale's problems,1998,18,Limits of intelligence,contested,,,No consensus whether resolved,Wikipedia Smale's problems

@@ -1,0 +1,4 @@
+label,halving_months,ci_low_months,ci_high_months,first_year,last_year,source_anchor
+Language model pretraining|compute to fixed loss,8.0,5.0,14.0,2012,2023,src-algo-progress
+ImageNet compute-augmenting|algorithmic advances,9.0,4.0,25.0,2012,2022,src-vision-progress
+Compute to reach|AlexNet-level accuracy,16.0,,,2012,2019,src-alexnet-efficiency

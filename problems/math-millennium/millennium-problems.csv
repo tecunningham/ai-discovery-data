@@ -1,0 +1,8 @@
+list_id,list_name,list_year,problem_id,short_name,status,resolved_year,resolver,notes,source
+millennium,Millennium Prize Problems,2000,bsd,Birch–Swinnerton-Dyer conjecture,open,,,,Clay Mathematics Institute
+millennium,Millennium Prize Problems,2000,hodge,Hodge conjecture,open,,,,Clay Mathematics Institute
+millennium,Millennium Prize Problems,2000,navier_stokes,Navier–Stokes existence and smoothness,open,,,,Clay Mathematics Institute
+millennium,Millennium Prize Problems,2000,poincare,Poincaré conjecture,resolved,2003,Perelman,arXiv 2002–2003; Clay prize announced 2010,Clay Mathematics Institute
+millennium,Millennium Prize Problems,2000,p_vs_np,P versus NP,open,,,,Clay Mathematics Institute
+millennium,Millennium Prize Problems,2000,yang_mills,Yang–Mills existence and mass gap,open,,,,Clay Mathematics Institute
+millennium,Millennium Prize Problems,2000,riemann,Riemann hypothesis,open,,,,Clay Mathematics Institute

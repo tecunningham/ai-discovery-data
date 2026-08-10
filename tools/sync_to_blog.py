@@ -23,15 +23,17 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-FIGURES = ROOT / "figures"
+PROBLEMS = ROOT / "problems"
 
-# The blog's shared images directory, fixed by its own convention.
+# The blog's shared images directory, fixed by its own convention. It is flat,
+# so the figures lose their folder on the way over; the names already carry the
+# series, and nothing in the blog would find them under a nested path.
 FIGURE_DEST = "posts/images"
 
 
 def pairs(blog: Path) -> list[tuple[Path, Path]]:
     return [(path, blog / FIGURE_DEST / path.name)
-            for path in sorted(FIGURES.glob("*.png"))]
+            for path in sorted(PROBLEMS.glob("*/*.png"))]
 
 
 def main() -> int:

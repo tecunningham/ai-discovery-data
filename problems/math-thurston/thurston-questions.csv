@@ -1,0 +1,25 @@
+list_id,list_name,list_year,problem_id,short_name,status,resolved_year,resolver,notes,source
+thurston,Thurston's 24 questions,1982,1,Geometrization conjecture,resolved,2003,Perelman,Includes Poincaré as a special case,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,2,Finite group actions isometric,resolved,2009,Meeks–Scott; Dinkelbach–Leeb,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,3,Orbifold geometrization,resolved,2005,Boileau–Leeb–Porti,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,4,Hyperbolic Dehn surgery global theory,resolved,2013,Agol; Lackenby; others,Wikipedia range 2000–2013; year is completion end,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,5,Kleinian groups geometrically tame,resolved,1993,Bonahon; Canary,Wikipedia range 1986–1993; year is completion end,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,6,Kleinian groups as limits of geometrically finite,resolved,2012,Namazi–Souto; Ohshika,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,7,Schottky groups and their limits,resolved,2012,Brock–Canary–Minsky,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,8,Limits of quasi-Fuchsian groups with accidental parabolics,resolved,2000,Anderson–Canary,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,9,Kleinian groups topologically tame,resolved,2004,Agol; Calegari–Gabai,Independent solutions,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,10,Ahlfors measure-zero problem,resolved,2004,Consequence of geometric tameness,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,11,Ending lamination conjecture,resolved,2012,Brock–Canary–Minsky,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,12,Quasi-isometry type of Kleinian groups,resolved,2012,With ending lamination theorem,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,13,Limit sets of Hausdorff dimension < 2 geometrically finite,resolved,1997,Bishop–Jones,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,14,Cannon–Thurston maps,resolved,2012,Mahan Mj,Wikipedia range 2009–2012; year is completion end,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,15,Residual separability of f.g. subgroups in f.g. Kleinian groups,resolved,2013,Agol (building on Wise),,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,16,Virtually Haken conjecture,resolved,2012,Agol,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,17,Finite cover with positive first Betti number,resolved,2013,Agol,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,18,Virtually fibered conjecture,resolved,2013,Agol,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,19,"Arithmetic PSL(2,C) quotients: topology and geometry",open,,,Open-ended; Agol 2017: among 19–24 not completely answered,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,20,Software for surface diffeomorphisms / laminations,resolved,2000,SnapPea and successors,Software ask; Wikipedia counts as addressed (1990s–2000s),Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,21,Software to compute hyperbolic structures,resolved,2000,SnapPea and successors,Software ask; Wikipedia counts as addressed (1990s–2000s),Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,22,Software tabulating 3-manifold invariants,resolved,2000,SnapPea and successors,Software ask; Wikipedia counts as addressed (1990s–2000s),Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,23,Hyperbolic volumes rationally independent?,open,,,Still open; originally Milnor; Agol 2017: no progress known,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017
+thurston,Thurston's 24 questions,1982,24,Hyperbolic structures at given Heegaard genus,resolved,2009,Namazi–Souto,,Wikipedia Thurston's 24 questions; MathOverflow Agol 2017

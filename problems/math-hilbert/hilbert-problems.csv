@@ -1,0 +1,29 @@
+list_id,list_name,list_year,problem_id,short_name,status,resolved_year,resolver,notes,source
+hilbert,Hilbert's problems,1900,3,Scissor congruence of polyhedra,resolved,1900,Dehn,First of the list to fall; equal-volume polyhedra need not be equidissectable,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,18a,Finitely many space groups in n dimensions,resolved,1910,Bieberbach,Part (a) of problem 18,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,11,Quadratic forms over number fields,resolved,1924,Hasse,Local-global principle,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,17,Nonnegative forms as sums of squares,resolved,1927,Artin,,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,18b,Anisohedral polyhedron in 3D,resolved,1928,Reinhardt,Part (b) of problem 18,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,6a,Axiomatic probability,resolved,1933,Kolmogorov,Part (a) of problem 6; part (b) remains contested,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,7,Transcendence of a^b,resolved,1934,Gelfond–Schneider,,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,19,Analyticity of regular variational solutions,resolved,1957,De Giorgi; Nash,Independent proofs,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,14,Finiteness of invariant rings,resolved,1959,Nagata,Negative answer: counterexample,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,10,Decidability of Diophantine equations,resolved,1970,Matiyasevich,Negative answer: no such algorithm,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,21,Fuchsian equations with prescribed monodromy,resolved,1989,Bolibrukh,Negative answer in the general case,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,18c,Densest sphere packing in 3D,resolved,1998,Hales,Part (c) of problem 18; computer-assisted; later formalized,Wikipedia Hilbert's problems (consensus)
+hilbert,Hilbert's problems,1900,1,Continuum hypothesis,contested,,,Gödel–Cohen independence; no consensus that this solves Hilbert's statement,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,2,Consistency of arithmetic,contested,,,Gödel incompleteness / Gentzen; no consensus,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,4,Straight line as shortest distance,vague,,,Too vague to score as solved or open,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,5,Continuous groups without differentiability,contested,,,Gleason for one reading; Hilbert–Smith conjecture open for another,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,6b,Atomistic-to-continuum limit in physics,contested,,,Interpretation-dependent,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,8a,Riemann hypothesis,open,,,,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,8b,Goldbach / twin primes family,open,,,,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,8c,Primes in number fields via zeta,contested,,,Hecke 1917 for some readings; extended RH still open,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,9,Most general reciprocity law,open,,,,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,12,Kronecker–Weber to arbitrary base fields,open,,,,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,13,Seventh-degree equation / composition,contested,,,Continuous variant resolved (Kolmogorov–Arnold 1957); algebraic variant open,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,15,Schubert enumerative calculus,contested,,,Claims of resolution exist; no consensus,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,16,Topology of real algebraic curves / limit cycles,open,,,,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,20,General boundary-value problems,open,,,,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,22,Uniformization by automorphic functions,open,,,,Wikipedia Hilbert's problems
+hilbert,Hilbert's problems,1900,23,Further development of calculus of variations,vague,,,Deliberately open-ended,Wikipedia Hilbert's problems

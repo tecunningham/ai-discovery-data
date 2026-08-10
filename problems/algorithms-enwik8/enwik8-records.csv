@@ -1,0 +1,6 @@
+series,date,program,author,total_bytes,award,note
+hutter_enwik8,2006-03-24,paq8f -7,Matt Mahoney,18324887,no,pre-prize baseline
+hutter_enwik8,2006-09-25,paq8hp5 -7,Alexander Rhatushnyak,17073018,yes,1st winner
+hutter_enwik8,2007-05-14,paq8hp12 -7,Alexander Rhatushnyak,16481655,yes,2nd winner
+hutter_enwik8,2009-05-23,decomp8,Alexander Rhatushnyak,15949688,yes,3rd winner
+hutter_enwik8,2017-11-04,phda9,Alexander Rhatushnyak,15284944,yes,4th winner

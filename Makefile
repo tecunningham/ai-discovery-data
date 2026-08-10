@@ -1,18 +1,28 @@
-.PHONY: help figures fetch drift check index sync clean
+.PHONY: help figures figure check index fetch fetch-one sync clean
 
 BLOG ?= $(HOME)/tecunningham.github.io
 
+# Every problem folder builds itself. There is no central generator, so the
+# target is a loop over the folders rather than a list to keep in sync.
+FIGURE_SCRIPTS := $(wildcard problems/*/figure.py)
+# math-antedb is excluded: it needs a checkout of github.com/teorth/expdb and a
+# cddlib-backed pycddlib<3, so it is run by hand and its output vendored.
+FETCH_SCRIPTS := $(filter-out problems/math-antedb/fetch.py, $(wildcard problems/*/fetch.py))
+
 help:
-	@echo "figures  regenerate figures/*.png from data/*.csv (no network)"
-	@echo "check    verify every series has a figure, a doc, and a source"
-	@echo "index    rewrite the generated series table in README.md"
-	@echo "fetch    refetch the automatable series from upstream (network)"
-	@echo "drift    report upstream drift without rewriting the CSVs (network)"
-	@echo "sync     copy figures/ into the blog repo (BLOG=$(BLOG))"
+	@echo "figures            redraw every problems/*/*.png from its folder's CSVs (no network)"
+	@echo "figure PROBLEM=x   redraw one folder"
+	@echo "check              verify every folder accounts for its data, figure and sources"
+	@echo "index              rewrite the generated series table in README.md"
+	@echo "fetch              refetch every automatable series from upstream (network, slow)"
+	@echo "fetch-one PROBLEM=x  refetch one folder"
+	@echo "sync               copy the figures into the blog repo (BLOG=$(BLOG))"
 
 figures:
-	python3 tools/make_figures.py
-	python3 tools/make_omnibus.py
+	@for script in $(FIGURE_SCRIPTS); do python3 $$script || exit 1; done
+
+figure:
+	python3 problems/$(PROBLEM)/figure.py
 
 check:
 	python3 tools/check.py
@@ -20,21 +30,18 @@ check:
 index:
 	python3 tools/check.py --write-index
 
-# Upstream fetchers, each independently runnable. Kept out of `figures` because
-# they need the network and several sources rate-limit.
+# Kept out of `figures` because these need the network and several sources
+# rate-limit. Responses are cached for the day under .cache/, so two folders
+# sharing an upstream do not fetch it twice.
 fetch:
-	python3 tools/fetch/collective_progress.py
-	python3 tools/fetch/alphaevolve_records.py
-	python3 tools/fetch/alphaevolve_inventory.py
-	python3 tools/fetch/refresh_series.py --write
-	@echo "antedb_extract.py needs a checkout of github.com/teorth/expdb; run it by hand"
+	@for script in $(FETCH_SCRIPTS); do echo "== $$script"; python3 $$script || exit 1; done
+	@echo "problems/math-antedb/fetch.py needs github.com/teorth/expdb and pycddlib<3; run it by hand"
 
-# Report drift in the living series without touching the vendored copies.
-drift:
-	python3 tools/fetch/refresh_series.py
+fetch-one:
+	python3 problems/$(PROBLEM)/fetch.py
 
 sync:
 	python3 tools/sync_to_blog.py --blog $(BLOG)
 
 clean:
-	rm -f figures/*.png
+	rm -f problems/*/*.png

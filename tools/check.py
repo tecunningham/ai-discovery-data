@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-"""Consistency checks over data/, figures/, problems/ and references.bib.
+"""Consistency checks over problems/, lib/ and references.bib.
 
     python3 tools/check.py                 # report, exit non-zero on failure
     python3 tools/check.py --write-index   # also rewrite README's series table
 
 What this is for. The repository's claim is that every chart can be traced to a
-public source, so the failure mode that matters is a series arriving without the
-apparatus that makes it checkable: a figure nobody documents, a CSV nobody
-plots or explains, a citation with no bibliography entry. None of those are
-visible by reading any single file, so they are checked mechanically here.
+public source, so the failure mode that matters is a file arriving without the
+apparatus that makes it checkable: a figure nobody documents, a CSV nobody plots
+or explains, a citation with no bibliography entry, a series whose provenance is
+nowhere stated. None of those are visible by reading any single file.
 
-Metadata is parsed out of the prose rather than hidden in front matter, because
-a reader of the document should see the same source and coverage the checker
-does.
+The layout does most of the work: one folder per problem, holding its data, the
+script that fetches it, the script that draws it, the figure, and the document.
+So the checks are mostly local — does this folder account for its own contents —
+and the two cross-folder rules are that sibling links resolve and that nothing is
+left lying outside a folder.
+
+Metadata is parsed out of the prose rather than hidden in front matter, because a
+reader of the document should see the same source and coverage the checker does.
 """
 
 from __future__ import annotations
@@ -23,8 +28,6 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data"
-FIGURES = ROOT / "figures"
 PROBLEMS = ROOT / "problems"
 BIB = ROOT / "references.bib"
 README = ROOT / "README.md"
@@ -32,30 +35,43 @@ README = ROOT / "README.md"
 FIELDS = ("Domain", "Metric", "Coverage", "Data", "Upstream", "Verdict")
 SECTIONS = ("The problem", "What the chart shows", "How the chart was built",
             "What it cannot support", "LLM contributions", "Related literature")
-VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive", "baseline"}
+VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive",
+            "too early", "baseline"}
+# The index groups by domain, so the order is fixed here rather than left to
+# whatever sorting a new value happens to fall under. The fourth group holds the
+# series tracked to span verification cost, which is the argument's own
+# explanatory variable and which the three worked domains barely vary.
+DOMAIN_ORDER = ("vulnerabilities", "mathematics", "algorithms",
+                "outside the three domains")
 
-# Support files: vendored on purpose, but not the subject of a chart of their
-# own. Each carries the reason, so the exemption cannot become a silent hole.
-SUPPORTING = {
-    "discovery-finders.csv": "per-finder rows behind the concentration claim; cited by cyber-curl",
-    "curl-vulnerabilities-quarterly.csv": "finer-grained view of the curl series",
-    "nvd-kev-by-quarter.csv": "finer-grained view of the two aggregate series",
-    "antedb-bounds.csv": "the six named slices; the sweep CSV is what gets plotted",
-    "alphaevolve-inventory.csv": "problem-level inventory behind the funnel figure",
-}
+# A folder with no fetch.py has to say how its CSV is maintained, in the section
+# a reader goes to for exactly that, so a series nobody can refetch is a stated
+# fact rather than an omission. Checked as vocabulary rather than as a fixed
+# field because the reasons genuinely differ: hand transcription from prose, a
+# hand-scored ledger, or generation by a sibling folder's fetcher.
+NO_FETCHER_REASONS = re.compile(
+    r"transcrib|by hand|hand-scored|hand-collected|assembled from|no fetcher"
+    r"|no maintained ledger|generated, not separately maintained|written by hand",
+    re.I,
+)
 
 INDEX_BEGIN = "<!-- BEGIN GENERATED: series-index -->"
 INDEX_END = "<!-- END GENERATED: series-index -->"
 
 
-class Doc:
-    def __init__(self, path: Path) -> None:
-        self.path = path
-        self.text = path.read_text(encoding="utf-8")
+class Problem:
+    def __init__(self, folder: Path) -> None:
+        self.folder = folder
+        self.slug = folder.name
+        self.doc = folder / "README.md"
+        self.text = self.doc.read_text(encoding="utf-8") if self.doc.exists() else ""
         title = re.search(r"^#\s+(.+)$", self.text, re.M)
         self.title = title.group(1).strip() if title else ""
-        self.figures = re.findall(r"!\[[^\]]*\]\(\.\./figures/([^)]+)\)", self.text)
-        self.csvs = re.findall(r"\.\./data/([A-Za-z0-9_.-]+\.csv)", self.text)
+        # Folder-local links only: an embed or a data link reaching outside the
+        # folder means the split is incomplete.
+        self.embedded = set(re.findall(r"!\[[^\]]*\]\(([^)/]+\.png)\)", self.text))
+        self.linked_csvs = set(re.findall(r"\(([^)/]+\.csv)\)", self.text))
+        self.siblings = set(re.findall(r"\(\.\./([a-z0-9-]+)/README\.md\)", self.text))
         self.citations = set(re.findall(r"\[@([A-Za-z0-9_:-]+)\]", self.text))
         self.fields = {}
         for field in FIELDS:
@@ -64,8 +80,71 @@ class Doc:
                 self.fields[field] = match.group(1).strip()
 
     @property
-    def slug(self) -> str:
-        return self.path.stem
+    def figures(self) -> list[Path]:
+        return sorted(self.folder.glob("*.png"))
+
+    @property
+    def csvs(self) -> list[Path]:
+        return sorted(self.folder.glob("*.csv"))
+
+    @property
+    def domain(self) -> str:
+        return self.fields.get("Domain", "?")
+
+    def check(self, keys: set[str], slugs: set[str]) -> list[str]:
+        out: list[str] = []
+        say = lambda msg: out.append(f"{self.slug}: {msg}")  # noqa: E731
+
+        if not self.doc.exists():
+            return [f"{self.slug}: no README.md"]
+        for field in FIELDS:
+            if field not in self.fields:
+                say(f"no **{field}:** line")
+        verdict = self.fields.get("Verdict", "").split(" —")[0].strip()
+        if verdict and verdict not in VERDICTS:
+            say(f"verdict {verdict!r} not one of {sorted(VERDICTS)}")
+        for section in SECTIONS:
+            if f"## {section}" not in self.text:
+                say(f"no '## {section}' section")
+        if "http" not in self.fields.get("Upstream", ""):
+            say("**Upstream:** names no URL")
+
+        figure_script = self.folder / "figure.py"
+        if not figure_script.exists():
+            say("no figure.py")
+        if not self.figures:
+            say("no figure on disk")
+        script_text = figure_script.read_text(encoding="utf-8") if figure_script.exists() else ""
+        for figure in self.figures:
+            if figure.name not in self.embedded:
+                say(f"{figure.name} is generated but the document does not embed it")
+            if figure.name not in script_text:
+                say(f"{figure.name} is not named in figure.py, so nothing rebuilds it")
+        for name in sorted(self.embedded):
+            if not (self.folder / name).exists():
+                say(f"embeds {name}, which is not in the folder")
+
+        if not self.csvs:
+            say("holds no CSV")
+        for csv_path in self.csvs:
+            if csv_path.name not in self.linked_csvs:
+                say(f"{csv_path.name} is vendored but the document does not link it")
+        for name in sorted(self.linked_csvs):
+            if not (self.folder / name).exists():
+                say(f"links {name}, which is not in the folder")
+
+        if not (self.folder / "fetch.py").exists():
+            built = re.search(r"## How the chart was built\n(.*?)(?=\n## |\Z)",
+                              self.text, re.S)
+            if not (built and NO_FETCHER_REASONS.search(built.group(1))):
+                say("has no fetch.py, and 'How the chart was built' does not say how "
+                    "the data is maintained instead")
+
+        for sibling in sorted(self.siblings - slugs):
+            say(f"links ../{sibling}/README.md, which does not exist")
+        for key in sorted(self.citations - keys):
+            say(f"citation @{key} has no bibliography entry")
+        return out
 
 
 def bib_keys() -> set[str]:
@@ -74,23 +153,58 @@ def bib_keys() -> set[str]:
     return set(re.findall(r"^@[a-zA-Z]+\{([^,\s]+)", BIB.read_text(encoding="utf-8"), re.M))
 
 
-def strip_links(value: str) -> str:
-    return re.sub(r"[`\[\]()<>]|\.\./data/", "", value).strip()
-
-
-def index_rows(docs: list[Doc]) -> str:
-    by_domain: dict[str, list[Doc]] = {}
-    for doc in docs:
-        by_domain.setdefault(doc.fields.get("Domain", "?"), []).append(doc)
+def index_rows(problems: list[Problem]) -> str:
+    domains = list(DOMAIN_ORDER) + sorted(
+        {p.domain for p in problems} - set(DOMAIN_ORDER)
+    )
     lines = ["| Series | Domain | Metric | Coverage | Acceleration? |",
              "|---|---|---|---|---|"]
-    for domain in ("vulnerabilities", "mathematics", "algorithms"):
-        for doc in sorted(by_domain.get(domain, []), key=lambda d: d.slug):
+    for domain in domains:
+        for problem in sorted((p for p in problems if p.domain == domain),
+                              key=lambda p: p.slug):
             lines.append(
-                f"| [{doc.title}](problems/{doc.path.name}) | {domain} | "
-                f"{doc.fields.get('Metric', '')} | {doc.fields.get('Coverage', '')} | "
-                f"{doc.fields.get('Verdict', '')} |")
+                f"| [{problem.title}](problems/{problem.slug}/) | {domain} | "
+                f"{problem.fields.get('Metric', '')} | "
+                f"{problem.fields.get('Coverage', '')} | "
+                f"{problem.fields.get('Verdict', '')} |")
     return "\n".join(lines)
+
+
+def duplicate_names(problems: list[Problem]) -> list[str]:
+    """Filenames must be unique across folders, not just within one.
+
+    The blog repository reads these CSVs by name through its own resolver, since
+    it has no reason to know which folder a series ended up in. Two folders both
+    holding a `finders.csv` would make that lookup ambiguous, so the names carry
+    the series: `curl-finders.csv`, not `finders.csv`.
+    """
+    seen: dict[str, str] = {}
+    out = []
+    for problem in problems:
+        for path in problem.csvs + problem.figures:
+            if path.name in seen:
+                out.append(f"{problem.slug}/{path.name} collides with "
+                           f"{seen[path.name]}/{path.name}; names must be unique "
+                           "across folders")
+            seen[path.name] = problem.slug
+    return out
+
+
+def strays() -> list[str]:
+    """Files left outside a problem folder by an incomplete migration."""
+    out = []
+    for legacy in ("data", "figures"):
+        folder = ROOT / legacy
+        if not folder.exists():
+            continue
+        left = sorted(p.name for p in folder.iterdir() if p.suffix in (".csv", ".png"))
+        if left:
+            out.append(f"{legacy}/ still holds {len(left)} file(s): {', '.join(left)}")
+        else:
+            out.append(f"{legacy}/ is empty and should be removed")
+    for orphan in sorted(PROBLEMS.glob("*.md")):
+        out.append(f"problems/{orphan.name} is a loose document, not a folder")
+    return out
 
 
 def main() -> int:
@@ -98,68 +212,18 @@ def main() -> int:
     parser.add_argument("--write-index", action="store_true")
     args = parser.parse_args()
 
-    docs = [Doc(p) for p in sorted(PROBLEMS.glob("*.md")) if p.name != "README.md"]
+    folders = sorted(p for p in PROBLEMS.iterdir() if p.is_dir())
+    problems = [Problem(folder) for folder in folders]
+    slugs = {problem.slug for problem in problems}
     keys = bib_keys()
+
     failures: list[str] = []
-
-    if not docs:
-        failures.append("problems/ has no documents")
-
-    documented_figures: dict[str, str] = {}
-    documented_csvs: set[str] = set()
-    for doc in docs:
-        for field in FIELDS:
-            if field not in doc.fields:
-                failures.append(f"{doc.slug}: no **{field}:** line")
-        verdict = doc.fields.get("Verdict", "").split(" —")[0].strip()
-        if verdict and verdict not in VERDICTS:
-            failures.append(f"{doc.slug}: verdict {verdict!r} not one of {sorted(VERDICTS)}")
-        for section in SECTIONS:
-            if f"## {section}" not in doc.text:
-                failures.append(f"{doc.slug}: no '## {section}' section")
-        if not doc.figures:
-            failures.append(f"{doc.slug}: embeds no figure from ../figures/")
-        for figure in doc.figures:
-            if not (FIGURES / figure).exists():
-                failures.append(f"{doc.slug}: figure {figure} missing on disk")
-            if figure in documented_figures:
-                failures.append(f"{doc.slug}: figure {figure} already documented by "
-                                f"{documented_figures[figure]}")
-            documented_figures[figure] = doc.slug
-        if not doc.csvs:
-            failures.append(f"{doc.slug}: links no CSV under ../data/")
-        for csv_name in doc.csvs:
-            if not (DATA / csv_name).exists():
-                failures.append(f"{doc.slug}: data file {csv_name} missing on disk")
-            documented_csvs.add(csv_name)
-        if "http" not in doc.fields.get("Upstream", ""):
-            failures.append(f"{doc.slug}: **Upstream:** names no URL")
-        for key in sorted(doc.citations - keys):
-            failures.append(f"{doc.slug}: citation @{key} has no bibliography entry")
-
-    # Cross-series figures have no per-series document, so the figures ledger is
-    # the second place a figure or a CSV can be accounted for.
-    ledger = FIGURES / "README.md"
-    ledger_text = ledger.read_text(encoding="utf-8") if ledger.exists() else ""
-    if not ledger_text:
-        failures.append("figures/README.md is missing; cross-series figures would go unexplained")
-    # Only the table rows count as accounting for a file; the prose around them
-    # also names figures built elsewhere.
-    rows = "\n".join(l for l in ledger_text.splitlines() if l.startswith("| `"))
-    ledger_figures = set(re.findall(r"`([a-z0-9-]+\.png)`", rows))
-    ledger_csvs = set(re.findall(r"`([a-z0-9-]+\.csv)`", rows))
-
-    for figure in sorted(p.name for p in FIGURES.glob("*.png")):
-        if figure not in documented_figures and figure not in ledger_figures:
-            failures.append(f"figure {figure} is generated but no document explains it")
-    for figure in sorted(ledger_figures):
-        if not (FIGURES / figure).exists():
-            failures.append(f"figures/README.md lists {figure}, which is not on disk")
-
-    for csv_path in sorted(DATA.glob("*.csv")):
-        name = csv_path.name
-        if name not in documented_csvs and name not in ledger_csvs and name not in SUPPORTING:
-            failures.append(f"data/{name} is vendored but no document uses it")
+    if not problems:
+        failures.append("problems/ has no folders")
+    for problem in problems:
+        failures.extend(problem.check(keys, slugs))
+    failures.extend(duplicate_names(problems))
+    failures.extend(strays())
 
     if args.write_index and README.exists():
         text = README.read_text(encoding="utf-8")
@@ -167,16 +231,17 @@ def main() -> int:
             head, rest = text.split(INDEX_BEGIN, 1)
             _, tail = rest.split(INDEX_END, 1)
             README.write_text(
-                f"{head}{INDEX_BEGIN}\n{index_rows(docs)}\n{INDEX_END}{tail}",
+                f"{head}{INDEX_BEGIN}\n{index_rows(problems)}\n{INDEX_END}{tail}",
                 encoding="utf-8")
             print("rewrote the series index in README.md")
         else:
             failures.append("README.md has no series-index markers")
 
-    print(f"{len(docs)} documents, {len(documented_figures)} per-series figures, "
-          f"{len(ledger_figures)} cross-series figures, "
-          f"{len(documented_csvs | ledger_csvs)} data files accounted for "
-          f"({len(SUPPORTING)} supporting), {len(keys)} bibliography entries")
+    figures = sum(len(p.figures) for p in problems)
+    csvs = sum(len(p.csvs) for p in problems)
+    fetchers = sum((p.folder / "fetch.py").exists() for p in problems)
+    print(f"{len(problems)} problem folders, {figures} figures, {csvs} data files, "
+          f"{fetchers} with a fetcher, {len(keys)} bibliography entries")
     for failure in failures:
         print(f"  FAIL {failure}")
     print("ok" if not failures else f"{len(failures)} failure(s)")

@@ -25,6 +25,7 @@ from lib.chart import (
     FUZZ,
     NEUTRAL,
     NOW,
+    UNATTRIBUTED,
     common_legend,
     new_chart,
     record_marker,
@@ -394,3 +395,79 @@ def compression_chart(
         built_by,
     )
 
+
+
+def volume_series(
+    out_path: Path,
+    *,
+    xs: list[float],
+    ys: list[float],
+    title: str,
+    subtitle: str,
+    ylabel: str,
+    reading: str,
+    source_label: str,
+    source_url: str,
+    built_by: str,
+    bars: bool = False,
+    markers: bool = False,
+    partial_last: str = "",
+    rules: tuple[tuple[float, str], ...] = (),
+    right_pad: float = 1.2,
+) -> None:
+    """One output-volume series: years on x, a count on y, era shaded.
+
+    The five volume series are five different artifacts counted by five
+    organizations, and the only thing that makes them comparable is being drawn
+    the same way. They are the collection's contrast case — volume against
+    discovery — so a difference in shape between one of these and a record series
+    has to be a difference in the data, not in how it was plotted.
+
+    Drawn in slate rather than blue: these counts carry no authorship field, so
+    the finder vocabulary the other charts use does not apply.
+
+    `reading` is the sentence of numbers on the axes. Callers compute it from
+    their own CSV rather than passing a literal, so it cannot go stale when the
+    series is refetched.
+    """
+    fig, ax = new_chart(title, subtitle)
+    if bars:
+        ax.bar(xs, ys, color=UNATTRIBUTED, width=0.72, zorder=3)
+    else:
+        ax.plot(xs, ys, color=UNATTRIBUTED, linewidth=1.7, zorder=3,
+                marker="o" if markers else None, markersize=3.2)
+    if partial_last:
+        if bars:
+            ax.bar([xs[-1]], [ys[-1]], width=0.72, facecolor="none",
+                   edgecolor="#444444", linewidth=1.3, zorder=4)
+        else:
+            ax.scatter([xs[-1]], [ys[-1]], s=46, facecolor="white",
+                       edgecolor=UNATTRIBUTED, linewidth=1.4, zorder=5)
+        # A part bar is short, so its label goes centred above it; offsetting it
+        # sideways lands the text on the taller neighbour. Beside a line the
+        # series itself occupies that space, so the label goes below the marker.
+        ax.annotate(partial_last, (xs[-1], ys[-1]),
+                    xytext=(0, 8) if bars else (-7, -16),
+                    textcoords="offset points",
+                    ha="center" if bars else "right", fontsize=8,
+                    color="#555555",
+                    bbox=dict(facecolor="white", edgecolor="none", alpha=0.75,
+                              pad=1))
+    for position, label in rules:
+        ax.axvline(position, color="#777777", linestyle=":", linewidth=1.1, zorder=2)
+        ax.text(position - 0.08, 0.30, label, transform=ax.get_xaxis_transform(),
+                fontsize=8, color="#555555", ha="right", linespacing=1.35)
+    right = max(xs) + right_pad
+    ax.set_xlim(min(xs) - right_pad * 0.35, right)
+    ax.set_ylim(0, max(ys) * 1.22)
+    shade_era(ax, right, annual=bars)
+    style(ax, ylabel)
+    if bars:
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=7))
+    ax.text(0.02, 0.90, reading, transform=ax.transAxes, fontsize=8.8,
+            color="#333333", va="top", linespacing=1.5)
+    # Kept short deliberately: the note is one line at the foot of the figure and
+    # a longer one runs off the canvas rather than wrapping.
+    source_note(fig, f"Source: {source_label}. No authorship field, so no AI "
+                     "share can be read off it.")
+    save(fig, out_path, f"{title}. {subtitle}", [source_url], built_by)

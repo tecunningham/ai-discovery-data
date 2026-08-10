@@ -135,4 +135,4 @@ should be judged. The verification-cost argument belongs next to
 verifier outside the three domains, where the record series simply stopped: two
 domains where checking an answer is nearly free, and neither shows a discovery
 curve bending. For the contrast with volume, see
-[output volume](../output-volume/README.md).
+[arXiv submissions](../output-arxiv/README.md) and the four series beside it.

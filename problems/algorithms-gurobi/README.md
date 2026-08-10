@@ -4,7 +4,7 @@
 **Metric:** cumulative vendor-reported MILP speedup across releases, every version rerun on one machine
 **Coverage:** releases 10 through 13, announced 2022-11-14 to 2025-11-18, baselined at version 9.5
 **Data:** [`gurobi-milp-speedups.csv`](gurobi-milp-speedups.csv)
-**Upstream:** <https://www.gurobi.com/features/gurobi-optimizer-delivers-unmatched-performance/> (per-release announcement URLs are carried row by row in the CSV, for example <https://www.gurobi.com/whats-new-gurobi-13-0/>)
+**Upstream:** <https://www.gurobi.com/misc/lp/all/unmatched-performance> (per-release announcement URLs are carried row by row in the CSV, for example <https://www.gurobi.com/whats-new-gurobi-13-0/>)
 **Verdict:** no acceleration
 
 ![Cumulative Gurobi MILP speedup across releases 10 to 13, drawn in vendor grey.](discovery-algorithms-gurobi.png)

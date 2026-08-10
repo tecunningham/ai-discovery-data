@@ -34,6 +34,7 @@ import argparse
 import re
 import subprocess
 import sys
+import textwrap
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,6 +57,19 @@ DOMAIN_ORDER = ("vulnerabilities", "mathematics", "algorithms",
 CHECKS = ("Document", "Data", "Figure", "Literature", "Refetch", "Reproduces")
 PASS, FAIL, HAND, SKIP = "✅", "❌", "✍️", "➖"
 
+# One mark per verdict, so the index can be read down the column. They answer
+# only "did the rate of discovery change", which is why none of them says
+# anything about AI: a rising series with no AI in it gets the same arrow as one
+# full of it.
+VERDICT_MARK = {
+    "accelerating": "📈",
+    "declining": "📉",
+    "no acceleration": "➡️",
+    "inconclusive": "❓",
+    "too early": "⏳",
+    "baseline": "⚪",
+}
+
 # A folder with no fetch.py has to say how its CSV is maintained, in the section
 # a reader goes to for exactly that, so a series nobody can refetch is a stated
 # fact rather than an omission. Checked as vocabulary rather than as a fixed
@@ -72,9 +86,15 @@ INDEX_END = "<!-- END GENERATED: series-index -->"
 CHECKS_BEGIN = "<!-- BEGIN GENERATED: checks-table -->"
 CHECKS_END = "<!-- END GENERATED: checks-table -->"
 
-# Wide enough that the shape of a series is readable in the index, narrow enough
-# that four columns of prose still fit beside it.
-THUMB_WIDTH = 240
+# GitHub clamps a markdown table to its 838-pixel content column and then
+# squeezes the columns to fit, so an image in a table is only as wide as the
+# prose beside it allows: at five columns of unwrapped prose the charts rendered
+# 67 pixels across, which is no chart at all. Hence two columns, the details
+# hard-wrapped, and a chart that gets its 400 pixels. Both numbers were measured
+# against GitHub's own table CSS rather than guessed; changing either without
+# re-measuring will silently shrink the charts again.
+THUMB_WIDTH = 400
+DETAIL_WRAP = 46
 
 
 class Problem:
@@ -90,7 +110,11 @@ class Problem:
         self.embedded = set(re.findall(r"!\[[^\]]*\]\(([^)/]+\.png)\)", self.text))
         self.linked_csvs = set(re.findall(r"\(([^)/]+\.csv)\)", self.text))
         self.siblings = set(re.findall(r"\(\.\./([a-z0-9-]+)/README\.md\)", self.text))
-        self.citations = set(re.findall(r"\[@([A-Za-z0-9_:-]+)\]", self.text))
+        # A bracket can hold several keys, `[@a; @b]`. Matching `@key]` would see
+        # only the last of them and leave a typo in any earlier key unchecked.
+        self.citations = {key
+                          for group in re.findall(r"\[@[^\]]*\]", self.text)
+                          for key in re.findall(r"@([A-Za-z0-9_:-]+)", group)}
         self.fields = {}
         for field in FIELDS:
             match = re.search(rf"^\*\*{field}:\*\*\s*(.+)$", self.text, re.M)
@@ -260,6 +284,50 @@ def duplicate_names(problems: list[Problem]) -> None:
     return None
 
 
+def unused_bib(problems: list[Problem], keys: set[str]) -> list[str]:
+    """A bibliography entry no document cites.
+
+    The reverse of the per-problem citation check, and it catches the residue of
+    a rewrite: prose gets reworded, the citation goes with it, and the entry sits
+    in references.bib looking like part of the apparatus.
+    """
+    cited = {key for problem in problems for key in problem.citations}
+    return [f"references.bib: @{key} is cited by no document"
+            for key in sorted(keys - cited)]
+
+
+def dead_links(problems: list[Problem], timeout: float = 25.0) -> list[str]:
+    """Every URL in every document, fetched. Opt-in: this one needs the network.
+
+    A source that has moved is not visible from inside the repository, and the
+    documents are mostly links. Kept out of the default run because it is the
+    only check that can fail for a reason that is nobody's fault.
+    """
+    import urllib.error
+    import urllib.request
+
+    urls: dict[str, str] = {}
+    for problem in problems:
+        for url in re.findall(r"https?://[^\s<>()\[\]`\"']+", problem.text):
+            urls.setdefault(url.rstrip(".,;"), problem.slug)
+    print(f"fetching {len(urls)} URLs from {len(problems)} documents", flush=True)
+    out = []
+    for url, slug in sorted(urls.items()):
+        request = urllib.request.Request(
+            url, method="HEAD",
+            headers={"User-Agent": "ai-discovery-data link check"})
+        try:
+            urllib.request.urlopen(request, timeout=timeout)
+        except urllib.error.HTTPError as error:
+            # 403 and 405 are how a live server says "not like that", which is a
+            # bot policy rather than a missing page.
+            if error.code not in (403, 405):
+                out.append(f"{slug}: {url} returns {error.code}")
+        except Exception as error:  # DNS, TLS, timeout
+            out.append(f"{slug}: {url} unreachable ({type(error).__name__})")
+    return out
+
+
 def strays() -> list[str]:
     """Files left outside a problem folder by an incomplete migration."""
     out = []
@@ -298,6 +366,29 @@ def thumbnails(problem: Problem) -> str:
         for figure in problem.figures)
 
 
+def marked_verdict(problem: Problem) -> str:
+    verdict = problem.fields.get("Verdict", "")
+    mark = VERDICT_MARK.get(verdict.split(" —")[0].strip(), "")
+    return f"{mark} {verdict}".strip()
+
+
+def details(problem: Problem) -> str:
+    """The title and the three fields, hard-wrapped, for the cell beside the chart.
+
+    Wrapped rather than left to the browser because a table column is as wide as
+    its longest unbroken line, and one 90-character sentence would take the width
+    the chart needs.
+    """
+    lines = [f'<b><a href="problems/{problem.slug}/">{problem.title}</a></b>']
+    for label, value in (("Metric:", problem.fields.get("Metric", "")),
+                         ("Coverage:", problem.fields.get("Coverage", "")),
+                         ("Acceleration?", marked_verdict(problem))):
+        wrapped = textwrap.wrap(f"{label} {value}", DETAIL_WRAP) or [label]
+        wrapped[0] = wrapped[0].replace(label, f"<b>{label}</b>", 1)
+        lines += wrapped
+    return "<br>".join(lines)
+
+
 def index_rows(problems: list[Problem]) -> str:
     out: list[str] = []
     for domain in DOMAIN_ORDER + tuple(sorted(
@@ -306,13 +397,8 @@ def index_rows(problems: list[Problem]) -> str:
         if not rows:
             continue
         out += [f"### {domain[:1].upper()}{domain[1:]}", "",
-                "| Chart | Series | Metric | Coverage | Acceleration? |",
-                "|---|---|---|---|---|"]
-        out += [f"| {thumbnails(problem)} | "
-                f"[{problem.title}](problems/{problem.slug}/) | "
-                f"{problem.fields.get('Metric', '')} | "
-                f"{problem.fields.get('Coverage', '')} | "
-                f"{problem.fields.get('Verdict', '')} |"
+                "| Chart | Series |", "|---|---|"]
+        out += [f"| {thumbnails(problem)} | {details(problem)} |"
                 for problem in rows]
         out.append("")
     return "\n".join(out).rstrip()
@@ -360,6 +446,8 @@ def main() -> int:
                         help="rewrite README's series and status tables; implies "
                              "--reproduce, so the status table never reports a "
                              "column it did not run")
+    parser.add_argument("--links", action="store_true",
+                        help="fetch every URL in every document (needs network)")
     args = parser.parse_args()
 
     folders = sorted(p for p in PROBLEMS.iterdir() if p.is_dir())
@@ -374,7 +462,10 @@ def main() -> int:
         reproduce(problems)
 
     failures = [message for problem in problems for message in problem.messages()]
+    failures += unused_bib(problems, keys)
     failures += strays()
+    if args.links:
+        failures += dead_links(problems)
     if not problems:
         failures.append("problems/ has no folders")
 

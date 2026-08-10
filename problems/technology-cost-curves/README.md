@@ -131,5 +131,6 @@ the reason the plotted rates are restricted to estimates with published
 intervals. Within this collection, the cost reading in
 [weather forecasting](../weather-forecasting/README.md) is the one place an
 agent-era cost curve can be compared against these, and
-[output volume](../output-volume/README.md) is the other variable that visibly
-moves.
+output volume is the other variable that visibly moves, most sharply in
+[git pushes to GitHub](../output-github-pushes/README.md) and
+[arXiv submissions](../output-arxiv/README.md).

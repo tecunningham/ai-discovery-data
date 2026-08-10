@@ -1,7 +1,7 @@
 """One visual language for every figure in the repository.
 
 Colours, the shaded agent era, the axis styling and the save path all live here
-so 35 charts stay comparable by eye. A problem folder draws its own series and
+so every chart stays comparable by eye. A problem folder draws its own series and
 calls save(); it should not restate a colour or re-decide where 2026 starts.
 
     from lib import chart
@@ -30,6 +30,10 @@ HUMAN = "#2f6cc1"
 FUZZ = "#c98a00"
 VENDOR = "#777777"
 NEUTRAL = "#aaaaaa"
+# For a series with no authorship field at all, which is a different thing from
+# one whose finders are recorded and happen to be human. Blue would claim more
+# than the data says: nobody counted who wrote these artifacts.
+UNATTRIBUTED = "#37474f"
 
 # The highlighted period is the same everywhere. Annual bar charts start it at
 # 2025.5, the left edge of the 2026 bar on a year-centred categorical axis.

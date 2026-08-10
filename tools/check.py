@@ -80,6 +80,14 @@ NO_FETCHER_REASONS = re.compile(
     r"|no maintained ledger|generated, not separately maintained|written by hand",
     re.I,
 )
+# A folder can keep its CSVs and document without a chart, when the series is
+# not plottable as a measured time series (text-stated anchors, a claimed rate,
+# and so on). Same pattern as a missing fetcher: the document has to say so in
+# the section a reader opens for that.
+NO_FIGURE_REASONS = re.compile(
+    r"no chart|no figure|not plotted|no visualization|not a digitized series",
+    re.I,
+)
 
 INDEX_BEGIN = "<!-- BEGIN GENERATED: series-index -->"
 INDEX_END = "<!-- END GENERATED: series-index -->"
@@ -164,22 +172,32 @@ class Problem:
                       f"links ../{sibling}/README.md, which does not exist")
 
         figure_script = self.folder / "figure.py"
-        if not figure_script.exists():
-            self.fail("Figure", "no figure.py")
-        if not self.figures:
-            self.fail("Figure", "no figure on disk")
-        script_text = (figure_script.read_text(encoding="utf-8")
-                       if figure_script.exists() else "")
-        for figure in self.figures:
-            if figure.name not in self.embedded:
-                self.fail("Figure", f"{figure.name} is generated but the document "
-                                    "does not embed it")
-            if figure.name not in script_text:
-                self.fail("Figure", f"{figure.name} is not named in figure.py, so "
-                                    "nothing rebuilds it")
-        for name in sorted(self.embedded):
-            if not (self.folder / name).exists():
-                self.fail("Figure", f"embeds {name}, which is not in the folder")
+        built = re.search(r"## How the chart was built\n(.*?)(?=\n## |\Z)",
+                          self.text, re.S)
+        built_body = built.group(1) if built else ""
+        if not figure_script.exists() and not self.figures:
+            if NO_FIGURE_REASONS.search(built_body) or NO_FIGURE_REASONS.search(self.text):
+                self.status["Figure"] = HAND
+            else:
+                self.fail("Figure", "no figure.py")
+                self.fail("Figure", "no figure on disk")
+        else:
+            if not figure_script.exists():
+                self.fail("Figure", "no figure.py")
+            if not self.figures:
+                self.fail("Figure", "no figure on disk")
+            script_text = (figure_script.read_text(encoding="utf-8")
+                           if figure_script.exists() else "")
+            for figure in self.figures:
+                if figure.name not in self.embedded:
+                    self.fail("Figure", f"{figure.name} is generated but the document "
+                                        "does not embed it")
+                if figure.name not in script_text:
+                    self.fail("Figure", f"{figure.name} is not named in figure.py, so "
+                                        "nothing rebuilds it")
+            for name in sorted(self.embedded):
+                if not (self.folder / name).exists():
+                    self.fail("Figure", f"embeds {name}, which is not in the folder")
 
         if not self.csvs:
             self.fail("Data", "holds no CSV")
@@ -196,15 +214,12 @@ class Problem:
 
         if (self.folder / "fetch.py").exists():
             self.status["Refetch"] = PASS
+        elif NO_FETCHER_REASONS.search(built_body):
+            self.status["Refetch"] = HAND
         else:
-            built = re.search(r"## How the chart was built\n(.*?)(?=\n## |\Z)",
-                              self.text, re.S)
-            if built and NO_FETCHER_REASONS.search(built.group(1)):
-                self.status["Refetch"] = HAND
-            else:
-                self.fail("Refetch", "has no fetch.py, and 'How the chart was "
-                                     "built' does not say how the data is "
-                                     "maintained instead")
+            self.fail("Refetch", "has no fetch.py, and 'How the chart was "
+                                 "built' does not say how the data is "
+                                 "maintained instead")
 
         for group in ("Document", "Data", "Figure", "Literature"):
             if self.status[group] == SKIP:
@@ -238,7 +253,11 @@ def reproduce(problems: list[Problem]) -> None:
     for problem in problems:
         script = problem.folder / "figure.py"
         if not script.exists():
-            problem.status["Reproduces"] = FAIL
+            # A documented chartless folder has nothing to reproduce.
+            if problem.status.get("Figure") == HAND:
+                problem.status["Reproduces"] = HAND
+            else:
+                problem.status["Reproduces"] = FAIL
             continue
         before = {path: path.read_bytes() for path in problem.figures}
         run = subprocess.run([sys.executable, str(script)], cwd=ROOT,

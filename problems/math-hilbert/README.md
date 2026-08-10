@@ -1,13 +1,13 @@
 # Hilbert's problems
 
 **Domain:** mathematics
-**Metric:** cumulative ledger rows scored resolved, out of 28 scored rows
+**Metric:** unresolved scored rows remaining, out of 28 scored rows
 **Coverage:** 1900–2026, with dated resolutions running 1900–1998
 **Data:** [`hilbert-problems.csv`](hilbert-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Hilbert%27s_problems>
 **Verdict:** no acceleration
 
-![Cumulative dated resolutions among Hilbert's problems, 1900 to 2026.](discovery-math-hilbert.png)
+![Unresolved scored rows over time.](discovery-math-hilbert.png)
 
 ## The problem
 
@@ -61,7 +61,7 @@ and famous open problems should be checked.
 [`../../lib/families.py`](../../lib/families.py), which reads
 `hilbert-problems.csv`, keeps the rows whose `status` is
 `resolved` and whose `resolved_year` is non-empty, sorts them by resolution year
-and then `problem_id`, and draws the cumulative count as a step function from the
+and then `problem_id`, and draws the count of still-unresolved rows as a step function from the
 `list_year` of 1900 to the present. The header text counts the remaining rows by
 status, and the source note is taken from the `source` column.
 

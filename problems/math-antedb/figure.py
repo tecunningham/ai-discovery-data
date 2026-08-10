@@ -205,78 +205,9 @@ def small_multiples() -> None:
     print(f"wrote antedb-small-multiples ({panel} panels)")
 
 
-def improvement_by_parameter() -> None:
-    """One compact summary: how much each function improved, against its parameter.
-
-    The per-slice time series live in the small-multiples figure. This is the
-    thing those thirty panels cannot show at a glance — that the century's
-    improvement depends strongly on where on each function you look.
-    """
-    series: dict[tuple[str, float], list[tuple[int, float]]] = defaultdict(list)
-    for row in read_csv(SWEEP):
-        series[(row["quantity"], float(row["point_float"]))].append(
-            (int(row["year"]), float(row["value_float"]))
-        )
-    for key in series:
-        series[key].sort()
-
-    styles = {
-        "mu": ("#2f6cc1", r"$\mu(\sigma)$", "o"),
-        "A": ("#e0a020", r"$A(\sigma)$", "s"),
-        "beta": ("#2f8f5b", r"$\beta(\alpha)$", "^"),
-    }
-
-    fig, ax = plt.subplots(figsize=(8.6, 5.0))
-    summary = {}
-    for quantity, (colour, name, marker) in styles.items():
-        points = sorted(k[1] for k in series if k[0] == quantity)
-        if not points:
-            continue
-        xs, ys, counts = [], [], []
-        for point in points:
-            rows = series[(quantity, point)]
-            xs.append(point)
-            ys.append(rows[-1][1] / rows[0][1])
-            counts.append(len(rows))
-        summary[quantity] = (xs, ys, counts)
-        ax.plot(xs, ys, lw=1.7, color=colour, marker=marker, ms=4.6,
-                markeredgecolor="white", markeredgewidth=0.5, zorder=3)
-        ax.text(xs[-1] + 0.013, ys[-1], name, fontsize=10, color=colour, va="center")
-
-    ax.axhline(1.0, color="#333", lw=1.1, ls=":", zorder=2)
-    ax.text(0.015, 1.014, "no improvement at all", fontsize=8.8, color="#555")
-    ax.set_ylim(0.12, 1.075)
-    ax.set_xlim(0, 1.08)
-    ax.set_xlabel(r"Parameter: $\sigma$ for $\mu$ and $A$, $\alpha$ for $\beta$",
-                  fontsize=10)
-    ax.set_ylabel("Latest bound ÷ earliest bound, whole record", fontsize=10)
-    ax.set_title("How much a century bought, by where on the function you look",
-                 fontsize=12, loc="left", pad=10)
-    ax.grid(axis="y", alpha=0.22)
-    ax.set_axisbelow(True)
-    for spine in ("top", "right"):
-        ax.spines[spine].set_visible(False)
-    flat = sum(1 for c in summary.get("beta", ([], [], []))[2] if c <= 1)
-    if flat:
-        ax.text(0.015, 0.22,
-                f"Lower is more improvement.\n{flat} of the "
-                r"$\beta$ points never moved once.",
-                fontsize=9, color="#333", va="center")
-
-    fig.tight_layout()
-    fig.savefig(HERE / "antedb-improvement-by-parameter.png", dpi=170)
-    plt.close(fig)
-
-    print("ANTEDB improvement by parameter:")
-    for quantity, (xs, ys, counts) in summary.items():
-        print(f"  {quantity}: {len(xs)} points, ratio {min(ys):.3f}-{max(ys):.3f}, "
-              f"records {min(counts)}-{max(counts)}")
-
-
 def main() -> None:
     cumulative_changes()
     small_multiples()
-    improvement_by_parameter()
 
 
 if __name__ == "__main__":

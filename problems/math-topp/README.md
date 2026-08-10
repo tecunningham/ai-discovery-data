@@ -1,13 +1,13 @@
 # The Open Problems Project
 
 **Domain:** mathematics
-**Metric:** cumulative entries whose own status line says solved, settled, or closed, out of 78
+**Metric:** unresolved scored rows remaining, out of 78
 **Coverage:** 2001–2026, with dated resolutions running 2000–2024
 **Data:** [`topp-problems.csv`](topp-problems.csv)
 **Upstream:** <https://topp.openproblem.net/>, with the rows transcribed from the project's GitHub sources
 **Verdict:** no acceleration
 
-![Cumulative dated solved, settled, or closed statuses in The Open Problems Project.](discovery-math-topp.png)
+![Unresolved scored rows over time.](discovery-math-topp.png)
 
 ## The problem
 
@@ -47,7 +47,7 @@ recorded in the project's own citations.
 One artifact is visible at the left edge and is not a data error. The leftmost
 resolution is dated 2000, a year before the project's 2001 start, because Bezdek
 and Connelly settled the pushing-disks problem in 2000 and the project's entry for
-it records that resolution rather than an open status. The cumulative line
+it records that resolution rather than an open status. The unresolved line
 therefore steps backwards briefly at its left end. It is a small instance of the
 larger problem with this series: the ledger dates resolutions but not entries.
 
@@ -57,7 +57,7 @@ larger problem with this series: the ledger dates resolutions but not entries.
 [`../../lib/families.py`](../../lib/families.py), which reads
 `topp-problems.csv`, keeps rows whose `status` is
 `resolved` with a non-empty `resolved_year`, sorts by year then `problem_id`, and
-draws the cumulative count as a step function from the 2001 `list_year` to the
+draws the count of still-unresolved rows as a step function from the 2001 `list_year` to the
 present. The header text reports the 78/17/60/1 breakdown and the source note
 names the `source` column, which for every row is the project's GitHub problem
 directory.
@@ -83,7 +83,7 @@ There is no `fetch.py`. The 78 rows were transcribed by hand from the project's 
   ledger and not a fixed-cohort solve rate. A denominator that grows invisibly
   cannot support a rate.
 - **One row predates the list.** The 2000 resolution sits a year before the 2001
-  start, which is why the cumulative line steps backwards at its left edge.
+  start, which is why the unresolved line steps up at its left edge when an entry-addition date precedes the list year.
 - **Statuses are the maintainers' own language**, not independent review, and some
   are qualified — entry 12 is counted on a "solved (in a certain sense)".
 - **Unmaintained entries look open.** A problem whose status was never updated is

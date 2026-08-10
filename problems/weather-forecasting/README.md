@@ -7,7 +7,6 @@
 **Upstream:** <https://www.ecmwf.int/en/forecasts/quality-our-forecasts>, <https://www.nature.com/articles/nature14956>, and each model's own paper or announcement
 **Verdict:** no acceleration — the skill trend did not bend; the cost of producing a forecast fell by about three orders of magnitude
 
-![Weather forecast skill: two stated anchors, the stated one-day-per-decade rate drawn forward as a dashed line, and the 2022 to 2025 arrival of machine-learning models.](discovery-weather-forecasting.png)
 
 ## The problem
 
@@ -29,62 +28,30 @@ delivered here is not obviously a gain in lead time at all.
 
 ## What the chart shows
 
-Two filled points and a dashed line, and they are not the same kind of thing.
+There is no chart. The skill series is not a digitized time series: two text-stated
+anchors (5.5 days in 1980, 6.5 days in 1985) and a stated rate of about a day a
+decade, with the arrival dates of the machine-learning models recorded beside
+them. Drawing that as a line would present a claim as if it were a measurement,
+so the folder keeps the CSVs and the reading without a figure.
 
-The filled points are the two dated anchors that exist in text: northern
-hemisphere useful forecast length of 5.5 days in 1980 and 6.5 days in 1985. The
-dashed line is the rate the literature states — "the skill of deterministic
-'best-guess' weather forecasts in the range from 3 to 10 days ahead has improved
-by about a day a decade" — drawn forward from the 1985 anchor to 2026. That line
-is a claim about the trend, not a measurement of it, and the figure labels it as
-such.
-
-The red triangles along the bottom are the arrivals of six machine-learning
-models between February 2022 and 2025, plotted at their dates; their height
-carries no value. Four beat the physics incumbent on its own class of metric:
-FourCastNet, which "matches the forecasting accuracy of the ECMWF Integrated
-Forecasting System (IFS) … at short lead times … while outperforming IFS for
-small-scale variables"; Pangu-Weather, where "for the first time, an AI-based
-method outperforms state-of-the-art numerical weather prediction (NWP) methods
-in terms of accuracy … of all factors … and in all time ranges"; GraphCast,
-"significantly more accurate than the ECMWF's deterministic forecasting system,
-HRES, on 89.3% of the 2760 target variables and lead times we evaluated"; and
-GenCast, "more accurate than ENS on 97.2% of these targets, and on 99.8% at lead
-times greater than 36 hours".
-
-The dotted vertical line is the fact that carries the most weight. ECMWF's own
-AIFS became operational on 25 February 2025, so the organization that owns both
-the physics model and the verification framework adopted a machine-learning
-model in production. At that point the capability claim stops being a vendor
-claim.
-
-Set the two magnitudes side by side, which is what the annotation does. ECMWF
-reports that AIFS "outperforms state-of-the-art physics-based models for many
-measures … with gains of up to 20%", the ensemble scorecard showing
-"improvements reach up to 25%" with overall skill improving 4–6% in v1.1 — and
-"a reduction of approximately 1,000 times in energy use". Percentages on skill;
-three orders of magnitude on cost. Nothing in the sources examined claims the
-forty-year one-day-per-decade trend has measurably steepened.
+The reading itself is unchanged. Four ML models beat the physics incumbent
+between 2022 and 2025, ECMWF made its own AIFS operational on 2025-02-25, skill
+gains are reported at 4 to 25%, and energy use fell by about a thousandfold —
+while nothing in the sources claims the forty-year one-day-per-decade trend
+steepened.
 
 ## How the chart was built
 
-[`figure.py`](figure.py) reads both CSVs. The anchors are the rows whose metric
-begins `useful_forecast_length`; the dashed line starts at the later anchor and
-rises at the rate stored in the `skill_gain_rate_500hPa_Z` row, so the slope
-comes from the file rather than from the code. The arrival markers are one per
-row of `weather-ml-models.csv`, placed at the first dated release in the row's
-`date` field, and the dotted vertical is the operational date named in the AIFS
-row.
+There is no figure and no `figure.py`. The folder is kept for the two CSVs and
+the document: `weather-forecast-skill.csv` holds the text-stated anchors and the
+stated rate, and `weather-ml-models.csv` holds the dated model arrivals. Neither
+is a digitized series, so they are not plotted.
 
 There is no fetcher. ECMWF's live skill chart blocks automated fetching, which
 is why the vendored file holds text-stated anchor points and a stated rate
-instead of a digitized series, and the model claims are quotations transcribed
-by hand from each paper or announcement. Digitizing the published skill figure
-is the obvious way to improve this folder.
+rather than a measured series, and why a figure would overclaim. Digitizing the
+published skill chart is the fix if a plotted series is wanted later.
 
-The legend distinguishes the measurement from the claim, and the markers are
-kept off the skill scale, because the one thing this chart must not do is imply
-a forty-year series that nobody here read.
 
 ## What it cannot support
 

@@ -1,13 +1,13 @@
 # Landau's problems
 
 **Domain:** mathematics
-**Metric:** cumulative ledger rows scored resolved, out of 4 scored rows
+**Metric:** unresolved scored rows remaining, out of 4 scored rows
 **Coverage:** 1912–2026, with no dated resolution anywhere in that span
 **Data:** [`landau-problems.csv`](landau-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Landau%27s_problems>
 **Verdict:** no acceleration
 
-![Cumulative dated resolutions among Landau's problems: flat at zero from 1912 to 2026.](discovery-math-landau.png)
+![Unresolved scored rows over time.](discovery-math-landau.png)
 
 ## The problem
 
@@ -32,7 +32,7 @@ under which every AI result in this collection has arrived.
 
 ## What the chart shows
 
-Nothing, and that is the reading. The cumulative line is flat at zero across the
+Nothing, and that is the reading. The unresolved line is flat at four across the
 whole span, the header text records four scored rows with none resolved, and the
 chart carries an annotation saying no row has been resolved since the list was
 posed. No marker is red because there are no markers at all.
@@ -46,7 +46,7 @@ behind this collection claims otherwise.
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `landau-problems.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, and draws the cumulative count as a step function from
+non-empty `resolved_year`, and draws the count of still-unresolved rows as a step function from
 the 1912 `list_year` to the present. Here that set is empty, so the function
 takes its no-resolution path: the flat line and the row-count annotation are
 drawn as usual, and the marker legend is replaced by a sentence, because legend

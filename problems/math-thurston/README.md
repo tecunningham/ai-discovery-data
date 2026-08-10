@@ -1,13 +1,13 @@
 # Thurston's 24 questions
 
 **Domain:** mathematics
-**Metric:** cumulative ledger rows scored resolved, out of 24 scored rows
+**Metric:** unresolved scored rows remaining, out of 24 scored rows
 **Coverage:** 1982–2026, with dated resolutions running 1993–2013
 **Data:** [`thurston-questions.csv`](thurston-questions.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Thurston%27s_24_questions>, cross-checked against Agol's status note at <https://mathoverflow.net/questions/265493/thurstons-24-questions-all-settled>
 **Verdict:** no acceleration
 
-![Cumulative dated resolutions among Thurston's 24 questions, clustered in 2012 and 2013 and flat since.](discovery-math-thurston.png)
+![Unresolved scored rows over time.](discovery-math-thurston.png)
 
 ## The problem
 
@@ -51,8 +51,7 @@ edge is what that looks like.
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `thurston-questions.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, sorts them by year and then `problem_id`, and draws the
-cumulative count as a step function from the 1982 `list_year` to the present. The
+non-empty `resolved_year`, sorts them by year and then `problem_id`, and draws the count of still-unresolved rows as a step function from the 1982 `list_year` to the present. The
 header text counts the remaining rows by status, and the source note is taken from
 the `source` column.
 

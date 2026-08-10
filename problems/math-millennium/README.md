@@ -1,13 +1,13 @@
 # Millennium Prize Problems
 
 **Domain:** mathematics
-**Metric:** cumulative prize problems scored resolved, out of 7
+**Metric:** unresolved scored rows remaining, out of 7
 **Coverage:** 2000–2026, with one dated resolution in 2003
 **Data:** [`millennium-problems.csv`](millennium-problems.csv)
 **Upstream:** <https://www.claymath.org/millennium-problems/>
 **Verdict:** no acceleration
 
-![Cumulative resolved Millennium Prize Problems, flat at one since Perelman's 2003 Poincaré result.](discovery-math-millennium.png)
+![Unresolved scored rows over time.](discovery-math-millennium.png)
 
 ## The problem
 
@@ -54,7 +54,7 @@ behind this collection.
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `millennium-problems.csv`, keeps the rows whose `status` is
-`resolved` with a non-empty `resolved_year`, and draws the cumulative count as a
+`resolved` with a non-empty `resolved_year`, and draws the count of still-unresolved rows as a
 step function from the 2000 `list_year` to the present. The header text reports
 the status breakdown, and the source note names the `source` column, which for
 every row here is the Clay Mathematics Institute.

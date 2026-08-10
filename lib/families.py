@@ -172,9 +172,19 @@ def problem_list_chart(
     built_by: str,
     ai_problem: str | None = None,
 ) -> None:
+    """Unresolved stock over time: progress is a step down, and the axis runs to the total.
+
+    A rising cumulative of resolutions compresses every list toward the bottom of
+    its panel and hides how much of the list is still open. Counting the rows
+    that remain unresolved puts every list on the same scale — its own size —
+    and makes a resolution read as depletion rather than as an accumulation.
+    Contested, partial and vague rows stay in the stock: only a status of
+    resolved with a year takes one off.
+    """
     rows = read_csv(csv_path)
     name = rows[0]["list_name"]
     start = int(rows[0]["list_year"])
+    total = len(rows)
     resolved = [
         (int(row["resolved_year"]), row)
         for row in rows
@@ -182,62 +192,85 @@ def problem_list_chart(
     ]
     resolved.sort(key=lambda item: (item[0], item[1]["problem_id"]))
     years = [start] + [year for year, _ in resolved] + [NOW]
-    counts = [0] + list(range(1, len(resolved) + 1)) + [len(resolved)]
+    remaining = [total - k for k in range(len(resolved) + 1)] + [
+        total - len(resolved)
+    ]
     fig, ax = new_chart(
-        f"{name}: dated resolution landmarks",
-        "Cumulative rows scored resolved under this ledger; disputed, partial, and vague rows are not counted",
+        f"{name}: unresolved problems",
+        "Scored rows still open, contested, partial or vague; a step down is a dated resolution",
     )
-    ax.plot(years, counts, drawstyle="steps-post", color=HUMAN, linewidth=2, zorder=3)
+    ax.plot(years, remaining, drawstyle="steps-post", color=HUMAN, linewidth=2, zorder=3)
+    ax.axhline(total, color="#bbbbbb", linewidth=0.9, linestyle=":", zorder=1)
+    ax.text(
+        start + max((NOW - start) * 0.01, 0.3),
+        total,
+        f"{total} scored",
+        fontsize=7.5,
+        color="#777777",
+        va="bottom",
+    )
     for index, (year, row) in enumerate(resolved, 1):
+        y = total - index
         colour = AI if row["problem_id"] == ai_problem else HUMAN
-        ax.scatter([year], [index], color=colour, s=52, edgecolor="white", linewidth=0.7, zorder=4)
+        ax.scatter([year], [y], color=colour, s=52, edgecolor="white", linewidth=0.7, zorder=4)
         if colour == AI:
             ax.annotate(
                 f"{row['short_name']}\nformal checks complete; peer review pending",
-                (year, index),
-                xytext=(-8, 10),
+                (year, y),
+                xytext=(-8, -18),
                 textcoords="offset points",
                 ha="right",
                 fontsize=8,
                 color=AI,
             )
     open_count = sum(row["status"] == "open" for row in rows)
-    other_count = len(rows) - len(resolved) - open_count
+    other_count = total - len(resolved) - open_count
+    still = total - len(resolved)
     right = NOW + max((NOW - start) * 0.035, 1.2)
     ax.set_xlim(start - max((NOW - start) * 0.04, 1), right)
-    ax.set_ylim(-0.3, max(len(resolved) + 2, 2))
+    # Floor at zero and ceiling at the list size, so every panel is a full stock
+    # and a drop of one is the same visual distance on every list.
+    ax.set_ylim(-0.05 * max(total, 1), total * 1.08)
     shade_era(ax, right)
-    style(ax, "Cumulative resolved rows")
+    style(ax, "Unresolved scored rows")
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.text(
-        0.02,
-        0.94,
-        f"{len(rows)} scored rows now: {len(resolved)} resolved, "
-        f"{open_count} open, {other_count} disputed/partial/vague",
-        transform=ax.transAxes,
-        fontsize=8.5,
-        va="top",
-        color="#333333",
-    )
     if resolved:
-        ax.legend(handles=common_legend(), frameon=False, fontsize=8)
+        ax.text(
+            0.02,
+            0.12,
+            f"{still} of {total} still unresolved "
+            f"({len(resolved)} resolved"
+            + (f", {other_count} contested/partial/vague" if other_count else "")
+            + ")",
+            transform=ax.transAxes,
+            fontsize=8.5,
+            va="top",
+            color="#333333",
+        )
+        ax.legend(handles=common_legend(), frameon=False, fontsize=8, loc="upper right")
     else:
-        # Landau's four rows are all open, so there are no markers to key and the
-        # legend swatches would sit on the flat line at zero, where they read as
-        # resolution landmarks.
+        # Status and the "none resolved" note are the same fact when the line is
+        # flat at the total, so one annotation carries both.
         ax.annotate(
+            f"{total} of {total} still unresolved\n"
             "no row resolved since the list was posed",
-            (start, 0),
-            xytext=(8, 12),
+            (start, total),
+            xytext=(8, -18),
             textcoords="offset points",
             fontsize=8.5,
             color=HUMAN,
+            linespacing=1.4,
         )
-    source_note(fig, f"Source: {rows[0]['source']}. Years are resolution landmarks, not effort-adjusted discovery rates.")
+    source_note(
+        fig,
+        f"Source: {rows[0]['source']}. Years are resolution landmarks, "
+        "not effort-adjusted discovery rates.",
+    )
     save(
         fig,
         out_path,
-        f"{name}: cumulative dated resolution landmarks under the source ledger.",
+        f"{name}: unresolved scored rows under the source ledger; "
+        "progress is a decline toward zero.",
         sorted({row["source"] for row in rows}),
         built_by,
     )

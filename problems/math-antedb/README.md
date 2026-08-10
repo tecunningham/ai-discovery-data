@@ -73,18 +73,10 @@ value to the earliest, the year the slice last moved, and how many records it
 carries. The dashed horizontal line on the $A$ panels marks the density
 hypothesis, $A \leq 2$, where it falls inside the panel.
 
-![Whole-record improvement ratio against the parameter, for all three families.](antedb-improvement-by-parameter.png)
-
-The same sweep reduced to one number per grid point: the latest bound divided by
-the earliest, plotted against the parameter — $\sigma$ for $\mu$ and $A$,
-$\alpha$ for $\beta$. Every grid point is plotted, not just the ten per family in
-the small multiples: circles for $\mu$, squares for $A$, triangles for $\beta$.
-Lower means more of the bound has been removed, and the dotted line at 1.0 marks
-no improvement at all.
 
 ## How the chart was built
 
-[`figure.py`](figure.py) draws all three figures from `antedb-sweep.csv`. For the
+[`figure.py`](figure.py) draws both remaining figures from `antedb-sweep.csv`. For the
 first, it groups
 `antedb-sweep.csv` by `quantity` and `point`, sorts each slice by `year`, and
 counts an event whenever `value_float` differs from the previous year's value for

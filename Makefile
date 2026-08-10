@@ -40,8 +40,16 @@ index:
 # rate-limit. Responses are cached for the day under .cache/, so two folders
 # sharing an upstream do not fetch it twice.
 fetch:
-	@for script in $(FETCH_SCRIPTS); do echo "== $$script"; python3 $$script || exit 1; done
-	@echo "problems/math-antedb/fetch.py needs github.com/teorth/expdb and pycddlib<3; run it by hand"
+	@status=0; \
+	for script in $(FETCH_SCRIPTS); do \
+		echo "== $$script"; \
+		python3 $$script || status=1; \
+	done; \
+	if [ $$status -ne 0 ]; then \
+		echo "one or more fetchers reported stale data or failed" >&2; \
+	fi; \
+	echo "problems/math-antedb/fetch.py needs github.com/teorth/expdb and pycddlib<3; run it by hand"; \
+	exit $$status
 
 fetch-one:
 	python3 problems/$(PROBLEM)/fetch.py

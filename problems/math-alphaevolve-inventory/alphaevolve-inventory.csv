@@ -23,7 +23,7 @@ problem,index,title,topic_group,status,status_mapping,n_citations,cited_refs,n_c
 6.22,22,Borcea’s conjecture,Sendov’s conjecture and its variants,,,1,181,1,2011,2011,2011,
 6.23,23,Smale’s problem,Sendov’s conjecture and its variants,,,5,19;76;80;135;265,4,1981,2007,1981;2002;2006;2007,1 ≤ 𝐶6.23 (𝑛) ≤ 4
 6.24,24,de Bruin–Sharma,Sendov’s conjecture and its variants,,,4,58;89;181;278,4,1997,2025,1997;2006;2011;2025,
-6.25,25,Crouzeix’s conjecture,Crouzeix’s conjecture,,,9,23;82;83;153;154;155;228;235;288,7,1965,2018,1965;1966;1999;2004;2014;2017;2018,2 ≤ 𝐶6.25 ≤ 1
+6.25,25,Crouzeix’s conjecture,Crouzeix’s conjecture,,,9,23;82;83;153;154;155;228;235;288,7,1965,2018,1965;1966;1999;2004;2014;2017;2018,2 ≤ 𝐶6.25 ≤ 1 + √2
 6.26,26,Sidorenko’s conjecture,Sidorenko’s conjecture,,,10,1;72;73;74;75;163;182;197;259;273,8,1993,2025,1993;2010;2011;2014;2016;2018;2021;2025,
 6.27,27,Prime number theorem,The prime number theorem,worse_than_record,assumed,3,57;95;272,3,1852,1982,1852;1870;1982,𝐶6.27 = 1.
 6.28,28,Golay’s merit factor,Flat polynomials and Golay’s merit factor conjecture,worse_than_record,assumed,10,12;39;106;143;144;150;170;200;225;227,9,1962,2020,1962;1966;1972;1977;2008;2013;2016;2018;2020,
@@ -35,16 +35,16 @@ problem,index,title,topic_group,status,status_mapping,n_citations,cited_refs,n_c
 6.34,34,Tammes problem,The Thomson and Tammes problems,,,11,65;86;93;189;217;219;234;241;254;263;286,9,1943,2023,1943;1951;1961;1986;1994;2010;2012;2015;2023,
 6.35,35,Packing in a dilate,Packing problems,world_record,assumed,7,1;112;126;131;134;176;249,5,1975,2025,1975;2002;2005;2019;2025,
 6.36,36,Circle packing in a square,Packing problems,former_record,assumed,4,25;94;128;129,3,2011,2025,2011;2012;2025,
-6.37,37,Turán hypergraph problem for the tetrahedron,The Turán number of the tetrahedron,,,3,177;187;236,3,1982,2011,1982;2010;2011,5 ≤ 𝐶6.37 ≤ 0.561666
+6.37,37,Turán hypergraph problem for the tetrahedron,The Turán number of the tetrahedron,,,3,177;187;236,3,1982,2011,1982;2010;2011,5/9 ≤ 𝐶6.37 ≤ 0.561666
 6.38,38,Factoring factorials,Factoring 𝑁! into 𝑁 numbers,former_record,assumed,1,5,1,2025,2025,2025,
 6.39,39,Beat the average game,Beat the average game,worse_than_record,assumed,2,21;209,1,2024,2024,2024,0.400695 ≤ 𝐶6.39 ≤ 0.417
 6.40,40,Erdős discrepancy problem,Erdős discrepancy problem,worse_than_record,assumed,4,104;121;185;280,4,1957,2016,1957;1964;2015;2016,
 6.41,41,Fejes–Tóth problem,Points on sphere maximizing the volume,,,7,24;44;81;161;168;220;262,7,1970,2016,1970;1991;1994;1995;2002;2005;2016,
 6.42,42,,Sums and differences problems,world_record,assumed,1,244,1,1996,1996,1996,𝐶6.42 ≤ 2
 6.43,43,,Sums and differences problems,worse_than_record,assumed,2,125;166,2,1973,1999,1973;1999,
-6.44,44,,Sums and differences problems,former_record,assumed,4,1;33;138;158,3,2007,2025,2007;2024;2025,6.44 ≤ 𝐶6.44 ≥ 1
+6.44,44,,Sums and differences problems,former_record,assumed,4,1;33;138;158,3,2007,2025,2007;2024;2025,1.14465 ≤ 𝐶6.44 ≤ 4/3
 6.45,45,Sum-product problem,Sum-product problems,,,3,34;115;214,3,1983,2025,1983;2023;2025,
-6.46,46,Minimal triangle (density,Triangle density in graphs,matched_optimal,assumed,13,1;29;30;36;99;123;147;179;204;215;223;237,11,1959,2025,1959;1962;1963;1976;1978;1983;1989;2007;2008;2012;2025,
+6.46,46,Minimal triangle density,Triangle density in graphs,matched_optimal,assumed,13,1;29;30;36;99;123;147;179;204;215;223;237,11,1959,2025,1959;1962;1963;1976;1978;1983;1989;2007;2008;2012;2025,
 6.47,47,,Matrix multiplications and AM-GM inequalities,,,2,99;169,2,2012,2016,2012;2016,
 6.48,48,Heilbronn problem in a fixed bounding box,Heilbronn problems,world_record,assumed,8,53;60;98;118;130;184;303;304,7,1982,2025,1982;1992;1995;2007;2015;2024;2025,
 6.49,49,Heilbronn problem in an arbitrary convex bounding box,Heilbronn problems,world_record,assumed,3,127;132;133,2,2007,2024,2007;2024,
@@ -59,7 +59,7 @@ problem,index,title,topic_group,status,status_mapping,n_citations,cited_refs,n_c
 6.58,58,Happy ending problem,Erdős–Szekeres Happy Ending problem,,,6,114;167;172;207;250;274,5,1960,2020,1960;1970;2006;2019;2020,1 ≤ 𝐶6.58 (𝑘) ≤ 2
 6.59,59,Subsets of grid with no isosceles triangles,Subsets of the grid with no isosceles triangles,world_record,assumed,5,56;100;101;268;300,5,1904,2025,1904;2016;2023;2024;2025,
 6.60,60,,The “no 5 on a sphere” problem,world_record,assumed,13,8;10;45;56;64;79;100;140;180;253;258;270,9,1994,2025,1994;1995;1997;1999;2005;2008;2010;2024;2025,
-6.61,61,Ring Loading Problem Discrepancy,The Ring Loading Problem,world_record,assumed,3,216;253;261,3,1966,2016,1966;1999;2016,101 ≤ 𝐶6.61 ≤ 23
+6.61,61,Ring Loading Problem Discrepancy,The Ring Loading Problem,world_record,assumed,3,216;253;261,3,1966,2016,1966;1999;2016,11/10 ≤ 𝐶6.61 ≤ 19/14
 6.62,62,Classic sofa,Moving sofa problem,matched_optimal,assumed,3,1;10;139,3,1992,2025,1992;2024;2025,𝐶6.62 ≥ 2.2195
 6.63,63,Ambidextrous sofa,Moving sofa problem,matched_optimal,assumed,2,1;243,2,2018,2025,2018;2025,𝐶6.63 ≥ 1.6449
 6.64,64,Three-dimensional sofa,Moving sofa problem,world_record,assumed,1,208,1,2022,2022,2022,

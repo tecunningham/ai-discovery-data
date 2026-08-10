@@ -55,10 +55,10 @@ reported as 67 mathematical results, two quantities supported a head-to-head at
 the point this inventory was built.
 
 The dating turned out better than expected in one respect. Of the 65 problems,
-63 cite at least one dated reference, 52 cite at least two, and 30 cite at least
+64 cite at least one dated reference, 52 cite at least two, and 30 cite at least
 four; the parsed bibliography yields 302 entries of which 298 carry a year.
 Among problems citing two or more dated works the median span between earliest
-and latest cited year is 36 years, so these are decades-deep literatures rather
+and latest cited year is 42 years, so these are decades-deep literatures rather
 than fresh ones.
 
 ## How the chart was built
@@ -79,6 +79,10 @@ publication year of each of those references from the parsed bibliography, any
 inline bound string, and the repository's status classification. Neither input
 is vendored here and the paper's text is not redistributed; only derived counts
 and short quoted bound strings go into the CSV.
+
+`n_citations` is the full number of parsed references. To keep the orientation
+inventory compact, `cited_refs` lists at most the first twelve reference IDs;
+three rows have thirteen or fourteen parsed references.
 
 Two extraction bugs were found during construction and are worth recording,
 because both would have corrupted the output silently. A cross-reference to a

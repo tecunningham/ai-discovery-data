@@ -165,6 +165,15 @@ def record_steps() -> None:
     # --- right: pooled step sizes over the whole frame ----------------------
     steps = [r for rows in series.values() for r in rows
              if r["relative_gain_pct"] and r.get("is_record", "yes") == "yes"]
+    comparable_quantities = sum(
+        any(row["agent"].startswith("ai_") for row in rows)
+        and any(row["agent"].startswith("human_") for row in rows)
+        for rows in (
+            [row for row in local
+             if row["relative_gain_pct"] and row.get("is_record", "yes") == "yes"]
+            for local in series.values()
+        )
+    )
     order = ["ai_evolution", "ai_guided_search", "ai_agents",
              "human_search", "human_analytic"]
     for y, agent in enumerate(order):
@@ -209,8 +218,8 @@ def record_steps() -> None:
         "AI record steps against human steps on the same quantity: the "
         "pre-committed 12-problem sample plus the 2026-07-28 frame completion\n"
         "Left three: representative contested sequences. Right: every record "
-        "step with a computable size, 12 quantities carrying both AI and "
-        "non-AI steps.",
+        f"step with a computable size, {comparable_quantities} quantities "
+        "carrying both AI and non-AI steps.",
         fontsize=11.5, x=0.006, ha="left", y=0.995,
     )
     fig.tight_layout(rect=(0, 0, 1, 0.90))

@@ -33,12 +33,19 @@ FIGURES = ROOT / "figures"
 DATA_DEST = "posts/data/apple-picking"
 FIGURE_DEST = "posts/images"
 
+# The one file this repository does not own. The prestige-list ledger is
+# transcribed by hand inside the blog's own famous_problem_lists() figure code,
+# which writes the CSV as a side effect, so copying our snapshot over the blog's
+# copy would silently revert a transcription made there. We hold a vendored
+# snapshot to plot from and leave the blog's copy alone.
+NOT_OURS = {"famous-open-problem-lists.csv"}
+
 
 def pairs(blog: Path) -> list[tuple[Path, Path]]:
     out = []
     for source, dest in ((DATA, DATA_DEST), (FIGURES, FIGURE_DEST)):
         for path in sorted(source.iterdir()):
-            if path.suffix in {".csv", ".png"}:
+            if path.suffix in {".csv", ".png"} and path.name not in NOT_OURS:
                 out.append((path, blog / dest / path.name))
     return out
 

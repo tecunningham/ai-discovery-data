@@ -44,6 +44,13 @@ the Gurobi release notes, the matrix-multiplication record chronology — are
 transcribed by hand, with the source URL recorded per row in the CSV. The
 per-problem document says which category each series is in.
 
+One file is not this repository's to regenerate. `famous-open-problem-lists.csv`
+holds the Hilbert, Smale, Millennium and TOPP status ledgers, which are
+transcribed by hand inside the blog repository's own figure code and written out
+from there. What is here is a vendored snapshot to plot from, and `make sync`
+deliberately skips it so a transcription made in the blog cannot be reverted by
+a sync from here.
+
 ## What the numbers are and are not
 
 Three conventions run through every series here, and reading a chart without

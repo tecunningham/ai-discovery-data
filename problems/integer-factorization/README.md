@@ -2,7 +2,7 @@
 
 **Domain:** outside the three domains
 **Metric:** cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum
-**Coverage:** 1991-04 to 2020-02, confirmed unmoved as of 2026-07-29
+**Coverage:** 1991-04 to 2020-02, confirmed unmoved as of 2026-08-10
 **Data:** [`factoring-records.csv`](factoring-records.csv) (all 23 published RSA factorizations, plus the 795-bit discrete-logarithm record and the first SHA-1 collision for context)
 **Upstream:** <https://en.wikipedia.org/wiki/RSA_numbers>, with the last two records from <https://caramba.loria.fr/rsa250.txt> and <https://caramba.loria.fr/dlp240-rsa240.txt>
 **Verdict:** no acceleration — no record since February 2020, and the fourfold slowdown before that predates AI entirely
@@ -30,7 +30,7 @@ Thirteen records between April 1991 and February 2020, and nothing since.
 The rate falls fourfold inside the series, well before AI: about 7.1 digits a
 year from RSA-100 in 1991 to RSA-768 in December 2009, then about 1.8 a year to
 RSA-250 in February 2020. Both figures are computed in the figure code from the
-running maximum. RSA-250 has stood for six years and four months, across exactly
+running maximum. RSA-250 has stood for about six and a half years, across exactly
 the period in which AI systems were setting records on speedruns, kernels, a SAT
 competition, and a dozen mathematical bounds. RSA-260, RSA-270, RSA-896 and
 RSA-1024 remain unfactored.

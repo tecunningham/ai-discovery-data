@@ -38,11 +38,16 @@ def main() -> None:
     ax.scatter(years, values, color=HUMAN, s=45, edgecolor="white", linewidth=0.6, zorder=4)
     ax.axhline(2, color=VENDOR, linestyle=":", linewidth=1)
     ax.text(1970, 2.025, "conjectured limit = 2", fontsize=8, color="#555555")
-    for target in ("Strassen", "Coppersmith–Winograd", "Alman et al."):
+    labels = {
+        "Strassen": "Strassen",
+        "Coppersmith–Winograd": "Coppersmith–Winograd",
+        "Alman–Duan–Williams–Xu–Xu–Zhou": "Alman et al.",
+    }
+    for target, label in labels.items():
         # Use the latest record when a discoverer appears more than once.
         row = next(row for row in reversed(rows) if row["discoverer"] == target)
         ax.annotate(
-            target,
+            label,
             (int(row["year"]), float(row["omega"])),
             xytext=(5, 7),
             textcoords="offset points",

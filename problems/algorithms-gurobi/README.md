@@ -15,12 +15,12 @@ Mixed-integer programming is the workhorse of applied optimization, and solver
 speed on it is one of the oldest measured algorithmic-progress series there is.
 The measurement design is the good part: every released version is recompiled and
 rerun on one bank of identical machines, so the ratio between versions is
-machine-independent by construction rather than by regression. Gurobi states the
-setup as a test set of 9,423 models, of which 960 are discarded for inconsistent
-answers and 2,641 because no version solves them, with the speedup measured on
-the bracket of models taking over 100 seconds, leaving 3,517; a 10,000-second time
-limit; and an Intel Xeon E3-1240 v5 at 3.50 GHz with 4 cores, 8 hyper-threads and
-32 GB of RAM.
+machine-independent by construction rather than by regression. Gurobi reports
+both an overall MILP figure for models taking over one second and a larger
+hard-model figure for those taking over 100 seconds. This chart consistently
+uses the overall figure. The vendor describes a 9,423-model test set, a
+10,000-second time limit, and an Intel Xeon E3-1240 v5 at 3.50 GHz with 4 cores,
+8 hyper-threads and 32 GB of RAM.
 
 That design is Robert Bixby's, from the canonical measurement of solver progress
 [@bixby2012history], now run by the company he founded. A "discovery" here is a
@@ -31,16 +31,17 @@ rather than a paper or a record.
 
 Four annual releases and four single-digit-to-low-double-digit gains: 13% for
 version 10 on 2022-11-14, 8.6% for version 11 on 2023-12-04, 13.1% for version 12
-on 2024-11-19, and 8.2% for version 13 on 2025-11-18. Multiplied together that is
-a cumulative factor of 1.50 since version 9.5, and the per-release figures show
-no trend within the window: the two largest gains are the first and the third.
+on 2024-11-19, and 0.6% for version 13 on 2025-11-18. Multiplied together that is
+a cumulative factor of 1.40 since version 9.5. The latest gain is the smallest
+in the window; the 8.2% number also reported for version 13 applies only to the
+hard-model bracket and is not mixed into this overall series.
 
 The comparison that matters is with the same problem's earlier history. A 2013
 survey recorded MIP algorithms as having "roughly doubled in speed each year"
 [@grace2013algorithmic], and Bixby's own fixed-hardware test over CPLEX versions
 released between 1991 and 2007 multiplied out to a machine-independent factor of
-over 29,000 [@bixby2012history]. Against either, 8 to 13% a year is an order of
-magnitude slower or worse, on the vendor's own numbers. The vendor's cumulative
+over 29,000 [@bixby2012history]. Against either, 0.6 to 13.1% a year is an order
+of magnitude slower or worse, on the vendor's own numbers. The vendor's cumulative
 claim tells the same story from the other end: its performance page moved from
 "a more than 75x speedup on MILP since version 1.1" in the version-10 era to
 "A 92x speed-up over version 1.1" by the version-13 era, which is most of a
@@ -88,9 +89,10 @@ new release is read and typed in the same way.
   `release_speedup` values are read off release pages, some through archive
   captures, and a cumulative product of four vendor point estimates carries no
   error bar.
-- **The headline percentages are aggregates.** Each is an overall geometric-mean
-  figure and each is larger on the over-100-second bracket, so the same release
-  can be quoted at two different sizes.
+- **The headline percentages are aggregates.** Each plotted value is the overall
+  geometric-mean figure for models taking over one second. The vendor also
+  reports a larger over-100-second bracket, so the same release can be quoted at
+  two different sizes; version 13 is 0.6% overall and 8.2% on hard models.
 - **One date upstream is unverified.** Version 1.0's commonly cited 2009 release
   is not confirmed on any primary Gurobi page; the vendor's own support table
   starts at version 7.0 in 2016. Nothing in this chart depends on it, but the

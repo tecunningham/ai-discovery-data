@@ -47,8 +47,9 @@ Coppersmith and Winograd in 1990 — a drop of 0.43 in twenty-one years — and 
 almost nothing. The seven steps the CSV records from 2010 onward are 2.3737
 (Stothers, 2010), 2.3729 (Williams, 2012), 2.3728639 (Le Gall, 2014), 2.3728596
 (Alman and Williams, 2020), 2.371866 (Duan, Wu and Zhou, 2022), 2.371552
-(Williams and co-authors, 2024) and 2.371339 (Alman and co-authors, 2024). That is
-a total movement of 0.0024 in fourteen years, two orders of magnitude smaller
+(Williams and co-authors, 2024) and 2.371339 (Alman, Duan, Williams, Yinzhan Xu,
+Zixuan Xu and Zhou, first posted in 2024 and published at SODA 2025). That is a
+total movement of 0.0024 in fourteen years, two orders of magnitude smaller
 than the first two decades bought, and the record has not moved since 2024.
 
 Every step in the series is a human proof. There is no AI-attributed entry, and
@@ -83,9 +84,6 @@ published record list, one `source_url` per row, so the CSV is edited directly.
 - **Bounds are not implementations.** None of the post-Strassen algorithms in this
   series is used in practice; the constants and crossover sizes make them
   galactic. A falling curve here is not a falling cost of multiplying matrices.
-- **Two 2024 rows cannot be ordered.** The CSV carries year precision only, so
-  the last two steps are drawn in file order and their sequence within the year is
-  not established here.
 - **Sixth-decimal-place movements are not comparable with percentage speedups**
   elsewhere in this collection. Nothing converts a change in an exponent into a
   quantity that can be set beside an 8% solver release or a 23% speedrun step.

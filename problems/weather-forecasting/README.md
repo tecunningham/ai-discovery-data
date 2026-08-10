@@ -2,7 +2,7 @@
 
 **Domain:** outside the three domains
 **Metric:** numerical weather prediction; forecast days of useful skill on 500 hPa geopotential height, plus the dated arrival of machine-learning models that beat the physics incumbent
-**Coverage:** skill anchors 1980 and 1985, rate claim published 2015; model arrivals 2022-02 to 2025-02
+**Coverage:** ACC 0.6 skill anchors in 1980 and 1985; day-5 ACC snapshots in 1980 and 1990; rate claim published 2015; model publications and operations from 2022 to 2025
 **Data:** [`weather-forecast-skill.csv`](weather-forecast-skill.csv), [`weather-ml-models.csv`](weather-ml-models.csv)
 **Upstream:** <https://www.ecmwf.int/en/forecasts/quality-our-forecasts>, <https://www.nature.com/articles/nature14956>, and each model's own paper or announcement
 **Verdict:** no acceleration — the skill trend did not bend; the cost of producing a forecast fell by about three orders of magnitude
@@ -32,13 +32,15 @@ There is no chart. The skill series is not a digitized time series: two text-sta
 anchors (5.5 days in 1980, 6.5 days in 1985) and a stated rate of about a day a
 decade, with the arrival dates of the machine-learning models recorded beside
 them. Drawing that as a line would present a claim as if it were a measurement,
-so the folder keeps the CSVs and the reading without a figure.
+so the folder keeps the CSVs and the reading without a figure
+[@krishnamurti2003forecast; @bauer2015weather].
 
-The reading itself is unchanged. Four ML models beat the physics incumbent
-between 2022 and 2025, ECMWF made its own AIFS operational on 2025-02-25, skill
-gains are reported at 4 to 25%, and energy use fell by about a thousandfold —
-while nothing in the sources claims the forty-year one-day-per-decade trend
-steepened.
+The reading itself is unchanged. Four non-ECMWF ML systems — FourCastNet,
+Pangu-Weather, GraphCast and GenCast — matched or beat their physics comparators
+between 2022 and 2024. ECMWF then made AIFS Single operational on 2025-02-25 and
+also deployed AIFS ENS; the CSV therefore carries six dated rows. Skill gains
+are reported at 4 to 25%, and energy use fell by about a thousandfold — while
+nothing in the sources claims the forty-year one-day-per-decade trend steepened.
 
 ## How the chart was built
 
@@ -72,10 +74,11 @@ published skill chart is the fix if a plotted series is wanted later.
   ECMWF's physics-based 4D-Var data assimilation. They are bounded by, and
   derived from, the system they outperform, so they are not an independent route
   to the same knowledge.
-- **Physics still wins on the cases that carry the value.** A 2026 paper's title
-  states the finding: "Physics-based models outperform AI weather forecasts of
-  record-breaking extremes." The aggregate score improves while the extremes do
-  not, which is the same shape as the proxy-versus-objective gap seen elsewhere.
+- **Physics still wins on the cases that carry the value.** Zhang et al. find
+  HRES consistently outperforming GraphCast, Pangu-Weather and Fuxi variants on
+  record-breaking heat, cold and wind [@zhang2026extremes]. The aggregate score
+  improves while the extremes do not, which is the same shape as the
+  proxy-versus-objective gap seen elsewhere.
 - **A cost collapse is not nothing.** Reading this folder as a null would be as
   wrong as reading it as an acceleration. A thousandfold cut in the energy cost
   of a forecast is a large change; it is a change in a different variable.

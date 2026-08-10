@@ -260,12 +260,24 @@ def csv_errors(path: Path) -> list[str]:
                 )
             if any(not field.strip() for field in header):
                 errors.append(f"{path.name} has an empty column name")
+            url_columns = [
+                (index, field)
+                for index, field in enumerate(header)
+                if field.endswith("_url")
+            ]
             for line_number, row in enumerate(rows, 2):
                 if len(row) != len(header):
                     errors.append(
                         f"{path.name}:{line_number} has {len(row)} fields; "
                         f"header has {len(header)}"
                     )
+                    continue
+                for index, field in url_columns:
+                    if not row[index].startswith(("http://", "https://")):
+                        errors.append(
+                            f"{path.name}:{line_number} has no public URL in "
+                            f"{field}"
+                        )
             return errors
     except (OSError, UnicodeError, csv.Error) as error:
         return [f"{path.name} cannot be parsed as CSV: {error}"]
@@ -412,6 +424,8 @@ def thumbnails(problem: Problem) -> str:
     figures stacks them, since a table cell is as wide as its contents and three
     thumbnails in a row would push the prose columns off the screen.
     """
+    if not problem.figures:
+        return "<em>document + data only</em>"
     return "<br>".join(
         f'<a href="problems/{problem.slug}/">'
         f'<img src="problems/{problem.slug}/{figure.name}" width="{THUMB_WIDTH}" '

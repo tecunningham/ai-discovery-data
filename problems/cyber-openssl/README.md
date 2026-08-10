@@ -2,7 +2,7 @@
 
 **Domain:** vulnerabilities
 **Metric:** vulnerabilities disclosed per year, split by finder credit
-**Coverage:** 2002–2026, partial through 9 June 2026
+**Coverage:** 2002–2026, partial through 5 August 2026
 **Data:** [`openssl-vulnerabilities.csv`](openssl-vulnerabilities.csv); per-finder rows in [`openssl-finders.csv`](openssl-finders.csv)
 **Upstream:** <https://openssl-library.org/news/vulnerabilities/>
 **Verdict:** accelerating — but the same shape appeared in 2015–2016 from a purely human cause
@@ -28,14 +28,14 @@ published it. It is not a count of bugs introduced or of bugs remaining.
 
 The instrument has one real weakness relative to curl. OpenSSL publishes no
 machine-readable feed — the JSON and XML endpoints it once offered both return
-404 — so the series is parsed out of HTML, and 3 of the 275 CVEs named on the
+404 — so the series is parsed out of HTML, and 3 of the 276 CVEs named on the
 page could not be given a date and are absent from the counts.
 
 ## What the chart shows
 
 Single digits for most of a decade, then a step: 3 disclosures in 2020, 8 in
-2021, 13 in 2022, 19 in 2023, 9 in 2024, 6 in 2025, and 38 in the first half of
-2026. Of those 38, 26 credit an AI system or an AI-security firm — about two
+2021, 13 in 2022, 19 in 2023, 9 in 2024, 6 in 2025, and 39 through 5 August
+2026. Of those 39, 26 credit an AI system or an AI-security firm — about two
 thirds, the highest AI share of any series in this collection, against 3 of 6
 in 2025 and none in any earlier year.
 
@@ -74,12 +74,12 @@ fuzzer is automated without being a model.
 
 - **The AI share is a floor.** Classification is by explicit textual marker, so
   a researcher who used a model and did not say so counts as human here.
-- **The parse is lossy.** 272 of the 275 CVEs on the page carry a date in this
+- **The parse is lossy.** 273 of the 276 CVEs on the page carry a date in this
   series; the other three are dropped rather than guessed at.
 - **Severity is not analysed.** The index records one, but unlike the curl
   series this collection has not compared the severity of AI-credited finds with
   the rest, so nothing here says whether the extra 2026 finds are shallower.
-- **2026 is a part-year** through 9 June, and disclosures arrive in batches at
+- **2026 is a part-year** through 5 August, and disclosures arrive in batches at
   releases, so the within-year path is lumpy.
 - **No denominator of effort.** A credit records who reported, not how much
   search anybody spent, so better tools and more attention cannot be separated.

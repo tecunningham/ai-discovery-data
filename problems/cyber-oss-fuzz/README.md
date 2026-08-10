@@ -2,7 +2,7 @@
 
 **Domain:** vulnerabilities
 **Metric:** vulnerability records published per year by an automated fuzzing programme
-**Coverage:** 2020–2026, partial through late July 2026
+**Coverage:** 2020–2026, partial through 10 August 2026
 **Data:** [`ossfuzz-discoveries.csv`](ossfuzz-discoveries.csv)
 **Upstream:** <https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip> (browsable at <https://osv.dev/list?q=ecosystem%3AOSS-Fuzz>, programme at <https://google.github.io/oss-fuzz/>)
 **Verdict:** declining
@@ -30,9 +30,9 @@ target set is hundreds of projects and it grew over the period.
 ## What the chart shows
 
 A steady fourfold decline. 1,041 records in 2020, then 739, 710, 581, 388 and
-244 in 2025, with 231 through late July 2026. Annualizing the part-year gives
-roughly 396, which is an uptick against 2025 but still far below where the
-series started. The 2020-onward total is 3,934 records.
+244 in 2025, with 239 through 10 August 2026. Annualizing the part-year gives
+roughly 393, which is an uptick against 2025 but still far below where the
+series started. The 2020-onward total is 3,942 records.
 
 The decline is the finding, and it is sharpened by what happened to the
 denominator. OSS-Fuzz has onboarded projects continuously over the period, so
@@ -57,7 +57,8 @@ The axis is linear and January 2026 onward is shaded, as in every figure here.
 
 The CSV is built by [`fetch.py`](fetch.py),
 which counts records in the OSV OSS-Fuzz archive by the year embedded in the
-record identifier (`OSV-YYYY-N`) rather than by the `published` date. That
+record identifier (`OSV-YYYY-N`) rather than by the `published` date. The final
+row now also records the UTC fetch date used for its partial-year annotation. That
 choice matters. Records predating 2020 were backfilled into OSV during 2021, so
 their publication dates all land in that year and would manufacture a spurious
 2021 peak while emptying 2016 to 2019. The two fields agree closely from 2020

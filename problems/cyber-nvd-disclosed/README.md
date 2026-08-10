@@ -2,7 +2,7 @@
 
 **Domain:** vulnerabilities
 **Metric:** CVEs published per year in the US National Vulnerability Database
-**Coverage:** 2016–2026, partial through 2026-07-28
+**Coverage:** 2016–2026, partial through 2026-08-10
 **Data:** [`nvd-by-year.csv`](nvd-by-year.csv), finer grain in [`nvd-by-quarter.csv`](nvd-by-quarter.csv)
 **Upstream:** <https://services.nvd.nist.gov/rest/json/cves/2.0> (human-readable at <https://nvd.nist.gov/vuln>)
 **Verdict:** accelerating — but growth was already +32% and +23% in 2024 and 2025, and no disclosure here is attributed to anyone
@@ -30,20 +30,20 @@ A "discovery" here is one CVE record, counted in the year NVD published it.
 
 A steep and mostly monotonic climb: 6,517 CVEs in 2016, 18,113 in 2017, then a
 slow rise through 19,222 in 2020 and 26,431 in 2022 to 40,704 in 2024 and 49,972
-in 2025, which was itself a record. The 2026 bar is 45,601 through 2026-07-28,
-day 209 of the year, which annualizes to about 79,600 — roughly 1.6 times 2025.
+in 2025, which was itself a record. The 2026 bar is 49,838 through 2026-08-10,
+day 222 of the year, which annualizes to about 82,000 — roughly 1.6 times 2025.
 
 Two things cut the reading down, and both are arithmetic on the same chart.
 First, the curve was already steepening before any of this: year-on-year growth
-was +32% into 2024 and +23% into 2025, against about +59% annualized for 2026.
+was +32% into 2024 and +23% into 2025, against about +64% annualized for 2026.
 Reading 2026 against a flat baseline would overstate the change by a wide
 margin. Second, the widely reported claim that 2026 is "on pace to roughly
 double" 2025 does not survive the annualization, which would require about
 99,900 disclosures; the count is on pace for about 1.6 times, not twice. The
-reported part-year figure itself checks out, at 45,207 against the 45,601
-counted here a day later, and NVD is continuously amended, so a small gap is
-expected. The annualization, the growth rates and the correction are this
-repository's arithmetic, not a source's stated claim.
+reported part-year figure itself checked out at the time: 45,207 in the report
+against this query's 45,601 on 28 July, and NVD is continuously amended, so a
+small gap is expected. The annualization, the growth rates and the correction
+are this repository's arithmetic, not a source's stated claim.
 
 The 2016-to-2017 near-tripling is a process break — the expansion of CVE
 numbering authorities — so the series is comparable only from about 2018.
@@ -56,7 +56,7 @@ draws one bar per year from the `nvd_published` column of `nvd-by-year.csv`.
 The bars are blue, the colour this collection uses for human or uncredited
 finders, because nothing in this series is attributed to anyone; there is no red
 band to draw. The `partial_year` row is outlined in dark grey and annotated with
-the `data_through` value, so the bar reads as partial through 2026-07-28. The
+the `data_through` value, so the bar reads as partial through 2026-08-10. The
 axis is linear and January 2026 onward is shaded, as in every figure here.
 
 The `kev_added` counts plotted in

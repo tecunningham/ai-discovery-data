@@ -2,7 +2,7 @@
 
 **Domain:** vulnerabilities
 **Metric:** advisory CVEs per year, split by AI, fuzzer, or other reporter credit
-**Coverage:** 2016–2026, partial through late July 2026
+**Coverage:** 2016–2026, partial through 10 August 2026
 **Data:** [`firefox-advisories.csv`](firefox-advisories.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv)
 **Upstream:** <https://github.com/mozilla/foundation-security-advisories> (rendered at <https://www.mozilla.org/en-US/security/advisories/>)
 **Verdict:** accelerating — though disclosures roughly doubled from 2021 to 2025 with essentially no AI credit
@@ -32,13 +32,13 @@ remaining.
 
 A codebase whose disclosure count was already climbing: 119 CVEs in 2016, 429 in
 2017, then a range of roughly 280 to 500 a year through 2024, 640 in 2025, and
-1,139 through late July 2026 — a part-year total already 1.8 times the 2025
+1,140 through 10 August 2026 — a part-year total already 1.8 times the 2025
 full year.
 
 The AI band appears almost from nothing. No reporter string carries an AI marker
 until 2025, which has exactly one, and 2026 has 137, or 12% of that year's CVEs.
 The fuzzer band moves quite differently: 7 in 2018, 8 in 2022, then 32, 41, 104
-and 107 across 2023 to 2026. Fuzzer-credited discovery grew through 2025 and
+and 108 across 2023 to 2026. Fuzzer-credited discovery grew through 2025 and
 then flattened in the same step where AI-credited discovery went from 1 to 137.
 
 Two things cut the finding down. The count roughly doubled from 2021 to 2025
@@ -87,7 +87,7 @@ published counts.
 - **The codebase is fixed but the effort is not.** Nothing here gives a
   denominator of search effort, and Mozilla's security investment grew over the
   same period.
-- **2026 is a part-year** through late July, so the bar is outlined and should
+- **2026 is a part-year** through 10 August, so the bar is outlined and should
   not be compared directly with the full years beside it.
 
 ## LLM contributions

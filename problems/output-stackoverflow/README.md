@@ -2,7 +2,7 @@
 
 **Domain:** outside the three domains
 **Metric:** demand for human answers; questions created on Stack Overflow per month
-**Coverage:** 2019-01 to 2026-06, monthly, complete months only
+**Coverage:** 2019-01 to 2026-07, monthly, complete months only
 **Data:** [`stackoverflow-questions-monthly.csv`](stackoverflow-questions-monthly.csv)
 **Upstream:** <https://api.stackexchange.com/docs>
 **Verdict:** declining — on demand for human answers, not on discovery
@@ -24,9 +24,9 @@ not a result either.
 
 ## What the chart shows
 
-The series collapses. It stood at 149,549 questions in January 2019, peaked at
-186,411 in May 2020 in the first pandemic months, and was at 109,341 in November
-2022, the month ChatGPT was released. By June 2026 it was 2,054: 98% below the
+The series collapses. It stood at 149,547 questions in January 2019, peaked at
+186,409 in May 2020 in the first pandemic months, and was at 109,295 in November
+2022, the month ChatGPT was released. By July 2026 it was 1,453: 99% below the
 pre-ChatGPT level, and the fall is continuous rather than a step.
 
 The decline did not begin with ChatGPT. From the May 2020 peak the series was

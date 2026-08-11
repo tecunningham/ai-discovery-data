@@ -129,7 +129,7 @@ def save(fig, out_path, description: str, sources: list[str], built_by: str) -> 
             "Description": description,
             "Source": " | ".join(sources),
             "Software": (
-                f"Python {platform.python_version()}; "
+                f"Python {'.'.join(platform.python_version_tuple()[:2])}; "
                 f"matplotlib {matplotlib.__version__}; "
                 f"FreeType {ft2font.__freetype_version__}; "
                 f"{Path(built_by).resolve().relative_to(ROOT)}"

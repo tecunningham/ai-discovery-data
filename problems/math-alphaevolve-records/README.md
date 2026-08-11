@@ -107,10 +107,9 @@ The CSV is built by [`fetch.py`](fetch.py), which carries the hand transcription
 itself: the values, the quoted sentence each was read from, the reference, and
 the agent coding are all literals in that file, and the relative gains are
 computed from consecutive values as it writes. It is the only place any of these
-records is maintained, and it also writes the two slices that
-[kissing number](../math-kissing-11/README.md) and
-[sums and autoconvolution](../math-sums-autoconvolution/README.md) plot, so
-those cannot drift from the file they are drawn out of.
+records is maintained, and it also writes the slice that
+[sums and autoconvolution](../math-sums-autoconvolution/README.md) plots, so
+that child dataset cannot drift from the file it is drawn out of.
 
 This folder keeps the full transcription rather than a slice of it because
 `alphaevolve-record-steps.png` pools every record step in the frame, across all
@@ -172,6 +171,5 @@ benchmark can compare AI output to the current record while carrying no historic
 dimension at all — which is the gap this series exists to fill — is visible in the
 design of HorizonMath [@arxiv2026horizonmath]. That records in any field arrive in
 bursts with long gaps, so a cluster is not by itself a signature, is Sherry and
-Thompson's [@sherry2021fast]. The two individually plotted series from the same
-frame are [kissing number](../math-kissing-11/README.md) and
-[sums and autoconvolution](../math-sums-autoconvolution/README.md).
+Thompson's [@sherry2021fast]. The individually plotted child series from the same
+frame is [sums and autoconvolution](../math-sums-autoconvolution/README.md).

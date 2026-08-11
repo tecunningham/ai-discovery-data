@@ -119,10 +119,9 @@ Open-problem ledgers are separated from mathematical bounds and records because
 their instruments differ. The former show current status plus dated resolution
 events; the latter track changes in numerical quantities.
 
-The final group sits outside the three worked domains. Integer factorization and
-technology cost curves span the cost of checking a candidate answer, while the
-output-volume series are contrast cases whose curves can bend without measuring
-discovery.
+The final group sits outside the three worked domains. Integer factorization is
+a cheap-verification control, while the output-volume series are contrast cases
+whose curves can bend without measuring discovery.
 
 ## What validation checks
 

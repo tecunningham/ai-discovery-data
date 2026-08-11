@@ -1,4 +1,0 @@
-label,halving_months,ci_low_months,ci_high_months,first_year,last_year,source_url
-Language model pretraining|compute to fixed loss,8.0,5.0,14.0,2012,2023,https://epoch.ai/publications/algorithmic-progress-in-language-models
-ImageNet compute-augmenting|algorithmic advances,9.0,4.0,25.0,2012,2022,https://arxiv.org/abs/2212.05153
-Compute to reach|AlexNet-level accuracy,16.0,,,2012,2019,https://openai.com/index/ai-and-efficiency/

@@ -54,6 +54,22 @@ exactly the period of fastest growth in model capability.
 Every record on both series is human. No entry on either page claims that a
 language model or an agent wrote the compressor.
 
+The retired 100 MB enwik8 prize supplies historical context but is not joined to
+the curve because it is a different corpus. Its complete five-row chronology was:
+
+| Date | Program | Total bytes | Status |
+|---|---|---:|---|
+| 2006-03-24 | paq8f -7 | 18,324,887 | pre-prize baseline |
+| 2006-09-25 | paq8hp5 -7 | 17,073,018 | first award |
+| 2007-05-14 | paq8hp12 -7 | 16,481,655 | second award |
+| 2009-05-23 | decomp8 | 15,949,688 | third award |
+| 2017-11-04 | phda9 | 15,284,944 | fourth award |
+
+Alexander Rhatushnyak set all four awards, including the eight-and-a-half-year
+gap before the last. The prize moved to enwik9 in February 2020. This context
+shows that a long flat interval was normal before language-model agents, without
+presenting incomparable byte levels as one time series.
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `compression_chart()` in
@@ -122,6 +138,6 @@ The two upstream ledgers are the prize itself [@hutter2026prize] and the
 Large Text Compression Benchmark [@mahoney2026ltcb]. For the base rate against
 which a three-year stall should be read, about half of all algorithm families
 show little or no improvement over decades and improvements arrive at
-roughly 1.44 per family since 1940 [@sherry2021fast], and the retired
-[enwik8 series](../algorithms-enwik8/README.md) in this collection is the same prize's own
-pre-agent cadence, where a single gap between records ran eight and a half years.
+roughly 1.44 per family since 1940 [@sherry2021fast]. The retired enwik8
+chronology above is the same prize's own pre-agent cadence, where a single gap
+between records ran eight and a half years.

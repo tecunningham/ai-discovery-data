@@ -167,6 +167,6 @@ across algorithm families, where half of all families never improve at all
 [@sherry2021fast]. The structurally identical series that disagrees about the
 recent trend is [sphere packing](../math-sphere-packing/README.md), which accelerates
 through the same window with no AI in it either; the quantities where AI steps do
-appear are finite constructions
-([kissing number](../math-kissing-11/README.md),
-[sums and autoconvolution](../math-sums-autoconvolution/README.md)).
+appear are the finite constructions in
+[the AlphaEvolve record sequences](../math-alphaevolve-records/README.md) and
+[sums and autoconvolution](../math-sums-autoconvolution/README.md).

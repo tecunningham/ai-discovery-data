@@ -84,9 +84,8 @@ are the same size as movements the series was already making in the 2010s.
 
 ## Related literature
 
-The comparison this folder exists for is with its four siblings, which is why
+The comparison this folder exists for is with its three siblings, which is why
 [arXiv](../output-arxiv/README.md) names it as its own control.
-[PyPI](../output-pypi/README.md) and
 [GitHub pushes](../output-github-pushes/README.md) bend upward and
 [Stack Overflow](../output-stackoverflow/README.md) collapses; this one does
 neither, over a longer window than any of them. Set the whole group against

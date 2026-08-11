@@ -5,11 +5,10 @@ Run: python3 problems/math-alphaevolve-records/fetch.py
 
 Writes this folder's alphaevolve-records.csv and prints the comparison the
 AlphaEvolve discussion lacks: how large the AI-era step was against the
-distribution of historical steps on the same quantity. It also writes the two
-per-problem slices that neighbouring folders plot — problem 6.8 to
-../math-kissing-11/kissing-11-records.csv and problems 6.44 and 6.3 to
-../math-sums-autoconvolution/sums-autoconvolution-records.csv — so that the hand
-transcription exists in exactly one place and the slices cannot drift from it.
+distribution of historical steps on the same quantity. It also writes the
+problems 6.44 and 6.3 slice that the sums-and-autoconvolution folder plots, so
+the hand transcription exists in exactly one place and the slice cannot drift
+from it.
 
 Sampling, fixed before any values were read. The frame is the 31 problems in
 `alphaevolve-inventory.csv` whose status is world_record, worse_than_record or
@@ -67,7 +66,6 @@ sys.path.insert(0, str(HERE.parents[1]))
 from lib.table import write_csv  # noqa: E402
 
 OUT = HERE / "alphaevolve-records.csv"
-OUT_KISSING = HERE.parent / "math-kissing-11/kissing-11-records.csv"
 OUT_SUMS = HERE.parent / "math-sums-autoconvolution/sums-autoconvolution-records.csv"
 
 SAMPLE = ["6.4", "6.1", "6.36", "6.9", "6.35", "6.42", "6.10", "6.38", "6.3",
@@ -498,7 +496,6 @@ FIELDS = ["problem", "quantity", "direction", "step", "year", "value", "agent",
 # takes. Written from here rather than maintained separately, so a correction to
 # a transcribed value cannot reach one figure and not the other.
 SLICES = [
-    (OUT_KISSING, {"6.8"}),
     (OUT_SUMS, {"6.44", "6.3"}),
 ]
 

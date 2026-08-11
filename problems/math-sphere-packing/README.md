@@ -130,6 +130,5 @@ are flat through the window in which this one accelerates. That records are lump
 and heterogeneous with no AI anywhere in them, so that neither a bend nor a
 plateau is by itself a signature, is Sherry and Thompson's finding
 [@sherry2021fast]. Where AI steps do appear in this domain they are on finite
-constructions with cheap scoring rather than on asymptotic bounds
-([kissing number](../math-kissing-11/README.md),
-[finite constructions](../math-alphaevolve-records/README.md)).
+constructions with cheap scoring rather than on asymptotic bounds, as in the
+[AlphaEvolve record sequences](../math-alphaevolve-records/README.md).

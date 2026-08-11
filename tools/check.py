@@ -49,12 +49,26 @@ SECTIONS = ("The problem", "What the chart shows", "How the chart was built",
             "What it cannot support", "LLM contributions", "Related literature")
 VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive",
             "too early", "baseline"}
-# The index groups by domain, so the order is fixed here rather than left to
-# whatever sorting a new value happens to fall under. The fourth group holds the
-# series tracked to span verification cost, which is the argument's own
-# explanatory variable and which the three worked domains barely vary.
-DOMAIN_ORDER = ("vulnerabilities", "mathematics", "algorithms",
-                "outside the three domains")
+# The index separates open-problem ledgers from mathematical records and bounds:
+# the former count discrete status changes, while the latter track numerical
+# quantities. Keeping them in one "mathematics" block made unlike instruments
+# look interchangeable.
+OPEN_PROBLEM_SLUGS = {
+    "math-erdos",
+    "math-hilbert",
+    "math-landau",
+    "math-millennium",
+    "math-smale",
+    "math-thurston",
+    "math-topp",
+}
+INDEX_GROUP_ORDER = (
+    "vulnerabilities",
+    "open problems",
+    "mathematical bounds and records",
+    "algorithms",
+    "outside the three domains",
+)
 
 CHECKS = ("Document", "Data", "Figure", "Literature", "Refetch", "Reproduces")
 PASS, FAIL, HAND, SKIP = "✅", "❌", "✍️", "➖"
@@ -410,10 +424,21 @@ def strays() -> list[str]:
     return out
 
 
+def index_group(problem: Problem) -> str:
+    if problem.slug in OPEN_PROBLEM_SLUGS:
+        return "open problems"
+    if problem.domain == "mathematics":
+        return "mathematical bounds and records"
+    return problem.domain
+
+
 def in_reading_order(problems: list[Problem]) -> list[Problem]:
-    """Domain order, then slug — the order both generated tables use."""
-    rank = {domain: i for i, domain in enumerate(DOMAIN_ORDER)}
-    return sorted(problems, key=lambda p: (rank.get(p.domain, len(rank)), p.slug))
+    """Index-group order, then slug — the order both generated tables use."""
+    rank = {group: i for i, group in enumerate(INDEX_GROUP_ORDER)}
+    return sorted(
+        problems,
+        key=lambda p: (rank.get(index_group(p), len(rank)), p.slug),
+    )
 
 
 def thumbnails(problem: Problem) -> str:
@@ -458,14 +483,18 @@ def details(problem: Problem) -> str:
 
 def index_rows(problems: list[Problem]) -> str:
     out: list[str] = []
-    for domain in DOMAIN_ORDER + tuple(sorted(
-            {p.domain for p in problems} - set(DOMAIN_ORDER))):
-        rows = [p for p in in_reading_order(problems) if p.domain == domain]
+    groups = {index_group(problem) for problem in problems}
+    for group in INDEX_GROUP_ORDER + tuple(sorted(groups - set(INDEX_GROUP_ORDER))):
+        rows = [
+            problem
+            for problem in in_reading_order(problems)
+            if index_group(problem) == group
+        ]
         if not rows:
             continue
-        out += [f"### {domain[:1].upper()}{domain[1:]}", "",
-                "| Chart | Series |", "|---|---|"]
-        out += [f"| {thumbnails(problem)} | {details(problem)} |"
+        out += [f"### {group[:1].upper()}{group[1:]}", "",
+                "| Series | Chart |", "|---|---|"]
+        out += [f"| {details(problem)} | {thumbnails(problem)} |"
                 for problem in rows]
         out.append("")
     return "\n".join(out).rstrip()

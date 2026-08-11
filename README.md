@@ -1,135 +1,9 @@
 # ai-discovery-data
 
-Vendored datasets, figure code and documentation behind measurements of how much LLMs have
-contributed to discovery, in the three domains where somebody keeps a public,
-dated, finder-attributed score: **software vulnerabilities**, **mathematics**,
-and **algorithms**.
-
-This repository is the canonical home for that data. It exists so the charts in
-[LLMs' Contribution to Discovery](https://tecunningham.github.io/posts/2026-08-08-llm-contribution-to-discoveries.html)
-can be checked and rebuilt from public sources by someone who did not write them.
-
-## Layout
-
-One folder per problem, holding everything about that problem:
-
-```
-problems/cyber-curl/
-  README.md                  what the problem is, what the chart shows, what it
-                             cannot support, and the literature
-  curl-vulnerabilities.csv   the series, vendored from a public source
-  curl-finders.csv           who was credited with each find
-  fetch.py                   rebuilds those CSVs from curl's own vuln.json
-  figure.py                  draws the PNG from the CSVs beside it
-  discovery-cyber-curl.png   committed, never hand-edited
-```
-
-A folder is self-contained: to check a number, read one directory. Nothing is
-shared except generic helpers.
-
-| Path | What is in it |
-|---|---|
-| `problems/<slug>/` | One folder per problem, as above. |
-| `lib/chart.py` | The visual language: colours, the shaded agent era, axis styling, saving. |
-| `lib/families.py` | Chart shapes drawn by more than one problem, parameterised by CSV path. |
-| `lib/credits.py` | Deciding whether a vulnerability credit names an AI system. |
-| `lib/table.py`, `lib/web.py` | Reading and writing CSVs; fetching upstream, with a daily cache. |
-| `tools/check.py` | Consistency checks: every folder accounts for its own data, figure and sources. |
-| `tools/sync_to_blog.py` | Copies the figures into the blog checkout that renders them. |
-| `references.bib` | Bibliography for the problem documents. |
-
-There is no central generator and no shared `data/` directory. Both existed
-until August 2026 and were removed: a figure five hundred lines away from the
-CSV it plots is a figure nobody checks, and a shared data directory made it
-impossible to see which series a file belonged to. The cost of the split is that
-a chart shape used by several problems has to live in `lib/families.py` rather
-than next to its data, and that a figure comparing several problems has nowhere
-to live at all — which is why there are none. Cross-series comparison happens in
-the prose that reads these folders, not in a composite chart.
-
-## Reproducing
-
-Figures need Python 3.12 and the pinned plotting dependencies, and no network:
-
-```bash
-python3 -m pip install -r requirements.txt
-make figures                    # every folder redraws its own PNG
-make figure PROBLEM=cyber-curl  # or just one
-make check                      # every folder accounts for its data and sources
-```
-
-The exact dependency versions are committed because matplotlib and its image
-stack can change PNG bytes between releases. CI runs the full byte-for-byte
-figure check from a clean install.
-
-Figures are byte-for-byte reproducible: run `make figures` twice and git should
-report nothing. If it does report something, that is a bug in the generator, not
-noise to be committed.
-
-Rebuilding the data itself needs the network, and is deliberately a separate
-step because several upstream sources rate-limit, change shape, or require
-judgment to transcribe:
-
-```bash
-make fetch                          # every folder that can refetch, does
-make fetch-one PROBLEM=cyber-curl   # or just one
-```
-
-`make fetch` does not cover everything. Series whose upstream is a prose page
-rather than a feed — the Hutter Prize table, the AlphaEvolve problem write-ups,
-the Gurobi release notes, the matrix-multiplication record chronology — are
-transcribed by hand, with the source URL recorded per row in the CSV. The
-per-problem document says which category each series is in.
-
-The prestige problem lists are the extreme case: the Hilbert, Landau, Thurston,
-Smale, Millennium and TOPP status ledgers are hand-scored, one CSV per list in
-its own folder, from the secondary accounts each document names.
-
-Two folders write a sibling's CSV rather than leaving it to be maintained twice.
-`problems/math-alphaevolve-records/fetch.py` holds the hand transcription of the
-AlphaEvolve record table and writes the kissing-number and
-sums-and-differences slices into their folders, so those slices cannot drift
-from it. Each affected document says so.
-
-## What the numbers are and are not
-
-Three conventions run through every series here, and reading a chart without
-them will mislead you.
-
-**A finder credit is a floor, not a measurement.** Where a project records who
-found a vulnerability, this data classifies a report as AI-credited only when
-the credit string explicitly names an AI system, an AI-security firm, or an
-agent. A researcher who used a model and did not say so counts as human. So
-every AI share here is a lower bound by an unknown margin.
-
-**A disclosure is not a discovery, and a status change is not a solution.**
-Vulnerability series count what got published, on the date it got published.
-The Erdős catalogue records the date a status was edited, which is not the date
-a problem was solved.
-
-**Records are lumpy with no AI in them.** Half of all algorithm families never
-improve at all [@sherry2021fast], solver records jump every few years, and a
-century-scale exponent can sit still for eighty years and then move by hand. A
-staircase inside the agent era is not by itself an AI signature, and a flat
-stretch is not by itself an exhausted frontier.
+This repository vendors the data, figures, and documentation behind [LLMs' Contribution to Discovery](https://tecunningham.github.io/posts/2026-08-08-llm-contribution-to-discoveries.html).
+Each chart links to its source folder and can be checked and rebuilt from public sources.
 
 ## Series
-
-Each chart links to the folder that draws it, where the same figure sits beside
-its data and its document, full size. The verdict asks only whether the series
-shows an acceleration in the rate of discovery, not whether AI contributed
-anything — so a curve that rises with no AI anywhere in it gets the same mark as
-one full of it:
-
-📈 accelerating  ·  📉 declining  ·  ➡️ no acceleration  ·  ❓ inconclusive  ·  ⏳ too early  ·  ⚪ baseline, a reference series rather than a test
-
-A fourth group sits outside the three domains, tracked because the three barely
-vary in the thing that most plausibly explains the differences between them:
-how cheap it is to check a candidate answer. Weather is verified against reality
-within days, a factorization instantly, a technology cost curve only in
-retrospect over decades. Output volume is in that group for a different reason —
-it is the contrast case, a set of curves that bend where the discovery curves do
-not.
 
 <!-- BEGIN GENERATED: series-index -->
 ### Vulnerabilities
@@ -187,32 +61,7 @@ not.
 | <em>document + data only</em> | <b><a href="problems/weather-forecasting/">Weather forecasting</a></b><br><b>Metric:</b> numerical weather prediction; forecast<br>days of useful skill on 500 hPa geopotential<br>height, plus the dated arrival of machine-<br>learning models that beat the physics<br>incumbent<br><b>Coverage:</b> ACC 0.6 skill anchors in 1980 and<br>1985; day-5 ACC snapshots in 1980 and 1990;<br>rate claim published 2015; model publications<br>and operations from 2022 to 2025<br><b>Acceleration?</b> ➡️ no acceleration — the skill<br>trend did not bend; the cost of producing a<br>forecast fell by about three orders of<br>magnitude |
 <!-- END GENERATED: series-index -->
 
-## Checks
-
-The only claim this repository makes is that every chart can be traced to a
-public source and rebuilt from it. So what `make check` looks for is a file that
-arrived without the apparatus that makes it checkable — a figure nobody
-documents, a CSV nobody plots, a series whose provenance is stated nowhere. Each
-column below is one kind of thing that can go missing.
-
-| Column | Fails when |
-|---|---|
-| Document | A `**Field:**` line or a required section is missing, the verdict is not one of the six allowed values, `**Upstream:**` names no URL, or a link to a sibling folder does not resolve. |
-| Data | The folder holds no CSV, vendors one its document never links, links one that is not there, or reuses a filename another folder already has. |
-| Figure | There is no `figure.py`, or no PNG, or a PNG the document does not embed, or a PNG that nothing regenerates. |
-| Literature | A `[@citekey]` in the document has no entry in `references.bib`. |
-| Refetch | There is no `fetch.py`, and the document does not say how the data is maintained instead. |
-| Reproduces | Redrawing the figure from the CSVs beside it does not give back the committed PNG, byte for byte. |
-
-✅ passes  ·  ❌ fails  ·  ✍️ maintained by hand, and the document says so  ·  ➖ not run
-
-Reproduction is the check worth having and the one that costs something: it runs
-every `figure.py` and compares the result with what is committed, which catches a
-figure edited after generation or left behind when its data was refetched —
-invisible to every other check here. It restores the original bytes afterwards,
-so a stale figure is reported rather than quietly staged. `make check` skips it,
-since it is ten seconds rather than one; `make check-figures` runs it, and so
-does `make index`, which regenerates the table below.
+## Validation
 
 <!-- BEGIN GENERATED: checks-table -->
 | Problem | Document | Data | Figure | Literature | Refetch | Reproduces |
@@ -254,6 +103,127 @@ does `make index`, which regenerates the table below.
 
 34 problems holding 35 figures and 43 data files. 17 refetch from upstream and 17 are maintained by hand and say so. No failing cells.
 <!-- END GENERATED: checks-table -->
+
+## How to read the series
+
+Each chart links to the folder that draws it, where the full-size figure sits
+beside its data and documentation. The verdict asks only whether the series
+shows an acceleration in the rate of discovery, not whether AI contributed:
+
+📈 accelerating  ·  📉 declining  ·  ➡️ no acceleration  ·  ❓ inconclusive  ·  ⏳ too early  ·  ⚪ baseline
+
+Open-problem ledgers are separated from mathematical bounds and records because
+their instruments differ. The former show current status plus dated resolution
+events; the latter track changes in numerical quantities.
+
+The final group sits outside the three worked domains. Integer factorization and
+technology cost curves span the cost of checking a candidate answer, while the
+output-volume series are contrast cases whose curves can bend without measuring
+discovery.
+
+## What validation checks
+
+The repository checks that every chart can be traced to a public source and
+rebuilt from it. Each validation column is one kind of thing that can go missing:
+
+| Column | Fails when |
+|---|---|
+| Document | A `**Field:**` line or a required section is missing, the verdict is not one of the six allowed values, `**Upstream:**` names no URL, or a link to a sibling folder does not resolve. |
+| Data | The folder holds no CSV, vendors one its document never links, links one that is not there, or reuses a filename another folder already has. |
+| Figure | There is no `figure.py`, or no PNG, or a PNG the document does not embed, or a PNG that nothing regenerates. |
+| Literature | A `[@citekey]` in the document has no entry in `references.bib`. |
+| Refetch | There is no `fetch.py`, and the document does not say how the data is maintained instead. |
+| Reproduces | Redrawing the figure from the CSVs beside it does not give back the committed PNG, byte for byte. |
+
+✅ passes  ·  ❌ fails  ·  ✍️ maintained by hand, and the document says so  ·  ➖ not run
+
+Reproduction runs every `figure.py` and compares the result with what is
+committed. It restores the original bytes afterwards, so a stale figure is
+reported rather than quietly staged. `make check` skips this slower step;
+`make check-figures` runs it, and `make index` runs it before regenerating the
+two tables above.
+
+## What the numbers are and are not
+
+Three conventions run through every series here, and reading a chart without
+them will mislead you.
+
+**A finder credit is a floor, not a measurement.** Where a project records who
+found a vulnerability, this data classifies a report as AI-credited only when
+the credit string explicitly names an AI system, an AI-security firm, or an
+agent. A researcher who used a model and did not say so counts as human. So
+every AI share here is a lower bound by an unknown margin.
+
+**A disclosure is not a discovery, and a status change is not a solution.**
+Vulnerability series count what got published, on the date it got published.
+The Erdős catalogue records the date a status was edited, which is not the date
+a problem was solved.
+
+**Records are lumpy with no AI in them.** Half of all algorithm families never
+improve at all [@sherry2021fast], solver records jump every few years, and a
+century-scale exponent can sit still for eighty years and then move by hand. A
+staircase inside the agent era is not by itself an AI signature, and a flat
+stretch is not by itself an exhausted frontier.
+
+## Layout
+
+One folder holds everything about each problem:
+
+```
+problems/cyber-curl/
+  README.md                  what the problem is and what the chart supports
+  curl-vulnerabilities.csv   the series, vendored from a public source
+  curl-finders.csv           who was credited with each find
+  fetch.py                   rebuilds those CSVs from curl's vuln.json
+  figure.py                  draws the PNG from the adjacent CSVs
+  discovery-cyber-curl.png   committed, never hand-edited
+```
+
+| Path | What is in it |
+|---|---|
+| `problems/<slug>/` | One folder per problem, as above. |
+| `lib/chart.py` | Shared colours, axis styling, and figure saving. |
+| `lib/families.py` | Chart shapes used by more than one problem. |
+| `lib/credits.py` | Classification of vulnerability finder credits. |
+| `lib/table.py`, `lib/web.py` | CSV and upstream-fetching helpers. |
+| `tools/check.py` | Cross-folder consistency and reproduction checks. |
+| `tools/sync_to_blog.py` | Copies figures into the blog checkout. |
+| `references.bib` | Bibliography for the problem documents. |
+
+A folder is self-contained except for generic helpers. Cross-series comparison
+happens in the prose rather than in a composite chart.
+
+## Reproducing
+
+Figures need Python 3.12 and the pinned plotting dependencies, but no network:
+
+```bash
+python3 -m pip install -r requirements.txt
+make figures                    # redraw every PNG
+make figure PROBLEM=cyber-curl  # redraw one folder
+make check                      # check data, documents, and sources
+make check-figures              # also verify PNG bytes
+```
+
+Exact dependency versions are committed because matplotlib and its image stack
+can change PNG bytes between releases. CI runs the byte-for-byte figure check
+from a clean install.
+
+Rebuilding data is a separate networked step:
+
+```bash
+make fetch                          # run every automatable fetcher
+make fetch-one PROBLEM=cyber-curl   # run one folder's fetcher
+```
+
+Some sources are prose pages rather than feeds, so their rows are transcribed by
+hand with source URLs recorded in the CSV. The Hilbert, Landau, Thurston, Smale,
+Millennium, and TOPP status ledgers are hand-scored from the secondary accounts
+their documents name.
+
+`problems/math-alphaevolve-records/fetch.py` also writes the kissing-number and
+sums-and-differences slices into their sibling folders so those datasets cannot
+drift apart.
 
 ## Who reads this
 

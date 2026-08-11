@@ -125,9 +125,7 @@ progress, around a factor of ten a year with an 80% interval of two to fifty, an
 labels it a best guess rather than a measured series [@epoch2026driver] — which
 would sit far off the right-hand side of this chart if it were plotted, and is
 the reason the plotted rates are restricted to estimates with published
-intervals. Within this collection, the cost reading in
-[weather forecasting](../weather-forecasting/README.md) is the one place an
-agent-era cost curve can be compared against these, and
-output volume is the other variable that visibly moves, most sharply in
+intervals. Within this collection, output volume is the other variable that
+visibly moves, most sharply in
 [git pushes to GitHub](../output-github-pushes/README.md) and
 [arXiv submissions](../output-arxiv/README.md).

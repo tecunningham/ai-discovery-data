@@ -56,13 +56,14 @@ cannot show that such falls have become more frequent.
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py) with `ai_problem="16"`, reading
 `smale-problems.csv`, keeping rows with `status` equal to
-`resolved` and a non-empty `resolved_year`, and drawing the count of still-unresolved rows as a
-step function from the 1998 `list_year` to the present.
+`resolved` and a non-empty `resolved_year`. The upper panel shows the current
+resolved/open/contested split; the lower panel counts resolution events by year
+from the 1998 `list_year` to the present.
 
 The `ai_problem` argument is the whole of the AI coding in this figure: the row
-whose `problem_id` matches is drawn red and annotated with its `short_name` plus
-the fixed caption about formal checks and pending peer review. Every other marker
-is blue. There is no agent column in this CSV, so the attribution is a single
+whose `problem_id` matches is drawn as a red event bar and annotated with its
+`short_name` plus the fixed caption about formal checks and pending peer review.
+Every other event bar is blue. There is no agent column in this CSV, so the attribution is a single
 hand-set argument in the figure code rather than something derived from the data.
 
 The scoring rule for that row differs from the rest of the ledger, deliberately

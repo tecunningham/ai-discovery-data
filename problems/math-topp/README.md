@@ -37,7 +37,7 @@ Seventeen resolutions between 2000 and 2024, out of 78 scored rows; 60 remain
 open and one, hexahedral meshing, is recorded as partial. The pace is roughly
 steady and slightly front-loaded: thirteen of the seventeen falls happen by 2010,
 then 2015, 2019, 2023 and 2024. Nothing lands in the shaded 2026 period and no
-marker is red.
+event is red.
 
 The two most recent are Wang's optimal algorithm for shortest paths among
 obstacles in the plane, dated 2023, and Abrahamsen and Stade's NP-hardness proof
@@ -47,9 +47,9 @@ recorded in the project's own citations.
 One artifact is visible at the left edge and is not a data error. The leftmost
 resolution is dated 2000, a year before the project's 2001 start, because Bezdek
 and Connelly settled the pushing-disks problem in 2000 and the project's entry for
-it records that resolution rather than an open status. The unresolved line
-therefore steps backwards briefly at its left end. It is a small instance of the
-larger problem with this series: the ledger dates resolutions but not entries.
+it records that resolution rather than an open status. The event panel therefore
+starts one year before the list itself. It is a small instance of the larger
+problem with this series: the ledger dates resolutions but not entries.
 
 ## How the chart was built
 
@@ -57,10 +57,10 @@ larger problem with this series: the ledger dates resolutions but not entries.
 [`../../lib/families.py`](../../lib/families.py), which reads
 `topp-problems.csv`, keeps rows whose `status` is
 `resolved` with a non-empty `resolved_year`, sorts by year then `problem_id`, and
-draws the count of still-unresolved rows as a step function from the 2001 `list_year` to the
-present. The header text reports the 78/17/60/1 breakdown and the source note
-names the `source` column, which for every row is the project's GitHub problem
-directory.
+draws a current-status bar above annual resolution-event bars. The upper panel
+reports the 78/17/60/1 breakdown and the lower panel runs from the earliest dated
+event through the present. The source note names the `source` column, which for
+every row is the project's GitHub problem directory.
 
 The `status` and `resolved_year` columns were set from the project's own
 Status and Conjectures lines, and the `notes` column keeps the maintainers'
@@ -69,10 +69,7 @@ closed: false; counterexample appeared in the 2009 CCCG proceedings" — so a re
 can see what each status rests on. Where the maintainers give a month, only the
 year is scored.
 
-No `ai_problem` argument is passed, because no entry credits an AI system. The
-track convention starts every list at its own `list_year` for visual consistency
-across the four ledgers, which is what produces the backwards step described
-above.
+No `ai_problem` argument is passed, because no entry credits an AI system.
 
 There is no `fetch.py`. The 78 rows were transcribed by hand from the project's GitHub problem directory, keeping its maintainers' own status wording; the site publishes no machine-readable index.
 
@@ -83,7 +80,7 @@ There is no `fetch.py`. The 78 rows were transcribed by hand from the project's 
   ledger and not a fixed-cohort solve rate. A denominator that grows invisibly
   cannot support a rate.
 - **One row predates the list.** The 2000 resolution sits a year before the 2001
-  start, which is why the unresolved line steps up at its left edge when an entry-addition date precedes the list year.
+  start, which is why the event timeline starts before the list year.
 - **Statuses are the maintainers' own language**, not independent review, and some
   are qualified — entry 12 is counted on a "solved (in a certain sense)".
 - **Unmaintained entries look open.** A problem whose status was never updated is

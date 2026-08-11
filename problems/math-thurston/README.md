@@ -23,8 +23,8 @@ question 23, on whether hyperbolic volumes are rationally independent.
 
 It is in the collection as a baseline, and it is the most useful of the prestige
 baselines because it is the one that moved. The other famous lists here are
-mostly stationary, which makes it easy to read a flat line as a property of
-famous mathematics rather than of a particular list. Thurston's questions show
+mostly stationary, which makes it easy to mistake inactivity in one ledger for a
+property of famous mathematics. Thurston's questions show
 what a prestige list looks like when it is being answered: a long thin start, then
 a burst that nearly empties it, all of it human, all of it before the agent era.
 
@@ -36,7 +36,7 @@ containing Brock, Canary and Minsky on the ending lamination conjecture and
 Agol's virtually Haken and virtually fibered theorems. Perelman's geometrization
 work, dated 2003, sits in the middle of the run rather than at its head.
 
-Nothing lands in the shaded 2026 period and no marker is red, because no row
+Nothing lands in the shaded 2026 period and no event is red, because no row
 carries an AI attribution.
 
 The burst is the part worth carrying away. A cluster of ten resolutions inside
@@ -51,9 +51,10 @@ edge is what that looks like.
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `thurston-questions.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, sorts them by year and then `problem_id`, and draws the count of still-unresolved rows as a step function from the 1982 `list_year` to the present. The
-header text counts the remaining rows by status, and the source note is taken from
-the `source` column.
+non-empty `resolved_year`, and sorts them by year and then `problem_id`. The
+upper panel shows the current status counts; the lower panel counts resolution
+events by year from the 1982 `list_year` to the present. The source note is taken
+from the `source` column.
 
 The rows are transcribed by hand from the ledger named in that column, so there is
 no `fetch.py` in this folder. There is no machine-readable upstream: the status of

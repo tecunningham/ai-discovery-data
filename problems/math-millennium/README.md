@@ -33,10 +33,10 @@ discriminates between almost nothing.
 
 ## What the chart shows
 
-One step, in 2003, and a flat line for twenty-three years either side of it. Of
-the seven rows, one is resolved and six are open: Birch–Swinnerton-Dyer, the
+One dated resolution, in 2003, and none in the twenty-three years since. The
+status bar shows one resolved row and six open: Birch–Swinnerton-Dyer, the
 Hodge conjecture, Navier–Stokes existence and smoothness, P versus NP,
-Yang–Mills existence and mass gap, and the Riemann hypothesis. No marker is red,
+Yang–Mills existence and mass gap, and the Riemann hypothesis. No event is red,
 because no row carries an AI attribution.
 
 There is nothing else in the reading. A single event cannot show a slope, and the
@@ -54,9 +54,9 @@ behind this collection.
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `millennium-problems.csv`, keeps the rows whose `status` is
-`resolved` with a non-empty `resolved_year`, and draws the count of still-unresolved rows as a
-step function from the 2000 `list_year` to the present. The header text reports
-the status breakdown, and the source note names the `source` column, which for
+`resolved` with a non-empty `resolved_year`. The upper panel reports the current
+status breakdown; the lower panel counts resolution events by year from the 2000
+`list_year` to the present. The source note names the `source` column, which for
 every row here is the Clay Mathematics Institute.
 
 The resolution year is 2003, taken from the arXiv postings; the row's `notes`

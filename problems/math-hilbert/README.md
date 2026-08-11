@@ -40,8 +40,9 @@ either direction.
 Twelve dated resolutions, from Dehn in 1900 to Hales's computer-assisted
 sphere-packing proof in 1998, and nothing in the twenty-eight years since. Of the
 twenty-eight scored rows, twelve are resolved, seven are open, and nine are
-disputed, partial or vague. Nothing lands in the shaded 2026 period, and no
-marker on the chart is red, because no row carries an AI attribution.
+disputed, partial or vague. The status bar makes that 12/7/9 split explicit; the
+lower panel places the twelve resolution events by year. Nothing lands in the
+shaded 2026 period, and no event is red, because no row carries an AI attribution.
 
 The visible clustering — five falls between 1924 and 1934, then a gap, then three
 between 1957 and 1970 — is a reminder that this ledger was never a steady
@@ -49,7 +50,7 @@ process even when it was moving. Reading a twenty-eight-year flat stretch at the
 right edge as exhaustion would require distinguishing it from the flat stretches
 of 1934–1957 and 1970–1989, which nothing in the series lets you do.
 
-The chart's own count line is the more useful reading: the seven rows still open
+The status bar is the more useful reading: the seven rows still open
 are Riemann, the Goldbach and twin-prime family, general reciprocity,
 Kronecker–Weber over arbitrary base fields, limit cycles, general boundary-value
 problems, and uniformization. That is the list against which any claim about AI
@@ -61,18 +62,18 @@ and famous open problems should be checked.
 [`../../lib/families.py`](../../lib/families.py), which reads
 `hilbert-problems.csv`, keeps the rows whose `status` is
 `resolved` and whose `resolved_year` is non-empty, sorts them by resolution year
-and then `problem_id`, and draws the count of still-unresolved rows as a step function from the
-`list_year` of 1900 to the present. The header text counts the remaining rows by
-status, and the source note is taken from the `source` column.
+and then `problem_id`. The upper panel is a current-status bar; the lower panel
+counts dated resolutions in each year from the `list_year` of 1900 to the
+present. The source note is taken from the `source` column.
 
 The scoring rule is the strict one. `contested` and `vague` rows are excluded
 rather than counted as half-resolutions, so problems with a defensible claim to
 being settled under some reading — Hilbert 1, 2, 5, 6b, 8c, 13, 15 — do not
-appear on the line at all. That choice makes the count smaller and the series
+appear in the resolution-event panel at all. That choice makes the count smaller and the series
 more comparable to the other ledgers here, and it is the reason the chart says
 twelve rather than any of the larger numbers in circulation.
 
-The function takes an `ai_problem` argument that colours one marker red. It is
+The function takes an `ai_problem` argument that colours one event bar red. It is
 not supplied for this list, because there is no such row.
 
 There is no `fetch.py`. The ledger is hand-scored from the Wikipedia problem table named above: one row per problem or subproblem, with the status and the resolution year read off that account and the scoring rule applied by hand. Nothing upstream publishes it in a form a script could take, so a correction means editing the CSV and saying here why.

@@ -11,12 +11,12 @@
 
 ## The problem
 
-Factoring is the cheap-verifier extreme, and it is here for the same reason
-weather is: to span the cost of checking an answer, which the three worked
-domains barely vary. Multiplying two claimed factors takes microseconds, so a
-result is verified instantly, for free, by anyone. The field also has everything
-else a scoreboard needs — a published list of targets, three decades of dated
-records with named teams, and a cash-prize history.
+Factoring is the cheap-verifier extreme, included to span a variable that the
+three worked domains barely vary: the cost of checking an answer. Multiplying
+two claimed factors takes microseconds, so a result is verified instantly, for
+free, by anyone. The field also has everything else a scoreboard needs — a
+published list of targets, three decades of dated records with named teams, and
+a cash-prize history.
 
 A discovery here is one new largest factorization. That is a coarse instrument
 by construction: the record is a running maximum over a fixed list of targets,
@@ -106,9 +106,7 @@ improving "about 5.5 digits per year for the last two decades"
 which makes the subsequent deceleration visible as a departure from a documented
 trend. The heterogeneity of pre-AI improvement rates across algorithm families
 is Sherry and Thompson's subject [@sherry2021fast], and it is the reason a single
-stalled family is weak evidence on its own. Within this collection the natural
-comparison is [weather forecasting](../weather-forecasting/README.md), the other
-cheap verifier outside the three domains, and
-[sphere packing](../math-sphere-packing/README.md), where a similarly old ladder
-took its two largest steps since 1947 in 2023 and 2025 — both of them human
-proofs.
+stalled family is weak evidence on its own. Within this collection,
+[sphere packing](../math-sphere-packing/README.md) is a useful contrast: a
+similarly old ladder took its two largest steps since 1947 in 2023 and 2025 —
+both of them human proofs.

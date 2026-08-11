@@ -32,10 +32,9 @@ under which every AI result in this collection has arrived.
 
 ## What the chart shows
 
-Nothing, and that is the reading. The unresolved line is flat at four across the
-whole span, the header text records four scored rows with none resolved, and the
-chart carries an annotation saying no row has been resolved since the list was
-posed. No marker is red because there are no markers at all.
+Nothing, and that is the reading. The current-status bar contains four open rows
+and no other segment; the event panel says no row has a dated resolution. There
+is no red event because there are no events at all.
 
 The one thing this establishes is a bound. Whatever AI has contributed to
 mathematics through mid-2026, it has not closed a Landau problem, and no source
@@ -46,11 +45,10 @@ behind this collection claims otherwise.
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `landau-problems.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, and draws the count of still-unresolved rows as a step function from
-the 1912 `list_year` to the present. Here that set is empty, so the function
-takes its no-resolution path: the flat line and the row-count annotation are
-drawn as usual, and the marker legend is replaced by a sentence, because legend
-swatches sitting on a line at zero read as resolution landmarks.
+non-empty `resolved_year`, and separates current status from resolution timing.
+The upper panel is a status bar; the lower panel counts resolution events by
+year from the 1912 `list_year` to the present. Here that event set is empty, so
+the lower panel states that directly.
 
 The rows are transcribed by hand from the consensus ledger named in the `source`
 column, so there is no `fetch.py` in this folder. There is no machine-readable
@@ -62,8 +60,7 @@ No `ai_problem` argument is passed, because there is no such row.
 ## What it cannot support
 
 - **Zero events cannot carry a rate.** A series with no resolutions in it has no
-  slope to compare, in either direction, and the flat line through 2026 is the
-  same flat line it showed in 1950.
+  event rate to compare, in either direction.
 - **Four rows is the coarsest ledger here.** The finest change it can register is
   one quarter.
 - **A binary status hides real progress.** Bounded gaps between primes were

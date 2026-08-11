@@ -13,8 +13,8 @@ calls save(); it should not restate a colour or re-decide where 2026 starts.
 
 from __future__ import annotations
 
-import zlib
 import platform
+import zlib
 from datetime import date
 from pathlib import Path
 
@@ -24,6 +24,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import ft2font
 from matplotlib.lines import Line2D
+
+from lib.renderer import assert_canonical_renderer
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -133,6 +135,10 @@ def save(fig, out_path, description: str, sources: list[str], built_by: str,
     for long tick labels passes ``adjust`` to override them; setting them before
     calling save would not work, since this is the last word on layout.
     """
+    assert_canonical_renderer(
+        matplotlib_version=matplotlib.__version__,
+        freetype_version=ft2font.__freetype_version__,
+    )
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.subplots_adjust(**{"left": 0.09, "right": 0.97, "top": 0.84,

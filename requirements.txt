@@ -1,4 +1,4 @@
-# Exact versions keep committed PNGs reproducible across clean Python 3.12 installs.
+# Exact versions are part of the containerized figure ABI used locally and in CI.
 contourpy==1.3.3
 cycler==0.12.1
 fonttools==4.63.0

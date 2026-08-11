@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Draw discovery-math-erdos.png from this folder's monthly catalogue snapshots.
+"""Draw this folder's two figures.
 
 Run: python3 problems/math-erdos/figure.py
+
+discovery-math-erdos.png plots the monthly catalogue snapshots;
+erdos-solution-years.png plots the imputed solution years from
+erdos-solution-years.csv.
 """
 
 from __future__ import annotations
@@ -24,6 +28,56 @@ from lib.chart import (  # noqa: E402
     year_fraction,
 )
 from lib.table import read_csv  # noqa: E402
+
+
+def solution_years() -> None:
+    rows = read_csv(HERE / "erdos-solution-years.csv")
+    dated = [row for row in rows if row["solution_year"]]
+    undated = len(rows) - len(dated)
+    first = min(int(row["solution_year"]) for row in dated)
+    years = list(range(first, 2027))
+    by_basis = {
+        basis: [sum(int(row["solution_year"]) == year and row["basis"] == basis
+                    for row in dated) for year in years]
+        for basis in ("solving_citation", "review", "ai_wiki")}
+    human = [a + b for a, b in zip(by_basis["solving_citation"],
+                                   by_basis["review"])]
+    fig, ax = new_chart(
+        "Erdős problems: imputed solution years",
+        "Publication year of the resolving reference on each solved problem's page,"
+        " not the status-edit date",
+    )
+    ax.bar(years, human, width=0.85, color=HUMAN,
+           label="solving reference in the literature")
+    ax.bar(years, by_basis["ai_wiki"], width=0.85, bottom=human, color=AI,
+           label="AI wiki full solution only")
+    right = 2026 + 1.2
+    ax.set_xlim(first - 1.5, right)
+    tallest = max(h + a for h, a in zip(human, by_basis["ai_wiki"]))
+    ax.set_ylim(0, tallest * 1.18)
+    shade_era(ax, right, annual=True)
+    style(ax, "Problems first resolved", "Imputed solution year")
+    ax.legend(frameon=False, fontsize=8, loc="upper left")
+    ax.text(
+        0.02,
+        0.78,
+        f"{len(dated)} of {len(rows)} solved problems dated;\n"
+        f"{undated} state no dateable resolution",
+        transform=ax.transAxes,
+        fontsize=8.5,
+        color="#555555",
+        ha="left",
+        va="top",
+    )
+    source_note(fig, "Source: erdosproblems.com problem pages and the "
+                     "AI-resolution wiki; years are imputed, see README.")
+    save(
+        fig,
+        HERE / "erdos-solution-years.png",
+        "Imputed solution years for the solved problems in the Erdős catalogue.",
+        ["https://www.erdosproblems.com/"],
+        __file__,
+    )
 
 
 def main() -> None:
@@ -77,3 +131,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    solution_years()

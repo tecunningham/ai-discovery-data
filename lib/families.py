@@ -1,6 +1,6 @@
 """Chart shapes drawn by more than one problem.
 
-Six vulnerability series are the same stacked bar; four prestige lists are the
+Seven vulnerability series share annual bar shapes; four prestige lists are the
 same cumulative step plot; two Hutter corpora and two AlphaEvolve ladders are
 the same standing-record plot. Those shapes live here, parameterised by the CSV
 path, so a problem folder holding a series of a known kind is a short call

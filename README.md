@@ -1,7 +1,8 @@
 # ai-discovery-data
 
 This repository vendors the data, figures, and documentation behind [LLMs' Contribution to Discovery](https://tecunningham.github.io/posts/2026-08-08-llm-contribution-to-discoveries.html).
-Each chart links to its source folder and can be checked and rebuilt from public sources.
+Each chart links to public sources and is rebuildable; inclusion requires a
+consistent rule and a usable time axis, not attribution of each event to AI.
 
 ## Series
 
@@ -107,6 +108,12 @@ shows an acceleration in the rate of discovery, not whether AI contributed:
 
 📈 accelerating  ·  📉 declining  ·  ➡️ no acceleration  ·  ❓ inconclusive  ·  ⏳ too early  ·  ⚪ baseline
 
+Attribution is deliberately not an admission test. The first-stage question is
+whether output under a stable inclusion rule bends upward in the agent era.
+Finder credits, where they exist, help investigate a mechanism; where they do
+not, the time series still supplies evidence about the claimed acceleration.
+Neither case identifies causation by itself.
+
 Open-problem ledgers are separated from mathematical bounds and records because
 their instruments differ. The former show current status plus dated resolution
 events; the latter track changes in numerical quantities.
@@ -139,8 +146,14 @@ two tables above.
 
 ## What the numbers are and are not
 
-Three conventions run through every series here, and reading a chart without
+Four conventions run through every series here, and reading a chart without
 them will mislead you.
+
+**Attribution is optional, and acceleration is not attribution.** A series is
+included when its events are selected consistently enough to compare over time.
+An upward bend is a signal to investigate alongside external evidence, not an
+estimate of AI's causal share. Conversely, a series does not become informative
+merely because a few events name a model.
 
 **A finder credit is a floor, not a measurement.** Where a project records who
 found a vulnerability, this data classifies a report as AI-credited only when
@@ -217,8 +230,8 @@ hand with source URLs recorded in the CSV. The Hilbert, Landau, Thurston, Smale,
 Millennium, and TOPP status ledgers are hand-scored from the secondary accounts
 their documents name.
 
-`problems/math-alphaevolve-records/fetch.py` also writes the kissing-number and
-sums-and-differences slices into their sibling folders so those datasets cannot
+`problems/math-alphaevolve-records/fetch.py` also writes the
+sums-and-differences slice into its sibling folder so those datasets cannot
 drift apart.
 
 ## Who reads this
@@ -236,8 +249,8 @@ says whether they are current.
 
 Every CSV records where its rows came from, either in a per-row source column
 or in the header of the fetch script that built it. The underlying facts belong
-to their publishers — the curl project, Mozilla, OpenSSL, NIST, CISA, Google
-OSS-Fuzz, the Erdős problems community, ANTEDB, Google DeepMind, the Hutter
-Prize, nextchessmove.com, and the speedrun leaderboards — and are collected
+to their publishers — the curl project, Mozilla, OpenSSL, NIST, CISA, OSV,
+Google OSS-Fuzz, the Erdős problems community, ANTEDB, Google DeepMind, the
+Hutter Prize, nextchessmove.com, and the speedrun leaderboards — and are collected
 here under the terms each publisher offers. The aggregation, classification,
 and arithmetic are this repository's, and are the part that can be wrong.

@@ -17,6 +17,7 @@ consistent rule and a usable time axis, not attribution of each event to AI.
 | <b><a href="problems/cyber-nvd-disclosed/">All software: vulnerabilities disclosed</a></b><br><b>Metric:</b> CVEs published per year in the US<br>National Vulnerability Database<br><b>Coverage:</b> 2016–2026, partial through<br>2026-08-10<br><b>Acceleration?</b> 📈 accelerating — but growth was<br>already +32% and +23% in 2024 and 2025, and no<br>disclosure here is attributed to anyone | <a href="problems/cyber-nvd-disclosed/"><img src="problems/cyber-nvd-disclosed/discovery-cyber-nvd-disclosed.png" width="400" alt="All software: vulnerabilities disclosed"></a> |
 | <b><a href="problems/cyber-openssl/">OpenSSL vulnerability disclosures</a></b><br><b>Metric:</b> vulnerabilities disclosed per year,<br>split by finder credit<br><b>Coverage:</b> 2002–2026, partial through 5 August<br>2026<br><b>Acceleration?</b> 📈 accelerating — but the same<br>shape appeared in 2015–2016 from a purely<br>human cause | <a href="problems/cyber-openssl/"><img src="problems/cyber-openssl/discovery-cyber-openssl.png" width="400" alt="OpenSSL vulnerability disclosures"></a> |
 | <b><a href="problems/cyber-oss-fuzz/">OSS-Fuzz vulnerability discoveries</a></b><br><b>Metric:</b> vulnerability records published per<br>year by an automated fuzzing programme<br><b>Coverage:</b> 2020–2026, partial through 10 August<br>2026<br><b>Acceleration?</b> 📉 declining | <a href="problems/cyber-oss-fuzz/"><img src="problems/cyber-oss-fuzz/discovery-cyber-oss-fuzz.png" width="400" alt="OSS-Fuzz vulnerability discoveries"></a> |
+| <b><a href="problems/cyber-osv-cves/">Open-source CVEs represented in OSV</a></b><br><b>Metric:</b> distinct CVE IDs linked to at least<br>one active affected-package record in OSV, by<br>earliest OSV publication date<br><b>Coverage:</b> 2016–2026, partial through<br>2026-08-10<br><b>Acceleration?</b> 📈 accelerating — 2026 annualizes<br>to about 2.3 times 2025, though source growth<br>and disclosure processes can also bend this<br>aggregate | <a href="problems/cyber-osv-cves/"><img src="problems/cyber-osv-cves/discovery-cyber-osv-cves.png" width="400" alt="Open-source CVEs represented in OSV"></a> |
 
 ### Open problems
 
@@ -73,6 +74,7 @@ consistent rule and a usable time axis, not attribution of each event to AI.
 | [All software: vulnerabilities disclosed](problems/cyber-nvd-disclosed/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [OpenSSL vulnerability disclosures](problems/cyber-openssl/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [OSS-Fuzz vulnerability discoveries](problems/cyber-oss-fuzz/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Open-source CVEs represented in OSV](problems/cyber-osv-cves/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Erdős problems catalogue](problems/math-erdos/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Hilbert's problems](problems/math-hilbert/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [Landau's problems](problems/math-landau/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
@@ -97,7 +99,7 @@ consistent rule and a usable time axis, not attribution of each event to AI.
 | [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Stack Overflow questions](problems/output-stackoverflow/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-29 problems holding 31 figures and 36 data files. 17 refetch from upstream and 12 are maintained by hand and say so. No failing cells.
+30 problems holding 32 figures and 37 data files. 18 refetch from upstream and 12 are maintained by hand and say so. No failing cells.
 <!-- END GENERATED: checks-table -->
 
 ## How to read the series

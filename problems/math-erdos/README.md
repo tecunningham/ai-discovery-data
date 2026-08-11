@@ -2,7 +2,7 @@
 
 **Domain:** mathematics
 **Metric:** problems catalogued, statuses marked solved, and statements formalized in Lean, at monthly site snapshots
-**Coverage:** 2025-08-31 to 2026-08-08, thirteen snapshots
+**Coverage:** 2025-08-31 to 2026-08-10, thirteen snapshots
 **Data:** [`erdos-database-history.csv`](erdos-database-history.csv)
 **Upstream:** <https://www.erdosproblems.com/>, with the snapshot statistics and Lean counts from <https://github.com/teorth/erdosproblems> and the AI-resolution count from <https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems>
 **Verdict:** inconclusive — the comparable window is about eleven months, and a status edit is not a solution
@@ -33,20 +33,20 @@ still being assembled for most of the window.
 ## What the chart shows
 
 Between August 2025 and August 2026 the catalogue grew from 992 problems to
-1,217, statuses marked solved from 355 to 565, and Lean-formalized statements
-from 148 to 605. The red callout is the separate stock: about 13 full
+1,217, statuses marked solved from 355 to 559, and Lean-formalized statements
+from 148 to 608. The red callout is the separate stock: about 13 full
 AI-standalone resolutions recorded in the project's AI wiki at its 2026-06-30
-freeze, against those 565 solved statuses.
+freeze, against those 559 solved statuses.
 
 The catalogue count stopped changing in April 2026, which is the only part of the
 window where a rise in solved status cannot be caused by adding an
 already-solved historical problem. Over that fixed cohort the solved count went
-from 525 on 30 April to 565 on 8 August, forty rows in about a hundred days.
-That arithmetic is this repository's, not the project's, and forty rows is too
-few and too recent to compare against anything.
+from 525 on 30 April to 559 on 10 August, thirty-four rows in about a hundred
+days. That arithmetic is this repository's, not the project's, and thirty-four
+rows is too few and too recent to compare against anything.
 
 One reading is worth stating because the lines cross: Lean-formalized statements
-pass the solved count in the final snapshot, 605 against 565. The two count
+pass the solved count in the final snapshot, 608 against 559. The two count
 different things. Formalizing a statement is not proving it, and the
 formalization drive is a separate effort from the solving.
 
@@ -60,7 +60,7 @@ second snapshot plus the last. January 2026 onward is shaded, as in every figure
 here.
 
 The AI-standalone stock is drawn as a boxed callout rather than a fourth line.
-About 13 against stocks of 565 and 1,217 would be a flat line on the axis, and
+About 13 against stocks of 559 and 1,217 would be a flat line on the axis, and
 plotting it as a series would also imply it is measured on the same basis, which
 it is not: it comes from a different source, frozen on a different date, under
 its own definition of standalone contribution.
@@ -69,11 +69,15 @@ The `catalogue_count_unchanged` column flags the snapshots from April 2026 on,
 where the cohort is fixed. The figure does not shade that sub-window separately;
 the column is there so a reader can find it.
 
-The series changes source at its tip. Through July the points follow the
-project's GitHub statistics history; the 8 August endpoint uses the live
-website's solved-status headline together with that day's GitHub Lean count.
-[`fetch.py`](fetch.py) rebuilds the file from the statistics history alone, so
-rerunning it replaces that hand-set endpoint with whatever the repository records.
+Every point now comes from one source, the project's GitHub statistics history,
+which is what [`fetch.py`](fetch.py) rebuilds the whole file from. An earlier
+version of this series set its last point by hand from the live website's
+solved-status headline, and the two sources do not agree: on 8 August the site
+headline read 565 solved where the statistics history recorded 559. A hand-set
+endpoint that the folder's own fetcher overwrites is not a series anybody can
+rebuild, so the fetcher's value stands and the disagreement is recorded here
+instead. It is worth knowing that the project's own two public counts of the
+same quantity differ by about six.
 
 ## What it cannot support
 
@@ -82,7 +86,7 @@ rerunning it replaces that hand-set endpoint with whatever the repository record
 - **The comparable window is about eleven months.** There is no before, so there
   is nothing for the agent era to be compared against.
 - **The two stocks are not an AI-versus-human flow.** The roughly 13 AI-standalone
-  resolutions and the 565 solved statuses are counted on different dates under
+  resolutions and the 559 solved statuses are counted on different dates under
   different definitions, so subtracting one from the other does not estimate
   human output.
 - **The cohort grew by 225 rows inside the window**, and problems can be added

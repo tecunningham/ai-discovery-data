@@ -37,6 +37,15 @@ NEUTRAL = "#aaaaaa"
 # than the data says: nobody counted who wrote these artifacts.
 UNATTRIBUTED = "#37474f"
 
+# Severity is ordered, not categorical, so it takes one hue in even lightness
+# steps rather than four separate colours: the reader should see the ordering in
+# the ink without consulting the legend. The steps are spaced so the closest
+# adjacent pair stays about 16 apart in OKLab (×100) under normal, protanopic
+# and deuteranopic vision, and the lightest clears 2:1 against white. The hue is
+# deliberately not the AI red or the fuzzer amber those charts already spend on
+# identity, so a severity bar cannot be misread as a finder band.
+SEVERITY_RAMP = ["#87afc1", "#547d8f", "#234f61", "#002435"]
+
 # The highlighted period is the same everywhere. Annual bar charts start it at
 # 2025.5, the left edge of the 2026 bar on a year-centred categorical axis.
 ERA_START = 2026.0
@@ -112,15 +121,22 @@ def source_note(fig, text: str) -> None:
     fig.text(0.09, 0.018, text, fontsize=7.2, color="#777777", ha="left")
 
 
-def save(fig, out_path, description: str, sources: list[str], built_by: str) -> None:
+def save(fig, out_path, description: str, sources: list[str], built_by: str,
+         adjust: dict[str, float] | None = None) -> None:
     """Write the figure beside the data it came from.
 
     built_by is the calling script's __file__; it is recorded in the PNG so a
     reader who finds the image alone can get back to the code that drew it.
+
+    The margins are set here rather than by the caller so every figure in the
+    collection frames its plot identically. A multi-panel figure that needs room
+    for long tick labels passes ``adjust`` to override them; setting them before
+    calling save would not work, since this is the last word on layout.
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.subplots_adjust(left=0.09, right=0.97, top=0.84, bottom=0.15)
+    fig.subplots_adjust(**{"left": 0.09, "right": 0.97, "top": 0.84,
+                           "bottom": 0.15, **(adjust or {})})
     fig.savefig(
         out_path,
         dpi=180,

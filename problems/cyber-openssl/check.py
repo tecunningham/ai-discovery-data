@@ -83,6 +83,22 @@ def main() -> int:
     ):
         failures.append("reporter aggregation does not match credited CVE rows")
 
+    # The severity chart's cohorts, recomputed from the same ledger it reads.
+    rated = [row for row in cves if int(row["published"][:4]) >= 2015]
+    baseline = [row for row in rated if row["published"][:4] != "2026"]
+    this_year = [row for row in rated if row["published"][:4] == "2026"]
+
+    def low_share(subset) -> int:
+        return round(100 * sum(row["severity"] == "Low" for row in subset) / len(subset))
+
+    conventional = [row for row in this_year
+                    if row["explicit_ai"] == "no" and row["ai_affiliated"] == "no"]
+    affiliated = [row for row in this_year
+                  if row["explicit_ai"] == "no" and row["ai_affiliated"] == "yes"]
+    corroborated = [row for row in this_year if row["explicit_ai"] == "yes"]
+    severe = round(100 * sum(row["severity"] in ("High", "Critical")
+                             for row in baseline) / len(baseline))
+
     current = next(row for row in annual if row["year"] == "2026")
     claims = {
         "The largest pre-2026 totals were 35 in 2016 and 32 in 2015":
@@ -99,6 +115,12 @@ def main() -> int:
             "affiliation-only severity row",
         "| Conventional/fuzzing | 0 | 0 | 3 | 9 |":
             "conventional severity row",
+        f"half of all rated\nCVEs were Low and {severe}% were High or Critical".replace("\n", " "):
+            "baseline severity mix",
+        f"{low_share(conventional)}% Low for\nconventional or fuzzing credits, "
+        f"{low_share(affiliated)}% for affiliation-only credits, and "
+        f"{low_share(corroborated)}% for\nthe corroborated-AI set".replace("\n", " "):
+            "2026 cohort severity mix",
     }
     for phrase, label in claims.items():
         if phrase not in prose:

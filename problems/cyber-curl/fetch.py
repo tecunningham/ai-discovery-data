@@ -12,8 +12,12 @@ Quarterly exists because curl publishes in batches at releases, so a quarter is
 about the finest grain at which the series is not just release timing. Severity
 is left off it: at three to twelve issues a quarter the mix is sampling noise.
 
-AI attribution is by the shared explicit-marker classifier in lib/credits.py and
-is therefore a floor.
+AI attribution is by the shared marker classifier in lib/credits.py. The
+per-finder table records which of the three independent signals a credit
+carries: a named AI method, an AI-security employer, or fuzzing. The annual and
+quarterly tables keep the older combined AI column, so refetching this folder
+does not silently redefine a series the blog already reads; the finer split is
+read off the finder table.
 """
 
 from __future__ import annotations
@@ -26,7 +30,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.credits import SEVERITIES, classify  # noqa: E402
+from lib.credits import SEVERITIES, band, classify  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch  # noqa: E402
 
@@ -144,14 +148,15 @@ def build_finders(records: list[dict]) -> list[dict]:
     for entry in records:
         year = int(entry["published"][:4])
         for name in finders(entry):
-            counted[(year, name, classify(name, year))] += 1
+            counted[(year, name, band(name, year))] += 1
     rows = [
         {"year": year, "finder": name, "category": category, "cves": count}
         for (year, name, category), count in sorted(
             counted.items(), key=lambda item: (item[0][0], -item[1])
         )
     ]
-    ai = [row for row in rows if row["category"] == "ai"]
+    ai = [row for row in rows
+          if row["category"] in ("explicit_ai", "ai_affiliated")]
     print(f"curl finders: {len(rows)} year-finder rows, {len(ai)} AI-credited")
     if ai:
         top = max(ai, key=lambda row: row["cves"])

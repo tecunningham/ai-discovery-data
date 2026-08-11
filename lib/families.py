@@ -24,6 +24,7 @@ from lib.chart import (
     AI,
     HUMAN,
     FUZZ,
+    SEVERITY_RAMP,
     NEUTRAL,
     NOW,
     UNATTRIBUTED,
@@ -107,7 +108,7 @@ def cyber_stacked(
             color="#333333",
             va="top",
         )
-    source_note(fig, f"Source: {source_label}. Finder credits are floors, not audited causation.")
+    source_note(fig, f"Source: {source_label}. Finder credits are textual markers, not audited causation.")
     save(
         fig,
         out_path,
@@ -545,7 +546,7 @@ def volume_series(
 ) -> None:
     """One output-volume series: years on x, a count on y, era shaded.
 
-    The five volume series are five different artifacts counted by five
+    The three volume series are three different artifacts counted by three
     organizations, and the only thing that makes them comparable is being drawn
     the same way. They are the collection's contrast case — volume against
     discovery — so a difference in shape between one of these and a record series
@@ -599,3 +600,114 @@ def volume_series(
     source_note(fig, f"Source: {source_label}. No authorship field, so no AI "
                      "share can be read off it.")
     save(fig, out_path, f"{title}. {subtitle}", [source_url], built_by)
+
+
+def severity_panels(
+    out_path: Path,
+    title: str,
+    subtitle: str,
+    *,
+    years: list[str],
+    by_year: dict[str, dict[str, int]],
+    cohorts: list[tuple[str, dict[str, int]]],
+    severities: list[str],
+    source_label: str,
+    source_url: str,
+    built_by: str,
+    year_caption: str,
+    cohort_caption: str,
+) -> None:
+    """Two views of one severity field: drift over time, and mix by cohort.
+
+    Both panels are drawn as shares rather than counts. A severity chart asks
+    what a year's disclosures were made of, and counts answer a different
+    question the folder's main figure already answers; plotting shares also lets
+    a year with nine disclosures sit beside one with thirty-nine without the
+    small year vanishing.
+
+    The top panel is the drift — whether a codebase's findings are getting
+    shallower — and the bottom panel is the comparison the drift is usually
+    invoked for, one bar per cohort of finders. Keeping them on one figure is
+    the point: the cohort difference means little without the trend it sits in,
+    since a shallow AI cohort inside a series that was already shallowing is a
+    weaker claim than the same gap in a flat series.
+
+    Callers pass only the years their upstream actually rated. A project that
+    scored nothing before some date has an absence of data there, not a run of
+    low-severity findings, and the honest rendering of that is to start the panel
+    where the ratings start and say so in the document.
+    """
+    ramp = dict(zip(severities, SEVERITY_RAMP))
+    bands = list(severities)
+
+    fig, (year_ax, cohort_ax) = plt.subplots(
+        2, 1, figsize=(8.4, 6.4), gridspec_kw={"height_ratios": (2.05, 1.0), "hspace": 0.42}
+    )
+    fig.suptitle(title, x=0.09, y=0.985, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.09, 0.930, subtitle, fontsize=9.2, color="#444444", ha="left", va="top")
+
+    positions = list(range(len(years)))
+    bottoms = [0.0] * len(years)
+    for band in bands:
+        shares = []
+        for year in years:
+            counts = by_year[year]
+            total = sum(counts.values()) or 1
+            shares.append(100 * counts.get(band, 0) / total)
+        year_ax.bar(positions, shares, bottom=bottoms, width=0.74, color=ramp[band],
+                    label=band, zorder=3, linewidth=0.8, edgecolor="white")
+        bottoms = [b + s for b, s in zip(bottoms, shares)]
+    year_ax.set_xticks(positions)
+    year_ax.set_xticklabels(years)
+    year_ax.set_xlim(-0.7, len(years) - 0.3)
+    year_ax.set_ylim(0, 100)
+    year_ax.set_yticks([0, 25, 50, 75, 100])
+    year_ax.set_yticklabels(["0", "25", "50", "75", "100%"])
+    if years and years[-1] == "2026":
+        # The era band is placed by bar index: this axis is categorical, so the
+        # year-valued constants the other charts shade with do not apply.
+        year_ax.axvspan(len(years) - 1.5, len(years) - 0.3, color=AI, alpha=0.055, zorder=0)
+    style(year_ax, "Share of that year's disclosures")
+
+    labels = [label for label, _ in cohorts]
+    spots = list(range(len(cohorts)))[::-1]
+    lefts = [0.0] * len(cohorts)
+    for band in bands:
+        widths = []
+        for _, counts in cohorts:
+            total = sum(counts.values()) or 1
+            widths.append(100 * counts.get(band, 0) / total)
+        cohort_ax.barh(spots, widths, left=lefts, height=0.52, color=ramp[band],
+                       zorder=3, linewidth=0.8, edgecolor="white")
+        for spot, width, left in zip(spots, widths, lefts):
+            # Direct-label the segments with room for the text. The lightest step
+            # sits below 3:1 on white, so the share it carries is written out
+            # rather than left to the eye to estimate.
+            if width >= 11:
+                cohort_ax.text(left + width / 2, spot, f"{width:.0f}%", ha="center",
+                               va="center", fontsize=8,
+                               color="#22333a" if band == severities[0] else "white",
+                               zorder=4)
+        lefts = [left + width for left, width in zip(lefts, widths)]
+    # The cohort names sit above their bars rather than in the margin. As tick
+    # labels they would need a left margin wide enough for the longest of them,
+    # which would push the year panel above off-centre for no reason.
+    for spot, label in zip(spots, labels):
+        cohort_ax.text(0.4, spot + 0.34, label, fontsize=8.5, color="#444444",
+                       va="bottom", ha="left", zorder=4)
+    cohort_ax.set_yticks(spots)
+    cohort_ax.set_yticklabels([""] * len(spots))
+    cohort_ax.tick_params(axis="y", length=0)
+    cohort_ax.set_ylim(-0.5, len(cohorts) - 0.15)
+    cohort_ax.set_xlim(0, 100)
+    cohort_ax.set_xticks([0, 25, 50, 75, 100])
+    cohort_ax.set_xticklabels(["0", "25", "50", "75", "100%"])
+    style(cohort_ax, "", cohort_caption)
+    cohort_ax.grid(axis="y", visible=False)
+
+    handles = [Patch(facecolor=ramp[band], label=band) for band in bands]
+    year_ax.legend(handles=handles, frameon=False, fontsize=8, ncol=len(bands),
+                   loc="lower left", bbox_to_anchor=(0, 1.03))
+    source_note(fig, f"Source: {source_label}. {year_caption}")
+    save(fig, out_path, f"{title}. {subtitle}.", [source_url], built_by,
+         adjust={"left": 0.095, "right": 0.97, "top": 0.83, "bottom": 0.115})

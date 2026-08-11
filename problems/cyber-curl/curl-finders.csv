@@ -117,32 +117,32 @@ year,finder,category,cves
 2024,Dexter Gerig,other,1
 2024,Dan Fandrich,other,1
 2025,Hiroki Kurosawa,other,2
-2025,Stanislav Fort (Aisle Research),ai,1
+2025,Stanislav Fort (Aisle Research),ai_affiliated,1
 2025,Calvin Ruocco (Vector Informatik GmbH),other,1
-2025,Google Big Sleep,ai,1
+2025,Google Big Sleep,explicit_ai,1
 2025,z2_ on hackerone,other,1
 2025,z2_,other,1
 2025,Ankom Coper,other,1
 2025,Christian Heusel,other,1
 2025,Yihang Zhou,other,1
-2026,Joshua Rogers (Aisle Research),ai,6
+2026,Joshua Rogers (Aisle Research),ai_affiliated,6
 2026,Muhamad Arga Reksapati,other,4
-2026,Stanislav Fort (Aisle Research),ai,3
+2026,Stanislav Fort (Aisle Research),ai_affiliated,3
 2026,Harry Sintonen,other,2
-2026,alienowo on hackerone (AntAISecurityLab),ai,1
+2026,alienowo on hackerone (AntAISecurityLab),ai_affiliated,1
 2026,jjchuck on hackerone,other,1
-2026,evergarden1123 on hackerone (AntAISecurityLab),ai,1
-2026,Filipe Casal of Trail of Bits in collaboration with OpenAI,ai,1
-2026,vectorqueue on hackerone (AntAISecurityLab),ai,1
+2026,evergarden1123 on hackerone (AntAISecurityLab),ai_affiliated,1
+2026,Filipe Casal of Trail of Bits in collaboration with OpenAI,ai_affiliated,1
+2026,vectorqueue on hackerone (AntAISecurityLab),ai_affiliated,1
 2026,renjian on hackerone,other,1
-2026,Eunsoo Kim (Autonomous Code Security team at Microsoft),ai,1
+2026,Eunsoo Kim (Autonomous Code Security team at Microsoft),ai_affiliated,1
 2026,Guannan Wang,other,1
 2026,Zhanpeng Liu,other,1
 2026,Jiashuo Liang,other,1
 2026,Guancheng Li,other,1
 2026,Ady Elouej,other,1
 2026,vegagent on hackerone,other,1
-2026,Andrew Nesbitt (powered by Mythos),ai,1
+2026,Andrew Nesbitt (powered by Mythos),explicit_ai,1
 2026,Carlos Carrillo,other,1
 2026,"Dwij Mehta (O2 Lab, Texas A&M University)",other,1
 2026,Osama Hamad,other,1

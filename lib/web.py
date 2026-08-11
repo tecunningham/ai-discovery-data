@@ -28,6 +28,20 @@ def _cache_path(url: str) -> Path:
     return CACHE / f"{date.today().isoformat()}-{key}"
 
 
+def _prune(keep: str) -> None:
+    """Drop cache entries from earlier days.
+
+    The cache exists so two folders sharing an upstream fetch it once in one
+    run; it is not a history. Keying by date and never sweeping would leave a
+    full set of responses per day forever, which is how a scratch directory
+    turns into a quiet several-gigabyte pile in a repository nobody expects to
+    hold one.
+    """
+    for stale in CACHE.glob("*-*"):
+        if not stale.name.startswith(keep):
+            stale.unlink(missing_ok=True)
+
+
 def fetch(url: str, refresh: bool = False) -> bytes:
     """GET url, reusing today's cached copy unless refresh is set."""
     cached = _cache_path(url)
@@ -50,6 +64,7 @@ def fetch(url: str, refresh: bool = False) -> bytes:
         detail = result.stderr.decode("utf-8", "replace").strip()
         raise SystemExit(f"failed to fetch {url}" + (f": {detail}" if detail else ""))
     CACHE.mkdir(exist_ok=True)
+    _prune(keep=date.today().isoformat())
     cached.write_bytes(result.stdout)
     return result.stdout
 

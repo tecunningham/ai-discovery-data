@@ -33,6 +33,15 @@ Roughly twelve disclosures a year from 2017 through 2025, then 36 through
 firm. Annualized from that exact date, 2026 is running near 75 a year against
 13.1 a year across 2014–2023.
 
+Those 15 are mostly an employer, not a method. Reading the credit strings in
+[`curl-finders.csv`](curl-finders.csv), one names a system — Andrew Nesbitt
+"powered by Mythos" — and the other fourteen name a person at Aisle Research,
+AntAISecurityLab, OpenAI or Microsoft's Autonomous Code Security team without
+saying how the bug was found. curl's own credits therefore support "researchers
+at AI-security companies reported a record number of curl flaws in 2026" and do
+not by themselves support "AI found them". The 2025 Big Sleep credit is the
+other case where the system is named.
+
 This is the clearest bend in any series in the collection, and the one place
 where a collective-progress curve visibly changes slope in the agent era.
 
@@ -43,6 +52,22 @@ low-severity findings started well before AI — across 2010–2022 curl's
 disclosures were 18% Low and 28% High or Critical, and by 2023–2025 the non-AI
 finds were already 67% Low. So AI intensifies a pre-existing trend on a
 hardening codebase rather than starting it.
+
+![curl disclosures by severity: annual composition since 2010, and four finder cohorts compared.](severity-cyber-curl.png)
+
+The severity chart puts those four numbers next to the trend they sit in. The
+top panel is every year since 2010 as shares rather than counts, because the
+question it answers — what was a year's disclosures made of — is not the
+question the disclosure chart answers, and a year with one disclosure would
+otherwise be invisible beside a year with thirty-six. The drift is plain and it
+starts around 2017, years before any AI credit: High and Critical findings go
+from most of the bar to almost none of it.
+
+The bottom panel is the comparison, one bar per cohort, ordered so the AI-marked
+slice is read last and against the right baseline. The gap between 48% and 80%
+Low in 2026 is real, but the gap that matters is between 18% across 2010–2022
+and 67% for non-AI credits in 2023–2025, which is most of the way to the AI
+figure and contains no AI at all.
 
 ## How the chart was built
 
@@ -57,18 +82,42 @@ The axis is linear and nothing is normalized, so a bar twice as tall is twice as
 many vulnerabilities. A log axis was avoided deliberately: it would flatten
 exactly the 2026 step the series exists to show.
 
-The CSVs are built by [`fetch.py`](fetch.py), which reads curl's JSON, buckets by publication year, and classifies a report as
-AI-credited when any `FINDER` credit string matches an explicit AI marker — a
-named system (Big Sleep, Mythos), a firm whose stated business is AI code
-security (Aisle Research, AntAISecurityLab), or the word "agent". The marker
-list in [`../../lib/credits.py`](../../lib/credits.py) is shared by all three
-finder-attributed vulnerability series; unifying the former lists moved no
-currently vendored row.
+The severity figure comes from the same script through the shared
+`severity_panels()` shape, which OpenSSL also draws. Severity is an ordered
+scale, not a set of categories, so it is drawn in one hue in even lightness
+steps rather than four unrelated colours: the ordering should be visible in the
+ink without consulting the legend. The hue is deliberately neither the red nor
+the amber the disclosure chart spends on finder identity, so a severity band
+cannot be misread as a finder band. Both panels are shares, and the cohort
+percentages are written on the bars because the lightest step sits below the 3:1
+contrast a reader should have to estimate a length by eye.
+
+The CSVs are built by [`fetch.py`](fetch.py), which reads curl's JSON and
+buckets by publication year. The shared classifier in
+[`../../lib/credits.py`](../../lib/credits.py) reads three independent signals
+off each `FINDER` string: whether it names an AI system or method (Big Sleep,
+Mythos, Claude, "agent"), whether it names an AI-security employer (Aisle
+Research, AntAISecurityLab, OpenAI, Anthropic), and whether it names fuzzing.
+The per-finder table [`curl-finders.csv`](curl-finders.csv) records which band
+each credit falls in, so the affiliation-only rows can be counted separately.
+
+The annual and quarterly tables keep a single combined `ai_attributed` column,
+which is true when a credit carries either AI signal. That column is not a
+statement about method, and the chart's red band inherits the same caveat. It is
+kept combined rather than split because these two files are read directly by the
+blog, and the split can be recovered from the finder table without redefining a
+column already in use.
 
 ## What it cannot support
 
-- **The AI share is a floor.** Classification is by explicit textual marker, so a
-  researcher who used a model and did not say so counts as human here.
+- **The AI share is not a floor.** Classification is by textual marker, and it
+  errs in both directions: a researcher who used a model and did not say so
+  counts as human, while fourteen of 2026's fifteen AI-marked reports name only
+  an employer and may or may not have involved a model on that finding.
+- **Severity is compared across the combined AI band.** The Low-severity
+  comparison below is computed against `ai_attributed`, so it describes reports
+  from AI-security researchers rather than reports with a corroborated AI
+  method.
 - **2026 is a part-year**, and curl publishes in batches at releases, so the
   within-year path is lumpy. The quarterly file is the finer-grained view.
 - **No denominator of effort.** A credit records who reported, not how much

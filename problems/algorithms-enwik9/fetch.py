@@ -10,8 +10,8 @@ leaderboard — judgment no parser should guess at. So the check is only whether
 the standing awarded record still appears on the prize page, and an update is
 made by hand.
 
-The enwik8 slice has no probe of its own: that series was retired in 2020 and
-the prize page carries only the live enwik9 records.
+The retired enwik8 chronology is kept as a compact context table in README.md;
+it has no probe because the prize page carries only the live enwik9 records.
 """
 
 from __future__ import annotations

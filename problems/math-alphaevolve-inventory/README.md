@@ -154,5 +154,4 @@ line of work began with FunSearch's cap-set improvement in December 2023
 gaps, so a cluster is not by itself a signature, is Sherry and Thompson's
 finding [@sherry2021fast]. The series drawn from this frame are
 [the record sequences](../math-alphaevolve-records/README.md),
-[kissing number](../math-kissing-11/README.md) and
 [sums and autoconvolution](../math-sums-autoconvolution/README.md).

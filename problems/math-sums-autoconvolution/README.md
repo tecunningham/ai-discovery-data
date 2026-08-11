@@ -129,8 +129,7 @@ improvement the exception, and that scoring functions had to use exact or interv
 arithmetic because the system otherwise games the score
 [@tao2025exploration]. The direct ancestor of this line of work is FunSearch, which
 in December 2023 improved the cap-set lower bound by evolving programs under an
-automated evaluator [@deepmind2023funsearch]. The other two record series from the
-same frame are [kissing number](../math-kissing-11/README.md) and
+automated evaluator [@deepmind2023funsearch]. The parent record series is
 [the finite-construction groups](../math-alphaevolve-records/README.md); the
 century-scale series with no AI step are
 [analytic-number-theory exponents](../math-antedb/README.md) and

@@ -1,7 +1,11 @@
 # ai-discovery-data
 
-This repository vendors the data, figures, and documentation behind [LLMs' Contribution to Discovery](https://tecunningham.github.io/posts/2026-08-08-llm-contribution-to-discoveries.html).
-Each chart links to its source folder and can be checked and rebuilt from public sources.
+The goal is to track rates of discovery over time across many domains and see
+whether there has been a recent acceleration; the collection supports [LLMs'
+Contribution to Discovery](https://tecunningham.github.io/posts/2026-08-08-llm-contribution-to-discoveries.html).
+A series is included when it has a consistent definition, a usable time axis,
+and public, rebuildable data. Evidence about AI usage is useful context, but is
+not required.
 
 ## Series
 
@@ -16,6 +20,7 @@ Each chart links to its source folder and can be checked and rebuilt from public
 | <b><a href="problems/cyber-nvd-disclosed/">All software: vulnerabilities disclosed</a></b><br><b>Metric:</b> CVEs published per year in the US<br>National Vulnerability Database<br><b>Coverage:</b> 2016–2026, partial through<br>2026-08-10<br><b>Acceleration?</b> 📈 accelerating — but growth was<br>already +32% and +23% in 2024 and 2025, and no<br>disclosure here is attributed to anyone | <a href="problems/cyber-nvd-disclosed/"><img src="problems/cyber-nvd-disclosed/discovery-cyber-nvd-disclosed.png" width="400" alt="All software: vulnerabilities disclosed"></a> |
 | <b><a href="problems/cyber-openssl/">OpenSSL vulnerability disclosures</a></b><br><b>Metric:</b> vulnerabilities disclosed per year,<br>split by finder credit<br><b>Coverage:</b> 2002–2026, partial through 5 August<br>2026<br><b>Acceleration?</b> 📈 accelerating — but the same<br>shape appeared in 2015–2016 from a purely<br>human cause | <a href="problems/cyber-openssl/"><img src="problems/cyber-openssl/discovery-cyber-openssl.png" width="400" alt="OpenSSL vulnerability disclosures"></a> |
 | <b><a href="problems/cyber-oss-fuzz/">OSS-Fuzz vulnerability discoveries</a></b><br><b>Metric:</b> vulnerability records published per<br>year by an automated fuzzing programme<br><b>Coverage:</b> 2020–2026, partial through 10 August<br>2026<br><b>Acceleration?</b> 📉 declining | <a href="problems/cyber-oss-fuzz/"><img src="problems/cyber-oss-fuzz/discovery-cyber-oss-fuzz.png" width="400" alt="OSS-Fuzz vulnerability discoveries"></a> |
+| <b><a href="problems/cyber-osv-cves/">Open-source CVEs represented in OSV</a></b><br><b>Metric:</b> distinct CVE IDs linked to at least<br>one active affected-package record in OSV, by<br>earliest OSV publication date<br><b>Coverage:</b> 2016–2026, partial through<br>2026-08-10<br><b>Acceleration?</b> 📈 accelerating — 2026 annualizes<br>to about 2.3 times 2025, though source growth<br>and disclosure processes can also bend this<br>aggregate | <a href="problems/cyber-osv-cves/"><img src="problems/cyber-osv-cves/discovery-cyber-osv-cves.png" width="400" alt="Open-source CVEs represented in OSV"></a> |
 
 ### Open problems
 
@@ -36,7 +41,6 @@ Each chart links to its source folder and can be checked and rebuilt from public
 | <b><a href="problems/math-alphaevolve-inventory/">Inventory of the AlphaEvolve problem set</a></b><br><b>Metric:</b> per problem, whether it has a live<br>numeric record and how many dated prior works<br>the paper cites<br><b>Coverage:</b> the 65 problems the paper numbers<br>6.1 to 6.65; cited works span 1898–2025; built<br>2026-07-26<br><b>Acceleration?</b> ⚪ baseline | <a href="problems/math-alphaevolve-inventory/"><img src="problems/math-alphaevolve-inventory/alphaevolve-frame-funnel.png" width="400" alt="Inventory of the AlphaEvolve problem set"></a> |
 | <b><a href="problems/math-alphaevolve-records/">Finite construction records around AlphaEvolve</a></b><br><b>Metric:</b> cumulative record steps in five groups<br>of finite construction and packing problems<br><b>Coverage:</b> 1949–2026, 22 record steps across<br>the five groups<br><b>Acceleration?</b> ❓ inconclusive — the 2025<br>cluster is real, but these five groups were<br>selected because an AI system worked on them | <a href="problems/math-alphaevolve-records/"><img src="problems/math-alphaevolve-records/alphaevolve-record-steps.png" width="400" alt="Finite construction records around AlphaEvolve"></a><br><a href="problems/math-alphaevolve-records/"><img src="problems/math-alphaevolve-records/discovery-math-alphaevolve-related-records.png" width="400" alt="Finite construction records around AlphaEvolve"></a> |
 | <b><a href="problems/math-antedb/">ANTEDB analytic-number-theory exponents</a></b><br><b>Metric:</b> cumulative slice-level record changes<br>across 58 exponent slices in the three<br>families $\mu$, $A$ and $\beta$<br><b>Coverage:</b> 1920–2024 in the underlying<br>literature; extracted from the database as of<br>2026-07-26<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/math-antedb/"><img src="problems/math-antedb/antedb-small-multiples.png" width="400" alt="ANTEDB analytic-number-theory exponents"></a><br><a href="problems/math-antedb/"><img src="problems/math-antedb/discovery-math-antedb.png" width="400" alt="ANTEDB analytic-number-theory exponents"></a> |
-| <b><a href="problems/math-kissing-11/">Kissing number in dimension 11</a></b><br><b>Metric:</b> best known lower bound on the kissing<br>number $K(11)$<br><b>Coverage:</b> 1971–2026, five record steps<br><b>Acceleration?</b> ❓ inconclusive — the selected<br>slice accelerates, but it was included because<br>AI improved it | <a href="problems/math-kissing-11/"><img src="problems/math-kissing-11/discovery-math-kissing-11.png" width="400" alt="Kissing number in dimension 11"></a> |
 | <b><a href="problems/math-sphere-packing/">Sphere-packing lower-bound ladder</a></b><br><b>Metric:</b> cumulative improvements to the<br>asymptotic lower bound on sphere-packing<br>density in high dimension<br><b>Coverage:</b> 1905–2025, eight recorded steps<br><b>Acceleration?</b> 📈 accelerating — and every step<br>is human, which is what this series is here to<br>show | <a href="problems/math-sphere-packing/"><img src="problems/math-sphere-packing/discovery-math-sphere-packing.png" width="400" alt="Sphere-packing lower-bound ladder"></a> |
 | <b><a href="problems/math-sums-autoconvolution/">Sums-and-differences and autoconvolution constants</a></b><br><b>Metric:</b> best known lower bounds on two<br>additive-combinatorics constants, $C_{6.44}$<br>and $C_{6.3}$ in the AlphaEvolve numbering<br><b>Coverage:</b> 2007–2025, twelve record steps<br>across the two ladders<br><b>Acceleration?</b> ❓ inconclusive — AI steps are<br>visible in 2025, and a human retook one of the<br>two ladders within months | <a href="problems/math-sums-autoconvolution/"><img src="problems/math-sums-autoconvolution/discovery-math-sums-autoconvolution.png" width="400" alt="Sums-and-differences and autoconvolution constants"></a> |
 | <b><a href="problems/matrix-omega/">Matrix-multiplication exponent ω</a></b><br><b>Metric:</b> best proved upper bound on the<br>asymptotic exponent ω of n×n matrix<br>multiplication; lower is better<br><b>Coverage:</b> 1969 to 2024, fifteen recorded steps<br><b>Acceleration?</b> 📉 declining — the asymptotic<br>record is slowing, and no step in it is AI-<br>attributed | <a href="problems/matrix-omega/"><img src="problems/matrix-omega/discovery-matrix-omega.png" width="400" alt="Matrix-multiplication exponent ω"></a> |
@@ -46,7 +50,6 @@ Each chart links to its source folder and can be checked and rebuilt from public
 | Series | Chart |
 |---|---|
 | <b><a href="problems/algorithms-cifar10/">CIFAR-10 speedrun</a></b><br><b>Metric:</b> seconds to 94% test accuracy on<br>CIFAR-10 on a single A100<br><b>Coverage:</b> 2018–2026; the plotted series starts<br>2022-12-29 and ends with a claim of 2026-07-09<br><b>Acceleration?</b> 📉 declining — the yearly<br>improvement factor falls from 2.9 to a claimed<br>1.09 | <a href="problems/algorithms-cifar10/"><img src="problems/algorithms-cifar10/discovery-algorithms-cifar10.png" width="400" alt="CIFAR-10 speedrun"></a> |
-| <b><a href="problems/algorithms-enwik8/">Hutter Prize compression: enwik8</a></b><br><b>Metric:</b> total size in bytes of decompressor<br>plus archive for a fixed 100 MB text corpus,<br>under a CPU-time and memory cap<br><b>Coverage:</b> 2006-03-24 baseline to the last<br>awarded record on 2017-11-04; retired when the<br>prize moved to enwik9 in February 2020<br><b>Acceleration?</b> ⚪ baseline — a pre-agent record<br>cadence for comparison, not a test of recent<br>acceleration | <a href="problems/algorithms-enwik8/"><img src="problems/algorithms-enwik8/discovery-algorithms-enwik8.png" width="400" alt="Hutter Prize compression: enwik8"></a> |
 | <b><a href="problems/algorithms-enwik9/">Hutter Prize compression: enwik9</a></b><br><b>Metric:</b> total size in bytes of decompressor<br>plus archive for a fixed 1 GB text corpus,<br>under a CPU-time and memory cap<br><b>Coverage:</b> 2019 baseline to 2026; the prize<br>moved to enwik9 on 2020-02-21, and the<br>uncapped comparator runs 2019 to 2023<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/algorithms-enwik9/"><img src="problems/algorithms-enwik9/discovery-algorithms-enwik9.png" width="400" alt="Hutter Prize compression: enwik9"></a> |
 | <b><a href="problems/algorithms-gurobi/">Gurobi mixed-integer programming speed</a></b><br><b>Metric:</b> cumulative vendor-reported MILP<br>speedup across releases, every version rerun<br>on one machine<br><b>Coverage:</b> releases 10 through 13, announced<br>2022-11-14 to 2025-11-18, baselined at version<br>9.5<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/algorithms-gurobi/"><img src="problems/algorithms-gurobi/discovery-algorithms-gurobi.png" width="400" alt="Gurobi mixed-integer programming speed"></a> |
 | <b><a href="problems/algorithms-nanogpt/">modded-nanogpt training speedrun</a></b><br><b>Metric:</b> minutes of training to a fixed target<br>validation loss, per accepted record<br><b>Coverage:</b> 2024-05-28 to 2026-05-27, all 86<br>records listed in the repository README<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/algorithms-nanogpt/"><img src="problems/algorithms-nanogpt/discovery-algorithms-nanogpt.png" width="400" alt="modded-nanogpt training speedrun"></a> |
@@ -60,9 +63,7 @@ Each chart links to its source folder and can be checked and rebuilt from public
 | <b><a href="problems/output-arxiv/">arXiv submissions</a></b><br><b>Metric:</b> research output; preprints submitted<br>to arXiv per month<br><b>Coverage:</b> 1991-07 to 2026-08, monthly, the<br>last month partial<br><b>Acceleration?</b> 📈 accelerating — on volume,<br>which is not discovery | <a href="problems/output-arxiv/"><img src="problems/output-arxiv/output-arxiv-submissions.png" width="400" alt="arXiv submissions"></a> |
 | <b><a href="problems/output-crossref/">DOI records deposited with Crossref</a></b><br><b>Metric:</b> formal publishing volume; DOI records<br>deposited with Crossref per year, by created<br>date<br><b>Coverage:</b> 2010 to 2026, annual, the last year<br>partial<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/output-crossref/"><img src="problems/output-crossref/output-crossref-dois.png" width="400" alt="DOI records deposited with Crossref"></a> |
 | <b><a href="problems/output-github-pushes/">Git pushes to GitHub</a></b><br><b>Metric:</b> code output; git pushes to GitHub per<br>quarter, summed over economies<br><b>Coverage:</b> 2020-Q1 to 2026-Q1, quarterly<br><b>Acceleration?</b> 📈 accelerating — on volume,<br>which is not discovery | <a href="problems/output-github-pushes/"><img src="problems/output-github-pushes/output-github-pushes.png" width="400" alt="Git pushes to GitHub"></a> |
-| <b><a href="problems/output-pypi/">Projects registered on PyPI</a></b><br><b>Metric:</b> code output; total projects registered<br>on the Python Package Index, a stock rather<br>than a flow<br><b>Coverage:</b> 2019-01 to 2026-08, roughly<br>quarterly readings of the front-page counter<br><b>Acceleration?</b> 📈 accelerating — on volume,<br>which is not discovery | <a href="problems/output-pypi/"><img src="problems/output-pypi/output-pypi-projects.png" width="400" alt="Projects registered on PyPI"></a> |
 | <b><a href="problems/output-stackoverflow/">Stack Overflow questions</a></b><br><b>Metric:</b> demand for human answers; questions<br>created on Stack Overflow per month<br><b>Coverage:</b> 2019-01 to 2026-07, monthly,<br>complete months only<br><b>Acceleration?</b> 📉 declining — on demand for<br>human answers, not on discovery | <a href="problems/output-stackoverflow/"><img src="problems/output-stackoverflow/output-stackoverflow-questions.png" width="400" alt="Stack Overflow questions"></a> |
-| <b><a href="problems/technology-cost-curves/">Technology cost curves: the pre-AI efficiency baseline</a></b><br><b>Metric:</b> 66 industrial and scientific<br>technologies; months to halve unit cost,<br>fitted log-linearly per technology, set<br>against the halving times quoted for AI<br>algorithmic progress<br><b>Coverage:</b> 1929–2013 for the cost curves;<br>2012–2023 for the three AI estimates they are<br>compared with<br><b>Acceleration?</b> ⚪ baseline | <a href="problems/technology-cost-curves/"><img src="problems/technology-cost-curves/efficiency-halving-times.png" width="400" alt="Technology cost curves: the pre-AI efficiency baseline"></a> |
 <!-- END GENERATED: series-index -->
 
 ## Validation
@@ -76,6 +77,7 @@ Each chart links to its source folder and can be checked and rebuilt from public
 | [All software: vulnerabilities disclosed](problems/cyber-nvd-disclosed/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [OpenSSL vulnerability disclosures](problems/cyber-openssl/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [OSS-Fuzz vulnerability discoveries](problems/cyber-oss-fuzz/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Open-source CVEs represented in OSV](problems/cyber-osv-cves/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Erdős problems catalogue](problems/math-erdos/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Hilbert's problems](problems/math-hilbert/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [Landau's problems](problems/math-landau/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
@@ -86,12 +88,10 @@ Each chart links to its source folder and can be checked and rebuilt from public
 | [Inventory of the AlphaEvolve problem set](problems/math-alphaevolve-inventory/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Finite construction records around AlphaEvolve](problems/math-alphaevolve-records/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [ANTEDB analytic-number-theory exponents](problems/math-antedb/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Kissing number in dimension 11](problems/math-kissing-11/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [Sphere-packing lower-bound ladder](problems/math-sphere-packing/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [Sums-and-differences and autoconvolution constants](problems/math-sums-autoconvolution/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [Matrix-multiplication exponent ω](problems/matrix-omega/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [CIFAR-10 speedrun](problems/algorithms-cifar10/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Hutter Prize compression: enwik8](problems/algorithms-enwik8/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [Hutter Prize compression: enwik9](problems/algorithms-enwik9/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Gurobi mixed-integer programming speed](problems/algorithms-gurobi/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [modded-nanogpt training speedrun](problems/algorithms-nanogpt/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -100,11 +100,9 @@ Each chart links to its source folder and can be checked and rebuilt from public
 | [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Projects registered on PyPI](problems/output-pypi/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [Stack Overflow questions](problems/output-stackoverflow/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Technology cost curves: the pre-AI efficiency baseline](problems/technology-cost-curves/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 
-33 problems holding 35 figures and 41 data files. 17 refetch from upstream and 16 are maintained by hand and say so. No failing cells.
+30 problems holding 32 figures and 37 data files. 18 refetch from upstream and 12 are maintained by hand and say so. No failing cells.
 <!-- END GENERATED: checks-table -->
 
 ## How to read the series
@@ -115,14 +113,19 @@ shows an acceleration in the rate of discovery, not whether AI contributed:
 
 📈 accelerating  ·  📉 declining  ·  ➡️ no acceleration  ·  ❓ inconclusive  ·  ⏳ too early  ·  ⚪ baseline
 
+Attribution is deliberately not an admission test. The first-stage question is
+whether output under a stable inclusion rule bends upward in the agent era.
+Finder credits, where they exist, help investigate a mechanism; where they do
+not, the time series still supplies evidence about the claimed acceleration.
+Neither case identifies causation by itself.
+
 Open-problem ledgers are separated from mathematical bounds and records because
 their instruments differ. The former show current status plus dated resolution
 events; the latter track changes in numerical quantities.
 
-The final group sits outside the three worked domains. Integer factorization and
-technology cost curves span the cost of checking a candidate answer, while the
-output-volume series are contrast cases whose curves can bend without measuring
-discovery.
+The final group sits outside the three worked domains. Integer factorization is
+a cheap-verification control, while the output-volume series are contrast cases
+whose curves can bend without measuring discovery.
 
 ## What validation checks
 
@@ -148,8 +151,14 @@ two tables above.
 
 ## What the numbers are and are not
 
-Three conventions run through every series here, and reading a chart without
+Four conventions run through every series here, and reading a chart without
 them will mislead you.
+
+**Attribution is optional, and acceleration is not attribution.** A series is
+included when its events are selected consistently enough to compare over time.
+An upward bend is a signal to investigate alongside external evidence, not an
+estimate of AI's causal share. Conversely, a series does not become informative
+merely because a few events name a model.
 
 **A finder credit is a floor, not a measurement.** Where a project records who
 found a vulnerability, this data classifies a report as AI-credited only when
@@ -226,8 +235,8 @@ hand with source URLs recorded in the CSV. The Hilbert, Landau, Thurston, Smale,
 Millennium, and TOPP status ledgers are hand-scored from the secondary accounts
 their documents name.
 
-`problems/math-alphaevolve-records/fetch.py` also writes the kissing-number and
-sums-and-differences slices into their sibling folders so those datasets cannot
+`problems/math-alphaevolve-records/fetch.py` also writes the
+sums-and-differences slice into its sibling folder so those datasets cannot
 drift apart.
 
 ## Who reads this
@@ -245,8 +254,8 @@ says whether they are current.
 
 Every CSV records where its rows came from, either in a per-row source column
 or in the header of the fetch script that built it. The underlying facts belong
-to their publishers — the curl project, Mozilla, OpenSSL, NIST, CISA, Google
-OSS-Fuzz, the Erdős problems community, ANTEDB, Google DeepMind, the Hutter
-Prize, nextchessmove.com, and the speedrun leaderboards — and are collected
+to their publishers — the curl project, Mozilla, OpenSSL, NIST, CISA, OSV,
+Google OSS-Fuzz, the Erdős problems community, ANTEDB, Google DeepMind, the
+Hutter Prize, nextchessmove.com, and the speedrun leaderboards — and are collected
 here under the terms each publisher offers. The aggregation, classification,
 and arithmetic are this repository's, and are the part that can be wrong.

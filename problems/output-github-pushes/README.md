@@ -100,8 +100,7 @@ longer history, and [Crossref](../output-crossref/README.md) is the control:
 publishing volume rose steeply through the same period with no clean bend, so a
 rising volume curve is not by itself evidence of anything new.
 [Stack Overflow](../output-stackoverflow/README.md) is the direct pairing —
-pushes of code roughly double while questions about code collapse — and
-[PyPI](../output-pypi/README.md) counts the packages some of these pushes
-become. HackerOne's platform self-report of a 210% rise in AI-attributed
+pushes of code roughly double while questions about code collapse. HackerOne's
+platform self-report of a 210% rise in AI-attributed
 vulnerability reports [@hackerone2025autonomy] is a statement of the same kind:
 a count of submissions rather than of what was found.

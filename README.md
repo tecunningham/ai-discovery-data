@@ -1,8 +1,11 @@
 # ai-discovery-data
 
-This repository vendors the data, figures, and documentation behind [LLMs' Contribution to Discovery](https://tecunningham.github.io/posts/2026-08-08-llm-contribution-to-discoveries.html).
-Each chart links to public sources and is rebuildable; inclusion requires a
-consistent rule and a usable time axis, not attribution of each event to AI.
+The goal is to track rates of discovery over time across many domains and see
+whether there has been a recent acceleration; the collection supports [LLMs'
+Contribution to Discovery](https://tecunningham.github.io/posts/2026-08-08-llm-contribution-to-discoveries.html).
+A series is included when it has a consistent definition, a usable time axis,
+and public, rebuildable data. Evidence about AI usage is useful context, but is
+not required.
 
 ## Series
 

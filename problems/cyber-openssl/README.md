@@ -40,7 +40,7 @@ disclosures from 1 January through 5 August 2015, 19 in the same period of 2016,
 and 16 in 2023. Comparing only partial 2026 with complete prior years understates
 rather than creates the numerical record.
 
-Of the 39 CVEs in 2026, 18 have finding-level evidence of AI use. Nine more name
+Of the 39 CVEs in 2026, 18 have finding-level evidence of AI use, and 9 more name
 an AI-security affiliation, but their discovery method is unverified. The other
 12 have conventional reporter credits; none is uncredited or explicitly
 fuzz-attributed. This replaces the previous claim that 27 of 39 were “explicitly

@@ -93,9 +93,8 @@ The comparison this folder exists for is with the rest of the collection.
 pushed to GitHub roughly doubles over the last five quarters while questions
 about code collapse, which is what substitution for the human help around coding
 would look like and also what a platform losing its audience would look like.
-[arXiv](../output-arxiv/README.md) and [PyPI](../output-pypi/README.md) are the
-other rising artifact counts, and [Crossref](../output-crossref/README.md) is
-the control on all of them. Set the whole group against
+[arXiv](../output-arxiv/README.md) is the other rising artifact count, and
+[Crossref](../output-crossref/README.md) is the control on both. Set the group against
 [curl](../cyber-curl/README.md), where a fixed codebase yields a step change in
 disclosures, and against the mathematics folders, where the records barely move:
 this is the only series here that changes by almost two orders of magnitude, and it

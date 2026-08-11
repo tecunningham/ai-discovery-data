@@ -5,7 +5,7 @@
 **Coverage:** 1971–2026, five record steps
 **Data:** [`kissing-11-records.csv`](kissing-11-records.csv), the problem 6.8 rows of the AlphaEvolve record transcription
 **Upstream:** <https://cohn.mit.edu/kissing-numbers>, with per-step sources in the CSV's `ref` and `note` columns
-**Verdict:** accelerating — a burst on one dimension of one problem, not a field-wide rate
+**Verdict:** inconclusive — the selected slice accelerates, but it was included because AI improved it
 
 ![The dimension-11 kissing-number lower bound, from 566 in 1971 to 604 in 2026.](discovery-math-kissing-11.png)
 
@@ -39,7 +39,9 @@ are not pinned.
 
 The shape is a 45-year plateau followed by three steps in four years, two of them
 AI-set. That is the clearest AI-era burst on any mathematical quantity in this
-collection.
+collection. The verdict remains inconclusive for the same reason as the parent
+AlphaEvolve record set: this dimension was selected after an AI system improved
+it, so the burst is real but cannot estimate an out-of-sample acceleration rate.
 
 Two things cut it down, and both are visible in the data. The step sizes are small
 in relative terms: AlphaEvolve's is +1 on 592, a gain of 0.17%, and the agent

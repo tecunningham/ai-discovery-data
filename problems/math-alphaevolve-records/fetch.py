@@ -26,8 +26,9 @@ about 2.5x. The draw is kept rather than redrawn, since redrawing on inspection
 is the thing pre-commitment exists to prevent; weight accordingly.
 
 The values below are transcribed by hand from the paper's own prose, verbatim
-where quoted, with the reference number and its bibliography year recorded per
-step. Only six of the twelve sampled problems yielded a scalar record sequence
+where quoted. Bare reference numbers are identified as entries in the
+arXiv:2511.02864 bibliography rather than left context-free in the CSV. Only six
+of the twelve sampled problems yielded a scalar record sequence
 at all; the other six are recorded in NO_SEQUENCE with the reason, because that
 is itself the main finding of this phase.
 
@@ -507,6 +508,13 @@ SLICES = [
 # missing data, and a chart that hides that misrepresents the exercise.
 
 
+def source_ref(ref: str) -> str:
+    """Make bibliography numbers self-contained in the generated CSV."""
+    if ref.isdigit():
+        return f"arXiv:2511.02864 bibliography ref {ref}"
+    return ref
+
+
 def rows() -> list[dict]:
     out: list[dict] = []
     by_quantity: dict[tuple[str, str], list] = {}
@@ -524,7 +532,7 @@ def rows() -> list[dict]:
             out.append({
                 "problem": problem, "quantity": quantity, "direction": direction,
                 "step": index, "year": year, "value": value, "agent": agent,
-                "attribution": who, "ref": ref,
+                "attribution": who, "ref": source_ref(ref),
                 # Two prior-record steps cannot be dated: reference [290] has no
                 # year in the paper's bibliography, and [134] is cited with
                 # literal [YEAR]/[DATE] placeholders left unfilled.

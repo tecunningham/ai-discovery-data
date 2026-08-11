@@ -528,20 +528,24 @@ def in_reading_order(problems: list[Problem]) -> list[Problem]:
 
 
 def thumbnails(problem: Problem) -> str:
-    """The folder's figures as links into it, sized to sit in a table cell.
+    """One primary figure linked into the folder, sized for the index table.
 
-    Written as HTML because markdown image syntax has no width, and a chart at
-    its natural 1600 pixels makes the index unreadable. A folder with several
-    figures stacks them, since a table cell is as wide as its contents and three
-    thumbnails in a row would push the prose columns off the screen.
+    Problem pages may carry diagnostics and sensitivity figures, but the main
+    index is a scan of series rather than a gallery of every output.  By
+    convention ``discovery-*.png`` is the primary time-series figure; when a
+    folder has no such file, its first (usually only) figure is the fallback.
+    Written as HTML because markdown image syntax has no width.
     """
     if not problem.figures:
         return "<em>document + data only</em>"
-    return "<br>".join(
+    preferred = [figure for figure in problem.figures
+                 if figure.name.startswith("discovery-")]
+    figure = preferred[0] if preferred else problem.figures[0]
+    return (
         f'<a href="problems/{problem.slug}/">'
         f'<img src="problems/{problem.slug}/{figure.name}" width="{THUMB_WIDTH}" '
         f'alt="{problem.title}"></a>'
-        for figure in problem.figures)
+    )
 
 
 def marked_verdict(problem: Problem) -> str:
@@ -550,8 +554,41 @@ def marked_verdict(problem: Problem) -> str:
     return f"{mark} {verdict}".strip()
 
 
+def caption_links(problem: Problem) -> str:
+    """Compact provenance links for a row in the main series index.
+
+    The problem page is the full source ledger.  The index links directly to
+    the first folder-local CSV named on its **Data:** line and the first URL on
+    its **Upstream:** line: those are the primary plotted data and primary
+    upstream source by the repository's documentation convention.  Additional
+    inputs remain linked and explained on the problem page, keeping this strip
+    short enough to scan beside a chart.
+    """
+    links = [f'<a href="problems/{problem.slug}/">Discussion</a>']
+
+    named_csvs = re.findall(
+        r"\(([^()/]+\.csv)\)", problem.fields.get("Data", "")
+    )
+    primary_csv = next(
+        (name for name in named_csvs if (problem.folder / name).exists()),
+        problem.csvs[0].name if problem.csvs else "",
+    )
+    if primary_csv:
+        links.append(
+            f'<a href="problems/{problem.slug}/{primary_csv}">Data</a>'
+        )
+
+    upstream = re.search(
+        r"https?://[^\s<>()\[\]`\"']+", problem.fields.get("Upstream", "")
+    )
+    if upstream:
+        links.append(f'<a href="{upstream.group(0).rstrip(".,;")}">Source</a>')
+
+    return " · ".join(links)
+
+
 def details(problem: Problem) -> str:
-    """The title and the three fields, hard-wrapped, for the cell beside the chart.
+    """Caption metadata and provenance links for the cell beside the chart.
 
     Wrapped rather than left to the browser because a table column is as wide as
     its longest unbroken line, and one 90-character sentence would take the width
@@ -564,6 +601,7 @@ def details(problem: Problem) -> str:
         wrapped = textwrap.wrap(f"{label} {value}", DETAIL_WRAP) or [label]
         wrapped[0] = wrapped[0].replace(label, f"<b>{label}</b>", 1)
         lines += wrapped
+    lines.append(caption_links(problem))
     return "<br>".join(lines)
 
 
@@ -635,7 +673,15 @@ def main() -> int:
                         help="fetch every URL in every document (needs network)")
     args = parser.parse_args()
 
-    folders = sorted(p for p in PROBLEMS.iterdir() if p.is_dir())
+    # Ignore directories containing only nested build artifacts.  They can keep
+    # an otherwise deleted folder alive in a long-used checkout (notably via a
+    # stale __pycache__/), but a folder with any real top-level file must still
+    # be checked so that an accidentally deleted README is reported.
+    folders = sorted(
+        path
+        for path in PROBLEMS.iterdir()
+        if path.is_dir() and any(child.is_file() for child in path.iterdir())
+    )
     problems = [Problem(folder) for folder in folders]
     slugs = {problem.slug for problem in problems}
     keys = bib_keys()

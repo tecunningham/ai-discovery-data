@@ -120,7 +120,7 @@ gate. No other commit in the repository credits a language model, and no Elo gai
 in thirteen years of this series is AI-attributed.
 
 That size is the same order as the AI-set records on
-[modded-nanogpt](../algorithms-nanogpt/README.md), where four of 86 records are AI-credited
+[modded-nanogpt](../algorithms-nanogpt/README.md), where five of 89 records are AI-credited
 at roughly one percent each. The one deeper AI step anywhere nearby is on the
 [CIFAR-10 speedrun](../algorithms-cifar10/README.md), at about 23%.
 

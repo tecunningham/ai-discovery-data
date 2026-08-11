@@ -210,7 +210,7 @@ problems/cyber-curl/
 | Path | What is in it |
 |---|---|
 | `problems/<slug>/` | One folder per problem, as above. |
-| `lib/chart.py` | Shared colours, axis styling, and figure saving. |
+| `lib/chart.py`, `lib/renderer.py` | Shared chart styling, saving, and the canonical renderer contract. |
 | `lib/families.py` | Chart shapes used by more than one problem. |
 | `lib/credits.py` | Classification of vulnerability finder credits. |
 | `lib/table.py`, `lib/web.py` | CSV and upstream-fetching helpers. |
@@ -223,28 +223,36 @@ happens in the prose rather than in a composite chart.
 
 ## Reproducing
 
-Figures need Python 3.12, the exact versions in `requirements.txt`, and
-matplotlib's bundled DejaVu Sans font, but no network:
+Figures are built in one digest-pinned Linux/amd64 container, both locally and
+in CI. Install Docker Desktop, OrbStack or another Docker-compatible runtime;
+the host's Python, matplotlib and fonts are deliberately not used:
 
 ```bash
-python3 -m pip install -r requirements.txt
-make figures                    # redraw every PNG
-make figure PROBLEM=cyber-curl  # redraw one folder
-make check                      # check data, documents, and sources
-make check-figures              # also verify PNG bytes
+make figure-image               # optional warm-up; later targets build it too
+make figures                    # redraw every PNG in the pinned renderer
+make figure PROBLEM=cyber-curl  # redraw one folder in the pinned renderer
+make check                      # fast host-side data/document/source checks
+make check-figures              # containerized redraw and byte comparison
 ```
 
-CI runs `make check-figures` on every push and pull request. A second workflow,
+Do not run a `figure.py` directly. The shared save helper rejects PNG writes
+outside the canonical container and points back to the corresponding Make
+command. `make index` is containerized too because it performs the full figure
+check before rewriting the generated README tables.
+
+CI runs the same `make check-figures` target on every push and pull request. A
+second workflow,
 [`freshness.yml`](.github/workflows/freshness.yml), runs weekly, refetches every
 automatable series, and fails if any vendored CSV no longer matches its
 upstream — the one failure mode that is invisible from inside the repository,
 since a stale series passes every other check. It checks the documented URLs in
 the same run.
 
-The figures are byte-for-byte reproducible under that pinned environment, not
-under arbitrary matplotlib or FreeType installations. Each PNG's `Software`
-metadata records the Python, matplotlib, and FreeType versions plus its generator
-path, and CI checks the committed bytes from a clean pinned install.
+The renderer pins the Python base image by digest, forces `linux/amd64`, and
+installs the exact versions in `requirements.txt`. Each PNG's `Software`
+metadata records the Python, matplotlib and FreeType versions plus its generator
+path. Local checks and CI therefore compare bytes produced by the same rendering
+ABI rather than merely similar Python environments.
 
 Rebuilding data is a separate networked step:
 

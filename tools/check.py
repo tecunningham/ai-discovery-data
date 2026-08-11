@@ -691,6 +691,17 @@ def main() -> int:
     check_chart_as_of(problems)
     duplicate_names(problems)
     if args.reproduce or args.write_index:
+        # Import lazily: the ordinary document/data check does not need
+        # matplotlib. This also turns a direct host invocation into one clear
+        # instruction instead of 31 near-identical figure.py failures.
+        sys.path.insert(0, str(ROOT))
+        from lib.renderer import assert_canonical_renderer
+
+        try:
+            assert_canonical_renderer()
+        except RuntimeError as error:
+            print(f"ERROR {error}")
+            return 2
         reproduce(problems)
 
     failures = [message for problem in problems for message in problem.messages()]

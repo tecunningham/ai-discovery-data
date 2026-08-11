@@ -1,6 +1,14 @@
-.PHONY: help figures figure check check-figures check-links index fetch fetch-one sync clean
+.PHONY: help figure-image figures figure check check-figures check-links index fetch fetch-one sync clean
 
 BLOG ?= $(HOME)/tecunningham.github.io
+FIGURE_IMAGE ?= ai-discovery-data-figures:python3.12.13
+FIGURE_PLATFORM := linux/amd64
+FIGURE_DOCKERFILE := tools/figures.Dockerfile
+FIGURE_RUN = docker run --rm --platform $(FIGURE_PLATFORM) \
+	--user "$$(id -u):$$(id -g)" \
+	--volume "$(CURDIR):/repo" \
+	--workdir /repo \
+	$(FIGURE_IMAGE)
 
 # Every problem folder builds itself. There is no central generator, so the
 # target is a loop over the folders rather than a list to keep in sync.
@@ -10,35 +18,39 @@ FIGURE_SCRIPTS := $(wildcard problems/*/figure.py)
 FETCH_SCRIPTS := $(filter-out problems/math-antedb/fetch.py, $(wildcard problems/*/fetch.py))
 
 help:
-	@echo "figures            redraw every problems/*/*.png from its folder's CSVs (no network)"
-	@echo "figure PROBLEM=x   redraw one folder"
+	@echo "figure-image       build the pinned Linux renderer (requires Docker)"
+	@echo "figures            redraw every problems/*/*.png in that renderer (no data network)"
+	@echo "figure PROBLEM=x   redraw one folder in that renderer"
 	@echo "check              verify every folder accounts for its data, figure and sources"
-	@echo "check-figures      also redraw every figure and compare it with the committed one"
+	@echo "check-figures      redraw and byte-compare in the same renderer used by CI"
 	@echo "check-links        check every documented URL (network, may see transient failures)"
 	@echo "index              rewrite README's series index and status table (runs check-figures)"
 	@echo "fetch              refetch every automatable series from upstream (network, slow)"
 	@echo "fetch-one PROBLEM=x  refetch one folder"
 	@echo "sync               copy the figures into the blog repo (BLOG=$(BLOG))"
 
-figures:
-	@for script in $(FIGURE_SCRIPTS); do python3 $$script || exit 1; done
+figure-image:
+	docker build --platform $(FIGURE_PLATFORM) --file $(FIGURE_DOCKERFILE) --tag $(FIGURE_IMAGE) .
 
-figure:
-	python3 problems/$(PROBLEM)/figure.py
+figures: figure-image
+	@$(FIGURE_RUN) sh -c 'for script in $(FIGURE_SCRIPTS); do python3 "$$script" || exit 1; done'
+
+figure: figure-image
+	$(FIGURE_RUN) python3 problems/$(PROBLEM)/figure.py
 
 check:
 	python3 tools/check.py
 
-# Separate from `check` only because it is ten seconds rather than one: it runs
-# every figure.py and compares the result with what is committed.
-check-figures:
-	python3 tools/check.py --reproduce
+# Separate from `check` because it needs Docker and is slower: it runs every
+# figure.py and compares the result with what is committed.
+check-figures: figure-image
+	$(FIGURE_RUN) python3 tools/check.py --reproduce
 
 check-links:
 	python3 tools/check.py --links
 
-index:
-	python3 tools/check.py --write-index
+index: figure-image
+	$(FIGURE_RUN) python3 tools/check.py --write-index
 
 # Kept out of `figures` because these need the network and several sources
 # rate-limit. Responses are cached for the day under .cache/, so two folders

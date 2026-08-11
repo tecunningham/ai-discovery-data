@@ -13,9 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - run: python -m pip install --requirement requirements.txt
+      # This is intentionally the same target contributors run locally. The
+      # digest-pinned linux/amd64 image makes PNG bytes independent of the host
+      # OS, Python installation and system fonts.
       - run: make check-figures

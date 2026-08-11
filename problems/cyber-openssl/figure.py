@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-"""Draw annual and publication-batch OpenSSL disclosure charts.
+"""Draw the annual, publication-batch and severity OpenSSL disclosure charts.
 
 Run: python3 problems/cyber-openssl/figure.py
+
+The severity chart cuts the same CVE ledger by OpenSSL's own rating, which is
+what turns a record disclosure count into a question about how much of it
+matters. It starts in 2015: the project's structured metadata carries no
+severity before 2014, and an unrated record is missing data rather than a low
+one.
 """
 
 from __future__ import annotations
@@ -28,9 +34,14 @@ from lib.chart import (  # noqa: E402
     source_note,
     style,
 )
+from lib.families import severity_panels  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 SOURCE_URL = "https://github.com/openssl/release-metadata/tree/main/secjson"
+# OpenSSL scores Moderate where curl scores Medium, so the ladder is named here
+# rather than taken from lib.credits.
+OPENSSL_SEVERITIES = ["Low", "Moderate", "High", "Critical"]
+RATED_FROM = 2015
 AFFILIATED = FUZZ
 UNKNOWN = NEUTRAL
 SERIES = (
@@ -183,9 +194,61 @@ def batch_chart() -> None:
     )
 
 
+def severity_chart() -> None:
+    rows = [row for row in read_csv(HERE / "openssl-cves.csv")
+            if int(row["published"][:4]) >= RATED_FROM]
+    unrated = [row for row in rows if row["severity"] not in OPENSSL_SEVERITIES]
+    if unrated:
+        raise SystemExit(
+            f"{len(unrated)} CVEs from {RATED_FROM} on carry no severity rating "
+            f"(first: {unrated[0]['cve']}); the chart's premise no longer holds"
+        )
+
+    def tally(subset) -> dict[str, int]:
+        counts = Counter(row["severity"] for row in subset)
+        return {severity: counts.get(severity, 0) for severity in OPENSSL_SEVERITIES}
+
+    years = sorted({row["published"][:4] for row in rows})
+    by_year = {year: tally([r for r in rows if r["published"][:4] == year])
+               for year in years}
+
+    current = [row for row in rows if row["published"][:4] == years[-1]]
+    baseline = [row for row in rows if row["published"][:4] != years[-1]]
+    cohorts = [
+        (f"{years[0]}–{years[-2]}, all finders", tally(baseline)),
+        (f"{years[-1]}, conventional or fuzzing", tally(
+            [r for r in current
+             if r["explicit_ai"] == "no" and r["ai_affiliated"] == "no"])),
+        (f"{years[-1]}, AI-affiliated, method unverified", tally(
+            [r for r in current
+             if r["explicit_ai"] == "no" and r["ai_affiliated"] == "yes"])),
+        (f"{years[-1]}, corroborated AI method", tally(
+            [r for r in current if r["explicit_ai"] == "yes"])),
+    ]
+
+    severity_panels(
+        HERE / "severity-cyber-openssl.png",
+        "OpenSSL disclosures by severity",
+        "The CVE ledger cut by OpenSSL's own rating, from the first year it rated",
+        years=years,
+        by_year=by_year,
+        cohorts=cohorts,
+        severities=OPENSSL_SEVERITIES,
+        source_label="OpenSSL release-metadata, one row per CVE",
+        source_url=SOURCE_URL,
+        built_by=__file__,
+        year_caption=(
+            f"Shares of each year's rated CVEs; {RATED_FROM} is the first year "
+            "the metadata carries a severity."
+        ),
+        cohort_caption="Share of that cohort's disclosures",
+    )
+
+
 def main() -> None:
     annual_chart()
     batch_chart()
+    severity_chart()
 
 
 if __name__ == "__main__":

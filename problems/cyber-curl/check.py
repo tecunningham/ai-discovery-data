@@ -44,6 +44,19 @@ def main() -> int:
         100 * int(current["other_sev_low"]) / int(current["other_attributed"])
     )
 
+    # The severity chart's two baseline cohorts, recomputed over the same rows
+    # figure.py groups so the prose and the picture cannot drift apart.
+    def cohort_share(rows, numerator, denominator) -> int:
+        top = sum(sum(int(row[field]) for field in numerator) for row in rows)
+        bottom = sum(int(row[denominator]) for row in rows)
+        return round(100 * top / bottom)
+
+    early = [row for row in annual if 2010 <= int(row["year"]) <= 2022]
+    recent = [row for row in annual if 2023 <= int(row["year"]) <= 2025]
+    early_low = cohort_share(early, ["sev_low"], "total")
+    early_severe = cohort_share(early, ["sev_high", "sev_critical"], "total")
+    recent_human_low = cohort_share(recent, ["other_sev_low"], "other_attributed")
+
     expected = {
         f"{current['total']} through 24 June 2026": "current total",
         f"with {current['ai_attributed']} of those crediting": "current AI count",
@@ -54,6 +67,9 @@ def main() -> int:
         "Big Sleep's curl credit is in 2025, not 2026": "Big Sleep year",
         "Stanislav Fort of Aisle Research appears in both curl and OpenSSL":
             "cross-project finder",
+        f"{early_low}% Low and {early_severe}% High or Critical":
+            "2010-2022 severity mix",
+        f"already {recent_human_low}% Low": "2023-2025 non-AI severity mix",
     }
     failures = [
         f"README lacks recomputed {label}: {phrase!r}"

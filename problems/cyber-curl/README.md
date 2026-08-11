@@ -53,6 +53,22 @@ disclosures were 18% Low and 28% High or Critical, and by 2023–2025 the non-AI
 finds were already 67% Low. So AI intensifies a pre-existing trend on a
 hardening codebase rather than starting it.
 
+![curl disclosures by severity: annual composition since 2010, and four finder cohorts compared.](severity-cyber-curl.png)
+
+The severity chart puts those four numbers next to the trend they sit in. The
+top panel is every year since 2010 as shares rather than counts, because the
+question it answers — what was a year's disclosures made of — is not the
+question the disclosure chart answers, and a year with one disclosure would
+otherwise be invisible beside a year with thirty-six. The drift is plain and it
+starts around 2017, years before any AI credit: High and Critical findings go
+from most of the bar to almost none of it.
+
+The bottom panel is the comparison, one bar per cohort, ordered so the AI-marked
+slice is read last and against the right baseline. The gap between 48% and 80%
+Low in 2026 is real, but the gap that matters is between 18% across 2010–2022
+and 67% for non-AI credits in 2023–2025, which is most of the way to the AI
+figure and contains no AI at all.
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `cyber_stacked()` shape in
@@ -65,6 +81,16 @@ onward is shaded, as in every figure here.
 The axis is linear and nothing is normalized, so a bar twice as tall is twice as
 many vulnerabilities. A log axis was avoided deliberately: it would flatten
 exactly the 2026 step the series exists to show.
+
+The severity figure comes from the same script through the shared
+`severity_panels()` shape, which OpenSSL also draws. Severity is an ordered
+scale, not a set of categories, so it is drawn in one hue in even lightness
+steps rather than four unrelated colours: the ordering should be visible in the
+ink without consulting the legend. The hue is deliberately neither the red nor
+the amber the disclosure chart spends on finder identity, so a severity band
+cannot be misread as a finder band. Both panels are shares, and the cohort
+percentages are written on the bars because the lightest step sits below the 3:1
+contrast a reader should have to estimate a length by eye.
 
 The CSVs are built by [`fetch.py`](fetch.py), which reads curl's JSON and
 buckets by publication year. The shared classifier in

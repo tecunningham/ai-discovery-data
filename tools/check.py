@@ -427,7 +427,7 @@ def strays() -> list[str]:
 def index_group(problem: Problem) -> str:
     if problem.slug in OPEN_PROBLEM_SLUGS:
         return "open problems"
-    if problem.domain == "mathematics":
+    if problem.domain == "mathematics" or problem.slug == "matrix-omega":
         return "mathematical bounds and records"
     return problem.domain
 

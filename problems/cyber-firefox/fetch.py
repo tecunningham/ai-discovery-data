@@ -9,9 +9,14 @@ Counts are by the advisory's `announced` year. Pre-2016 advisories do not list
 CVEs in this structure, so the series starts there. Two views come out of the
 repository: annual counts split by credit, and one row per reporter per year.
 
-AI attribution is by explicit marker in the reporter string (see lib/credits.py)
-and is therefore a floor. Fuzzers are counted apart from AI: a fuzzer is
-automated but is not a model.
+The plotted unit is the distinct CVE. Mozilla repeats one CVE across the Firefox,
+Firefox ESR and Thunderbird advisories of a release, so a mention count moves
+with Mozilla's packaging as well as with discovery; mention counts are kept as a
+sensitivity column rather than as the headline.
+
+AI attribution is by explicit marker in the reporter string (see lib/credits.py),
+which separates a named AI method from a bare AI-company affiliation and carries
+error in both directions. Fuzz is an independent signal, not a rival category.
 
 Requires PyYAML.
 """
@@ -29,7 +34,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.credits import classify  # noqa: E402
+from lib.credits import Signals, band, classify, signals  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch  # noqa: E402
 
@@ -88,19 +93,41 @@ def records() -> list[dict]:
 
 
 def build_annual(rows: list[dict]) -> list[dict]:
+    """Annual counts of distinct CVEs by band, with mention counts alongside.
+
+    A CVE repeated across a release's advisories is one discovery, so the band
+    columns count distinct CVE IDs. Where the same CVE carries different reporter
+    strings in different advisories, its signals are unioned across that year's
+    mentions before the display precedence is applied — otherwise which advisory
+    happened to be read last would decide the band.
+    """
     per_year: dict[int, Counter] = defaultdict(Counter)
     unique_cves: dict[int, set[str]] = defaultdict(set)
     unique_ai_cves: dict[int, set[str]] = defaultdict(set)
+    cve_signals: dict[tuple[int, str], Signals] = {}
     ai_reporters: Counter = Counter()
     for record in rows:
-        bucket = per_year[record["year"]]
+        year = record["year"]
+        bucket = per_year[year]
         bucket["total"] += 1
-        unique_cves[record["year"]].add(record["cve"])
-        category = classify(record["reporter"], record["year"])
+        unique_cves[year].add(record["cve"])
+        marks = signals(record["reporter"], year)
+        key = (year, record["cve"])
+        seen = cve_signals.get(key)
+        cve_signals[key] = marks if seen is None else Signals(
+            explicit_ai=seen.explicit_ai or marks.explicit_ai,
+            ai_affiliated=seen.ai_affiliated or marks.ai_affiliated,
+            fuzz=seen.fuzz or marks.fuzz,
+        )
+        bucket[f"mention_{marks.band}"] += 1
+        category = classify(record["reporter"], year)
         bucket[f"{category}_attributed"] += 1
         if category == "ai":
             ai_reporters[record["reporter"][:90]] += 1
-            unique_ai_cves[record["year"]].add(record["cve"])
+            unique_ai_cves[year].add(record["cve"])
+    unique_bands: dict[int, Counter] = defaultdict(Counter)
+    for (year, _cve), marks in cve_signals.items():
+        unique_bands[year][marks.band] += 1
     this_year = datetime.now(timezone.utc).year
     latest = max(
         (record["announced"] for record in rows if record["announced"]),
@@ -109,8 +136,16 @@ def build_annual(rows: list[dict]) -> list[dict]:
     annual = [
         {
             "year": year,
-            "total": per_year[year]["total"],
             "unique_cves": len(unique_cves[year]),
+            "unique_explicit_ai": unique_bands[year]["explicit_ai"],
+            "unique_ai_affiliated": unique_bands[year]["ai_affiliated"],
+            "unique_fuzz": unique_bands[year]["fuzz"],
+            "unique_other": unique_bands[year]["other"],
+            "total": per_year[year]["total"],
+            "mentions_explicit_ai": per_year[year]["mention_explicit_ai"],
+            "mentions_ai_affiliated": per_year[year]["mention_ai_affiliated"],
+            "mentions_fuzz": per_year[year]["mention_fuzz"],
+            "mentions_other": per_year[year]["mention_other"],
             "ai_attributed": per_year[year]["ai_attributed"],
             "unique_ai_cves": len(unique_ai_cves[year]),
             "fuzz_attributed": per_year[year]["fuzz_attributed"],
@@ -122,7 +157,8 @@ def build_annual(rows: list[dict]) -> list[dict]:
         if per_year[year]["total"]
     ]
     print(
-        f"firefox: {sum(r['total'] for r in annual)} advisory-CVE mentions, "
+        f"firefox: {sum(r['unique_cves'] for r in annual)} distinct CVEs across "
+        f"{sum(r['total'] for r in annual)} advisory-CVE mentions, "
         f"{annual[0]['year']}–{annual[-1]['year']}"
     )
     print(
@@ -143,7 +179,7 @@ def build_finders(rows: list[dict]) -> list[dict]:
         finder = record["reporter"].strip()
         if finder:
             counted[
-                (record["year"], finder, classify(finder, record["year"]))
+                (record["year"], finder, band(finder, record["year"]))
             ] += 1
     out = [
         {"year": year, "finder": finder, "category": category, "cves": count}
@@ -151,8 +187,10 @@ def build_finders(rows: list[dict]) -> list[dict]:
             counted.items(), key=lambda item: (item[0][0], -item[1])
         )
     ]
-    ai = [row for row in out if row["category"] == "ai"]
-    print(f"firefox finders: {len(out)} year-finder rows, {len(ai)} AI-credited")
+    ai = [row for row in out if row["category"] in ("explicit_ai", "ai_affiliated")]
+    explicit = [row for row in ai if row["category"] == "explicit_ai"]
+    print(f"firefox finders: {len(out)} year-finder rows, {len(ai)} AI-marked "
+          f"({len(explicit)} naming a method)")
     if ai:
         top = max(ai, key=lambda row: row["cves"])
         print(f"  top AI finder {top['cves']} advisory-CVE mentions — "

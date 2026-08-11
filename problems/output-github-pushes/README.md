@@ -43,6 +43,19 @@ quarter. The EU row is an aggregate of its member states, so including it would
 count those pushes twice; it is dropped. The CSV carries all three metrics and a
 note recording that exclusion; the chart plots pushes.
 
+That exclusion is the one thing in this folder that could go wrong without
+looking wrong: the EU row is about a fifth of the total, and upstream renamed the
+economy column from `iso2` to `iso2_code` in 2026, which is the kind of change
+that can make a filter silently stop matching. [`check.py`](check.py) therefore
+asserts every vendored row records the exclusion, that the quarters are
+contiguous and the cumulative metrics never fall, and that the README's printed
+figures match the CSV. Run with `--upstream` it also re-sums the published files
+and fails if any vendored quarter is not exactly the EU-free sum:
+
+```sh
+python3 problems/output-github-pushes/check.py --upstream
+```
+
 [`figure.py`](figure.py) draws the series through
 [`lib/families.py`](../../lib/families.py)'s shared volume shape: years on the
 x-axis, the count on the y-axis, January 2026 onward shaded. A marker is drawn

@@ -107,7 +107,7 @@ def cyber_stacked(
             color="#333333",
             va="top",
         )
-    source_note(fig, f"Source: {source_label}. Finder credits are floors, not audited causation.")
+    source_note(fig, f"Source: {source_label}. Finder credits are textual markers, not audited causation.")
     save(
         fig,
         out_path,

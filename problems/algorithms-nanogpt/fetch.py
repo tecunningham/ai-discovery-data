@@ -25,7 +25,10 @@ URL = ("https://raw.githubusercontent.com/KellerJordan/modded-nanogpt/"
 
 
 def probe() -> str | None:
-    vendored = read_csv(HERE / "nanogpt-records.csv")
+    # Re-timing rows repeat an earlier record number, so the probe compares only
+    # the accepted records against the upstream table.
+    vendored = [row for row in read_csv(HERE / "nanogpt-records.csv")
+                if row["kind"] == "record"]
     last_n = int(vendored[-1]["record"]) if vendored else 0
     last_minutes = vendored[-1]["minutes"] if vendored else "?"
     text = fetch(URL, refresh=True).decode("utf-8", errors="replace")

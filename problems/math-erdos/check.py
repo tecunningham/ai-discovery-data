@@ -23,8 +23,6 @@ def solution_year_claims(failures: list[str]) -> dict[str, str]:
     dated = [int(row["solution_year"]) for row in rows if row["solution_year"]]
     per_year = {year: sum(value == year for value in dated) for year in set(dated)}
     undated = len(rows) - len(dated)
-    wiki = [row for row in rows if row["basis"] == "ai_wiki"]
-    wiki_2026 = sum(row["solution_year"] == "2026" for row in wiki)
     supplied = sum(1 for row in overrides
                    if not row["rule_year"] and row["solution_year"])
     corrected = sum(1 for row in overrides
@@ -39,6 +37,23 @@ def solution_year_claims(failures: list[str]) -> dict[str, str]:
     baseline = sum(per_year.get(year, 0) for year in range(2000, 2024)) / 24
     if not 5.4 <= baseline <= 6.4:
         failures.append(f"2000–2023 mean is {baseline:.2f}, not 'near six'")
+
+    def kind(year: int, name: str) -> int:
+        return sum(row["solution_year"] == str(year)
+                   and row["reference_kind"] == name for row in rows)
+
+    first_total = int(read_csv(HERE / "erdos-database-history.csv")[0]
+                      ["total_problems"])
+    works_2024 = len({row["reference"] for row in rows
+                      if row["solution_year"] == "2024"})
+    catalogued_2026 = sum(row["solution_year"] == "2026"
+                          and int(row["problem"]) <= first_total
+                          for row in rows)
+    wiki_kind = sum(row["reference_kind"] == "ai_wiki" for row in rows)
+    preprint_kind = sum(row["reference_kind"] == "preprint" for row in rows)
+    if kind(2025, "published") != 1:
+        failures.append(f"2025 published-dated rows are "
+                        f"{kind(2025, 'published')}, prose says one")
     return {
         f"Of the {len(rows)} solved problems, {len(dated)} carry":
             "imputed coverage",
@@ -47,12 +62,25 @@ def solution_year_claims(failures: list[str]) -> dict[str, str]:
         f"imputed solution years {min(dated)}–{max(dated)}": "coverage field",
         f"{per_year.get(2024, 0)} in 2024, {per_year.get(2025, 0)} in 2025, "
         f"and {per_year.get(2026, 0)} in 2026": "recent years",
-        f"{wiki_2026} of its {per_year.get(2026, 0)} rows": "2026 wiki share",
         f"carries {len(overrides)} hand-checkable rows": "override count",
         f"dated {rule_dated} of the {len(rows)} pages": "rule coverage",
         f"supplied a year for {supplied} pages the rule had missed, "
         f"corrected {corrected}, and withdrew {withdrawn}": "review ledger",
-        f"for {len(wiki)} problems it is a wiki entry": "wiki-only count",
+        f"for {wiki_kind} problems the only dated record is a wiki":
+            "wiki-only count",
+        f"the {per_year.get(2024, 0)} rows of 2024 trace to {works_2024} "
+        f"distinct works": "2024 distinct works",
+        f"with {kind(2024, 'preprint')} dated by arXiv preprints and "
+        f"{kind(2024, 'published')} by published papers": "2024 composition",
+        f"{kind(2025, 'preprint')} of the {per_year.get(2025, 0)} rows are "
+        f"preprint-dated": "2025 composition",
+        f"{kind(2026, 'ai_wiki')} of its {per_year.get(2026, 0)} rows are "
+        f"dated only by the AI wiki": "2026 wiki share",
+        f"against {kind(2026, 'preprint')} preprints": "2026 preprints",
+        f"{catalogued_2026} of the {per_year.get(2026, 0)} sat at numbers "
+        f"1–{first_total}": "2026 catalogued share",
+        f"{preprint_kind} of the {len(dated)} dated rows rest on arXiv "
+        f"preprints and {wiki_kind} on wiki entries": "kind totals",
     }
 
 

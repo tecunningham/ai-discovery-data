@@ -62,12 +62,35 @@ The second chart reads the imputed years. Of the 556 solved problems, 502 carry
 an imputed solution year and 54 state no dateable resolution. The dated series
 runs 1940 to 2026 and holds near six resolutions per year across 2000–2023,
 then jumps: 34 in 2024, 33 in 2025, and 55 in 2026 with four months of the year
-still to run. The 2026 bar is mostly red — 39 of its 55 rows are dated only by
-the AI wiki's record of a full AI solution, with no citable paper on the
-problem's page. The jump is the most direct flow-level evidence in this folder,
+still to run. The jump is the most direct flow-level evidence in this folder,
 and it is also exactly where the selection caveats below bite hardest: the
 catalogue grew around these solutions, and an old problem's solution enters the
 series only when the literature already recorded it.
+
+![Composition of recent Erdős-problem solutions and their position in the catalogue.](erdos-surge-anatomy.png)
+
+The third chart is the anatomy of that jump, and it shows the surge has two
+distinct phases. The 2024–2025 phase is human and preprint-shaped: the 34 rows
+of 2024 trace to 31 distinct works — one paper can resolve several problems —
+with 25 dated by arXiv preprints and 9 by published papers, and none by the AI
+wiki. In 2025, 30 of the 33 rows are preprint-dated and one published, which is
+what a wave too recent for peer review looks like. These are real papers by
+real mathematicians, several written directly to the list — titles like "A
+problem of Erdős-Graham-Granville-Selfridge" and "Resolution of Erdős'
+problems about unimodularity" — and a small circle of names (Tao, Sawhney,
+Liu, Kovač, Cambie, Steinerberger) recurs across them. The 2026 phase is the
+flip: 45 of its 55 rows are dated only by the AI wiki's record of a full AI
+solution, with no citable paper on the problem's page, against 10 preprints.
+
+The right panel places each dated solution at its problem number, which is the
+order the site catalogued them. For 2026 the reading is sharp: 41 of the 55
+sat at numbers 1–992, catalogued by the August 2025 snapshot and standing as
+open before they fell. For 2024–2025 the anchor is too late to order
+cataloguing against solution — a 2024 solution at a low number may still have
+been added to the site after the paper appeared — but the same panel shows the
+pre-2024 pattern that keeps the whole series honest: decades-old solutions
+scattered at every problem number are literature archaeology, problems entering
+the catalogue with their resolutions already attached.
 
 The catalogue count stopped changing in April 2026, which is the only part of the
 window where a rise in solved status cannot be caused by adding an
@@ -91,7 +114,12 @@ second snapshot plus the last. January 2026 onward is shaded, as in every figure
 here. The second chart bars the `solution_year` column of
 [`erdos-solution-years.csv`](erdos-solution-years.csv) by year, blue where the
 year comes from a reference on the problem's page and red where the only dated
-resolution is the AI wiki's.
+resolution is the AI wiki's. The third chart reads the same file's
+`reference_kind` column — `published` when a dating reference carries a venue
+in the page's bibliography, `preprint` when every dating reference is
+arXiv-only, `ai_wiki` when the date is a wiki entry — and plots each dated
+solution against its problem number, with the catalogue's size at the first
+snapshot marked from `erdos-database-history.csv`.
 
 The AI-standalone stock is drawn as a boxed callout rather than a fourth line.
 About 13 against stocks of 559 and 1,217 would be a flat line on the axis, and
@@ -145,12 +173,19 @@ same quantity differ by about six.
   date; the imputed years exist precisely because of this, and carry their own
   caveats below.
 - **An imputed year is the publication year of the resolving reference,** not
-  the date of the mathematics, and for 40 problems it is a wiki entry rather
-  than a citable paper. Those 40 count full solutions in any of the wiki's four
-  primary-contribution categories — a wider net than the roughly 13 standalone
-  resolutions in the first chart's callout. The assignment of "the resolving
-  reference" is an editorial reading of each page's discussion — reviewed, but
-  not ground truth, and 54 solved problems resisted any dating at all.
+  the date of the mathematics, and for 47 problems the only dated record is a
+  wiki entry rather than a citable paper. Those 47 count full solutions in any
+  of the wiki's four primary-contribution categories — a wider net than the
+  roughly 13 standalone resolutions in the first chart's callout. The
+  assignment of "the resolving reference" is an editorial reading of each
+  page's discussion — reviewed, but not ground truth, and 54 solved problems
+  resisted any dating at all.
+- **Recent rows are mostly unrefereed, and they cluster.** 98 of the 502 dated
+  rows rest on arXiv preprints and 47 on wiki entries; the surge years are
+  almost entirely these two kinds. One paper can resolve several problems and
+  a few authors account for many rows, so the recent bars count catalogue rows
+  cleared, not independent discoveries — and any of the underlying preprints
+  or wiki claims could yet fail review.
 - **The imputed flow inherits the catalogue's selection twice over.** The
   corpus was assembled from 2023 onward, partly around solutions as they
   happened, and AI systems have been pointed at this list precisely because it

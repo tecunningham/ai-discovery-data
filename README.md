@@ -107,7 +107,7 @@ Potential future series and cross-domain causal designs are tracked in the
 | [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-31 problems holding 38 figures and 41 data files. 19 refetch from upstream and 12 are maintained by hand and say so. 14 recompute their prose arithmetic; the other 17 state numbers no check reads. No failing cells.
+31 problems holding 39 figures and 41 data files. 19 refetch from upstream and 12 are maintained by hand and say so. 14 recompute their prose arithmetic; the other 17 state numbers no check reads. No failing cells.
 <!-- END GENERATED: checks-table -->
 
 ## How to read the series

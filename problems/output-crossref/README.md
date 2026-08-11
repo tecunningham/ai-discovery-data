@@ -24,7 +24,7 @@ a result, and nothing here says whether the work behind it was any good.
 
 ## What the chart shows
 
-Deposits rose from 5.28 million records in 2010 to 12.81 million in 2025, up
+Deposits rose from 5.28 million records in 2010 to 12.80 million in 2025, up
 143% over fifteen years, with no clean bend anywhere along the way. The rise is
 not smooth: six of those fifteen year-on-year changes are falls, the most recent
 of them in 2024, when deposits dropped to 11.31 million from 12.70 million in
@@ -35,7 +35,7 @@ read as a fall in publishing. The count is by deposit date, so which year a
 record lands in is a fact about when a publisher registered it.
 
 The 2026 bar is drawn outlined and labelled a part year: the last row is the
-year in progress at fetch time, year-to-date through 28 July 2026, and read as a
+year in progress at fetch time, year-to-date through 10 August 2026, and read as a
 full year it would look like a collapse. Every figure in the chart's annotation
 is computed from the CSV when the chart is drawn, so the annotation cannot
 survive a refetch that changes the numbers.

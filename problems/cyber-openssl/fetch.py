@@ -13,8 +13,8 @@ The parse is deliberately tolerant: severity is optional, because the older
 entries do not all carry one, and any record without a parseable date is dropped
 and counted so the coverage is visible.
 
-AI attribution is by explicit marker in the credit (see lib/credits.py) and is
-therefore a floor. OpenSSL is matched against ADVISORY_AI.
+AI attribution is by the shared explicit-marker classifier in lib/credits.py and
+is therefore a floor.
 """
 
 from __future__ import annotations
@@ -41,7 +41,7 @@ PATTERN = re.compile(
     + r"(?:" + GAP + r"Severity" + GAP + r"([A-Za-z]+))?"
     + GAP + r"Published at" + GAP + r"(\d{1,2} [A-Z][a-z]+ \d{4})"
     + r"(?:" + GAP + r"Title" + GAP + r"[^|]{0,200})?"
-    + r"(?:" + GAP + r"Found by" + GAP + r"([^|]{0,160}))?"
+    + r"(?:" + GAP + r"Found by" + GAP + r"([^|]*))?"
 )
 
 
@@ -63,6 +63,9 @@ def records() -> tuple[list[dict], int]:
             {
                 "cve": cve,
                 "year": int(match.group(3).split()[-1]),
+                "published": datetime.strptime(
+                    match.group(3), "%d %B %Y"
+                ).date().isoformat(),
                 "finder": (match.group(4) or "").strip(),
             }
         )
@@ -76,11 +79,12 @@ def build_annual(rows: list[dict], named: int) -> list[dict]:
     for record in rows:
         bucket = per_year[record["year"]]
         bucket["total"] += 1
-        category = classify(record["finder"])
+        category = classify(record["finder"], record["year"])
         bucket[f"{category}_attributed"] += 1
         if category == "ai":
             ai_names[record["finder"][:70]] += 1
     this_year = datetime.now(timezone.utc).year
+    latest = max((record["published"] for record in rows), default="")
     annual = [
         {
             "year": year,
@@ -89,6 +93,7 @@ def build_annual(rows: list[dict], named: int) -> list[dict]:
             "fuzz_attributed": per_year[year]["fuzz_attributed"],
             "other_attributed": per_year[year]["other_attributed"],
             "partial_year": "yes" if year == this_year else "no",
+            "data_through": latest if year == this_year else "",
         }
         for year in sorted(per_year)
     ]
@@ -113,7 +118,9 @@ def build_finders(rows: list[dict]) -> list[dict]:
     for record in rows:
         finder = record["finder"]
         if finder:
-            counted[(record["year"], finder, classify(finder))] += 1
+            counted[
+                (record["year"], finder, classify(finder, record["year"]))
+            ] += 1
     out = [
         {"year": year, "finder": finder, "category": category, "cves": count}
         for (year, finder, category), count in sorted(

@@ -31,10 +31,13 @@ different situation from the reverse.
 from __future__ import annotations
 
 import argparse
+import csv
 import re
 import subprocess
 import sys
 import textwrap
+from collections import Counter
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,12 +50,26 @@ SECTIONS = ("The problem", "What the chart shows", "How the chart was built",
             "What it cannot support", "LLM contributions", "Related literature")
 VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive",
             "too early", "baseline"}
-# The index groups by domain, so the order is fixed here rather than left to
-# whatever sorting a new value happens to fall under. The fourth group holds the
-# series tracked to span verification cost, which is the argument's own
-# explanatory variable and which the three worked domains barely vary.
-DOMAIN_ORDER = ("vulnerabilities", "mathematics", "algorithms",
-                "outside the three domains")
+# The index separates open-problem ledgers from mathematical records and bounds:
+# the former count discrete status changes, while the latter track numerical
+# quantities. Keeping them in one "mathematics" block made unlike instruments
+# look interchangeable.
+OPEN_PROBLEM_SLUGS = {
+    "math-erdos",
+    "math-hilbert",
+    "math-landau",
+    "math-millennium",
+    "math-smale",
+    "math-thurston",
+    "math-topp",
+}
+INDEX_GROUP_ORDER = (
+    "vulnerabilities",
+    "open problems",
+    "mathematical bounds and records",
+    "algorithms",
+    "outside the three domains",
+)
 
 CHECKS = ("Document", "Data", "Figure", "Literature", "Refetch", "Reproduces")
 PASS, FAIL, HAND, SKIP = "✅", "❌", "✍️", "➖"
@@ -205,6 +222,8 @@ class Problem:
             if csv_path.name not in self.linked_csvs:
                 self.fail("Data", f"{csv_path.name} is vendored but the document "
                                   "does not link it")
+            for message in csv_errors(csv_path):
+                self.fail("Data", message)
         for name in sorted(self.linked_csvs):
             if not (self.folder / name).exists():
                 self.fail("Data", f"links {name}, which is not in the folder")
@@ -221,6 +240,19 @@ class Problem:
                                  "built' does not say how the data is "
                                  "maintained instead")
 
+        folder_check = self.folder / "check.py"
+        if folder_check.exists():
+            result = subprocess.run(
+                [sys.executable, str(folder_check)],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            if result.returncode:
+                output = (result.stdout + result.stderr).strip()
+                for message in output.splitlines() or ["folder check failed"]:
+                    self.fail("Document", f"check.py: {message}")
+
         for group in ("Document", "Data", "Figure", "Literature"):
             if self.status[group] == SKIP:
                 self.status[group] = PASS
@@ -235,6 +267,103 @@ def bib_keys() -> set[str]:
     if not BIB.exists():
         return set()
     return set(re.findall(r"^@[a-zA-Z]+\{([^,\s]+)", BIB.read_text(encoding="utf-8"), re.M))
+
+
+def check_chart_as_of(problems: list[Problem]) -> None:
+    """Fail if vendored data has advanced beyond the chart snapshot date."""
+    chart_text = (ROOT / "lib/chart.py").read_text(encoding="utf-8")
+    match = re.search(
+        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)",
+        chart_text,
+        re.M,
+    )
+    if not match:
+        for problem in problems:
+            problem.fail("Figure", "lib/chart.py has no parseable AS_OF_DATE")
+        return
+    as_of = date(*(int(part) for part in match.groups()))
+    date_fields = {"date", "published", "announced", "data_through", "release_date"}
+    for problem in problems:
+        newest: date | None = None
+        source = ""
+        for path in problem.csvs:
+            with path.open(encoding="utf-8", newline="") as handle:
+                for row in csv.DictReader(handle):
+                    for field, value in row.items():
+                        value = value or ""
+                        candidate: date | None = None
+                        if field == "year" and re.fullmatch(r"20\d{2}", value):
+                            candidate = date(int(value), 1, 1)
+                        elif field in date_fields or field.endswith("_date"):
+                            if re.fullmatch(r"20\d{2}-\d{2}-\d{2}", value):
+                                candidate = date.fromisoformat(value)
+                        if candidate and (newest is None or candidate > newest):
+                            newest, source = candidate, path.name
+        if newest and newest > as_of:
+            problem.fail(
+                "Figure",
+                f"{source} contains {newest.isoformat()}, newer than "
+                f"lib/chart.py AS_OF_DATE {as_of.isoformat()}",
+            )
+
+
+def csv_errors(path: Path) -> list[str]:
+    """Report structural CSV damage before a figure silently ignores it."""
+    try:
+        with path.open(encoding="utf-8", newline="") as handle:
+            rows = csv.reader(handle, strict=True)
+            header = next(rows, None)
+            if header is None:
+                return [f"{path.name} is empty"]
+            errors = []
+            duplicate_fields = [
+                field for field, count in Counter(header).items() if count > 1
+            ]
+            if duplicate_fields:
+                errors.append(
+                    f"{path.name} has duplicate column(s): "
+                    f"{', '.join(duplicate_fields)}"
+                )
+            if any(not field.strip() for field in header):
+                errors.append(f"{path.name} has an empty column name")
+            url_columns = [
+                (index, field)
+                for index, field in enumerate(header)
+                if field.endswith("_url")
+            ]
+            finder_columns = [
+                index
+                for index, field in enumerate(header)
+                if field in {"finder", "reporter"}
+            ]
+            for line_number, row in enumerate(rows, 2):
+                if len(row) != len(header):
+                    errors.append(
+                        f"{path.name}:{line_number} has {len(row)} fields; "
+                        f"header has {len(header)}"
+                    )
+                    continue
+                for index, field in url_columns:
+                    if not row[index].startswith(("http://", "https://")):
+                        errors.append(
+                            f"{path.name}:{line_number} has no public URL in "
+                            f"{field}"
+                        )
+                for index in finder_columns:
+                    finder = row[index]
+                    if len(finder) == 160:
+                        errors.append(
+                            f"{path.name}:{line_number} finder is exactly 160 "
+                            "characters and may retain an old parser truncation"
+                        )
+                    if finder.count("(") != finder.count(")"):
+                        errors.append(
+                            f"{path.name}:{line_number} finder has unbalanced "
+                            "parentheses and may be a split credit"
+                        )
+            return errors
+    except (OSError, UnicodeError, csv.Error) as error:
+        return [f"{path.name} cannot be parsed as CSV: {error}"]
 
 
 def reproduce(problems: list[Problem]) -> None:
@@ -364,10 +493,21 @@ def strays() -> list[str]:
     return out
 
 
+def index_group(problem: Problem) -> str:
+    if problem.slug in OPEN_PROBLEM_SLUGS:
+        return "open problems"
+    if problem.domain == "mathematics" or problem.slug == "matrix-omega":
+        return "mathematical bounds and records"
+    return problem.domain
+
+
 def in_reading_order(problems: list[Problem]) -> list[Problem]:
-    """Domain order, then slug — the order both generated tables use."""
-    rank = {domain: i for i, domain in enumerate(DOMAIN_ORDER)}
-    return sorted(problems, key=lambda p: (rank.get(p.domain, len(rank)), p.slug))
+    """Index-group order, then slug — the order both generated tables use."""
+    rank = {group: i for i, group in enumerate(INDEX_GROUP_ORDER)}
+    return sorted(
+        problems,
+        key=lambda p: (rank.get(index_group(p), len(rank)), p.slug),
+    )
 
 
 def thumbnails(problem: Problem) -> str:
@@ -378,6 +518,8 @@ def thumbnails(problem: Problem) -> str:
     figures stacks them, since a table cell is as wide as its contents and three
     thumbnails in a row would push the prose columns off the screen.
     """
+    if not problem.figures:
+        return "<em>document + data only</em>"
     return "<br>".join(
         f'<a href="problems/{problem.slug}/">'
         f'<img src="problems/{problem.slug}/{figure.name}" width="{THUMB_WIDTH}" '
@@ -410,14 +552,18 @@ def details(problem: Problem) -> str:
 
 def index_rows(problems: list[Problem]) -> str:
     out: list[str] = []
-    for domain in DOMAIN_ORDER + tuple(sorted(
-            {p.domain for p in problems} - set(DOMAIN_ORDER))):
-        rows = [p for p in in_reading_order(problems) if p.domain == domain]
+    groups = {index_group(problem) for problem in problems}
+    for group in INDEX_GROUP_ORDER + tuple(sorted(groups - set(INDEX_GROUP_ORDER))):
+        rows = [
+            problem
+            for problem in in_reading_order(problems)
+            if index_group(problem) == group
+        ]
         if not rows:
             continue
-        out += [f"### {domain[:1].upper()}{domain[1:]}", "",
-                "| Chart | Series |", "|---|---|"]
-        out += [f"| {thumbnails(problem)} | {details(problem)} |"
+        out += [f"### {group[:1].upper()}{group[1:]}", "",
+                "| Series | Chart |", "|---|---|"]
+        out += [f"| {details(problem)} | {thumbnails(problem)} |"
                 for problem in rows]
         out.append("")
     return "\n".join(out).rstrip()
@@ -476,6 +622,7 @@ def main() -> int:
 
     for problem in problems:
         problem.check(keys, slugs)
+    check_chart_as_of(problems)
     duplicate_names(problems)
     if args.reproduce or args.write_index:
         reproduce(problems)

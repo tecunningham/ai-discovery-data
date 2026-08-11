@@ -34,10 +34,21 @@ def fetch(url: str, refresh: bool = False) -> bytes:
     if cached.exists() and not refresh:
         return cached.read_bytes()
     result = subprocess.run(
-        ["curl", "-sL", "--max-time", "120", url], capture_output=True
+        [
+            "curl",
+            "--fail",
+            "--silent",
+            "--show-error",
+            "--location",
+            "--max-time",
+            "120",
+            url,
+        ],
+        capture_output=True,
     )
     if result.returncode != 0 or not result.stdout:
-        raise SystemExit(f"failed to fetch {url}")
+        detail = result.stderr.decode("utf-8", "replace").strip()
+        raise SystemExit(f"failed to fetch {url}" + (f": {detail}" if detail else ""))
     CACHE.mkdir(exist_ok=True)
     cached.write_bytes(result.stdout)
     return result.stdout

@@ -4,7 +4,7 @@
 **Metric:** 66 industrial and scientific technologies; months to halve unit cost, fitted log-linearly per technology, set against the halving times quoted for AI algorithmic progress
 **Coverage:** 1929–2013 for the cost curves; 2012–2023 for the three AI estimates they are compared with
 **Data:** [`owid-66-technologies.csv`](owid-66-technologies.csv), [`ai-efficiency-rates.csv`](ai-efficiency-rates.csv)
-**Upstream:** <https://ourworldindata.org/grapher/costs-of-66-different-technologies-over-time>, adapted by Our World in Data from the Santa Fe Performance Curve Database as compiled by Farmer and Lafond (2016)
+**Upstream:** <https://ourworldindata.org/grapher/costs-of-66-different-technologies-over-time.csv?v=1&csvType=full&useColumnShortNames=false>, adapted by Our World in Data from the Santa Fe Performance Curve Database as compiled by Farmer and Lafond (2016)
 **Verdict:** baseline
 
 ![Left: the years each efficiency measurement covers, for seven physical cost curves and three AI algorithmic-progress estimates. Right: halving times on a log axis, with published intervals and Moore's law marked at 24 months.](efficiency-halving-times.png)
@@ -58,11 +58,8 @@ writes about.
 The three AI rates the physical curves are compared against are quotations, not
 measurements: each is a halving time an author fitted and published, with the
 interval they gave. They sit in [`ai-efficiency-rates.csv`](ai-efficiency-rates.csv)
-with the source-log anchor that carries each quote, rather than in the figure
-code, because the source log's own evidence-coverage figure plots the same three
-measurement windows — a rate transcribed in two places is a rate that will
-eventually disagree with itself. Recomputing any of them here would invent a
-number the source did not state.
+with a public source URL for each quote rather than in the figure code.
+Recomputing any of them here would invent a number the source did not state.
 
 [`figure.py`](figure.py) fits each entity in the OWID CSV separately: a log-linear
 regression of cost on year, converted to a halving time in months, keeping
@@ -71,16 +68,16 @@ than an endpoint ratio so that one noisy first or last observation cannot set
 the rate on its own. The seven fastest go in the left panel and the five fastest
 in the right.
 
-The three AI rates are not fitted. They are quotations, hardcoded as `AI_RATES`
-in the figure code with the interval each source published — Epoch AI's estimate
-for language-model pretraining, the ImageNet algorithmic-advances estimate, and
-the compute-to-AlexNet figure — and the entry each came from is named in the
-constant. Keeping them as constants rather than recomputing them is deliberate:
-they are other people's published numbers, and this folder's arithmetic should
-not be mistaken for a re-estimate.
+The three AI rates are not fitted. They are quotations read from
+`ai-efficiency-rates.csv` with the interval each source published — Epoch AI's
+estimate for language-model pretraining, the ImageNet algorithmic-advances
+estimate, and the compute-to-AlexNet figure. Keeping them as quoted inputs rather
+than recomputing them is deliberate: they are other people's published numbers,
+and this folder's arithmetic should not be mistaken for a re-estimate.
 
 There is no fetcher. The CSV is Our World in Data's own chart download, vendored
-here unchanged, and the underlying dataset stopped in 2013 and will not move.
+here unchanged and verified against the live full CSV export on 2026-08-10; the
+underlying dataset stopped in 2013 and will not move.
 
 ## What it cannot support
 
@@ -128,9 +125,7 @@ progress, around a factor of ten a year with an 80% interval of two to fifty, an
 labels it a best guess rather than a measured series [@epoch2026driver] — which
 would sit far off the right-hand side of this chart if it were plotted, and is
 the reason the plotted rates are restricted to estimates with published
-intervals. Within this collection, the cost reading in
-[weather forecasting](../weather-forecasting/README.md) is the one place an
-agent-era cost curve can be compared against these, and
-output volume is the other variable that visibly moves, most sharply in
+intervals. Within this collection, output volume is the other variable that
+visibly moves, most sharply in
 [git pushes to GitHub](../output-github-pushes/README.md) and
 [arXiv submissions](../output-arxiv/README.md).

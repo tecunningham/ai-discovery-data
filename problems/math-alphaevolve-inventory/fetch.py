@@ -84,6 +84,19 @@ CITE_RE = re.compile(r"\[([^\]\n]{1,80})\]")
 BOUND_RE = re.compile(r"[0-9][0-9.,]*\s*[≤≥<>=]\s*𝐶[^\n]{0,40}?[≤≥<>=]\s*[0-9][0-9.]*")
 SIMPLE_BOUND_RE = re.compile(r"𝐶[6.\d]{0,8}\s*[≤≥=]\s*[0-9][0-9.]*")
 
+# pdftotext splits stacked fractions and radicals onto separate lines, so these
+# four first-match strings lose numerators or denominators. Keep the short
+# orientation field accurate with values checked against the paper.
+BOUND_OVERRIDES = {
+    25: "2 ≤ 𝐶6.25 ≤ 1 + √2",
+    37: "5/9 ≤ 𝐶6.37 ≤ 0.561666",
+    44: "1.14465 ≤ 𝐶6.44 ≤ 4/3",
+    61: "11/10 ≤ 𝐶6.61 ≤ 19/14",
+}
+TITLE_OVERRIDES = {
+    46: "Minimal triangle density",
+}
+
 
 def parse_bibliography(text: str) -> dict[int, dict]:
     """{reference number: {authors, year, raw}} from the paper's reference list."""
@@ -230,17 +243,22 @@ def main() -> int:
         rows.append({
             "problem": f"6.{number}",
             "index": number,
-            "title": title,
+            "title": TITLE_OVERRIDES.get(number, title),
             "topic_group": group_for(start, groups),
             "status": statuses.get(number, ""),
             "status_mapping": "assumed" if number in statuses else "",
             "n_citations": len(cited),
+            # Keep the orientation inventory compact. n_citations is the full
+            # parsed count; cited_refs intentionally carries at most 12 IDs.
             "cited_refs": ";".join(str(c) for c in cited[:12]),
             "n_cited_years": len(years),
             "earliest_cited_year": years[0] if years else "",
             "latest_cited_year": years[-1] if years else "",
             "cited_years": ";".join(str(y) for y in years),
-            "stated_bound": re.sub(r"\s+", " ", bounds[0])[:120] if bounds else "",
+            "stated_bound": BOUND_OVERRIDES.get(
+                number,
+                re.sub(r"\s+", " ", bounds[0])[:120] if bounds else "",
+            ),
         })
 
     write_csv(OUT, rows)

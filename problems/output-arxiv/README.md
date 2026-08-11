@@ -2,7 +2,7 @@
 
 **Domain:** outside the three domains
 **Metric:** research output; preprints submitted to arXiv per month
-**Coverage:** 1991-07 to 2026-07, monthly, the last month partial
+**Coverage:** 1991-07 to 2026-08, monthly, the last month partial
 **Data:** [`arxiv-monthly.csv`](arxiv-monthly.csv)
 **Upstream:** <https://arxiv.org/stats/monthly_submissions>
 **Verdict:** accelerating — on volume, which is not discovery
@@ -24,7 +24,7 @@ much weaker thing to establish. A submission is not a result.
 ## What the chart shows
 
 Submissions rose from 17,271 in November 2022, the month ChatGPT was released,
-to 32,040 in June 2026, the last complete month: 86% in three years and seven
+to 29,687 in July 2026, the last complete month: 72% in three years and eight
 months, against decades in which the series took roughly a decade to double.
 The bend is visible around 2023 and continues through the shaded 2026 period.
 

@@ -2,7 +2,7 @@
 
 **Domain:** outside the three domains
 **Metric:** cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum
-**Coverage:** 1991-04 to 2020-02, confirmed unmoved as of 2026-07-29
+**Coverage:** 1991-04 to 2020-02, confirmed unmoved as of 2026-08-10
 **Data:** [`factoring-records.csv`](factoring-records.csv) (all 23 published RSA factorizations, plus the 795-bit discrete-logarithm record and the first SHA-1 collision for context)
 **Upstream:** <https://en.wikipedia.org/wiki/RSA_numbers>, with the last two records from <https://caramba.loria.fr/rsa250.txt> and <https://caramba.loria.fr/dlp240-rsa240.txt>
 **Verdict:** no acceleration — no record since February 2020, and the fourfold slowdown before that predates AI entirely
@@ -11,12 +11,12 @@
 
 ## The problem
 
-Factoring is the cheap-verifier extreme, and it is here for the same reason
-weather is: to span the cost of checking an answer, which the three worked
-domains barely vary. Multiplying two claimed factors takes microseconds, so a
-result is verified instantly, for free, by anyone. The field also has everything
-else a scoreboard needs — a published list of targets, three decades of dated
-records with named teams, and a cash-prize history.
+Factoring is the cheap-verifier extreme, included to span a variable that the
+three worked domains barely vary: the cost of checking an answer. Multiplying
+two claimed factors takes microseconds, so a result is verified instantly, for
+free, by anyone. The field also has everything else a scoreboard needs — a
+published list of targets, three decades of dated records with named teams, and
+a cash-prize history.
 
 A discovery here is one new largest factorization. That is a coarse instrument
 by construction: the record is a running maximum over a fixed list of targets,
@@ -30,7 +30,7 @@ Thirteen records between April 1991 and February 2020, and nothing since.
 The rate falls fourfold inside the series, well before AI: about 7.1 digits a
 year from RSA-100 in 1991 to RSA-768 in December 2009, then about 1.8 a year to
 RSA-250 in February 2020. Both figures are computed in the figure code from the
-running maximum. RSA-250 has stood for six years and four months, across exactly
+running maximum. RSA-250 has stood for about six and a half years, across exactly
 the period in which AI systems were setting records on speedruns, kernels, a SAT
 competition, and a dozen mathematical bounds. RSA-260, RSA-270, RSA-896 and
 RSA-1024 remain unfactored.
@@ -106,9 +106,7 @@ improving "about 5.5 digits per year for the last two decades"
 which makes the subsequent deceleration visible as a departure from a documented
 trend. The heterogeneity of pre-AI improvement rates across algorithm families
 is Sherry and Thompson's subject [@sherry2021fast], and it is the reason a single
-stalled family is weak evidence on its own. Within this collection the natural
-comparison is [weather forecasting](../weather-forecasting/README.md), the other
-cheap verifier outside the three domains, and
-[sphere packing](../math-sphere-packing/README.md), where a similarly old ladder
-took its two largest steps since 1947 in 2023 and 2025 — both of them human
-proofs.
+stalled family is weak evidence on its own. Within this collection,
+[sphere packing](../math-sphere-packing/README.md) is a useful contrast: a
+similarly old ladder took its two largest steps since 1947 in 2023 and 2025 —
+both of them human proofs.

@@ -28,9 +28,10 @@ not a count of bugs introduced or bugs remaining.
 
 ## What the chart shows
 
-Roughly ten disclosures a year from 2017 through 2025, then 36 in the first half
-of 2026 alone — with 15 of those crediting an AI system or an AI-security firm.
-Annualized, 2026 is running near 72 a year against 13.7 a year across 2014–2023.
+Roughly twelve disclosures a year from 2017 through 2025, then 36 through
+24 June 2026 alone — with 15 of those crediting an AI system or an AI-security
+firm. Annualized from that exact date, 2026 is running near 75 a year against
+13.1 a year across 2014–2023.
 
 This is the clearest bend in any series in the collection, and the one place
 where a collective-progress curve visibly changes slope in the agent era.
@@ -59,9 +60,10 @@ exactly the 2026 step the series exists to show.
 The CSVs are built by [`fetch.py`](fetch.py), which reads curl's JSON, buckets by publication year, and classifies a report as
 AI-credited when any `FINDER` credit string matches an explicit AI marker — a
 named system (Big Sleep, Mythos), a firm whose stated business is AI code
-security (Aisle Research, AntAISecurityLab), or the word "agent". The marker list
-is `CURL_AI` in [`../../lib/credits.py`](../../lib/credits.py), shared with the
-other vulnerability folders, and should be read before quoting the 42% share.
+security (Aisle Research, AntAISecurityLab), or the word "agent". The marker
+list in [`../../lib/credits.py`](../../lib/credits.py) is shared by all three
+finder-attributed vulnerability series; unifying the former lists moved no
+currently vendored row.
 
 ## What it cannot support
 
@@ -81,12 +83,12 @@ other vulnerability folders, and should be read before quoting the 42% share.
 ## LLM contributions
 
 The 2026 credits name identifiable efforts rather than a diffuse capability:
-Google's Big Sleep, an entry crediting Anthropic's Mythos, a Trail of Bits
-report made in collaboration with OpenAI, Microsoft's Autonomous Code Security
-team, several HackerOne handles crediting AntAISecurityLab, and six from Aisle
-Research. Alex Gaynor of Anthropic appears both here and on OpenSSL, so the
-AI-credited discovery visible across these codebases is substantially a few
-well-resourced people pointed at high-value targets
+an entry crediting Anthropic's Mythos, a Trail of Bits report made in
+collaboration with OpenAI, Microsoft's Autonomous Code Security team, three
+HackerOne handles crediting AntAISecurityLab, and 9 from Aisle Research.
+Big Sleep's curl credit is in 2025, not 2026. Stanislav Fort of Aisle Research
+appears in both curl and OpenSSL, so the AI-credited discovery visible across
+these codebases is substantially a few well-resourced people pointed at high-value targets
 [@googlebigsleep2024; @anthropicmythos2026; @aisle2026].
 
 ## Related literature

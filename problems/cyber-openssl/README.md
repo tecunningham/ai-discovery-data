@@ -2,7 +2,7 @@
 
 **Domain:** vulnerabilities
 **Metric:** vulnerabilities disclosed per year, split by finder credit
-**Coverage:** 2002–2026, partial through 9 June 2026
+**Coverage:** 2002–2026, partial through 5 August 2026
 **Data:** [`openssl-vulnerabilities.csv`](openssl-vulnerabilities.csv); per-finder rows in [`openssl-finders.csv`](openssl-finders.csv)
 **Upstream:** <https://openssl-library.org/news/vulnerabilities/>
 **Verdict:** accelerating — but the same shape appeared in 2015–2016 from a purely human cause
@@ -28,16 +28,17 @@ published it. It is not a count of bugs introduced or of bugs remaining.
 
 The instrument has one real weakness relative to curl. OpenSSL publishes no
 machine-readable feed — the JSON and XML endpoints it once offered both return
-404 — so the series is parsed out of HTML, and 3 of the 275 CVEs named on the
+404 — so the series is parsed out of HTML, and 3 of the 276 CVEs named on the
 page could not be given a date and are absent from the counts.
 
 ## What the chart shows
 
 Single digits for most of a decade, then a step: 3 disclosures in 2020, 8 in
-2021, 13 in 2022, 19 in 2023, 9 in 2024, 6 in 2025, and 38 in the first half of
-2026. Of those 38, 26 credit an AI system or an AI-security firm — about two
-thirds, the highest AI share of any series in this collection, against 3 of 6
-in 2025 and none in any earlier year.
+2021, 13 in 2022, 19 in 2023, 9 in 2024, 6 in 2025, and 39 through 5 August
+2026. Of those 39, 27 credit an AI system or an AI-security firm — about two
+thirds, the highest AI share of any series in this collection. Eleven name
+non-AI finders and one carries no finder credit, so the annual “other” band is
+12. In 2025 the split was 3 of 6, with no AI credit in any earlier year.
 
 What cuts the reading down is visible in the same chart. The tallest bars in
 the whole twenty-four-year series are not recent: 35 in 2016 and 32 in 2015,
@@ -63,32 +64,34 @@ many CVEs. A log axis would flatten the 2026 step the series exists to show.
 The CSVs are built by [`fetch.py`](fetch.py),
 which parses the HTML index into one record per CVE and classifies the "Found
 by" string against two regexes in [`../../lib/credits.py`](../../lib/credits.py)
-shared with the finder rows of the other codebases: `ADVISORY_AI`
+shared with the finder rows of the other codebases. The AI marker list
 matches named systems and labs (Claude, Anthropic, OpenAI, GPT, Gemini, Big
 Sleep, Mythos, Aisle, AntAISecurityLab, XBOW, ZeroPath) plus the bare words
-"LLM" and "agent", and `FUZZ` matches "fuzz". AI is tested first, so a
-credit naming both counts as AI. Keeping fuzzing separate is deliberate: a
-fuzzer is automated without being a model.
+"LLM" and "agent"; bare "Claude" is accepted only from 2024 onward.
+`FUZZ` matches "fuzz". AI is tested first, so a credit naming both counts as AI.
+Keeping fuzzing separate is deliberate: a fuzzer is automated without being a
+model. The parser captures through the next HTML field delimiter rather than a
+character cap, so long multi-person credits remain verbatim for classification.
 
 ## What it cannot support
 
 - **The AI share is a floor.** Classification is by explicit textual marker, so
   a researcher who used a model and did not say so counts as human here.
-- **The parse is lossy.** 272 of the 275 CVEs on the page carry a date in this
+- **The parse is lossy.** 273 of the 276 CVEs on the page carry a date in this
   series; the other three are dropped rather than guessed at.
 - **Severity is not analysed.** The index records one, but unlike the curl
   series this collection has not compared the severity of AI-credited finds with
   the rest, so nothing here says whether the extra 2026 finds are shallower.
-- **2026 is a part-year** through 9 June, and disclosures arrive in batches at
+- **2026 is a part-year** through 5 August, and disclosures arrive in batches at
   releases, so the within-year path is lumpy.
 - **No denominator of effort.** A credit records who reported, not how much
   search anybody spent, so better tools and more attention cannot be separated.
 
 ## LLM contributions
 
-The 26 AI-credited CVEs of 2026 come from a very small group. Counting the
-credit lines in `openssl-finders.csv`, 18 name Aisle Research and 9 name
-Anthropic, with one line naming both, which accounts for all 26. Stanislav Fort
+The 27 AI-credited CVEs of 2026 come from a very small group. Counting the
+credit lines in `openssl-finders.csv`, 19 name Aisle Research and 9 name
+Anthropic, with one line naming both, which accounts for all 27. Stanislav Fort
 of Aisle Research is the single largest finder, credited alone on 5 and sharing
 4 more; Alex Gaynor of Anthropic is credited on 5; Luigino Camastra of Aisle
 Research on 4; Igor Morgenstern of Aisle Research on 2; and one names Claude

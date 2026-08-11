@@ -38,12 +38,13 @@ def build_annual() -> list[dict]:
             match = re.match(r"OSV-(\d{4})-", name)
             if match:
                 by_id[match.group(1)] += 1
-    this_year = datetime.now(timezone.utc).year
+    today = datetime.now(timezone.utc).date()
     rows = [
         {
             "year": int(year),
             "discoveries": by_id[year],
-            "partial_year": "yes" if int(year) == this_year else "no",
+            "partial_year": "yes" if int(year) == today.year else "no",
+            "data_through": today.isoformat() if int(year) == today.year else "",
         }
         for year in sorted(by_id)
         if int(year) >= 2020

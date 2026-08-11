@@ -22,7 +22,7 @@ from __future__ import annotations
 import sys
 import time
 import urllib.parse
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -36,7 +36,8 @@ FIRST_YEAR = 2016
 
 
 def build(first_year: int = FIRST_YEAR) -> tuple[list[dict], list[dict]]:
-    today = datetime.now(timezone.utc).date()
+    snapshot = datetime.now(timezone.utc)
+    today = snapshot.date()
     per_year: dict[int, int] = {}
     per_quarter: dict[str, int] = {}
     for year in range(first_year, today.year + 1):
@@ -49,13 +50,21 @@ def build(first_year: int = FIRST_YEAR) -> tuple[list[dict], list[dict]]:
         ]
         total = 0
         for start, end in zip(edges, edges[1:]):
-            if datetime.fromisoformat(start).date() > today:
+            start_at = datetime.fromisoformat(start).replace(tzinfo=timezone.utc)
+            if start_at > snapshot:
                 break
+            # NVD treats both endpoints as inclusive. End one millisecond before
+            # the next quarter so a boundary timestamp cannot be counted twice.
+            end_at = min(
+                datetime.fromisoformat(end).replace(tzinfo=timezone.utc)
+                - timedelta(milliseconds=1),
+                snapshot,
+            )
             params = urllib.parse.urlencode(
                 {
                     "resultsPerPage": 1,
-                    "pubStartDate": f"{start}T00:00:00.000",
-                    "pubEndDate": f"{min(end, today.isoformat())}T00:00:00.000",
+                    "pubStartDate": start_at.isoformat(timespec="milliseconds"),
+                    "pubEndDate": end_at.isoformat(timespec="milliseconds"),
                 }
             )
             count = int(fetch_json(f"{API}?{params}").get("totalResults", 0))

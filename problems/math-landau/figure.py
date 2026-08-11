@@ -3,7 +3,7 @@
 
 Run: python3 problems/math-landau/figure.py
 
-All four rows are open, so the cumulative line is flat at zero for its whole
+All four rows are open, so the unresolved count stays flat at four for its whole
 length. That is the chart's content rather than a failure to draw.
 """
 

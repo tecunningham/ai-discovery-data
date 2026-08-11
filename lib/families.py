@@ -15,6 +15,7 @@ from __future__ import annotations
 from collections import defaultdict
 from pathlib import Path
 
+from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 from matplotlib.ticker import MaxNLocator
@@ -47,6 +48,9 @@ def cyber_stacked(
     source_label: str,
     source_url: str,
     built_by: str,
+    *,
+    ylabel: str = "Vulnerabilities disclosed that year",
+    unit_label: str = "disclosures",
 ) -> None:
     rows = read_csv(csv_path)
     years = [int(row["year"]) for row in rows]
@@ -84,25 +88,31 @@ def cyber_stacked(
     ax.set_xlim(min(years) - 1, right)
     ax.set_ylim(0, max(totals) * 1.23)
     shade_era(ax, right, annual=True)
-    style(ax, "Vulnerabilities disclosed that year")
+    style(ax, ylabel)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=7))
     ax.legend(handles=common_legend(fuzz=any(fuzz)), frameon=False, fontsize=8, ncol=3)
-    latest = rows[-1]
-    ax.text(
-        0.02,
-        0.9,
-        f"{latest['total']} disclosures in partial 2026\n"
-        f"{latest['ai_attributed']} explicitly AI-credited",
-        transform=ax.transAxes,
-        fontsize=9,
-        color="#333333",
-        va="top",
-    )
+    if partial:
+        latest = rows[partial[-1]]
+        through = (
+            f" through {latest['data_through']}"
+            if latest.get("data_through") else ""
+        )
+        ax.text(
+            0.02,
+            0.9,
+            f"{latest['total']} {unit_label} in partial {latest['year']}{through}\n"
+            f"{latest['ai_attributed']} explicitly AI-credited",
+            transform=ax.transAxes,
+            fontsize=9,
+            color="#333333",
+            va="top",
+        )
     source_note(fig, f"Source: {source_label}. Finder credits are floors, not audited causation.")
     save(
         fig,
         out_path,
-        f"{title}. Annual finder-attributed vulnerability disclosures; 2026 is partial.",
+        f"{title}. Annual finder-attributed {unit_label}; "
+        + (f"{rows[partial[-1]]['year']} is partial." if partial else "complete years."),
         [source_url],
         built_by,
     )
@@ -172,14 +182,12 @@ def problem_list_chart(
     built_by: str,
     ai_problem: str | None = None,
 ) -> None:
-    """Unresolved stock over time: progress is a step down, and the axis runs to the total.
+    """Show a list's current status and its dated resolution events separately.
 
-    A rising cumulative of resolutions compresses every list toward the bottom of
-    its panel and hides how much of the list is still open. Counting the rows
-    that remain unresolved puts every list on the same scale — its own size —
-    and makes a resolution read as depletion rather than as an accumulation.
-    Contested, partial and vague rows stay in the stock: only a status of
-    resolved with a year takes one off.
+    A status bar makes the present-day ledger directly readable. The event bars
+    retain the chronology needed to discuss acceleration without making a
+    numerical-bound staircase and a problem-status ledger look like the same
+    instrument.
     """
     rows = read_csv(csv_path)
     name = rows[0]["list_name"]
@@ -191,76 +199,164 @@ def problem_list_chart(
         if row["status"] == "resolved" and row["resolved_year"]
     ]
     resolved.sort(key=lambda item: (item[0], item[1]["problem_id"]))
-    years = [start] + [year for year, _ in resolved] + [NOW]
-    remaining = [total - k for k in range(len(resolved) + 1)] + [
-        total - len(resolved)
-    ]
-    fig, ax = new_chart(
-        f"{name}: unresolved problems",
-        "Scored rows still open, contested, partial or vague; a step down is a dated resolution",
+    open_count = sum(row["status"] == "open" for row in rows)
+    other_count = total - len(resolved) - open_count
+
+    fig, (status_ax, timeline_ax) = plt.subplots(
+        2,
+        1,
+        figsize=(8.4, 5.2),
+        gridspec_kw={"height_ratios": (0.85, 2.15), "hspace": 0.52},
     )
-    ax.plot(years, remaining, drawstyle="steps-post", color=HUMAN, linewidth=2, zorder=3)
-    ax.axhline(total, color="#bbbbbb", linewidth=0.9, linestyle=":", zorder=1)
-    ax.text(
-        start + max((NOW - start) * 0.01, 0.3),
-        total,
-        f"{total} scored",
-        fontsize=7.5,
-        color="#777777",
-        va="bottom",
+    fig.suptitle(
+        f"{name}: problem-status ledger",
+        x=0.09,
+        y=0.98,
+        ha="left",
+        fontsize=14,
+        fontweight="bold",
     )
-    for index, (year, row) in enumerate(resolved, 1):
-        y = total - index
-        colour = AI if row["problem_id"] == ai_problem else HUMAN
-        ax.scatter([year], [y], color=colour, s=52, edgecolor="white", linewidth=0.7, zorder=4)
-        if colour == AI:
-            ax.annotate(
+
+    status_ax.set_title(
+        f"Current status of {total} scored rows",
+        loc="left",
+        fontsize=9.2,
+        color="#444444",
+        pad=8,
+    )
+    status_parts = (
+        ("resolved", len(resolved), HUMAN),
+        ("open", open_count, "#d9dee5"),
+        ("contested / partial / vague", other_count, "#8c96a0"),
+    )
+    left = 0
+    for label, count, colour in status_parts:
+        if not count:
+            continue
+        status_ax.barh(
+            [0],
+            [count],
+            left=left,
+            height=0.52,
+            color=colour,
+            edgecolor="white",
+            linewidth=1,
+        )
+        status_ax.text(
+            left + count / 2,
+            0,
+            str(count),
+            ha="center",
+            va="center",
+            fontsize=9,
+            fontweight="bold",
+            color="white" if colour != "#d9dee5" else "#333333",
+        )
+        left += count
+    status_ax.set_xlim(0, total)
+    status_ax.set_yticks([])
+    status_ax.set_xticks([0, total])
+    status_ax.tick_params(axis="x", labelsize=8, colors="#777777")
+    for spine in status_ax.spines.values():
+        spine.set_visible(False)
+    status_ax.legend(
+        handles=[
+            Patch(facecolor=colour, label=f"{count} {label}")
+            for label, count, colour in status_parts
+            if count
+        ],
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.1),
+        frameon=False,
+        fontsize=8,
+        ncol=3,
+    )
+
+    human_by_year: dict[int, int] = defaultdict(int)
+    ai_by_year: dict[int, int] = defaultdict(int)
+    ai_row: tuple[int, dict[str, str]] | None = None
+    for year, row in resolved:
+        if row["problem_id"] == ai_problem:
+            ai_by_year[year] += 1
+            ai_row = (year, row)
+        else:
+            human_by_year[year] += 1
+    event_years = sorted(set(human_by_year) | set(ai_by_year))
+    bar_width = max(0.65, min(1.4, (NOW - start) * 0.018))
+    if resolved:
+        human_values = [human_by_year[year] for year in event_years]
+        ai_values = [ai_by_year[year] for year in event_years]
+        timeline_ax.bar(
+            event_years,
+            human_values,
+            width=bar_width,
+            color=HUMAN,
+            zorder=3,
+        )
+        timeline_ax.bar(
+            event_years,
+            ai_values,
+            bottom=human_values,
+            width=bar_width,
+            color=AI,
+            zorder=4,
+        )
+        for year, human_value, ai_value in zip(event_years, human_values, ai_values):
+            timeline_ax.text(
+                year,
+                human_value + ai_value + 0.08,
+                str(human_value + ai_value),
+                ha="center",
+                va="bottom",
+                fontsize=7.5,
+                color="#555555",
+            )
+        if ai_row:
+            year, row = ai_row
+            timeline_ax.annotate(
                 f"{row['short_name']}\nformal checks complete; peer review pending",
-                (year, y),
-                xytext=(-8, -18),
+                (year, human_by_year[year] + ai_by_year[year]),
+                xytext=(-10, 26),
                 textcoords="offset points",
                 ha="right",
                 fontsize=8,
                 color=AI,
+                arrowprops={"arrowstyle": "-", "color": AI, "linewidth": 0.8},
             )
-    open_count = sum(row["status"] == "open" for row in rows)
-    other_count = total - len(resolved) - open_count
-    still = total - len(resolved)
-    right = NOW + max((NOW - start) * 0.035, 1.2)
-    ax.set_xlim(start - max((NOW - start) * 0.04, 1), right)
-    # Floor at zero and ceiling at the list size, so every panel is a full stock
-    # and a drop of one is the same visual distance on every list.
-    ax.set_ylim(-0.05 * max(total, 1), total * 1.08)
-    shade_era(ax, right)
-    style(ax, "Unresolved scored rows")
-    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-    if resolved:
-        ax.text(
-            0.02,
-            0.12,
-            f"{still} of {total} still unresolved "
-            f"({len(resolved)} resolved"
-            + (f", {other_count} contested/partial/vague" if other_count else "")
-            + ")",
-            transform=ax.transAxes,
-            fontsize=8.5,
-            va="top",
-            color="#333333",
+        timeline_ax.set_ylim(
+            0,
+            max(human_by_year[year] + ai_by_year[year] for year in event_years)
+            + 1.15,
         )
-        ax.legend(handles=common_legend(), frameon=False, fontsize=8, loc="upper right")
     else:
-        # Status and the "none resolved" note are the same fact when the line is
-        # flat at the total, so one annotation carries both.
-        ax.annotate(
-            f"{total} of {total} still unresolved\n"
-            "no row resolved since the list was posed",
-            (start, total),
-            xytext=(8, -18),
-            textcoords="offset points",
+        timeline_ax.text(
+            0.5,
+            0.52,
+            "No row has a dated resolution",
+            transform=timeline_ax.transAxes,
+            ha="center",
+            va="center",
             fontsize=8.5,
             color=HUMAN,
-            linespacing=1.4,
         )
+        timeline_ax.set_ylim(0, 1)
+
+    right = NOW + max((NOW - start) * 0.035, 1.2)
+    left_year = min([start, *event_years])
+    timeline_ax.set_xlim(
+        left_year - max((NOW - left_year) * 0.04, 1),
+        right,
+    )
+    shade_era(timeline_ax, right)
+    style(timeline_ax, "Resolutions in year")
+    timeline_ax.set_title(
+        "Dated resolutions (event count, not the value of a bound)",
+        loc="left",
+        fontsize=9.2,
+        color="#444444",
+        pad=8,
+    )
+    timeline_ax.yaxis.set_major_locator(MaxNLocator(integer=True))
     source_note(
         fig,
         f"Source: {rows[0]['source']}. Years are resolution landmarks, "
@@ -269,8 +365,7 @@ def problem_list_chart(
     save(
         fig,
         out_path,
-        f"{name}: unresolved scored rows under the source ledger; "
-        "progress is a decline toward zero.",
+        f"{name}: current status of scored rows and dated resolution events.",
         sorted({row["source"] for row in rows}),
         built_by,
     )

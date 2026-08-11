@@ -12,8 +12,8 @@ Quarterly exists because curl publishes in batches at releases, so a quarter is
 about the finest grain at which the series is not just release timing. Severity
 is left off it: at three to twelve issues a quarter the mix is sampling noise.
 
-AI attribution is by explicit marker in a finder credit (see lib/credits.py) and
-is therefore a floor. curl is matched against the narrower CURL_AI list.
+AI attribution is by the shared explicit-marker classifier in lib/credits.py and
+is therefore a floor.
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.credits import CURL_AI, SEVERITIES, classify  # noqa: E402
+from lib.credits import SEVERITIES, classify  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch  # noqa: E402
 
@@ -42,7 +42,25 @@ def entries() -> list[dict]:
 
 
 def finders(entry: dict) -> list[str]:
-    return [c["name"] for c in entry.get("credits", []) if c.get("type") == "FINDER"]
+    """Return FINDER credits, rejoining upstream's parenthesis-split fragments."""
+    raw = [
+        c["name"].strip()
+        for c in entry.get("credits", [])
+        if c.get("type") == "FINDER" and c.get("name")
+    ]
+    merged: list[str] = []
+    pending = ""
+    for name in raw:
+        candidate = f"{pending}, {name}" if pending else name
+        if candidate.count("(") > candidate.count(")"):
+            pending = candidate
+            continue
+        merged.append(candidate)
+        pending = ""
+    if pending:
+        # Keep malformed upstream text visible; tools/check.py will flag it.
+        merged.append(pending)
+    return merged
 
 
 def build_annual(records: list[dict]) -> list[dict]:
@@ -52,7 +70,7 @@ def build_annual(records: list[dict]) -> list[dict]:
         published = entry["published"]
         year = int(published[:4])
         latest = max(latest, published[:10])
-        is_ai = any(CURL_AI.search(name) for name in finders(entry))
+        is_ai = any(classify(name, year) == "ai" for name in finders(entry))
         severity = (entry.get("database_specific") or {}).get("severity", "unknown")
         bucket = per_year[year]
         bucket["total"] += 1
@@ -98,7 +116,7 @@ def build_quarterly(records: list[dict]) -> list[dict]:
         year, month = int(published[:4]), int(published[5:7])
         bucket = per_quarter[f"{year}-Q{(month - 1) // 3 + 1}"]
         bucket["total"] += 1
-        is_ai = any(CURL_AI.search(name) for name in finders(entry))
+        is_ai = any(classify(name, year) == "ai" for name in finders(entry))
         bucket["ai_attributed" if is_ai else "other_attributed"] += 1
     rows = [
         {
@@ -126,7 +144,7 @@ def build_finders(records: list[dict]) -> list[dict]:
     for entry in records:
         year = int(entry["published"][:4])
         for name in finders(entry):
-            counted[(year, name, classify(name))] += 1
+            counted[(year, name, classify(name, year))] += 1
     rows = [
         {"year": year, "finder": name, "category": category, "cves": count}
         for (year, name, category), count in sorted(

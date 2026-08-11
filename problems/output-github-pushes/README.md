@@ -28,8 +28,8 @@ software and not a result.
 Pushes rose from 135.4 million in 2022-Q4, the quarter ChatGPT was released, to
 167.8 million in 2024-Q4 and 319.8 million in 2026-Q1, roughly doubling over the
 last five quarters of the series. This is the sharpest bend of the five volume
-series, and the bend is late: the first eleven quarters add 68%, the following
-thirteen add 136%, and the steepest part of the climb runs from 2025 into the
+series, and the bend is late: 2020-Q1 through 2022-Q4 adds 68%, while 2022-Q4
+through 2026-Q1 adds 136%, and the steepest part of the climb runs from 2025 into the
 shaded 2026 period.
 
 Every figure in the annotation is computed from the CSV when the chart is drawn,

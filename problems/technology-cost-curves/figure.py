@@ -44,7 +44,7 @@ def ai_rates() -> list[tuple[str, float, tuple[float, float] | None, int, int, s
               if row["ci_low_months"] else None)
         out.append((row["label"].replace("|", "\n"), float(row["halving_months"]),
                     ci, int(row["first_year"]), int(row["last_year"]),
-                    row["source_anchor"]))
+                    row["source_url"]))
     return out
 
 
@@ -90,7 +90,7 @@ def main() -> None:
 
     Left: the window each measurement covers. Right: halving times on a log
     axis, with published 95% intervals where the source gives one. Only the
-    fastest physical curves are shown; the rest of the 64 falling series are
+    fastest physical curves are shown; the other 58 falling series are
     slower than everything plotted, and several are so nearly flat that a
     fitted halving time runs to centuries and means nothing.
     """

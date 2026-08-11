@@ -545,7 +545,7 @@ def volume_series(
 ) -> None:
     """One output-volume series: years on x, a count on y, era shaded.
 
-    The five volume series are five different artifacts counted by five
+    The three volume series are three different artifacts counted by three
     organizations, and the only thing that makes them comparable is being drawn
     the same way. They are the collection's contrast case — volume against
     discovery — so a difference in shape between one of these and a record series

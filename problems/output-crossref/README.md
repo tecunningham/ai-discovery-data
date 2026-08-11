@@ -51,7 +51,7 @@ sequential with a sleep between them, which is what keeps a rebuild polite.
 [`figure.py`](figure.py) draws the series through
 [`lib/families.py`](../../lib/families.py)'s shared volume shape: years on the
 x-axis, the count on the y-axis, 2026 shaded, the part year outlined rather than
-filled. The five volume folders use that one shape so a difference in appearance
+filled. The three volume folders use that one shape so a difference in appearance
 between any two of them is a difference in the data. It is drawn in slate rather
 than the blue the other charts use for human or uncredited finders, because this
 series has no authorship field at all.
@@ -86,9 +86,8 @@ are the same size as movements the series was already making in the 2010s.
 
 The comparison this folder exists for is with its three siblings, which is why
 [arXiv](../output-arxiv/README.md) names it as its own control.
-[GitHub pushes](../output-github-pushes/README.md) bend upward and
-[Stack Overflow](../output-stackoverflow/README.md) collapses; this one does
-neither, over a longer window than any of them. Set the whole group against
+[GitHub pushes](../output-github-pushes/README.md) bend upward; this one does
+not, over a longer window than either of them. Set the whole group against
 [curl](../cyber-curl/README.md), where a fixed codebase yields a step change in
 disclosures, and against the mathematics folders such as
 [the Erdős problems](../math-erdos/README.md), where the records barely move.

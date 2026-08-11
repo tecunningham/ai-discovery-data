@@ -42,7 +42,7 @@ for corrections to 1991–1997, which is dropped.
 [`figure.py`](figure.py) draws the series through
 [`lib/families.py`](../../lib/families.py)'s shared volume shape: years on the
 x-axis, the count on the y-axis, January 2026 onward shaded, an open marker on
-a part period. The five volume folders use that one shape so a difference in
+a part period. The three volume folders use that one shape so a difference in
 appearance between any two of them is a difference in the data. It is drawn in
 slate rather than the blue the other charts use for human or uncredited finders,
 because this series has no authorship field at all.

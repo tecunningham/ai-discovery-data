@@ -27,7 +27,7 @@ software and not a result.
 
 Pushes rose from 135.4 million in 2022-Q4, the quarter ChatGPT was released, to
 167.8 million in 2024-Q4 and 319.8 million in 2026-Q1, roughly doubling over the
-last five quarters of the series. This is the sharpest bend of the five volume
+last five quarters of the series. This is the sharpest bend of the three volume
 series, and the bend is late: 2020-Q1 through 2022-Q4 adds 68%, while 2022-Q4
 through 2026-Q1 adds 136%, and the steepest part of the climb runs from 2025 into the
 shaded 2026 period.
@@ -60,7 +60,7 @@ python3 problems/output-github-pushes/check.py --upstream
 [`lib/families.py`](../../lib/families.py)'s shared volume shape: years on the
 x-axis, the count on the y-axis, January 2026 onward shaded. A marker is drawn
 on each quarter, since the series is twenty-five points rather than the hundreds
-the monthly series carry. The five volume folders use that one shape so a
+the monthly series carry. The three volume folders use that one shape so a
 difference in appearance between any two of them is a difference in the data. It
 is drawn in slate rather than the blue the other charts use for human or
 uncredited finders, because this series has no authorship field at all.
@@ -111,9 +111,7 @@ change in disclosures, and against the mathematics folders, where the records
 barely move. [arXiv](../output-arxiv/README.md) is the same shape over a much
 longer history, and [Crossref](../output-crossref/README.md) is the control:
 publishing volume rose steeply through the same period with no clean bend, so a
-rising volume curve is not by itself evidence of anything new.
-[Stack Overflow](../output-stackoverflow/README.md) is the direct pairing —
-pushes of code roughly double while questions about code collapse. HackerOne's
-platform self-report of a 210% rise in AI-attributed
-vulnerability reports [@hackerone2025autonomy] is a statement of the same kind:
-a count of submissions rather than of what was found.
+rising volume curve is not by itself evidence of anything new. HackerOne's
+platform self-report of a 210% rise in AI-attributed vulnerability reports
+[@hackerone2025autonomy] is a statement of the same kind: a count of submissions
+rather than of what was found.

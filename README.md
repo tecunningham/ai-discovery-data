@@ -63,7 +63,6 @@ not required.
 | <b><a href="problems/output-arxiv/">arXiv submissions</a></b><br><b>Metric:</b> research output; preprints submitted<br>to arXiv per month<br><b>Coverage:</b> 1991-07 to 2026-08, monthly, the<br>last month partial<br><b>Acceleration?</b> 📈 accelerating — on volume,<br>which is not discovery | <a href="problems/output-arxiv/"><img src="problems/output-arxiv/output-arxiv-submissions.png" width="400" alt="arXiv submissions"></a> |
 | <b><a href="problems/output-crossref/">DOI records deposited with Crossref</a></b><br><b>Metric:</b> formal publishing volume; DOI records<br>deposited with Crossref per year, by created<br>date<br><b>Coverage:</b> 2010 to 2026, annual, the last year<br>partial<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/output-crossref/"><img src="problems/output-crossref/output-crossref-dois.png" width="400" alt="DOI records deposited with Crossref"></a> |
 | <b><a href="problems/output-github-pushes/">Git pushes to GitHub</a></b><br><b>Metric:</b> code output; git pushes to GitHub per<br>quarter, summed over economies<br><b>Coverage:</b> 2020-Q1 to 2026-Q1, quarterly<br><b>Acceleration?</b> 📈 accelerating — on volume,<br>which is not discovery | <a href="problems/output-github-pushes/"><img src="problems/output-github-pushes/output-github-pushes.png" width="400" alt="Git pushes to GitHub"></a> |
-| <b><a href="problems/output-stackoverflow/">Stack Overflow questions</a></b><br><b>Metric:</b> demand for human answers; questions<br>created on Stack Overflow per month<br><b>Coverage:</b> 2019-01 to 2026-07, monthly,<br>complete months only<br><b>Acceleration?</b> 📉 declining — on demand for<br>human answers, not on discovery | <a href="problems/output-stackoverflow/"><img src="problems/output-stackoverflow/output-stackoverflow-questions.png" width="400" alt="Stack Overflow questions"></a> |
 <!-- END GENERATED: series-index -->
 
 ## Validation
@@ -100,9 +99,8 @@ not required.
 | [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Stack Overflow questions](problems/output-stackoverflow/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-30 problems holding 34 figures and 38 data files. 18 refetch from upstream and 12 are maintained by hand and say so. No failing cells.
+29 problems holding 33 figures and 37 data files. 17 refetch from upstream and 12 are maintained by hand and say so. No failing cells.
 <!-- END GENERATED: checks-table -->
 
 ## How to read the series

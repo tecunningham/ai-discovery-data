@@ -344,6 +344,11 @@ def csv_errors(path: Path) -> list[str]:
                     )
                     continue
                 for index, field in url_columns:
+                    # Evidence URLs are conditional: an empty value is expected
+                    # when the corresponding classification is false. Folder
+                    # semantic checks enforce that classified rows supply one.
+                    if field == "ai_evidence_url" and not row[index]:
+                        continue
                     if not row[index].startswith(("http://", "https://")):
                         errors.append(
                             f"{path.name}:{line_number} has no public URL in "

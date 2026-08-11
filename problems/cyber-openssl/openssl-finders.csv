@@ -1,208 +1,208 @@
-year,finder,category,cves
-2002,OpenSSL Group (A.L. Digital),other,3
-2003,NISCC,other,3
-2003,Novell,other,1
-2004,OpenSSL group,other,2
-2004,OpenSSL group (Stephen Henson),other,1
-2005,researcher,other,1
-2006,openssl,other,5
-2007,Geoff Lowe,other,1
-2007,Andy Polyakov,other,1
-2007,Moritz Jodeit,other,1
-2008,codenomicon,other,2
-2009,"Daniel Mentz, Robin Seggelmann",other,3
-2009,Alex Lam,other,1
-2009,"Ivan Nestlerode, IBM",other,1
-2009,Paolo Ganci,other,1
-2009,Robin Seggelmann,other,1
-2009,google,other,1
-2010,Martin Rex,other,1
-2010,Sebastian Martini,other,1
-2010,Rob Hulswit,other,1
-2010,Ronald Moesbergen,other,1
-2010,Peter-Michael Hager,other,1
-2010,Bodo Moeller and Adam Langley (Google),other,1
-2010,"Martin Olsson, Neel Mehta",other,1
-2010,"Todd Rinaldo, Tomas Hoger (Red Hat)",other,1
-2010,Michael K Johnson and Andy Grimm (rPath),other,1
-2011,Kaspar Brand,other,1
-2011,Adam Langley,other,1
-2011,Neel Mehta,other,1
-2012,Codenomicon,other,1
-2012,Red Hat,other,1
-2012,Tavis Ormandy,other,1
-2012,Ivan Nestlerode,other,1
-2012,Nadhem Alfardan and Kenny Paterson,other,1
-2012,Ben Laurie,other,1
-2012,Adam Langley,other,1
-2012,Andrew Chi,other,1
-2012,George Kadianakis,other,1
-2012,Andrey Kulikov,other,1
-2012,Antonio Martin,other,1
-2013,Ron Barber,other,1
-2013,Dmitry Sobinov,other,1
-2013,Adam Langley and Wolfgang Ettlinger,other,1
-2013,Stephen Henson,other,1
-2013,"Nadhem J. AlFardan and Kenneth G. Paterson of the Information Security Group Royal Holloway, University of London",other,1
-2014,Adam Langley (Google),other,2
-2014,Frank Schmirler,other,1
-2014,LibreSSL project,other,1
-2014,Akamai Technologies,other,1
-2014,Adam Langley and Wan-Teh Chang (Google),other,1
-2014,Ivan Fratric (Google),other,1
-2014,Gabor Tyukasz (LogMeIn Inc),other,1
-2014,Felix Gröbert (Google),other,1
-2014,David Benjamin and Adam Langley (Google),other,1
-2014,"Sean Devlin and Watson Ladd (Cryptography Services, NCC Group)",other,1
-2014,Joonas Kuorilehto and Riku Hietamäki (Codenomicon),other,1
-2014,Jüri Aedla,other,1
-2014,Imre Rad (Search-Lab Ltd.),other,1
-2014,KIKUCHI Masashi (Lepidum Co. Ltd.),other,1
-2014,Felix Gröbert and Ivan Fratrić (Google),other,1
-2014,Neel Mehta,other,1
-2014,Yuval Yarom and Naomi Benger,other,1
-2014,Anton Johansson,other,1
-2015,Karthikeyan Bhargavan of the PROSECCO team at INRIA,other,3
-2015,Michal Zalewski (Google),other,2
-2015,Brian Carpenter,other,2
-2015,Matt Caswell (OpenSSL development team),other,2
-2015,Hanno Böck,other,1
-2015,Loïc Jonas Etienne (Qnective AG),other,1
-2015,Adam Langley (Google/BoringSSL) using libFuzzer,fuzz,1
-2015,Stephen Henson (OpenSSL),other,1
-2015,Guy Leaver (Cisco),other,1
-2015,Adam Langley and David Benjamin (Google/BoringSSL),other,1
-2015,"Praveen Kariyanahalli, and subsequently by Ivan Fratric and Felix Groebert (Google)",other,1
-2015,Joseph Birr-Pixton,other,1
-2015,Robert Święcki (Google Security Team) and Hanno Böck,other,1
-2015,Johannes Bauer,other,1
-2015,Emilia Käsper (OpenSSL),other,1
-2015,Per Allansson,other,1
-2015,The BoringSSL project,other,1
-2015,Stephen Henson (OpenSSL development team),other,1
-2015,Emilia Käsper (OpenSSL development team),other,1
-2015,Daniel Danner and Rainer Mueller,other,1
-2015,David Ramos (Stanford University),other,1
-2015,"Robert Dugal, also David Ramos, also Huzaifa Sidhpurwala (Red Hat)",other,1
-2015,Sean Burford (Google) and Emilia Käsper (OpenSSL development team),other,1
-2015,Pieter Wuille (Blockstream),other,1
-2015,Chris Mueller,other,1
-2015,"Markus Stenberg of Cisco Systems, Inc",other,1
-2015,Antti Karjalainen and Tuomo Untinen from the Codenomicon CROSS program/Konrad Kraszewski from Google,other,1
-2016,"Shi Lei (Gear Team, Qihoo 360 Inc.)",other,8
-2016,Guido Vranken,other,6
-2016,Robert Święcki (Google Security Team),other,2
-2016,David Adrian and J.Alex Halderman (University of Michigan),other,2
-2016,Nimrod Aviram and Sebastian Schinzel,other,2
-2016,Tyler Nighswander (ForAllSecure),other,1
-2016,Publicly reported,other,1
-2016,Bruce Stephens and Thomas Jakobi,other,1
-2016,Alex Gaynor,other,1
-2016,Karthik Bhargavan and Gaetan Leurent from Inria,other,1
-2016,Quan Luo,other,1
-2016,OCAP audit team,other,1
-2016,"César Pereida (Aalto University), Billy Brumley (Tampere University of Technology), and Yuval Yarom (The University of Adelaide and NICTA)",other,1
-2016,Juraj Somorovsky,other,1
-2016,"Huzaifa Sidhpurwala (Red Hat), Hanno Böck, David Benjamin (Google)",other,1
-2016,Brian Carpenter,other,1
-2016,"Yuval Yarom, The University of Adelaide and NICTA, Daniel Genkin, Technion and Tel Aviv University, and Nadia Heninger, University of Pennsylvania",other,1
-2016,Adam Langley (Google/BoringSSL),other,1
-2016,Emilia Käsper (OpenSSL),other,1
-2016,Antonio Sanso (Adobe),other,1
-2017,Google OSS-Fuzz,fuzz,2
-2017,David Benjamin (Google),other,1
-2017,David Benjamin (Google)/Google OSS-Fuzz,fuzz,1
-2017,Joe Orton (Red Hat),other,1
-2017,Guido Vranken,other,1
-2017,Robert Święcki of Google,other,1
-2017,OSS-Fuzz project,fuzz,1
-2018,Samuel Weiser,other,2
-2018,"Alejandro Cabrera Aldaya, Billy Brumley, Sohaib ul Hassan, Cesar Pereida Garcia and Nicola Tuveri",other,1
-2018,Guido Vranken,other,1
-2018,"Alejandro Cabrera Aldaya, Billy Brumley, Cesar Pereida Garcia and Luis Manuel Alvarez Tapia",other,1
-2018,Peter Waltenberg (IBM),other,1
-2018,OSS-fuzz,fuzz,1
-2019,OSS-Fuzz and Guido Vranken,fuzz,1
-2019,"Cesar Pereida García, Sohaib ul Hassan, Nicola Tuveri, Iaroslav Gridin, Alejandro Cabrera Aldaya, and Billy Brumley",other,1
-2019,Matt Caswell,other,1
-2019,Bernd Edlinger,other,1
-2019,Rich Mirch,other,1
-2019,Joran Dirk Greef of Ronomon,other,1
-2019,"Juraj Somorovsky, Robert Merget and Nimrod Aviram, with additional investigation by Steven Collison and Andrew Hourselt",other,1
-2020,David Benjamin (Google),other,1
-2020,"Robert Merget, Marcus Brinkmann, Nimrod Aviram, and Juraj Somorovsky",other,1
-2020,Bernd Edlinger,other,1
-2021,Tobias Nießen,other,1
-2021,John Ouyang,other,1
-2021,Ingo Schwarze,other,1
-2021,Peter Kästle (Nokia) and Samuel Sapalski (Nokia),other,1
-2021,"Benjamin Kaduk (Akamai), Xiang Ding (Akamai), others at Akamai",other,1
-2021,D. Katz and Joel Luellwitz (Trustwave),other,1
-2021,Paul Kehrer,other,1
-2021,Tavis Ormandy (Google),other,1
-2022,Polar Bear,other,2
-2022,Viktor Dukhovni,other,1
-2022,Chris Rapier (Pittsburgh Supercomputing Center),other,1
-2022,Alex Chernyakhovsky,other,1
-2022,Xi Ruoyao,other,1
-2022,Chancen (Qingteng 73lab),other,1
-2022,Elison Niven (Sophos),other,1
-2022,Raul Metsma,other,1
-2022,Tom Colley (Broadcom),other,1
-2022,Aliaksei Levin,other,1
-2022,Tavis Ormandy (Google),other,1
-2022,Bernd Edlinger,other,1
-2023,David Benjamin (Google),other,5
-2023,Tony Battersby (Cybernetics),other,1
-2023,Zach Wilson,other,1
-2023,Bernd Edlinger,other,1
-2023,OSSfuzz,fuzz,1
-2023,Juerg Wullschleger (Google),other,1
-2023,OSSFuzz and Matt Caswell,fuzz,1
-2023,Anton Romanov (Amazon),other,1
-2023,Corey Bonnell from Digicert,other,1
-2023,Hubert Kario from Red Hat,other,1
-2023,"CarpetFuzz, Dawei Wang and Marc Schönefeld",fuzz,1
-2023,Octavio Galland (Max Planck Institute for Security and Privacy) and Marcel Böhme (Max Planck Institute for Security and Privacy),other,1
-2023,Marc Schönefeld,other,1
-2023,Kurt Roeckx,other,1
-2023,Hubert Kario (Red Hat) and Dmitry Belyavsky (Red Hat),other,1
-2024,OSS-Fuzz,fuzz,2
-2024,Google OSS-Fuzz-Gen,fuzz,1
-2024,David Benjamin (Google),other,1
-2024,Joseph Birr-Pixton,other,1
-2024,William Ahern (Akamai),other,1
-2024,Manish Patidar (Hewlett Packard Enterprise),other,1
-2024,Bahaa Naamneh (Crosspoint Labs),other,1
-2024,Sverker Eriksson,other,1
-2025,Stanislav Fort (Aisle Research),ai,3
-2025,Alexandr Sosedkin (Red Hat),other,1
-2025,Apple Inc.,other,1
-2025,George Pantelakis (Red Hat) and Alicja Kario (Red Hat),other,1
-2026,Alex Gaynor (Anthropic),ai,5
-2026,Stanislav Fort (Aisle Research),ai,5
-2026,Luigino Camastra (Aisle Research),ai,4
-2026,Igor Morgenstern (Aisle Research),ai,2
-2026,Bhabani Sankar Das and Zhenzhe Shao,other,1
-2026,Frank Buss,other,1
-2026,Pavol Žáčik (Red Hat) and Alex Gaynor (Anthropic),ai,1
-2026,"Asim Viladi Oglu Manizada, Alex Gaynor (Anthropic), Ying Dong and Haiyang Huang",ai,1
-2026,Abhinav Agarwal,other,1
-2026,"Wang Kenaz (University of Illinois), Guido Vranken (Aisle Research) and Aaron Grattafiori (Nvidia)",ai,1
-2026,"Sunwoo Lee (KENTECH), Hyuk Lim (KENTECH) and Seunghyun Yoon (KENTECH)",other,1
-2026,Joshua Rogers (Aisle Research),ai,1
-2026,"Mayank Jangid, Kushal Khemka, Hari Priandana, Bhabani Sankar Das and Qifan Zhang (Palo Alto Networks)",other,1
-2026,"Zhanpeng Liu (Tencent Xuanwu Lab), Guannan Wang (Tencent Xuanwu Lab), Guancheng Li (Tencent Xuanwu Lab) and Bhabani Sankar Das",other,1
-2026,TrendAI Zero Day Initiative,other,1
-2026,Thai Duong (Calif.io in collaboration with Claude and Anthropic Research),ai,1
-2026,Zehua Qiao and Jinwen He,other,1
-2026,Bhabani Sankar Das and Haruki Oyama (Waseda University),other,1
-2026,"Stanislav Fort (Aisle Research), Pavel Kohout (Aisle Research) and Alex Gaynor (Anthropic)",ai,1
-2026,"Nathan Sportsman (Praetorian), Daniel Rhea, Jaeho Nam (Seoul National University), Muhammad Daffa, Zhanpeng Liu (Tencent Xuanwu Lab), Guannan Wang (Tencent Xuanwu Lab), Guancheng Li (Tencent Xuanwu Lab) and Joshua Rogers (Aisle Research)",ai,1
-2026,"Muhammad Daffa, Zhanpeng Liu (Tencent Xuanwu Lab), Guannan Wang (Tencent Xuanwu Lab), Guancheng Li (Tencent Xuanwu Lab), Joshua Rogers (Aisle Research) and Chanho Kim",ai,1
-2026,Quoc Tran (Xint.io - US Team),other,1
-2026,Simo Sorce (Red Hat),other,1
-2026,Viktor Dukhovni,other,1
-2026,"Stanislav Fort (Aisle Research), Petr Šimeček (Aisle Research) and Hamza (Metadust)",ai,1
-2026,Tomas Dulka (Aisle Research) and Stanislav Fort (Aisle Research),ai,1
-2026,Petr Šimeček (Aisle Research) and Stanislav Fort (Aisle Research),ai,1
+year,finder,explicit_ai,ai_affiliated,fuzz,ai_evidence_url,cves
+2002,OpenSSL Group (A.L. Digital),no,no,no,,3
+2003,NISCC,no,no,no,,3
+2003,Novell,no,no,no,,1
+2004,OpenSSL group,no,no,no,,2
+2004,OpenSSL group (Stephen Henson),no,no,no,,1
+2005,researcher,no,no,no,,1
+2006,openssl,no,no,no,,5
+2007,Andy Polyakov,no,no,no,,1
+2007,Moritz Jodeit,no,no,no,,1
+2007,Geoff Lowe,no,no,no,,1
+2008,codenomicon,no,no,no,,2
+2009,"Daniel Mentz, Robin Seggelmann",no,no,no,,3
+2009,google,no,no,no,,1
+2009,Robin Seggelmann,no,no,no,,1
+2009,"Ivan Nestlerode, IBM",no,no,no,,1
+2009,Paolo Ganci,no,no,no,,1
+2009,Alex Lam,no,no,no,,1
+2010,Michael K Johnson and Andy Grimm (rPath),no,no,no,,1
+2010,"Todd Rinaldo, Tomas Hoger (Red Hat)",no,no,no,,1
+2010,"Martin Olsson, Neel Mehta",no,no,no,,1
+2010,Bodo Moeller and Adam Langley (Google),no,no,no,,1
+2010,Ronald Moesbergen,no,no,no,,1
+2010,Peter-Michael Hager,no,no,no,,1
+2010,Rob Hulswit,no,no,no,,1
+2010,Martin Rex,no,no,no,,1
+2010,Sebastian Martini,no,no,no,,1
+2011,Neel Mehta,no,no,no,,1
+2011,Kaspar Brand,no,no,no,,1
+2011,Adam Langley,no,no,no,,1
+2012,Nadhem Alfardan and Kenny Paterson,no,no,no,,1
+2012,Ben Laurie,no,no,no,,1
+2012,Adam Langley,no,no,no,,1
+2012,Andrew Chi,no,no,no,,1
+2012,George Kadianakis,no,no,no,,1
+2012,Andrey Kulikov,no,no,no,,1
+2012,Antonio Martin,no,no,no,,1
+2012,Ivan Nestlerode,no,no,no,,1
+2012,Tavis Ormandy,no,no,no,,1
+2012,Red Hat,no,no,no,,1
+2012,Codenomicon,no,no,no,,1
+2013,"Nadhem J. AlFardan and Kenneth G. Paterson of the Information Security Group Royal Holloway, University of London",no,no,no,,1
+2013,Adam Langley and Wolfgang Ettlinger,no,no,no,,1
+2013,Stephen Henson,no,no,no,,1
+2013,Dmitry Sobinov,no,no,no,,1
+2013,Ron Barber,no,no,no,,1
+2014,Adam Langley (Google),no,no,no,,2
+2014,Anton Johansson,no,no,no,,1
+2014,Yuval Yarom and Naomi Benger,no,no,no,,1
+2014,Neel Mehta,no,no,no,,1
+2014,Felix Gröbert and Ivan Fratrić (Google),no,no,no,,1
+2014,Jüri Aedla,no,no,no,,1
+2014,Imre Rad (Search-Lab Ltd.),no,no,no,,1
+2014,KIKUCHI Masashi (Lepidum Co. Ltd.),no,no,no,,1
+2014,Adam Langley and Wan-Teh Chang (Google),no,no,no,,1
+2014,Ivan Fratric (Google),no,no,no,,1
+2014,Gabor Tyukasz (LogMeIn Inc),no,no,no,,1
+2014,Felix Gröbert (Google),no,no,no,,1
+2014,David Benjamin and Adam Langley (Google),no,no,no,,1
+2014,"Sean Devlin and Watson Ladd (Cryptography Services, NCC Group)",no,no,no,,1
+2014,Joonas Kuorilehto and Riku Hietamäki (Codenomicon),no,no,no,,1
+2014,LibreSSL project,no,no,no,,1
+2014,Akamai Technologies,no,no,no,,1
+2014,Frank Schmirler,no,no,no,,1
+2015,Karthikeyan Bhargavan of the PROSECCO team at INRIA,no,no,no,,3
+2015,Brian Carpenter,no,no,no,,2
+2015,Matt Caswell (OpenSSL development team),no,no,no,,2
+2015,Michal Zalewski (Google),no,no,no,,2
+2015,"Markus Stenberg of Cisco Systems, Inc",no,no,no,,1
+2015,Antti Karjalainen and Tuomo Untinen from the Codenomicon CROSS program/Konrad Kraszewski from Google,no,no,no,,1
+2015,Pieter Wuille (Blockstream),no,no,no,,1
+2015,Chris Mueller,no,no,no,,1
+2015,Per Allansson,no,no,no,,1
+2015,The BoringSSL project,no,no,no,,1
+2015,Stephen Henson (OpenSSL development team),no,no,no,,1
+2015,Emilia Käsper (OpenSSL development team),no,no,no,,1
+2015,Daniel Danner and Rainer Mueller,no,no,no,,1
+2015,David Ramos (Stanford University),no,no,no,,1
+2015,"Robert Dugal, also David Ramos, also Huzaifa Sidhpurwala (Red Hat)",no,no,no,,1
+2015,Sean Burford (Google) and Emilia Käsper (OpenSSL development team),no,no,no,,1
+2015,Emilia Käsper (OpenSSL),no,no,no,,1
+2015,"Praveen Kariyanahalli, and subsequently by Ivan Fratric and Felix Groebert (Google)",no,no,no,,1
+2015,Joseph Birr-Pixton,no,no,no,,1
+2015,Robert Święcki (Google Security Team); Hanno Böck,no,no,no,,1
+2015,Johannes Bauer,no,no,no,,1
+2015,Adam Langley and David Benjamin (Google/BoringSSL),no,no,no,,1
+2015,Guy Leaver (Cisco),no,no,no,,1
+2015,Hanno Böck,no,no,no,,1
+2015,Loïc Jonas Etienne (Qnective AG),no,no,no,,1
+2015,Adam Langley (Google/BoringSSL) using libFuzzer,no,no,yes,,1
+2015,Stephen Henson (OpenSSL),no,no,no,,1
+2016,"Shi Lei (Gear Team, Qihoo 360 Inc.)",no,no,no,,8
+2016,Guido Vranken,no,no,no,,6
+2016,Nimrod Aviram and Sebastian Schinzel,no,no,no,,2
+2016,David Adrian and J.Alex Halderman (University of Michigan),no,no,no,,2
+2016,Robert Święcki (Google Security Team),no,no,no,,2
+2016,Antonio Sanso (Adobe),no,no,no,,1
+2016,"Yuval Yarom, The University of Adelaide and NICTA, Daniel Genkin, Technion and Tel Aviv University, and Nadia Heninger, University of Pennsylvania",no,no,no,,1
+2016,Adam Langley (Google/BoringSSL),no,no,no,,1
+2016,Emilia Käsper (OpenSSL),no,no,no,,1
+2016,Juraj Somorovsky,no,no,no,,1
+2016,"Huzaifa Sidhpurwala (Red Hat), Hanno Böck, David Benjamin (Google)",no,no,no,,1
+2016,Brian Carpenter,no,no,no,,1
+2016,"César Pereida (Aalto University), Billy Brumley (Tampere University of Technology), and Yuval Yarom (The University of Adelaide and NICTA)",no,no,no,,1
+2016,OCAP audit team,no,no,no,,1
+2016,Quan Luo,no,no,no,,1
+2016,Karthik Bhargavan and Gaetan Leurent from Inria,no,no,no,,1
+2016,Alex Gaynor,no,no,no,,1
+2016,Bruce Stephens and Thomas Jakobi,no,no,no,,1
+2016,Tyler Nighswander (ForAllSecure),no,no,no,,1
+2016,Publicly reported,no,no,no,,1
+2017,Google OSS-Fuzz,no,no,yes,,2
+2017,Guido Vranken,no,no,no,,1
+2017,Robert Święcki of Google,no,no,no,,1
+2017,OSS-Fuzz project,no,no,yes,,1
+2017,Joe Orton (Red Hat),no,no,no,,1
+2017,David Benjamin (Google),no,no,no,,1
+2017,David Benjamin (Google)/Google OSS-Fuzz,no,no,yes,,1
+2018,Samuel Weiser,no,no,no,,2
+2018,Peter Waltenberg (IBM),no,no,no,,1
+2018,OSS-fuzz,no,no,yes,,1
+2018,"Alejandro Cabrera Aldaya, Billy Brumley, Cesar Pereida Garcia and Luis Manuel Alvarez Tapia",no,no,no,,1
+2018,Guido Vranken,no,no,no,,1
+2018,"Alejandro Cabrera Aldaya, Billy Brumley, Sohaib ul Hassan, Cesar Pereida Garcia and Nicola Tuveri",no,no,no,,1
+2019,"Juraj Somorovsky, Robert Merget and Nimrod Aviram, with additional investigation by Steven Collison and Andrew Hourselt",no,no,no,,1
+2019,Joran Dirk Greef of Ronomon,no,no,no,,1
+2019,Rich Mirch,no,no,no,,1
+2019,"Cesar Pereida García, Sohaib ul Hassan, Nicola Tuveri, Iaroslav Gridin, Alejandro Cabrera Aldaya, and Billy Brumley",no,no,no,,1
+2019,Matt Caswell,no,no,no,,1
+2019,Bernd Edlinger,no,no,no,,1
+2019,OSS-Fuzz and Guido Vranken,no,no,yes,,1
+2020,Bernd Edlinger,no,no,no,,1
+2020,"Robert Merget, Marcus Brinkmann, Nimrod Aviram, and Juraj Somorovsky",no,no,no,,1
+2020,David Benjamin (Google),no,no,no,,1
+2021,D. Katz and Joel Luellwitz (Trustwave),no,no,no,,1
+2021,Paul Kehrer,no,no,no,,1
+2021,Tavis Ormandy (Google),no,no,no,,1
+2021,Peter Kästle (Nokia) and Samuel Sapalski (Nokia),no,no,no,,1
+2021,"Benjamin Kaduk (Akamai), Xiang Ding (Akamai), others at Akamai",no,no,no,,1
+2021,John Ouyang,no,no,no,,1
+2021,Ingo Schwarze,no,no,no,,1
+2021,Tobias Nießen,no,no,no,,1
+2022,Polar Bear,no,no,no,,2
+2022,Bernd Edlinger,no,no,no,,1
+2022,Tavis Ormandy (Google),no,no,no,,1
+2022,Elison Niven (Sophos),no,no,no,,1
+2022,Raul Metsma,no,no,no,,1
+2022,Tom Colley (Broadcom),no,no,no,,1
+2022,Aliaksei Levin,no,no,no,,1
+2022,Chancen (Qingteng 73lab),no,no,no,,1
+2022,Alex Chernyakhovsky,no,no,no,,1
+2022,Xi Ruoyao,no,no,no,,1
+2022,Chris Rapier (Pittsburgh Supercomputing Center),no,no,no,,1
+2022,Viktor Dukhovni,no,no,no,,1
+2023,David Benjamin (Google),no,no,no,,5
+2023,Corey Bonnell from Digicert,no,no,no,,1
+2023,Hubert Kario from Red Hat,no,no,no,,1
+2023,CarpetFuzz; Dawei Wang; Marc Schönefeld,no,no,yes,,1
+2023,Octavio Galland (Max Planck Institute for Security and Privacy); Marcel Böhme (Max Planck Institute for Security and Privacy),no,no,no,,1
+2023,Marc Schönefeld,no,no,no,,1
+2023,Kurt Roeckx,no,no,no,,1
+2023,Hubert Kario (Red Hat); Dmitry Belyavsky (Red Hat),no,no,no,,1
+2023,Anton Romanov (Amazon),no,no,no,,1
+2023,OSSFuzz; Matt Caswell,no,no,yes,,1
+2023,Juerg Wullschleger (Google),no,no,no,,1
+2023,OSSfuzz,no,no,yes,,1
+2023,Bernd Edlinger,no,no,no,,1
+2023,Zach Wilson,no,no,no,,1
+2023,Tony Battersby (Cybernetics),no,no,no,,1
+2024,OSS-Fuzz,no,no,yes,,2
+2024,Sverker Eriksson,no,no,no,,1
+2024,Bahaa Naamneh (Crosspoint Labs),no,no,no,,1
+2024,Manish Patidar (Hewlett Packard Enterprise),no,no,no,,1
+2024,William Ahern (Akamai),no,no,no,,1
+2024,Joseph Birr-Pixton,no,no,no,,1
+2024,David Benjamin (Google),no,no,no,,1
+2024,Google OSS-Fuzz-Gen,no,no,yes,,1
+2025,Stanislav Fort (Aisle Research),yes,yes,no,https://aisle.com/blog/aisle-discovers-three-of-the-four-openssl-vulnerabilities-of-2025,3
+2025,George Pantelakis (Red Hat); Alicja Kario (Red Hat),no,no,no,,1
+2025,Apple Inc.,no,no,no,,1
+2025,Alexandr Sosedkin (Red Hat),no,no,no,,1
+2026,Stanislav Fort (Aisle Research),yes,yes,no,https://aisle.com/blog/aisle-discovered-12-out-of-12-openssl-vulnerabilities,5
+2026,Alex Gaynor (Anthropic),no,yes,no,,5
+2026,Luigino Camastra (Aisle Research),yes,yes,no,https://aisle.com/blog/aisle-discovered-12-out-of-12-openssl-vulnerabilities,4
+2026,Igor Morgenstern (Aisle Research),yes,yes,no,https://aisle.com/blog/aisle-discovers-20-openssl-zero-days-in-6-months,2
+2026,Stanislav Fort (Aisle Research); Petr Šimeček (Aisle Research); Hamza (Metadust),yes,yes,no,https://aisle.com/blog/aisle-discovered-12-out-of-12-openssl-vulnerabilities,1
+2026,Tomas Dulka (Aisle Research); Stanislav Fort (Aisle Research),yes,yes,no,https://aisle.com/blog/aisle-discovered-12-out-of-12-openssl-vulnerabilities,1
+2026,Petr Šimeček (Aisle Research); Stanislav Fort (Aisle Research),yes,yes,no,https://aisle.com/blog/aisle-discovered-12-out-of-12-openssl-vulnerabilities,1
+2026,Viktor Dukhovni,no,no,no,,1
+2026,Stanislav Fort (Aisle Research); Pavel Kohout (Aisle Research); Alex Gaynor (Anthropic),yes,yes,no,https://aisle.com/blog/aisle-discovers-20-openssl-zero-days-in-6-months,1
+2026,Nathan Sportsman (Praetorian); Daniel Rhea; Jaeho Nam (Seoul National University); Muhammad Daffa; Zhanpeng Liu (Tencent Xuanwu Lab); Guannan Wang (Tencent Xuanwu Lab); Guancheng Li (Tencent Xuanwu Lab); Joshua Rogers (Aisle Research),yes,yes,no,https://aisle.com/blog/aisle-discovers-20-openssl-zero-days-in-6-months,1
+2026,Muhammad Daffa; Zhanpeng Liu (Tencent Xuanwu Lab); Guannan Wang (Tencent Xuanwu Lab); Guancheng Li (Tencent Xuanwu Lab); Joshua Rogers (Aisle Research); Chanho Kim,yes,yes,no,https://aisle.com/blog/aisle-discovers-20-openssl-zero-days-in-6-months,1
+2026,Quoc Tran (Xint.io - US Team),no,no,no,,1
+2026,Simo Sorce (Red Hat),no,no,no,,1
+2026,Frank Buss,no,no,no,,1
+2026,Pavol Žáčik (Red Hat); Alex Gaynor (Anthropic),no,yes,no,,1
+2026,Asim Viladi Oglu Manizada; Alex Gaynor (Anthropic); Ying Dong; Haiyang Huang,no,yes,no,,1
+2026,Abhinav Agarwal,no,no,no,,1
+2026,Wang Kenaz (University of Illinois); Guido Vranken (Aisle Research); Aaron Grattafiori (Nvidia),no,yes,no,,1
+2026,Sunwoo Lee (KENTECH); Hyuk Lim (KENTECH); Seunghyun Yoon (KENTECH),no,no,no,,1
+2026,Joshua Rogers (Aisle Research),no,yes,no,,1
+2026,Mayank Jangid; Kushal Khemka; Hari Priandana; Bhabani Sankar Das; Qifan Zhang (Palo Alto Networks),no,no,no,,1
+2026,Zhanpeng Liu (Tencent Xuanwu Lab); Guannan Wang (Tencent Xuanwu Lab); Guancheng Li (Tencent Xuanwu Lab); Bhabani Sankar Das,no,no,no,,1
+2026,TrendAI Zero Day Initiative,no,no,no,,1
+2026,Thai Duong (Calif.io in collaboration with Claude and Anthropic Research),yes,yes,no,https://raw.githubusercontent.com/openssl/release-metadata/597a9a75044fb94b2823d111fd96ad9607a38189/secjson/CVE-2026-45447.json,1
+2026,Zehua Qiao; Jinwen He,no,no,no,,1
+2026,Bhabani Sankar Das; Haruki Oyama (Waseda University),no,no,no,,1
+2026,Bhabani Sankar Das; Zhenzhe Shao,no,no,no,,1

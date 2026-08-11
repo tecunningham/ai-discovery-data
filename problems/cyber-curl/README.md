@@ -85,7 +85,7 @@ currently vendored row.
 The 2026 credits name identifiable efforts rather than a diffuse capability:
 an entry crediting Anthropic's Mythos, a Trail of Bits report made in
 collaboration with OpenAI, Microsoft's Autonomous Code Security team, three
-HackerOne handles crediting AntAISecurityLab, and nine from Aisle Research.
+HackerOne handles crediting AntAISecurityLab, and 9 from Aisle Research.
 Big Sleep's curl credit is in 2025, not 2026. Stanislav Fort of Aisle Research
 appears in both curl and OpenSSL, so the AI-credited discovery visible across
 these codebases is substantially a few well-resourced people pointed at high-value targets

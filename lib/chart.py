@@ -14,6 +14,7 @@ calls save(); it should not restate a colour or re-decide where 2026 starts.
 from __future__ import annotations
 
 import zlib
+import platform
 from datetime import date
 from pathlib import Path
 
@@ -21,6 +22,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import ft2font
 from matplotlib.lines import Line2D
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,7 +41,11 @@ UNATTRIBUTED = "#37474f"
 # 2025.5, the left edge of the 2026 bar on a year-centred categorical axis.
 ERA_START = 2026.0
 ANNUAL_ERA_START = 2025.5
-NOW = 2026.62
+# A committed snapshot date keeps PNG bytes stable. tools/check.py rejects data
+# newer than this date, so a refetch cannot silently leave standing-record lines
+# ending before their newest observation.
+AS_OF_DATE = date(2026, 8, 10)
+NOW = AS_OF_DATE.year + (AS_OF_DATE.timetuple().tm_yday - 1) / 365.25
 
 
 def stable_jitter(key: str, spread: float = 0.035) -> float:
@@ -122,7 +128,12 @@ def save(fig, out_path, description: str, sources: list[str], built_by: str) -> 
             "Title": description.split(".")[0],
             "Description": description,
             "Source": " | ".join(sources),
-            "Software": str(Path(built_by).resolve().relative_to(ROOT)),
+            "Software": (
+                f"Python {platform.python_version()}; "
+                f"matplotlib {matplotlib.__version__}; "
+                f"FreeType {ft2font.__freetype_version__}; "
+                f"{Path(built_by).resolve().relative_to(ROOT)}"
+            ),
         },
     )
     plt.close(fig)

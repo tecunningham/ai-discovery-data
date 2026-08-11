@@ -37,6 +37,7 @@ import subprocess
 import sys
 import textwrap
 from collections import Counter
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -239,6 +240,19 @@ class Problem:
                                  "built' does not say how the data is "
                                  "maintained instead")
 
+        folder_check = self.folder / "check.py"
+        if folder_check.exists():
+            result = subprocess.run(
+                [sys.executable, str(folder_check)],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            if result.returncode:
+                output = (result.stdout + result.stderr).strip()
+                for message in output.splitlines() or ["folder check failed"]:
+                    self.fail("Document", f"check.py: {message}")
+
         for group in ("Document", "Data", "Figure", "Literature"):
             if self.status[group] == SKIP:
                 self.status[group] = PASS
@@ -253,6 +267,44 @@ def bib_keys() -> set[str]:
     if not BIB.exists():
         return set()
     return set(re.findall(r"^@[a-zA-Z]+\{([^,\s]+)", BIB.read_text(encoding="utf-8"), re.M))
+
+
+def check_chart_as_of(problems: list[Problem]) -> None:
+    """Fail if vendored data has advanced beyond the chart snapshot date."""
+    chart_text = (ROOT / "lib/chart.py").read_text(encoding="utf-8")
+    match = re.search(
+        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)",
+        chart_text,
+        re.M,
+    )
+    if not match:
+        for problem in problems:
+            problem.fail("Figure", "lib/chart.py has no parseable AS_OF_DATE")
+        return
+    as_of = date(*(int(part) for part in match.groups()))
+    date_fields = {"date", "published", "announced", "data_through", "release_date"}
+    for problem in problems:
+        newest: date | None = None
+        source = ""
+        for path in problem.csvs:
+            with path.open(encoding="utf-8", newline="") as handle:
+                for row in csv.DictReader(handle):
+                    for field, value in row.items():
+                        value = value or ""
+                        candidate: date | None = None
+                        if field == "year" and re.fullmatch(r"20\d{2}", value):
+                            candidate = date(int(value), 1, 1)
+                        elif field in date_fields or field.endswith("_date"):
+                            if re.fullmatch(r"20\d{2}-\d{2}-\d{2}", value):
+                                candidate = date.fromisoformat(value)
+                        if candidate and (newest is None or candidate > newest):
+                            newest, source = candidate, path.name
+        if newest and newest > as_of:
+            problem.fail(
+                "Figure",
+                f"{source} contains {newest.isoformat()}, newer than "
+                f"lib/chart.py AS_OF_DATE {as_of.isoformat()}",
+            )
 
 
 def csv_errors(path: Path) -> list[str]:
@@ -279,6 +331,11 @@ def csv_errors(path: Path) -> list[str]:
                 for index, field in enumerate(header)
                 if field.endswith("_url")
             ]
+            finder_columns = [
+                index
+                for index, field in enumerate(header)
+                if field in {"finder", "reporter"}
+            ]
             for line_number, row in enumerate(rows, 2):
                 if len(row) != len(header):
                     errors.append(
@@ -291,6 +348,18 @@ def csv_errors(path: Path) -> list[str]:
                         errors.append(
                             f"{path.name}:{line_number} has no public URL in "
                             f"{field}"
+                        )
+                for index in finder_columns:
+                    finder = row[index]
+                    if len(finder) == 160:
+                        errors.append(
+                            f"{path.name}:{line_number} finder is exactly 160 "
+                            "characters and may retain an old parser truncation"
+                        )
+                    if finder.count("(") != finder.count(")"):
+                        errors.append(
+                            f"{path.name}:{line_number} finder has unbalanced "
+                            "parentheses and may be a split credit"
                         )
             return errors
     except (OSError, UnicodeError, csv.Error) as error:
@@ -553,6 +622,7 @@ def main() -> int:
 
     for problem in problems:
         problem.check(keys, slugs)
+    check_chart_as_of(problems)
     duplicate_names(problems)
     if args.reproduce or args.write_index:
         reproduce(problems)

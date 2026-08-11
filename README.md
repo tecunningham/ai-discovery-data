@@ -131,7 +131,7 @@ rebuilt from it. Each validation column is one kind of thing that can go missing
 
 | Column | Fails when |
 |---|---|
-| Document | A `**Field:**` line or a required section is missing, the verdict is not one of the six allowed values, `**Upstream:**` names no URL, or a link to a sibling folder does not resolve. |
+| Document | A `**Field:**` line or required section is missing, a verdict is invalid, `**Upstream:**` names no URL, a sibling link fails, or an optional folder `check.py` finds stale prose arithmetic. |
 | Data | The folder holds no CSV, vendors one its document never links, links one that is not there, or reuses a filename another folder already has. |
 | Figure | There is no `figure.py`, or no PNG, or a PNG the document does not embed, or a PNG that nothing regenerates. |
 | Literature | A `[@citekey]` in the document has no entry in `references.bib`. |
@@ -198,7 +198,8 @@ happens in the prose rather than in a composite chart.
 
 ## Reproducing
 
-Figures need Python 3.12 and the pinned plotting dependencies, but no network:
+Figures need Python 3.12, the exact versions in `requirements.txt`, and
+matplotlib's bundled DejaVu Sans font, but no network:
 
 ```bash
 python3 -m pip install -r requirements.txt
@@ -208,9 +209,10 @@ make check                      # check data, documents, and sources
 make check-figures              # also verify PNG bytes
 ```
 
-Exact dependency versions are committed because matplotlib and its image stack
-can change PNG bytes between releases. CI runs the byte-for-byte figure check
-from a clean install.
+The figures are byte-for-byte reproducible under that pinned environment, not
+under arbitrary matplotlib or FreeType installations. Each PNG's `Software`
+metadata records the Python, matplotlib, and FreeType versions plus its generator
+path, and CI checks the committed bytes from a clean pinned install.
 
 Rebuilding data is a separate networked step:
 

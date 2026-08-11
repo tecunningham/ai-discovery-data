@@ -1,13 +1,15 @@
 # Erdős problems catalogue
 
 **Domain:** mathematics
-**Metric:** problems catalogued, statuses marked solved, and statements formalized in Lean, at monthly site snapshots
-**Coverage:** 2025-08-31 to 2026-08-10, thirteen snapshots
-**Data:** [`erdos-database-history.csv`](erdos-database-history.csv)
+**Metric:** problems catalogued, statuses marked solved, and statements formalized in Lean, at monthly site snapshots; plus an imputed solution year per solved problem
+**Coverage:** 2025-08-31 to 2026-08-10, thirteen snapshots; imputed solution years 1940–2026
+**Data:** [`erdos-database-history.csv`](erdos-database-history.csv), [`erdos-solution-years.csv`](erdos-solution-years.csv)
 **Upstream:** <https://www.erdosproblems.com/>, with the snapshot statistics and Lean counts from <https://github.com/teorth/erdosproblems> and the AI-resolution count from <https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems>
-**Verdict:** inconclusive — the comparable window is about eleven months, and a status edit is not a solution
+**Verdict:** inconclusive — the imputed years show a real 2024–2026 surge, but the catalogue was assembled while it happened, and it selects for exactly these problems
 
 ![Monthly Erdős catalogue snapshots: problems catalogued, statuses marked solved, and statements formalized in Lean.](discovery-math-erdos.png)
+
+![Imputed solution years for the solved problems in the Erdős catalogue.](erdos-solution-years.png)
 
 ## The problem
 
@@ -21,14 +23,21 @@ of what has fallen.
 A "discovery" in this series is a status edit from open to solved. That is a
 bookkeeping event, not a mathematical one, and the site itself warns that the
 edit can follow the underlying solution by weeks, months, or decades. It is also
-a stock rather than a flow: the chart shows how many problems currently carry a
-solved status, not how many were solved in a given month.
+a stock rather than a flow: the first chart shows how many problems currently
+carry a solved status, not how many were solved in a given month.
 
-That makes this a poor instrument for a slope change and a good one for scale.
-The catalogue can tell you how large the AI-attributed contribution is next to
-the recorded total. It cannot tell you the rate at which either is growing,
-because it has no pre-2025 history in comparable form and because the cohort was
-still being assembled for most of the window.
+The second chart is this folder's attempt to recover the flow. Each solved
+problem's page usually states what resolved it — "Solved by Maynard [Ma16]" —
+and the page's bibliography dates that reference. Imputing each solved problem
+a solution year from its resolving reference turns the 556-row stock into a
+per-year series running back to 1940. That series is imputed, not measured:
+its rules and failure modes are documented below, and every date in it is the
+publication year of the resolving work, not the day the mathematics happened.
+
+The snapshot series remains a poor instrument for a slope change and a good one
+for scale. The imputed series can say more about timing, but it inherits the
+catalogue's selection: the corpus was assembled from 2023 onward, partly around
+the very solutions being counted.
 
 ## What the chart shows
 
@@ -36,7 +45,29 @@ Between August 2025 and August 2026 the catalogue grew from 992 problems to
 1,217, statuses marked solved from 355 to 559, and Lean-formalized statements
 from 148 to 608. The red callout is the separate stock: about 13 full
 AI-standalone resolutions recorded in the project's AI wiki at its 2026-06-30
-freeze, against those 559 solved statuses.
+freeze, against those 559 solved statuses. To be precise about what froze:
+the wiki page attributing contributions to AI systems stopped updating on
+2026-06-30, while the catalogue itself — problem statuses, the solved count,
+the Lean formalizations — is still edited and still moves in these snapshots.
+
+The project publishes its own running chart of the same statistics history this
+folder's fetcher reads, kept current in the repository:
+
+[<img src="https://raw.githubusercontent.com/teorth/erdosproblems/main/data/statistics_history_light.svg" width="600" alt="Erdős problems progress, drawn by the teorth/erdosproblems repository from its statistics history.">](https://github.com/teorth/erdosproblems)
+
+Unlike the PNG above, that image is upstream's and live: it will keep moving
+after this document's snapshot date, and its counts are the project's own.
+
+The second chart reads the imputed years. Of the 556 solved problems, 502 carry
+an imputed solution year and 54 state no dateable resolution. The dated series
+runs 1940 to 2026 and holds near six resolutions per year across 2000–2023,
+then jumps: 34 in 2024, 33 in 2025, and 55 in 2026 with four months of the year
+still to run. The 2026 bar is mostly red — 39 of its 55 rows are dated only by
+the AI wiki's record of a full AI solution, with no citable paper on the
+problem's page. The jump is the most direct flow-level evidence in this folder,
+and it is also exactly where the selection caveats below bite hardest: the
+catalogue grew around these solutions, and an old problem's solution enters the
+series only when the literature already recorded it.
 
 The catalogue count stopped changing in April 2026, which is the only part of the
 window where a rise in solved status cannot be caused by adding an
@@ -52,12 +83,15 @@ formalization drive is a separate effort from the solving.
 
 ## How the chart was built
 
-[`figure.py`](figure.py) plots three step series from
-`erdos-database-history.csv` against `date`: `total_problems`
+[`figure.py`](figure.py) draws both charts. The first plots three step series
+from `erdos-database-history.csv` against `date`: `total_problems`
 as a dashed grey line, `total_solved` in blue with markers, and `lean_formalized`
 as a purple dotted line. The x tick labels come from the `month` column, every
 second snapshot plus the last. January 2026 onward is shaded, as in every figure
-here.
+here. The second chart bars the `solution_year` column of
+[`erdos-solution-years.csv`](erdos-solution-years.csv) by year, blue where the
+year comes from a reference on the problem's page and red where the only dated
+resolution is the AI wiki's.
 
 The AI-standalone stock is drawn as a boxed callout rather than a fourth line.
 About 13 against stocks of 559 and 1,217 would be a flat line on the axis, and
@@ -69,8 +103,33 @@ The `catalogue_count_unchanged` column flags the snapshots from April 2026 on,
 where the cohort is fixed. The figure does not shade that sub-window separately;
 the column is there so a reader can find it.
 
-Every point now comes from one source, the project's GitHub statistics history,
-which is what [`fetch.py`](fetch.py) rebuilds the whole file from. An earlier
+The imputed years come from [`fetch_solutions.py`](fetch_solutions.py), which
+is run by hand rather than by `make fetch` because it downloads the LaTeX
+source of every solved problem's page — about 560 throttled requests. It
+imputes each solved problem a year by three rules, in order. First, review
+overrides: [`erdos-solution-year-overrides.csv`](erdos-solution-year-overrides.csv)
+carries 175 hand-checkable rows, each with its reference and reason, for pages
+where the mechanical rule misfires. Second, the solving citation: the page's
+discussion usually attributes the resolution in a sentence like "Solved by
+Maynard [Ma16]", and the imputed year is the publication year of the newest
+reference cited in the first such sentence, taken from the page's own
+bibliography. Third, the AI wiki: problems whose only recorded resolution is an
+AI system's take the date in the wiki's primary-contribution tables. Where a
+citation and a wiki date both exist the earlier wins, since the question is
+when the problem was first resolved.
+
+The overrides file is the honesty layer, and how it was built matters: the
+sentence rule and the wiki overlay together dated 418 of the 556 pages, and
+every one of the 556 was then re-read against that output — a model-assisted
+review of each page's discussion text, spot-checked by hand — which supplied a
+year for 94 pages the rule had missed, corrected 71, and withdrew 10, leaving
+54 problems with no dateable resolution stated anywhere on their page.
+Rerunning the fetcher reapplies the overrides, so the review survives a refetch
+until the underlying page text changes.
+
+Every point in the snapshot series comes from one source, the project's GitHub
+statistics history, which is what [`fetch.py`](fetch.py) rebuilds the whole
+file from. An earlier
 version of this series set its last point by hand from the live website's
 solved-status headline, and the two sources do not agree: on 8 August the site
 headline read 565 solved where the statistics history recorded 559. A hand-set
@@ -82,7 +141,22 @@ same quantity differ by about six.
 ## What it cannot support
 
 - **Status-change dates are not solution dates.** The site says so itself, and
-  the gap can run to decades. Every date on this chart is an editing date.
+  the gap can run to decades. Every date on the snapshot chart is an editing
+  date; the imputed years exist precisely because of this, and carry their own
+  caveats below.
+- **An imputed year is the publication year of the resolving reference,** not
+  the date of the mathematics, and for 40 problems it is a wiki entry rather
+  than a citable paper. Those 40 count full solutions in any of the wiki's four
+  primary-contribution categories — a wider net than the roughly 13 standalone
+  resolutions in the first chart's callout. The assignment of "the resolving
+  reference" is an editorial reading of each page's discussion — reviewed, but
+  not ground truth, and 54 solved problems resisted any dating at all.
+- **The imputed flow inherits the catalogue's selection twice over.** The
+  corpus was assembled from 2023 onward, partly around solutions as they
+  happened, and AI systems have been pointed at this list precisely because it
+  is a list. A 2024–2026 surge in this series is evidence about these problems,
+  not about mathematics at large — the prestige-list series linked below are
+  the check on that.
 - **The comparable window is about eleven months.** There is no before, so there
   is nothing for the agent era to be compared against.
 - **The two stocks are not an AI-versus-human flow.** The roughly 13 AI-standalone
@@ -95,9 +169,12 @@ same quantity differ by about six.
 - **Lean formalization counts statements, not proofs**, and is driven by a
   separate volunteer effort, so it is a measure of infrastructure rather than of
   discovery.
-- **The wiki is frozen and downstream.** Its AI counts stop at 2026-06-30, and
-  its largest single input is a vendor's own denominator rather than an
-  independent recount.
+- **The AI-attribution wiki is frozen and downstream — the catalogue is not.**
+  The wiki's AI counts stop at 2026-06-30, and its largest single input is a
+  vendor's own denominator rather than an independent recount. The catalogue's
+  own tracking of solved and open statuses continues past that date, so the two
+  stocks drift apart: AI resolutions after June 2026 can appear as status edits
+  but never in the wiki's count.
 
 ## LLM contributions
 

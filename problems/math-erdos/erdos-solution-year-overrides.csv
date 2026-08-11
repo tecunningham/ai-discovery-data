@@ -1,0 +1,176 @@
+problem,rule_year,solution_year,reference,note
+8,,2015,Ho15,answer is no due to Hough's result
+24,2013,2012,Gr12,independent proofs; earliest (Grzesik 2012) resolved first
+29,,2024,JPSZ24,explicit construction by JPSZ24 resolves it
+34,2015,1986,He86,first counterexample was Hegyvari 1986
+35,1936,1970,Pl70,Er36c only weaker 2k version; follows from Plunnecke
+45,,2003,Cr03,follows from Croot's colouring result
+57,,2020,LiMo20,solved by Liu and Montgomery
+59,1986,2016,MoSa16,EFR86 is partial (non-bipartite); C6 disproof is MoSa16
+63,,2020,LiMo20,follows from Liu-Montgomery per Hunter
+69,,2025,TaTe25,unconditional proof by Tao-Teravainen
+79,,2024,Wi24,Wigderson proved infinitely many exist
+94,,1995,LeTh95,LeTh95 proved stronger version; Fishburn claim undated
+95,1963,2015,GuKa15,Al63 only convex case; GuKa15 solved fully
+105,1983,,,Disproved by Xichuan in comments; undated
+110,1995,2020,La20,La20 ZFC counterexample completed disproof
+118,2010,1999,Sc99 Da99,Independent 1999 proofs; 2010 only publication
+119,1991,,,GPT 5.6/Korsky resolved third question; undated
+125,2001,2026,2026-03-30,DeepMind completed disproof; Me01 was partial
+136,,2022,BCDP22,BCDP22 determined asymptotics
+154,,1998,Li98,Follows immediately from Li98
+157,,2023,Pi23,Pilatte Pi23 resolves; regex missed
+175,1996,1995,Ve95,Ve95 independently completed all n first
+186,,2024,PhZa24,PhZa24 completed matching bounds
+189,1980,2023,Ko23,Ko23 disproof; Gr80 is triangle variant
+190,,2025,Hu25b,Hunter recurrence first gives resolution
+192,,1992,Ke92,Keranen d=4 construction completed it
+202,1968,,,AI (GPT-5.4 Pro) resolution; no wiki date
+204,,2025,Ad25,Adenwalla proved no such n
+205,1980,2026,ai-wiki 2026-01-10,AI-assisted disproof; Er80 was conjecture
+206,1950,2024,Ko24b,Kovac disproof; earlier cites are special cases
+216,,1983,Ho83,Horton disproved existence for n>=7
+230,,1980,Ka80,Kahane ultraflat polynomials disproved it
+231,,1992,Ke92,Ke92 string gives negative answer k>=4
+239,1968,1967,Wi67,Wirsing proved it; Halasz only generalised
+240,,1973,Ti73,Tijdeman resolved the question
+248,2026,2025,TaTe25,TaTe25 resolved; La26 is improvement
+255,1972,1968,Sc68,Sc68 resolved it; Sc72 is a later strengthening
+258,1971,2026,2026-04-14,ErSt71 only monotone case; AI solution via TaTe25
+262,1976,1991,Ha91,Er75c is an example; Hancl essentially solved it
+296,,2021,Bl21,Resolution follows from Bloom's theorem; undated observation
+299,,2021,Bl21,Follows from Bloom's solution of 298
+300,,2024,LiSa24,Liu-Sawhney determined asymptotic; completing resolution
+305,,1988,Yo88,Solved by Yokota; LiSa24 only improved bound
+310,,2024,LiSa24,LiSa24 observed Bloom implies positive solution
+316,,1997,Sa97,Sandor's counterexample disproved it
+343,1966,2006,SzVu06,Fo66 is partial; SzVu06 answered the original question
+350,1977,1974,BeEr74,Ryavec's resolving proof reproduced in BeEr74; HSS77 is stronger statement
+351,1963,,,Gr63 is special case; completion via [283] comment; undated
+353,2023,2025,Ko25,Ko23 partial; Koizumi Ko25 resolved the question
+356,2015,2023,Be23b,Ko15 is side question; Beker solved original problem
+360,,2021,CFP21,CFP21 determined order of growth; completing resolution
+379,,2025,2025-12-21,solved in comments; AI wiki date used
+387,1958,2026,BNPZ26,Sc58 disproved earlier conjecture; BNPZ26 answered this question
+395,2011,2024,HJNS24,CaCa11 only corrected constant; HJNS24 solved problem
+399,1937,,,Barfield's disproving solution uncited; ErOb37 only partial
+402,1987,1996,BaSo96,1986/87 only large sets; BaSo96 proved all sets
+405,,1991,BrEr91,BrEr91 proved finiteness; the stated resolution
+418,,1995,BrSc95,BrSc95 gave affirmative answer to the question
+427,,2000,Sh00,positive solution follows from Shiu Sh00
+437,,2024,BPZ24,positive answer follows from BPZ24
+438,,2002,KLS02,KLS02 proved 11/32 sharp; completing resolution
+441,,2007,ChDa07,ChDa07 disproved: construction not optimal infinitely often
+447,1965,1971,Kl71,Solved by Kleitman; Er65b reported unpublished weaker result
+449,,1988,HaTe88,Disproof argument published by Hall-Tenenbaum
+464,2010,1979,Po79b,Solved 1979/1981 independently; later refs only improvements
+465,2001,1976,Sa76,Sarkozy proved conjecture; Konyagin only strengthened bound
+481,,1982,Kl82,First shown by Klarner
+482,,2006,St06,Stoll's generalisations settle the open-ended problem
+492,1963,1969,Sc69,Schmidt disproved; tier1 picked partial result
+493,1961,,,Seamans observation undated; Er61 only problem source
+494,1958,1962,GFS62,GFS62 completed general case; SeSt58 partial
+498,,1965,Kl65,Solved affirmatively by Kleitman
+502,2021,1983,BBS83,BBS83 resolved; PePo21 only simpler proof
+504,1992,1993,Se93,Se93 gave definitive answer; Se92 only disproof
+505,1955,1993,KaKa93,Kahn-Kalai disproved Borsuk; Eg55 was n=3 case
+515,1977,1984,LRW84,Zh77 only finite-order case; general case LRW84
+525,1994,1987,Ka87,Kashin answered both questions; Ko94 only improved
+565,1975,2025,ACDFM25,1975 only existence; 2^O(n) bound is ACDFM25
+570,1993,2026,CFMPP26,Completed for odd k>=7 by CFMPP26
+582,1970,1988,Sp88,Spencer resolved Erdos's <10^10 challenge; Fo70 mere existence
+610,2026,2021,JMRS21,Stated inequality follows from JMRS21 results
+613,1993,2001,Pi01,tier1 picked Faudree partial result; Pikhurko disproved it
+633,,2026,BLZ26,complete classification by Beeson-Laczokovich-Zhang
+648,,2025,Ca25b,Cambie proved the asymptotic order
+652,,2021,Ma21,Mathialagan's lower bound completed resolution
+673,,1982,Er82e,Erdos observed triviality in Er82e
+674,1975,1940,Ko40,Ko resolved original equation; De75b proved Schinzel's aside
+690,2026,2025,Ca25,Cambie settled unimodularity question
+692,,2025,Ca25,Cambie showed unimodularity fails
+702,,1977,Fr77,Frankl proved all k>=4
+703,1981,1987,FrRo87,FrRo87 answered second question; tier1 picked implication aside
+717,1952,2013,FLS13,tier1 picked Dirac's partial 1952 result; FLS13 resolved it
+721,,2022,Gr22 Sc21,both challenges met: Sc21 upper; Gr22 lower; newest 2022
+744,,1985,RoTu85,disproved by Rodl-Tuza; tier1 missed it
+746,,1977,Ko77,Korshunov proved sharp threshold; KoSz83 is stronger refinement
+747,,2023,Ka23,Kahn's precise asymptotic completed resolution
+765,,2023,MaYa23,MaYa23 refuted Erdos's stronger conjecture; completing resolution
+777,1985,2015,ADGS15,first question answered last by ADGS15; tier1 dated 1985
+781,,1989,AlSp89,resolved by Alon-Spencer; tier1 missed it
+784,,1982,Ru82,Ruzsa answered both cases; We25 only sharpened
+785,2015,1994,SaSz94,SaSz94 resolved; ChFa15 is later improvement
+793,1938,,,AI (GPT 5.6) solution; no date; Er38 only bounds
+794,,1984,FrFu84,FrFu84 construction refutes 2/9; Harris undated
+803,1970,2008,Al08,Al08 disproved it; ErSi70 posed the problem
+804,,2007,AlSu07,AlSu07 settled both asymptotics
+814,,2019,Sa19,Sauermann proved full conjecture
+841,,2024,BPZ24,BPZ24 only dated resolution; Selfridge undated
+843,2021,1995,Er95,Burr's unpublished proof reported in Er95
+844,,2025,AMS25,AMS25 dated proof; Weisenberg comment undated
+845,,2025,vDEv25,vDEv25 disproved with C=6
+847,,2024,RRS24,RRS24 gave negative answer
+861,,2015,SaTh15 KLRS15,Both 2015 bounds settled the questions
+867,,1993,Fr93,Fr93 construction disproved conjecture
+871,1989,2026,2026-01-05,AI (Claude Opus 4.5) solution; ErNa89 is prior work
+874,,1999,DeFr99,conjecture proved by Deshouillers-Freiman
+877,,2001,LuSc01,LuSc01 resolved the questions; later work refines
+882,,1998,Er98,Sandor's resolving proof reported in Er98
+894,2010,,,resolved via [464]; whose date not given; PeSc10 only bound
+896,2008,,,completing lower bound by GPT-5.5 Pro; undated
+897,2025,1981,Wi81,counterexample first appeared in Wi81
+910,,1958,Ru58,answer no shown by Rudin
+914,,1970,HaSz70,HaSz70 completed proof for all r
+915,,1973,Ma73,Mader settled both variants; Le73 only m=5
+920,,2026,Br26,Bradac's bound completed remaining cases k>=5
+926,2003,1991,Fu91,Furedi proved answer; AKS03 only improvement
+937,,2024,BBC24,Bajpai-Bennett-Chan proved the progressions exist
+946,,1984,He84,Heath-Brown proved tau(n)=tau(n+1) infinitely often
+964,,2025,Eb25,Eberhard proved it unconditionally
+965,1975,2016,Ko16,CH-free disproof by Komjath completed resolution
+966,2026,1975,Er75b,Spencer's proof reported in Er75b (1975)
+967,,2025,Yi25,Yip disproved it
+980,1961,1967,El67b,Elliott's general case; year from citation key
+988,1954,1969,Sc69b,Ro54 was square variant; Schmidt resolved sphere case
+990,1950,2026,APSSV26b,ErTu50 prior work; OpenAI model disproved conjecture
+997,2026,2024,CLLW24,CLLW24 established existence of such alpha
+998,,1966,Ke66,Kesten proved it; year from citation key
+1001,,1966,KeSo66,Kesten-Sos proved existence; year from citation key
+1010,1981,1976,LoSi76,independent proofs; first was Lovasz-Simonovits 1976
+1012,,1972,Wo72,Woodall settles question completely
+1015,,1975,BES75,Burr-Erdos-Spencer determined f(t)
+1022,1971,2013,Wo13b,Wood's counterexample disproved it; Er71 is background
+1024,,1986,PhRo86,Phelps-Rodl determined asymptotics
+1025,,2016,CFS16,CFS16 upper bound completed resolution
+1026,2017,2016,TWY16,first proved by TWY16; Wa17 only implicit
+1028,,1971,ErSp71,ErSp71 completed bound; year from cite key
+1051,1988,2026,Fe26,solved by Aletheia Fe26; Er88c only a remark
+1058,,2001,Lu01,Lu01 proved these are only solutions
+1064,,2002,LuPo02,LuPo02 density-1 result completed; GLW01 partial
+1067,2013,2015,So15,Ko13 only consistency; So15 unconditional counterexample
+1077,,2025,JiLo25,JiLo25 lower bound completed the disproof
+1090,1975,2026,2026-02-27,Er75f only k=3; Hunter uncited; ai-wiki date
+1091,1979,2026,APSSV26b,La79 earlier version; APSSV26b answered second question
+1092,2026,1982,Ro82,Ro82 construction disproves (noted by Tang)
+1096,,1998,ErKo98,text: 'first resolved by' ErKo98
+1099,,1984,Vo84,Vo84 answered main question
+1105,,2021,Yu21,Yu21 announced proof for all n>=k>=5
+1116,,1976,To76,earliest of two independent constructions
+1125,1969,1984,La84,Solved by Laczkovich; Ke69 was partial (measurable case)
+1126,1966,1965,Ju65,Independent proofs; Jurkat 1965 was first
+1128,,1978,prose: Prikry-Mills 1978,Prose year 1978; unpublished disproof
+1129,1980,1978,Ki77  dBPi78,Br80 proved easier variant; main conjecture done 1978
+1134,2016,1982,Kl82,Crampin-Hilton disproof reported in Kl82; La16 later account
+1136,,2011,Mu11,Settled by Muller
+1140,,2010,EpGi10,Epure-Gica (with MoWi89) resolve it
+1148,2012,,,AI resolution undated; ELMV12 only an ingredient
+1161,,2025,Be25d,Proved by Beker
+1165,,2024,HLOZ24,r=3 case completed resolution in 2024
+1166,1960,2001,ErTa60  To01 (via [1165]),Needs |F(n)|<=3 from Toth 2001
+1179,,1976,ErHa76,Erdos-Hall proved the asymptotic
+1185,,1981,Fu81,Furstenberg's counterexample disproves it
+1196,2023,2026,ABLLPSTT26 / ai-wiki 2026-04-13,Li23 partial; solved by GPT-5.4 Pro 2026
+1198,1974,1995,Sm95,Smith's counterexample; Hi74 was singleton case
+1214,,1997,CoSc97,Corrales-Rodriganez and Schoof
+1215,,1953,Ma53,Mac Lane; year from key; missing in bibliography
+1216,,1970,RePa70,Reid-Parker answered negatively

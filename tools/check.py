@@ -584,6 +584,14 @@ def caption_links(problem: Problem) -> str:
     if upstream:
         links.append(f'<a href="{upstream.group(0).rstrip(".,;")}">Source</a>')
 
+    # The interactive companion is built by tools/build_docs.py into docs/ and
+    # served by GitHub Pages; the PNG in this table stays the static record.
+    if (ROOT / "docs" / f"{problem.slug}.html").exists():
+        links.append(
+            "<a href=\"https://tecunningham.github.io/ai-discovery-data/"
+            f'{problem.slug}.html">Interactive</a>'
+        )
+
     return " · ".join(links)
 
 

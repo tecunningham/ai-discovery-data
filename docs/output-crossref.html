@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOI records deposited with Crossref — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>DOI records deposited with Crossref</h1>
+<p class="metric">formal publishing volume; DOI records deposited with Crossref per year, by created date</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-crossref/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-crossref/#what-it-cannot-support">Caveats</a> <a href="https://api.crossref.org/works">Source</a></p>
+<h2>DOI records created</h2>
+<div id="chart0" class="chart"></div>
+<p class="note">The final bar is a partial year; hover for the flag.</p>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"note":"","value":5275965,"x":"2010"},{"note":"","value":6618189,"x":"2011"},{"note":"","value":6058054,"x":"2012"},{"note":"","value":6997246,"x":"2013"},{"note":"","value":6565755,"x":"2014"},{"note":"","value":6513271,"x":"2015"},{"note":"","value":7349664,"x":"2016"},{"note":"","value":8311074,"x":"2017"},{"note":"","value":8144802,"x":"2018"},{"note":"","value":8724675,"x":"2019"},{"note":"","value":10161748,"x":"2020"},{"note":"","value":10279633,"x":"2021"},{"note":"","value":10210825,"x":"2022"},{"note":"","value":12694453,"x":"2023"},{"note":"","value":11305092,"x":"2024"},{"note":"","value":12802642,"x":"2025"},{"note":"","value":8108195,"x":"2026"}]},"encoding":{"tooltip":[{"field":"x","title":"year","type":"ordinal"},{"field":"value","title":"DOI records created","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","title":"DOI records created","type":"quantitative"}},"height":340,"mark":{"color":"#37474f","type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

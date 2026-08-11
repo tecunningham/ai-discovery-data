@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gurobi mixed-integer programming speed — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Gurobi mixed-integer programming speed</h1>
+<p class="metric">cumulative vendor-reported MILP speedup across releases, every version rerun on one machine</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-gurobi/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-gurobi/#what-it-cannot-support">Caveats</a> <a href="https://www.gurobi.com/misc/lp/all/unmatched-performance">Source</a></p>
+<h2>Gurobi vendor-reported MILP speedup</h2>
+<div id="chart0" class="chart"></div>
+<p class="note">Click a point to open the vendor announcement.</p>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"cumulative":1.13,"date":"2022-11-14","note":"13% overall performance improvement over v9.5 on the vendor benchmark","release":"v10","step":1.13,"url":"https://www.gurobi.com/whats-new-gurobi-10-0/"},{"cumulative":1.2272,"date":"2023-12-04","note":"8.6% overall performance improvement over v10 on the vendor benchmark","release":"v11","step":1.086,"url":"https://www.gurobi.com/whats-new-gurobi-11-0/"},{"cumulative":1.3879,"date":"2024-11-19","note":"13.1% overall performance improvement over v11 on the vendor benchmark","release":"v12","step":1.131,"url":"https://www.gurobi.com/whats-new-gurobi-12-0/"},{"cumulative":1.3963,"date":"2025-11-18","note":"0.6% overall MILP performance improvement over v12; 8.2% applies only to hard models taking over 100 seconds","release":"v13","step":1.006,"url":"https://www.gurobi.com/whats-new-gurobi-13-0/"}]},"height":340,"layer":[{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"release","title":"release","type":"nominal"},{"field":"date","title":"announced","type":"temporal"},{"field":"step","title":"release speedup","type":"quantitative"},{"field":"cumulative","title":"cumulative","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%b %Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"cumulative","title":"Cumulative MILP speedup vs v9.5","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"release","title":"release","type":"nominal"},{"field":"date","title":"announced","type":"temporal"},{"field":"step","title":"release speedup","type":"quantitative"},{"field":"cumulative","title":"cumulative","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%b %Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"cumulative","title":"Cumulative MILP speedup vs v9.5","type":"quantitative"}},"mark":{"cursor":"pointer","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

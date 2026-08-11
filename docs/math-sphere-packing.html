@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sphere-packing lower-bound ladder — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Sphere-packing lower-bound ladder</h1>
+<p class="metric">cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-sphere-packing/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-sphere-packing/#what-it-cannot-support">Caveats</a> <a href="https://arxiv.org/abs/2606.13313">Source</a></p>
+<h2>Sphere-packing lower-bound ladder</h2>
+<div id="chart0" class="chart"></div>
+<p class="note">Click a point for the survey it is documented in.</p>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"bound":"theta(d) >= 2*zeta(d)*2^-d","finder":"Minkowski (Minkowski-Hlawka; Hlawka 1943 general)","note":"trivial saturation gives 2^-d; Minkowski-Hlawka improves by factor ~2","step":1,"url":"https://arxiv.org/abs/2606.13313","year":1905},{"bound":"theta(d) >= c*d*2^-d with c=2/e","finder":"Rogers","note":"first asymptotically-growing (factor d) improvement over Minkowski-Hlawka","step":2,"url":"https://arxiv.org/abs/2606.13313","year":1947},{"bound":"theta(d) >= c*d*2^-d","finder":"Davenport-Rogers","note":"improved Rogers constant","step":3,"url":"https://arxiv.org/abs/2606.13313","year":1947},{"bound":"theta(d) >= c*d*2^-d","finder":"Keith Ball","note":"IMRN 1992; improved constant to 2 (lattice packings)","step":4,"url":"https://arxiv.org/abs/2606.13313","year":1992},{"bound":"theta(d) >= c*d*2^-d","finder":"Stephanie Vance","note":"for d divisible by 4; via Hurwitz lattices","step":5,"url":"https://arxiv.org/abs/1105.3779","year":2011},{"bound":"theta(d) >= c*d*log log d*2^-d (sparse d); and c up to 65963","finder":"Akshay Venkatesh","note":"first super-linear-in-d factor, but only along a sparse sequence of dimensions","step":6,"url":"https://arxiv.org/abs/2606.13313","year":2013},{"bound":"theta(d) >= (1-o(1))*d*log d*2^-(d+1)","finder":"Campos, Jenssen, Michelen, Sahasrabudhe","note":"first asymptotically-growing (factor log d) improvement to Rogers for ALL d, since 1947","step":7,"url":"https://arxiv.org/abs/2312.10026","year":2023},{"bound":"delta_n^L >= c*n^2*2^-n","finder":"Boaz Klartag","note":"jumps another whole power of n (factor n^2); new probabilistic/stochastic-ellipsoid method; announced 2025","step":8,"url":"https://arxiv.org/abs/2606.13313","year":2025}]},"height":340,"layer":[{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"finder","title":"finder","type":"nominal"},{"field":"bound","title":"bound","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"step","title":"Cumulative improvements","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"finder","title":"finder","type":"nominal"},{"field":"bound","title":"bound","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"step","title":"Cumulative improvements","type":"quantitative"}},"mark":{"cursor":"pointer","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

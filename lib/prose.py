@@ -63,5 +63,7 @@ def annualized(count: int, through: str) -> float:
     """
     from datetime import date
 
-    day_of_year = date.fromisoformat(through).timetuple().tm_yday
-    return count * 365 / day_of_year
+    through_date = date.fromisoformat(through)
+    day_of_year = through_date.timetuple().tm_yday
+    days_in_year = date(through_date.year, 12, 31).timetuple().tm_yday
+    return count * days_in_year / day_of_year

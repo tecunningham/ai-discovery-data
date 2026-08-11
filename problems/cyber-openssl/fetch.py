@@ -13,8 +13,8 @@ The parse is deliberately tolerant: severity is optional, because the older
 entries do not all carry one, and any record without a parseable date is dropped
 and counted so the coverage is visible.
 
-AI attribution is by explicit marker in the credit (see lib/credits.py) and is
-therefore a floor. OpenSSL is matched against ADVISORY_AI.
+AI attribution is by the shared explicit-marker classifier in lib/credits.py and
+is therefore a floor.
 """
 
 from __future__ import annotations
@@ -79,7 +79,7 @@ def build_annual(rows: list[dict], named: int) -> list[dict]:
     for record in rows:
         bucket = per_year[record["year"]]
         bucket["total"] += 1
-        category = classify(record["finder"])
+        category = classify(record["finder"], record["year"])
         bucket[f"{category}_attributed"] += 1
         if category == "ai":
             ai_names[record["finder"][:70]] += 1
@@ -118,7 +118,9 @@ def build_finders(rows: list[dict]) -> list[dict]:
     for record in rows:
         finder = record["finder"]
         if finder:
-            counted[(record["year"], finder, classify(finder))] += 1
+            counted[
+                (record["year"], finder, classify(finder, record["year"]))
+            ] += 1
     out = [
         {"year": year, "finder": finder, "category": category, "cves": count}
         for (year, finder, category), count in sorted(

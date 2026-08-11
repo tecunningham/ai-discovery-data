@@ -13,11 +13,6 @@ AI attribution is by explicit marker in the reporter string (see lib/credits.py)
 and is therefore a floor. Fuzzers are counted apart from AI: a fuzzer is
 automated but is not a model.
 
-The annual counts match against FIREFOX_AI while the finder rows use classify()'s
-default ADVISORY_AI, which is one marker wider. The two lists were written
-against different sources at different times; unifying them would move published
-counts, so the difference is preserved here and recorded in README.md.
-
 Requires PyYAML.
 """
 
@@ -34,7 +29,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.credits import FIREFOX_AI, classify  # noqa: E402
+from lib.credits import classify  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch  # noqa: E402
 
@@ -101,7 +96,7 @@ def build_annual(rows: list[dict]) -> list[dict]:
         bucket = per_year[record["year"]]
         bucket["total"] += 1
         unique_cves[record["year"]].add(record["cve"])
-        category = classify(record["reporter"], ai=FIREFOX_AI)
+        category = classify(record["reporter"], record["year"])
         bucket[f"{category}_attributed"] += 1
         if category == "ai":
             ai_reporters[record["reporter"][:90]] += 1
@@ -147,7 +142,9 @@ def build_finders(rows: list[dict]) -> list[dict]:
     for record in rows:
         finder = record["reporter"].strip()
         if finder:
-            counted[(record["year"], finder, classify(finder))] += 1
+            counted[
+                (record["year"], finder, classify(finder, record["year"]))
+            ] += 1
     out = [
         {"year": year, "finder": finder, "category": category, "cves": count}
         for (year, finder, category), count in sorted(

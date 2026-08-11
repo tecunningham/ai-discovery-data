@@ -36,8 +36,9 @@ page could not be given a date and are absent from the counts.
 Single digits for most of a decade, then a step: 3 disclosures in 2020, 8 in
 2021, 13 in 2022, 19 in 2023, 9 in 2024, 6 in 2025, and 39 through 5 August
 2026. Of those 39, 27 credit an AI system or an AI-security firm — about two
-thirds, the highest AI share of any series in this collection, against 3 of 6
-in 2025 and none in any earlier year.
+thirds, the highest AI share of any series in this collection. Eleven name
+non-AI finders and one carries no finder credit, so the annual “other” band is
+12. In 2025 the split was 3 of 6, with no AI credit in any earlier year.
 
 What cuts the reading down is visible in the same chart. The tallest bars in
 the whole twenty-four-year series are not recent: 35 in 2016 and 32 in 2015,
@@ -63,12 +64,14 @@ many CVEs. A log axis would flatten the 2026 step the series exists to show.
 The CSVs are built by [`fetch.py`](fetch.py),
 which parses the HTML index into one record per CVE and classifies the "Found
 by" string against two regexes in [`../../lib/credits.py`](../../lib/credits.py)
-shared with the finder rows of the other codebases: `ADVISORY_AI`
+shared with the finder rows of the other codebases. The AI marker list
 matches named systems and labs (Claude, Anthropic, OpenAI, GPT, Gemini, Big
 Sleep, Mythos, Aisle, AntAISecurityLab, XBOW, ZeroPath) plus the bare words
-"LLM" and "agent", and `FUZZ` matches "fuzz". AI is tested first, so a
-credit naming both counts as AI. Keeping fuzzing separate is deliberate: a
-fuzzer is automated without being a model.
+"LLM" and "agent"; bare "Claude" is accepted only from 2024 onward.
+`FUZZ` matches "fuzz". AI is tested first, so a credit naming both counts as AI.
+Keeping fuzzing separate is deliberate: a fuzzer is automated without being a
+model. The parser captures through the next HTML field delimiter rather than a
+character cap, so long multi-person credits remain verbatim for classification.
 
 ## What it cannot support
 

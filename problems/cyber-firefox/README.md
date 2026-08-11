@@ -69,15 +69,15 @@ The CSVs are built by [`fetch.py`](fetch.py),
 which walks every `announce/*.yml` file in Mozilla's repository, takes the year
 from the advisory's `announced` field, and classifies each CVE's `reporter`
 string with two regexes from [`../../lib/credits.py`](../../lib/credits.py).
-`FIREFOX_AI` matches Claude, Anthropic, OpenAI, GPT,
+The shared AI marker list matches Claude, Anthropic, OpenAI, GPT,
 Gemini, Big Sleep, Mythos, the AI-security firms, and the bare words "LLM" and
 "agent"; `FUZZ` matches "fuzz". AI is tested first, so a report crediting
-a model and a fuzzer counts as AI. Pre-2016 advisories do not list CVEs in this
-structure, which is where the series starts. The annual counts match against
-`FIREFOX_AI` while the per-reporter rows in `firefox-finders.csv` match against
-`ADVISORY_AI`, one marker wider — an inconsistency inherited from the order the
-two lists were written in, preserved here because unifying them would move
-published counts. The annual CSV also retains `unique_cves` and
+a model and a fuzzer counts as AI. Bare "Claude" is accepted only from 2024
+onward so a human reporter with that given name cannot create a historical AI
+credit. Pre-2016 advisories do not list CVEs in this structure, which is where
+the series starts. The annual and per-reporter tables use the same classifier;
+unifying the former marker lists moved no currently vendored row. The annual
+CSV also retains `unique_cves` and
 `unique_ai_cves`, deduplicated by CVE ID within each year, so the mention count
 can be compared with a distinct-ID sensitivity count.
 

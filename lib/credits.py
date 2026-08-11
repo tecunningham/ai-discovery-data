@@ -61,15 +61,6 @@ EXPLICIT_AI_METHOD = re.compile(
 )
 CLAUDE = re.compile(r"\bclaude\b", re.I)
 
-# Compatibility matcher for code that needs the old undifferentiated signal.
-AI_CREDIT = re.compile(
-    rf"{AI_AFFILIATION.pattern}|{EXPLICIT_AI_METHOD.pattern}|\bclaude\b",
-    re.I,
-)
-
-# Compatibility aliases for code and notebooks that imported the old names.
-CURL_AI = FIREFOX_AI = ADVISORY_AI = AI_CREDIT
-
 FUZZ = re.compile(r"fuzz", re.I)
 
 SEVERITIES = ["Low", "Medium", "High", "Critical"]

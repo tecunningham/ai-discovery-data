@@ -16,7 +16,7 @@ not required.
 |---|---|
 | <b><a href="problems/cyber-curl/">curl vulnerability disclosures</a></b><br><b>Metric:</b> vulnerabilities disclosed per year,<br>split by finder credit<br><b>Coverage:</b> 2000–2026, partial through<br>2026-06-24<br><b>Acceleration?</b> 📈 accelerating | <a href="problems/cyber-curl/"><img src="problems/cyber-curl/discovery-cyber-curl.png" width="400" alt="curl vulnerability disclosures"></a> |
 | <b><a href="problems/cyber-firefox/">Firefox vulnerability disclosures</a></b><br><b>Metric:</b> distinct CVEs per year, split by<br>whether the reporter credit names an AI<br>method, an AI-security employer, a fuzzer, or<br>none of these; advisory–CVE mentions retained<br>as a sensitivity count<br><b>Coverage:</b> 2016–2026, partial through the<br>latest advisory on 4 August 2026<br><b>Acceleration?</b> 📈 accelerating — though distinct<br>CVEs rose 44% from 2021 to 2025 with<br>essentially no AI credit | <a href="problems/cyber-firefox/"><img src="problems/cyber-firefox/counting-units-cyber-firefox.png" width="400" alt="Firefox vulnerability disclosures"></a><br><a href="problems/cyber-firefox/"><img src="problems/cyber-firefox/discovery-cyber-firefox.png" width="400" alt="Firefox vulnerability disclosures"></a> |
-| <b><a href="problems/cyber-kev-exploited/">All software: vulnerabilities known exploited</a></b><br><b>Metric:</b> CVEs added per year to CISA's Known<br>Exploited Vulnerabilities catalogue<br><b>Coverage:</b> 2021–2026, from the catalogue's<br>November 2021 launch, partial through<br>2026-08-10<br><b>Acceleration?</b> ➡️ no acceleration — additions<br>annualize to about +20% in 2026 against +64%<br>for disclosures | <a href="problems/cyber-kev-exploited/"><img src="problems/cyber-kev-exploited/discovery-cyber-kev-exploited.png" width="400" alt="All software: vulnerabilities known exploited"></a> |
+| <b><a href="problems/cyber-kev-exploited/">All software: vulnerabilities known exploited</a></b><br><b>Metric:</b> CVEs added per year to CISA's Known<br>Exploited Vulnerabilities catalogue<br><b>Coverage:</b> 2021–2026, from the catalogue's<br>November 2021 launch, partial through<br>2026-08-10<br><b>Acceleration?</b> ➡️ no acceleration — additions<br>annualize to about +19% in 2026 against +64%<br>for disclosures | <a href="problems/cyber-kev-exploited/"><img src="problems/cyber-kev-exploited/discovery-cyber-kev-exploited.png" width="400" alt="All software: vulnerabilities known exploited"></a> |
 | <b><a href="problems/cyber-nvd-disclosed/">All software: vulnerabilities disclosed</a></b><br><b>Metric:</b> CVEs published per year in the US<br>National Vulnerability Database<br><b>Coverage:</b> 2016–2026, partial through<br>2026-08-10<br><b>Acceleration?</b> 📈 accelerating — but growth was<br>already +32% and +23% in 2024 and 2025, and no<br>disclosure here is attributed to anyone | <a href="problems/cyber-nvd-disclosed/"><img src="problems/cyber-nvd-disclosed/discovery-cyber-nvd-disclosed.png" width="400" alt="All software: vulnerabilities disclosed"></a> |
 | <b><a href="problems/cyber-openssl/">OpenSSL vulnerability disclosures</a></b><br><b>Metric:</b> vulnerabilities disclosed per year,<br>split by finder provenance<br><b>Coverage:</b> 2002–2026, partial through 5 August<br>2026<br><b>Acceleration?</b> 📈 accelerating — a record 2026<br>surge, with provenance and release-batching<br>caveats | <a href="problems/cyber-openssl/"><img src="problems/cyber-openssl/batches-cyber-openssl.png" width="400" alt="OpenSSL vulnerability disclosures"></a><br><a href="problems/cyber-openssl/"><img src="problems/cyber-openssl/discovery-cyber-openssl.png" width="400" alt="OpenSSL vulnerability disclosures"></a> |
 | <b><a href="problems/cyber-oss-fuzz/">OSS-Fuzz vulnerability discoveries</a></b><br><b>Metric:</b> vulnerability records published per<br>year by an automated fuzzing programme<br><b>Coverage:</b> 2020–2026, partial through 10 August<br>2026<br><b>Acceleration?</b> 📉 declining | <a href="problems/cyber-oss-fuzz/"><img src="problems/cyber-oss-fuzz/discovery-cyber-oss-fuzz.png" width="400" alt="OSS-Fuzz vulnerability discoveries"></a> |
@@ -26,7 +26,7 @@ not required.
 
 | Series | Chart |
 |---|---|
-| <b><a href="problems/math-erdos/">Erdős problems catalogue</a></b><br><b>Metric:</b> problems catalogued, statuses marked<br>solved, and statements formalized in Lean, at<br>monthly site snapshots<br><b>Coverage:</b> 2025-08-31 to 2026-08-08, thirteen<br>snapshots<br><b>Acceleration?</b> ❓ inconclusive — the comparable<br>window is about eleven months, and a status<br>edit is not a solution | <a href="problems/math-erdos/"><img src="problems/math-erdos/discovery-math-erdos.png" width="400" alt="Erdős problems catalogue"></a> |
+| <b><a href="problems/math-erdos/">Erdős problems catalogue</a></b><br><b>Metric:</b> problems catalogued, statuses marked<br>solved, and statements formalized in Lean, at<br>monthly site snapshots<br><b>Coverage:</b> 2025-08-31 to 2026-08-10, thirteen<br>snapshots<br><b>Acceleration?</b> ❓ inconclusive — the comparable<br>window is about eleven months, and a status<br>edit is not a solution | <a href="problems/math-erdos/"><img src="problems/math-erdos/discovery-math-erdos.png" width="400" alt="Erdős problems catalogue"></a> |
 | <b><a href="problems/math-hilbert/">Hilbert's problems</a></b><br><b>Metric:</b> unresolved scored rows remaining, out<br>of 28 scored rows<br><b>Coverage:</b> 1900–2026, with dated resolutions<br>running 1900–1998<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/math-hilbert/"><img src="problems/math-hilbert/discovery-math-hilbert.png" width="400" alt="Hilbert's problems"></a> |
 | <b><a href="problems/math-landau/">Landau's problems</a></b><br><b>Metric:</b> unresolved scored rows remaining, out<br>of 4 scored rows<br><b>Coverage:</b> 1912–2026, with no dated resolution<br>anywhere in that span<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/math-landau/"><img src="problems/math-landau/discovery-math-landau.png" width="400" alt="Landau's problems"></a> |
 | <b><a href="problems/math-millennium/">Millennium Prize Problems</a></b><br><b>Metric:</b> unresolved scored rows remaining, out<br>of 7<br><b>Coverage:</b> 2000–2026, with one dated resolution<br>in 2003<br><b>Acceleration?</b> ➡️ no acceleration | <a href="problems/math-millennium/"><img src="problems/math-millennium/discovery-math-millennium.png" width="400" alt="Millennium Prize Problems"></a> |
@@ -68,39 +68,39 @@ not required.
 ## Validation
 
 <!-- BEGIN GENERATED: checks-table -->
-| Problem | Document | Data | Figure | Literature | Refetch | Reproduces |
-|---|---|---|---|---|---|---|
-| [curl vulnerability disclosures](problems/cyber-curl/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Firefox vulnerability disclosures](problems/cyber-firefox/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [All software: vulnerabilities known exploited](problems/cyber-kev-exploited/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [All software: vulnerabilities disclosed](problems/cyber-nvd-disclosed/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [OpenSSL vulnerability disclosures](problems/cyber-openssl/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [OSS-Fuzz vulnerability discoveries](problems/cyber-oss-fuzz/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Open-source CVEs represented in OSV](problems/cyber-osv-cves/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Erdős problems catalogue](problems/math-erdos/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Hilbert's problems](problems/math-hilbert/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Landau's problems](problems/math-landau/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Millennium Prize Problems](problems/math-millennium/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Smale's problems](problems/math-smale/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Thurston's 24 questions](problems/math-thurston/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [The Open Problems Project](problems/math-topp/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Inventory of the AlphaEvolve problem set](problems/math-alphaevolve-inventory/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Finite construction records around AlphaEvolve](problems/math-alphaevolve-records/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [ANTEDB analytic-number-theory exponents](problems/math-antedb/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Sphere-packing lower-bound ladder](problems/math-sphere-packing/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Sums-and-differences and autoconvolution constants](problems/math-sums-autoconvolution/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Matrix-multiplication exponent ω](problems/matrix-omega/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [CIFAR-10 speedrun](problems/algorithms-cifar10/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [Hutter Prize compression: enwik9](problems/algorithms-enwik9/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Gurobi mixed-integer programming speed](problems/algorithms-gurobi/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [modded-nanogpt training speedrun](problems/algorithms-nanogpt/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Stockfish development builds on fixed hardware](problems/algorithms-stockfish/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Integer factorization records](problems/integer-factorization/) | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Problem | Document | Data | Figure | Literature | Arithmetic | Refetch | Reproduces |
+|---|---|---|---|---|---|---|---|
+| [curl vulnerability disclosures](problems/cyber-curl/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Firefox vulnerability disclosures](problems/cyber-firefox/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [All software: vulnerabilities known exploited](problems/cyber-kev-exploited/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [All software: vulnerabilities disclosed](problems/cyber-nvd-disclosed/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [OpenSSL vulnerability disclosures](problems/cyber-openssl/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [OSS-Fuzz vulnerability discoveries](problems/cyber-oss-fuzz/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Open-source CVEs represented in OSV](problems/cyber-osv-cves/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Erdős problems catalogue](problems/math-erdos/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Hilbert's problems](problems/math-hilbert/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Landau's problems](problems/math-landau/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Millennium Prize Problems](problems/math-millennium/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Smale's problems](problems/math-smale/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Thurston's 24 questions](problems/math-thurston/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [The Open Problems Project](problems/math-topp/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Inventory of the AlphaEvolve problem set](problems/math-alphaevolve-inventory/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✅ | ✅ |
+| [Finite construction records around AlphaEvolve](problems/math-alphaevolve-records/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✅ | ✅ |
+| [ANTEDB analytic-number-theory exponents](problems/math-antedb/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✅ | ✅ |
+| [Sphere-packing lower-bound ladder](problems/math-sphere-packing/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Sums-and-differences and autoconvolution constants](problems/math-sums-autoconvolution/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Matrix-multiplication exponent ω](problems/matrix-omega/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [CIFAR-10 speedrun](problems/algorithms-cifar10/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [Hutter Prize compression: enwik9](problems/algorithms-enwik9/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✅ | ✅ |
+| [Gurobi mixed-integer programming speed](problems/algorithms-gurobi/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [modded-nanogpt training speedrun](problems/algorithms-nanogpt/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✅ | ✅ |
+| [Stockfish development builds on fixed hardware](problems/algorithms-stockfish/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Integer factorization records](problems/integer-factorization/) | ✅ | ✅ | ✅ | ✅ | ➖ | ✍️ | ✅ |
+| [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-29 problems holding 33 figures and 37 data files. 17 refetch from upstream and 12 are maintained by hand and say so. No failing cells.
+29 problems holding 33 figures and 37 data files. 17 refetch from upstream and 12 are maintained by hand and say so. 12 recompute their prose arithmetic; the other 17 state numbers no check reads. No failing cells.
 <!-- END GENERATED: checks-table -->
 
 ## How to read the series
@@ -132,14 +132,23 @@ rebuilt from it. Each validation column is one kind of thing that can go missing
 
 | Column | Fails when |
 |---|---|
-| Document | A `**Field:**` line or required section is missing, a verdict is invalid, `**Upstream:**` names no URL, a sibling link fails, or an optional folder `check.py` finds stale prose arithmetic. |
+| Document | A `**Field:**` line or required section is missing, a verdict is invalid, `**Upstream:**` names no URL, or a sibling link fails. |
 | Data | The folder holds no CSV, vendors one its document never links, links one that is not there, or reuses a filename another folder already has. |
 | Figure | There is no `figure.py`, or no PNG, or a PNG the document does not embed, or a PNG that nothing regenerates. |
 | Literature | A `[@citekey]` in the document has no entry in `references.bib`. |
+| Arithmetic | The folder's `check.py` recomputes a number from the CSV and does not find it in the prose. A folder with no `check.py` scores ➖: nothing read its numbers, which is a gap rather than a pass. |
 | Refetch | There is no `fetch.py`, and the document does not say how the data is maintained instead. |
 | Reproduces | Redrawing the figure from the CSVs beside it does not give back the committed PNG, byte for byte. |
 
 ✅ passes  ·  ❌ fails  ·  ✍️ maintained by hand, and the document says so  ·  ➖ not run
+
+The Arithmetic column exists because prose does not move when a CSV does. A
+refetch changes a number and leaves the sentence quoting it behind, stating a
+figure the data no longer supports, and nothing about the files looks wrong. A
+folder `check.py` recomputes each printed figure and asserts the document
+contains it, so the document stays the place the number lives while the CSV
+stays the thing that decides it. Twelve folders do this today; the rest print
+numbers no check reads, and their ➖ says so rather than claiming a pass.
 
 Reproduction runs every `figure.py` and compares the result with what is
 committed. It restores the original bytes afterwards, so a stale figure is
@@ -216,6 +225,13 @@ make check                      # check data, documents, and sources
 make check-figures              # also verify PNG bytes
 ```
 
+CI runs `make check-figures` on every push and pull request. A second workflow,
+[`freshness.yml`](.github/workflows/freshness.yml), runs weekly, refetches every
+automatable series, and fails if any vendored CSV no longer matches its
+upstream — the one failure mode that is invisible from inside the repository,
+since a stale series passes every other check. It checks the documented URLs in
+the same run.
+
 The figures are byte-for-byte reproducible under that pinned environment, not
 under arbitrary matplotlib or FreeType installations. Each PNG's `Software`
 metadata records the Python, matplotlib, and FreeType versions plus its generator
@@ -227,6 +243,15 @@ Rebuilding data is a separate networked step:
 make fetch                          # run every automatable fetcher
 make fetch-one PROBLEM=cyber-curl   # run one folder's fetcher
 ```
+
+Refetching can leave the repository failing its own check, by design. Every
+chart is drawn as of one date, `AS_OF_DATE` in
+[`lib/chart.py`](lib/chart.py), which is where the shaded era ends and where a
+series that stops early is understood to stop. `tools/check.py` fails when any
+vendored row is newer than that date, because a figure drawn to an older
+horizon than its data is a figure that quietly omits rows. So a successful
+`make fetch` that pulls in newer data is followed by bumping `AS_OF_DATE` and
+rerunning `make index`. `make fetch` prints a reminder to that effect.
 
 Some sources are prose pages rather than feeds, so their rows are transcribed by
 hand with source URLs recorded in the CSV. The Hilbert, Landau, Thurston, Smale,

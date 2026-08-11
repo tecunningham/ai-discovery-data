@@ -34,6 +34,14 @@ newest build in the series measures +137.27 ± 1.97 on 2026-07-26. That is about
 675 Elo of pure software progress, averaging 51 Elo a year across the whole
 span.
 
+"Newest" is a choice here, not a lookup. 8 builds share that final date and
+span 136.67 to 139.42, about three Elo, which is the ordinary noise of 20,000
+games rather than three Elo of progress. The CSV keeps upstream's test order, so
+the last row is the last build tested and that is what the headline figure and
+the chart's marker both use; taking the day's maximum instead would report
+whichever run drew the easiest games, and would move the span figure by a couple
+of Elo without anything having changed in the engine.
+
 The largest single move is one architecture change, not a trend. Calendar 2020
 gained about 121 Elo and 2021 about 114, around the NNUE merge of 2020-08-06.
 The project's own regression tables put one patch at roughly 58 Elo — master

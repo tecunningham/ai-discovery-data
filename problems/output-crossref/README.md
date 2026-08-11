@@ -27,7 +27,7 @@ a result, and nothing here says whether the work behind it was any good.
 Deposits rose from 5.28 million records in 2010 to 12.80 million in 2025, up
 143% over fifteen years, with no clean bend anywhere along the way. The rise is
 not smooth: six of those fifteen year-on-year changes are falls, the most recent
-of them in 2024, when deposits dropped to 11.31 million from 12.70 million in
+of them in 2024, when deposits dropped to 11.31 million from 12.69 million in
 2023 before recovering to a new high the year after.
 
 That 2024 dip is the most instructive part of the series, because it cannot be

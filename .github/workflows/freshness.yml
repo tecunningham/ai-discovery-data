@@ -1,0 +1,61 @@
+name: Check data freshness
+
+# The repository's data goes stale silently. Every other check runs against what
+# is committed, so a series whose upstream has moved on passes everything right
+# up until somebody reads the chart. This job is the only one that talks to the
+# upstreams, and its whole job is to fail when the vendored CSVs no longer match
+# them.
+#
+# It is separate from check.yml because it fails for a different reason. A red
+# check.yml means the repository is inconsistent with itself and somebody broke
+# something; a red freshness run means the world moved, which is expected and is
+# resolved by refetching rather than by fixing a bug.
+
+on:
+  schedule:
+    # Monday morning UTC. Weekly rather than daily because most of these series
+    # move monthly at best, and a job that cries wolf every morning gets muted.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freshness:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --requirement requirements.txt
+
+      # Several upstreams rate-limit or go down. A transient failure here is not
+      # a stale series, so fetch failures are reported and do not fail the job;
+      # the diff below is what decides.
+      - name: Refetch every automatable series
+        continue-on-error: true
+        run: make fetch
+
+      - name: Report series whose upstream has moved
+        run: |
+          if git diff --quiet -- problems; then
+            echo "every vendored series still matches its upstream"
+            exit 0
+          fi
+          echo "::error::vendored data differs from upstream; run make fetch locally"
+          echo
+          echo "Series that moved:"
+          git diff --stat -- problems
+          echo
+          git diff -- problems
+          exit 1
+
+      - name: Check documented URLs
+        # Link rot is the other thing invisible from inside the repository, and
+        # it is checked here rather than in check.yml because it can fail for
+        # reasons that are nobody's fault.
+        if: always()
+        run: make check-links

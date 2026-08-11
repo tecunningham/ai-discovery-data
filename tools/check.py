@@ -71,7 +71,13 @@ INDEX_GROUP_ORDER = (
     "outside the three domains",
 )
 
-CHECKS = ("Document", "Data", "Figure", "Literature", "Refetch", "Reproduces")
+# Arithmetic is separated from Document because the two answer different
+# questions. Document asks whether the apparatus is present; Arithmetic asks
+# whether the numbers the prose prints still follow from the CSV beside it, and
+# only a folder shipping a check.py can answer it. Folding them together would
+# show a tick for "nothing checked the numbers".
+CHECKS = ("Document", "Data", "Figure", "Literature", "Arithmetic", "Refetch",
+          "Reproduces")
 PASS, FAIL, HAND, SKIP = "✅", "❌", "✍️", "➖"
 
 # One mark per verdict, so the index can be read down the column. They answer
@@ -251,7 +257,13 @@ class Problem:
             if result.returncode:
                 output = (result.stdout + result.stderr).strip()
                 for message in output.splitlines() or ["folder check failed"]:
-                    self.fail("Document", f"check.py: {message}")
+                    self.fail("Arithmetic", f"check.py: {message}")
+            else:
+                self.status["Arithmetic"] = PASS
+        else:
+            # No check.py, so nothing read this folder's numbers. That is a
+            # gap to show, not a pass to award.
+            self.status["Arithmetic"] = SKIP
 
         for group in ("Document", "Data", "Figure", "Literature"):
             if self.status[group] == SKIP:
@@ -584,11 +596,14 @@ def checks_rows(problems: list[Problem]) -> str:
 
     fetched = sum(p.status["Refetch"] == PASS for p in problems)
     hand = sum(p.status["Refetch"] == HAND for p in problems)
+    checked = sum(p.status["Arithmetic"] != SKIP for p in problems)
     red = sum(p.status[group] == FAIL for p in problems for group in CHECKS)
     out += ["", f"{len(problems)} problems holding {sum(len(p.figures) for p in problems)} "
                 f"figures and {sum(len(p.csvs) for p in problems)} data files. "
                 f"{fetched} refetch from upstream and {hand} are maintained by hand "
-                f"and say so. {red or 'No'} failing "
+                f"and say so. {checked} recompute their prose arithmetic; the other "
+                f"{len(problems) - checked} state numbers no check reads. "
+                f"{red or 'No'} failing "
                 f"{'cell' if red == 1 else 'cells'}."]
     if red:
         out += ["", "Failing:"]

@@ -30,6 +30,12 @@ def main() -> None:
     rows = read_csv(HERE / "stockfish-ncm-elo.csv")
     xs = [year_fraction(row["date"]) for row in rows]
     ys = [float(row["elo_vs_sf15"]) for row in rows]
+    # Eight builds share the final date, spanning about three Elo, so "the
+    # newest build" is a choice rather than a lookup. The file keeps upstream's
+    # test order, and the last row in it is the last build tested; taking the
+    # maximum instead would report whichever run got the luckiest 20,000 games.
+    latest = rows[-1]
+    latest_elo = float(latest["elo_vs_sf15"])
     fig, ax = new_chart(
         "Stockfish development builds on fixed hardware",
         "20,000 games per build against Stockfish 15; releases are marked",
@@ -37,11 +43,11 @@ def main() -> None:
     ax.plot(xs, ys, color="#9fb3cc", linewidth=1, zorder=2)
     releases = [(x, y, row["release"]) for x, y, row in zip(xs, ys, rows) if row["release"]]
     ax.scatter([row[0] for row in releases], [row[1] for row in releases], color=HUMAN, s=35, edgecolor="white", linewidth=0.5, zorder=4)
-    llm_x = year_fraction("2026-07-26")
-    ax.scatter([llm_x], [ys[-1]], s=70, facecolor="none", edgecolor=AI, linewidth=1.6, zorder=5)
+    llm_x = year_fraction(latest["date"])
+    ax.scatter([llm_x], [latest_elo], s=70, facecolor="none", edgecolor=AI, linewidth=1.6, zorder=5)
     ax.annotate(
         "first LLM-credited master commit:\n0.6% speed patch, not an Elo record",
-        (llm_x, ys[-1]),
+        (llm_x, latest_elo),
         xytext=(-8, -35),
         textcoords="offset points",
         ha="right",

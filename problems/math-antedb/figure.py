@@ -199,10 +199,22 @@ def small_multiples() -> None:
         "density hypothesis.",
         fontsize=12.5, x=0.008, ha="left", y=0.995,
     )
+    # tight_layout picks the margins this panel grid needs; save() then
+    # reapplies exactly those, so the shared helper adds its renderer guard and
+    # PNG provenance without changing the layout.
     fig.tight_layout(rect=(0, 0, 1, 0.955))
-    fig.savefig(HERE / "antedb-small-multiples.png", dpi=150)
-    plt.close(fig)
-    print(f"wrote antedb-small-multiples ({panel} panels)")
+    pars = fig.subplotpars
+    save(
+        fig,
+        HERE / "antedb-small-multiples.png",
+        "Best known value of each ANTEDB exponent slice over time, one panel "
+        "per slice.",
+        ["https://github.com/teorth/expdb"],
+        __file__,
+        adjust={"left": pars.left, "right": pars.right, "top": pars.top,
+                "bottom": pars.bottom, "wspace": pars.wspace,
+                "hspace": pars.hspace},
+    )
 
 
 def main() -> None:

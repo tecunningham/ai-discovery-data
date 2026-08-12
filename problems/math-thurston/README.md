@@ -1,13 +1,13 @@
 # Thurston's 24 questions
 
 **Domain:** mathematics
-**Metric:** unresolved scored rows remaining, out of 24 scored rows
+**Metric:** current status of 24 scored rows, plus dated resolutions per year
 **Coverage:** 1982–2026, with dated resolutions running 1993–2013
 **Data:** [`thurston-questions.csv`](thurston-questions.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Thurston%27s_24_questions>, cross-checked against Agol's status note at <https://mathoverflow.net/questions/265493/thurstons-24-questions-all-settled>
 **Verdict:** no acceleration
 
-![Unresolved scored rows over time.](discovery-math-thurston.png)
+![Current status of the scored rows, and dated resolutions per year.](discovery-math-thurston.png)
 
 ## The problem
 

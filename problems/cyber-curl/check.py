@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import re
+from datetime import date
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -57,8 +58,12 @@ def main() -> int:
     early_severe = cohort_share(early, ["sev_high", "sev_critical"], "total")
     recent_human_low = cohort_share(recent, ["other_sev_low"], "other_attributed")
 
+    # The prose spells the snapshot date out; derive it from the CSV so a
+    # refetch that moves data_through cannot leave the old date standing.
+    through = date.fromisoformat(current["data_through"])
     expected = {
-        f"{current['total']} through 24 June 2026": "current total",
+        f"{current['total']} through {through.day} {through.strftime('%B')} "
+        f"{through.year}": "current total",
         f"with {current['ai_attributed']} of those crediting": "current AI count",
         f"{average:.1f} a year across 2014–2023": "baseline average",
         f"{ai_low_share}% are rated Low": "AI severity share",

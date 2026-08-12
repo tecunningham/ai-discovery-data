@@ -167,7 +167,7 @@ RECORDS = [
     # collapsed.
     ("6.44", "C_6.44", "up", 2007, 1.07921778, "human_analytic",
      "Gyarmati, Hennecart and Ruzsa, U={0,1,3}", "158",
-     "paper: 'setting U = {0,1,3} gives C_6.44 >= 1 + log(67)/log(7) ~ 1.07921778'"),
+     "paper: 'setting U = {0,1,3} gives C_6.44 >= 1 + log(7/6)/log(7) ~ 1.07921778'"),
     ("6.44", "C_6.44", "up", 2007, 1.1078, "human_search",
      "same paper, brute force computer search", "158",
      "paper: 'With a brute force computer search, in [158] the set "

@@ -1,10 +1,10 @@
 """Chart shapes drawn by more than one problem.
 
-Seven vulnerability series share annual bar shapes; four prestige lists are the
-same cumulative step plot; two Hutter corpora and two AlphaEvolve ladders are
-the same standing-record plot. Those shapes live here, parameterised by the CSV
-path, so a problem folder holding a series of a known kind is a short call
-rather than a copy of 60 lines of matplotlib.
+Five vulnerability series share annual bar shapes; six problem-list ledgers
+share one status-and-dated-resolutions chart; one Hutter corpus and one
+AlphaEvolve ladder folder use the same standing-record plot. Those shapes live
+here, parameterised by the CSV path, so a problem folder holding a series of a
+known kind is a short call rather than a copy of 60 lines of matplotlib.
 
 A shape belongs here only once a second problem needs it. One-off charts stay in
 the folder that owns them.
@@ -150,7 +150,7 @@ def cyber_simple_bars(
             zorder=4,
         )
         ax.annotate(
-            f"partial year\nthrough {row.get('data_through', 'latest snapshot')}",
+            f"partial year\nthrough {row.get('data_through') or 'latest snapshot'}",
             (years[i], values[i]),
             xytext=(-5, 7),
             textcoords="offset points",

@@ -13,13 +13,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.chart import save  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
-import matplotlib  # noqa: E402
-
-# The backend has to be fixed before pyplot is imported: an interactive one
-# renders text differently and the committed PNG stops matching the CSV.
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 
@@ -93,10 +89,22 @@ def main() -> None:
     for spine in ("top", "right", "left"):
         ax_funnel.spines[spine].set_visible(False)
 
+    # tight_layout picks the margins this two-panel shape needs; save() then
+    # reapplies exactly those, so the shared helper adds its renderer guard and
+    # PNG provenance without changing the layout.
     fig.tight_layout()
-    fig.savefig(HERE / "alphaevolve-frame-funnel.png", dpi=170)
-    plt.close(fig)
-    print(f"wrote alphaevolve-frame-funnel ({len(rows)} problems, {live} in frame)")
+    pars = fig.subplotpars
+    save(
+        fig,
+        HERE / "alphaevolve-frame-funnel.png",
+        "The AlphaEvolve problem set: status composition and the filters a "
+        "historical baseline survives.",
+        ["https://github.com/google-deepmind/alphaevolve_repository_of_problems",
+         "https://arxiv.org/abs/2511.02864"],
+        __file__,
+        adjust={"left": pars.left, "right": pars.right, "top": pars.top,
+                "bottom": pars.bottom, "wspace": pars.wspace},
+    )
 
 
 if __name__ == "__main__":

@@ -9,12 +9,13 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.prose import missing, prose, report  # noqa: E402
+from lib.prose import annualized, missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 
 def main() -> int:
     rows = read_csv(HERE / "firefox-advisories.csv")
+    ai_cves = read_csv(HERE / "firefox-ai-cves.csv")
     by_year = {row["year"]: row for row in rows}
     latest = next(row for row in rows if row["partial_year"] == "yes")
     unique = {year: int(row["unique_cves"]) for year, row in by_year.items()}
@@ -27,6 +28,15 @@ def main() -> int:
             f"the two AI bands sum to {ai_marked} but unique_ai_cves is "
             f"{latest['unique_ai_cves']}"
         )
+    # The per-CVE evidence file must agree with the annual bands it itemizes.
+    current_ai = [row for row in ai_cves if row["year"] == latest["year"]]
+    if len(current_ai) != int(latest["unique_ai_cves"]):
+        failures.append(
+            f"firefox-ai-cves.csv holds {len(current_ai)} rows for "
+            f"{latest['year']} but the annual file counts "
+            f"{latest['unique_ai_cves']}"
+        )
+    team = sum("Nicholas Carlini" in row["reporters"] for row in current_ai)
     for row in rows:
         banded = sum(int(row[f"unique_{band}"]) for band in
                      ("explicit_ai", "ai_affiliated", "fuzz", "other"))
@@ -49,6 +59,13 @@ def main() -> int:
         f"{by_year['2023']['unique_fuzz']}, {by_year['2024']['unique_fuzz']}, "
         f"{by_year['2025']['unique_fuzz']} and {by_year['2026']['unique_fuzz']}"
         .replace("\n", " "): "fuzz band",
+        "annualizes to about "
+        f"{round(annualized(int(latest['unique_fuzz']), latest['data_through']))}":
+            "fuzz annualization",
+        f"Of the {len(current_ai)} AI-marked distinct CVEs in {latest['year']}, "
+        f"{team} are credited to a single seven-person team": "per-team split",
+        f"roughly {round(100 * team / unique[latest['year']])}% of everything "
+        f"Firefox disclosed in {latest['year']}": "team share of the year",
         f"rose {round(100 * (unique['2025'] / unique['2021'] - 1))}% from 2021 to 2025":
             "2021-2025 growth",
         f"{ratio['2016']:.1f} in 2016, {ratio['2025']:.1f} in 2025, "

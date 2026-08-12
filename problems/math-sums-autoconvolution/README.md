@@ -4,7 +4,7 @@
 **Metric:** best known lower bounds on two additive-combinatorics constants, $C_{6.44}$ and $C_{6.3}$ in the AlphaEvolve numbering
 **Coverage:** 2007–2025, twelve record steps across the two ladders
 **Data:** [`sums-autoconvolution-records.csv`](sums-autoconvolution-records.csv), the problem 6.44 and 6.3 rows of the AlphaEvolve record transcription
-**Upstream:** <https://arxiv.org/abs/2506.13131> and the follow-on sources recorded per row in the CSV's `ref` and `note` columns
+**Upstream:** <https://arxiv.org/abs/2511.02864> and the follow-on sources recorded per row in the CSV's `ref` and `note` columns
 **Verdict:** inconclusive — AI steps are visible in 2025, and a human retook one of the two ladders within months
 
 ![Record lower bounds on the sums-and-differences and autoconvolution constants, with AI and human steps distinguished.](discovery-math-sums-autoconvolution.png)
@@ -14,7 +14,7 @@
 Two constants from the AlphaEvolve problem set, both bounded below by exhibiting a
 finite object whose score can be computed exactly. For $C_{6.44}$, in sums and
 differences of sets, the object is a set of integers: taking $U = \{0,1,3\}$ gives
-$C_{6.44} \geq 1 + \log 67 / \log 7 \approx 1.0792$, and later records come from
+$C_{6.44} \geq 1 + \log(7/6) / \log 7 \approx 1.0792$, and later records come from
 larger sets found by search. For $C_{6.3}$, an autocorrelation inequality, the
 object is a step function, and the recorded bracket at the start of the series is
 $0.88922 \leq C_{6.3} \leq 1$.
@@ -122,8 +122,9 @@ quantity where a real contest developed [@tao2025exploration].
 ## Related literature
 
 The 2025 steps and the prior bounds they were measured against are in the
-AlphaEvolve white paper [@novikov2025alphaevolve] and its companion problem
-repository [@deepmind2025problems]; Tao's account of the mathematics paper is the
+mathematics paper's appendix [@georgiev2025mathexploration], with the AlphaEvolve
+white paper [@novikov2025alphaevolve] and its companion problem
+repository [@deepmind2025problems] as the frame; Tao's account of the mathematics paper is the
 source for the wider pattern, including that rediscovery was the modal outcome and
 improvement the exception, and that scoring functions had to use exact or interval
 arithmetic because the system otherwise games the score

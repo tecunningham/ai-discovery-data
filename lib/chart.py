@@ -30,6 +30,9 @@ from lib.renderer import assert_canonical_renderer
 ROOT = Path(__file__).resolve().parents[1]
 
 AI = "#c1442f"
+# Affiliation-only credits: the same family as AI, visibly weaker evidence.
+# Shared here so the PNGs and the interactive pages use one soft red.
+AI_SOFT = "#e09a8c"
 HUMAN = "#2f6cc1"
 FUZZ = "#c98a00"
 VENDOR = "#777777"

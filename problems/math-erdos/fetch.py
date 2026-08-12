@@ -13,10 +13,10 @@ catalogued, so `solved` rose partly because already-solved problems were being
 added. From 2026-04 the total is fixed at 1217, and after that a rise in `solved`
 is a genuine new resolution — which is what catalogue_count_unchanged flags.
 
-The vendored CSV's final row does not come from here. Its 8 August 2026 endpoint
-takes the solved count from the live website's headline together with that day's
-Lean count from this file, so rerunning this script will move that row to
-whatever the repository's own statistics say.
+Every vendored row, endpoint included, comes from this history. An earlier
+version set the final row by hand from the live website's solved headline,
+which runs about six above the statistics history; that endpoint was abandoned
+as unrebuildable, and the folder README records the discrepancy instead.
 """
 
 from __future__ import annotations

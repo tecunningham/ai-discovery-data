@@ -1,13 +1,13 @@
 # Hilbert's problems
 
 **Domain:** mathematics
-**Metric:** unresolved scored rows remaining, out of 28 scored rows
+**Metric:** current status of 28 scored rows, plus dated resolutions per year
 **Coverage:** 1900–2026, with dated resolutions running 1900–1998
 **Data:** [`hilbert-problems.csv`](hilbert-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Hilbert%27s_problems>
 **Verdict:** no acceleration
 
-![Unresolved scored rows over time.](discovery-math-hilbert.png)
+![Current status of the scored rows, and dated resolutions per year.](discovery-math-hilbert.png)
 
 ## The problem
 
@@ -117,6 +117,7 @@ where "discovery is hard, requiring meaningful mathematical insight, but
 verification is computationally efficient and simple" [@arxiv2026horizonmath]. The general warning that record series are lumpy
 with no AI in them, so that a flat stretch is not an exhausted frontier, is
 Sherry and Thompson's [@sherry2021fast]. The companion ledgers are
+[Landau](../math-landau/README.md), [Thurston](../math-thurston/README.md),
 [Smale](../math-smale/README.md), [Millennium](../math-millennium/README.md) and
 [TOPP](../math-topp/README.md); the high-volume corpus that actually shows AI flow is
 [Erdős](../math-erdos/README.md).

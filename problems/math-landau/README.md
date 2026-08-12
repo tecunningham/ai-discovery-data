@@ -1,13 +1,13 @@
 # Landau's problems
 
 **Domain:** mathematics
-**Metric:** unresolved scored rows remaining, out of 4 scored rows
+**Metric:** current status of 4 scored rows, plus dated resolutions per year
 **Coverage:** 1912–2026, with no dated resolution anywhere in that span
 **Data:** [`landau-problems.csv`](landau-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Landau%27s_problems>
 **Verdict:** no acceleration
 
-![Unresolved scored rows over time.](discovery-math-landau.png)
+![Current status of the scored rows, and dated resolutions per year.](discovery-math-landau.png)
 
 ## The problem
 

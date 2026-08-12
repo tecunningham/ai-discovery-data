@@ -36,7 +36,7 @@ REPO_BASE = "https://github.com/tecunningham/ai-discovery-data"
 # lib/chart.py's palette, restated for the web pages so the interactive and
 # static versions of a series read as the same chart.
 AI = "#c1442f"
-AI_SOFT = "#d99287"
+AI_SOFT = "#e09a8c"
 HUMAN = "#2f6cc1"
 HUMAN_SOFT = "#8fb3d9"
 FUZZ = "#c98a00"
@@ -472,7 +472,9 @@ def build_openssl(slug: str):
                "ai_affiliated_unverified": "AI-affiliated, unverified",
                "conventional_or_fuzz": "conventional or fuzzing",
                "unknown": "unknown"}
-    colors = {"corroborated AI": AI, "AI-affiliated, unverified": AI_SOFT,
+    # The folder's PNG draws the affiliated band in the fuzzer amber (its chart
+    # has no separate fuzz band), so the interactive page matches that choice.
+    colors = {"corroborated AI": AI, "AI-affiliated, unverified": FUZZ,
               "conventional or fuzzing": HUMAN, "unknown": NEUTRAL}
     charts = [("Disclosures per year by finder provenance",
                stacked_bars(rows, "year", columns, colors,
@@ -730,6 +732,25 @@ def build_omega(slug: str):
     return [("Matrix-multiplication exponent ω", spec, "")]
 
 
+def build_microsoft(slug: str):
+    charts = split_series(
+        "msrc-cves.csv",
+        {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
+         "fuzz": "fuzzer", "other": "other"},
+        {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
+         "other": HUMAN}, "CVEs issued")(slug)
+    monthly = [{"x": f'{r["month"]}-01', "series": "CVEs",
+                "value": num(r["cves"])}
+               for r in load(slug, "msrc-monthly.csv")]
+    spec = plain_lines(monthly, x="x", x_type="temporal",
+                       y_title="CVEs per month",
+                       series_colors={"CVEs": DARKGREY})
+    charts.append(("Monthly counts", spec,
+                   "One point per monthly security-update document; "
+                   "out-of-band fixes land in the month they shipped."))
+    return charts
+
+
 def build_arxiv(slug: str):
     values = [{"x": f'{r["month"]}-01', "series": "submissions",
                "value": num(r["submissions"])}
@@ -780,14 +801,9 @@ SERIES: dict[str, object] = {
          "unique_fuzz": "fuzzer", "unique_other": "other"},
         {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
          "other": HUMAN}, "Distinct CVEs"),
-    "cyber-microsoft": split_series(
-        "msrc-cves.csv",
-        {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
-         "fuzz": "fuzzer", "other": "other"},
-        {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
-         "other": HUMAN}, "CVEs issued"),
     "cyber-kev-exploited": annual_series(
         "kev-by-year.csv", "kev_added", "CVEs added to KEV"),
+    "cyber-microsoft": build_microsoft,
     "cyber-nvd-disclosed": annual_series(
         "nvd-by-year.csv", "nvd_published", "CVEs published"),
     "cyber-openssl": build_openssl,

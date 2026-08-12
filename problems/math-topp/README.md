@@ -1,13 +1,13 @@
 # The Open Problems Project
 
 **Domain:** mathematics
-**Metric:** unresolved scored rows remaining, out of 78
+**Metric:** current status of 78 scored rows, plus dated resolutions per year
 **Coverage:** 2001–2026, with dated resolutions running 2000–2024
 **Data:** [`topp-problems.csv`](topp-problems.csv)
 **Upstream:** <https://topp.openproblem.net/>, with the rows transcribed from the project's GitHub sources
 **Verdict:** no acceleration
 
-![Unresolved scored rows over time.](discovery-math-topp.png)
+![Current status of the scored rows, and dated resolutions per year.](discovery-math-topp.png)
 
 ## The problem
 
@@ -116,6 +116,7 @@ attempted: 9 of 353 open Erdős problems resolved by formal proof search
 cheap automated verification on which frontier models still score near zero
 [@arxiv2026horizonmath]. That records arrive in bursts with long gaps and no AI in
 them is Sherry and Thompson's [@sherry2021fast]. The companion ledgers are
-[Hilbert](../math-hilbert/README.md), [Smale](../math-smale/README.md) and
+[Hilbert](../math-hilbert/README.md), [Landau](../math-landau/README.md),
+[Thurston](../math-thurston/README.md), [Smale](../math-smale/README.md) and
 [Millennium](../math-millennium/README.md); the corpus with measurable AI flow is
 [Erdős](../math-erdos/README.md).

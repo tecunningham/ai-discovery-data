@@ -1,13 +1,13 @@
 # Millennium Prize Problems
 
 **Domain:** mathematics
-**Metric:** unresolved scored rows remaining, out of 7
+**Metric:** current status of 7 scored rows, plus dated resolutions per year
 **Coverage:** 2000–2026, with one dated resolution in 2003
 **Data:** [`millennium-problems.csv`](millennium-problems.csv)
 **Upstream:** <https://www.claymath.org/millennium-problems/>
 **Verdict:** no acceleration
 
-![Unresolved scored rows over time.](discovery-math-millennium.png)
+![Current status of the scored rows, and dated resolutions per year.](discovery-math-millennium.png)
 
 ## The problem
 
@@ -112,4 +112,5 @@ problems on that basis and found frontier models scoring near zero even so
 [@arxiv2026horizonmath]. That flat stretches in record series are normal, with no
 AI anywhere in them, is Sherry and Thompson's finding across algorithm families
 [@sherry2021fast]. The companion ledgers are [Hilbert](../math-hilbert/README.md),
+[Landau](../math-landau/README.md), [Thurston](../math-thurston/README.md),
 [Smale](../math-smale/README.md) and [TOPP](../math-topp/README.md).

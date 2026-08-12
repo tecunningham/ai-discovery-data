@@ -12,7 +12,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.chart import year_fraction  # noqa: E402
+from lib.chart import AS_OF_DATE, year_fraction  # noqa: E402
 from lib.families import volume_series  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
@@ -26,7 +26,14 @@ def main() -> None:
     rows = read_csv(HERE / "arxiv-monthly.csv")
     counts = {row["month"]: int(row["submissions"]) for row in rows}
     # The last row is the month in progress at fetch time, so every comparison
-    # uses the last complete month instead.
+    # uses the last complete month instead. That rule silently breaks when a
+    # fetch lands just after a month boundary, before arXiv opens the new
+    # month's row — so assert it rather than assume it.
+    if rows[-1]["month"] != f"{AS_OF_DATE.year}-{AS_OF_DATE.month:02d}":
+        raise SystemExit(
+            f"the last row is {rows[-1]['month']}, not the AS_OF_DATE month "
+            f"{AS_OF_DATE.year}-{AS_OF_DATE.month:02d}; the last-row-is-partial "
+            "rule no longer holds")
     last = rows[-2]["month"]
     span = (year_fraction(last) - year_fraction(CHATGPT))
     growth = counts[last] / counts[CHATGPT] - 1

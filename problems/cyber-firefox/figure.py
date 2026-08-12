@@ -20,6 +20,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.chart import (  # noqa: E402
     AI,
+    AI_SOFT,
     FUZZ,
     HUMAN,
     VENDOR,
@@ -36,7 +37,7 @@ from matplotlib.ticker import MaxNLocator  # noqa: E402
 
 # Affiliation-only credits are drawn in a lighter red than corroborated method
 # credits: same family, visibly weaker evidence.
-AI_AFFILIATED = "#e09a8c"
+AI_AFFILIATED = AI_SOFT
 
 
 def main() -> None:

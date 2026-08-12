@@ -34,6 +34,13 @@ finding-level provenance from another source — see
 The bare name "Claude" is ambiguous before the model era, so that one marker is
 accepted only from 2024 onward. Callers pass the disclosure year to enforce that
 guard even though no currently vendored pre-2024 credit is affected.
+
+Several markers are ordinary words — "agent", "Gemini", "GPT" — so a refetch can
+reclassify a credit that merely contains one. Every currently vendored AI-marked
+credit was reviewed and none is a false positive; keeping it that way relies on
+the vendored evidence files (msrc-ai-cves.csv, firefox-ai-cves.csv, the finders
+tables), where any classification drift shows up as a reviewable diff rather
+than as a silent change in a count.
 """
 
 from __future__ import annotations

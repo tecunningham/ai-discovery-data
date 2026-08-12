@@ -1,0 +1,40 @@
+cve,date,band,credits
+CVE-2025-53133,2025-08-12,explicit_ai,"Jongseong Kim (nevul37) with Ajou University, and working at ENKI WhiteHat | Dongjun Kim (smlijun) with Ajou University, and working at ENKI WhiteHat | Seongheun Hong (seongheunh) with Ajou University | Pwnforr777 | Hwiwon Lee (hwiwonl), SEC-agent team | Taewoo (Tae_ω02)"
+CVE-2025-53802,2025-09-09,explicit_ai,"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat"
+CVE-2025-59220,2025-09-18,explicit_ai,"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team | Zhiniang Peng with HUST & R4nger with CyberKunLun"
+CVE-2025-55677,2025-10-14,explicit_ai,"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat"
+CVE-2025-55685,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-55686,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-55689,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-55684,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-55688,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-55690,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-55691,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-59190,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-59198,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat"
+CVE-2025-59210,2025-10-14,explicit_ai,"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat"
+CVE-2025-59289,2025-10-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-59515,2025-11-11,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team with ENKI WhiteHat | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2025-60717,2025-11-11,explicit_ai,"Anonymous | Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team"
+CVE-2026-20835,2026-01-13,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | k0shl"
+CVE-2026-20918,2026-01-13,explicit_ai,"Anonymous | Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (develacker), SEC-agent team"
+CVE-2026-21536,2026-03-05,ai_affiliated,XBOW
+CVE-2026-23667,2026-03-10,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team"
+CVE-2026-32191,2026-03-19,ai_affiliated,XBOW with XBOW
+CVE-2026-32194,2026-03-19,ai_affiliated,XBOW with XBOW
+CVE-2026-32195,2026-04-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Gwanhyun Lee | Dongjun Kim | Anonymous | 0rb1t with None | Qanux with None"
+CVE-2026-33096,2026-04-14,explicit_ai,WARP & MORSE teams at Microsoft | Milad Nasr (Anthropic) and Calif.io with Claude
+CVE-2026-27909,2026-04-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team"
+CVE-2026-35420,2026-05-12,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team"
+CVE-2026-40380,2026-05-12,explicit_ai,Calif.io in collaboration with Claude and Anthropic Research
+CVE-2026-40369,2026-05-12,explicit_ai,Théo DUTEIS | Calif.io in collaboration with Claude and Anthropic Research | Adrian Denkiewicz at Doyensec in collaboration with Anthropic Research | Len Sadowski (lytnc) and Oguz Bektas (_ozb_)
+CVE-2026-40398,2026-05-12,explicit_ai,Calif.io in collaboration with Claude and Anthropic Research
+CVE-2026-40403,2026-05-12,explicit_ai,Calif.io and Milad Nasr (Anthropic) with Claude with Calif.io and Anthropic
+CVE-2026-42915,2026-06-09,explicit_ai,Linzishan & Anemone & Zhiniang Peng (HUST) | Daniel Friedl | Anonymous | Calif.io and Milad Nasr (Anthropic) with Claude with Calif.io and Anthropic | Wongi Lee with Theori | Jungwoo Lee with KAIST SoftSec Lab
+CVE-2026-42984,2026-06-09,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team"
+CVE-2026-49183,2026-07-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Pwnforr777 | Anonymous"
+CVE-2026-49798,2026-07-14,explicit_ai,"Anonymous | Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Minwoo Jeong (P1nkjelly) with KAIST Hacking Lab"
+CVE-2026-50384,2026-07-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Pwnforr777 | Anonymous"
+CVE-2026-50476,2026-07-14,explicit_ai,"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team | Younggi Park (grill66), SEC-agent team"
+CVE-2026-50479,2026-07-14,explicit_ai,Adrian Denkiewicz at Doyensec in collaboration with Anthropic Research [Adrian Denkiewicz at Doyensec in collaboration with Claude and Anthropic Research](https://doyensec.com)
+CVE-2026-50490,2026-07-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Dongjun Kim (smlijun), SEC-agent team"

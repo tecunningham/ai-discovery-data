@@ -23,8 +23,10 @@ ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".cache"
 
 
-def _cache_path(url: str) -> Path:
-    key = hashlib.sha256(url.encode()).hexdigest()[:16]
+def _cache_path(url: str, accept: str | None = None) -> Path:
+    key = hashlib.sha256(
+        (url if accept is None else f"{url}\n{accept}").encode()
+    ).hexdigest()[:16]
     return CACHE / f"{date.today().isoformat()}-{key}"
 
 
@@ -42,22 +44,30 @@ def _prune(keep: str) -> None:
             stale.unlink(missing_ok=True)
 
 
-def fetch(url: str, refresh: bool = False) -> bytes:
-    """GET url, reusing today's cached copy unless refresh is set."""
-    cached = _cache_path(url)
+def fetch(url: str, refresh: bool = False, accept: str | None = None) -> bytes:
+    """GET url, reusing today's cached copy unless refresh is set.
+
+    Some upstreams (MSRC's CVRF endpoint) content-negotiate and answer XML
+    unless asked for JSON, so a caller may pass an Accept header. The header is
+    part of the cache key: the same URL in two representations is two
+    responses, not one.
+    """
+    cached = _cache_path(url, accept)
     if cached.exists() and not refresh:
         return cached.read_bytes()
+    command = [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--max-time",
+        "120",
+    ]
+    if accept is not None:
+        command += ["--header", f"Accept: {accept}"]
     result = subprocess.run(
-        [
-            "curl",
-            "--fail",
-            "--silent",
-            "--show-error",
-            "--location",
-            "--max-time",
-            "120",
-            url,
-        ],
+        command + [url],
         capture_output=True,
     )
     if result.returncode != 0 or not result.stdout:
@@ -69,7 +79,8 @@ def fetch(url: str, refresh: bool = False) -> bytes:
     return result.stdout
 
 
-def fetch_json(url: str, attempts: int = 6, base_delay: float = 8.0, refresh: bool = False):
+def fetch_json(url: str, attempts: int = 6, base_delay: float = 8.0, refresh: bool = False,
+               accept: str | None = None):
     """Fetch and parse JSON, retrying on the rate-limit replies NVD returns.
 
     Over quota, NVD answers with an HTML error page rather than a JSON error, so
@@ -78,7 +89,7 @@ def fetch_json(url: str, attempts: int = 6, base_delay: float = 8.0, refresh: bo
     """
     last = ""
     for attempt in range(attempts):
-        raw = fetch(url, refresh=refresh or attempt > 0)
+        raw = fetch(url, refresh=refresh or attempt > 0, accept=accept)
         try:
             return json.loads(raw)
         except json.JSONDecodeError:

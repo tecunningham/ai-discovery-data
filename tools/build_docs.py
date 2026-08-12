@@ -350,6 +350,35 @@ def build_cvrplib(slug: str):
              "Click a point to open the update page it was posted on.")]
 
 
+def build_ecdsa_circuit(slug: str):
+    rows = load(slug, "ecdsa-circuit-records.csv")
+    kind = {"yes": "note names an AI tool", "no": "no such tool named",
+            "": "no note left"}
+    values = [{"date": r["date"], "score": num(r["score"]),
+               "toffoli": num(r["toffoli"]), "qubits": num(r["qubits"]),
+               "solver": r["solver"],
+               "tool": kind[r["ai_tool_in_note"]],
+               "url": f'https://github.com/{r["solver"]}'}
+              for r in rows]
+    spec = record_steps(
+        values, x="date", x_type="temporal", y="score",
+        y_title="Score: Toffoli × qubits (log scale)", log=True, href=True,
+        color=("tool", {"note names an AI tool": AI,
+                        "no such tool named": NEUTRAL,
+                        "no note left": HUMAN_SOFT}),
+        tips=[("date", "temporal", "accepted"),
+              ("score", "quantitative", "score"),
+              ("toffoli", "quantitative", "avg Toffoli"),
+              ("qubits", "quantitative", "peak qubits"),
+              ("solver", "nominal", "solver"),
+              ("tool", "nominal", "note")])
+    # Colour marks the tool disclosure; the ladder itself is one frontier.
+    del spec["layer"][0]["encoding"]["color"]
+    return [("secp256k1 point-addition record ladder", spec,
+             "Each point is an accepted record; click to open the solver's "
+             "GitHub profile.")]
+
+
 def build_enwik9(slug: str):
     values = [{"date": r["date"], "bytes": num(r["total_bytes"]),
                "series": r["series"], "program": r["program"],
@@ -751,6 +780,12 @@ SERIES: dict[str, object] = {
          "unique_fuzz": "fuzzer", "unique_other": "other"},
         {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
          "other": HUMAN}, "Distinct CVEs"),
+    "cyber-microsoft": split_series(
+        "msrc-cves.csv",
+        {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
+         "fuzz": "fuzzer", "other": "other"},
+        {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
+         "other": HUMAN}, "CVEs issued"),
     "cyber-kev-exploited": annual_series(
         "kev-by-year.csv", "kev_added", "CVEs added to KEV"),
     "cyber-nvd-disclosed": annual_series(
@@ -760,6 +795,7 @@ SERIES: dict[str, object] = {
         "ossfuzz-discoveries.csv", "discoveries", "Records published"),
     "cyber-osv-cves": annual_series(
         "osv-cves-by-year.csv", "distinct_cves", "Distinct CVEs"),
+    "algorithms-ecdsa-circuit": build_ecdsa_circuit,
     "integer-factorization": build_factoring,
     "math-alphaevolve-inventory": build_alphaevolve_inventory,
     "math-alphaevolve-records": build_record_ladder(

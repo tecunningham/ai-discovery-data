@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hutter Prize compression: enwik9 — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Hutter Prize compression: enwik9</h1>
+<p class="metric">total size in bytes of decompressor plus archive for a fixed 1 GB text corpus, under a CPU-time and memory cap</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-enwik9/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-enwik9/#what-it-cannot-support">Caveats</a> <a href="http://prize.hutter1.net/">Source</a></p>
+<h2>Hutter Prize enwik9 record</h2>
+<div id="chart0" class="chart"></div>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"author":"Alexander Rhatushnyak","bytes":116673681,"date":"2019-07-04","note":"pre-prize baseline for the 2020 10x expansion","program":"phda9v1.8","series":"hutter_enwik9"},{"author":"Artemiy Margaritov","bytes":115352938,"date":"2021-05-31","note":"5th winner","program":"starlit","series":"hutter_enwik9"},{"author":"Saurabh Kumar","bytes":114156155,"date":"2023-07-16","note":"6th winner","program":"fast cmix","series":"hutter_enwik9"},{"author":"Kaido Orav","bytes":112578322,"date":"2024-02-02","note":"7th winner","program":"fx-cmix","series":"hutter_enwik9"},{"author":"Kaido Orav & Byron Knoll","bytes":110793128,"date":"2024-09-03","note":"8th winner","program":"fx2-cmix","series":"hutter_enwik9"},{"author":"Ibrahim Marcouch","bytes":109190109,"date":"2026-06-26","note":"announced on LTCB; not yet an awarded record on the prize site as of 2026-07-28","program":"cmix-lex","series":"hutter_enwik9"},{"author":"Alexander Rhatushnyak","bytes":116587793,"date":"2019-07-04","note":"LTCB total incl. decompressor","program":"phda9 1.8","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":114317255,"date":"2021-01-03","note":"as printed on LTCB; likely omits the 99671-byte decompressor","program":"nncp v2","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":112319355,"date":"2021-02-06","note":"","program":"nncp v2.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":110231784,"date":"2021-04-24","note":"","program":"nncp v3","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":108579652,"date":"2021-06-01","note":"","program":"nncp v3.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":107261318,"date":"2023-10-23","note":"still ranked 1 as of the page's 2026-07-08 update","program":"nncp v3.2","series":"ltcb_enwik9"}]},"height":340,"layer":[{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

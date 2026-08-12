@@ -16,6 +16,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+import matplotlib.pyplot as plt  # noqa: E402
+
 from lib.chart import (  # noqa: E402
     AI,
     HUMAN,
@@ -28,6 +30,10 @@ from lib.chart import (  # noqa: E402
     year_fraction,
 )
 from lib.table import read_csv  # noqa: E402
+
+# arXiv preprints sit between "published" and "wiki entry" in how settled they
+# are, so they take a lighter shade of the human blue rather than a new hue.
+PREPRINT = "#8fb3d9"
 
 
 def solution_years() -> None:
@@ -77,6 +83,80 @@ def solution_years() -> None:
         "Imputed solution years for the solved problems in the Erdős catalogue.",
         ["https://www.erdosproblems.com/"],
         __file__,
+    )
+
+
+def surge_anatomy() -> None:
+    rows = read_csv(HERE / "erdos-solution-years.csv")
+    dated = [row for row in rows if row["solution_year"]]
+    history = read_csv(HERE / "erdos-database-history.csv")
+    first_snapshot = int(history[0]["total_problems"])
+
+    fig, (left, right) = plt.subplots(1, 2, figsize=(8.4, 4.9))
+    fig.suptitle("Erdős problems: anatomy of the 2024–2026 surge",
+                 x=0.09, y=0.98, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.09, 0.895,
+             "What kind of record dates each solution, and where the solved "
+             "problems sit in the catalogue's own ordering",
+             fontsize=9.2, color="#444444")
+
+    # Left: what dates each recent solution. "published" has a venue in the
+    # page's bibliography, "preprint" is arXiv-only, "AI wiki" has no citable
+    # record at all. The one "stated" row (1978) is outside this window.
+    years = list(range(2015, 2027))
+    kinds = [("published", HUMAN, "published paper"),
+             ("preprint", PREPRINT, "arXiv preprint only"),
+             ("ai_wiki", AI, "AI-wiki entry only")]
+    bottom = [0] * len(years)
+    for kind, colour, label in kinds:
+        counts = [sum(row["solution_year"] == str(year)
+                      and row["reference_kind"] == kind for row in dated)
+                  for year in years]
+        left.bar(years, counts, width=0.85, bottom=bottom, color=colour,
+                 label=label)
+        bottom = [b + c for b, c in zip(bottom, counts)]
+    left.set_xlim(2014.3, 2026.7)
+    left.set_ylim(0, max(bottom) * 1.15)
+    shade_era(left, 2026.7, annual=True)
+    style(left, "Problems first resolved", "Imputed solution year")
+    left.legend(frameon=False, fontsize=8, loc="upper left")
+
+    # Right: solution year against the problem's catalogue number, which is
+    # the order the site assigned numbers. Points above the line were not yet
+    # catalogued at the first snapshot; an old solution up there is literature
+    # archaeology (added already solved), a recent solution below it is a
+    # problem that sat in the catalogue as open and then fell.
+    colour_of = {"published": HUMAN, "stated": HUMAN,
+                 "preprint": PREPRINT, "ai_wiki": AI}
+    for kind, colour in colour_of.items():
+        xs = [int(row["solution_year"]) for row in dated
+              if row["reference_kind"] == kind]
+        ys = [int(row["problem"]) for row in dated
+              if row["reference_kind"] == kind]
+        right.scatter(xs, ys, s=9, color=colour, alpha=0.65, linewidths=0)
+    right.axhline(first_snapshot, color="#555555", linewidth=0.9,
+                  linestyle="--")
+    right.text(1942, first_snapshot + 25,
+               f"catalogued by {history[0]['month']} "
+               f"(problems 1–{first_snapshot})",
+               fontsize=7.5, color="#555555", va="bottom")
+    right.set_xlim(1938, 2028)
+    right.set_ylim(0, 1260)
+    shade_era(right, 2028)
+    style(right, "Problem number (order of cataloguing)",
+          "Imputed solution year")
+
+    source_note(fig, "Source: erdosproblems.com problem pages and the "
+                     "AI-resolution wiki; one paper can resolve several "
+                     "problems.")
+    save(
+        fig,
+        HERE / "erdos-surge-anatomy.png",
+        "Composition of recent Erdős-problem solutions and their position "
+        "in the catalogue.",
+        ["https://www.erdosproblems.com/"],
+        __file__,
+        adjust={"top": 0.82, "wspace": 0.28, "left": 0.08},
     )
 
 
@@ -132,3 +212,4 @@ def main() -> None:
 if __name__ == "__main__":
     main()
     solution_years()
+    surge_anatomy()

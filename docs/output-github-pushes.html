@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git pushes to GitHub — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Git pushes to GitHub</h1>
+<p class="metric">code output; git pushes to GitHub per quarter, summed over economies</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-github-pushes/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-github-pushes/#what-it-cannot-support">Caveats</a> <a href="https://github.com/github/innovationgraph">Source</a></p>
+<h2>GitHub global git pushes</h2>
+<div id="chart0" class="chart"></div>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"quarter":"2020-Q1","series":"git pushes","value":80818507,"x":"2020-02-15"},{"quarter":"2020-Q2","series":"git pushes","value":97826757,"x":"2020-05-15"},{"quarter":"2020-Q3","series":"git pushes","value":90342286,"x":"2020-08-15"},{"quarter":"2020-Q4","series":"git pushes","value":95305074,"x":"2020-11-15"},{"quarter":"2021-Q1","series":"git pushes","value":100124471,"x":"2021-02-15"},{"quarter":"2021-Q2","series":"git pushes","value":106274154,"x":"2021-05-15"},{"quarter":"2021-Q3","series":"git pushes","value":99170316,"x":"2021-08-15"},{"quarter":"2021-Q4","series":"git pushes","value":107413770,"x":"2021-11-15"},{"quarter":"2022-Q1","series":"git pushes","value":117027199,"x":"2022-02-15"},{"quarter":"2022-Q2","series":"git pushes","value":125509146,"x":"2022-05-15"},{"quarter":"2022-Q3","series":"git pushes","value":125575542,"x":"2022-08-15"},{"quarter":"2022-Q4","series":"git pushes","value":135432974,"x":"2022-11-15"},{"quarter":"2023-Q1","series":"git pushes","value":144228396,"x":"2023-02-15"},{"quarter":"2023-Q2","series":"git pushes","value":147009169,"x":"2023-05-15"},{"quarter":"2023-Q3","series":"git pushes","value":141334665,"x":"2023-08-15"},{"quarter":"2023-Q4","series":"git pushes","value":149427748,"x":"2023-11-15"},{"quarter":"2024-Q1","series":"git pushes","value":153037523,"x":"2024-02-15"},{"quarter":"2024-Q2","series":"git pushes","value":158300927,"x":"2024-05-15"},{"quarter":"2024-Q3","series":"git pushes","value":152879513,"x":"2024-08-15"},{"quarter":"2024-Q4","series":"git pushes","value":167788463,"x":"2024-11-15"},{"quarter":"2025-Q1","series":"git pushes","value":177693914,"x":"2025-02-15"},{"quarter":"2025-Q2","series":"git pushes","value":209236125,"x":"2025-05-15"},{"quarter":"2025-Q3","series":"git pushes","value":214957089,"x":"2025-08-15"},{"quarter":"2025-Q4","series":"git pushes","value":246758015,"x":"2025-11-15"},{"quarter":"2026-Q1","series":"git pushes","value":319841623,"x":"2026-02-15"}]},"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["git pushes"],"range":["#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"x","title":"Date","type":"temporal"},{"field":"series","title":"series","type":"nominal"},{"field":"value","title":"Git pushes per quarter","type":"quantitative"},{"field":"quarter","title":"quarter","type":"nominal"}],"x":{"field":"x","title":"Date","type":"temporal"},"y":{"field":"value","title":"Git pushes per quarter","type":"quantitative"}},"height":340,"mark":{"strokeWidth":1.6,"type":"line"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

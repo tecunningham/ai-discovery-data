@@ -98,8 +98,9 @@ def fetch_page(number: str) -> str:
     return text
 
 
-def page_parts(raw: str) -> tuple[str, dict[str, int]]:
-    """The page's discussion LaTeX, and each cited key's publication year."""
+def page_parts(raw: str) -> tuple[str, dict[str, int], dict[str, str]]:
+    """The page's discussion LaTeX, each cited key's publication year, and
+    each key's raw bibliography entry."""
     text = re.sub(r"<script.*?</script>", "", raw, flags=re.S)
     text = re.sub(r"<style.*?</style>", "", text, flags=re.S)
     match = re.search(r'class="problem-additional-text"[^>]*>(.*?)</div>',
@@ -110,12 +111,14 @@ def page_parts(raw: str) -> tuple[str, dict[str, int]]:
         discussion = re.sub(r"\s+", " ", discussion).strip()
     plain = unescape(re.sub(r"<[^>]+>", " ", text))
     references: dict[str, int] = {}
+    entries: dict[str, str] = {}
     tail = plain[plain.find("References"):] if "References" in plain else ""
     for entry in re.finditer(
             r"\[([A-Za-z]+\d{2}[a-z]?)\]\s+(.{10,500}?)"
             r"(?=\[[A-Za-z]+\d{2}[a-z]?\]\s|Back to the problem|$)",
             tail, re.S):
         key, body = entry.group(1), entry.group(2)
+        entries[key] = re.sub(r"\s+", " ", body).strip()
         years = re.findall(r"\((\d{4})\)", body)
         if years:
             references[key] = int(years[-1])
@@ -123,7 +126,28 @@ def page_parts(raw: str) -> tuple[str, dict[str, int]]:
             arxiv = re.search(r"arXiv:\s*(\d{2})\d{2}\.", body)
             if arxiv:
                 references[key] = 2000 + int(arxiv.group(1))
-    return discussion, references
+    return discussion, references, entries
+
+
+def reference_kind(reference: str, year: str, basis: str,
+                   entries: dict[str, str]) -> str:
+    """Classify what kind of record dates this row.
+
+    published — the dating reference has a venue in the page's bibliography;
+    preprint — every dating reference is an arXiv preprint;
+    ai_wiki — dated by the AI wiki (directly or via a reviewed wiki date);
+    stated — a year is stated on the page with no matching bibliography entry.
+    """
+    if not year:
+        return ""
+    if basis == "ai_wiki" or re.search(r"\d{4}-\d{2}-\d{2}", reference):
+        return "ai_wiki"
+    keys = [key for key in reference.split()
+            if re.fullmatch(r"[A-Za-z]+\d{2}[a-z]?", key)]
+    found = [entries[key] for key in keys if key in entries]
+    if not found:
+        return "stated"
+    return "preprint" if all("arXiv" in entry for entry in found) else "published"
 
 
 def sentences(discussion: str) -> list[str]:
@@ -201,7 +225,7 @@ def main() -> None:
     ai_dates = wiki_full_solutions()
     rows = []
     for number, state in solved:
-        discussion, references = page_parts(fetch_page(number))
+        discussion, references, entries = page_parts(fetch_page(number))
         year, reference = solving_citation(discussion, references)
         basis = "solving_citation" if year else "none"
         wiki_date = ai_dates.get(number)
@@ -214,12 +238,15 @@ def main() -> None:
             else:
                 year, basis = None, "none"
             reference = entry["reference"]
+        year_text = str(year) if year else ""
         rows.append({
             "problem": number,
             "status": state,
-            "solution_year": str(year) if year else "",
+            "solution_year": year_text,
             "basis": basis,
             "reference": reference,
+            "reference_kind": reference_kind(reference, year_text, basis,
+                                             entries),
         })
     rows.sort(key=lambda row: int(row["problem"]))
     write_csv(HERE / "erdos-solution-years.csv", rows)

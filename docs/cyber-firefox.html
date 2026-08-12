@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firefox vulnerability disclosures — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Firefox vulnerability disclosures</h1>
+<p class="metric">distinct CVEs per year, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-firefox/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-firefox/#what-it-cannot-support">Caveats</a> <a href="https://github.com/mozilla/foundation-security-advisories">Source</a></p>
+<h2>Distinct CVEs</h2>
+<div id="chart0" class="chart"></div>
+<p class="note">The final bar is a partial year.</p>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"series":"explicit AI","value":0,"x":"2016"},{"series":"AI-affiliated","value":0,"x":"2016"},{"series":"fuzzer","value":0,"x":"2016"},{"series":"other","value":65,"x":"2016"},{"series":"explicit AI","value":0,"x":"2017"},{"series":"AI-affiliated","value":0,"x":"2017"},{"series":"fuzzer","value":0,"x":"2017"},{"series":"other","value":187,"x":"2017"},{"series":"explicit AI","value":0,"x":"2018"},{"series":"AI-affiliated","value":0,"x":"2018"},{"series":"fuzzer","value":3,"x":"2018"},{"series":"other","value":149,"x":"2018"},{"series":"explicit AI","value":0,"x":"2019"},{"series":"AI-affiliated","value":0,"x":"2019"},{"series":"fuzzer","value":1,"x":"2019"},{"series":"other","value":138,"x":"2019"},{"series":"explicit AI","value":0,"x":"2020"},{"series":"AI-affiliated","value":0,"x":"2020"},{"series":"fuzzer","value":1,"x":"2020"},{"series":"other","value":161,"x":"2020"},{"series":"explicit AI","value":0,"x":"2021"},{"series":"AI-affiliated","value":0,"x":"2021"},{"series":"fuzzer","value":0,"x":"2021"},{"series":"other","value":146,"x":"2021"},{"series":"explicit AI","value":0,"x":"2022"},{"series":"AI-affiliated","value":0,"x":"2022"},{"series":"fuzzer","value":4,"x":"2022"},{"series":"other","value":173,"x":"2022"},{"series":"explicit AI","value":0,"x":"2023"},{"series":"AI-affiliated","value":0,"x":"2023"},{"series":"fuzzer","value":12,"x":"2023"},{"series":"other","value":182,"x":"2023"},{"series":"explicit AI","value":0,"x":"2024"},{"series":"AI-affiliated","value":0,"x":"2024"},{"series":"fuzzer","value":17,"x":"2024"},{"series":"other","value":183,"x":"2024"},{"series":"explicit AI","value":0,"x":"2025"},{"series":"AI-affiliated","value":1,"x":"2025"},{"series":"fuzzer","value":30,"x":"2025"},{"series":"other","value":179,"x":"2025"},{"series":"explicit AI","value":32,"x":"2026"},{"series":"AI-affiliated","value":5,"x":"2026"},{"series":"fuzzer","value":32,"x":"2026"},{"series":"other","value":273,"x":"2026"}]},"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["explicit AI","AI-affiliated","fuzzer","other"],"range":["#c1442f","#d99287","#c98a00","#2f6cc1"]},"title":null,"type":"nominal"},"tooltip":[{"field":"x","title":"Year","type":"ordinal"},{"field":"series","title":"series","type":"nominal"},{"field":"value","title":"count","type":"quantitative"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","stack":true,"title":"Distinct CVEs","type":"quantitative"}},"height":340,"mark":{"type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

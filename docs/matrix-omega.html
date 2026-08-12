@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matrix-multiplication exponent ω — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Matrix-multiplication exponent ω</h1>
+<p class="metric">best proved upper bound on the asymptotic exponent ω of n×n matrix multiplication; lower is better</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/matrix-omega/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/matrix-omega/#what-it-cannot-support">Caveats</a> <a href="https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms">Source</a></p>
+<h2>Matrix-multiplication exponent ω</h2>
+<div id="chart0" class="chart"></div>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"credit":"human","discoverer":"Strassen","note":"Value reproduces the existing source-log transcription","omega":2.8074,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1969},{"credit":"human","discoverer":"Pan","note":"Value reproduces the existing source-log transcription","omega":2.796,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1978},{"credit":"human","discoverer":"Bini et al.","note":"Value reproduces the existing source-log transcription","omega":2.78,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1979},{"credit":"human","discoverer":"Sch\u00f6nhage","note":"Value reproduces the existing source-log transcription","omega":2.522,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Romani","note":"Value reproduces the existing source-log transcription","omega":2.517,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Coppersmith\u2013Winograd","note":"Value reproduces the existing source-log transcription","omega":2.496,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Strassen","note":"Value reproduces the existing source-log transcription","omega":2.479,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1986},{"credit":"human","discoverer":"Coppersmith\u2013Winograd","note":"Value reproduces the existing source-log transcription","omega":2.3755,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1990},{"credit":"human","discoverer":"Stothers","note":"Value reproduces the existing source-log transcription","omega":2.3737,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2010},{"credit":"human","discoverer":"Williams","note":"Value reproduces the existing source-log transcription","omega":2.3729,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2012},{"credit":"human","discoverer":"Le Gall","note":"Value reproduces the existing source-log transcription","omega":2.3728639,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2014},{"credit":"human","discoverer":"Alman\u2013Williams","note":"Value reproduces the existing source-log transcription","omega":2.3728596,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2020},{"credit":"human","discoverer":"Duan\u2013Wu\u2013Zhou","note":"Value reproduces the existing source-log transcription","omega":2.371866,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2022},{"credit":"human","discoverer":"Williams et al.","note":"Value reproduces the existing source-log transcription","omega":2.371552,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2024},{"credit":"human","discoverer":"Alman\u2013Duan\u2013Williams\u2013Xu\u2013Xu\u2013Zhou","note":"First posted April 2024; subsequently published at SODA 2025","omega":2.371339,"url":"https://arxiv.org/abs/2404.16349","year":2024}]},"height":340,"layer":[{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"omega","title":"\u03c9","type":"quantitative"},{"field":"discoverer","title":"discoverer","type":"nominal"},{"field":"credit","title":"credit","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"omega","scale":{"zero":false},"title":"Best proved upper bound on \u03c9","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"omega","title":"\u03c9","type":"quantitative"},{"field":"discoverer","title":"discoverer","type":"nominal"},{"field":"credit","title":"credit","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"omega","scale":{"zero":false},"title":"Best proved upper bound on \u03c9","type":"quantitative"}},"mark":{"cursor":"pointer","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thurston&#x27;s 24 questions — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Thurston&#x27;s 24 questions</h1>
+<p class="metric">unresolved scored rows remaining, out of 24 scored rows</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-thurston/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-thurston/#what-it-cannot-support">Caveats</a> <a href="https://en.wikipedia.org/wiki/Thurston%27s_24_questions">Source</a></p>
+<h2>Per-problem resolution timeline</h2>
+<div id="chart0" class="chart"></div>
+<p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"notes":"Includes Poincar\u00e9 as a special case","problem":"Geometrization conjecture","resolver":"Perelman","status":"resolved","year":2003},{"notes":"","problem":"Finite group actions isometric","resolver":"Meeks\u2013Scott; Dinkelbach\u2013Leeb","status":"resolved","year":2009},{"notes":"","problem":"Orbifold geometrization","resolver":"Boileau\u2013Leeb\u2013Porti","status":"resolved","year":2005},{"notes":"Wikipedia range 2000\u20132013; year is completion end","problem":"Hyperbolic Dehn surgery global theory","resolver":"Agol; Lackenby; others","status":"resolved","year":2013},{"notes":"Wikipedia range 1986\u20131993; year is completion end","problem":"Kleinian groups geometrically tame","resolver":"Bonahon; Canary","status":"resolved","year":1993},{"notes":"","problem":"Kleinian groups as limits of geometrically finite","resolver":"Namazi\u2013Souto; Ohshika","status":"resolved","year":2012},{"notes":"","problem":"Schottky groups and their limits","resolver":"Brock\u2013Canary\u2013Minsky","status":"resolved","year":2012},{"notes":"","problem":"Limits of quasi-Fuchsian groups with accidental parabolics","resolver":"Anderson\u2013Canary","status":"resolved","year":2000},{"notes":"Independent solutions","problem":"Kleinian groups topologically tame","resolver":"Agol; Calegari\u2013Gabai","status":"resolved","year":2004},{"notes":"","problem":"Ahlfors measure-zero problem","resolver":"Consequence of geometric tameness","status":"resolved","year":2004},{"notes":"","problem":"Ending lamination conjecture","resolver":"Brock\u2013Canary\u2013Minsky","status":"resolved","year":2012},{"notes":"","problem":"Quasi-isometry type of Kleinian groups","resolver":"With ending lamination theorem","status":"resolved","year":2012},{"notes":"","problem":"Limit sets of Hausdorff dimension < 2 geometrically finite","resolver":"Bishop\u2013Jones","status":"resolved","year":1997},{"notes":"Wikipedia range 2009\u20132012; year is completion end","problem":"Cannon\u2013Thurston maps","resolver":"Mahan Mj","status":"resolved","year":2012},{"notes":"","problem":"Residual separability of f.g. subgroups in f.g. Kleinian groups","resolver":"Agol (building on Wise)","status":"resolved","year":2013},{"notes":"","problem":"Virtually Haken conjecture","resolver":"Agol","status":"resolved","year":2012},{"notes":"","problem":"Finite cover with positive first Betti number","resolver":"Agol","status":"resolved","year":2013},{"notes":"","problem":"Virtually fibered conjecture","resolver":"Agol","status":"resolved","year":2013},{"notes":"Open-ended; Agol 2017: among 19\u201324 not completely answered","problem":"Arithmetic PSL(2,C) quotients: topology and geometry","resolver":"\u2014","status":"open","year":2026},{"notes":"Software ask; Wikipedia counts as addressed (1990s\u20132000s)","problem":"Software for surface diffeomorphisms / laminations","resolver":"SnapPea and successors","status":"resolved","year":2000},{"notes":"Software ask; Wikipedia counts as addressed (1990s\u20132000s)","problem":"Software to compute hyperbolic structures","resolver":"SnapPea and successors","status":"resolved","year":2000},{"notes":"Software ask; Wikipedia counts as addressed (1990s\u20132000s)","problem":"Software tabulating 3-manifold invariants","resolver":"SnapPea and successors","status":"resolved","year":2000},{"notes":"Still open; originally Milnor; Agol 2017: no progress known","problem":"Hyperbolic volumes rationally independent?","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Hyperbolic structures at given Heegaard genus","resolver":"Namazi\u2013Souto","status":"resolved","year":2009}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["open","resolved"],"range":["#aaaaaa","#2f6cc1"]},"title":null,"type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"resolver","title":"resolver","type":"nominal"},{"field":"notes","title":"notes","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"domain":[1980,2028]},"title":"Resolution year (open problems drawn at 2026; list posed 1982)","type":"quantitative"},"y":{"field":"problem","sort":["Geometrization conjecture","Finite group actions isometric","Orbifold geometrization","Hyperbolic Dehn surgery global theory","Kleinian groups geometrically tame","Kleinian groups as limits of geometrically finite","Schottky groups and their limits","Limits of quasi-Fuchsian groups with accidental parabolics","Kleinian groups topologically tame","Ahlfors measure-zero problem","Ending lamination conjecture","Quasi-isometry type of Kleinian groups","Limit sets of Hausdorff dimension < 2 geometrically finite","Cannon\u2013Thurston maps","Residual separability of f.g. subgroups in f.g. Kleinian groups","Virtually Haken conjecture","Finite cover with positive first Betti number","Virtually fibered conjecture","Arithmetic PSL(2,C) quotients: topology and geometry","Software for surface diffeomorphisms / laminations","Software to compute hyperbolic structures","Software tabulating 3-manifold invariants","Hyperbolic volumes rationally independent?","Hyperbolic structures at given Heegaard genus"],"title":null,"type":"nominal"}},"height":480,"mark":{"cursor":"default","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finite construction records around AlphaEvolve — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Finite construction records around AlphaEvolve</h1>
+<p class="metric">cumulative record steps in five groups of finite construction and packing problems</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-records/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-records/#what-it-cannot-support">Caveats</a> <a href="https://github.com/google-deepmind/alphaevolve_repository_of_problems">Source</a></p>
+<h2>Record steps across the five groups</h2>
+<div id="chart0" class="chart"></div>
+<p class="note">Hover a step for its value and attribution.</p>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"agent":"human_search","attribution":"David Cantrell","group":"6.48","steps":1,"value":"0.036","year":2006},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.48","steps":2,"value":"0.03652","year":2025},{"agent":"human_search","attribution":"David Cantrell","group":"6.49","steps":1,"value":"0.0306","year":2007},{"agent":"human_search","attribution":"David Cantrell","group":"6.49","steps":2,"value":"0.0277","year":2007},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.49","steps":3,"value":"0.0309","year":2025},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.49","steps":4,"value":"0.02783","year":2025},{"agent":"human_analytic","attribution":"Erdos, bound at posing","group":"6.5","steps":1,"value":"0.5","year":1955},{"agent":"human_analytic","attribution":"Motzkin, Ralston and Selfridge","group":"6.5","steps":2,"value":"0.4","year":1956},{"agent":"human_search","attribution":"Haugland, 21-step step function","group":"6.5","steps":3,"value":"0.382002","year":1996},{"agent":"human_search","attribution":"Haugland","group":"6.5","steps":4,"value":"0.380926853433087","year":2016},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.5","steps":5,"value":"0.380924","year":2025},{"agent":"human_search","attribution":"David Cantrell","group":"6.50","steps":1,"value":"12.89","year":2009},{"agent":"human_search","attribution":"David Cantrell","group":"6.50","steps":2,"value":"4.168","year":2009},{"agent":"ai_evolution","attribution":"AlphaEvolve, search mode","group":"6.50","steps":3,"value":"12.889266112","year":2025},{"agent":"ai_evolution","attribution":"AlphaEvolve, search mode","group":"6.50","steps":4,"value":"4.165849767","year":2025},{"agent":"human_search","attribution":"Berthold and co-authors, FICO Xpress global solver, no custom algorithm","group":"6.50","steps":5,"value":"12.889246743","year":2025},{"agent":"human_search","attribution":"Berthold and co-authors, FICO Xpress global solver","group":"6.50","steps":6,"value":"4.165783989","year":2025},{"agent":"human_search","attribution":"M. Sun and E. Samanta","group":"6.50","steps":7,"value":"","year":2026},{"agent":"human_analytic","attribution":"Redei and Renyi","group":"6.7","steps":1,"value":"2.6667","year":1949},{"agent":"human_analytic","attribution":"Leech","group":"6.7","steps":2,"value":"2.6646","year":1956},{"agent":"human_analytic","attribution":"Golay","group":"6.7","steps":3,"value":"2.6571","year":1972},{"agent":"ai_evolution","attribution":"AlphaEvolve, after being given Singer difference-set code","group":"6.7","steps":4,"value":"2.639","year":2025}]},"height":340,"layer":[{"encoding":{"color":{"field":"group","legend":{"orient":"top"},"scale":{"domain":["6.48","6.49","6.5","6.50","6.7"],"range":["#2f6cc1","#c1442f","#c98a00","#37474f","#8fb3d9"]},"title":null,"type":"nominal"},"tooltip":[{"field":"group","title":"quantity","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"value","title":"record value","type":"nominal"},{"field":"agent","title":"agent","type":"nominal"},{"field":"attribution","title":"attribution","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"steps","title":"Cumulative record steps","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"group","legend":{"orient":"top"},"scale":{"domain":["6.48","6.49","6.5","6.50","6.7"],"range":["#2f6cc1","#c1442f","#c98a00","#37474f","#8fb3d9"]},"title":null,"type":"nominal"},"tooltip":[{"field":"group","title":"quantity","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"value","title":"record value","type":"nominal"},{"field":"agent","title":"agent","type":"nominal"},{"field":"attribution","title":"attribution","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"steps","title":"Cumulative record steps","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

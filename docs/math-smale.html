@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smale&#x27;s problems — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Smale&#x27;s problems</h1>
+<p class="metric">unresolved scored rows remaining, out of 19 scored rows</p>
+<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-smale/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-smale/#what-it-cannot-support">Caveats</a> <a href="https://en.wikipedia.org/wiki/Smale%27s_problems">Source</a></p>
+<h2>Per-problem resolution timeline</h2>
+<div id="chart0" class="chart"></div>
+<p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
+<footer>Interactive companion to the static chart committed in the
+repository; both are drawn from the same CSV. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"notes":"","problem":"Riemann hypothesis","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Poincar\u00e9 conjecture","resolver":"Perelman","status":"resolved","year":2003},{"notes":"","problem":"P versus NP","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Shub\u2013Smale tau-conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Diophantine decision in exponential time","resolver":"\u2014","status":"open","year":2026},{"notes":"Partial results for almost-all five-body systems","problem":"Finiteness of n-body central configurations","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Point distributions minimizing a log-energy on S^2","resolver":"\u2014","status":"open","year":2026},{"notes":"Results exist; no consensus the problem is settled","problem":"General equilibrium with price adjustments","resolver":"\u2014","status":"contested","year":2026},{"notes":"","problem":"Strongly polynomial LP","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Pugh closing lemma (higher smoothness)","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"One-dimensional complex dynamics / hyperbolicity","resolver":"\u2014","status":"open","year":2026},{"notes":"One of two subquestions of Smale 11","problem":"Smooth interval maps approximated by hyperbolic","resolver":"Kozlovski\u2013Shen\u2013van Strien","status":"resolved","year":2007},{"notes":"Settled in C^1; open for r>1","problem":"Trivial centralizers dense in Diff^r","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Hilbert's 16th problem","resolver":"\u2014","status":"open","year":2026},{"notes":"Computer-assisted proof","problem":"Lorenz attractor is strange","resolver":"Tucker","status":"resolved","year":2002},{"notes":"","problem":"Navier\u2013Stokes regularity","resolver":"\u2014","status":"open","year":2026},{"notes":"Negative resolution in dimension 3, hence all dimensions at least 3; independently kernel-checked in Lean and Isabelle; dimension 2 remains open","problem":"Jacobian conjecture","resolver":"Levent Alp\u00f6ge; Claude Fable 5","status":"resolved","year":2026},{"notes":"Probabilistic algorithms from 2008; deterministic average-poly-time by Lairez 2016","problem":"Solving polynomial equations in average polynomial time","resolver":"Beltr\u00e1n\u2013Pardo; Lairez","status":"resolved","year":2016},{"notes":"No consensus whether resolved","problem":"Limits of intelligence","resolver":"\u2014","status":"contested","year":2026}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["contested","open","resolved"],"range":["#37474f","#aaaaaa","#2f6cc1"]},"title":null,"type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"resolver","title":"resolver","type":"nominal"},{"field":"notes","title":"notes","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"domain":[1996,2028]},"title":"Resolution year (open problems drawn at 2026; list posed 1998)","type":"quantitative"},"y":{"field":"problem","sort":["Riemann hypothesis","Poincar\u00e9 conjecture","P versus NP","Shub\u2013Smale tau-conjecture","Diophantine decision in exponential time","Finiteness of n-body central configurations","Point distributions minimizing a log-energy on S^2","General equilibrium with price adjustments","Strongly polynomial LP","Pugh closing lemma (higher smoothness)","One-dimensional complex dynamics / hyperbolicity","Smooth interval maps approximated by hyperbolic","Trivial centralizers dense in Diff^r","Hilbert's 16th problem","Lorenz attractor is strange","Navier\u2013Stokes regularity","Jacobian conjecture","Solving polynomial equations in average polynomial time","Limits of intelligence"],"title":null,"type":"nominal"}},"height":380,"mark":{"cursor":"default","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

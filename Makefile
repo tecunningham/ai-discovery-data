@@ -1,4 +1,4 @@
-.PHONY: help figure-image figures figure check check-figures check-links index fetch fetch-one sync clean
+.PHONY: help figure-image figures figure check check-figures check-links index docs fetch fetch-one sync clean
 
 BLOG ?= $(HOME)/tecunningham.github.io
 FIGURE_IMAGE ?= ai-discovery-data-figures:python3.12.13
@@ -25,6 +25,7 @@ help:
 	@echo "check-figures      redraw and byte-compare in the same renderer used by CI"
 	@echo "check-links        check every documented URL (network, may see transient failures)"
 	@echo "index              rewrite README's series index and status table (runs check-figures)"
+	@echo "docs               rebuild the interactive chart pages in docs/ (GitHub Pages)"
 	@echo "fetch              refetch every automatable series from upstream (network, slow)"
 	@echo "fetch-one PROBLEM=x  refetch one folder"
 	@echo "sync               copy the figures into the blog repo (BLOG=$(BLOG))"
@@ -51,6 +52,12 @@ check-links:
 
 index: figure-image
 	$(FIGURE_RUN) python3 tools/check.py --write-index
+
+# The interactive companions to the committed PNGs. Pure Python, no Docker:
+# the pages embed the CSV rows and a Vega-Lite spec, so rebuild whenever a
+# vendored CSV changes, alongside `make figures`.
+docs:
+	python3 tools/build_docs.py
 
 # Kept out of `figures` because these need the network and several sources
 # rate-limit. Responses are cached for the day under .cache/, so two folders

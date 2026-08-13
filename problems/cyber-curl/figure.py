@@ -17,6 +17,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.credits import SEVERITIES  # noqa: E402
+from lib.cumulative import counts_chart  # noqa: E402
 from lib.families import cyber_stacked, severity_panels  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
@@ -38,6 +39,20 @@ def totalled(rows: list[dict[str, str]], prefix: str = "") -> dict[str, int]:
     return out
 
 
+def cumulative() -> None:
+    rows = read_csv(HERE / "curl-vulnerabilities.csv")
+    counts_chart(
+        HERE / "cumulative-cyber-curl.png",
+        title="curl vulnerabilities: cumulative disclosures",
+        ylabel="Disclosures to date",
+        period_labels=[row["year"] for row in rows],
+        counts=[int(row["total"]) for row in rows],
+        source_label="curl vulnerability JSON, counted in the vendored CSV",
+        source_url="https://curl.se/docs/vuln.json",
+        built_by=__file__,
+    )
+
+
 def main() -> None:
     cyber_stacked(
         HERE / "curl-vulnerabilities.csv",
@@ -48,6 +63,7 @@ def main() -> None:
         "https://curl.se/docs/vuln.json",
         __file__,
     )
+    cumulative()
 
     rows = [row for row in read_csv(HERE / "curl-vulnerabilities.csv")
             if int(row["year"]) >= FROM_YEAR]

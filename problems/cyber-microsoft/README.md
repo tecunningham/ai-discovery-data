@@ -62,6 +62,11 @@ never state a method at all.
 The blue band is mostly named humans rather than silence: 87% of 2016's CVEs
 carry at least one named credit, rising to 98% in the 2026 part year.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative CVEs to date:
+
+![Cumulative CVEs to date.](cumulative-cyber-microsoft.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) draws stacked annual bars from `msrc-cves.csv`:

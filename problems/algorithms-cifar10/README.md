@@ -52,6 +52,11 @@ the claim is granted. Those factors are computed over the vendored series rather
 than stated by any source. So the two facts here point in opposite directions:
 the AI steps are individually deep, and the curve they sit on is flattening.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the standing record's value over time:
+
+![Standing record for seconds to 94% accuracy over time.](cumulative-algorithms-cifar10.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) reads

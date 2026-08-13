@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw discovery-algorithms-nanogpt.png from this folder's record table.
+"""Draw discovery-algorithms-nanogpt.png and cumulative-algorithms-nanogpt.png
+from this folder's record table.
 
 Run: python3 problems/algorithms-nanogpt/figure.py
 """
@@ -26,8 +27,28 @@ from lib.chart import (  # noqa: E402
     style,
     year_fraction,
 )
+from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 from matplotlib.ticker import NullFormatter, ScalarFormatter  # noqa: E402
+
+
+def cumulative() -> None:
+    rows = [row for row in read_csv(HERE / "nanogpt-records.csv")
+            if row["kind"] == "record"]
+    staircase_chart(
+        HERE / "cumulative-algorithms-nanogpt.png",
+        title="modded-nanogpt speedrun: standing record",
+        subtitle="Minutes to the fixed target loss; lower is better",
+        ylabel="Training minutes to target loss",
+        series=[("", [year_fraction(row["date"]) for row in rows],
+                 [float(row["minutes"]) for row in rows])],
+        ylog=True,
+        source_label="KellerJordan/modded-nanogpt README, vendored as "
+                     "nanogpt-records.csv",
+        source_url="https://github.com/KellerJordan/modded-nanogpt",
+        built_by=__file__,
+        note="Lower is better.",
+    )
 
 
 def main() -> None:
@@ -84,3 +105,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

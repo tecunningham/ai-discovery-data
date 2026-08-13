@@ -86,6 +86,11 @@ publications on 27 January, 13 March, 7 April, 9 June and 5 August contained
 coordination and remediation timing as well as the rate at which bugs were
 found.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative disclosures to date:
+
+![Cumulative disclosures to date.](cumulative-cyber-openssl.png)
+
 ## How the chart was built
 
 [`fetch.py`](fetch.py) downloads one tarball for OpenSSL release-metadata commit

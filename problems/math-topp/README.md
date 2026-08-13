@@ -1,13 +1,13 @@
 # The Open Problems Project
 
 **Domain:** mathematics
-**Metric:** current status of 78 scored rows, plus dated resolutions per year
+**Metric:** dated resolutions per year across 78 scored rows
 **Coverage:** 2001–2026, with dated resolutions running 2000–2024
 **Data:** [`topp-problems.csv`](topp-problems.csv)
 **Upstream:** <https://topp.openproblem.net/>, with the rows transcribed from the project's GitHub sources
 **Verdict:** no acceleration
 
-![Current status of the scored rows, and dated resolutions per year.](discovery-math-topp.png)
+![Dated resolutions per year.](discovery-math-topp.png)
 
 ## The problem
 
@@ -47,9 +47,14 @@ recorded in the project's own citations.
 One artifact is visible at the left edge and is not a data error. The leftmost
 resolution is dated 2000, a year before the project's 2001 start, because Bezdek
 and Connelly settled the pushing-disks problem in 2000 and the project's entry for
-it records that resolution rather than an open status. The event panel therefore
+it records that resolution rather than an open status. The event timeline therefore
 starts one year before the list itself. It is a small instance of the larger
 problem with this series: the ledger dates resolutions but not entries.
+
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
+as rows remaining, declining toward zero as dated resolutions arrive:
+
+![Rows remaining without a dated resolution.](cumulative-math-topp.png)
 
 ## How the chart was built
 
@@ -57,9 +62,9 @@ problem with this series: the ledger dates resolutions but not entries.
 [`../../lib/families.py`](../../lib/families.py), which reads
 `topp-problems.csv`, keeps rows whose `status` is
 `resolved` with a non-empty `resolved_year`, sorts by year then `problem_id`, and
-draws a current-status bar above annual resolution-event bars. The upper panel
-reports the 78/17/60/1 breakdown and the lower panel runs from the earliest dated
-event through the present. The source note names the `source` column, which for
+draws annual resolution-event bars running from the earliest dated event through
+the present, with the 78/17/60/1 breakdown stated in the corner note and the
+prose above. The source note names the `source` column, which for
 every row is the project's GitHub problem directory.
 
 The `status` and `resolved_year` columns were set from the project's own

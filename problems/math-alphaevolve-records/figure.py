@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
-"""Draw this folder's two figures from the full AlphaEvolve record transcription.
+"""Draw this folder's three figures from the AlphaEvolve record transcription.
 
 Run: python3 problems/math-alphaevolve-records/figure.py
+
+discovery-math-alphaevolve-related-records.png plots the five groups' steps;
+alphaevolve-record-steps.png compares AI and human steps across the frame;
+cumulative-math-alphaevolve-records.png pools the five groups' record steps
+into one line, for the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -27,11 +32,33 @@ from lib.chart import (  # noqa: E402
     stable_jitter,
     style,
 )
+from lib.cumulative import events_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 import matplotlib.pyplot as plt  # noqa: E402
 
 RECORDS = HERE / "alphaevolve-records.csv"
+
+
+def cumulative() -> None:
+    # The same five groups and record filter as related_groups(), pooled into
+    # one line for the collection-wide cumulative index.
+    selected = {"6.5", "6.7", "6.48", "6.49", "6.50"}
+    rows = [
+        row
+        for row in read_csv(RECORDS)
+        if row["problem"] in selected and row["year"] and row.get("is_record", "yes") == "yes"
+    ]
+    rows.sort(key=lambda row: (int(row["year"]), row["quantity"], int(row["step"])))
+    events_chart(
+        HERE / "cumulative-math-alphaevolve-records.png",
+        title="AlphaEvolve-adjacent construction records: cumulative steps",
+        ylabel="Record steps to date",
+        dates=[row["year"] for row in rows],
+        source_label="alphaevolve-records.csv",
+        source_url="https://github.com/google-deepmind/alphaevolve_repository_of_problems",
+        built_by=__file__,
+    )
 
 
 def related_groups() -> None:
@@ -244,6 +271,7 @@ def record_steps() -> None:
 def main() -> None:
     related_groups()
     record_steps()
+    cumulative()
 
 
 if __name__ == "__main__":

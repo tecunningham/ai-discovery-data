@@ -23,7 +23,24 @@ from lib.chart import (  # noqa: E402
     source_note,
     style,
 )
+from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "matrix-multiplication-omega.csv")
+    staircase_chart(
+        HERE / "cumulative-matrix-omega.png",
+        title="Matrix-multiplication exponent ω: standing record",
+        subtitle="Best proved asymptotic upper bound; lower is better",
+        ylabel="Best proved upper bound on ω",
+        series=[("", [float(row["year"]) for row in rows],
+                 [float(row["omega"]) for row in rows])],
+        source_label="matrix-multiplication-omega.csv, a secondary chronology",
+        source_url="https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms",
+        built_by=__file__,
+        note="Conjectured limit is 2; no step is AI-attributed.",
+    )
 
 
 def main() -> None:
@@ -86,3 +103,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

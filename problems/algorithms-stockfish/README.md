@@ -65,6 +65,11 @@ before any of this.
 The open red marker is the first master commit whose message credits a language
 model, merged 2026-07-26. It is a 0.6% speed patch, not an Elo record.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the measured strength of every tested build:
+
+![Measured Elo vs Stockfish 15 for every tested build over time.](cumulative-algorithms-stockfish.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py)

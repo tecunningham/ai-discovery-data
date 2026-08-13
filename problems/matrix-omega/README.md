@@ -59,6 +59,11 @@ The chart's own corner note takes the 2010 record as its baseline and counts the
 six further improvements after it, so it cannot mix the 1990–2010 step into the
 fourteen-year comparison. They are worth 0.0024 together.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the standing record's value over time:
+
+![Standing record for ω over time.](cumulative-matrix-omega.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py)

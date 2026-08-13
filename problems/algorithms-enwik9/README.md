@@ -70,6 +70,11 @@ gap before the last. The prize moved to enwik9 in February 2020. This context
 shows that a long flat interval was normal before language-model agents, without
 presenting incomparable byte levels as one time series.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the standing record's value over time:
+
+![Standing record for total size in MB over time.](cumulative-algorithms-enwik9.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `compression_chart()` in

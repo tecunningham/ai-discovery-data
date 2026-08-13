@@ -52,6 +52,11 @@ with any solver improvement. The largest recent gains the vendor highlights are
 in nonconvex problem classes, such as a 5.8-fold speedup on nonconvex MIQCP in
 version 11.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the cumulative speedup factor over time:
+
+![Cumulative vendor-reported speedup factor over time.](cumulative-algorithms-gurobi.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) reads

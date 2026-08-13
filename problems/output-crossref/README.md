@@ -40,6 +40,11 @@ full year it would look like a collapse. Every figure in the chart's annotation
 is computed from the CSV when the chart is drawn, so the annotation cannot
 survive a refetch that changes the numbers.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative DOI records to date:
+
+![Cumulative DOI records to date.](cumulative-output-crossref.png)
+
 ## How the chart was built
 
 [`fetch.py`](fetch.py) makes one Crossref REST API request per year from 2010,

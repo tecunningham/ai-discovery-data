@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the annual, publication-batch and severity OpenSSL disclosure charts.
+"""Draw the annual, batch, severity and cumulative OpenSSL disclosure charts.
 
 Run: python3 problems/cyber-openssl/figure.py
 
@@ -7,7 +7,8 @@ The severity chart cuts the same CVE ledger by OpenSSL's own rating, which is
 what turns a record disclosure count into a question about how much of it
 matters. It starts in 2015: the project's structured metadata carries no
 severity before 2014, and an unrated record is missing data rather than a low
-one.
+one. cumulative-cyber-openssl.png redraws the annual counts as a running total
+for the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -34,6 +35,7 @@ from lib.chart import (  # noqa: E402
     source_note,
     style,
 )
+from lib.cumulative import counts_chart  # noqa: E402
 from lib.families import severity_panels  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
@@ -245,10 +247,25 @@ def severity_chart() -> None:
     )
 
 
+def cumulative() -> None:
+    rows = read_csv(HERE / "openssl-vulnerabilities.csv")
+    counts_chart(
+        HERE / "cumulative-cyber-openssl.png",
+        title="OpenSSL vulnerabilities: cumulative disclosures",
+        ylabel="Disclosures to date",
+        period_labels=[row["year"] for row in rows],
+        counts=[int(row["total"]) for row in rows],
+        source_label="OpenSSL release-metadata",
+        source_url=SOURCE_URL,
+        built_by=__file__,
+    )
+
+
 def main() -> None:
     annual_chart()
     batch_chart()
     severity_chart()
+    cumulative()
 
 
 if __name__ == "__main__":

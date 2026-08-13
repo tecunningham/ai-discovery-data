@@ -1,7 +1,7 @@
 """Chart shapes drawn by more than one problem.
 
 Five vulnerability series share annual bar shapes; six problem-list ledgers
-share one status-and-dated-resolutions chart; one Hutter corpus and one
+share one dated-resolutions chart; one Hutter corpus and one
 AlphaEvolve ladder folder use the same standing-record plot. Those shapes live
 here, parameterised by the CSV path, so a problem folder holding a series of a
 known kind is a short call rather than a copy of 60 lines of matplotlib.
@@ -183,12 +183,13 @@ def problem_list_chart(
     built_by: str,
     ai_problem: str | None = None,
 ) -> None:
-    """Show a list's current status and its dated resolution events separately.
+    """Show a list's dated resolution events by year.
 
-    A status bar makes the present-day ledger directly readable. The event bars
-    retain the chronology needed to discuss acceleration without making a
-    numerical-bound staircase and a problem-status ledger look like the same
-    instrument.
+    The event bars retain the chronology needed to discuss acceleration without
+    making a numerical-bound staircase and a problem-status ledger look like the
+    same instrument. The present-day status split — open, contested, undated
+    resolutions — lives in the CSV and the document's prose; a one-line note
+    here says how much of the list the dated events account for.
     """
     rows = read_csv(csv_path)
     name = rows[0]["list_name"]
@@ -201,76 +202,10 @@ def problem_list_chart(
     ]
     resolved.sort(key=lambda item: (item[0], item[1]["problem_id"]))
     open_count = sum(row["status"] == "open" for row in rows)
-    other_count = total - len(resolved) - open_count
 
-    fig, (status_ax, timeline_ax) = plt.subplots(
-        2,
-        1,
-        figsize=(8.4, 5.2),
-        gridspec_kw={"height_ratios": (0.85, 2.15), "hspace": 0.52},
-    )
-    fig.suptitle(
-        f"{name}: problem-status ledger",
-        x=0.09,
-        y=0.98,
-        ha="left",
-        fontsize=14,
-        fontweight="bold",
-    )
-
-    status_ax.set_title(
-        f"Current status of {total} scored rows",
-        loc="left",
-        fontsize=9.2,
-        color="#444444",
-        pad=8,
-    )
-    status_parts = (
-        ("resolved", len(resolved), HUMAN),
-        ("open", open_count, "#d9dee5"),
-        ("contested / partial / vague", other_count, "#8c96a0"),
-    )
-    left = 0
-    for label, count, colour in status_parts:
-        if not count:
-            continue
-        status_ax.barh(
-            [0],
-            [count],
-            left=left,
-            height=0.52,
-            color=colour,
-            edgecolor="white",
-            linewidth=1,
-        )
-        status_ax.text(
-            left + count / 2,
-            0,
-            str(count),
-            ha="center",
-            va="center",
-            fontsize=9,
-            fontweight="bold",
-            color="white" if colour != "#d9dee5" else "#333333",
-        )
-        left += count
-    status_ax.set_xlim(0, total)
-    status_ax.set_yticks([])
-    status_ax.set_xticks([0, total])
-    status_ax.tick_params(axis="x", labelsize=8, colors="#777777")
-    for spine in status_ax.spines.values():
-        spine.set_visible(False)
-    status_ax.legend(
-        handles=[
-            Patch(facecolor=colour, label=f"{count} {label}")
-            for label, count, colour in status_parts
-            if count
-        ],
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.1),
-        frameon=False,
-        fontsize=8,
-        ncol=3,
+    fig, timeline_ax = new_chart(
+        f"{name}: dated resolutions",
+        "Resolution events by year (event count, not the value of a bound)",
     )
 
     human_by_year: dict[int, int] = defaultdict(int)
@@ -350,14 +285,17 @@ def problem_list_chart(
     )
     shade_era(timeline_ax, right)
     style(timeline_ax, "Resolutions in year")
-    timeline_ax.set_title(
-        "Dated resolutions (event count, not the value of a bound)",
-        loc="left",
-        fontsize=9.2,
-        color="#444444",
-        pad=8,
-    )
     timeline_ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    timeline_ax.text(
+        0.02,
+        0.96,
+        f"{len(resolved)} of {total} scored rows have dated resolutions; "
+        f"{open_count} are open today",
+        transform=timeline_ax.transAxes,
+        fontsize=8.5,
+        color="#555555",
+        va="top",
+    )
     source_note(
         fig,
         f"Source: {rows[0]['source']}. Years are resolution landmarks, "
@@ -366,7 +304,7 @@ def problem_list_chart(
     save(
         fig,
         out_path,
-        f"{name}: current status of scored rows and dated resolution events.",
+        f"{name}: dated resolution events per year.",
         sorted({row["source"] for row in rows}),
         built_by,
     )

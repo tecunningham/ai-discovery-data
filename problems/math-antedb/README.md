@@ -73,6 +73,10 @@ value to the earliest, the year the slice last moved, and how many records it
 carries. The dashed horizontal line on the $A$ panels marks the density
 hypothesis, $A \leq 2$, where it falls inside the panel.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative slice-level record changes to date:
+
+![Cumulative slice-level record changes to date.](cumulative-math-antedb.png)
 
 ## How the chart was built
 

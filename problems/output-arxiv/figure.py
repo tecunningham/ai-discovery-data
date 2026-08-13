@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Draw output-arxiv-submissions.png from this folder's monthly counts.
+"""Draw this folder's two figures from its monthly submission counts.
 
 Run: python3 problems/output-arxiv/figure.py
+
+output-arxiv-submissions.png plots submissions per month;
+cumulative-output-arxiv.png redraws the series as cumulative submissions to
+date, for the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -13,6 +17,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.chart import AS_OF_DATE, year_fraction  # noqa: E402
+from lib.cumulative import counts_chart  # noqa: E402
 from lib.families import volume_series  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
@@ -20,6 +25,20 @@ from lib.table import read_csv  # noqa: E402
 # put to. Named here rather than in the text so the arithmetic below cannot
 # drift from the label it produces.
 CHATGPT = "2022-11"
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "arxiv-monthly.csv")
+    counts_chart(
+        HERE / "cumulative-output-arxiv.png",
+        title="arXiv submissions: cumulative",
+        ylabel="Submissions to date, millions",
+        period_labels=[row["month"] for row in rows],
+        counts=[int(row["submissions"]) / 1e6 for row in rows],
+        source_label="arxiv.org/stats download, vendored as arxiv-monthly.csv",
+        source_url="https://arxiv.org/stats/monthly_submissions",
+        built_by=__file__,
+    )
 
 
 def main() -> None:
@@ -53,6 +72,7 @@ def main() -> None:
         built_by=__file__,
         partial_last="part month",
     )
+    cumulative()
 
 
 if __name__ == "__main__":

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Draw this folder's two figures.
+"""Draw this folder's four figures.
 
 Run: python3 problems/math-erdos/figure.py
 
 discovery-math-erdos.png plots the monthly catalogue snapshots;
 erdos-solution-years.png plots the imputed solution years from
-erdos-solution-years.csv.
+erdos-solution-years.csv; erdos-surge-anatomy.png dissects the 2024–2026
+surge; cumulative-math-erdos.png redraws the snapshots as open problems
+remaining, for the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -29,6 +31,7 @@ from lib.chart import (  # noqa: E402
     style,
     year_fraction,
 )
+from lib.cumulative import remaining_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 # arXiv preprints sit between "published" and "wiki entry" in how settled they
@@ -160,6 +163,26 @@ def surge_anatomy() -> None:
     )
 
 
+def cumulative() -> None:
+    rows = read_csv(HERE / "erdos-database-history.csv")
+    first_total = int(rows[0]["total_problems"])
+    last_total = int(rows[-1]["total_problems"])
+    remaining_chart(
+        HERE / "cumulative-math-erdos.png",
+        title="Erdős problems: open problems remaining",
+        subtitle="Catalogued minus marked solved at each site snapshot; "
+                 "the catalogue itself keeps growing",
+        ylabel="Problems open at snapshot",
+        xs=[year_fraction(row["date"]) for row in rows],
+        ys=[int(row["total_problems"]) - int(row["total_solved"]) for row in rows],
+        source_label="teorth/erdosproblems statistics history",
+        source_url="https://github.com/teorth/erdosproblems",
+        built_by=__file__,
+        note=f"catalogue grew from {first_total} to {last_total} problems "
+             "across the window",
+    )
+
+
 def main() -> None:
     rows = read_csv(HERE / "erdos-database-history.csv")
     xs = [year_fraction(row["date"]) for row in rows]
@@ -213,3 +236,4 @@ if __name__ == "__main__":
     main()
     solution_years()
     surge_anatomy()
+    cumulative()

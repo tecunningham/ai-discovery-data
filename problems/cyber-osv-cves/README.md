@@ -39,6 +39,11 @@ and 2025 before the larger 2026 rise. A growing source population, backfills,
 more CVE assignment, and faster advisory publication can all raise the bars
 without a matching rise in newly discovered underlying flaws.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative distinct CVEs to date:
+
+![Cumulative distinct CVEs to date.](cumulative-cyber-osv-cves.png)
+
 ## How the chart was built
 
 [`fetch.py`](fetch.py) downloads OSV's official full-database archive, then

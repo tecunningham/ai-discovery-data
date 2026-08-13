@@ -34,6 +34,11 @@ The counts also make the batch mechanism visible. A year with one large release
 does not mean every improvement was found on that release date. The chart is a
 history of public frontier updates, not a timestamped lab notebook.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative announced solution updates to date:
+
+![Cumulative announced solution updates to date.](cumulative-algorithms-miplib.png)
+
 ## How the chart was built
 
 The News Log was transcribed into [`miplib-solution-releases.csv`](miplib-solution-releases.csv).

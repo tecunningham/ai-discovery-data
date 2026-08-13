@@ -61,6 +61,11 @@ Among problems citing two or more dated works the median span between earliest
 and latest cited year is 42 years, so these are decades-deep literatures rather
 than fresh ones.
 
+This folder has no cumulative view on the collection-wide
+[cumulative index](../../CUMULATIVE.md): the inventory is a one-date snapshot
+of a problem set, not a time series. The dated record sequences it feeds are
+the [records folder's](../math-alphaevolve-records/README.md), which has one.
+
 ## How the chart was built
 
 [`figure.py`](figure.py) counts the `status` column of

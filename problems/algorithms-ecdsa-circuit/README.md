@@ -48,6 +48,11 @@ where it does not. 389 of the 433 notes name one; the model lines that
 submitters volunteered are dominated by Claude Opus 4.8 (150), GPT-5 Codex
 (77), and GPT-5 (64), with a long tail of Gemini, DeepSeek, Devin, and others.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the standing record's value over time:
+
+![Standing record for the validated circuit score over time.](cumulative-algorithms-ecdsa-circuit.png)
+
 ## How the chart was built
 
 [`fetch.py`](fetch.py) reads the challenge API's list of accepted submissions

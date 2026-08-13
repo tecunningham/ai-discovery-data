@@ -48,6 +48,11 @@ are this repository's arithmetic, not a source's stated claim.
 The 2016-to-2017 near-tripling is a process break — the expansion of CVE
 numbering authorities — so the series is comparable only from about 2018.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative CVEs published to date:
+
+![Cumulative CVEs published to date.](cumulative-cyber-nvd-disclosed.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `cyber_simple_bars()` shape in

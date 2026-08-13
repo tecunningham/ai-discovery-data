@@ -69,6 +69,11 @@ Low in 2026 is real, but the gap that matters is between 18% across 2010–2022
 and 67% for non-AI credits in 2023–2025, which is most of the way to the AI
 figure and contains no AI at all.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative disclosures to date:
+
+![Cumulative disclosures to date.](cumulative-cyber-curl.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `cyber_stacked()` shape in

@@ -24,7 +24,7 @@ help:
 	@echo "check              verify every folder accounts for its data, figure and sources"
 	@echo "check-figures      redraw and byte-compare in the same renderer used by CI"
 	@echo "check-links        check every documented URL (network, may see transient failures)"
-	@echo "index              rewrite README's series index and status table (runs check-figures)"
+	@echo "index              rewrite README's and CUMULATIVE.md's generated tables (runs check-figures)"
 	@echo "docs               rebuild the interactive chart pages in docs/ (GitHub Pages)"
 	@echo "fetch              refetch every automatable series from upstream (network, slow)"
 	@echo "fetch-one PROBLEM=x  refetch one folder"

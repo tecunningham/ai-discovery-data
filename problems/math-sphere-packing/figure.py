@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw discovery-math-sphere-packing.png from this folder's record ladder.
+"""Draw discovery-math-sphere-packing.png and
+cumulative-math-sphere-packing.png from this folder's record ladder.
 
 Run: python3 problems/math-sphere-packing/figure.py
 """
@@ -23,7 +24,27 @@ from lib.chart import (  # noqa: E402
     source_note,
     style,
 )
+from lib.cumulative import events_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
+
+
+def cumulative() -> None:
+    # The bound changes functional form across the ladder and constant_c is
+    # non-numeric in several rows, so the main chart counts steps rather than
+    # plotting a value; the cumulative view mirrors that count.
+    rows = read_csv(HERE / "sphere-packing-lower-bound-records.csv")
+    events_chart(
+        HERE / "cumulative-math-sphere-packing.png",
+        title="Sphere-packing lower bound: cumulative record steps",
+        subtitle="Cumulative count of published improvements; the bound's "
+                 "changing functional form precludes one numeric axis",
+        ylabel="Cumulative improvements to the bound",
+        dates=[row["year"] for row in rows],
+        source_label="sphere-packing-lower-bound-records.csv; source URLs "
+                     "carried row-by-row",
+        source_url=sorted({row["source_url"] for row in rows})[0],
+        built_by=__file__,
+    )
 
 
 def main() -> None:
@@ -74,3 +95,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

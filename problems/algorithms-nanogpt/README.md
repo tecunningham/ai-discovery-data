@@ -58,6 +58,11 @@ at 2.990, 2.979 and 2.966 are genuine improvements, not a regression. Both
 re-timings are vendored as `kind=retiming` rows and drawn as open markers, so
 the discontinuity is visible rather than inferred.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the standing record's value over time:
+
+![Standing record for training minutes over time.](cumulative-algorithms-nanogpt.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py)

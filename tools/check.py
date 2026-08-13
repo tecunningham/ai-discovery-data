@@ -3,7 +3,8 @@
 
     python3 tools/check.py                 # report, exit non-zero on failure
     python3 tools/check.py --reproduce     # also redraw every figure and compare
-    python3 tools/check.py --write-index   # rewrite README's two generated tables
+    python3 tools/check.py --write-index   # rewrite README's two generated
+                                           # tables and CUMULATIVE.md's index
 
 What this is for. The repository's claim is that every chart can be traced to a
 public source, so the failure mode that matters is a file arriving without the
@@ -116,6 +117,15 @@ INDEX_BEGIN = "<!-- BEGIN GENERATED: series-index -->"
 INDEX_END = "<!-- END GENERATED: series-index -->"
 CHECKS_BEGIN = "<!-- BEGIN GENERATED: checks-table -->"
 CHECKS_END = "<!-- END GENERATED: checks-table -->"
+CUMULATIVE = ROOT / "CUMULATIVE.md"
+CUMULATIVE_BEGIN = "<!-- BEGIN GENERATED: cumulative-index -->"
+CUMULATIVE_END = "<!-- END GENERATED: cumulative-index -->"
+
+# Every plottable series also appears on CUMULATIVE.md in one shared step
+# format, drawn by the same figure.py as cumulative-<slug>.png. A folder whose
+# series has no time axis states that instead, in the same way a chartless
+# folder states why there is no figure.
+NO_CUMULATIVE_REASONS = re.compile(r"no cumulative view", re.I)
 
 # GitHub clamps a markdown table to its 838-pixel content column and then
 # squeezes the columns to fit, so an image in a table is only as wide as the
@@ -221,6 +231,11 @@ class Problem:
             for name in sorted(self.embedded):
                 if not (self.folder / name).exists():
                     self.fail("Figure", f"embeds {name}, which is not in the folder")
+            if (f"cumulative-{self.slug}.png" not in script_text
+                    and not NO_CUMULATIVE_REASONS.search(self.text)):
+                self.fail("Figure",
+                          f"figure.py draws no cumulative-{self.slug}.png for "
+                          "CUMULATIVE.md, and the document does not say why not")
 
         if not self.csvs:
             self.fail("Data", "holds no CSV")
@@ -549,11 +564,33 @@ def thumbnails(problem: Problem) -> str:
         return "<em>document + data only</em>"
     preferred = [figure for figure in problem.figures
                  if figure.name.startswith("discovery-")]
-    figure = preferred[0] if preferred else problem.figures[0]
+    # The cumulative view is CUMULATIVE.md's panel, never the main index's:
+    # without this exclusion a folder with no discovery-*.png would fall back
+    # to it by alphabetical accident.
+    fallback = [figure for figure in problem.figures
+                if not figure.name.startswith("cumulative-")]
+    figure = (preferred or fallback or problem.figures)[0]
     return (
         f'<a href="problems/{problem.slug}/">'
         f'<img src="problems/{problem.slug}/{figure.name}" width="{THUMB_WIDTH}" '
         f'alt="{problem.title}"></a>'
+    )
+
+
+def cumulative_thumbnail(problem: Problem) -> str:
+    """The folder's shared-format panel for CUMULATIVE.md, when it has one.
+
+    A folder without a cumulative view is still a row on that page — the page
+    is the whole collection in one format, and a gap in it should be a stated
+    fact rather than a silently missing series.
+    """
+    name = f"cumulative-{problem.slug}.png"
+    if not (problem.folder / name).exists():
+        return "<em>no cumulative view: not a time series</em>"
+    return (
+        f'<a href="problems/{problem.slug}/">'
+        f'<img src="problems/{problem.slug}/{name}" width="{THUMB_WIDTH}" '
+        f'alt="{problem.title}, cumulative view"></a>'
     )
 
 
@@ -622,7 +659,7 @@ def details(problem: Problem) -> str:
     return "<br>".join(lines)
 
 
-def index_rows(problems: list[Problem]) -> str:
+def index_rows(problems: list[Problem], thumbnail=thumbnails) -> str:
     out: list[str] = []
     groups = {index_group(problem) for problem in problems}
     for group in INDEX_GROUP_ORDER + tuple(sorted(groups - set(INDEX_GROUP_ORDER))):
@@ -635,7 +672,7 @@ def index_rows(problems: list[Problem]) -> str:
             continue
         out += [f"### {group[:1].upper()}{group[1:]}", "",
                 "| Series | Chart |", "|---|---|"]
-        out += [f"| {details(problem)} | {thumbnails(problem)} |"
+        out += [f"| {details(problem)} | {thumbnail(problem)} |"
                 for problem in rows]
         out.append("")
     return "\n".join(out).rstrip()
@@ -698,6 +735,23 @@ def stale_readme(problems: list[Problem]) -> list[str]:
     return out
 
 
+def stale_cumulative(problems: list[Problem]) -> list[str]:
+    """CUMULATIVE.md's generated table must match the folders, like README's.
+
+    Same claim, same mechanism: the page is a deterministic function of the
+    problem folders, so a series merged or refetched without `make index`
+    leaves it silently short or stale, and a byte comparison is the check.
+    """
+    text = CUMULATIVE.read_text(encoding="utf-8") if CUMULATIVE.exists() else ""
+    if CUMULATIVE_BEGIN not in text or CUMULATIVE_END not in text:
+        return ["CUMULATIVE.md has no cumulative-index markers"]
+    committed = text.split(CUMULATIVE_BEGIN, 1)[1].split(CUMULATIVE_END, 1)[0].strip()
+    if committed != index_rows(problems, cumulative_thumbnail).strip():
+        return ["CUMULATIVE.md cumulative index does not match the problem "
+                "folders; run `make index`"]
+    return []
+
+
 def stale_docs(problems: list[Problem]) -> list[str]:
     """Every series needs a registered, current interactive page.
 
@@ -753,9 +807,10 @@ def main() -> int:
                         help="redraw every figure and compare it with the "
                              "committed one (slow, no network)")
     parser.add_argument("--write-index", action="store_true",
-                        help="rewrite README's series and status tables; implies "
-                             "--reproduce, so the status table never reports a "
-                             "column it did not run")
+                        help="rewrite README's series and status tables and "
+                             "CUMULATIVE.md's index; implies --reproduce, so "
+                             "the status table never reports a column it did "
+                             "not run")
     parser.add_argument("--links", action="store_true",
                         help="fetch every URL in every document (needs network)")
     args = parser.parse_args()
@@ -797,6 +852,7 @@ def main() -> int:
     if not args.write_index:
         # Pointless when the tables are about to be rewritten anyway.
         failures += stale_readme(problems)
+        failures += stale_cumulative(problems)
     failures += stale_docs(problems)
     if args.links:
         failures += dead_links(problems)
@@ -814,7 +870,16 @@ def main() -> int:
             else:
                 text = written
         README.write_text(text, encoding="utf-8")
-        print("rewrote the series index and the status table in README.md")
+        cumulative_text = (CUMULATIVE.read_text(encoding="utf-8")
+                           if CUMULATIVE.exists() else "")
+        written = rewrite(cumulative_text, CUMULATIVE_BEGIN, CUMULATIVE_END,
+                          index_rows(problems, cumulative_thumbnail))
+        if written is None:
+            failures.append("CUMULATIVE.md has no cumulative-index markers")
+        else:
+            CUMULATIVE.write_text(written, encoding="utf-8")
+        print("rewrote the series index and the status table in README.md, "
+              "and the cumulative index in CUMULATIVE.md")
 
     figures = sum(len(p.figures) for p in problems)
     csvs = sum(len(p.csvs) for p in problems)

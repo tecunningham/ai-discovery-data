@@ -8,6 +8,8 @@ the Firefox, Firefox ESR and Thunderbird advisories of a release is one
 discovery. The advisory-CVE mention count that the series used to plot becomes a
 second, smaller sensitivity chart: it is an order of magnitude larger by 2026 and
 sharing an axis with it would flatten the series the folder is actually about.
+cumulative-cyber-firefox.png redraws the distinct-CVE count as a running total for
+the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -30,6 +32,7 @@ from lib.chart import (  # noqa: E402
     source_note,
     style,
 )
+from lib.cumulative import counts_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
@@ -38,6 +41,21 @@ from matplotlib.ticker import MaxNLocator  # noqa: E402
 # Affiliation-only credits are drawn in a lighter red than corroborated method
 # credits: same family, visibly weaker evidence.
 AI_AFFILIATED = AI_SOFT
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "firefox-advisories.csv")
+    counts_chart(
+        HERE / "cumulative-cyber-firefox.png",
+        title="Firefox vulnerabilities: cumulative distinct CVEs",
+        ylabel="Distinct CVEs to date",
+        period_labels=[row["year"] for row in rows],
+        counts=[int(row["unique_cves"]) for row in rows],
+        source_label="Mozilla foundation-security-advisories, "
+                     "counted in the vendored CSV",
+        source_url="https://github.com/mozilla/foundation-security-advisories",
+        built_by=__file__,
+    )
 
 
 def main() -> None:
@@ -109,6 +127,7 @@ def main() -> None:
         __file__,
     )
     sensitivity(rows, years, unique, mentions)
+    cumulative()
 
 
 def sensitivity(rows, years, unique, mentions) -> None:

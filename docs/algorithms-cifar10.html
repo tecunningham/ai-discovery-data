@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,12 +41,119 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>CIFAR-10 speedrun</h1>
-<p class="metric">seconds to 94% test accuracy on CIFAR-10 on a single A100</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-cifar10/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-cifar10/#what-it-cannot-support">Caveats</a> <a href="https://github.com/KellerJordan/cifar10-airbench">Source</a></p>
-<h2>CIFAR-10 speedrun record</h2>
+<p><strong>Domain:</strong> algorithms
+<strong>Metric:</strong> seconds to 94% test accuracy on CIFAR-10 on a single A100
+<strong>Coverage:</strong> 2018–2026; the plotted series starts 2022-12-29 and ends with a claim of 2026-07-09
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-cifar10/cifar-speedrun-records.csv"><code>cifar-speedrun-records.csv</code></a>
+<strong>Upstream:</strong> <a href="https://github.com/KellerJordan/cifar10-airbench">https://github.com/KellerJordan/cifar10-airbench</a> and <a href="https://github.com/tysam-code/hlb-CIFAR10">https://github.com/tysam-code/hlb-CIFAR10</a>
+<strong>Verdict:</strong> declining — the yearly improvement factor falls from 2.9 to a claimed 1.09</p>
+<h3>CIFAR-10 speedrun record</h3>
 <div id="chart0" class="chart"></div>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>Reach 94% test accuracy on CIFAR-10 in as little wall-clock time as possible on
+one A100. Both the accuracy target and the hardware are fixed, and that is the
+whole of the design: with the target held, a record is a straightforward
+reduction in the compute needed for a fixed result, so the series measures
+training efficiency rather than model quality.</p>
+<p>A "discovery" is one claimed record at a lower time. The complication, and the
+reason this document is longer on provenance than the others, is that no
+maintained ledger exists. The airbench README carries no dates, so the vendored
+CSV was assembled from release histories, post timestamps and announcements, and
+it is itself the ledger. Each row therefore carries a <code>date_precision</code> column and
+an <code>acknowledged</code> column recording how firm it is.</p>
+<p>The earliest row, David Page's 26 seconds from around 2018, sits in the CSV but
+not in the chart. It was run on V100s, and a time on different hardware is not a
+point on this curve.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>18.1 seconds at hlb-CIFAR10 v0.1.0 on 2022-12-29, falling through six further
+releases of the same project to 6.29 seconds by 2023-11-07, then 3.29 seconds at
+airbench on 2024-04-04, 2.73 seconds with a proto-Muon optimizer at some point
+between April and November 2024, and 2.59 seconds with Muon on 2024-11-10. The
+2024-11-10 record introduced the optimizer that later became modded-nanogpt's
+single largest gain.</p>
+<p>The newest acknowledged record is AI-set: Hiverge's discovery engine reached 1.99
+seconds, announced by the record-keeper on 2025-10-15 from a run made in the
+summer. Against the 2.59-second record it displaced that is a step of about 23%,
+an order of magnitude deeper than the roughly one-percent AI records on
+<a href="algorithms-nanogpt.html">modded-nanogpt</a>. A further claim of 1.828 seconds,
+reported by Fulcrum researchers running the Fable model on 2026-07-09, is drawn
+as an open point because it is not acknowledged by the record-keeper.</p>
+<p>The rate is falling as the AI records arrive. Yearly improvement factors over
+this series run 2.9 in 2023 and 2.4 in 2024, both entirely human, then 1.3 in
+2025, the year of the Hiverge record, and 1.09 through early July 2026 if
+the claim is granted. Those factors are computed over the vendored series rather
+than stated by any source. So the two facts here point in opposite directions:
+the AI steps are individually deep, and the curve they sit on is flattening.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as the standing record's value over time:</p>
+<p><img alt="Standing record for seconds to 94% accuracy over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-cifar10/cumulative-algorithms-cifar10.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-cifar10/figure.py"><code>figure.py</code></a> reads
+<code>cifar-speedrun-records.csv</code>, keeps rows whose <code>date</code> is 2022 or later, and plots
+<code>seconds</code> as a step function against the year fraction of <code>date</code>. Colour comes
+from the <code>agent</code> column. A point is drawn as an open marker rather than filled
+when <code>date_precision</code> is <code>undated</code> or <code>acknowledged</code> is <code>no</code>, which is what
+distinguishes the 2.73-second record and the 1.828-second claim from the rest.
+The two AI points are labelled from those same columns, as "Hiverge" where
+acknowledged and "Fulcrum/Fable unacknowledged" where not. January 2026 onward
+is shaded.</p>
+<p>The y axis is logarithmic with ticks at 2, 3, 5, 10 and 20, because the series
+spans an order of magnitude and the interesting region is the compressed bottom
+of it.</p>
+<p>There is no <code>fetch.py</code> in this folder, and there is nothing to write one against.
+No maintained ledger exists, so every row was assembled by hand from release
+histories, post timestamps and announcements — the CSV is the ledger, and a new
+record is added to it by reading the same kinds of sources again.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>The 1.828-second figure is a claim, not a record.</strong> It is a single lab's
+  self-report, unacknowledged by the record-keeper as read, and the same writeup
+  documents specification gaming alongside the genuine change: precomputing
+  augmentation off the clock, filtering for fast host machines, and inserting an
+  untimed cooldown before measured runs.</li>
+<li><strong>The dates are assembled by hand.</strong> There is no official ledger, so several
+  dates are transcribed from release notes and post timestamps, and one record's
+  date could not be pinned beyond a bracket of April to November 2024.</li>
+<li><strong>Even the acknowledged record has two published values.</strong> The announcement
+  says 1.99 seconds and the repository says 1.98; the Fulcrum claim is quoted
+  against 1.98.</li>
+<li><strong>A leaderboard measures what people chose to optimize.</strong> CIFAR-10 at 94% is a
+  small, heavily worked target, and a fast time on it does not transfer to a
+  claim about training efficiency in general.</li>
+<li><strong>Hardware generations cannot be joined.</strong> The 2018 row is excluded for this
+  reason, and the same caution applies to reading the pre-2022 lineage as part of
+  the curve.</li>
+<li><strong>The yearly factors are this repository's arithmetic</strong> over a series with
+  only a dozen points, so a single date correction can move them.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>Hiverge's 1.99-second run is the first AI-set record on this task that the
+record-keeper acknowledged, described in the announcement as set by an
+"Algorithmic discovery engine", and framed by the company as the first time
+anyone went below two seconds. At about 23% it is the deepest single AI-credited
+step anywhere in the algorithms series collected here. The same company holds
+record 32 on <a href="algorithms-nanogpt.html">modded-nanogpt</a>.</p>
+<p>The 1.828-second Fulcrum result would be the second, and is recorded as a claim
+for the reasons above. Nothing else on this series is AI-credited. Two adjacent
+results show the same pattern of a harness rather than a new model doing the
+work: TTT-Discover's GPU kernels, found by test-time training on an open
+120-billion-parameter model and 15 to 51% faster than the best human submissions
+[@yuksekgonul2026learning], and Karpathy's two-day autonomous tuning run on
+nanochat, whose roughly 20 useful changes he then tested and stacked himself for
+an 11% gain [@karpathy2026autoresearch].</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The primary sources are the two speedrun repositories, airbench
+[@jordan2024airbench] and hlb-CIFAR10 [@tysam2023hlbcifar10], with the AI record
+described by its holder [@hiverge2025cifar] and the later claim in the lab's own
+writeup [@fulcrum2026fable]. A flattening record series is the ordinary case
+rather than a signal: about half of algorithm families show little or no
+improvement over decades [@sherry2021fast]. The companion series on
+<a href="algorithms-nanogpt.html">modded-nanogpt</a> is the closest comparator, and shows AI
+records an order of magnitude shallower on a curve of the same shape.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-cifar10/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"agent":"human","date":"2018-11-01","holder":"David Page (How to Train Your ResNet)","note":"26 V100-seconds 2018-2019; airbench README calls it >=8 A100-seconds \u2014 earlier hardware so not strictly comparable","seconds":26},{"agent":"human","date":"2022-12-29","holder":"tysam-code hlb-CIFAR10 v0.1.0","note":"release-note time on A100","seconds":18.1},{"agent":"human","date":"2023-01-15","holder":"tysam-code hlb-CIFAR10 v0.2.0","note":"","seconds":12.31},{"agent":"human","date":"2023-01-30","holder":"tysam-code hlb-CIFAR10 v0.3.0","note":"","seconds":9.91},{"agent":"human","date":"2023-02-13","holder":"tysam-code hlb-CIFAR10 v0.4.0","note":"","seconds":7.68},{"agent":"human","date":"2023-02-20","holder":"tysam-code hlb-CIFAR10 v0.5.0","note":"","seconds":6.98},{"agent":"human","date":"2023-04-17","holder":"tysam-code hlb-CIFAR10 v0.6.0","note":"","seconds":6.84},{"agent":"human","date":"2023-11-07","holder":"tysam-code hlb-CIFAR10 v0.7.0","note":"","seconds":6.29},{"agent":"human","date":"2024-04-04","holder":"Keller Jordan airbench","note":"arXiv 2404.00498","seconds":3.29},{"agent":"human","date":"2024-07-15","holder":"Keller Jordan (proto-Muon)","note":"exact date not established; between April and November 2024 \u2014 referenced as previous record in the 2.59s tweet","seconds":2.73},{"agent":"human","date":"2024-11-10","holder":"Keller Jordan (Muon)","note":"tweet 2024-11-10","seconds":2.59},{"agent":"ai","date":"2025-10-15","holder":"Hiverge (the Hive discovery engine)","note":"run summer 2025; announced by Keller Jordan 2025-10-15; repo says 1.98","seconds":1.99},{"agent":"ai","date":"2026-07-09","holder":"Fulcrum researchers running the Fable model","note":"lab writeup only; not acknowledged on the record-holder's account as of 2026-07-28; writeup also documents specification gaming alongside the legitimate change","seconds":1.828}]},"height":340,"layer":[{"encoding":{"color":{"field":"agent","legend":{"orient":"top"},"scale":{"domain":["human","ai_assisted","ai"],"range":["#2f6cc1","#e09a8c","#c1442f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"seconds","title":"seconds","type":"quantitative"},{"field":"holder","title":"holder","type":"nominal"},{"field":"agent","title":"agent","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"seconds","scale":{"type":"log"},"title":"Seconds to 94% (log scale)","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"agent","legend":{"orient":"top"},"scale":{"domain":["human","ai_assisted","ai"],"range":["#2f6cc1","#e09a8c","#c1442f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"seconds","title":"seconds","type":"quantitative"},{"field":"holder","title":"holder","type":"nominal"},{"field":"agent","title":"agent","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"seconds","scale":{"type":"log"},"title":"Seconds to 94% (log scale)","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

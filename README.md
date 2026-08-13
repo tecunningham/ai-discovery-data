@@ -10,12 +10,13 @@ not required.
 Potential future series and cross-domain causal designs are tracked in the
 [appendix of additional candidates](ADDITIONAL-CANDIDATES.md).
 
-Every series also has an [interactive version of its
-chart](https://tecunningham.github.io/ai-discovery-data/) — hover any mark for
-the underlying record, and on several charts click through to the original
-reference. The pages are built from the same vendored CSVs by
-[`tools/build_docs.py`](tools/build_docs.py); the PNGs in the table below
-remain the static record.
+The collection is browsable at
+[tecunningham.github.io/ai-discovery-data](https://tecunningham.github.io/ai-discovery-data/),
+where each series page renders its folder's full write-up with the interactive
+chart inline — hover any mark for the underlying record, and on several charts
+click through to the original reference. The pages are built from the same
+vendored CSVs and documents by [`tools/build_docs.py`](tools/build_docs.py);
+the PNGs in the table below remain the static record.
 
 A companion [cumulative index](CUMULATIVE.md) redraws every series in one
 shared format — a single step function of progress to date, declining toward

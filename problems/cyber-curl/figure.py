@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Draw this folder's two figures from its annual disclosure counts.
+"""Draw the quarterly, severity and cumulative curl disclosure charts.
 
 Run: python3 problems/cyber-curl/figure.py
 
-The first figure counts disclosures. The second cuts the same rows by curl's own
-severity rating, which is the folder's check on whether a rising count is a
-rising amount of harm.
+The main chart counts disclosures by publication quarter, the finest grain the
+vendored tables carry; its corner note and part-quarter marker come from the
+annual table, which knows the snapshot date. The severity chart cuts the same
+rows by curl's own severity rating, as counts a reader can take numbers from —
+the folder's check on whether a rising count is a rising amount of harm.
+cumulative-cyber-curl.png redraws the quarterly totals as a running total for
+the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -16,14 +20,19 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.chart import AI, HUMAN  # noqa: E402
 from lib.credits import SEVERITIES  # noqa: E402
 from lib.cumulative import counts_chart  # noqa: E402
-from lib.families import cyber_stacked, severity_panels  # noqa: E402
+from lib.families import periodic_stacked, severity_heatmap  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
-# The severity drift is a long-run story, but curl disclosed one or two issues in
-# some early years and a share computed on two rows is noise drawn at full width.
+# The severity story is a long-run one, but curl disclosed one or two issues in
+# some early years, and a decade of near-empty columns would squeeze the years
+# where the drift actually happens.
 FROM_YEAR = 2010
+
+SOURCE_LABEL = "curl vulnerability JSON, counted in the vendored CSV"
+SOURCE_URL = "https://curl.se/docs/vuln.json"
 
 
 def counts(row: dict[str, str], prefix: str = "") -> dict[str, int]:
@@ -31,74 +40,67 @@ def counts(row: dict[str, str], prefix: str = "") -> dict[str, int]:
             for severity in SEVERITIES}
 
 
-def totalled(rows: list[dict[str, str]], prefix: str = "") -> dict[str, int]:
-    out = {severity: 0 for severity in SEVERITIES}
-    for row in rows:
-        for severity, value in counts(row, prefix).items():
-            out[severity] += value
-    return out
-
-
 def cumulative() -> None:
-    rows = read_csv(HERE / "curl-vulnerabilities.csv")
+    rows = read_csv(HERE / "curl-vulnerabilities-quarterly.csv")
     counts_chart(
         HERE / "cumulative-cyber-curl.png",
         title="curl vulnerabilities: cumulative disclosures",
         ylabel="Disclosures to date",
-        period_labels=[row["year"] for row in rows],
+        period_labels=[row["quarter"] for row in rows],
         counts=[int(row["total"]) for row in rows],
-        source_label="curl vulnerability JSON, counted in the vendored CSV",
-        source_url="https://curl.se/docs/vuln.json",
+        source_label=SOURCE_LABEL,
+        source_url=SOURCE_URL,
         built_by=__file__,
     )
 
 
 def main() -> None:
-    cyber_stacked(
-        HERE / "curl-vulnerabilities.csv",
+    quarterly = read_csv(HERE / "curl-vulnerabilities-quarterly.csv")
+    annual = read_csv(HERE / "curl-vulnerabilities.csv")
+    latest = annual[-1]
+    periodic_stacked(
         HERE / "discovery-cyber-curl.png",
-        "curl vulnerability disclosures",
-        "One fixed codebase; annual disclosures split by explicit finder credit",
-        "curl vulnerability JSON, counted in the vendored CSV",
-        "https://curl.se/docs/vuln.json",
-        __file__,
+        title="curl vulnerability disclosures",
+        subtitle="One fixed codebase; quarterly disclosures split by explicit "
+                 "finder credit",
+        ylabel="Vulnerabilities disclosed that quarter",
+        periods=[row["quarter"] for row in quarterly],
+        stacks=[
+            ("human or uncredited", HUMAN,
+             [int(row["other_attributed"]) for row in quarterly]),
+            ("AI-credited", AI,
+             [int(row["ai_attributed"]) for row in quarterly]),
+        ],
+        source_label=f"{SOURCE_LABEL}. Finder credits are textual markers, "
+                     "not audited causation",
+        source_url=SOURCE_URL,
+        built_by=__file__,
+        partial_last=f"partial quarter\nthrough {latest['data_through']}",
+        note=f"{latest['total']} disclosures in partial {latest['year']} "
+             f"through {latest['data_through']}\n"
+             f"{latest['ai_attributed']} explicitly AI-credited",
     )
     cumulative()
 
-    rows = [row for row in read_csv(HERE / "curl-vulnerabilities.csv")
-            if int(row["year"]) >= FROM_YEAR]
-    by_year = {row["year"]: counts(row) for row in rows}
-    latest = rows[-1]
-
-    # Four cohorts, ordered so the reading runs from the long baseline to the
-    # newest AI-marked slice. The middle bar is the one that matters: it is the
-    # non-AI drift that was already under way before any AI credit appeared, so
-    # the last bar cannot be read as AI having started the shallowing.
-    early = [row for row in rows if int(row["year"]) <= 2022]
-    recent_human = [row for row in rows if 2023 <= int(row["year"]) <= 2025]
-    cohorts = [
-        (f"{early[0]['year']}–{early[-1]['year']}, all finders", totalled(early)),
-        ("2023–2025, non-AI credits", totalled(recent_human, "other_")),
-        (f"{latest['year']}, other credits", counts(latest, "other_")),
-        (f"{latest['year']}, AI-marked credits", counts(latest, "ai_")),
-    ]
-
-    severity_panels(
+    rows = [row for row in annual if int(row["year"]) >= FROM_YEAR]
+    severity_heatmap(
         HERE / "severity-cyber-curl.png",
         "curl disclosures by severity",
-        "The same rows as the disclosure chart, cut by curl's own severity rating",
+        "Disclosure counts by curl's own rating and finder credit, "
+        f"from {FROM_YEAR}",
         years=[row["year"] for row in rows],
-        by_year=by_year,
-        cohorts=cohorts,
+        panels=[
+            ("All finders",
+             {row["year"]: counts(row) for row in rows}),
+            ("AI-marked credits",
+             {row["year"]: counts(row, "ai_") for row in rows}),
+            ("Other credits",
+             {row["year"]: counts(row, "other_") for row in rows}),
+        ],
         severities=SEVERITIES,
-        source_label="curl vulnerability JSON, counted in the vendored CSV",
-        source_url="https://curl.se/docs/vuln.json",
+        source_label=SOURCE_LABEL,
+        source_url=SOURCE_URL,
         built_by=__file__,
-        year_caption=(
-            f"Shares, so a {min(int(row['total']) for row in rows)}-disclosure year "
-            f"is as tall as a {max(int(row['total']) for row in rows)}-disclosure one."
-        ),
-        cohort_caption="Share of that cohort's disclosures",
     )
 
 

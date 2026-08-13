@@ -1,13 +1,13 @@
 # OpenSSL vulnerability disclosures
 
 **Domain:** vulnerabilities
-**Metric:** vulnerabilities disclosed per year, split by finder provenance
+**Metric:** vulnerabilities disclosed per quarter, split by finder provenance
 **Coverage:** 2002–2026, partial through 5 August 2026
 **Data:** CVE-level [`openssl-cves.csv`](openssl-cves.csv); annual [`openssl-vulnerabilities.csv`](openssl-vulnerabilities.csv); per-finder [`openssl-finders.csv`](openssl-finders.csv)
 **Upstream:** <https://github.com/openssl/release-metadata/tree/main/secjson>
 **Verdict:** accelerating — a record 2026 surge, with provenance and release-batching caveats
 
-![Annual OpenSSL vulnerability disclosures, separating corroborated AI discovery from affiliation-only credits.](discovery-cyber-openssl.png)
+![Quarterly OpenSSL vulnerability disclosures, separating corroborated AI discovery from affiliation-only credits.](discovery-cyber-openssl.png)
 
 ## The problem
 
@@ -61,15 +61,17 @@ both High-severity CVEs disclosed in 2026, but 15 of 18 are Low. The evidence
 therefore supports substantial AI-assisted discovery without implying that the
 count is a count of equally consequential flaws.
 
-![OpenSSL disclosures by severity: annual composition since 2015, and four finder cohorts compared.](severity-cyber-openssl.png)
+![OpenSSL disclosures by severity: counts by year and finder provenance since 2015.](severity-cyber-openssl.png)
 
-The severity chart puts that table in its trend. The top panel starts in 2015
-because the structured metadata carries no severity before 2014, and an unrated
-record is missing data rather than a low-severity one; drawing the earlier years
-would invent a rating OpenSSL never gave. Across 2015–2025 half of all rated
-CVEs were Low and 15% were High or Critical, and the annual mix swings widely on
-year sizes of three to thirty-five — 2020's three CVEs are two-thirds High, which
-is a fact about three CVEs.
+The severity chart puts that table in its trend, as counts a reader can take a
+number straight out of: one grid per finder-provenance cohort, years across,
+OpenSSL's ratings down, every cell printing how many CVEs it holds. It starts
+in 2015 because the structured metadata carries no severity before 2014, and an
+unrated record is missing data rather than a low-severity one; drawing the
+earlier years would invent a rating OpenSSL never gave. Across 2015–2025 half
+of all rated CVEs were Low and 15% were High or Critical, and the annual mix
+swings widely on year sizes of three to thirty-five — 2020's three CVEs are
+two-thirds High, which is a fact about three CVEs.
 
 Against that baseline the 2026 cohorts are close together: 75% Low for
 conventional or fuzzing credits, 67% for affiliation-only credits, and 83% for
@@ -134,8 +136,10 @@ rule, applied in this order: corroborated AI; affiliation-only; credited
 conventional/fuzzing; no reporter. This precedence does not erase the underlying
 signals.
 
-[`figure.py`](figure.py) derives the four-band annual chart, the event-level
-2026 chart and the severity chart from the CSVs. The severity chart refuses to
+[`figure.py`](figure.py) derives the four-band quarterly chart, the event-level
+2026 chart and the severity chart from the CSVs; quarters come from each CVE's
+publication date, so the main chart and the CVE ledger cannot disagree. The
+severity chart refuses to
 draw if any CVE from 2015 on lacks a rating, since its whole premise is that
 every year it covers was scored. [`check.py`](check.py) runs offline semantic checks:
 unique CVEs, complete dates, category sums, CVE-to-annual and CVE-to-reporter

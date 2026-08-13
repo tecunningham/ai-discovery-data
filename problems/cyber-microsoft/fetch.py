@@ -236,14 +236,37 @@ def build_annual(cves: dict[str, dict], cutoff: date) -> list[dict]:
 
 
 def build_monthly(cves: dict[str, dict]) -> list[dict]:
-    """CVEs per month, the release's native cadence.
+    """CVEs per month by band, the release's native cadence.
 
     Patch Tuesday is a monthly ritual, and the record releases the documents
     describe — June and July 2026 — are monthly facts an annual bar hides.
+    Bands use the same union-then-precedence rule as build_annual, so a month
+    column sums to the same CVEs its year's row counts.
     """
-    per_month = Counter(record["initial"][:7] for record in cves.values())
+    per_month: dict[str, Counter] = defaultdict(Counter)
+    for record in cves.values():
+        month = record["initial"][:7]
+        year = int(record["initial"][:4])
+        marks = Signals(explicit_ai=False, ai_affiliated=False, fuzz=False)
+        for credit in record["credits"]:
+            found = signals(credit, year)
+            marks = Signals(
+                explicit_ai=marks.explicit_ai or found.explicit_ai,
+                ai_affiliated=marks.ai_affiliated or found.ai_affiliated,
+                fuzz=marks.fuzz or found.fuzz,
+            )
+        per_month[month]["cves"] += 1
+        per_month[month][marks.band] += 1
     return [
-        {"month": month, "cves": per_month[month]} for month in sorted(per_month)
+        {
+            "month": month,
+            "cves": per_month[month]["cves"],
+            "explicit_ai": per_month[month]["explicit_ai"],
+            "ai_affiliated": per_month[month]["ai_affiliated"],
+            "fuzz": per_month[month]["fuzz"],
+            "other": per_month[month]["other"],
+        }
+        for month in sorted(per_month)
     ]
 
 

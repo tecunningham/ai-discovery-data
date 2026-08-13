@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import sys
+from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -43,6 +44,35 @@ def main() -> int:
         if banded != int(row["unique_cves"]):
             failures.append(f"{row['year']} bands sum to {banded}, not "
                             f"{row['unique_cves']} distinct CVEs")
+    # The per-CVE ledger is the file the aggregates summarize, so summing it
+    # by year and band must reproduce the annual columns, and its dated rows
+    # must reproduce the quarterly totals.
+    cves = read_csv(HERE / "firefox-cves.csv")
+    quarterly = read_csv(HERE / "firefox-quarterly.csv")
+    per_band: Counter = Counter((row["year"], row["band"]) for row in cves)
+    for row in rows:
+        for band in ("explicit_ai", "ai_affiliated", "fuzz", "other"):
+            if per_band[row["year"], band] != int(row[f"unique_{band}"]):
+                failures.append(
+                    f"firefox-cves.csv holds {per_band[row['year'], band]} "
+                    f"{band} rows for {row['year']} but the annual file "
+                    f"counts {row[f'unique_{band}']}"
+                )
+    undated = sum(not row["date"] for row in cves)
+    quarterly_total = sum(int(row["unique_cves"]) for row in quarterly)
+    if quarterly_total + undated != len(cves):
+        failures.append(
+            f"quarterly totals ({quarterly_total}) plus undated ledger rows "
+            f"({undated}) do not reproduce the ledger ({len(cves)})"
+        )
+    quarters = {row["quarter"]: int(row["unique_cves"]) for row in quarterly}
+    impacts: Counter = Counter(row["impact"] for row in cves)
+    ai_rows = [row for row in cves
+               if row["band"] in ("explicit_ai", "ai_affiliated")]
+    ai_impacts: Counter = Counter(row["impact"] for row in ai_rows)
+    fuzz_rows = [row for row in cves if row["band"] == "fuzz"]
+    fuzz_high_critical = sum(
+        row["impact"] in ("High", "Critical") for row in fuzz_rows)
     claims = {
         f"{unique['2016']} in 2016, {unique['2017']} in 2017": "early counts",
         f"{unique['2025']} in 2025": "2025 count",
@@ -70,7 +100,29 @@ def main() -> int:
             "2021-2025 growth",
         f"{ratio['2016']:.1f} in 2016, {ratio['2025']:.1f} in 2025, "
         f"{ratio['2026']:.1f} in 2026": "mentions-per-CVE ratios",
+        f"{quarters['2026-Q1']} distinct CVEs in 2026-Q1 and "
+        f"{quarters['2026-Q2']} in 2026-Q2": "2026 quarterly surge",
+        f"{round(100 * (impacts['High'] + impacts['Critical']) / len(cves))}% "
+        "of distinct CVEs are rated High or Critical and "
+        f"{round(100 * impacts['Low'] / len(cves))}% Low": "all-finder impact mix",
+        f"of the {len(ai_rows)} AI-marked CVEs, {ai_impacts['High']} are High, "
+        f"{ai_impacts['Moderate']} Moderate and {ai_impacts['Low']} Low, with "
+        f"{ai_impacts['Critical'] or 'none'} Critical": "AI-marked impact mix",
+        f"{round(100 * (ai_impacts['Low'] + ai_impacts['Moderate']) / len(ai_rows))}% "
+        "Low or Moderate against "
+        f"{round(100 * (impacts['Low'] + impacts['Moderate']) / len(cves))}% "
+        "across all finders": "AI against all-finder depth",
+        f"{fuzz_high_critical} of its {len(fuzz_rows)} CVEs are High or "
+        "Critical": "fuzz impact mix",
     }
+    # The undated and unrated remainders are stated only while they exist; the
+    # figure drops their ink the same way, so the claims are conditional too.
+    if undated:
+        claims[f"{undated} of its {len(cves):,} rows have no parseable "
+               "announcement date"] = "undated remainder"
+    if impacts["Unrated"]:
+        claims[f"{impacts['Unrated']} of the {len(cves):,} ledger rows "
+               "carries it"] = "unrated remainder"
     return report(failures + missing(prose(HERE), claims))
 
 

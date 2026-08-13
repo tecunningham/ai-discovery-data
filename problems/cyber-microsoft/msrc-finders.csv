@@ -2072,10 +2072,10 @@ year,finder,category,cves
 2022,Abdelhamid Naceri working with Trend Micro Zero Day Initiative,other,4
 2022,Alex Nichols with Nettitude,other,4
 2022,Andrea Pierini (@decoder_it) with Semperis,other,4
-2022,Yiming Xiang with NSFOCUS TIANJI LAB,other,3
 2022,ziming zhang with Ant Security Light-Year Lab,other,3
 2022,"lm0963, renyimen, and l1nk3d with TianGong Team of Legendsec at Qi'anxin Group",other,3
 2022,Microsoft Offensive Research & Security Engineering,other,3
+2022,Yiming Xiang with NSFOCUS TIANJI LAB,other,3
 2022,HongZhenhao of Ant Group Light-Year Security Lab,other,3
 2022,Andrew Bartlett of Catalyst IT,other,3
 2022,Zammis Clark,other,3
@@ -3833,11 +3833,11 @@ year,finder,category,cves
 2026,AIフィジカルインターフェイス二号機,other,13
 2026,Howard McGreehan with MSRC V&M,other,12
 2026,"Jongseong Kim (nevul37), SEC-agent team",explicit_ai,12
+2026,k0shl,other,12
 2026,h4urek with secsys lab,other,11
 2026,Varun Goel,other,11
 2026,Alon Leviev with Microsoft (STORM),other,11
 2026,Microsoft Offensive Research & Security Engineering,other,11
-2026,k0shl,other,11
 2026,"Kentaro Kawane with GMO Cybersecurity by Ierae, Inc.",other,11
 2026,f7d8c52bec79e42795cf15888b85cbad,other,10
 2026,f4 & Zhiniang Peng with HUST,other,10
@@ -4037,10 +4037,10 @@ year,finder,category,cves
 2026,Varsha Chahal with Microsoft,other,2
 2026,WARP team at Microsoft,other,2
 2026,DongJun Kim with UIUC,other,2
-2026,Arjun Vasudeva with MSRC V&M - Exploit Research Team,other,2
 2026,Adam Baldwin with https://evilpacket.net/,other,2
 2026,Calif.io and Milad Nasr (Anthropic) with Claude with Calif.io and Anthropic,explicit_ai,2
 2026,Diffract,other,2
+2026,Arjun Vasudeva with MSRC V&M - Exploit Research Team,other,2
 2026,Guillaume André with Synacktiv,other,2
 2026,wisiyeon with JUSTWIN,other,2
 2026,Gábor Selján,other,2
@@ -4237,7 +4237,6 @@ year,finder,category,cves
 2026,mick3y with Team SaturnX,other,1
 2026,Omri Baso with XM Cyber,other,1
 2026,Vandit Aruldas with Microsoft,other,1
-2026,Brahim Chebli with Deloitte France’s Offensive Security Center,other,1
 2026,Michael Grafnetter with SpecterOps,other,1
 2026,DongJun Kim (UIUC) with UIUC,other,1
 2026,Gal Azaria with Microsoft,other,1
@@ -4373,6 +4372,7 @@ year,finder,category,cves
 2026,Povcfe,other,1
 2026,Prasanna Dabi,other,1
 2026,Pham Quang Minh,other,1
+2026,Brahim Chebli with Deloitte France’s Offensive Security Center,other,1
 2026,Sourov Ghosh,other,1
 2026,Shira Hoffman with Microsoft,other,1
 2026,nicolas joly,other,1
@@ -4426,7 +4426,6 @@ year,finder,category,cves
 2026,"Jianliang Zhao & zhiniang Peng with HUST, R4nger with kunlun lab",other,1
 2026,0rb1t,other,1
 2026,wxz and Thanatos Tian with Diffract,other,1
-2026,wxz & Thanatos Tian,other,1
 2026,Anil Chandra,other,1
 2026,Niklas Tomsic with Cparta Cyber Defense,other,1
 2026,Abhishek Kushwaha with Zeta,other,1
@@ -4458,6 +4457,7 @@ year,finder,category,cves
 2026,Dolev Taler with Varonis,other,1
 2026,Maxmillian Toor with Microsoft,other,1
 2026,Yogeesh Seralathan with Microsoft,other,1
+2026,wxz & Thanatos Tian,other,1
 2026,Erland Sommarskog with Erland Sommarskog SQL-Konsult AB,other,1
 2026,Nicolas Delhaye with Airbus,other,1
 2026,"Doug Rasler, Mac Sample and Ancel Johnson with Microsoft",other,1

@@ -19,6 +19,9 @@ def main() -> int:
     current = next(row for row in annual if row["partial_year"] == "yes")
     pace = annualized(counts[current["year"]], current["data_through"])
     total = sum(counts.values())
+    quarterly = read_csv(HERE / "ossfuzz-by-quarter.csv")
+    published = sum(int(row["discoveries"]) for row in quarterly
+                    if row["quarter"].startswith(current["year"]))
     claims = {
         f"{counts['2020']:,} records in 2020": "2020 count",
         f"then {counts['2021']}, {counts['2022']}, {counts['2023']}, "
@@ -27,6 +30,8 @@ def main() -> int:
         f"{counts['2026']} through": "part-year count",
         f"roughly {round(pace)}": "annualized pace",
         f"total is {total:,} records": "cumulative total",
+        f"quarters sum to {published} records against "
+        f"{counts[current['year']]} by record id": "id-year vs published-quarter gap",
     }
     return report(missing(prose(HERE), claims))
 

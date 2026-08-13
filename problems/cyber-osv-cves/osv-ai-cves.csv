@@ -1,0 +1,25 @@
+cve,date,band,credits
+CVE-2025-9086,2025-09-10,explicit_ai,Google Big Sleep | Daniel Stenberg
+CVE-2025-10966,2025-11-05,ai_affiliated,Stanislav Fort (Aisle Research) | Daniel Stenberg
+CVE-2025-13034,2026-01-07,ai_affiliated,Stanislav Fort (Aisle Research) | Daniel Stenberg
+CVE-2025-14017,2026-01-07,ai_affiliated,Stanislav Fort (Aisle Research) | Daniel Stenberg
+CVE-2025-14819,2026-01-07,ai_affiliated,Stanislav Fort (Aisle Research) | Daniel Stenberg
+CVE-2026-21620,2026-02-20,ai_affiliated,Luigino Camastra / Aisle Research | Jakub Witczak | Raimo Niskanen
+CVE-2026-23941,2026-03-13,ai_affiliated,Luigino Camastra / Aisle Research | Konrad Pietrzak
+CVE-2026-23942,2026-03-13,ai_affiliated,Luigino Camastra / Aisle Research | Jakub Witczak | Michał Wąsowski
+CVE-2026-23943,2026-03-13,ai_affiliated,Igor Morgenstern / Aisle Research | Michał Wąsowski | Jakub Witczak
+CVE-2026-28808,2026-04-07,ai_affiliated,Igor Morgenstern / Aisle Research | Konrad Pietrzak
+CVE-2026-28810,2026-04-07,ai_affiliated,Luigino Camastra / Aisle Research | Raimo Niskanen
+CVE-2026-32144,2026-04-07,ai_affiliated,Igor Morgenstern / Aisle Research | Jakub Witczak | Ingela Anderton Andin
+CVE-2026-10536,2026-06-24,ai_affiliated,Joshua Rogers (Aisle Research) | Stefan Eissing
+CVE-2026-11352,2026-06-24,ai_affiliated,vectorqueue on hackerone (AntAISecurityLab) | Stefan Eissing
+CVE-2026-11564,2026-06-24,ai_affiliated,Filipe Casal of Trail of Bits in collaboration with OpenAI | Stefan Eissing
+CVE-2026-11586,2026-06-24,ai_affiliated,evergarden1123 on hackerone (AntAISecurityLab) | Stefan Eissing
+CVE-2026-12064,2026-06-24,ai_affiliated,alienowo on hackerone (AntAISecurityLab) | Daniel Stenberg
+CVE-2026-8286,2026-06-24,explicit_ai,Andrew Nesbitt (powered by Mythos) | Stefan Eissing
+CVE-2026-8925,2026-06-24,ai_affiliated,Joshua Rogers (Aisle Research) | Viktor Szakats
+CVE-2026-8926,2026-06-24,ai_affiliated,Joshua Rogers (Aisle Research) | Stefan Eissing
+CVE-2026-8932,2026-06-24,ai_affiliated,Joshua Rogers (Aisle Research)
+CVE-2026-9080,2026-06-24,ai_affiliated,Joshua Rogers (Aisle Research) | Daniel Stenberg
+CVE-2026-9545,2026-06-24,ai_affiliated,Eunsoo Kim (Autonomous Code Security team at Microsoft) | Stefan Eissing
+CVE-2026-9547,2026-06-24,ai_affiliated,Joshua Rogers (Aisle Research)

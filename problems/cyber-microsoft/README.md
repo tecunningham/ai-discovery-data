@@ -1,13 +1,13 @@
 # Microsoft security-update CVEs
 
 **Domain:** vulnerabilities
-**Metric:** CVEs issued by Microsoft's own CNA per year, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
+**Metric:** CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
 **Coverage:** 2016–2026, partial through 2026-07-31; no February or March 2016 document exists upstream, so the first year is ten months
-**Data:** [`msrc-cves.csv`](msrc-cves.csv); monthly counts in [`msrc-monthly.csv`](msrc-monthly.csv); per-credit rows in [`msrc-finders.csv`](msrc-finders.csv); every AI-marked CVE with its full credit strings in [`msrc-ai-cves.csv`](msrc-ai-cves.csv)
+**Data:** [`msrc-cves.csv`](msrc-cves.csv); monthly counts by band in [`msrc-monthly.csv`](msrc-monthly.csv); per-credit rows in [`msrc-finders.csv`](msrc-finders.csv); every AI-marked CVE with its full credit strings in [`msrc-ai-cves.csv`](msrc-ai-cves.csv)
 **Upstream:** <https://api.msrc.microsoft.com/cvrf/v3.0/updates> (rendered at <https://msrc.microsoft.com/update-guide>)
 **Verdict:** accelerating — the 2026 part year annualizes to about 2.1 times 2025, and at most 1.5% of it carries any AI marker
 
-![Annual Microsoft security-update CVEs, split by AI method, AI affiliation, and fuzzer credit.](discovery-cyber-microsoft.png)
+![Monthly Microsoft security-update CVEs, split by AI method, AI affiliation, and fuzzer credit.](discovery-cyber-microsoft.png)
 
 ## The problem
 
@@ -33,22 +33,23 @@ distribution, curl or similar CNA notes. Each CVE is dated by the earliest
 revision in its history across every document that mentions it, so an
 out-of-band fix lands in the month it shipped.
 
-A "discovery" here is one Microsoft-issued CVE first published that year. It
+A "discovery" here is one Microsoft-issued CVE first published that month. It
 is a patch-and-disclosure count, not a count of bugs found or bugs remaining.
 
 ## What the chart shows
 
-A vendor whose CVE count climbed, sat still, and then took off: 371 CVEs
-across ten documented months of 2016, 622 in 2017, then between 825 and 961 a
-year from 2019 through 2023, growth of about 14% in each of 2024 and 2025 to
-1,095 in 2024, then 1,243 in 2025 — and 1,507 CVEs through 2026-07-31, a part
-year already 1.21 times the 2025 full year, annualizing to about 2.1 times
-2025.
+A vendor whose CVE count climbed, sat still, and then took off. Summed to
+years, the monthly bars give 371 CVEs across ten documented months of 2016,
+622 in 2017, then between 825 and 961 a year from 2019 through 2023, growth of
+about 14% in each of 2024 and 2025 to 1,095 in 2024, then 1,243 in 2025 — and
+1,507 CVEs through 2026-07-31, a part year already 1.21 times the 2025 full
+year, annualizing to about 2.1 times 2025.
 
-The monthly file locates the surge precisely. The releases the recaps called
-the largest in Patch Tuesday's history are both here: 220 CVEs dated June
-2026, then 662 CVEs dated July 2026, 3.0 times the June record that had itself
-set the all-time high a month earlier.
+Drawing the series at its Patch Tuesday cadence locates the surge precisely.
+The releases the recaps called the largest in Patch Tuesday's history are the
+chart's two tallest bars: 220 CVEs dated June 2026, then 662 CVEs dated July
+2026, 3.0 times the June record that had itself set the all-time high a month
+earlier.
 
 The AI bands barely register against that. No credit string carries an AI
 marker until 2025, which has 17 AI-marked CVEs; the 2026 part year has 22
@@ -69,12 +70,13 @@ as cumulative CVEs to date:
 
 ## How the chart was built
 
-[`figure.py`](figure.py) draws stacked annual bars from `msrc-cves.csv`:
+[`figure.py`](figure.py) draws stacked monthly bars from `msrc-monthly.csv`:
 `other` in blue, `fuzz` in amber, `ai_affiliated` in pale red and
-`explicit_ai` in full red, with the partial 2026 bar outlined so it cannot be
-misread as a full year, in the same bands and colours as the
-[Firefox series](../cyber-firefox/README.md). January 2026 onward is shaded,
-as in every figure here. The axis is linear and nothing is normalized.
+`explicit_ai` in full red, in the same bands and colours as the
+[Firefox series](../cyber-firefox/README.md). The part year ends on a complete
+month — data run through 2026-07-31 — so no bar is drawn partial; the chart
+note says where the data stop. January 2026 onward is shaded, as in every
+figure here. The axis is linear and nothing is normalized.
 
 The CSVs are built by [`fetch.py`](fetch.py), which walks every monthly
 security-update document in the CVRF API — matched on document title, because
@@ -87,10 +89,12 @@ with the shared markers in [`../../lib/credits.py`](../../lib/credits.py):
 employer, `FUZZ` for fuzzing, with one CVE's signals unioned across all its
 credit strings before the display precedence — method, then affiliation, then
 fuzz, then none — picks its band. Anonymized hex handles count as credits,
-since an anonymous credit is still a credit. The annual CSV keeps an
-`acknowledged` column beside the bands, and a `no_customer_action` column
-counting the cloud-service CVEs Microsoft patches itself, so both caveats
-below stay auditable.
+since an anonymous credit is still a credit. `msrc-monthly.csv` carries the
+same four bands at the monthly grain, banded per CVE by the same rule, so the
+months of a year sum to that year's row in `msrc-cves.csv`. The annual CSV
+keeps an `acknowledged` column beside the bands, and a `no_customer_action`
+column counting the cloud-service CVEs Microsoft patches itself, so both
+caveats below stay auditable.
 
 ## What it cannot support
 
@@ -117,10 +121,12 @@ below stay auditable.
 - **The codebase is fixed but the surface and the effort are not.** Microsoft
   added cloud services, acquired products and an expanded bounty over the
   period, and nothing here gives a denominator of code or search effort.
-- **Edges of coverage.** The first year is ten months; 2026 is a part year
-  through 2026-07-31 and its bar is outlined. The rare Microsoft-product CVE
-  issued by another CNA — a 2022 Windows SMB flaw issued by Rapid7's CNA, for
-  instance — is excluded by the counting rule.
+- **Edges of coverage.** The first year is ten months, and a month with no
+  bar — February 2017, for one — is a month in which no CVE has its earliest
+  publication; 2026 is a part year through 2026-07-31, ending on a complete
+  month. The rare Microsoft-product CVE issued by another CNA — a 2022
+  Windows SMB flaw issued by Rapid7's CNA, for instance — is excluded by the
+  counting rule.
 
 ## LLM contributions
 

@@ -23,6 +23,12 @@ def main() -> int:
     def growth(earlier: str, later: str) -> int:
         return round((counts[later] / counts[earlier] - 1) * 100)
 
+    quarterly = read_csv(HERE / "nvd-by-quarter.csv")
+    q_counts = {row["quarter"]: int(row["nvd_published"]) for row in quarterly}
+    prior_peak = max(count for quarter, count in q_counts.items()
+                     if quarter < "2026")
+    peak_2025 = max(count for quarter, count in q_counts.items()
+                    if quarter.startswith("2025"))
     claims = {
         f"{counts['2016']:,} CVEs in 2016": "2016 count",
         f"{counts['2017']:,} in 2017": "2017 count",
@@ -39,8 +45,23 @@ def main() -> int:
         f"about +{round((pace / counts['2025'] - 1) * 100)}% annualized for 2026":
             "annualized 2026 growth",
         f"about {round(counts['2025'] * 2, -2):,} disclosures": "doubling comparator",
+        f"Q1's {q_counts['2026-Q1']:,} already topped every quarter before it":
+            "2026-Q1 record quarter",
+        f"Q2's {q_counts['2026-Q2']:,} is another "
+        f"{round((q_counts['2026-Q2'] / q_counts['2026-Q1'] - 1) * 100)}% above Q1":
+            "2026-Q2 over Q1",
+        f"{round((q_counts['2026-Q2'] / peak_2025 - 1) * 100)}% above "
+        "2025's largest quarter": "2026-Q2 over 2025 peak",
     }
-    return report(missing(prose(HERE), claims))
+    failures = missing(prose(HERE), claims)
+    # "Topped every quarter before it" is checked, not assumed: a refetch that
+    # revises history upward could quietly falsify the record claim.
+    if q_counts["2026-Q1"] <= prior_peak:
+        failures.append(
+            f"README calls 2026-Q1 ({q_counts['2026-Q1']}) a record quarter, "
+            f"but an earlier quarter reached {prior_peak}"
+        )
+    return report(failures)
 
 
 if __name__ == "__main__":

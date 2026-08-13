@@ -49,7 +49,12 @@ NS = {
     "arxiv": "http://arxiv.org/OAI/arXiv/",
 }
 CHECKPOINT = HERE.parents[1] / ".cache" / "arxiv-oai-checkpoint.json"
-PAGE_DELAY_SECONDS = 1.0
+# arXiv's OAI turns hostile toward eager harvesters: sustained one-a-second
+# paging earns 503s whose Retry-After can run to many minutes, and retrying
+# early resets the penalty. Four seconds between pages stays under the radar,
+# and a 503's full Retry-After is honoured up to fifteen minutes.
+PAGE_DELAY_SECONDS = 4.0
+RETRY_AFTER_CAP_SECONDS = 900
 
 
 def as_of_date() -> date:
@@ -75,19 +80,26 @@ def fetch_page(params: dict[str, str]) -> bytes:
     )
     for attempt in range(8):
         try:
-            with urllib.request.urlopen(request, timeout=180) as response:
+            # The endpoint meters ListRecords hard and a page can take
+            # minutes to arrive; a short socket timeout turns a slow page
+            # into a wasted wait plus a retry of the same slow page.
+            with urllib.request.urlopen(request, timeout=900) as response:
                 return response.read()
         except urllib.error.HTTPError as error:
             if error.code == 503:
-                wait = int(error.headers.get("Retry-After") or "10")
-                time.sleep(min(max(wait, 1), 120))
+                wait = min(max(int(error.headers.get("Retry-After") or "30"),
+                               5), RETRY_AFTER_CAP_SECONDS)
+                print(f"  503; waiting {wait}s as asked", flush=True)
+                time.sleep(wait)
                 continue
             if error.code >= 500:
-                time.sleep(10 * (attempt + 1))
+                time.sleep(30 * (attempt + 1))
                 continue
             raise
-        except (urllib.error.URLError, TimeoutError, OSError):
-            time.sleep(10 * (attempt + 1))
+        except (urllib.error.URLError, TimeoutError, OSError) as error:
+            # A timeout has already spent its wait; retry promptly.
+            print(f"  {type(error).__name__}; backing off", flush=True)
+            time.sleep(10)
     raise SystemExit(f"gave up after 8 attempts on {url}")
 
 
@@ -163,8 +175,8 @@ def harvest(resume: bool) -> Counter:
             kept += 1
         if pages % 25 == 0:
             save_checkpoint(counts, token, pages)
-            print(f"page {pages}: {kept} records counted "
-                  f"(complete list size {size})", flush=True)
+            print(f"{time.strftime('%H:%M:%S')} page {pages}: {kept} records "
+                  f"counted (complete list size {size})", flush=True)
         if token is None:
             save_checkpoint(counts, None, pages)
             print(f"done: {pages} pages, {kept} records", flush=True)

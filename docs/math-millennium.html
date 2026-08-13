@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,13 +41,109 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Millennium Prize Problems</h1>
-<p class="metric">dated resolutions per year across 7 scored rows</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-millennium/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-millennium/#what-it-cannot-support">Caveats</a> <a href="https://www.claymath.org/millennium-problems/">Source</a></p>
-<h2>Per-problem resolution timeline</h2>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> dated resolutions per year across 7 scored rows
+<strong>Coverage:</strong> 2000–2026, with one dated resolution in 2003
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-millennium/millennium-problems.csv"><code>millennium-problems.csv</code></a>
+<strong>Upstream:</strong> <a href="https://www.claymath.org/millennium-problems/">https://www.claymath.org/millennium-problems/</a>
+<strong>Verdict:</strong> no acceleration</p>
+<h3>Per-problem resolution timeline</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>The Clay Mathematics Institute named seven problems in 2000 and attached a
+million dollars to each. They are what the public means by open mathematics, and
+that is the whole of their value here: the list is a ceiling check, the place to
+look when someone claims AI is solving the great problems.</p>
+<p>A "discovery" in this series is a prize problem being resolved. Unlike the other
+ledgers scored in this collection, the list needs no subproblem splitting and has
+no contested rows: seven problems, one resolved, six open. That cleanliness is
+also what makes it useless as a rate.</p>
+<p>It is the worst instrument in the collection for measuring anything, and it is
+worth being explicit about why, because the low count is easy to misread. The
+list has seven rows, so its finest possible resolution is one seventh. The
+problems were selected for depth. And verification is extremely expensive:
+Perelman's Poincaré work reached arXiv in 2002 and 2003, and the prize was not
+announced until 2010, which is the checking cost made visible. Under any story in
+which AI results arrive first where a candidate answer can be scored cheaply, the
+predicted AI count here is zero, and the observed count of zero therefore
+discriminates between almost nothing.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>One dated resolution, in 2003, and none in the twenty-three years since. One
+row is resolved and six are open: Birch–Swinnerton-Dyer, the
+Hodge conjecture, Navier–Stokes existence and smoothness, P versus NP,
+Yang–Mills existence and mass gap, and the Riemann hypothesis. No event is red,
+because no row carries an AI attribution.</p>
+<p>There is nothing else in the reading. A single event cannot show a slope, and the
+absence of events since cannot distinguish a hard frontier from a short window: at
+one resolution per twenty-six years, a twenty-three-year gap is what the series
+looks like when nothing has changed.</p>
+<p>The one thing the chart does establish is a bound on the strongest possible claim.
+Whatever AI has contributed to mathematics through mid-2026, it has not resolved
+a Millennium problem, and no credible claim to have done so exists in the sources
+behind this collection.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this ledger
+as rows remaining, declining toward zero as dated resolutions arrive:</p>
+<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-millennium/cumulative-math-millennium.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-millennium/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> shape in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which reads
+<code>millennium-problems.csv</code>, keeps the rows whose <code>status</code> is
+<code>resolved</code> with a non-empty <code>resolved_year</code>, and counts resolution events by
+year from the 2000 <code>list_year</code> to the present. The source note names the
+<code>source</code> column, which for every row here is the Clay Mathematics Institute.</p>
+<p>The resolution year is 2003, taken from the arXiv postings; the row's <code>notes</code>
+field records that the preprints ran 2002 to 2003 and that the prize was
+announced in 2010. Which of those three dates counts as the resolution is a real
+choice, and the chart takes the earliest defensible one. On a series with one
+event, that choice moves the only step by up to seven years.</p>
+<p>No <code>ai_problem</code> argument is passed, because there is no such row. The y-axis is
+forced to integers and the axis limits leave room for two, so the flatness is
+visible as flatness rather than as a chart that has been zoomed until nothing
+moves.</p>
+<p>There is no <code>fetch.py</code>. Seven rows, hand-scored from the Clay Mathematics Institute's own pages; a feed would be more machinery than a list that has moved once in twenty-six years deserves.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>Seven rows cannot carry a rate.</strong> The finest change this series can register
+  is one seventh, and it has registered one event in its lifetime.</li>
+<li><strong>Verification is expensive</strong>, so the lag between a solution and its
+  acknowledgement is measured in years, and any recent result would not yet be
+  visible here.</li>
+<li><strong>The resolution date is a choice.</strong> Preprints 2002–2003, prize 2010; the chart
+  uses 2003.</li>
+<li><strong>The rows overlap other lists.</strong> Riemann appears on <a href="math-hilbert.html">Hilbert</a>
+  and <a href="math-smale.html">Smale</a> too, and P versus NP on Smale, so this is not an
+  independent sample of hard problems.</li>
+<li><strong>Selection against cheap verification makes the zero uninformative.</strong> These
+  problems are chosen to be deep, and depth here means no mechanical check
+  exists, which is the condition under which every AI result in this collection
+  has failed to appear.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None, and none claimed. The list stands where it stood in 2003.</p>
+<p>Where a series has no AI step at all, the useful question is whether the absence
+is informative, and here it mostly is not. A zero on seven problems selected for
+depth and expensive verification is the predicted outcome under both the
+optimistic and the pessimistic readings of AI's mathematical ability, so it
+cannot separate them. The place where the same question does get an informative
+answer is <a href="math-smale.html">Smale</a>, where one row fell in 2026 to an AI-assisted
+finite counterexample that could be machine-checked, and <a href="math-erdos.html">Erdős</a>,
+where the problems are numerous enough and cheap enough to verify that a flow can
+be measured at all.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The seven problems and their status are the Institute's own
+[@clay2000millennium]. The argument that scored mathematical progress lives where
+verification is cheap is made explicitly by benchmark designers who selected
+problems on that basis and found frontier models scoring near zero even so
+[@arxiv2026horizonmath]. That flat stretches in record series are normal, with no
+AI anywhere in them, is Sherry and Thompson's finding across algorithm families
+[@sherry2021fast]. The companion ledgers are <a href="math-hilbert.html">Hilbert</a>,
+<a href="math-landau.html">Landau</a>, <a href="math-thurston.html">Thurston</a>,
+<a href="math-smale.html">Smale</a> and <a href="math-topp.html">TOPP</a>.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-millennium/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"notes":"","problem":"Birch\u2013Swinnerton-Dyer conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Hodge conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Navier\u2013Stokes existence and smoothness","resolver":"\u2014","status":"open","year":2026},{"notes":"arXiv 2002\u20132003; Clay prize announced 2010","problem":"Poincar\u00e9 conjecture","resolver":"Perelman","status":"resolved","year":2003},{"notes":"","problem":"P versus NP","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Yang\u2013Mills existence and mass gap","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Riemann hypothesis","resolver":"\u2014","status":"open","year":2026}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["open","resolved"],"range":["#aaaaaa","#2f6cc1"]},"title":null,"type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"resolver","title":"resolver","type":"nominal"},{"field":"notes","title":"notes","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"domain":[1998,2028]},"title":"Resolution year (open problems drawn at 2026; list posed 2000)","type":"quantitative"},"y":{"field":"problem","sort":["Birch\u2013Swinnerton-Dyer conjecture","Hodge conjecture","Navier\u2013Stokes existence and smoothness","Poincar\u00e9 conjecture","P versus NP","Yang\u2013Mills existence and mass gap","Riemann hypothesis"],"title":null,"type":"nominal"}},"height":220,"mark":{"cursor":"default","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,16 +41,152 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Open-source CVEs represented in OSV</h1>
-<p class="metric">distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-osv-cves/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-osv-cves/#what-it-cannot-support">Caveats</a> <a href="https://storage.googleapis.com/osv-vulnerabilities/all.zip">Source</a></p>
-<h2>Distinct CVEs</h2>
+<p><strong>Domain:</strong> vulnerabilities
+<strong>Metric:</strong> distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date
+<strong>Coverage:</strong> 2016–2026, partial through 2026-08-10
+<strong>Data:</strong> quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-cves-by-quarter.csv"><code>osv-cves-by-quarter.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-cves-by-year.csv"><code>osv-cves-by-year.csv</code></a>; severity labels in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-severity-by-year.csv"><code>osv-severity-by-year.csv</code></a>; finder credits in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-credits-by-year.csv"><code>osv-credits-by-year.csv</code></a>; every AI-marked CVE with its credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a>
+<strong>Upstream:</strong> <a href="https://storage.googleapis.com/osv-vulnerabilities/all.zip">https://storage.googleapis.com/osv-vulnerabilities/all.zip</a> (documentation at <a href="https://google.github.io/osv.dev/data/">https://google.github.io/osv.dev/data/</a>)
+<strong>Verdict:</strong> accelerating — 2026 annualizes to about 2.3 times 2025, though source growth and disclosure processes can also bend this aggregate</p>
+<h3>Distinct CVEs</h3>
 <div id="chart0" class="chart"></div>
-<p class="note">The final bar is a partial year; hover for the flag.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<p class="note">The final bar is a partial quarter; hover for the flag.</p>
+<h3>Ecosystem severity labels by year</h3>
+<div id="chart1" class="chart"></div>
+<p class="note">Labels cover about a third of CVEs; Unrated is missing data, not a rating.</p>
+<h3>Finder credits by year</h3>
+<div id="chart2" class="chart"></div>
+<p class="note">About 1% of CVEs carry any credit; the uncredited majority is not drawn.</p>
+<h2 id="the-problem">The problem</h2>
+<p>OSV aggregates machine-readable vulnerability records from open-source package
+ecosystems, project databases, Linux distributions, GitHub advisories and a
+converted subset of NVD [@osv2026data]. That makes it a useful second
+all-open-source view beside the all-software NVD count.</p>
+<p>This series does not require a finder credit. Its purpose is to ask a prior,
+simpler question: under one stable rule, did the volume of published
+vulnerabilities accelerate? If it did, attribution and alternative mechanisms
+are a separate interpretive step. Requiring every event to name an AI system
+would discard most of the usable evidence before asking whether a bend exists.</p>
+<p>A counted event is one distinct CVE identifier linked by at least one
+non-withdrawn OSV record to an affected package. It is dated to the earliest
+<code>published</code> date among all such records for that CVE.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>The deduplicated count rises from 1,472 in 2016 to 5,317 in 2020, 10,821 in
+2022, 12,269 in 2024 and 15,146 in 2025. There are 21,321 through 10 August
+2026. Scaling that part-year mechanically gives about 35,100, or 2.3 times the
+2025 count. The quarterly bars localize the rise: 2026-Q2 alone holds 10,193
+distinct CVEs, more than any full year before 2022.</p>
+<p>That is acceleration under this instrument, but not a clean structural break.
+The history is uneven: 2022 rose sharply, 2023 fell, and growth resumed in 2024
+and 2025 before the larger 2026 rise. A growing source population, backfills,
+more CVE assignment, and faster advisory publication can all raise the bars
+without a matching rise in newly discovered underlying flaws.</p>
+<p><img alt="OSV CVEs by ecosystem severity label, with the Unrated majority drawn as its own row." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-osv-cves/severity-cyber-osv-cves.png" /></p>
+<p>Severity is the first cut at whether the extra volume is consequential, and
+here it mostly cannot say: 34,163 of the 96,695 CVEs (35%) carry an ecosystem
+severity label, and the heatmap draws the Unrated majority as its own row
+rather than silently dropping it. The rated mix is also not a random sample.
+Labels come from whichever upstream databases choose to assign them — GitHub's
+advisory database does, the converted NVD subset and several distributions do
+not — and that composition shifts over time, so a drift in the rated mix can be
+a drift in which sources publish labels rather than in the vulnerabilities
+themselves.</p>
+<p><img alt="OSV CVEs with finder credits; the uncredited majority is not drawn." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-osv-cves/credits-cyber-osv-cves.png" /></p>
+<p>Finder credits are thinner still: 1,129 CVEs (1.2%) carry any credit, so the
+credits chart draws that sliver alone and its note says the uncredited 99% is
+not drawn. Within the sliver sit 24 AI-marked CVEs — two with an explicitly
+stated AI method, the rest carrying an AI-lab affiliation only — each kept
+with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a> so the
+classification can be re-audited. Nearly all come from the few projects whose
+maintainers write credit strings at all, curl and Erlang/OTP above the rest.
+These counts are a floor set by which ecosystems publish credits, not a
+measurement of AI's share of discovery.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as cumulative distinct CVEs to date:</p>
+<p><img alt="Cumulative distinct CVEs to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-osv-cves/cumulative-cyber-osv-cves.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/fetch.py"><code>fetch.py</code></a> downloads OSV's official full-database archive, then
+applies the same inclusion rule to every JSON record:</p>
+<ol>
+<li>exclude withdrawn records and records with no affected package;</li>
+<li>retain only CVE identifiers appearing as the record ID or an alias;</li>
+<li>count each distinct CVE once, at its earliest valid <code>published</code> date.</li>
+</ol>
+<p>The second step deliberately excludes OSV's malicious-package reports,
+non-security distribution updates, and advisories that have no CVE. The third
+collapses the multiple distribution and ecosystem advisories that often point
+to the same flaw. If one advisory legitimately names several CVEs, each CVE
+still counts once. CVEs first published after the repository's snapshot date
+(lib/chart.py's <code>AS_OF_DATE</code>) are dropped, so a refetch reproduces the
+committed window.</p>
+<p>The merged per-CVE entries feed five CSVs: quarterly and annual counts, the
+severity and credits cuts, and the AI-marked ledger. Severity is the
+<code>database_specific.severity</code> label an ecosystem database assigns (GHSA-style
+LOW/MODERATE/HIGH/CRITICAL, with MEDIUM folded into Moderate), taken at the
+highest label across a CVE's records; records carrying only a CVSS vector stay
+Unrated rather than being scored by a calculator this repository would then
+have to defend. Credits are OSV <code>credits</code> names unioned across a CVE's records
+and classified with the shared lib/credits.py rules; a CVE with no credit on
+any record is uncredited, which is the majority and is its own column.</p>
+<p>The plotted series starts in 2016. Earlier years in the present export contain
+only tens or low hundreds of matching CVEs, a clear coverage discontinuity
+rather than a credible measure of open-source disclosure volume. The current
+quarter is outlined and labelled partial. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/figure.py"><code>figure.py</code></a> draws the
+main chart from the quarterly CSV in the shared periodic-bar shape, in the
+unattributed colour because the headline count carries no finder split; the
+severity heatmap and the credits chart come from their annual CSVs, with the
+coverage percentages in their subtitles and notes computed from the data at
+draw time. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/check.py"><code>check.py</code></a> recomputes the numbers this document states
+from the vendored CSVs.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>The count does not attribute discoveries.</strong> The headline series has no
+  finder field, and the credit columns cover 1.2% of CVEs — a floor set by
+  which ecosystems publish credits, not an attribution of the rest.</li>
+<li><strong>The severity mix is a coverage artifact first.</strong> Most CVEs are Unrated,
+  and which sources assign labels changes over time, so composition shifts can
+  masquerade as severity shifts.</li>
+<li><strong>It is publication, not discovery.</strong> The date is an advisory's publication
+  date; discovery, CVE assignment and publication can be far apart.</li>
+<li><strong>The denominator is not fixed.</strong> OSV adds sources and packages while the
+  open-source software population itself grows.</li>
+<li><strong>The snapshot can revise history.</strong> A newly imported or corrected record can
+  add a CVE to an earlier publication year on the next fetch.</li>
+<li><strong>CVE-only is a conservative slice of OSV.</strong> Valid GHSA-only, ecosystem-only
+  and project advisories are omitted so that duplicate records can be collapsed
+  with a simple, auditable identifier rule.</li>
+<li><strong>Annualization is only arithmetic.</strong> The 2026 projection assumes an even
+  publication rate and is not a forecast.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>The aggregate count remains unattributable, and that does not disqualify the
+series: the chart is a detector for a change in a consistently defined output,
+not an estimator of what share AI caused. The credits view adds a thin evidence
+ledger on top — the 24 AI-marked CVEs in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a> — but at 1.2% credit coverage that is a
+floor, not a share. A bend can motivate comparison with finder-credited
+fixed-codebase series and contemporaneous evidence about tools and disclosure
+pipelines; it cannot supply causation by itself.</p>
+<p>That distinction also works in the other direction. A flat OSV series would
+count against a broad acceleration claim even if a handful of individual
+records carried strong AI attribution.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>OSV documents both the full export and its mix of native and converted data
+sources [@osv2026data]. The broader comparator is
+<a href="cyber-nvd-disclosed.html">all CVEs published by NVD</a>; the narrower
+programme-level slice is <a href="cyber-oss-fuzz.html">OSS-Fuzz</a>. Dense finder
+credits live in the project-level <a href="cyber-curl.html">curl</a>,
+<a href="cyber-openssl.html">OpenSSL</a> and
+<a href="cyber-firefox.html">Firefox</a> series; here they exist only for the
+1.2% sliver above.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-osv-cves/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
-vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"note":"","value":1472,"x":"2016"},{"note":"","value":4588,"x":"2017"},{"note":"","value":4877,"x":"2018"},{"note":"","value":5161,"x":"2019"},{"note":"","value":5317,"x":"2020"},{"note":"","value":6911,"x":"2021"},{"note":"","value":10821,"x":"2022"},{"note":"","value":8812,"x":"2023"},{"note":"","value":12269,"x":"2024"},{"note":"","value":15146,"x":"2025"},{"note":"partial year","value":21321,"x":"2026"}]},"encoding":{"tooltip":[{"field":"x","title":"year","type":"ordinal"},{"field":"value","title":"Distinct CVEs","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","title":"Distinct CVEs","type":"quantitative"}},"height":340,"mark":{"color":"#37474f","type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"note":"","value":204,"x":"2016-Q1"},{"note":"","value":449,"x":"2016-Q2"},{"note":"","value":347,"x":"2016-Q3"},{"note":"","value":472,"x":"2016-Q4"},{"note":"","value":1205,"x":"2017-Q1"},{"note":"","value":1061,"x":"2017-Q2"},{"note":"","value":1203,"x":"2017-Q3"},{"note":"","value":1119,"x":"2017-Q4"},{"note":"","value":1066,"x":"2018-Q1"},{"note":"","value":1374,"x":"2018-Q2"},{"note":"","value":1315,"x":"2018-Q3"},{"note":"","value":1122,"x":"2018-Q4"},{"note":"","value":1142,"x":"2019-Q1"},{"note":"","value":1093,"x":"2019-Q2"},{"note":"","value":1492,"x":"2019-Q3"},{"note":"","value":1434,"x":"2019-Q4"},{"note":"","value":1223,"x":"2020-Q1"},{"note":"","value":1360,"x":"2020-Q2"},{"note":"","value":1362,"x":"2020-Q3"},{"note":"","value":1372,"x":"2020-Q4"},{"note":"","value":1532,"x":"2021-Q1"},{"note":"","value":1953,"x":"2021-Q2"},{"note":"","value":1825,"x":"2021-Q3"},{"note":"","value":1601,"x":"2021-Q4"},{"note":"","value":2418,"x":"2022-Q1"},{"note":"","value":3721,"x":"2022-Q2"},{"note":"","value":2381,"x":"2022-Q3"},{"note":"","value":2301,"x":"2022-Q4"},{"note":"","value":2260,"x":"2023-Q1"},{"note":"","value":2334,"x":"2023-Q2"},{"note":"","value":2110,"x":"2023-Q3"},{"note":"","value":2108,"x":"2023-Q4"},{"note":"","value":2751,"x":"2024-Q1"},{"note":"","value":3756,"x":"2024-Q2"},{"note":"","value":2855,"x":"2024-Q3"},{"note":"","value":2907,"x":"2024-Q4"},{"note":"","value":3595,"x":"2025-Q1"},{"note":"","value":3314,"x":"2025-Q2"},{"note":"","value":3798,"x":"2025-Q3"},{"note":"","value":4439,"x":"2025-Q4"},{"note":"","value":6240,"x":"2026-Q1"},{"note":"","value":10193,"x":"2026-Q2"},{"note":"partial quarter","value":4888,"x":"2026-Q3"}]},"encoding":{"tooltip":[{"field":"x","title":"quarter","type":"ordinal"},{"field":"value","title":"Distinct CVEs","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"labelAngle":0,"labelExpr":"test(/-Q1$/, datum.value) ? substring(datum.value, 0, 4) : ''"},"field":"x","title":"Quarter","type":"ordinal"},"y":{"field":"value","title":"Distinct CVEs","type":"quantitative"}},"height":340,"mark":{"color":"#37474f","type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+vegaEmbed('#chart1', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"series":"Critical","value":32,"x":"2016"},{"series":"High","value":91,"x":"2016"},{"series":"Moderate","value":112,"x":"2016"},{"series":"Low","value":2,"x":"2016"},{"series":"Unrated","value":1235,"x":"2016"},{"series":"Critical","value":115,"x":"2017"},{"series":"High","value":321,"x":"2017"},{"series":"Moderate","value":365,"x":"2017"},{"series":"Low","value":15,"x":"2017"},{"series":"Unrated","value":3772,"x":"2017"},{"series":"Critical","value":185,"x":"2018"},{"series":"High","value":608,"x":"2018"},{"series":"Moderate","value":536,"x":"2018"},{"series":"Low","value":32,"x":"2018"},{"series":"Unrated","value":3516,"x":"2018"},{"series":"Critical","value":220,"x":"2019"},{"series":"High","value":608,"x":"2019"},{"series":"Moderate","value":597,"x":"2019"},{"series":"Low","value":35,"x":"2019"},{"series":"Unrated","value":3701,"x":"2019"},{"series":"Critical","value":337,"x":"2020"},{"series":"High","value":928,"x":"2020"},{"series":"Moderate","value":1018,"x":"2020"},{"series":"Low","value":117,"x":"2020"},{"series":"Unrated","value":2917,"x":"2020"},{"series":"Critical","value":440,"x":"2021"},{"series":"High","value":1045,"x":"2021"},{"series":"Moderate","value":1266,"x":"2021"},{"series":"Low","value":65,"x":"2021"},{"series":"Unrated","value":4095,"x":"2021"},{"series":"Critical","value":633,"x":"2022"},{"series":"High","value":1875,"x":"2022"},{"series":"Moderate","value":2670,"x":"2022"},{"series":"Low","value":285,"x":"2022"},{"series":"Unrated","value":5358,"x":"2022"},{"series":"Critical","value":525,"x":"2023"},{"series":"High","value":1216,"x":"2023"},{"series":"Moderate","value":1707,"x":"2023"},{"series":"Low","value":191,"x":"2023"},{"series":"Unrated","value":5173,"x":"2023"},{"series":"Critical","value":371,"x":"2024"},{"series":"High","value":1193,"x":"2024"},{"series":"Moderate","value":1600,"x":"2024"},{"series":"Low","value":259,"x":"2024"},{"series":"Unrated","value":8846,"x":"2024"},{"series":"Critical","value":348,"x":"2025"},{"series":"High","value":1207,"x":"2025"},{"series":"Moderate","value":1840,"x":"2025"},{"series":"Low","value":403,"x":"2025"},{"series":"Unrated","value":11348,"x":"2025"},{"series":"Critical","value":931,"x":"2026"},{"series":"High","value":3332,"x":"2026"},{"series":"Moderate","value":3713,"x":"2026"},{"series":"Low","value":774,"x":"2026"},{"series":"Unrated","value":12571,"x":"2026"}]},"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["Critical","High","Moderate","Low","Unrated"],"range":["#002435","#234f61","#547d8f","#87afc1","#aaaaaa"]},"title":null,"type":"nominal"},"tooltip":[{"field":"x","title":"Year","type":"ordinal"},{"field":"series","title":"series","type":"nominal"},{"field":"value","title":"count","type":"quantitative"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","stack":true,"title":"CVEs","type":"quantitative"}},"height":340,"mark":{"type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+vegaEmbed('#chart2', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"series":"explicit AI","value":0,"x":"2016"},{"series":"AI-affiliated","value":0,"x":"2016"},{"series":"fuzzer","value":0,"x":"2016"},{"series":"other credited","value":27,"x":"2016"},{"series":"explicit AI","value":0,"x":"2017"},{"series":"AI-affiliated","value":0,"x":"2017"},{"series":"fuzzer","value":1,"x":"2017"},{"series":"other credited","value":21,"x":"2017"},{"series":"explicit AI","value":0,"x":"2018"},{"series":"AI-affiliated","value":0,"x":"2018"},{"series":"fuzzer","value":2,"x":"2018"},{"series":"other credited","value":22,"x":"2018"},{"series":"explicit AI","value":0,"x":"2019"},{"series":"AI-affiliated","value":0,"x":"2019"},{"series":"fuzzer","value":0,"x":"2019"},{"series":"other credited","value":32,"x":"2019"},{"series":"explicit AI","value":0,"x":"2020"},{"series":"AI-affiliated","value":0,"x":"2020"},{"series":"fuzzer","value":0,"x":"2020"},{"series":"other credited","value":51,"x":"2020"},{"series":"explicit AI","value":0,"x":"2021"},{"series":"AI-affiliated","value":0,"x":"2021"},{"series":"fuzzer","value":4,"x":"2021"},{"series":"other credited","value":69,"x":"2021"},{"series":"explicit AI","value":0,"x":"2022"},{"series":"AI-affiliated","value":0,"x":"2022"},{"series":"fuzzer","value":8,"x":"2022"},{"series":"other credited","value":101,"x":"2022"},{"series":"explicit AI","value":0,"x":"2023"},{"series":"AI-affiliated","value":0,"x":"2023"},{"series":"fuzzer","value":2,"x":"2023"},{"series":"other credited","value":87,"x":"2023"},{"series":"explicit AI","value":0,"x":"2024"},{"series":"AI-affiliated","value":0,"x":"2024"},{"series":"fuzzer","value":0,"x":"2024"},{"series":"other credited","value":155,"x":"2024"},{"series":"explicit AI","value":1,"x":"2025"},{"series":"AI-affiliated","value":1,"x":"2025"},{"series":"fuzzer","value":0,"x":"2025"},{"series":"other credited","value":179,"x":"2025"},{"series":"explicit AI","value":1,"x":"2026"},{"series":"AI-affiliated","value":21,"x":"2026"},{"series":"fuzzer","value":0,"x":"2026"},{"series":"other credited","value":344,"x":"2026"}]},"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["explicit AI","AI-affiliated","fuzzer","other credited"],"range":["#c1442f","#e09a8c","#c98a00","#2f6cc1"]},"title":null,"type":"nominal"},"tooltip":[{"field":"x","title":"Year","type":"ordinal"},{"field":"series","title":"series","type":"nominal"},{"field":"value","title":"count","type":"quantitative"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","stack":true,"title":"Credited CVEs","type":"quantitative"}},"height":340,"mark":{"type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
 </script>
 </body>
 </html>

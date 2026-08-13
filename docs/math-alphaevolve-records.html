@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,13 +41,165 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Finite construction records around AlphaEvolve</h1>
-<p class="metric">cumulative record steps in five groups of finite construction and packing problems</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-records/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-records/#what-it-cannot-support">Caveats</a> <a href="https://github.com/google-deepmind/alphaevolve_repository_of_problems">Source</a></p>
-<h2>Record steps across the five groups</h2>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> cumulative record steps in five groups of finite construction and packing problems
+<strong>Coverage:</strong> 1949–2026, 22 record steps across the five groups
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-alphaevolve-records/alphaevolve-records.csv"><code>alphaevolve-records.csv</code></a>, with the sampling frame in <a href="../math-alphaevolve-inventory/alphaevolve-inventory.csv"><code>../math-alphaevolve-inventory/alphaevolve-inventory.csv</code></a>
+<strong>Upstream:</strong> <a href="https://github.com/google-deepmind/alphaevolve_repository_of_problems">https://github.com/google-deepmind/alphaevolve_repository_of_problems</a> and <a href="https://arxiv.org/abs/2511.02864">https://arxiv.org/abs/2511.02864</a>, with per-step sources recorded in the CSV's <code>ref</code> and <code>note</code> columns
+<strong>Verdict:</strong> inconclusive — the 2025 cluster is real, but these five groups were selected because an AI system worked on them</p>
+<h3>Record steps across the five groups</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Hover a step for its value and attribution.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>Five groups of finite problems from the AlphaEvolve problem set, each with a
+standing record held by an explicit construction: the Erdős minimum-overlap type
+constant (6.5), the difference-basis constant (6.7), Heilbronn-style triangle
+packing (6.48) and convex packing (6.49), and a max-min packing ratio (6.50).</p>
+<p>They belong together because they share a shape rather than a subject. In each
+case the record is a finite object — a step function, a difference set, a packing
+of $n$ shapes — that can be scored exactly, and the incumbent record often lives on
+a community page maintained by continuous computer search rather than in a journal.
+A "discovery" in this series is one such record being improved.</p>
+<p>The instrument is deliberately weak in one direction and useful in another. It
+cannot measure a discovery rate, because these five groups exist in the data
+precisely because an AI system was pointed at them: the 2025 cluster is guaranteed
+by construction. What it can do is show what an AI record step looks like next to
+the human steps on the same quantity, and how much of the human baseline is itself
+machine search.</p>
+<p>The frame is worth naming, because it is what stops the selection from being
+arbitrary. <code>alphaevolve-inventory.csv</code> covers the 65 problems the paper numbers,
+of which the companion repository's own classification marks 19 as ones where
+AlphaEvolve holds the record, 11 where it matched a known optimum, 8 where it came
+in below the record, 4 where its result has since been surpassed, and 23
+unclassified. The 31 in the first, third and fourth groups are the ones with a live
+numeric record, and these five come from there.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Twenty-two record steps, of which seven are AI-set and all seven fall in 2025. By
+group: minimum-overlap has five steps from 1955 to 2025, difference basis four from
+1949 to 2025, triangle packing two (2006 and 2025), convex packing four (two
+Cantrell constructions in 2007 and two AlphaEvolve improvements in 2025), and
+max-min packing seven (two Cantrell constructions in 2009, two AlphaEvolve steps
+and two solver steps in 2025, and one human step in 2026).</p>
+<p>The AI step sizes, from the CSV's <code>relative_gain_pct</code>, are mostly tiny: +1.44% on
+triangle packing, +0.98% and +0.47% on convex packing, +0.69% on difference basis,
++0.052% and +0.0057% on the two max-min slices, and +0.00075% on minimum-overlap.
+The last of those is the fourth-decimal-place nudge that secondary coverage of the
+paper described, moving the Erdős minimum-overlap upper bound from roughly 0.380927
+to 0.380924.</p>
+<p>Two features of the 2025 column cut the reading down, and both are in the data. The
+difference-basis record had stood since Golay in 1972, which is the oldest record
+with an AI step anywhere in this collection — but the paper reports the system was
+not able to beat it unaided, and the improvement came only after it was given
+working Singer difference-set code, which is what the chart's callout says. And both
+max-min records fell within a month to FICO's Xpress global solver, run by its own
+account with no custom algorithm and verified with the vendor's own tool. A record an
+unmodified commercial solver retakes in weeks says more about how contested the
+quantity was than about discovery.</p>
+<p><img alt="Three contested record sequences, and the pooled distribution of step sizes by who made each step." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-alphaevolve-records/alphaevolve-record-steps.png" /></p>
+<p>The second figure covers the whole file rather than the five groups. Its left
+three panels plot the best known value against record step, not against year,
+because several steps share a year: problem 6.44's sums-and-differences bound
+over eight steps, problem 6.3's autoconvolution constant over four, and problem
+6.8's kissing number in dimension 11 over five. Marker colour is who made the
+step — AlphaEvolve, AI-guided search, an agent platform, human computer search,
+human work by hand, or a community records page — and each point is annotated
+with its year. The right panel pools every record step in the file that has a
+computable size and an <code>is_record</code> of <code>yes</code>, one row per kind of agent on a
+symmetric log axis, with a vertical bar at each row's median and the median
+printed above it.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as cumulative record steps to date:</p>
+<p><img alt="Cumulative record steps to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-alphaevolve-records/cumulative-math-alphaevolve-records.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-alphaevolve-records/figure.py"><code>figure.py</code></a> draws both figures from <code>alphaevolve-records.csv</code>. For
+the first it holds the five problem ids
+in a hardcoded <code>selected</code> set, keeps rows with a non-empty <code>year</code> and <code>is_record</code>
+equal to <code>yes</code>, groups by <code>problem</code>, sorts each group by <code>year</code> then <code>quantity</code>
+then <code>step</code>, and plots the cumulative step count per group. The group labels in the
+legend are hardcoded in the function, not read from the data.</p>
+<p>The y-axis is a count because the values are not commensurable: an area, a squared
+radius, and two dimensionless constants cannot share a numeric axis. So this figure
+plots discoveries rather than levels, the same choice the
+<a href="math-sphere-packing.html">sphere-packing ladder</a> makes for the same reason.</p>
+<p>Step markers are colour-coded by who set them. <code>record_marker()</code> reads <code>agent</code>,
+draws red for anything beginning <code>ai_</code> and blue otherwise, and draws an unfilled
+marker where <code>date_certain</code> is <code>no</code>. Note that the FICO solver steps and the 2026
+step are blue: the coding distinguishes AI from non-AI rather than automated from
+manual, and much of the blue here is computer search.</p>
+<p>Two rows in the same CSV are flagged <code>is_record: no</code> and are therefore excluded
+from figures, including this one. Both are spherical-design constructions the paper
+described as improving on the literature bounds it cited, where a 2016 result the
+paper does not cite was already better. They are worth knowing about when reading
+any record claim from this source, even though they are not in this group.</p>
+<p>The CSV is built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-alphaevolve-records/fetch.py"><code>fetch.py</code></a>, which carries the hand transcription
+itself: the values, the quoted sentence each was read from, the reference, and
+the agent coding are all literals in that file, and the relative gains are
+computed from consecutive values as it writes. It is the only place any of these
+records is maintained, and it also writes the slice that
+<a href="math-sums-autoconvolution.html">sums and autoconvolution</a> plots, so
+that child dataset cannot drift from the file it is drawn out of.</p>
+<p>This folder keeps the full transcription rather than a slice of it because
+<code>alphaevolve-record-steps.png</code> pools every record step in the frame, across all
+the problems the paper numbers, not only the five plotted in the first figure.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>The groups are selected because an AI system worked on them.</strong> The 2025 cluster
+  is an artifact of that selection, so nothing about a rate can be read from it.</li>
+<li><strong>The axis counts steps, not sizes</strong>, and the AI steps are among the smallest in
+  the series, several in the fourth or fifth decimal place.</li>
+<li><strong>A group's step count mixes quantities.</strong> Convex packing pools $n=13$ and
+  $n=14$, and max-min pools two slices, so a group reaching seven steps is not one
+  record improving seven times.</li>
+<li><strong>Points from different groups land on the same coordinates.</strong> Two groups both
+  take their second step in 1956, and the minimum-overlap one — whose date rests on
+  secondary sources only, and which is therefore drawn as an open marker — is hidden
+  underneath the other group's filled marker.</li>
+<li><strong>The human baseline is itself continuous computer search.</strong> Several incumbent
+  records come from Erich Friedman's packing pages, whose "+" convention truncates
+  values and so slightly understates prior records and overstates AI gains; one page
+  now shows AlphaEvolve's value for the $n=13$ convex case while still crediting
+  Cantrell in 2007, so page and paper disagree about who holds it.</li>
+<li><strong>One value is missing.</strong> The 2026 max-min step has an empty <code>value</code>, because the
+  community page truncates the figure and the exact number could not be established;
+  the step is counted, the level is not recorded.</li>
+<li><strong>The deepest-looking result was hint-dependent.</strong> The 53-year difference-basis
+  record and the supplied Singer-code hint belong in the same sentence.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>Seven of the twenty-two steps, all AlphaEvolve, all in 2025
+[@novikov2025alphaevolve; @deepmind2025problems]. Their sizes run from +1.44% down
+to +0.00075%, and their durability varies: two were retaken within a month by an
+off-the-shelf commercial solver, and one was set only after the system was handed
+the key construction as code.</p>
+<p>That mixture is the honest summary of what this part of mathematics has received —
+real improvements on genuinely standing records, concentrated on problems where a
+candidate can be scored exactly, mostly small, and in several cases matched or
+beaten quickly by conventional search. The wider assessment from the same source
+agrees: rediscovery of known solutions was the modal outcome across the problem
+set and improvement the exception, and on named conjectures the system located the
+already-known extremal candidates and nothing beyond them
+[@tao2025exploration]. The line of work began with FunSearch's cap-set improvement
+in December 2023, which is where the era of AI-set mathematical records should be
+dated from [@deepmind2023funsearch].</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The 2025 steps and the bounds they were measured against come from the
+mathematics paper's appendix [@georgiev2025mathexploration], with the AlphaEvolve
+white paper and its companion repository supplying the status
+classification used as the frame here [@novikov2025alphaevolve;
+@deepmind2025problems]. Tao's account of the mathematics paper is the source for
+the modal-rediscovery finding, for the verifier-gaming caveat, and for the observation
+that the method needs a computable objective rather than an easier problem
+[@tao2025exploration]. FunSearch is the ancestor [@deepmind2023funsearch]. That a
+benchmark can compare AI output to the current record while carrying no historical
+dimension at all — which is the gap this series exists to fill — is visible in the
+design of HorizonMath [@arxiv2026horizonmath]. That records in any field arrive in
+bursts with long gaps, so a cluster is not by itself a signature, is Sherry and
+Thompson's [@sherry2021fast]. The individually plotted child series from the same
+frame is <a href="math-sums-autoconvolution.html">sums and autoconvolution</a>.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-records/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"agent":"human_search","attribution":"David Cantrell","group":"6.48","steps":1,"value":"0.036","year":2006},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.48","steps":2,"value":"0.03652","year":2025},{"agent":"human_search","attribution":"David Cantrell","group":"6.49","steps":1,"value":"0.0306","year":2007},{"agent":"human_search","attribution":"David Cantrell","group":"6.49","steps":2,"value":"0.0277","year":2007},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.49","steps":3,"value":"0.0309","year":2025},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.49","steps":4,"value":"0.02783","year":2025},{"agent":"human_analytic","attribution":"Erdos, bound at posing","group":"6.5","steps":1,"value":"0.5","year":1955},{"agent":"human_analytic","attribution":"Motzkin, Ralston and Selfridge","group":"6.5","steps":2,"value":"0.4","year":1956},{"agent":"human_search","attribution":"Haugland, 21-step step function","group":"6.5","steps":3,"value":"0.382002","year":1996},{"agent":"human_search","attribution":"Haugland","group":"6.5","steps":4,"value":"0.380926853433087","year":2016},{"agent":"ai_evolution","attribution":"AlphaEvolve","group":"6.5","steps":5,"value":"0.380924","year":2025},{"agent":"human_search","attribution":"David Cantrell","group":"6.50","steps":1,"value":"12.89","year":2009},{"agent":"human_search","attribution":"David Cantrell","group":"6.50","steps":2,"value":"4.168","year":2009},{"agent":"ai_evolution","attribution":"AlphaEvolve, search mode","group":"6.50","steps":3,"value":"12.889266112","year":2025},{"agent":"ai_evolution","attribution":"AlphaEvolve, search mode","group":"6.50","steps":4,"value":"4.165849767","year":2025},{"agent":"human_search","attribution":"Berthold and co-authors, FICO Xpress global solver, no custom algorithm","group":"6.50","steps":5,"value":"12.889246743","year":2025},{"agent":"human_search","attribution":"Berthold and co-authors, FICO Xpress global solver","group":"6.50","steps":6,"value":"4.165783989","year":2025},{"agent":"human_search","attribution":"M. Sun and E. Samanta","group":"6.50","steps":7,"value":"","year":2026},{"agent":"human_analytic","attribution":"Redei and Renyi","group":"6.7","steps":1,"value":"2.6667","year":1949},{"agent":"human_analytic","attribution":"Leech","group":"6.7","steps":2,"value":"2.6646","year":1956},{"agent":"human_analytic","attribution":"Golay","group":"6.7","steps":3,"value":"2.6571","year":1972},{"agent":"ai_evolution","attribution":"AlphaEvolve, after being given Singer difference-set code","group":"6.7","steps":4,"value":"2.639","year":2025}]},"height":340,"layer":[{"encoding":{"color":{"field":"group","legend":{"orient":"top"},"scale":{"domain":["6.48","6.49","6.5","6.50","6.7"],"range":["#2f6cc1","#c1442f","#c98a00","#37474f","#8fb3d9"]},"title":null,"type":"nominal"},"tooltip":[{"field":"group","title":"quantity","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"value","title":"record value","type":"nominal"},{"field":"agent","title":"agent","type":"nominal"},{"field":"attribution","title":"attribution","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"steps","title":"Cumulative record steps","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"group","legend":{"orient":"top"},"scale":{"domain":["6.48","6.49","6.5","6.50","6.7"],"range":["#2f6cc1","#c1442f","#c98a00","#37474f","#8fb3d9"]},"title":null,"type":"nominal"},"tooltip":[{"field":"group","title":"quantity","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"value","title":"record value","type":"nominal"},{"field":"agent","title":"agent","type":"nominal"},{"field":"attribution","title":"attribution","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"steps","title":"Cumulative record steps","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

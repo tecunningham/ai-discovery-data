@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,13 +41,126 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Sphere-packing lower-bound ladder</h1>
-<p class="metric">cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-sphere-packing/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-sphere-packing/#what-it-cannot-support">Caveats</a> <a href="https://arxiv.org/abs/2606.13313">Source</a></p>
-<h2>Sphere-packing lower-bound ladder</h2>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension
+<strong>Coverage:</strong> 1905–2025, eight recorded steps
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-sphere-packing/sphere-packing-lower-bound-records.csv"><code>sphere-packing-lower-bound-records.csv</code></a>
+<strong>Upstream:</strong> per-row <code>source_url</code> values, chiefly the survey at <a href="https://arxiv.org/abs/2606.13313">https://arxiv.org/abs/2606.13313</a>, with the two most recent steps at <a href="https://arxiv.org/abs/2312.10026">https://arxiv.org/abs/2312.10026</a> and the Klartag preprint recorded in the same survey
+<strong>Verdict:</strong> accelerating — and every step is human, which is what this series is here to show</p>
+<h3>Sphere-packing lower-bound ladder</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Click a point for the survey it is documented in.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>How densely can equal spheres be packed in dimension $d$ as $d$ grows? The upper
+bounds and the lower bounds are separate literatures, and this series is the lower
+bounds: each step exhibits or proves the existence of packings at least as dense
+as some function of $d$. Saturation gives $2^{-d}$ for free; everything since has
+been an argument for a factor on top of it.</p>
+<p>The ladder, with the forms as the vendored rows record them. Minkowski–Hlawka
+(1905, in Hlawka's general form 1943) gives
+$\theta(d) \geq 2\zeta(d)\,2^{-d}$, a factor of about 2. Rogers (1947) gives the
+first asymptotically growing improvement, $\theta(d) \geq c\,d\,2^{-d}$ with
+$c = 2/e$; Davenport and Rogers raise $c$ to 1.68 the same year, Ball (1992) to 2,
+and Vance (2011) to $6/e$ for dimensions divisible by four. Venkatesh (2013) gets
+the first super-linear factor, $d\log\log d$, but only along a sparse sequence of
+dimensions. Campos, Jenssen, Michelen and Sahasrabudhe (2023) prove
+$(1-o(1))\,d\log d\,2^{-(d+1)}$, the first asymptotically growing improvement on
+Rogers valid for all $d$, after seventy-six years. Klartag (2025) gains another
+whole power, $c\,n^{2}2^{-n}$, by a new probabilistic method.</p>
+<p>A "discovery" here is a published improvement to that form or to its constant. The
+series is in this collection as a control rather than a test. It has no AI step at
+all, and its two largest steps in eighty years land in 2023 and 2025, immediately
+before the period this collection shades. It is the cleanest available warning
+against reading proximity to the agent era as an AI effect.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Eight steps in 120 years, four of them in the twentieth century and four between
+2011 and 2025 — and the last two are the largest since 1947. On the count axis the
+recent bend is unmistakable: three steps in the thirteen years to 2025 against one
+in the forty-five years to 1992.</p>
+<p>Every one of them is a human proof, and the chart says so in a callout. None of
+the papers involves a machine-learning system. Set against the flat
+<a href="math-antedb.html">analytic-number-theory exponents</a> over the same window, this is
+the collection's demonstration that "century-scale bound series do not move much"
+is a fact about particular quantities and not about mathematics.</p>
+<p>What cuts the reading down is that eight rows is a very small sample, and the
+grouping into "four in the twentieth century, four since 2011" is this
+repository's arithmetic over those rows rather than a claim any source makes. The
+axis also counts rather than measures: a change of constant from 1.68 to 2 and a
+gain of a whole power of $n$ are one step each.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as its cumulative count of record steps over time:</p>
+<p><img alt="Cumulative record steps for the sphere-packing lower bound over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-sphere-packing/cumulative-math-sphere-packing.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-sphere-packing/figure.py"><code>figure.py</code></a> reads
+<code>sphere-packing-lower-bound-records.csv</code>, plots the cumulative step index against
+<code>year</code> as a step function, and annotates the <code>finder</code> for the rows whose year is
+one of 1905, 1947, 1992, 2013, 2023 or 2025.</p>
+<p>There is no <code>fetch.py</code> here. The ladder is transcribed by hand from a survey and
+the primary papers it cites, since no upstream publishes it as a machine-readable
+series, so the CSV is edited directly and every row carries its own <code>source_url</code>.</p>
+<p>The design choice that matters is the y-axis. The bound changes functional form
+along the ladder — $c\,d\,2^{-d}$ for the mid-century entries, then
+$d\log\log d$, then $d\log d$, then $n^{2}$ — so no single scalar runs the length
+of the series and there is nothing to plot on a numeric axis. Counting steps is
+the honest alternative, and it is the same reason the
+<a href="math-alphaevolve-records.html">finite-construction groups</a> are counted
+rather than plotted.</p>
+<p>Two consequences of that choice are visible. Both 1947 rows, Rogers and
+Davenport–Rogers, sit at the same x position, so their annotations overlap; and
+Vance's 2011 step carries no label because 2011 is not in the annotation set. The
+<code>constant_c</code> column carries the mid-century constants for readers who want the
+magnitudes, and the <code>bound_asymptotic</code> column carries each form in plain text.</p>
+<p>Every row carries its own <code>source_url</code>, and the figure records the set of them as
+its source rather than naming a single upstream.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>The axis counts steps, not sizes.</strong> A constant nudged from 1.68 to 2 and a
+  gain of a whole power of $n$ are one unit each, so the visible slope is a
+  frequency and not a rate of improvement.</li>
+<li><strong>The forms are not comparable.</strong> The constants are only comparable within the
+  mid-century $c\,d\,2^{-d}$ family; across families there is no shared unit.</li>
+<li><strong>Eight rows is a small sample</strong>, and the split into pre- and post-2011 halves is
+  this repository's reading of them.</li>
+<li><strong>The ladder is as the recent literature records it</strong>, not as this collection
+  reconstructed it independently, and the 1947 and 1992 constants were not checked
+  against those primaries.</li>
+<li><strong>Two steps are qualified in ways the chart cannot show.</strong> Vance's constant holds
+  only for dimensions divisible by four, and Venkatesh's factor only along a sparse
+  sequence of dimensions, so neither improves the bound for all $d$ in the way the
+  2023 step does.</li>
+<li><strong>No denominator of effort</strong>, as everywhere in this collection.</li>
+<li><strong>This is the lower-bound side only.</strong> The upper bounds are a separate
+  literature, and the one AI claim in this area is on that side.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None in this ladder. Every step from 1905 to 2025 is a human proof, and the two
+largest steps in eighty years arrive in the three years immediately before the
+agent era.</p>
+<p>That absence is the point of including the series. It is a standing counterexample
+to inferring an AI effect from timing: a bound series can bend sharply just before
+2026 for reasons that have nothing to do with AI, and only per-step attribution
+distinguishes the two cases.</p>
+<p>The one relevant AI claim sits on the other side of the problem. Astra's August
+2026 package claims new sphere-packing upper bounds reaching the Cohn–Elkies
+threshold, with Lean certificates and peer review pending. Those are upper bounds;
+they do not touch the lower-bound ladder plotted here, and they cannot explain the
+2023 and 2025 steps, which predate them and are attributed to named human papers.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The ladder's dates, finders and bound forms are recorded in a recent survey
+[@arxiv2026spherepacking], with the 2023 step as its own preprint
+[@campos2023sphere]. The comparison this series exists to support is with the
+<a href="math-antedb.html">analytic-number-theory exponents</a>, which are structurally the
+same object — humans tightening an asymptotic constant over a century — and which
+are flat through the window in which this one accelerates. That records are lumpy
+and heterogeneous with no AI anywhere in them, so that neither a bend nor a
+plateau is by itself a signature, is Sherry and Thompson's finding
+[@sherry2021fast]. Where AI steps do appear in this domain they are on finite
+constructions with cheap scoring rather than on asymptotic bounds, as in the
+<a href="math-alphaevolve-records.html">AlphaEvolve record sequences</a>.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-sphere-packing/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"bound":"theta(d) >= 2*zeta(d)*2^-d","finder":"Minkowski (Minkowski-Hlawka; Hlawka 1943 general)","note":"trivial saturation gives 2^-d; Minkowski-Hlawka improves by factor ~2","step":1,"url":"https://arxiv.org/abs/2606.13313","year":1905},{"bound":"theta(d) >= c*d*2^-d with c=2/e","finder":"Rogers","note":"first asymptotically-growing (factor d) improvement over Minkowski-Hlawka","step":2,"url":"https://arxiv.org/abs/2606.13313","year":1947},{"bound":"theta(d) >= c*d*2^-d","finder":"Davenport-Rogers","note":"improved Rogers constant","step":3,"url":"https://arxiv.org/abs/2606.13313","year":1947},{"bound":"theta(d) >= c*d*2^-d","finder":"Keith Ball","note":"IMRN 1992; improved constant to 2 (lattice packings)","step":4,"url":"https://arxiv.org/abs/2606.13313","year":1992},{"bound":"theta(d) >= c*d*2^-d","finder":"Stephanie Vance","note":"for d divisible by 4; via Hurwitz lattices","step":5,"url":"https://arxiv.org/abs/1105.3779","year":2011},{"bound":"theta(d) >= c*d*log log d*2^-d (sparse d); and c up to 65963","finder":"Akshay Venkatesh","note":"first super-linear-in-d factor, but only along a sparse sequence of dimensions","step":6,"url":"https://arxiv.org/abs/2606.13313","year":2013},{"bound":"theta(d) >= (1-o(1))*d*log d*2^-(d+1)","finder":"Campos, Jenssen, Michelen, Sahasrabudhe","note":"first asymptotically-growing (factor log d) improvement to Rogers for ALL d, since 1947","step":7,"url":"https://arxiv.org/abs/2312.10026","year":2023},{"bound":"delta_n^L >= c*n^2*2^-n","finder":"Boaz Klartag","note":"jumps another whole power of n (factor n^2); new probabilistic/stochastic-ellipsoid method; announced 2025","step":8,"url":"https://arxiv.org/abs/2606.13313","year":2025}]},"height":340,"layer":[{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"finder","title":"finder","type":"nominal"},{"field":"bound","title":"bound","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"step","title":"Cumulative improvements","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"finder","title":"finder","type":"nominal"},{"field":"bound","title":"bound","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"step","title":"Cumulative improvements","type":"quantitative"}},"mark":{"cursor":"pointer","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,12 +41,168 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Hutter Prize compression: enwik9</h1>
-<p class="metric">total size in bytes of decompressor plus archive for a fixed 1 GB text corpus, under a CPU-time and memory cap</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-enwik9/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-enwik9/#what-it-cannot-support">Caveats</a> <a href="http://prize.hutter1.net/">Source</a></p>
-<h2>Hutter Prize enwik9 record</h2>
+<p><strong>Domain:</strong> algorithms
+<strong>Metric:</strong> total size in bytes of decompressor plus archive for a fixed 1 GB text corpus, under a CPU-time and memory cap
+<strong>Coverage:</strong> 2019 baseline to 2026; the prize moved to enwik9 on 2020-02-21, and the uncapped comparator runs 2019 to 2023
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/enwik9-records.csv"><code>enwik9-records.csv</code></a>, holding both the <code>hutter_enwik9</code> and <code>ltcb_enwik9</code> series
+<strong>Upstream:</strong> <a href="http://prize.hutter1.net/">http://prize.hutter1.net/</a> and <a href="http://mattmahoney.net/dc/text.html">http://mattmahoney.net/dc/text.html</a>
+<strong>Verdict:</strong> no acceleration</p>
+<h3>Hutter Prize enwik9 record</h3>
 <div id="chart0" class="chart"></div>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>Compress the first 10^9 bytes of a fixed XML dump of English Wikipedia, and be
+scored on the compressed size including the size of the decompression program.
+The corpus was frozen in 2006, so the task has no benchmark drift by
+construction, and counting the decompressor closes the obvious loophole of
+hiding the model in the program.</p>
+<p>The prize also caps resources. Entries "must run in ≲50 hours using a single CPU
+core and &lt;10GB RAM and &lt;100GB HDD on our test machine", which excludes GPUs.
+That cap is why two series are plotted here rather than one: the prize is the
+constrained series and Matt Mahoney's Large Text Compression Benchmark is the
+same corpus with no cap, admitting GPU and TPU compressors. Holding the corpus
+and the rules fixed for two decades is what turns a list of programs into an
+efficiency curve.</p>
+<p>A "discovery" is an awarded record. The prize pays only for improvements of at
+least 1% over the standing record, so the ledger is a record of steps that
+cleared a hurdle, not of every improvement made.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>116,673,681 bytes at the 2019 phda9v1.8 baseline, then four awarded records:
+starlit by Artemiy Margaritov on 2021-05-31, fast cmix by Saurabh Kumar on
+2023-07-16, fx-cmix by Kaido Orav on 2024-02-02, and fx2-cmix by Kaido Orav and
+Byron Knoll on 2024-09-03 at 110,793,128 bytes. Computed over the vendored
+series, those steps are 1.13%, 1.04%, 1.38% and 1.59%: the 1.0 to 1.6% cadence
+the prize's hurdle implies, held steady straight through the arrival of frontier
+models. Together the four awarded records take the total down 5.0% from the 2019
+baseline in five years.</p>
+<p>One further entry is open rather than filled. cmix-lex, by Ibrahim Marcouch, was
+announced on the benchmark page on 2026-06-26 at 109,190,109 bytes, a further
+1.45% and inside the 109,685,196 needed to clear the 1% hurdle, but it was not an
+awarded record on the prize site as read.</p>
+<p>The dashed line is the sharper fact. The uncapped leaderboard, which permits
+GPUs and neural compressors, has not moved since nncp v3.2 reached 107,261,318
+bytes on 2023-10-23, despite active submissions below it through 2024 to 2026.
+Three years of stall on an uncapped, cash-adjacent, fixed-corpus task spans
+exactly the period of fastest growth in model capability.</p>
+<p>Every record on both series is human. No entry on either page claims that a
+language model or an agent wrote the compressor.</p>
+<p>The retired 100 MB enwik8 prize supplies historical context but is not joined to
+the curve because it is a different corpus. Its complete five-row chronology was:</p>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Program</th>
+<th style="text-align: right;">Total bytes</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2006-03-24</td>
+<td>paq8f -7</td>
+<td style="text-align: right;">18,324,887</td>
+<td>pre-prize baseline</td>
+</tr>
+<tr>
+<td>2006-09-25</td>
+<td>paq8hp5 -7</td>
+<td style="text-align: right;">17,073,018</td>
+<td>first award</td>
+</tr>
+<tr>
+<td>2007-05-14</td>
+<td>paq8hp12 -7</td>
+<td style="text-align: right;">16,481,655</td>
+<td>second award</td>
+</tr>
+<tr>
+<td>2009-05-23</td>
+<td>decomp8</td>
+<td style="text-align: right;">15,949,688</td>
+<td>third award</td>
+</tr>
+<tr>
+<td>2017-11-04</td>
+<td>phda9</td>
+<td style="text-align: right;">15,284,944</td>
+<td>fourth award</td>
+</tr>
+</tbody>
+</table>
+<p>Alexander Rhatushnyak set all four awards, including the eight-and-a-half-year
+gap before the last. The prize moved to enwik9 in February 2020. This context
+shows that a long flat interval was normal before language-model agents, without
+presenting incomparable byte levels as one time series.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as the standing record's value over time:</p>
+<p><img alt="Standing record for total size in MB over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-enwik9/cumulative-algorithms-enwik9.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/figure.py"><code>figure.py</code></a> calls the shared <code>compression_chart()</code> in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which reads
+<code>enwik9-records.csv</code>, keeps the rows whose <code>series</code> column matches, and
+plots <code>total_bytes</code> divided by 10^6 against the year fraction of <code>date</code> as a step
+function. Rows whose <code>award</code> column is anything other than <code>pending</code> are drawn
+filled and joined by the solid line, which therefore includes the unawarded 2019
+baseline; the pending row is drawn as an open marker labelled from its <code>program</code>
+column, "cmix-lex, pending".</p>
+<p>The second dashed series is specific to this figure. When the series is
+<code>hutter_enwik9</code>, the function additionally selects the <code>ltcb_enwik9</code> rows and
+draws them in grey dashes, with a corner note reporting the uncapped frontier as
+flat since October 2023 at 107.3 MB. The axis is linear and in megabytes, since
+the whole series moves by single-digit percentages and a log axis would flatten
+the only structure there is. January 2026 onward is shaded.</p>
+<p>The rows are transcribed by hand, so there is no fetcher that rebuilds them.
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/fetch.py"><code>fetch.py</code></a> is a staleness probe instead: it reads the prize page and
+reports if the standing awarded record has been displaced, leaving the CSV and
+this document to be updated by hand.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>A hurdle censors the small steps.</strong> The prize pays only above 1%, so
+  improvements below that threshold are invisible here whether or not they
+  happened, and the observed 1.0–1.6% cadence is partly an artefact of the rule.</li>
+<li><strong>Neural is not AI-authored.</strong> The uncapped leader nncp uses a transformer
+  architecture and cmix has carried an LSTM since 2016, but a hand-written
+  neural compressor is not a model-written one. The distinction, and the search
+  for any authorship claim, are the source log's.</li>
+<li><strong>The two pages do not agree on every byte count.</strong> fx2-cmix is 110,793,128 on
+  the prize site and 110,351,665 on the benchmark, because the archives and
+  measurement conventions differ, and the benchmark's nncp v2 row prints a total
+  equal to its archive-only size, apparently omitting a 99,671-byte
+  decompressor. Quote whichever page you are using.</li>
+<li><strong>The rows were transcribed by hand from prose pages.</strong> Neither upstream is a
+  feed; both are HTML tables read and typed into the CSV, and the prize site was
+  read over plain HTTP because its TLS certificate has expired.</li>
+<li><strong>The capped and uncapped series are not comparable in level.</strong> They are
+  different rules on the same corpus, which is why they share an axis but not a
+  line style, and their difference is a statement about the cap rather than
+  about progress.</li>
+<li><strong>A flat frontier is not a measured absence of effort.</strong> Submissions continued
+  below the leader, but nothing in the data counts how much search went into
+  them.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None. No record on either the capped or the uncapped series credits a language
+model or an agent, on a task that is fixed, publicly scored, cash-rewarded, and
+verifiable by anyone who can run a decompressor. That absence is the point of
+including the series: text compression is the closest thing in this collection to
+a pure prediction task, which is what language models are trained to do, and it
+is a series they have not entered.</p>
+<p>The only nearby AI results are in different corners of the same domain: the
+23% GPU kernel speedup in the AlphaEvolve paper [@novikov2025alphaevolve], and
+kernels found by test-time training that beat the best human submissions by 15 to
+51% [@yuksekgonul2026learning]. Neither is a compression record.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The two upstream ledgers are the prize itself [@hutter2026prize] and the
+Large Text Compression Benchmark [@mahoney2026ltcb]. For the base rate against
+which a three-year stall should be read, about half of all algorithm families
+show little or no improvement over decades and improvements arrive at
+roughly 1.44 per family since 1940 [@sherry2021fast]. The retired enwik8
+chronology above is the same prize's own pre-agent cadence, where a single gap
+between records ran eight and a half years.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-enwik9/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"author":"Alexander Rhatushnyak","bytes":116673681,"date":"2019-07-04","note":"pre-prize baseline for the 2020 10x expansion","program":"phda9v1.8","series":"hutter_enwik9"},{"author":"Artemiy Margaritov","bytes":115352938,"date":"2021-05-31","note":"5th winner","program":"starlit","series":"hutter_enwik9"},{"author":"Saurabh Kumar","bytes":114156155,"date":"2023-07-16","note":"6th winner","program":"fast cmix","series":"hutter_enwik9"},{"author":"Kaido Orav","bytes":112578322,"date":"2024-02-02","note":"7th winner","program":"fx-cmix","series":"hutter_enwik9"},{"author":"Kaido Orav & Byron Knoll","bytes":110793128,"date":"2024-09-03","note":"8th winner","program":"fx2-cmix","series":"hutter_enwik9"},{"author":"Ibrahim Marcouch","bytes":109190109,"date":"2026-06-26","note":"announced on LTCB; not yet an awarded record on the prize site as of 2026-07-28","program":"cmix-lex","series":"hutter_enwik9"},{"author":"Alexander Rhatushnyak","bytes":116587793,"date":"2019-07-04","note":"LTCB total incl. decompressor","program":"phda9 1.8","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":114317255,"date":"2021-01-03","note":"as printed on LTCB; likely omits the 99671-byte decompressor","program":"nncp v2","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":112319355,"date":"2021-02-06","note":"","program":"nncp v2.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":110231784,"date":"2021-04-24","note":"","program":"nncp v3","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":108579652,"date":"2021-06-01","note":"","program":"nncp v3.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":107261318,"date":"2023-10-23","note":"still ranked 1 as of the page's 2026-07-08 update","program":"nncp v3.2","series":"ltcb_enwik9"}]},"height":340,"layer":[{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

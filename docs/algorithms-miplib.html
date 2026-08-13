@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,12 +41,74 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>MIPLIB 2017 solution frontier</h1>
-<p class="metric">better feasible incumbents, first feasible solutions and optimality updates announced in MIPLIB 2017 solufile releases</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-miplib/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-miplib/#what-it-cannot-support">Caveats</a> <a href="https://miplib.zib.de/news.html">Source</a></p>
-<h2>MIPLIB 2017 solufile releases</h2>
+<p><strong>Domain:</strong> algorithms
+<strong>Metric:</strong> better feasible incumbents, first feasible solutions and optimality updates announced in MIPLIB 2017 solufile releases
+<strong>Coverage:</strong> 2019-08-26 through 2026-01-26, 28 releases with explicit solution counts
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-miplib/miplib-solution-releases.csv"><code>miplib-solution-releases.csv</code></a>, one public solufile release per row
+<strong>Upstream:</strong> <a href="https://miplib.zib.de/news.html">https://miplib.zib.de/news.html</a> and <a href="https://miplib.zib.de/download.html">https://miplib.zib.de/download.html</a>
+<strong>Verdict:</strong> no acceleration — dense but batch-driven, with no sustained post-2020 rise</p>
+<h3>MIPLIB 2017 solufile releases</h3>
 <div id="chart0" class="chart"></div>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>MIPLIB is a standard public library of mixed-integer programs. Its maintainers
+accept new solutions to open instances and periodically publish a new solution
+file. This series treats the 2017 collection as a maintained frontier: a better
+incumbent improves a known feasible objective, a first feasible solution closes
+an instance with no prior incumbent, and an optimality update proves or records
+that the frontier cannot be improved.</p>
+<p>The three kinds are separated because they represent different work. The unit
+in this table is the count stated in each release announcement, not a solver run
+and not the number of changed lines in a downloaded solution file.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Across 28 releases, the log reports 599 better incumbents, 44 optimality updates
+and 28 first feasible solutions. The largest waves are in late 2019 and early
+2020; later years remain active, including 137 better incumbents during 2024 and
+40 in the partial 2026 release, but do not show a rising rate over the full
+window.</p>
+<p>The counts also make the batch mechanism visible. A year with one large release
+does not mean every improvement was found on that release date. The chart is a
+history of public frontier updates, not a timestamped lab notebook.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as cumulative announced solution updates to date:</p>
+<p><img alt="Cumulative announced solution updates to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-miplib/cumulative-algorithms-miplib.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p>The News Log was transcribed into <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-miplib/miplib-solution-releases.csv"><code>miplib-solution-releases.csv</code></a>.
+For announcements that give a total and say how many were first-known or
+optimal, the categories are made disjoint. For example, the 91 improved
+incumbents in February 2020 become 86 ordinary improvements, two first feasible
+solutions and three optima. Open-to-hard/easy status changes are counted as
+first feasible; “marked optimal” entries are kept in <code>optimal_status_only</code>.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-miplib/figure.py"><code>figure.py</code></a> aggregates releases by year. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-miplib/fetch.py"><code>fetch.py</code></a> is a
+staleness probe because the classification depends on prose; it checks whether
+the live log has advanced beyond solufile 36. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-miplib/check.py"><code>check.py</code></a> recomputes
+the totals in this document.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li>Release dates are publication dates, not necessarily discovery dates.</li>
+<li>The news prose changes vocabulary across releases, so category boundaries
+  require the explicit rules above.</li>
+<li>Counts do not measure objective magnitude or instance difficulty.</li>
+<li>The collection is substantially fixed, but corrected instances and status
+  tags exist; this is cleaner than annual benchmark scores, not immutable.</li>
+<li>A newly optimal solution can overlap conceptually with an improved incumbent;
+  the CSV makes categories disjoint to avoid double-counting.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None are stated in the release log. Submitters and solver provenance are not
+recorded consistently enough in these aggregate announcements to infer whether
+an AI tool contributed, so the absence of an AI label is not evidence of
+absence.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The library's <a href="https://miplib.zib.de/history.html">history</a> explains the sequence
+of MIPLIB editions, while the <a href="https://doi.org/10.1007/s12532-020-00194-3">MIPLIB 2017 paper</a>
+documents collection and benchmark selection. The download page preserves old
+solution files and fixed collection lists, allowing a future instance-level
+reconstruction of objective magnitudes in addition to the public release counts
+used here.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-miplib/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"series":"better incumbent","value":4,"x":"2019-08-26"},{"series":"new optimal","value":0,"x":"2019-08-26"},{"series":"first feasible","value":0,"x":"2019-08-26"},{"series":"status-only optimal","value":0,"x":"2019-08-26"},{"series":"better incumbent","value":4,"x":"2019-09-30"},{"series":"new optimal","value":0,"x":"2019-09-30"},{"series":"first feasible","value":0,"x":"2019-09-30"},{"series":"status-only optimal","value":0,"x":"2019-09-30"},{"series":"better incumbent","value":8,"x":"2019-11-20"},{"series":"new optimal","value":0,"x":"2019-11-20"},{"series":"first feasible","value":5,"x":"2019-11-20"},{"series":"status-only optimal","value":0,"x":"2019-11-20"},{"series":"better incumbent","value":115,"x":"2019-12-19"},{"series":"new optimal","value":0,"x":"2019-12-19"},{"series":"first feasible","value":10,"x":"2019-12-19"},{"series":"status-only optimal","value":0,"x":"2019-12-19"},{"series":"better incumbent","value":86,"x":"2020-02-11"},{"series":"new optimal","value":3,"x":"2020-02-11"},{"series":"first feasible","value":2,"x":"2020-02-11"},{"series":"status-only optimal","value":0,"x":"2020-02-11"},{"series":"better incumbent","value":7,"x":"2020-02-24"},{"series":"new optimal","value":15,"x":"2020-02-24"},{"series":"first feasible","value":0,"x":"2020-02-24"},{"series":"status-only optimal","value":0,"x":"2020-02-24"},{"series":"better incumbent","value":20,"x":"2020-03-25"},{"series":"new optimal","value":5,"x":"2020-03-25"},{"series":"first feasible","value":0,"x":"2020-03-25"},{"series":"status-only optimal","value":0,"x":"2020-03-25"},{"series":"better incumbent","value":49,"x":"2020-05-24"},{"series":"new optimal","value":2,"x":"2020-05-24"},{"series":"first feasible","value":0,"x":"2020-05-24"},{"series":"status-only optimal","value":0,"x":"2020-05-24"},{"series":"better incumbent","value":11,"x":"2020-06-22"},{"series":"new optimal","value":2,"x":"2020-06-22"},{"series":"first feasible","value":0,"x":"2020-06-22"},{"series":"status-only optimal","value":0,"x":"2020-06-22"},{"series":"better incumbent","value":14,"x":"2020-08-03"},{"series":"new optimal","value":0,"x":"2020-08-03"},{"series":"first feasible","value":0,"x":"2020-08-03"},{"series":"status-only optimal","value":0,"x":"2020-08-03"},{"series":"better incumbent","value":11,"x":"2020-10-27"},{"series":"new optimal","value":0,"x":"2020-10-27"},{"series":"first feasible","value":0,"x":"2020-10-27"},{"series":"status-only optimal","value":0,"x":"2020-10-27"},{"series":"better incumbent","value":11,"x":"2021-05-20"},{"series":"new optimal","value":0,"x":"2021-05-20"},{"series":"first feasible","value":0,"x":"2021-05-20"},{"series":"status-only optimal","value":0,"x":"2021-05-20"},{"series":"better incumbent","value":14,"x":"2022-02-24"},{"series":"new optimal","value":0,"x":"2022-02-24"},{"series":"first feasible","value":0,"x":"2022-02-24"},{"series":"status-only optimal","value":0,"x":"2022-02-24"},{"series":"better incumbent","value":1,"x":"2022-03-08"},{"series":"new optimal","value":2,"x":"2022-03-08"},{"series":"first feasible","value":0,"x":"2022-03-08"},{"series":"status-only optimal","value":3,"x":"2022-03-08"},{"series":"better incumbent","value":12,"x":"2022-07-21"},{"series":"new optimal","value":4,"x":"2022-07-21"},{"series":"first feasible","value":0,"x":"2022-07-21"},{"series":"status-only optimal","value":0,"x":"2022-07-21"},{"series":"better incumbent","value":7,"x":"2022-09-28"},{"series":"new optimal","value":0,"x":"2022-09-28"},{"series":"first feasible","value":0,"x":"2022-09-28"},{"series":"status-only optimal","value":0,"x":"2022-09-28"},{"series":"better incumbent","value":5,"x":"2022-11-25"},{"series":"new optimal","value":1,"x":"2022-11-25"},{"series":"first feasible","value":0,"x":"2022-11-25"},{"series":"status-only optimal","value":0,"x":"2022-11-25"},{"series":"better incumbent","value":34,"x":"2023-07-28"},{"series":"new optimal","value":5,"x":"2023-07-28"},{"series":"first feasible","value":1,"x":"2023-07-28"},{"series":"status-only optimal","value":0,"x":"2023-07-28"},{"series":"better incumbent","value":4,"x":"2024-02-29"},{"series":"new optimal","value":1,"x":"2024-02-29"},{"series":"first feasible","value":0,"x":"2024-02-29"},{"series":"status-only optimal","value":0,"x":"2024-02-29"},{"series":"better incumbent","value":44,"x":"2024-04-17"},{"series":"new optimal","value":1,"x":"2024-04-17"},{"series":"first feasible","value":0,"x":"2024-04-17"},{"series":"status-only optimal","value":0,"x":"2024-04-17"},{"series":"better incumbent","value":6,"x":"2024-06-18"},{"series":"new optimal","value":0,"x":"2024-06-18"},{"series":"first feasible","value":0,"x":"2024-06-18"},{"series":"status-only optimal","value":0,"x":"2024-06-18"},{"series":"better incumbent","value":18,"x":"2024-07-09"},{"series":"new optimal","value":0,"x":"2024-07-09"},{"series":"first feasible","value":2,"x":"2024-07-09"},{"series":"status-only optimal","value":0,"x":"2024-07-09"},{"series":"better incumbent","value":22,"x":"2024-07-18"},{"series":"new optimal","value":0,"x":"2024-07-18"},{"series":"first feasible","value":2,"x":"2024-07-18"},{"series":"status-only optimal","value":0,"x":"2024-07-18"},{"series":"better incumbent","value":28,"x":"2024-10-07"},{"series":"new optimal","value":0,"x":"2024-10-07"},{"series":"first feasible","value":1,"x":"2024-10-07"},{"series":"status-only optimal","value":0,"x":"2024-10-07"},{"series":"better incumbent","value":15,"x":"2024-11-14"},{"series":"new optimal","value":0,"x":"2024-11-14"},{"series":"first feasible","value":1,"x":"2024-11-14"},{"series":"status-only optimal","value":0,"x":"2024-11-14"},{"series":"better incumbent","value":8,"x":"2025-01-20"},{"series":"new optimal","value":0,"x":"2025-01-20"},{"series":"first feasible","value":4,"x":"2025-01-20"},{"series":"status-only optimal","value":0,"x":"2025-01-20"},{"series":"better incumbent","value":1,"x":"2025-03-07"},{"series":"new optimal","value":0,"x":"2025-03-07"},{"series":"first feasible","value":0,"x":"2025-03-07"},{"series":"status-only optimal","value":0,"x":"2025-03-07"},{"series":"better incumbent","value":40,"x":"2026-01-26"},{"series":"new optimal","value":0,"x":"2026-01-26"},{"series":"first feasible","value":0,"x":"2026-01-26"},{"series":"status-only optimal","value":0,"x":"2026-01-26"}]},"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["better incumbent","new optimal","first feasible","status-only optimal"],"range":["#2f6cc1","#37474f","#c98a00","#aaaaaa"]},"title":null,"type":"nominal"},"tooltip":[{"field":"x","title":"Solufile release","type":"ordinal"},{"field":"series","title":"series","type":"nominal"},{"field":"value","title":"count","type":"quantitative"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Solufile release","type":"ordinal"},"y":{"field":"value","stack":true,"title":"Solutions updated","type":"quantitative"}},"height":340,"mark":{"type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

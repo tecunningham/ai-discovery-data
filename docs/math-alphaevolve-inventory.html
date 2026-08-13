@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,13 +41,152 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Inventory of the AlphaEvolve problem set</h1>
-<p class="metric">per problem, whether it has a live numeric record and how many dated prior works the paper cites</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-inventory/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-inventory/#what-it-cannot-support">Caveats</a> <a href="https://arxiv.org/abs/2511.02864">Source</a></p>
-<h2>The 65 problems, by literature depth and recency</h2>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> per problem, whether it has a live numeric record and how many dated prior works the paper cites
+<strong>Coverage:</strong> the 65 problems the paper numbers 6.1 to 6.65; cited works span 1852–2025; built 2026-07-26
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-alphaevolve-inventory/alphaevolve-inventory.csv"><code>alphaevolve-inventory.csv</code></a>
+<strong>Upstream:</strong> <a href="https://arxiv.org/abs/2511.02864">https://arxiv.org/abs/2511.02864</a> and <a href="https://github.com/google-deepmind/alphaevolve_repository_of_problems">https://github.com/google-deepmind/alphaevolve_repository_of_problems</a>
+<strong>Verdict:</strong> baseline</p>
+<h3>The 65 problems, by literature depth and recency</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Each point is one problem from the AlphaEvolve paper&#x27;s section 6.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>The AlphaEvolve mathematics paper reports improved bounds on a share of 67
+problems, and the discussion of that result has no historical baseline. Nobody
+had assembled the dated record of prior improvements on those same problems, so
+the AI-era step could not be set against the distribution of historical steps on
+the same quantity. The paper's authors decline the survey explicitly, which is
+why it is missing: "For reasons of space, we do not attempt to exhaustively
+survey the history of each of the problems listed here, and refer the reader to
+the references provided for each problem for a more in-depth discussion of known
+results."</p>
+<p>This folder is not a discovery series. It is the frame the record series are
+drawn from: an inventory saying, per problem, what the quantity is, which prior
+work the paper cites, what year each cited work dates from, and how the
+companion repository classifies the outcome. It answers the prior question —
+which of these problems even has a record history to compare against — so that
+the sample can be drawn from a stated frame rather than from whichever problems
+turned out to be convenient.</p>
+<p>A prior-art search found nobody had done this. The nearest miss is HorizonMath,
+a benchmark of over 100 unsolved problems with automated verification, which
+compares AI output to best-known published results and carries no historical
+dimension at all [@arxiv2026horizonmath]. Dated record tables exist per problem —
+Packomania and Erich Friedman's packing pages, Radziszowski's small Ramsey
+numbers survey, the standard tabulation of the matrix-multiplication exponent —
+and no one has joined them to the AI results.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Two bar panels. On the left, the repository's own classification of the 65
+numbered problems under the assumed index mapping: 19 where AlphaEvolve holds
+the record, 11 where it matched a known optimum, 8 where it came in below the
+record, 4 where its result has since been surpassed, and 23 unclassified. The 31
+in the first, third and fourth groups are the ones with a live numeric record;
+the matched-optimal group's history has terminated at a proven optimum, and the
+unclassified group is mostly conjectures and non-record tasks.</p>
+<p>On the right, the same set after each filter a historical comparison needs: 65
+numbered in the paper, 31 with a live numeric record, 12 drawn as the
+pre-committed sample, 6 that yielded a dated scalar record sequence at all, and
+2 carrying both AI and human steps. That last number is the finding. Of a set
+reported as 67 mathematical results, two quantities supported a head-to-head at
+the point this inventory was built.</p>
+<p>The dating turned out better than expected in one respect. Of the 65 problems,
+64 cite at least one dated reference, 52 cite at least two, and 31 cite at least
+four; the parsed bibliography yields 302 entries of which 298 carry a year.
+Among problems citing two or more dated works the median span between earliest
+and latest cited year is 42 years, so these are decades-deep literatures rather
+than fresh ones.</p>
+<p>This folder has no cumulative view on the collection-wide
+<a href="cumulative.html">cumulative index</a>: the inventory is a one-date snapshot
+of a problem set, not a time series. The dated record sequences it feeds are
+the <a href="math-alphaevolve-records.html">records folder's</a>, which has one.</p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-alphaevolve-inventory/figure.py"><code>figure.py</code></a> counts the <code>status</code> column of
+<code>alphaevolve-inventory.csv</code> for the left panel and reads the first two funnel
+rows off the same counts; the last three funnel rows are the sample size, the
+number of sampled problems that yielded a sequence, and the number of quantities
+with steps of both kinds, which come from
+<a href="math-alphaevolve-records.html">the record sequences</a> and are written
+into the figure rather than computed here.</p>
+<p>The CSV is built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-alphaevolve-inventory/fetch.py"><code>fetch.py</code></a>, which reads a local <code>pdftotext</code>
+extraction of the paper plus a checkout of the companion repository. It locates
+each problem's definition inside the paper's problem section, then records the
+title, the topic group, the bracketed references cited within that span, the
+publication year of each of those references from the parsed bibliography, any
+inline bound string, and the repository's status classification. Neither input
+is vendored here and the paper's text is not redistributed; only derived counts
+and short quoted bound strings go into the CSV.</p>
+<p><code>n_citations</code> is the full number of parsed references. To keep the orientation
+inventory compact, <code>cited_refs</code> lists at most the first twelve reference IDs;
+three rows have thirteen or fourteen parsed references.</p>
+<p>Two extraction bugs were found during construction and are worth recording,
+because both would have corrupted the output silently. A cross-reference to a
+problem occurring before its definition made the preceding problem's span
+swallow its content, and the topic-group headings were only partly matched, so
+group labels drifted forward. Both were caught by checking two problems whose
+histories are known independently: the Sidon autoconvolution problem returns
+2010 and 2017, matching the Matolcsi–Vinuesa and Cloninger–Steinerberger
+attributions its own notebook gives, and the classic moving sofa returns 1992
+and 2024, matching Gerver and Baek. That is the check to repeat if the script
+changes.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>A cited year is not a record year.</strong> It is the year of a cited work:
+  background references, surveys and method papers are mixed in with the papers
+  that moved the bound. Separating them means reading the cited papers, which is
+  the manual step this inventory scopes rather than performs. Nothing in the CSV
+  should be read as a record sequence.</li>
+<li><strong>The index mapping is an assumption.</strong> The paper numbers problems 6.1 to
+  6.65 while the repository's <code>status.json</code> indexes 1 to 67, so the two
+  enumerations cannot be identical. The identity mapping is assumed and every
+  row carries <code>status_mapping</code> = <code>assumed</code> to say so.</li>
+<li><strong>The 65 are not 65 distinct problems.</strong> At least twelve of the repository's
+  67 experiment directories are the same problem under two names, so the set is
+  closer to 50 distinct problems.</li>
+<li><strong>The status classification is the vendor's.</strong> What counts as holding the
+  record, matching an optimum or falling below one is the repository's own
+  judgment, not an independent adjudication.</li>
+<li><strong>Bound strings are pattern-extracted</strong> from lightly normalised LaTeX and are
+  for orientation only; they must be re-read against the paper before use.</li>
+<li><strong>The frame does not fix the selection problem, only state it.</strong> Tractability
+  correlates with being well-curated and therefore with progress rate, so a
+  sample drawn from this frame is still a sample of problems an AI system was
+  pointed at.</li>
+<li><strong>On the packing problems the historical baseline is itself machine search.</strong>
+  Record improvements there have been machine-generated since the 1990s and many
+  are unpublished, with Packomania reporting improvements arriving daily. An
+  AI-versus-history comparison on those problems is automated against automated,
+  so whether each prior record was human-proved or machine-found has to be coded
+  per problem or the headline comparison means nothing.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None to this inventory, which is a frame rather than a result. The set it
+inventories is the output of an evolutionary coding agent that mutates programs
+under an automated evaluator [@novikov2025alphaevolve], published with a
+companion repository carrying the status classification used here
+[@deepmind2025problems].</p>
+<p>What the inventory contributes to reading that output is the denominator. A
+paper reporting improvements across 67 problems invites a count of results; the
+frame says that 31 of them had a live numeric record to improve, and that only a
+handful of those could be reduced to a dated sequence in which an AI step and a
+human step sit on the same axis. Tao's assessment of the same run points the
+same way: rediscovery of known solutions was the modal outcome across the
+problem set and improvement the exception [@tao2025exploration].</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The paper and its companion repository are the two inputs
+[@novikov2025alphaevolve; @deepmind2025problems], and Tao's account of the run
+is the standing external assessment of what it did and did not reach
+[@tao2025exploration]. That a benchmark can compare AI output to the current
+record while carrying no historical dimension — the gap this inventory exists to
+close — is visible in the design of HorizonMath [@arxiv2026horizonmath]. The
+line of work began with FunSearch's cap-set improvement in December 2023
+[@deepmind2023funsearch]. That records in any field arrive in bursts with long
+gaps, so a cluster is not by itself a signature, is Sherry and Thompson's
+finding [@sherry2021fast]. The series drawn from this frame are
+<a href="math-alphaevolve-records.html">the record sequences</a>,
+<a href="math-sums-autoconvolution.html">sums and autoconvolution</a>.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-alphaevolve-inventory/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"citations":7,"earliest":2005,"group":"Finite field Kakeya and Nikodym sets","latest":2025,"problem":"6.1","status":"world_record","title":"Kakeya and Nikodym sets"},{"citations":3,"earliest":2010,"group":"Autocorrelation inequalities","latest":2025,"problem":"6.2","status":"world_record","title":""},{"citations":2,"earliest":2010,"group":"Autocorrelation inequalities","latest":2025,"problem":"6.3","status":"former_record","title":""},{"citations":2,"earliest":2010,"group":"Autocorrelation inequalities","latest":2010,"problem":"6.4","status":"world_record","title":""},{"citations":5,"earliest":1955,"group":"Autocorrelation inequalities","latest":2025,"problem":"6.5","status":"world_record","title":""},{"citations":2,"earliest":2020,"group":"Autocorrelation inequalities","latest":2025,"problem":"6.6","status":"worse_than_record","title":""},{"citations":5,"earliest":1938,"group":"Difference bases","latest":2019,"problem":"6.7","status":"world_record","title":"Difference bases"},{"citations":9,"earliest":1972,"group":"Kissing numbers","latest":2025,"problem":"6.8","status":"world_record","title":"Kissing numbers"},{"citations":3,"earliest":1919,"group":"Kakeya needle problem","latest":1999,"problem":"6.9","status":"world_record","title":"Kakeya needle problem"},{"citations":2,"earliest":2025,"group":"Kakeya needle problem","latest":2025,"problem":"6.10","status":"world_record","title":"3D Kakeya problem"},{"citations":8,"earliest":2003,"group":"Sphere packing and uncertainty principles","latest":2025,"problem":"6.11","status":"worse_than_record","title":"Uncertainty principle"},{"citations":1,"earliest":2003,"group":"Sphere packing and uncertainty principles","latest":2003,"problem":"6.12","status":"","title":"Sphere packing"},{"citations":3,"earliest":1999,"group":"Sphere packing and uncertainty principles","latest":2003,"problem":"6.13","status":"","title":"Linear programming bound"},{"citations":5,"earliest":1961,"group":"Classical inequalities","latest":2025,"problem":"6.14","status":"matched_optimal","title":"Hausdorff\u2013Young"},{"citations":1,"earliest":2025,"group":"Classical inequalities","latest":2025,"problem":"6.15","status":"matched_optimal","title":"Gagliardo\u2013Nirenberg"},{"citations":1,"earliest":1983,"group":"Classical inequalities","latest":1983,"problem":"6.16","status":"matched_optimal","title":"Special case of Gagliardo\u2013Nirenberg"},{"citations":1,"earliest":1975,"group":"Classical inequalities","latest":1975,"problem":"6.17","status":"matched_optimal","title":"Young\u2019s convolution inequality"},{"citations":3,"earliest":1998,"group":"Classical inequalities","latest":2003,"problem":"6.18","status":"worse_than_record","title":"Hardy\u2013Littlewood maximal inequality"},{"citations":6,"earliest":2003,"group":"The Ovals problem","latest":2009,"problem":"6.19","status":"matched_optimal","title":"Ovals problem"},{"citations":9,"earliest":1969,"group":"Sendov\u2019s conjecture and its variants","latest":2022,"problem":"6.20","status":"","title":"Sendov\u2019s conjecture"},{"citations":2,"earliest":1969,"group":"Sendov\u2019s conjecture and its variants","latest":1977,"problem":"6.21","status":"","title":"Schmeisser\u2019s conjecture"},{"citations":1,"earliest":2011,"group":"Sendov\u2019s conjecture and its variants","latest":2011,"problem":"6.22","status":"","title":"Borcea\u2019s conjecture"},{"citations":5,"earliest":1981,"group":"Sendov\u2019s conjecture and its variants","latest":2007,"problem":"6.23","status":"","title":"Smale\u2019s problem"},{"citations":4,"earliest":1997,"group":"Sendov\u2019s conjecture and its variants","latest":2025,"problem":"6.24","status":"","title":"de Bruin\u2013Sharma"},{"citations":9,"earliest":1965,"group":"Crouzeix\u2019s conjecture","latest":2018,"problem":"6.25","status":"","title":"Crouzeix\u2019s conjecture"},{"citations":10,"earliest":1993,"group":"Sidorenko\u2019s conjecture","latest":2025,"problem":"6.26","status":"","title":"Sidorenko\u2019s conjecture"},{"citations":3,"earliest":1852,"group":"The prime number theorem","latest":1982,"problem":"6.27","status":"worse_than_record","title":"Prime number theorem"},{"citations":10,"earliest":1962,"group":"Flat polynomials and Golay\u2019s merit factor conjecture","latest":2020,"problem":"6.28","status":"worse_than_record","title":"Golay\u2019s merit factor"},{"citations":5,"earliest":1999,"group":"The arithmetic Kakeya conjecture","latest":2025,"problem":"6.30","status":"world_record","title":"Arithmetic Kakeya conjecture"},{"citations":5,"earliest":1977,"group":"Furstenberg\u2013S\u00e1rk\u00f6zy theorem","latest":2024,"problem":"6.31","status":"","title":"Furstenberg\u2013S\u00e1rk\u00f6zy problem"},{"citations":10,"earliest":1904,"group":"Spherical designs","latest":2017,"problem":"6.32","status":"world_record","title":"Spherical designs"},{"citations":14,"earliest":1930,"group":"The Thomson and Tammes problems","latest":2025,"problem":"6.33","status":"","title":"Thomson problem"},{"citations":11,"earliest":1943,"group":"The Thomson and Tammes problems","latest":2023,"problem":"6.34","status":"","title":"Tammes problem"},{"citations":7,"earliest":1975,"group":"Packing problems","latest":2025,"problem":"6.35","status":"world_record","title":"Packing in a dilate"},{"citations":4,"earliest":2011,"group":"Packing problems","latest":2025,"problem":"6.36","status":"former_record","title":"Circle packing in a square"},{"citations":3,"earliest":1982,"group":"The Tur\u00e1n number of the tetrahedron","latest":2011,"problem":"6.37","status":"","title":"Tur\u00e1n hypergraph problem for the tetrahedron"},{"citations":1,"earliest":2025,"group":"Factoring \ud835\udc41! into \ud835\udc41 numbers","latest":2025,"problem":"6.38","status":"former_record","title":"Factoring factorials"},{"citations":2,"earliest":2024,"group":"Beat the average game","latest":2024,"problem":"6.39","status":"worse_than_record","title":"Beat the average game"},{"citations":4,"earliest":1957,"group":"Erd\u0151s discrepancy problem","latest":2016,"problem":"6.40","status":"worse_than_record","title":"Erd\u0151s discrepancy problem"},{"citations":7,"earliest":1970,"group":"Points on sphere maximizing the volume","latest":2016,"problem":"6.41","status":"","title":"Fejes\u2013T\u00f3th problem"},{"citations":1,"earliest":1996,"group":"Sums and differences problems","latest":1996,"problem":"6.42","status":"world_record","title":""},{"citations":2,"earliest":1973,"group":"Sums and differences problems","latest":1999,"problem":"6.43","status":"worse_than_record","title":""},{"citations":4,"earliest":2007,"group":"Sums and differences problems","latest":2025,"problem":"6.44","status":"former_record","title":""},{"citations":3,"earliest":1983,"group":"Sum-product problems","latest":2025,"problem":"6.45","status":"","title":"Sum-product problem"},{"citations":13,"earliest":1959,"group":"Triangle density in graphs","latest":2025,"problem":"6.46","status":"matched_optimal","title":"Minimal triangle density"},{"citations":2,"earliest":2012,"group":"Matrix multiplications and AM-GM inequalities","latest":2016,"problem":"6.47","status":"","title":""},{"citations":8,"earliest":1982,"group":"Heilbronn problems","latest":2025,"problem":"6.48","status":"world_record","title":"Heilbronn problem in a fixed bounding box"},{"citations":3,"earliest":2007,"group":"Heilbronn problems","latest":2024,"problem":"6.49","status":"world_record","title":"Heilbronn problem in an arbitrary convex bounding box"},{"citations":8,"earliest":1951,"group":"Max to min ratios","latest":2025,"problem":"6.50","status":"world_record","title":"Max to min ratios"},{"citations":1,"earliest":2023,"group":"Erd\u0151s\u2013Gy\u00e1rf\u00e1s conjecture","latest":2023,"problem":"6.51","status":"","title":"Erd\u0151s\u2013Gy\u00e1rf\u00e1s problem"},{"citations":3,"earliest":1992,"group":"Erd\u0151s squarefree problem","latest":2025,"problem":"6.52","status":"","title":"Erd\u0151s squarefree problem"},{"citations":7,"earliest":1961,"group":"Equidistant points in convex polygons","latest":2025,"problem":"6.53","status":"","title":"Erd\u0151s equidistant points in convex polygons problem"},{"citations":9,"earliest":1968,"group":"Pairwise touching cylinders","latest":2025,"problem":"6.54","status":"matched_optimal","title":"Touching cylinders"},{"citations":7,"earliest":1984,"group":"Erd\u0151s squares in a square problem","latest":2024,"problem":"6.55","status":"","title":"Squares in square"},{"citations":5,"earliest":1983,"group":"Good asymptotic constructions of Szemer\u00e9di\u2013Trotter","latest":2025,"problem":"6.56","status":"","title":"Szemer\u00e9di\u2013Trotter"},{"citations":5,"earliest":1935,"group":"Rudin problem for polynomials","latest":2016,"problem":"6.57","status":"","title":"Rudin problem"},{"citations":6,"earliest":1960,"group":"Erd\u0151s\u2013Szekeres Happy Ending problem","latest":2020,"problem":"6.58","status":"","title":"Happy ending problem"},{"citations":5,"earliest":1904,"group":"Subsets of the grid with no isosceles triangles","latest":2025,"problem":"6.59","status":"world_record","title":"Subsets of grid with no isosceles triangles"},{"citations":13,"earliest":1994,"group":"The \u201cno 5 on a sphere\u201d problem","latest":2025,"problem":"6.60","status":"world_record","title":""},{"citations":3,"earliest":1966,"group":"The Ring Loading Problem","latest":2016,"problem":"6.61","status":"world_record","title":"Ring Loading Problem Discrepancy"},{"citations":3,"earliest":1992,"group":"Moving sofa problem","latest":2025,"problem":"6.62","status":"matched_optimal","title":"Classic sofa"},{"citations":2,"earliest":2018,"group":"Moving sofa problem","latest":2025,"problem":"6.63","status":"matched_optimal","title":"Ambidextrous sofa"},{"citations":1,"earliest":2022,"group":"Moving sofa problem","latest":2022,"problem":"6.64","status":"world_record","title":"Three-dimensional sofa"},{"citations":3,"earliest":1986,"group":"International Mathematical Olympiad (IMO) 2025: Problem 6","latest":2025,"problem":"6.65","status":"matched_optimal","title":"IMO 2025, Problem 614"}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["","former_record","matched_optimal","world_record","worse_than_record"],"range":["#2f6cc1","#c1442f","#c98a00","#aaaaaa","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"title","title":"title","type":"nominal"},{"field":"group","title":"group","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"citations","title":"cited works","type":"quantitative"},{"field":"earliest","title":"earliest cited","type":"quantitative"}],"x":{"axis":{"format":"d"},"field":"latest","title":"Latest cited year","type":"quantitative"},"y":{"axis":{"format":"d"},"field":"citations","title":"Dated prior works cited","type":"quantitative"}},"height":340,"mark":{"cursor":"default","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

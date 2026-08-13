@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,13 +41,90 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>DOI records deposited with Crossref</h1>
-<p class="metric">formal publishing volume; DOI records deposited with Crossref per year, by created date</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-crossref/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-crossref/#what-it-cannot-support">Caveats</a> <a href="https://api.crossref.org/works">Source</a></p>
-<h2>DOI records created</h2>
+<p><strong>Domain:</strong> outside the three domains
+<strong>Metric:</strong> formal publishing volume; DOI records deposited with Crossref per year, by created date
+<strong>Coverage:</strong> 2010 to 2026, annual, the last year partial
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-crossref/crossref-dois-by-year.csv"><code>crossref-dois-by-year.csv</code></a>
+<strong>Upstream:</strong> <a href="https://api.crossref.org/works">https://api.crossref.org/works</a>
+<strong>Verdict:</strong> no acceleration</p>
+<h3>DOI records created</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial year; hover for the flag.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>This is the control on the other output-volume series. The rest of them rise,
+and a rising curve through the agent era invites the reading that the agent era
+produced it. Crossref is the series that shows what such a curve is worth on its
+own: it counts registrations of formal publications, the most institutionally
+conservative output anywhere in the collection, and it was climbing steeply long
+before there was an agent era to explain it.</p>
+<p>Like the rest of the volume folders it is a contrast case rather than a
+discovery series. A deposited DOI is a record that something was published, not
+a result, and nothing here says whether the work behind it was any good.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Deposits rose from 5.28 million records in 2010 to 12.80 million in 2025, up
+143% over fifteen years, with no clean bend anywhere along the way. The rise is
+not smooth: six of those fifteen year-on-year changes are falls, the most recent
+of them in 2024, when deposits dropped to 11.31 million from 12.69 million in
+2023 before recovering to a new high the year after.</p>
+<p>That 2024 dip is the most instructive part of the series, because it cannot be
+read as a fall in publishing. The count is by deposit date, so which year a
+record lands in is a fact about when a publisher registered it.</p>
+<p>The 2026 bar is drawn outlined and labelled a part year: the last row is the
+year in progress at fetch time, year-to-date through 10 August 2026, and read as a
+full year it would look like a collapse. Every figure in the chart's annotation
+is computed from the CSV when the chart is drawn, so the annotation cannot
+survive a refetch that changes the numbers.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as cumulative DOI records to date:</p>
+<p><img alt="Cumulative DOI records to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/output-crossref/cumulative-output-crossref.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-crossref/fetch.py"><code>fetch.py</code></a> makes one Crossref REST API request per year from 2010,
+filtered to that year's created-date range and asking for <code>rows=0</code> so the
+response is a count rather than the records themselves. The row for the current
+year is marked year-to-date with the date it was fetched. The requests are
+sequential with a sleep between them, which is what keeps a rebuild polite.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-crossref/figure.py"><code>figure.py</code></a> draws the series through
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>lib/families.py</code></a>'s shared volume shape: years on the
+x-axis, the count on the y-axis, 2026 shaded, the part year outlined rather than
+filled. The three volume folders use that one shape so a difference in appearance
+between any two of them is a difference in the data. It is drawn in slate rather
+than the blue the other charts use for human or uncredited finders, because this
+series has no authorship field at all.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>Deposits are not publications.</strong> Backfile deposits of old work land in
+  whatever year they were registered, which is what makes the 2024 dip
+  uninterpretable as a change in publishing.</li>
+<li><strong>No authorship labels.</strong> The series does not record whether a human or a
+  model wrote the work behind a record, so no AI share can be read off it.</li>
+<li><strong>Volume is not discovery.</strong> These count artifacts registered. The domain
+  folders count results, and the two need not move together.</li>
+<li><strong>Membership is not held fixed.</strong> A deposit exists because a publisher who
+  registers DOIs registered one, so the series cannot separate more work being
+  published from more of publishing being registered with Crossref.</li>
+<li><strong>No denominator of effort.</strong> Nothing here measures how many researchers were
+  working, so output per unit of input cannot be separated from more input.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>Nothing in this series is attributable to a model, by construction: it is a
+count of registrations with no authorship field. The series is here for the
+opposite reason to the others, and the absence works in its favour — the shape
+that matters is the one predating any model at all.</p>
+<p>The most that can be said about the agent era in this chart is that nothing
+distinctive happens in it. The 2023 high, the 2024 fall and the 2025 recovery
+are the same size as movements the series was already making in the 2010s.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The comparison this folder exists for is with its three siblings, which is why
+<a href="output-arxiv.html">arXiv</a> names it as its own control.
+<a href="output-github-pushes.html">GitHub pushes</a> bend upward; this one does
+not, over a longer window than either of them. Set the whole group against
+<a href="cyber-curl.html">curl</a>, where a fixed codebase yields a step change in
+disclosures, and against the mathematics folders such as
+<a href="math-erdos.html">the Erdős problems</a>, where the records barely move.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-crossref/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"note":"","value":5275965,"x":"2010"},{"note":"","value":6618189,"x":"2011"},{"note":"","value":6058054,"x":"2012"},{"note":"","value":6997246,"x":"2013"},{"note":"","value":6565755,"x":"2014"},{"note":"","value":6513271,"x":"2015"},{"note":"","value":7349664,"x":"2016"},{"note":"","value":8311074,"x":"2017"},{"note":"","value":8144802,"x":"2018"},{"note":"","value":8724675,"x":"2019"},{"note":"","value":10161748,"x":"2020"},{"note":"","value":10279633,"x":"2021"},{"note":"","value":10210825,"x":"2022"},{"note":"","value":12694453,"x":"2023"},{"note":"","value":11305092,"x":"2024"},{"note":"","value":12802642,"x":"2025"},{"note":"","value":8108195,"x":"2026"}]},"encoding":{"tooltip":[{"field":"x","title":"year","type":"ordinal"},{"field":"value","title":"DOI records created","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","title":"DOI records created","type":"quantitative"}},"height":340,"mark":{"color":"#37474f","type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

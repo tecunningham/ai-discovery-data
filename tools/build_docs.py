@@ -1,18 +1,26 @@
 #!/usr/bin/env python3
-"""Generate docs/ — one interactive page per problem folder.
+"""Generate docs/ — the browsable, canonical rendering of the collection.
 
     python3 tools/build_docs.py
 
-Each problems/<slug>/ README keeps its committed PNG as the canonical static
-figure; the pages built here are the interactive companions, served by GitHub
-Pages from docs/. Every chart is a Vega-Lite spec with the folder's CSV rows
-inlined, so a page is a self-contained artifact rebuilt whenever the data
-changes — the same model as the PNGs, with `make docs` beside `make figures`.
+Each problem page renders its folder's README in full — the discussion is the
+document, not a caption — with the interactive chart embedded where the README
+embeds its primary PNG. Supplementary PNGs are shown from the repository's own
+raw URLs, so the pages hold no image copies; every chart is a Vega-Lite spec
+with the folder's CSV rows inlined, so a page is a self-contained artifact
+rebuilt whenever the data or the document changes — the same model as the
+PNGs, with `make docs` beside `make figures`. The site index is the root
+README, rendered the same way, and CUMULATIVE.md and ADDITIONAL-CANDIDATES.md
+get pages of their own, which is what makes GitHub Pages the one canonical
+place to browse the data.
 
 The registry at the bottom maps every series to one of a handful of chart
-shapes (annual bars, record steps, a problem ledger, plain lines, a labelled
+shapes (periodic bars, record steps, a problem ledger, plain lines, a labelled
 scatter). A folder missing from the registry fails the build loudly rather
 than silently shipping an index without it.
+
+Markdown is rendered with the `markdown` package (pinned in requirements.txt
+for the container; `pip install markdown` on a host that lacks it).
 """
 
 from __future__ import annotations
@@ -24,6 +32,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import markdown
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -32,6 +42,18 @@ from lib.table import read_csv  # noqa: E402
 DOCS = ROOT / "docs"
 PAGES_BASE = "https://tecunningham.github.io/ai-discovery-data"
 REPO_BASE = "https://github.com/tecunningham/ai-discovery-data"
+RAW_BASE = ("https://raw.githubusercontent.com/tecunningham/"
+            "ai-discovery-data/main")
+BLOB_BASE = f"{REPO_BASE}/blob/main"
+
+# The one place the pages' math is rendered; a couple of documents carry
+# $…$ TeX. Inline math spans are shielded from the markdown pass below.
+MATHJAX_CDN = (
+    "<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>\n"
+    '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">'
+    "</script>"
+)
+CHARTS_PLACEHOLDER = "\x00CHARTS\x00"
 
 # lib/chart.py's palette, restated for the web pages so the interactive and
 # static versions of a series read as the same chart.
@@ -72,6 +94,71 @@ def readme_fields(slug: str) -> dict[str, str]:
         match = re.search(rf"^\*\*{field}:\*\*\s*(.+)$", text, re.M)
         fields[field.lower()] = match.group(1).strip() if match else ""
     return fields
+
+
+def _protect_math(text: str) -> tuple[str, list[str]]:
+    """Shield $…$ spans from the markdown pass; MathJax renders them later.
+
+    Without this, underscores inside TeX become emphasis and the math never
+    reaches the browser intact. Only single-line spans are shielded, which is
+    all the documents use.
+    """
+    stash: list[str] = []
+
+    def keep(match: re.Match) -> str:
+        stash.append(match.group(0))
+        return f"\x00MATH{len(stash) - 1}\x00"
+
+    return re.sub(r"\$[^$\n]+\$", keep, text), stash
+
+
+def _restore_math(rendered: str, stash: list[str]) -> str:
+    for index, span in enumerate(stash):
+        rendered = rendered.replace(f"\x00MATH{index}\x00", html.escape(span))
+    return rendered
+
+
+def render_markdown(text: str) -> str:
+    shielded, stash = _protect_math(text)
+    rendered = markdown.markdown(
+        shielded, extensions=["tables", "fenced_code", "toc"])
+    return _restore_math(rendered, stash)
+
+
+def _rewrite_folder_markdown(text: str, slug: str) -> str:
+    """Point a folder README's relative links at their browsable homes.
+
+    Sibling documents become sibling pages, the cumulative index becomes its
+    page, repository files go to the GitHub blob view, and supplementary PNGs
+    are served from the repository's raw URLs — the pages keep no copies. The
+    primary figure embed (the first image) becomes the placeholder the
+    interactive charts are inserted at.
+    """
+    text = re.sub(r"!\[([^\]]*)\]\(([^)/]+\.png)\)", CHARTS_PLACEHOLDER, text,
+                  count=1)
+    text = re.sub(r"(?<=\])\(([^)/]+\.png)\)",
+                  rf"({RAW_BASE}/problems/{slug}/\1)", text)
+    text = re.sub(r"(?<=\])\(\.\./([a-z0-9-]+)/README\.md\)", r"(\1.html)",
+                  text)
+    text = re.sub(r"(?<=\])\(\.\./\.\./CUMULATIVE\.md\)", "(cumulative.html)",
+                  text)
+    text = re.sub(r"(?<=\])\(\.\./\.\./([^)#\s]+)\)",
+                  rf"({BLOB_BASE}/\1)", text)
+    text = re.sub(r"(?<=\])\(([^)/:#\s]+\.(?:csv|py|bib|json|yml|txt))\)",
+                  rf"({BLOB_BASE}/problems/{slug}/\1)", text)
+    return text
+
+
+def readme_body(slug: str) -> str:
+    """The folder README as page HTML, title line dropped, links rewritten.
+
+    The H1 is dropped because the page template renders the title itself; the
+    placeholder left by the first image embed is where render_page inserts
+    the interactive charts.
+    """
+    text = (ROOT / "problems" / slug / "README.md").read_text(encoding="utf-8")
+    text = re.sub(r"^#\s+.+\n", "", text, count=1)
+    return render_markdown(_rewrite_folder_markdown(text, slug))
 
 
 def base_spec(values: list[dict], height: int = 340) -> dict:
@@ -260,6 +347,94 @@ def split_series(csv: str, columns: dict[str, str], colors: dict[str, str],
         return [(y_title,
                  stacked_bars(rows, "year", columns, colors, y_title=y_title),
                  "The final bar is a partial year.")]
+    return build
+
+
+def _period_axis(period: str) -> dict:
+    """An ordinal period axis labelled once a year.
+
+    Forty quarters or a hundred months of tick labels are unreadable; the
+    year is written on each January or Q1 bar and the tooltip carries the
+    full period label.
+    """
+    marker = "-Q1" if period == "quarter" else "-01"
+    return {"labelExpr": f"test(/{marker}$/, datum.value) ? "
+                         "substring(datum.value, 0, 4) : ''",
+            "labelAngle": 0}
+
+
+def _fill_periods(rows: list[dict], period: str) -> list[dict]:
+    """Insert zero rows for periods a sparse CSV skips.
+
+    An ordinal axis draws only the labels it is given, so a quiet quarter
+    that has no CSV row would silently compress time — 2004 sitting beside
+    2009. Numeric columns of the synthesized rows are empty strings, which
+    ``num`` reads as None and Vega-Lite draws as nothing.
+    """
+    def successor(label: str) -> str:
+        year, part = label.split("-")
+        if period == "quarter":
+            index = int(part[1])
+            return (f"{year}-Q{index + 1}" if index < 4
+                    else f"{int(year) + 1}-Q1")
+        index = int(part)
+        return (f"{year}-{index + 1:02d}" if index < 12
+                else f"{int(year) + 1}-01")
+
+    filled = []
+    expected = rows[0][period]
+    for row in rows:
+        while row[period] != expected:
+            filled.append({key: ("0" if key != period else expected)
+                           for key in row})
+            expected = successor(expected)
+        filled.append(row)
+        expected = successor(row[period])
+    return filled
+
+
+def periodic_series(csv: str, period: str, y_column: str, y_title: str,
+                    drop_leading_zeros: bool = False):
+    """Single-band bars at a quarterly or monthly cadence."""
+    def build(slug: str):
+        rows = load(slug, csv)
+        if drop_leading_zeros:
+            first = next(i for i, r in enumerate(rows) if num(r[y_column]))
+            rows = rows[first:]
+        rows = _fill_periods(rows, period)
+        values = [{"x": r[period], "value": num(r[y_column]),
+                   "note": ("partial " + period
+                            if r.get(f"partial_{period}") == "yes" else "")}
+                  for r in rows]
+        spec = base_spec(values)
+        spec.update({
+            "mark": {"type": "bar", "color": DARKGREY},
+            "encoding": {
+                "x": {"field": "x", "type": "ordinal",
+                      "title": period.capitalize(),
+                      "axis": _period_axis(period)},
+                "y": {"field": "value", "type": "quantitative",
+                      "title": y_title},
+                "tooltip": tooltip([("x", "ordinal", period),
+                                    ("value", "quantitative", y_title),
+                                    ("note", "nominal", "note")]),
+            },
+        })
+        return [(y_title, spec,
+                 f"The final bar is a partial {period}; hover for the flag.")]
+    return build
+
+
+def periodic_split_series(csv: str, period: str, columns: dict[str, str],
+                          colors: dict[str, str], y_title: str):
+    """Stacked bands at a quarterly or monthly cadence."""
+    def build(slug: str):
+        rows = _fill_periods(load(slug, csv), period)
+        spec = stacked_bars(rows, period, columns, colors,
+                            x_title=period.capitalize(), y_title=y_title)
+        spec["encoding"]["x"]["axis"] = _period_axis(period)
+        return [(y_title, spec,
+                 f"The final bar is a partial {period}.")]
     return build
 
 
@@ -467,7 +642,8 @@ def build_stockfish(slug: str):
 
 
 def build_openssl(slug: str):
-    rows = load(slug, "openssl-vulnerabilities.csv")
+    from collections import Counter, defaultdict
+
     columns = {"corroborated_ai": "corroborated AI",
                "ai_affiliated_unverified": "AI-affiliated, unverified",
                "conventional_or_fuzz": "conventional or fuzzing",
@@ -476,10 +652,28 @@ def build_openssl(slug: str):
     # has no separate fuzz band), so the interactive page matches that choice.
     colors = {"corroborated AI": AI, "AI-affiliated, unverified": FUZZ,
               "conventional or fuzzing": HUMAN, "unknown": NEUTRAL}
-    charts = [("Disclosures per year by finder provenance",
-               stacked_bars(rows, "year", columns, colors,
-                            y_title="CVEs disclosed"),
-               "The final bar is a partial year.")]
+    # The same quarter × provenance aggregation the folder's figure.py draws,
+    # from the same per-CVE ledger, so the two views cannot disagree.
+    per_quarter: dict[str, Counter] = defaultdict(Counter)
+    for r in load(slug, "openssl-cves.csv"):
+        quarter = f'{r["published"][:4]}-Q{(int(r["published"][5:7]) + 2) // 3}'
+        if r["explicit_ai"] == "yes":
+            per_quarter[quarter]["corroborated_ai"] += 1
+        elif r["ai_affiliated"] == "yes":
+            per_quarter[quarter]["ai_affiliated_unverified"] += 1
+        elif r["reporter"]:
+            per_quarter[quarter]["conventional_or_fuzz"] += 1
+        else:
+            per_quarter[quarter]["unknown"] += 1
+    rows = _fill_periods(
+        [{"quarter": quarter, **{key: str(per_quarter[quarter][key])
+                                 for key in columns}}
+         for quarter in sorted(per_quarter)], "quarter")
+    spec = stacked_bars(rows, "quarter", columns, colors,
+                        x_title="Quarter", y_title="CVEs disclosed")
+    spec["encoding"]["x"]["axis"] = _period_axis("quarter")
+    charts = [("Disclosures per quarter by finder provenance", spec,
+               "The final bar is a partial quarter.")]
     per_cve = [{"date": r["published"], "severity": r["severity"],
                 "cve": r["cve"], "reporter": (r["reporter"] or "—")[:160],
                 "url": r["source_url"]}
@@ -732,22 +926,59 @@ def build_omega(slug: str):
     return [("Matrix-multiplication exponent ω", spec, "")]
 
 
-def build_microsoft(slug: str):
-    charts = split_series(
-        "msrc-cves.csv",
+def build_firefox(slug: str):
+    charts = periodic_split_series(
+        "firefox-quarterly.csv", "quarter",
         {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
          "fuzz": "fuzzer", "other": "other"},
         {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
-         "other": HUMAN}, "CVEs issued")(slug)
-    monthly = [{"x": f'{r["month"]}-01', "series": "CVEs",
-                "value": num(r["cves"])}
-               for r in load(slug, "msrc-monthly.csv")]
-    spec = plain_lines(monthly, x="x", x_type="temporal",
-                       y_title="CVEs per month",
-                       series_colors={"CVEs": DARKGREY})
-    charts.append(("Monthly counts", spec,
-                   "One point per monthly security-update document; "
-                   "out-of-band fixes land in the month they shipped."))
+         "other": HUMAN}, "Distinct CVEs")(slug)
+    per_cve = [{"date": r["date"], "impact": r["impact"], "cve": r["cve"],
+                "band": r["band"],
+                "reporters": (r["reporters"] or "—")[:160]}
+               for r in load(slug, "firefox-cves.csv") if r["date"]]
+    impact_order = ["Critical", "High", "Moderate", "Low", "Unrated"]
+    spec = scatter(per_cve, x="date", x_type="temporal", y="impact",
+                   y_type="nominal", y_title=None, y_sort=impact_order,
+                   x_title="Announced",
+                   tips=[("cve", "nominal", "CVE"),
+                         ("date", "temporal", "announced"),
+                         ("impact", "nominal", "impact"),
+                         ("band", "nominal", "credit band"),
+                         ("reporters", "nominal", "reporters")],
+                   color=("band", {"explicit_ai": AI, "ai_affiliated": AI_SOFT,
+                                   "fuzz": FUZZ, "other": HUMAN}),
+                   height=260)
+    charts.append(("Every distinct CVE, by impact", spec,
+                   "Mozilla's advisory impact rating; colour is the credit "
+                   "band. The few undated CVEs are absent."))
+    return charts
+
+
+def build_osv(slug: str):
+    charts = periodic_series(
+        "osv-cves-by-quarter.csv", "quarter", "distinct_cves",
+        "Distinct CVEs")(slug)
+    severity = stacked_bars(
+        load(slug, "osv-severity-by-year.csv"), "year",
+        {"critical": "Critical", "high": "High", "moderate": "Moderate",
+         "low": "Low", "unrated": "Unrated"},
+        {"Critical": "#002435", "High": "#234f61", "Moderate": "#547d8f",
+         "Low": "#87afc1", "Unrated": NEUTRAL},
+        y_title="CVEs")
+    charts.append(("Ecosystem severity labels by year", severity,
+                   "Labels cover about a third of CVEs; Unrated is missing "
+                   "data, not a rating."))
+    credits = stacked_bars(
+        load(slug, "osv-credits-by-year.csv"), "year",
+        {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
+         "fuzz": "fuzzer", "other_credited": "other credited"},
+        {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
+         "other credited": HUMAN},
+        y_title="Credited CVEs")
+    charts.append(("Finder credits by year", credits,
+                   "About 1% of CVEs carry any credit; the uncredited "
+                   "majority is not drawn."))
     return charts
 
 
@@ -790,27 +1021,27 @@ SERIES: dict[str, object] = {
     "algorithms-miplib": build_miplib,
     "algorithms-nanogpt": build_nanogpt,
     "algorithms-stockfish": build_stockfish,
-    "cyber-curl": split_series(
-        "curl-vulnerabilities.csv",
+    "cyber-curl": periodic_split_series(
+        "curl-vulnerabilities-quarterly.csv", "quarter",
         {"ai_attributed": "AI-attributed", "other_attributed": "other"},
         {"AI-attributed": AI, "other": HUMAN}, "CVEs disclosed"),
-    "cyber-firefox": split_series(
-        "firefox-advisories.csv",
-        {"unique_explicit_ai": "explicit AI",
-         "unique_ai_affiliated": "AI-affiliated",
-         "unique_fuzz": "fuzzer", "unique_other": "other"},
+    "cyber-firefox": build_firefox,
+    "cyber-kev-exploited": periodic_series(
+        "kev-by-quarter.csv", "quarter", "kev_added", "CVEs added to KEV",
+        drop_leading_zeros=True),
+    "cyber-microsoft": periodic_split_series(
+        "msrc-monthly.csv", "month",
+        {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
+         "fuzz": "fuzzer", "other": "other"},
         {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
-         "other": HUMAN}, "Distinct CVEs"),
-    "cyber-kev-exploited": annual_series(
-        "kev-by-year.csv", "kev_added", "CVEs added to KEV"),
-    "cyber-microsoft": build_microsoft,
-    "cyber-nvd-disclosed": annual_series(
-        "nvd-by-year.csv", "nvd_published", "CVEs published"),
+         "other": HUMAN}, "CVEs issued"),
+    "cyber-nvd-disclosed": periodic_series(
+        "nvd-by-quarter.csv", "quarter", "nvd_published", "CVEs published"),
     "cyber-openssl": build_openssl,
-    "cyber-oss-fuzz": annual_series(
-        "ossfuzz-discoveries.csv", "discoveries", "Records published"),
-    "cyber-osv-cves": annual_series(
-        "osv-cves-by-year.csv", "distinct_cves", "Distinct CVEs"),
+    "cyber-oss-fuzz": periodic_series(
+        "ossfuzz-by-quarter.csv", "quarter", "discoveries",
+        "Records published"),
+    "cyber-osv-cves": build_osv,
     "algorithms-ecdsa-circuit": build_ecdsa_circuit,
     "integer-factorization": build_factoring,
     "math-alphaevolve-inventory": build_alphaevolve_inventory,
@@ -836,6 +1067,34 @@ SERIES: dict[str, object] = {
     "output-github-pushes": build_github_pushes,
 }
 
+STYLE = """
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+"""
+
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -844,28 +1103,17 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <title>{title} — ai-discovery-data</title>
 <base target="_blank">
 {vega}
-<style>
-body {{ font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
-       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
-       padding: 24px 18px 60px; }}
-h1 {{ font-size: 1.5em; margin-bottom: 0.2em; }}
-h2 {{ font-size: 1.1em; margin: 1.6em 0 0.4em; }}
-.metric {{ color: #57606a; margin: 0 0 0.6em; }}
-.links a {{ margin-right: 1.2em; }}
-.chart {{ width: 100%; }}
-.note {{ color: #57606a; font-size: 0.88em; margin-top: 0.3em; }}
-footer {{ margin-top: 3em; color: #57606a; font-size: 0.85em;
-         border-top: 1px solid #d8dee4; padding-top: 0.8em; }}
-</style>
+{mathjax}
+<style>{style}</style>
 </head>
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>{title}</h1>
-<p class="metric">{metric}</p>
-<p class="links">{links}</p>
-{charts}
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+{body}
+<footer>This page renders the folder's
+<a href="{repo}/tree/main/problems/{slug}/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 {embeds}
@@ -874,50 +1122,33 @@ repository; both are drawn from the same CSV. Rebuilt by
 </html>
 """
 
-INDEX_TEMPLATE = """<!DOCTYPE html>
+ROOT_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ai-discovery-data — interactive charts</title>
-<style>
-body {{ font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
-       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
-       padding: 24px 18px 60px; }}
-h1 {{ font-size: 1.5em; }}
-li {{ margin: 0.35em 0; }}
-.metric {{ color: #57606a; }}
-</style>
+<title>{title}</title>
+<base target="_blank">
+<style>{style}</style>
 </head>
 <body>
-<h1>ai-discovery-data — interactive charts</h1>
-<p>Interactive companions to the static charts in
-<a href="{repo}">the repository</a>. Hover any mark for the underlying
-record; on several charts a click opens the original reference.</p>
-<ul>
-{items}
-</ul>
+{nav}
+{body}
+<footer>Rendered from
+<a href="{repo}/blob/main/{source}">{source}</a> by
+<code>tools/build_docs.py</code>; the repository is the archival
+record.</footer>
 </body>
 </html>
 """
 
 
 def render_page(slug: str, charts) -> str:
-    fields = readme_fields(slug)
-    links = [
-        f'<a href="{REPO_BASE}/tree/main/problems/{slug}/">Discussion</a>',
-        f'<a href="{REPO_BASE}/tree/main/problems/{slug}/'
-        f'#what-it-cannot-support">Caveats</a>',
-    ]
-    upstream = re.search(r"https?://[^\s<>()\[\]`\"']+",
-                         fields.get("upstream", ""))
-    if upstream:
-        links.append(f'<a href="{upstream.group(0).rstrip(".,;")}">'
-                     "Source</a>")
+    body = readme_body(slug)
     blocks, embeds = [], []
     for index, (heading, spec, note) in enumerate(charts):
         div = f"chart{index}"
-        blocks.append(f"<h2>{html.escape(heading)}</h2>\n"
+        blocks.append(f"<h3>{html.escape(heading)}</h3>\n"
                       f'<div id="{div}" class="chart"></div>'
                       + (f'\n<p class="note">{html.escape(note)}</p>'
                          if note else ""))
@@ -926,11 +1157,63 @@ def render_page(slug: str, charts) -> str:
             + json.dumps(spec, separators=(",", ":"), sort_keys=True)
             + ", {actions: {export: true, source: false, compiled: false, "
               "editor: false}});")
+    charts_html = "\n".join(blocks)
+    if CHARTS_PLACEHOLDER in body:
+        # The placeholder may sit inside the <p> markdown wrapped around the
+        # image it replaced; the chart divs are block elements, so close and
+        # reopen the paragraph around them.
+        body = body.replace(f"<p>{CHARTS_PLACEHOLDER}</p>", charts_html)
+        body = body.replace(CHARTS_PLACEHOLDER, f"</p>{charts_html}<p>")
+    else:
+        body += charts_html
     return PAGE_TEMPLATE.format(
-        title=html.escape(fields["title"]),
-        metric=html.escape(fields.get("metric", "")),
-        links=" ".join(links), vega=VEGA_CDN,
-        charts="\n".join(blocks), embeds="\n".join(embeds))
+        title=html.escape(readme_fields(slug)["title"]),
+        vega=VEGA_CDN, mathjax=MATHJAX_CDN, style=STYLE, body=body,
+        repo=REPO_BASE, slug=slug, embeds="\n".join(embeds))
+
+
+def _rewrite_root_markdown(text: str) -> str:
+    """Point a root document's repository links at their browsable homes.
+
+    Applies to both the markdown links the prose uses and the raw HTML the
+    generated tables hold: folder links become series pages, PNGs are served
+    from raw URLs, data files and code go to the blob view, and the two
+    sibling root documents become their own pages.
+    """
+    text = re.sub(r'(href=")problems/([a-z0-9-]+)/(")', r"\1\2.html\3", text)
+    text = re.sub(r'(src=")(problems/[^"]+\.png)(")',
+                  rf"\1{RAW_BASE}/\2\3", text)
+    text = re.sub(r'(href=")(problems/[^"]+)(")', rf"\1{BLOB_BASE}/\2\3", text)
+    text = re.sub(r"(?<=\])\(problems/([a-z0-9-]+)/\)", r"(\1.html)", text)
+    text = re.sub(r"(?<=\])\((problems/[^)#\s]+)\)", rf"({BLOB_BASE}/\1)",
+                  text)
+    text = re.sub(r"(?<=\])\(README\.md\)", "(index.html)", text)
+    text = re.sub(r"(?<=\])\(CUMULATIVE\.md\)", "(cumulative.html)", text)
+    text = re.sub(r"(?<=\])\(ADDITIONAL-CANDIDATES\.md\)",
+                  "(additional-candidates.html)", text)
+    text = re.sub(r"(?<=\])\((?!https?://|#|[a-z0-9-]+\.html)([^)\s]+)\)",
+                  rf"({BLOB_BASE}/\1)", text)
+    return text
+
+
+def render_root(source: str) -> str:
+    """One of the root documents (README, CUMULATIVE, the appendix) as a page."""
+    text = (ROOT / source).read_text(encoding="utf-8")
+    title = re.match(r"#\s+(.+)", text).group(1).strip()
+    nav = ("" if source == "README.md" else
+           '<p class="links"><a href="index.html" target="_self">'
+           "← all series</a></p>")
+    return ROOT_TEMPLATE.format(
+        title=html.escape(title), style=STYLE, nav=nav,
+        body=render_markdown(_rewrite_root_markdown(text)),
+        repo=REPO_BASE, source=source)
+
+
+ROOT_PAGES = {
+    "index.html": "README.md",
+    "cumulative.html": "CUMULATIVE.md",
+    "additional-candidates.html": "ADDITIONAL-CANDIDATES.md",
+}
 
 
 def main() -> int:
@@ -947,19 +1230,14 @@ def main() -> int:
         print("add entries to SERIES in tools/build_docs.py")
         return 1
     DOCS.mkdir(exist_ok=True)
-    items = []
     for slug in folders:
         charts = SERIES[slug](slug)
         (DOCS / f"{slug}.html").write_text(render_page(slug, charts),
                                            encoding="utf-8")
-        fields = readme_fields(slug)
-        items.append(f'<li><a href="{slug}.html">{html.escape(fields["title"])}'
-                     f'</a> — <span class="metric">'
-                     f'{html.escape(fields.get("metric", ""))}</span></li>')
-    (DOCS / "index.html").write_text(
-        INDEX_TEMPLATE.format(repo=REPO_BASE, items="\n".join(items)),
-        encoding="utf-8")
-    print(f"wrote docs/: {len(folders)} series pages and index.html")
+    for page, source in ROOT_PAGES.items():
+        (DOCS / page).write_text(render_root(source), encoding="utf-8")
+    print(f"wrote docs/: {len(folders)} series pages and "
+          f"{len(ROOT_PAGES)} root pages")
     return 0
 
 

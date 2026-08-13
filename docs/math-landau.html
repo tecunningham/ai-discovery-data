@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,13 +41,91 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Landau&#x27;s problems</h1>
-<p class="metric">dated resolutions per year across 4 scored rows</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-landau/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-landau/#what-it-cannot-support">Caveats</a> <a href="https://en.wikipedia.org/wiki/Landau%27s_problems">Source</a></p>
-<h2>Per-problem resolution timeline</h2>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> dated resolutions per year across 4 scored rows
+<strong>Coverage:</strong> 1912–2026, with no dated resolution anywhere in that span
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-landau/landau-problems.csv"><code>landau-problems.csv</code></a>
+<strong>Upstream:</strong> <a href="https://en.wikipedia.org/wiki/Landau%27s_problems">https://en.wikipedia.org/wiki/Landau%27s_problems</a>
+<strong>Verdict:</strong> no acceleration</p>
+<h3>Per-problem resolution timeline</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>Landau named four problems about the primes at the 1912 International Congress
+of Mathematicians: Goldbach's conjecture, the twin prime conjecture, Legendre's
+conjecture that a prime lies between consecutive squares, and the infinitude of
+primes of the form $n^2+1$. All four are still open.</p>
+<p>A "discovery" in this series is a row moving to resolved, on the year a secondary
+consensus account gives. There are four rows, no subproblem splitting, and no
+contested classifications, so the ledger is as simple as a ledger gets — and as
+coarse.</p>
+<p>It is in the collection as a baseline rather than as a test. A famous list that
+has not moved in one hundred and fourteen years is what the pre-AI resolution
+cadence of prestige mathematics looks like at its slowest, and it is the
+comparison against which a claim about AI and famous open problems has to be
+read. The instrument warning that applies to <a href="math-hilbert.html">Hilbert</a>
+applies with more force here: these are problems selected for depth, and depth
+here means no candidate answer can be scored cheaply, which is the condition
+under which every AI result in this collection has arrived.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Nothing, and that is the reading. All four rows are open, and the chart says no
+row has a dated resolution. There is no red event because there are no events at
+all.</p>
+<p>The one thing this establishes is a bound. Whatever AI has contributed to
+mathematics through mid-2026, it has not closed a Landau problem, and no source
+behind this collection claims otherwise.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this ledger
+as rows remaining, declining toward zero as dated resolutions arrive:</p>
+<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-landau/cumulative-math-landau.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-landau/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> shape in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which reads
+<code>landau-problems.csv</code>, keeps the rows whose <code>status</code> is <code>resolved</code> with a
+non-empty <code>resolved_year</code>, and counts resolution events by year from the 1912
+<code>list_year</code> to the present. Here that event set is empty, so the chart states
+that directly.</p>
+<p>The rows are transcribed by hand from the consensus ledger named in the <code>source</code>
+column, so there is no <code>fetch.py</code> in this folder. There is no machine-readable
+upstream to rebuild from: the status of a famous conjecture is a judgment in the
+literature rather than a feed.</p>
+<p>No <code>ai_problem</code> argument is passed, because there is no such row.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>Zero events cannot carry a rate.</strong> A series with no resolutions in it has no
+  event rate to compare, in either direction.</li>
+<li><strong>Four rows is the coarsest ledger here.</strong> The finest change it can register is
+  one quarter.</li>
+<li><strong>A binary status hides real progress.</strong> Bounded gaps between primes were
+  established in 2013 by Zhang and sharpened by the Polymath follow-ons, and the
+  ternary Goldbach problem was settled by Helfgott, none of which moves a row on
+  this ledger. The series measures falls, not advances.</li>
+<li><strong>The rows overlap other lists.</strong> Goldbach and twin primes are also scored on
+  Hilbert's list, as its row 8b [@wikipedia2026hilbert], so this is not an
+  independent draw.</li>
+<li><strong>Resolution landmarks are not effort-adjusted discovery rates</strong>, and effort on
+  the primes has certainly risen over the century.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None. No AI system has resolved a Landau problem, and none is credited with
+partial progress on one in any source behind this collection.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The four problems and their statuses come from the consensus ledger linked above,
+which has no bibliography entry here; the overlapping Hilbert row is
+[@wikipedia2026hilbert]. That a record series can sit still for decades with no
+AI anywhere in it, so that flatness is not evidence of an exhausted frontier, is
+Sherry and Thompson's finding across algorithm families [@sherry2021fast]. That
+scored mathematical progress arrives where verification is cheap — which these
+four problems are the opposite of — is the explicit selection rule of the
+benchmark designers who built a problem set on it [@arxiv2026horizonmath]. The
+companion ledgers are <a href="math-hilbert.html">Hilbert</a>,
+<a href="math-thurston.html">Thurston</a>, <a href="math-smale.html">Smale</a>,
+<a href="math-millennium.html">Millennium</a> and <a href="math-topp.html">TOPP</a>;
+the corpus where an AI-contributed flow is measurable at all is
+<a href="math-erdos.html">Erdős</a>.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-landau/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"notes":"","problem":"Goldbach conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Twin prime conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Legendre's conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Primes of the form n^2+1","resolver":"\u2014","status":"open","year":2026}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["open"],"range":["#aaaaaa"]},"title":null,"type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"resolver","title":"resolver","type":"nominal"},{"field":"notes","title":"notes","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"domain":[1910,2028]},"title":"Resolution year (open problems drawn at 2026; list posed 1912)","type":"quantitative"},"y":{"field":"problem","sort":["Goldbach conjecture","Twin prime conjecture","Legendre's conjecture","Primes of the form n^2+1"],"title":null,"type":"nominal"}},"height":220,"mark":{"cursor":"default","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

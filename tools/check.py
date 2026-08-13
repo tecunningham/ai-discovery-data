@@ -790,6 +790,21 @@ def stale_docs(problems: list[Problem]) -> list[str]:
             continue
         if page.read_text(encoding="utf-8") != rendered:
             out.append(f"docs/{slug}.html is stale; run `make docs`")
+    # The root pages are deterministic functions of the root documents, so
+    # they get the same byte comparison: an edited README with an unbuilt
+    # index page is the docs equivalent of a stale generated table.
+    for page_name, source in build_docs.ROOT_PAGES.items():
+        page = ROOT / "docs" / page_name
+        if not page.exists():
+            out.append(f"docs/{page_name} is missing; run `make docs`")
+            continue
+        try:
+            rendered = build_docs.render_root(source)
+        except Exception as error:
+            out.append(f"docs builder for {source} fails: {error}")
+            continue
+        if page.read_text(encoding="utf-8") != rendered:
+            out.append(f"docs/{page_name} is stale; run `make docs`")
     return out
 
 

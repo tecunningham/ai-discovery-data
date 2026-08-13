@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,12 +41,121 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>modded-nanogpt training speedrun</h1>
-<p class="metric">minutes of training to a fixed target validation loss, per accepted record</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-nanogpt/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-nanogpt/#what-it-cannot-support">Caveats</a> <a href="https://github.com/KellerJordan/modded-nanogpt">Source</a></p>
-<h2>modded-nanogpt speedrun records</h2>
+<p><strong>Domain:</strong> algorithms
+<strong>Metric:</strong> minutes of training to a fixed target validation loss, per accepted record
+<strong>Coverage:</strong> 2024-05-28 to 2026-07-17, all 89 records listed in the repository README
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/nanogpt-records.csv"><code>nanogpt-records.csv</code></a>
+<strong>Upstream:</strong> <a href="https://github.com/KellerJordan/modded-nanogpt">https://github.com/KellerJordan/modded-nanogpt</a> (record table in the README at <a href="https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md">https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md</a>)
+<strong>Verdict:</strong> no acceleration</p>
+<h3>modded-nanogpt speedrun records</h3>
 <div id="chart0" class="chart"></div>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>A public competition to train a GPT-2-scale language model to a fixed target
+validation loss in as little wall-clock time as possible. The target is fixed by
+the rules, so a record is not a better model: it is the same capability reached
+with less compute. That is what makes the series an efficiency curve rather than
+a capability curve, and it is why an AI-set record here is directly comparable
+with a human one.</p>
+<p>A "discovery" is one record accepted into the README's table, dated and credited
+to a named entrant. The ledger is unusually good for this collection — every
+record carries a day-precise date and an author, which is what allows the AI
+share to be counted rather than estimated.</p>
+<p>The fixed-hardware assumption comes from the leaderboard's own rules. The
+vendored CSV carries only the record number, date, minutes, agent, credited AI
+system, and a note, so nothing in the data itself pins the machine.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>45.0 minutes at the llm.c baseline of 2024-05-28, down to 1.23 minutes at
+record 89 on 2026-07-17 — a reduction of about 37 times in a little over two
+years. Five of the 89 records are credited to AI-agent companies: record 32 to
+hiverge.ai at 2.625 minutes (2025-09-11), record 60 to Locus at 1.765
+(2026-01-16), record 69 to Aster at 1.528 (2026-02-02), record 72 to Station at
+1.496 (2026-02-10), and record 87 to Recursive at 1.256 (2026-06-11).</p>
+<p>The AI records are real and small. Measuring each against the record it
+displaced gives 1.2%, 0.9%, 0.5%, 1.3% and 0.8% — this repository's arithmetic
+over the vendored series, not figures the README prints. The deep gains are human:
+the Muon optimizer at about 21% and U-Net skip connections at about 8%.</p>
+<p>Records arrive faster in the agent era while each one buys less: 17 records in
+2024, 39 in 2025, and 33 in the first seven months of 2026. Over the same three
+periods the standing record fell by a factor of 12.6, then 1.9, then 1.5. So the
+flat tail is where the AI records sit, and the series does not bend upward when
+they arrive.</p>
+<p>One wrinkle in the fine structure has a documented cause. Records 22 to 24, in
+May 2025, are slower than record 21 of January 2025 as printed in the README's
+own table, because the leaderboard changed how it times a run after record 21:
+ten formerly untimed warmup steps became timed, worth about 850ms, and
+<code>torch._inductor.config.coordinate_descent_tuning</code> was banned, worth about
+three seconds. Upstream re-timed record 21 under the new rules at 2.997 minutes
+and again on the then-current torch at 3.014. Against 3.014, records 22 to 24
+at 2.990, 2.979 and 2.966 are genuine improvements, not a regression. Both
+re-timings are vendored as <code>kind=retiming</code> rows and drawn as open markers, so
+the discontinuity is visible rather than inferred.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as the standing record's value over time:</p>
+<p><img alt="Standing record for training minutes over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-nanogpt/cumulative-algorithms-nanogpt.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/figure.py"><code>figure.py</code></a>
+reads <code>nanogpt-records.csv</code>, converts each <code>date</code> to a year fraction, and draws
+<code>minutes</code> as a step function through all 89 rows with <code>kind=record</code>. Each record is a point
+coloured by the <code>agent</code> column, red where it is <code>ai</code> and blue where it is
+<code>human</code>, with the AI points drawn larger and labelled from the <code>ai_system</code>
+column. January 2026 onward is shaded, as in every figure here.</p>
+<p>The y axis is logarithmic, with ticks set explicitly at 1.5, 2, 3, 5, 10, 20 and
+45. A linear axis would compress the whole 2025–2026 stretch into the bottom of
+the frame, which is exactly the region the slope question is about. Apart from
+the two re-timings, nothing is plotted with an open marker on this series,
+because every record row carries a firm date and an acknowledged holder.</p>
+<p>The rows are transcribed by hand, since attributing a record needs judgment the
+README states only in prose. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/fetch.py"><code>fetch.py</code></a> is therefore a staleness probe
+rather than a fetcher: it reads the upstream README and reports if a record past
+the vendored series has been accepted.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>A leaderboard measures what people chose to optimize.</strong> Eighty-nine records
+  on one training task say nothing about the value of the improvement, or about
+  how much of it transfers to a model anybody ships.</li>
+<li><strong>The AI share is a floor.</strong> The <code>agent</code> column reflects the README's own
+  labels, so a record set with undisclosed model assistance counts as human.</li>
+<li><strong>The step sizes are this repository's arithmetic.</strong> The README prints
+  standing times, not per-record deltas. Only the Muon and U-Net figures come
+  from the source log; the five AI step sizes are computed here.</li>
+<li><strong>Nothing separates better ideas from more attention.</strong> There is no denominator
+  of effort, spend, or attempts, so a faster cadence in 2026 cannot be split
+  into better tools and more entrants.</li>
+<li><strong>Approaching a floor is not the same as exhausting ideas.</strong> Time to a fixed
+  loss has a hard lower bound, so flattening is the expected shape late in any
+  speedrun and is not by itself evidence about the supply of discoveries.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>Five records out of 89, held by hiverge.ai, Locus, Aster, Station and
+Recursive, each worth
+roughly one percent. Where the content of an AI record is described it is
+mechanical rather than conceptual: Locus's entry is an explicit fused Triton
+kernel, which is kernel fusion rather than a new idea. Hiverge also holds the
+first acknowledged AI record on the <a href="algorithms-cifar10.html">CIFAR-10 speedrun</a>,
+so the AI-set records on the two ML speedruns are partly the same small set of
+firms.</p>
+<p>Two adjacent results bear on this series without appearing on it. TTT-Discover's
+test-time-training harness, running the open gpt-oss-120b model, found TriMul
+GPU kernels 15 to 51% faster than the best human submission depending on GPU
+type [@yuksekgonul2026learning]. And Karpathy left an agent tuning nanochat for
+about two days in March 2026; it worked through roughly 700 changes, about 20 of
+which improved validation loss, after which Karpathy himself tested, transferred
+and stacked them and measured an 11% cut in time to GPT-2. Both are the same
+kind of work this leaderboard rewards, done off it.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The lumpiness here is the field's normal shape: half of all algorithm families
+never improve at all, while 14% improve more than a thousandfold per year
+[@sherry2021fast]. The leaderboard itself is the primary record
+[@kellerjordan2026moddednanogpt], and the two off-leaderboard demonstrations are
+TTT-Discover [@yuksekgonul2026learning] and Karpathy's autoresearch run
+[@karpathy2026autoresearch]. The curve this series is a proxy for — the labs'
+own training efficiency — is not published; Epoch's best guess is about 10 times
+a year inside an 80% interval of 2 to 50 times [@epoch2026driver], which is too
+wide to show a bend.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-nanogpt/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"agent":"human","ai_system":"\u2014","date":"2024-05-28","minutes":45,"note":"llm.c baseline","record":"1"},{"agent":"human","ai_system":"\u2014","date":"2024-06-06","minutes":31.4,"note":"","record":"2"},{"agent":"human","ai_system":"\u2014","date":"2024-10-04","minutes":24.9,"note":"","record":"3"},{"agent":"human","ai_system":"\u2014","date":"2024-10-11","minutes":22.3,"note":"","record":"4"},{"agent":"human","ai_system":"\u2014","date":"2024-10-14","minutes":15.2,"note":"","record":"5"},{"agent":"human","ai_system":"\u2014","date":"2024-10-18","minutes":13.1,"note":"","record":"6"},{"agent":"human","ai_system":"\u2014","date":"2024-10-18","minutes":12,"note":"","record":"7"},{"agent":"human","ai_system":"\u2014","date":"2024-11-03","minutes":10.8,"note":"","record":"8"},{"agent":"human","ai_system":"\u2014","date":"2024-11-06","minutes":8.2,"note":"","record":"9"},{"agent":"human","ai_system":"\u2014","date":"2024-11-08","minutes":7.8,"note":"","record":"10"},{"agent":"human","ai_system":"\u2014","date":"2024-11-10","minutes":7.2,"note":"","record":"11"},{"agent":"human","ai_system":"\u2014","date":"2024-11-19","minutes":5.03,"note":"","record":"12"},{"agent":"human","ai_system":"\u2014","date":"2024-11-24","minutes":4.66,"note":"","record":"13"},{"agent":"human","ai_system":"\u2014","date":"2024-12-04","minutes":4.41,"note":"","record":"14"},{"agent":"human","ai_system":"\u2014","date":"2024-12-08","minutes":3.95,"note":"","record":"15"},{"agent":"human","ai_system":"\u2014","date":"2024-12-10","minutes":3.8,"note":"","record":"16"},{"agent":"human","ai_system":"\u2014","date":"2024-12-17","minutes":3.57,"note":"","record":"17"},{"agent":"human","ai_system":"\u2014","date":"2025-01-04","minutes":3.4,"note":"","record":"18"},{"agent":"human","ai_system":"\u2014","date":"2025-01-13","minutes":3.142,"note":"","record":"19"},{"agent":"human","ai_system":"\u2014","date":"2025-01-16","minutes":2.992,"note":"","record":"20"},{"agent":"human","ai_system":"\u2014","date":"2025-01-26","minutes":2.933,"note":"","record":"21"},{"agent":"human","ai_system":"\u2014","date":"2025-02-01","minutes":2.997,"note":"record 21 re-timed under the new rules: 10 formerly untimed warmup steps became timed and coordinate_descent_tuning was banned","record":"21"},{"agent":"human","ai_system":"\u2014","date":"2025-05-24","minutes":3.014,"note":"record 21 re-timed again on the then-current torch; this is the comparable baseline for records 22 onward","record":"21"},{"agent":"human","ai_system":"\u2014","date":"2025-05-24","minutes":2.99,"note":"first record under the post-record-21 timing rules; compare with the 3.014-minute re-timing of record 21, not its 2.933-minute original","record":"22"},{"agent":"human","ai_system":"\u2014","date":"2025-05-25","minutes":2.979,"note":"","record":"23"},{"agent":"human","ai_system":"\u2014","date":"2025-05-30","minutes":2.966,"note":"","record":"24"},{"agent":"human","ai_system":"\u2014","date":"2025-07-13","minutes":2.896,"note":"","record":"25"},{"agent":"human","ai_system":"\u2014","date":"2025-07-13","minutes":2.863,"note":"","record":"26"},{"agent":"human","ai_system":"\u2014","date":"2025-07-18","minutes":2.817,"note":"","record":"27"},{"agent":"human","ai_system":"\u2014","date":"2025-08-23","minutes":2.812,"note":"","record":"28"},{"agent":"human","ai_system":"\u2014","date":"2025-09-03","minutes":2.731,"note":"","record":"29"},{"agent":"human","ai_system":"\u2014","date":"2025-09-05","minutes":2.717,"note":"","record":"30"},{"agent":"human","ai_system":"\u2014","date":"2025-09-10","minutes":2.656,"note":"","record":"31"},{"agent":"ai","ai_system":"hiverge.ai","date":"2025-09-11","minutes":2.625,"note":"","record":"32"},{"agent":"human","ai_system":"\u2014","date":"2025-09-15","minutes":2.565,"note":"","record":"33"},{"agent":"human","ai_system":"\u2014","date":"2025-09-18","minutes":2.547,"note":"","record":"34"},{"agent":"human","ai_system":"\u2014","date":"2025-09-21","minutes":2.527,"note":"","record":"35"},{"agent":"human","ai_system":"\u2014","date":"2025-09-23","minutes":2.495,"note":"","record":"36"},{"agent":"human","ai_system":"\u2014","date":"2025-09-27","minutes":2.483,"note":"","record":"37"},{"agent":"human","ai_system":"\u2014","date":"2025-09-29","minutes":2.476,"note":"","record":"38"},{"agent":"human","ai_system":"\u2014","date":"2025-09-30","minutes":2.447,"note":"","record":"39"},{"agent":"human","ai_system":"\u2014","date":"2025-10-04","minutes":2.358,"note":"","record":"40"},{"agent":"human","ai_system":"\u2014","date":"2025-10-24","minutes":2.345,"note":"","record":"41"},{"agent":"human","ai_system":"\u2014","date":"2025-10-27","minutes":2.313,"note":"","record":"42"},{"agent":"human","ai_system":"\u2014","date":"2025-11-10","minutes":2.284,"note":"","record":"43"},{"agent":"human","ai_system":"\u2014","date":"2025-11-16","minutes":2.269,"note":"","record":"44"},{"agent":"human","ai_system":"\u2014","date":"2025-11-18","minutes":2.248,"note":"","record":"45"},{"agent":"human","ai_system":"\u2014","date":"2025-11-29","minutes":2.203,"note":"","record":"46"},{"agent":"human","ai_system":"\u2014","date":"2025-12-10","minutes":2.193,"note":"","record":"47"},{"agent":"human","ai_system":"\u2014","date":"2025-12-11","minutes":2.17,"note":"","record":"48"},{"agent":"human","ai_system":"\u2014","date":"2025-12-14","minutes":2.146,"note":"","record":"49"},{"agent":"human","ai_system":"\u2014","date":"2025-12-18","minutes":2.128,"note":"","record":"50"},{"agent":"human","ai_system":"\u2014","date":"2025-12-19","minutes":2.075,"note":"","record":"51"},{"agent":"human","ai_system":"\u2014","date":"2025-12-21","minutes":2.037,"note":"","record":"52"},{"agent":"human","ai_system":"\u2014","date":"2025-12-22","minutes":1.988,"note":"","record":"53"},{"agent":"human","ai_system":"\u2014","date":"2025-12-26","minutes":1.94,"note":"","record":"54"},{"agent":"human","ai_system":"\u2014","date":"2025-12-29","minutes":1.918,"note":"","record":"55"},{"agent":"human","ai_system":"\u2014","date":"2025-12-31","minutes":1.894,"note":"","record":"56"},{"agent":"human","ai_system":"\u2014","date":"2026-01-04","minutes":1.878,"note":"","record":"57"},{"agent":"human","ai_system":"\u2014","date":"2026-01-07","minutes":1.82,"note":"","record":"58"},{"agent":"human","ai_system":"\u2014","date":"2026-01-10","minutes":1.781,"note":"","record":"59"},{"agent":"ai","ai_system":"Locus","date":"2026-01-16","minutes":1.765,"note":"","record":"60"},{"agent":"human","ai_system":"\u2014","date":"2026-01-18","minutes":1.748,"note":"","record":"61"},{"agent":"human","ai_system":"\u2014","date":"2026-01-19","minutes":1.655,"note":"","record":"62"},{"agent":"human","ai_system":"\u2014","date":"2026-01-26","minutes":1.65,"note":"","record":"63"},{"agent":"human","ai_system":"\u2014","date":"2026-01-30","minutes":1.63,"note":"","record":"64"},{"agent":"human","ai_system":"\u2014","date":"2026-01-30","minutes":1.613,"note":"","record":"65"},{"agent":"human","ai_system":"\u2014","date":"2026-01-31","minutes":1.595,"note":"","record":"66"},{"agent":"human","ai_system":"\u2014","date":"2026-01-31","minutes":1.54,"note":"","record":"67"},{"agent":"human","ai_system":"\u2014","date":"2026-01-31","minutes":1.535,"note":"","record":"68"},{"agent":"ai","ai_system":"Aster","date":"2026-02-02","minutes":1.528,"note":"","record":"69"},{"agent":"human","ai_system":"\u2014","date":"2026-02-03","minutes":1.521,"note":"","record":"70"},{"agent":"human","ai_system":"\u2014","date":"2026-02-06","minutes":1.516,"note":"","record":"71"},{"agent":"ai","ai_system":"Station","date":"2026-02-10","minutes":1.496,"note":"","record":"72"},{"agent":"human","ai_system":"\u2014","date":"2026-02-12","minutes":1.485,"note":"","record":"73"},{"agent":"human","ai_system":"\u2014","date":"2026-02-16","minutes":1.468,"note":"","record":"74"},{"agent":"human","ai_system":"\u2014","date":"2026-02-23","minutes":1.453,"note":"","record":"75"},{"agent":"human","ai_system":"\u2014","date":"2026-02-28","minutes":1.446,"note":"","record":"76"},{"agent":"human","ai_system":"\u2014","date":"2026-03-06","minutes":1.435,"note":"","record":"77"},{"agent":"human","ai_system":"\u2014","date":"2026-03-22","minutes":1.426,"note":"","record":"78"},{"agent":"human","ai_system":"\u2014","date":"2026-04-04","minutes":1.411,"note":"","record":"79"},{"agent":"human","ai_system":"\u2014","date":"2026-04-08","minutes":1.406,"note":"","record":"80"},{"agent":"human","ai_system":"\u2014","date":"2026-04-22","minutes":1.363,"note":"","record":"81"},{"agent":"human","ai_system":"\u2014","date":"2026-04-29","minutes":1.353,"note":"","record":"82"},{"agent":"human","ai_system":"\u2014","date":"2026-05-20","minutes":1.328,"note":"","record":"83"},{"agent":"human","ai_system":"\u2014","date":"2026-05-21","minutes":1.32,"note":"","record":"84"},{"agent":"human","ai_system":"\u2014","date":"2026-05-27","minutes":1.271,"note":"","record":"85"},{"agent":"human","ai_system":"\u2014","date":"2026-05-27","minutes":1.266,"note":"","record":"86"},{"agent":"ai","ai_system":"Recursive","date":"2026-06-11","minutes":1.256,"note":"faster ReLU^2 kernel; credited to @cong_ml and AI System Recursive","record":"87"},{"agent":"human","ai_system":"\u2014","date":"2026-07-13","minutes":1.243,"note":"","record":"88"},{"agent":"human","ai_system":"\u2014","date":"2026-07-17","minutes":1.23,"note":"","record":"89"}]},"height":340,"layer":[{"encoding":{"color":{"field":"agent","legend":{"orient":"top"},"scale":{"domain":["human","ai_assisted","ai"],"range":["#2f6cc1","#e09a8c","#c1442f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"record","title":"record #","type":"nominal"},{"field":"date","title":"date","type":"temporal"},{"field":"minutes","title":"minutes","type":"quantitative"},{"field":"agent","title":"agent","type":"nominal"},{"field":"ai_system","title":"AI system","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%b %Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"minutes","scale":{"type":"log"},"title":"Training minutes to target loss (log scale)","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"agent","legend":{"orient":"top"},"scale":{"domain":["human","ai_assisted","ai"],"range":["#2f6cc1","#e09a8c","#c1442f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"record","title":"record #","type":"nominal"},{"field":"date","title":"date","type":"temporal"},{"field":"minutes","title":"minutes","type":"quantitative"},{"field":"agent","title":"agent","type":"nominal"},{"field":"ai_system","title":"AI system","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%b %Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"minutes","scale":{"type":"log"},"title":"Training minutes to target loss (log scale)","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

@@ -8,12 +8,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
        padding: 24px 18px 60px; }
 h1 { font-size: 1.5em; margin-bottom: 0.2em; }
-h2 { font-size: 1.1em; margin: 1.6em 0 0.4em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
 .metric { color: #57606a; margin: 0 0 0.6em; }
 .links a { margin-right: 1.2em; }
 .chart { width: 100%; }
@@ -25,13 +41,108 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Integer factorization records</h1>
-<p class="metric">cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum</p>
-<p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/integer-factorization/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/integer-factorization/#what-it-cannot-support">Caveats</a> <a href="https://en.wikipedia.org/wiki/RSA_numbers">Source</a></p>
-<h2>Factoring and discrete-log records</h2>
+<p><strong>Domain:</strong> outside the three domains
+<strong>Metric:</strong> cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum
+<strong>Coverage:</strong> 1991-04 to 2020-02, confirmed unmoved as of 2026-08-10
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/integer-factorization/factoring-records.csv"><code>factoring-records.csv</code></a> (all 23 published RSA factorizations, plus the 795-bit discrete-logarithm record and the first SHA-1 collision for context)
+<strong>Upstream:</strong> <a href="https://en.wikipedia.org/wiki/RSA_numbers">https://en.wikipedia.org/wiki/RSA_numbers</a>, with the last two records from <a href="https://caramba.loria.fr/rsa250.txt">https://caramba.loria.fr/rsa250.txt</a> and <a href="https://caramba.loria.fr/dlp240-rsa240.txt">https://caramba.loria.fr/dlp240-rsa240.txt</a>
+<strong>Verdict:</strong> no acceleration — no record since February 2020, and the fourfold slowdown before that predates AI entirely</p>
+<h3>Factoring and discrete-log records</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Click a point for its source.</p>
-<footer>Interactive companion to the static chart committed in the
-repository; both are drawn from the same CSV. Rebuilt by
+<h2 id="the-problem">The problem</h2>
+<p>Factoring is the cheap-verifier extreme, included to span a variable that the
+three worked domains barely vary: the cost of checking an answer. Multiplying
+two claimed factors takes microseconds, so a result is verified instantly, for
+free, by anyone. The field also has everything else a scoreboard needs — a
+published list of targets, three decades of dated records with named teams, and
+a cash-prize history.</p>
+<p>A discovery here is one new largest factorization. That is a coarse instrument
+by construction: the record is a running maximum over a fixed list of targets,
+so it moves only when someone commits a very large computation to the next
+number on the list.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Thirteen records between April 1991 and February 2020, and nothing since.</p>
+<p>The rate falls fourfold inside the series, well before AI: about 7.1 digits a
+year from RSA-100 in 1991 to RSA-768 in December 2009, then about 1.8 a year to
+RSA-250 in February 2020. Both figures are computed in the figure code from the
+running maximum. RSA-250 has stood for about six and a half years, across exactly
+the period in which AI systems were setting records on speedruns, kernels, a SAT
+competition, and a dozen mathematical bounds. RSA-260, RSA-270, RSA-896 and
+RSA-1024 remain unfactored.</p>
+<p>The open markers behind the line are every published RSA factorization,
+including the ones that were not records — RSA-170, RSA-180, RSA-190, RSA-210
+and others, factored in the 2010s while the maximum stood at 232 digits. They
+are there so a flat line is not misread as nobody working.</p>
+<p>Every record in the series is the number field sieve, or the quadratic sieve for
+the earliest ones, run as a large parallel computation by a human team. The
+<code>ai_involved</code> column is <code>no</code> on all 23 rows.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
+as the standing record's value over time:</p>
+<p><img alt="Standing record for decimal digits factored over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/integer-factorization/cumulative-integer-factorization.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/integer-factorization/figure.py"><code>figure.py</code></a> filters <code>factoring-records.csv</code> to the
+<code>integer_factorization</code> rows, sorts by date, and takes the running maximum over
+<code>digits</code> as a step function; the two adjacent records in the file, a discrete
+logarithm and a hash collision, are excluded because they are different
+quantities. Three records are labelled — the first, the last of the fast era,
+and the current one — and the rest are left unlabelled to keep the steps
+readable. The rates in the annotation are computed at plot time from the running
+maximum, split at RSA-768, so they cannot drift from the CSV. January 2026
+onward is shaded, as in every figure here.</p>
+<p>There is no fetcher. The record list is a hand-maintained page rather than an
+API, the last two records come from the record-setters' own announcements, and
+the fields that matter here — who, which method, whether machine learning was
+involved — need reading rather than parsing.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>A stalled record is not a demonstration that AI could not do it.</strong> No one
+  has published a serious AI-assisted attempt. The arithmetic is not the kind of
+  task current systems are pointed at, and no attempt means no evidence either
+  way.</li>
+<li><strong>The prize is gone, which is a sufficient explanation on its own.</strong> The RSA
+  Factoring Challenge was formally discontinued in 2007, so the 2019 and 2020
+  records were one-off academic efforts.</li>
+<li><strong>A record here costs real money.</strong> RSA-250 took "roughly 2700 core-years",
+  and RSA-768 was reported as "the equivalent of almost 2000 years of computing
+  on a single-core 2.2 GHz AMD Opteron". The stall is not disinterest in a cheap
+  prize.</li>
+<li><strong>Thirteen points cannot detect a modest change in rate.</strong> The series is dense
+  enough to show a fourfold slowdown and a six-year stop; it is far too sparse
+  to rule out a smaller effect.</li>
+<li><strong>The running maximum hides the work.</strong> Effort that goes into a number smaller
+  than the current record leaves no mark on the line at all, which is why the
+  non-record factorizations are drawn.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None recorded anywhere in the series. The one announcement that separates
+algorithm from hardware attributes the gain to human work: the RSA-240 team
+report that "our computation was 3 times faster than the expected time that
+would have been extrapolated from previous records", and that "the acceleration
+can be attributed to various algorithmic improvements that were implemented for
+these computations. The CADO-NFS implementation was also vastly improved." So
+the last real step in this series was human algorithmic and implementation work
+worth about 3x against a hardware-adjusted baseline.</p>
+<p>The two adjacent records in the file point the same way. The 795-bit discrete
+logarithm was set by the same team on the same day as RSA-240, and the first
+SHA-1 collision was published in February 2017 by a Google and CWI team using a
+differential path and about 2^63.1 hash evaluations. Neither involved machine
+learning either.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>Grace's 2013 survey of algorithmic progress in six domains recorded factoring
+improving "about 5.5 digits per year for the last two decades"
+[@grace2013algorithmic], which this series confirms for the window she had and
+which makes the subsequent deceleration visible as a departure from a documented
+trend. The heterogeneity of pre-AI improvement rates across algorithm families
+is Sherry and Thompson's subject [@sherry2021fast], and it is the reason a single
+stalled family is weak evidence on its own. Within this collection,
+<a href="math-sphere-packing.html">sphere packing</a> is a useful contrast: a
+similarly old ladder took its two largest steps since 1947 in 2023 and 2025 —
+both of them human proofs.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/integer-factorization/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
 vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"ai":"no","date":"1991-04-01","digits":100,"domain":"integer_factorization","method":"quadratic sieve (ppmpqs)","record":"RSA-100","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Arjen K. Lenstra & Mark Manasse"},{"ai":"no","date":"1992-04-14","digits":110,"domain":"integer_factorization","method":"quadratic sieve (ppmpqs)","record":"RSA-110","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Arjen K. Lenstra & Mark Manasse"},{"ai":"no","date":"1993-06-09","digits":120,"domain":"integer_factorization","method":"quadratic sieve (ppmpqs)","record":"RSA-120","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Denny/Dodson/Lenstra/Manasse/Lioen/te Riele"},{"ai":"no","date":"1994-04-26","digits":129,"domain":"integer_factorization","method":"quadratic sieve (MPQS)","record":"RSA-129","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Atkins/Graff/Lenstra/Leyland + 600 volunteers"},{"ai":"no","date":"1996-04-10","digits":130,"domain":"integer_factorization","method":"GNFS","record":"RSA-130","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Lenstra/Cowie/Montgomery/Weber/Zayer et al."},{"ai":"no","date":"1999-02-02","digits":140,"domain":"integer_factorization","method":"GNFS","record":"RSA-140","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"te Riele/Cavallar/Lenstra/Montgomery/Zimmermann et al."},{"ai":"no","date":"1999-08-22","digits":155,"domain":"integer_factorization","method":"GNFS","record":"RSA-155","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"te Riele/Cavallar/Montgomery/Zimmermann et al."},{"ai":"no","date":"2003-04-01","digits":160,"domain":"integer_factorization","method":"GNFS","record":"RSA-160","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Franke/Bahr/Kleinjung/Lochter/Boehm (Univ. Bonn/BSI)"},{"ai":"no","date":"2003-12-03","digits":174,"domain":"integer_factorization","method":"GNFS","record":"RSA-576","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Franke/Kleinjung (Univ. Bonn)"},{"ai":"no","date":"2004-04-16","digits":150,"domain":"integer_factorization","method":"GNFS","record":"RSA-150","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Aoki et al."},{"ai":"no","date":"2005-05-09","digits":200,"domain":"integer_factorization","method":"GNFS","record":"RSA-200","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Bahr/Boehm/Franke/Kleinjung (Univ. Bonn/BSI)"},{"ai":"no","date":"2005-11-02","digits":193,"domain":"integer_factorization","method":"GNFS","record":"RSA-640","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Bahr/Boehm/Franke/Kleinjung (BSI)"},{"ai":"no","date":"2009-12-12","digits":232,"domain":"integer_factorization","method":"GNFS","record":"RSA-768","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Kleinjung/Aoki/Franke/Lenstra/Thome/Gaudry/Montgomery/te Riele/Zimmermann et al."},{"ai":"no","date":"2009-12-29","digits":170,"domain":"integer_factorization","method":"GNFS","record":"RSA-170","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Bonenberger & Krone"},{"ai":"no","date":"2010-05-08","digits":180,"domain":"integer_factorization","method":"GNFS","record":"RSA-180","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Danilov & Popovyan (Moscow State Univ.)"},{"ai":"no","date":"2010-11-08","digits":190,"domain":"integer_factorization","method":"GNFS","record":"RSA-190","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Popovyan & Timofeev"},{"ai":"no","date":"2012-07-02","digits":212,"domain":"integer_factorization","method":"GNFS","record":"RSA-704","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Bai/Thome/Zimmermann"},{"ai":"no","date":"2013-09-26","digits":210,"domain":"integer_factorization","method":"GNFS","record":"RSA-210","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Ryan Propper"},{"ai":"no","date":"2016-05-13","digits":220,"domain":"integer_factorization","method":"GNFS","record":"RSA-220","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Bai/Gaudry/Kruppa/Thome/Zimmermann"},{"ai":"no","date":"2018-08-15","digits":230,"domain":"integer_factorization","method":"GNFS","record":"RSA-230","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Samuel S. Gross (Noblis)"},{"ai":"no","date":"2019-12-02","digits":240,"domain":"integer_factorization","method":"GNFS (CADO-NFS)","record":"RSA-240","url":"https://caramba.loria.fr/dlp240-rsa240.txt","who":"Boudot/Gaudry/Guillevic/Heninger/Thome/Zimmermann"},{"ai":"no","date":"2020-02-17","digits":232,"domain":"integer_factorization","method":"GNFS","record":"RSA-232","url":"https://en.wikipedia.org/wiki/RSA_numbers","who":"Zamarashkin/Zheltkov/Matveev"},{"ai":"no","date":"2020-02-28","digits":250,"domain":"integer_factorization","method":"GNFS (CADO-NFS)","record":"RSA-250","url":"https://caramba.loria.fr/rsa250.txt","who":"Boudot/Gaudry/Guillevic/Heninger/Thome/Zimmermann"},{"ai":"no","date":"2019-12-02","digits":240,"domain":"discrete_logarithm","method":"Number Field Sieve (CADO-NFS)","record":"DLP-240 (795-bit safe prime RSA-240+49204)","url":"https://caramba.loria.fr/dlp240-rsa240.txt","who":"Boudot/Gaudry/Guillevic/Heninger/Thome/Zimmermann"},{"ai":"no","date":"2017-02-23","digits":null,"domain":"hash_collision","method":"differential path + brute force (2^63.1 SHA-1 evals)","record":"SHAttered (first SHA-1 collision)","url":"https://en.wikipedia.org/wiki/SHA-1","who":"Stevens/Bursztein/Karpman/Albertini/Markov (Google + CWI Amsterdam)"}]},"height":340,"layer":[{"encoding":{"color":{"field":"domain","legend":{"orient":"top"},"scale":{"domain":["discrete_logarithm","hash_collision","integer_factorization"],"range":["#2f6cc1","#37474f","#c98a00"]},"title":null,"type":"nominal"},"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"record","title":"record","type":"nominal"},{"field":"date","title":"date","type":"temporal"},{"field":"digits","title":"digits","type":"quantitative"},{"field":"who","title":"who","type":"nominal"},{"field":"method","title":"method","type":"nominal"},{"field":"ai","title":"AI involved","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"digits","title":"Record size (decimal digits)","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"domain","legend":{"orient":"top"},"scale":{"domain":["discrete_logarithm","hash_collision","integer_factorization"],"range":["#2f6cc1","#37474f","#c98a00"]},"title":null,"type":"nominal"},"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"record","title":"record","type":"nominal"},{"field":"date","title":"date","type":"temporal"},{"field":"digits","title":"digits","type":"quantitative"},{"field":"who","title":"who","type":"nominal"},{"field":"method","title":"method","type":"nominal"},{"field":"ai","title":"AI involved","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"digits","title":"Record size (decimal digits)","type":"quantitative"}},"mark":{"cursor":"pointer","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});

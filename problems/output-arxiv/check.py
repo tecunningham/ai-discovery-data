@@ -45,6 +45,58 @@ def main() -> int:
             "latest complete month",
         f"{growth}% in three years": "growth since 2022-11",
     }
+
+    # The by-field and subfield claims, recomputed with the same grouping
+    # rule figure.py draws with (restated here textually: importing figure.py
+    # would pull matplotlib onto the host path).
+    legacy = {"alg-geom": "math.AG", "dg-ga": "math.DG", "funct-an": "math.FA",
+              "q-alg": "math.QA", "cmp-lg": "cs.CL"}
+    physics = {"astro-ph", "cond-mat", "gr-qc", "hep-ex", "hep-lat", "hep-ph",
+               "hep-th", "math-ph", "nlin", "nucl-ex", "nucl-th", "physics",
+               "quant-ph", "chao-dyn", "patt-sol", "adap-org", "comp-gas",
+               "solv-int", "acc-phys", "ao-sci", "atom-ph", "bayes-an",
+               "chem-ph", "plasm-ph", "supr-con", "mtrl-th"}
+    group_totals: dict[tuple[str, str], int] = {}
+    subfield_totals: dict[tuple[str, str], int] = {}
+    for row in read_csv(HERE / "arxiv-monthly-by-category.csv"):
+        category = legacy.get(row["category"], row["category"])
+        archive = category.split(".")[0]
+        group = "physics" if archive in physics else archive
+        key = (group, row["month"])
+        group_totals[key] = group_totals.get(key, 0) + int(row["submissions"])
+        if archive == "math":
+            sub = (category, row["month"])
+            subfield_totals[sub] = (subfield_totals.get(sub, 0)
+                                    + int(row["submissions"]))
+    months = sorted({month for _, month in group_totals
+                     if "1991-07" <= month <= complete})
+    above = next(
+        month for month in months
+        if all(group_totals.get(("cs", later), 0)
+               > group_totals.get(("physics", later), 0)
+               for later in months if later >= month))
+    co_2024 = round(sum(subfield_totals.get((f"math.CO", f"2024-{i:02d}"), 0)
+                        for i in range(1, 13)) / 12)
+    math_2024 = sum(group_totals.get(("math", f"2024-{i:02d}"), 0) for i in range(1, 13)) / 12
+    math_ratio = group_totals[("math", complete)] / math_2024
+    claims.update({
+        f"from {group_totals[('cs', '2022-11')]:,} monthly submissions in "
+        f"November 2022 to {group_totals[('cs', complete)]:,} in July 2026":
+            "computer-science growth",
+        f"mathematics {round((group_totals[('math', complete)] / group_totals[('math', '2022-11')] - 1) * 100)}%, "
+        f"from {group_totals[('math', '2022-11')]:,} to "
+        f"{group_totals[('math', complete)]:,}": "mathematics growth",
+        f"Physics rose {round((group_totals[('physics', complete)] / group_totals[('physics', '2022-11')] - 1) * 100)}%":
+            "physics growth",
+        f"above physics every month since August 2023"
+        if above == "2023-08" else f"above physics every month since {above}":
+            "cs-physics crossover",
+        f"reached {subfield_totals[('math.CO', complete)]:,} submissions in "
+        f"July 2026 against a 2024 monthly average of {co_2024}":
+            "combinatorics surge",
+        f"ran at {math_ratio:.1f} times its 2024 monthly average":
+            "math vs 2024 baseline",
+    })
     return report(failures + missing(prose(HERE), claims))
 
 

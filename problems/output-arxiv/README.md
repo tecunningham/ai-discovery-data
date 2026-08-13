@@ -34,6 +34,11 @@ at fetch time, and an incomplete month read as a complete one would look like a
 collapse. Every figure in the chart is computed from the CSV when the chart is
 drawn, so the annotation cannot survive a refetch that changes the numbers.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative submissions to date:
+
+![Cumulative submissions to date.](cumulative-output-arxiv.png)
+
 ## How the chart was built
 
 [`fetch.py`](fetch.py) downloads arXiv's own monthly-submissions file and keeps

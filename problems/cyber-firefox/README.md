@@ -62,6 +62,11 @@ The two units are plotted together above. The gap between them is Mozilla's
 packaging: more products shipping the same fix multiply mentions without adding
 a discovery.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative distinct CVEs to date:
+
+![Cumulative distinct CVEs to date.](cumulative-cyber-firefox.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) draws stacked annual bars from

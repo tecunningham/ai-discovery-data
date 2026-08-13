@@ -1,13 +1,13 @@
 # Smale's problems
 
 **Domain:** mathematics
-**Metric:** current status of 19 scored rows, plus dated resolutions per year
+**Metric:** dated resolutions per year across 19 scored rows
 **Coverage:** 1998–2026, with dated resolutions running 2002–2026
 **Data:** [`smale-problems.csv`](smale-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Smale%27s_problems>, with the 2026 row resting on the independent verifications at <https://zenodo.org/records/21514514> and <https://isa-afp.org/entries/Jacobian_Counterexample.html>
 **Verdict:** inconclusive — one AI-attributed fall in 2026, and a single event cannot set a slope
 
-![Current status of the scored rows, and dated resolutions per year.](discovery-math-smale.png)
+![Dated resolutions per year.](discovery-math-smale.png)
 
 ## The problem
 
@@ -51,14 +51,19 @@ in twenty-eight years is entirely consistent with the pre-existing rate. The
 chart shows that an AI-attributed fall on a prestige list is now possible; it
 cannot show that such falls have become more frequent.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
+as rows remaining, declining toward zero as dated resolutions arrive:
+
+![Rows remaining without a dated resolution.](cumulative-math-smale.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py) with `ai_problem="16"`, reading
 `smale-problems.csv`, keeping rows with `status` equal to
-`resolved` and a non-empty `resolved_year`. The upper panel shows the current
-resolved/open/contested split; the lower panel counts resolution events by year
-from the 1998 `list_year` to the present.
+`resolved` and a non-empty `resolved_year`, and counting resolution events by
+year from the 1998 `list_year` to the present. The resolved/open/contested
+split is stated in the chart's corner note and in the prose above.
 
 The `ai_problem` argument is the whole of the AI coding in this figure: the row
 whose `problem_id` matches is drawn as a red event bar and annotated with its

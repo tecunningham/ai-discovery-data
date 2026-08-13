@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw discovery-integer-factorization.png from the RSA record list.
+"""Draw discovery-integer-factorization.png and
+cumulative-integer-factorization.png from the RSA record list.
 
 Run: python3 problems/integer-factorization/figure.py
 
@@ -12,6 +13,7 @@ being factored while the record stood still.
 from __future__ import annotations
 
 import sys
+from datetime import date
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -31,12 +33,46 @@ from lib.chart import (  # noqa: E402
     style,
     year_fraction,
 )
+from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 RIGHT = 2029.0
 LABELLED = ("RSA-100", "RSA-768", "RSA-250")
 # The rate split the sources use: RSA-768 in December 2009 ends the fast era.
 MIDPOINT = "RSA-768"
+
+
+def cumulative() -> None:
+    rows = sorted(
+        (row for row in read_csv(HERE / "factoring-records.csv")
+         if row["domain"] == "integer_factorization"),
+        key=lambda row: row["date"],
+    )
+    xs: list[float] = []
+    ys: list[float] = []
+    best = 0
+    last_record = rows[0]["date"]
+    for row in rows:
+        digits = int(row["digits"])
+        if digits > best:
+            best = digits
+            xs.append(year_fraction(row["date"]))
+            ys.append(float(digits))
+            last_record = row["date"]
+    stalled_since = date.fromisoformat(last_record).strftime("%B %Y")
+    staircase_chart(
+        HERE / "cumulative-integer-factorization.png",
+        title="Integer factorization: standing record",
+        subtitle="Largest hard semiprime factored, in decimal digits; "
+                 "higher is better",
+        ylabel="Decimal digits of largest factored semiprime",
+        series=[("", xs, ys)],
+        source_label="the RSA Factoring Challenge record list and the "
+                     "record-setters' own announcements",
+        source_url="https://en.wikipedia.org/wiki/RSA_numbers",
+        built_by=__file__,
+        note=f"Higher is better; no record since {stalled_since}.",
+    )
 
 
 def main() -> None:
@@ -127,3 +163,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

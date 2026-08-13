@@ -1,13 +1,13 @@
 # Landau's problems
 
 **Domain:** mathematics
-**Metric:** current status of 4 scored rows, plus dated resolutions per year
+**Metric:** dated resolutions per year across 4 scored rows
 **Coverage:** 1912–2026, with no dated resolution anywhere in that span
 **Data:** [`landau-problems.csv`](landau-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Landau%27s_problems>
 **Verdict:** no acceleration
 
-![Current status of the scored rows, and dated resolutions per year.](discovery-math-landau.png)
+![Dated resolutions per year.](discovery-math-landau.png)
 
 ## The problem
 
@@ -32,23 +32,27 @@ under which every AI result in this collection has arrived.
 
 ## What the chart shows
 
-Nothing, and that is the reading. The current-status bar contains four open rows
-and no other segment; the event panel says no row has a dated resolution. There
-is no red event because there are no events at all.
+Nothing, and that is the reading. All four rows are open, and the chart says no
+row has a dated resolution. There is no red event because there are no events at
+all.
 
 The one thing this establishes is a bound. Whatever AI has contributed to
 mathematics through mid-2026, it has not closed a Landau problem, and no source
 behind this collection claims otherwise.
+
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
+as rows remaining, declining toward zero as dated resolutions arrive:
+
+![Rows remaining without a dated resolution.](cumulative-math-landau.png)
 
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `landau-problems.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, and separates current status from resolution timing.
-The upper panel is a status bar; the lower panel counts resolution events by
-year from the 1912 `list_year` to the present. Here that event set is empty, so
-the lower panel states that directly.
+non-empty `resolved_year`, and counts resolution events by year from the 1912
+`list_year` to the present. Here that event set is empty, so the chart states
+that directly.
 
 The rows are transcribed by hand from the consensus ledger named in the `source`
 column, so there is no `fetch.py` in this folder. There is no machine-readable

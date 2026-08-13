@@ -1,13 +1,13 @@
 # Thurston's 24 questions
 
 **Domain:** mathematics
-**Metric:** current status of 24 scored rows, plus dated resolutions per year
+**Metric:** dated resolutions per year across 24 scored rows
 **Coverage:** 1982–2026, with dated resolutions running 1993–2013
 **Data:** [`thurston-questions.csv`](thurston-questions.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Thurston%27s_24_questions>, cross-checked against Agol's status note at <https://mathoverflow.net/questions/265493/thurstons-24-questions-all-settled>
 **Verdict:** no acceleration
 
-![Current status of the scored rows, and dated resolutions per year.](discovery-math-thurston.png)
+![Dated resolutions per year.](discovery-math-thurston.png)
 
 ## The problem
 
@@ -46,15 +46,19 @@ signature. The thirteen years since are the other half of the same point: the tw
 questions still open are the ones nobody has been able to touch, and a flat right
 edge is what that looks like.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
+as rows remaining, declining toward zero as dated resolutions arrive:
+
+![Rows remaining without a dated resolution.](cumulative-math-thurston.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `thurston-questions.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, and sorts them by year and then `problem_id`. The
-upper panel shows the current status counts; the lower panel counts resolution
-events by year from the 1982 `list_year` to the present. The source note is taken
-from the `source` column.
+non-empty `resolved_year`, sorts them by year and then `problem_id`, and counts
+resolution events by year from the 1982 `list_year` to the present. The source
+note is taken from the `source` column.
 
 The rows are transcribed by hand from the ledger named in that column, so there is
 no `fetch.py` in this folder. There is no machine-readable upstream: the status of

@@ -1,13 +1,13 @@
 # Millennium Prize Problems
 
 **Domain:** mathematics
-**Metric:** current status of 7 scored rows, plus dated resolutions per year
+**Metric:** dated resolutions per year across 7 scored rows
 **Coverage:** 2000–2026, with one dated resolution in 2003
 **Data:** [`millennium-problems.csv`](millennium-problems.csv)
 **Upstream:** <https://www.claymath.org/millennium-problems/>
 **Verdict:** no acceleration
 
-![Current status of the scored rows, and dated resolutions per year.](discovery-math-millennium.png)
+![Dated resolutions per year.](discovery-math-millennium.png)
 
 ## The problem
 
@@ -33,8 +33,8 @@ discriminates between almost nothing.
 
 ## What the chart shows
 
-One dated resolution, in 2003, and none in the twenty-three years since. The
-status bar shows one resolved row and six open: Birch–Swinnerton-Dyer, the
+One dated resolution, in 2003, and none in the twenty-three years since. One
+row is resolved and six are open: Birch–Swinnerton-Dyer, the
 Hodge conjecture, Navier–Stokes existence and smoothness, P versus NP,
 Yang–Mills existence and mass gap, and the Riemann hypothesis. No event is red,
 because no row carries an AI attribution.
@@ -49,15 +49,19 @@ Whatever AI has contributed to mathematics through mid-2026, it has not resolved
 a Millennium problem, and no credible claim to have done so exists in the sources
 behind this collection.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
+as rows remaining, declining toward zero as dated resolutions arrive:
+
+![Rows remaining without a dated resolution.](cumulative-math-millennium.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
 [`../../lib/families.py`](../../lib/families.py), which reads
 `millennium-problems.csv`, keeps the rows whose `status` is
-`resolved` with a non-empty `resolved_year`. The upper panel reports the current
-status breakdown; the lower panel counts resolution events by year from the 2000
-`list_year` to the present. The source note names the `source` column, which for
-every row here is the Clay Mathematics Institute.
+`resolved` with a non-empty `resolved_year`, and counts resolution events by
+year from the 2000 `list_year` to the present. The source note names the
+`source` column, which for every row here is the Clay Mathematics Institute.
 
 The resolution year is 2003, taken from the arXiv postings; the row's `notes`
 field records that the preprints ran 2002 to 2003 and that the prize was

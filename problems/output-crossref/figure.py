@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Draw output-crossref-dois.png from this folder's annual deposit counts.
+"""Draw this folder's two figures from its annual deposit counts.
 
 Run: python3 problems/output-crossref/figure.py
+
+output-crossref-dois.png plots annual deposits as bars;
+cumulative-output-crossref.png redraws the series as cumulative DOI records to
+date, for the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -12,8 +16,24 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.cumulative import counts_chart  # noqa: E402
 from lib.families import volume_series  # noqa: E402
 from lib.table import read_csv  # noqa: E402
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "crossref-dois-by-year.csv")
+    counts_chart(
+        HERE / "cumulative-output-crossref.png",
+        title="Crossref DOI records: cumulative",
+        ylabel="DOI records to date, millions",
+        period_labels=[row["year"] for row in rows],
+        counts=[int(row["dois_created"]) / 1e6 for row in rows],
+        source_label="Crossref REST API by created date, vendored as "
+                     "crossref-dois-by-year.csv",
+        source_url="https://api.crossref.org/works",
+        built_by=__file__,
+    )
 
 
 def main() -> None:
@@ -45,6 +65,7 @@ def main() -> None:
         bars=True,
         partial_last="part year",
     )
+    cumulative()
 
 
 if __name__ == "__main__":

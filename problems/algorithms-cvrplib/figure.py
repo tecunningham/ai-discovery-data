@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Draw annual fixed-X objective improvements and optimality proofs."""
+"""Draw this folder's two figures from its ledger of fixed-X frontier events.
+
+Run: python3 problems/algorithms-cvrplib/figure.py
+
+discovery-algorithms-cvrplib.png counts annual objective improvements and
+optimality proofs; cumulative-algorithms-cvrplib.png is the same cohort as
+instances remaining without an optimality proof, for the collection-wide
+cumulative index.
+"""
 
 from __future__ import annotations
 
@@ -14,7 +22,39 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib import chart  # noqa: E402
+from lib.cumulative import remaining_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
+
+# The X set was introduced as one designed cohort of exactly this many
+# instances, which is what makes a fixed denominator honest here.
+COHORT = 100
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "cvrplib-x-frontier.csv")
+    xs = [min(chart.year_fraction(row["recorded_date"]) for row in rows)]
+    ys = [float(COHORT)]
+    proved: set[str] = set()
+    for row in sorted(rows, key=lambda row: row["recorded_date"]):
+        if row["event_type"] != "optimality_proof" or row["instance"] in proved:
+            continue
+        proved.add(row["instance"])
+        xs.append(chart.year_fraction(row["recorded_date"]))
+        ys.append(float(COHORT - len(proved)))
+    remaining_chart(
+        HERE / "cumulative-algorithms-cvrplib.png",
+        title="CVRPLIB X instances: unproven remaining",
+        subtitle="The fixed 100-instance cohort minus instances with a posted "
+                 "optimality proof",
+        ylabel="Instances without optimality proof",
+        xs=xs,
+        ys=ys,
+        source_label="CVRPLIB Updates",
+        source_url="https://galgos.inf.puc-rio.br/cvrplib/index.php/en/updates/",
+        built_by=__file__,
+        note=f"{len(proved)} of {COHORT} instances proven optimal; "
+             "objective improvements do not move this line",
+    )
 
 
 def main() -> None:
@@ -55,3 +95,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

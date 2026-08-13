@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw discovery-algorithms-ecdsa-circuit.png from this folder's record table.
+"""Draw discovery-algorithms-ecdsa-circuit.png and
+cumulative-algorithms-ecdsa-circuit.png from this folder's record table.
 
 Run: python3 problems/algorithms-ecdsa-circuit/figure.py
 
@@ -24,7 +25,9 @@ from lib.chart import (  # noqa: E402
     save,
     source_note,
     style,
+    year_fraction,
 )
+from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.ticker import LogFormatterSciNotation, NullFormatter  # noqa: E402
@@ -37,6 +40,26 @@ GOOGLE_PARETO = 3_000_000_000
 
 def day_offset(value: str, origin: date) -> int:
     return (date.fromisoformat(value) - origin).days
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "ecdsa-circuit-records.csv")
+    staircase_chart(
+        HERE / "cumulative-algorithms-ecdsa-circuit.png",
+        title="ECDSA.fail circuit score: standing record",
+        subtitle="Average Toffoli count × peak qubits for a validated "
+                 "reversible circuit; lower is better",
+        ylabel="Best validated score (lower is better)",
+        series=[("", [year_fraction(row["date"]) for row in rows],
+                 [float(row["score"]) for row in rows])],
+        ylog=True,
+        source_label="ecdsa.fail challenge API (Eigen Labs); one accepted "
+                     "submission per record, vendored as "
+                     "ecdsa-circuit-records.csv",
+        source_url="https://ecdsa.fail/",
+        built_by=__file__,
+        note="Lower is better; score = Toffoli count × peak qubit width.",
+    )
 
 
 def main() -> None:
@@ -114,3 +137,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

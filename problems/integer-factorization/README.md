@@ -44,6 +44,11 @@ Every record in the series is the number field sieve, or the quadratic sieve for
 the earliest ones, run as a large parallel computation by a human team. The
 `ai_involved` column is `no` on all 23 rows.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as the standing record's value over time:
+
+![Standing record for decimal digits factored over time.](cumulative-integer-factorization.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) filters `factoring-records.csv` to the

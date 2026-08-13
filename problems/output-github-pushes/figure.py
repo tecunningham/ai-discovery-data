@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Draw output-github-pushes.png from this folder's quarterly totals.
+"""Draw this folder's two figures from its quarterly totals.
 
 Run: python3 problems/output-github-pushes/figure.py
+
+output-github-pushes.png plots pushes per quarter;
+cumulative-output-github-pushes.png redraws the series as cumulative pushes to
+date, for the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -12,6 +16,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.cumulative import counts_chart  # noqa: E402
 from lib.families import volume_series  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
@@ -29,6 +34,20 @@ def quarter_fraction(quarter: str) -> float:
     # by quarter, which it does not accept.
     year, index = quarter.split("-Q")
     return int(year) + (int(index) - 0.5) / 4
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "github-innovationgraph-global.csv")
+    counts_chart(
+        HERE / "cumulative-output-github-pushes.png",
+        title="Git pushes to GitHub: cumulative",
+        ylabel="Git pushes to date, billions",
+        period_labels=[row["quarter"] for row in rows],
+        counts=[int(row["git_pushes"]) / 1e9 for row in rows],
+        source_label="github/innovationgraph, summed over economies here",
+        source_url="https://github.com/github/innovationgraph",
+        built_by=__file__,
+    )
 
 
 def main() -> None:
@@ -54,6 +73,7 @@ def main() -> None:
         built_by=__file__,
         markers=True,
     )
+    cumulative()
 
 
 if __name__ == "__main__":

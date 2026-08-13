@@ -54,6 +54,11 @@ repository's arithmetic over those rows rather than a claim any source makes. Th
 axis also counts rather than measures: a change of constant from 1.68 to 2 and a
 gain of a whole power of $n$ are one step each.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as its cumulative count of record steps over time:
+
+![Cumulative record steps for the sphere-packing lower bound over time.](cumulative-math-sphere-packing.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) reads

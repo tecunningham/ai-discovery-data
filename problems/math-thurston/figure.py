@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Draw discovery-math-thurston.png from this folder's ledger of Thurston's questions.
+"""Draw this folder's two figures from its ledger of Thurston's questions.
 
 Run: python3 problems/math-thurston/figure.py
+
+discovery-math-thurston.png counts dated resolutions by year;
+cumulative-math-thurston.png is the same ledger as rows remaining, for the
+collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -12,6 +16,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.cumulative import ledger_remaining_chart  # noqa: E402
 from lib.families import problem_list_chart  # noqa: E402
 
 
@@ -19,6 +24,11 @@ def main() -> None:
     problem_list_chart(
         HERE / "thurston-questions.csv",
         HERE / "discovery-math-thurston.png",
+        __file__,
+    )
+    ledger_remaining_chart(
+        HERE / "thurston-questions.csv",
+        HERE / "cumulative-math-thurston.png",
         __file__,
     )
 

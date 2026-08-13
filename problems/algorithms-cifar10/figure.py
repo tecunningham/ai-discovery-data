@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw discovery-algorithms-cifar10.png from this folder's record table.
+"""Draw discovery-algorithms-cifar10.png and cumulative-algorithms-cifar10.png
+from this folder's record table.
 
 Run: python3 problems/algorithms-cifar10/figure.py
 
@@ -28,8 +29,27 @@ from lib.chart import (  # noqa: E402
     style,
     year_fraction,
 )
+from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 from matplotlib.ticker import NullFormatter, ScalarFormatter  # noqa: E402
+
+
+def cumulative() -> None:
+    rows = [row for row in read_csv(HERE / "cifar-speedrun-records.csv") if row["date"] >= "2022"]
+    staircase_chart(
+        HERE / "cumulative-algorithms-cifar10.png",
+        title="CIFAR-10 speedrun: standing record",
+        subtitle="Seconds to 94% accuracy on one A100; lower is better",
+        ylabel="Seconds to 94% accuracy",
+        series=[("", [year_fraction(row["date"]) for row in rows],
+                 [float(row["seconds"]) for row in rows])],
+        ylog=True,
+        source_label="dates assembled from releases and announcements in "
+                     "cifar-speedrun-records.csv; no official ledger exists",
+        source_url="https://github.com/KellerJordan/cifar10-airbench",
+        built_by=__file__,
+        note="Lower is better.",
+    )
 
 
 def main() -> None:
@@ -97,3 +117,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

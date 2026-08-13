@@ -2,6 +2,11 @@
 """Draw this folder's three ANTEDB figures from the sweep of exponent slices.
 
 Run: python3 problems/math-antedb/figure.py
+
+discovery-math-antedb.png counts slice-level record changes per family;
+antedb-small-multiples.png plots each slice's raw values;
+cumulative-math-antedb.png pools the three families into one line, for the
+collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -22,11 +27,41 @@ from lib.chart import (  # noqa: E402
     source_note,
     style,
 )
+from lib.cumulative import events_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 import matplotlib.pyplot as plt  # noqa: E402
 
 SWEEP = HERE / "antedb-sweep.csv"
+
+
+def cumulative() -> None:
+    # The same event definition as cumulative_changes() — a year in which a
+    # slice's best derivable value moves — pooled across all three families
+    # into one line for the collection-wide cumulative index.
+    series: dict[tuple[str, str], list[tuple[int, float]]] = defaultdict(list)
+    for row in read_csv(SWEEP):
+        series[(row["quantity"], row["point"])].append(
+            (int(row["year"]), float(row["value_float"])))
+    by_year: dict[int, int] = defaultdict(int)
+    for values in series.values():
+        values.sort()
+        previous = values[0][1]
+        for year, value in values[1:]:
+            if value != previous:
+                by_year[year] += 1
+                previous = value
+    years = sorted(by_year)
+    events_chart(
+        HERE / "cumulative-math-antedb.png",
+        title="ANTEDB exponent records: cumulative changes",
+        ylabel="Slice-level record changes to date",
+        dates=[str(year) for year in years],
+        weights=[float(by_year[year]) for year in years],
+        source_label="ANTEDB extraction",
+        source_url="https://github.com/teorth/expdb",
+        built_by=__file__,
+    )
 
 
 def cumulative_changes() -> None:
@@ -220,6 +255,7 @@ def small_multiples() -> None:
 def main() -> None:
     cumulative_changes()
     small_multiples()
+    cumulative()
 
 
 if __name__ == "__main__":

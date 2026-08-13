@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw discovery-algorithms-stockfish.png from this folder's build tests.
+"""Draw discovery-algorithms-stockfish.png and
+cumulative-algorithms-stockfish.png from this folder's build tests.
 
 Run: python3 problems/algorithms-stockfish/figure.py
 """
@@ -23,12 +24,31 @@ from lib.chart import (  # noqa: E402
     style,
     year_fraction,
 )
+from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 # The date of the commit the red marker records; see the README's LLM section.
 # Pinned here so a refetch that appends newer builds cannot silently drag the
 # marker to whatever the new last row happens to be.
 LLM_COMMIT_DATE = "2026-07-26"
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "stockfish-ncm-elo.csv")
+    staircase_chart(
+        HERE / "cumulative-algorithms-stockfish.png",
+        title="Stockfish dev builds: measured strength",
+        subtitle="Every tested build's Elo vs Stockfish 15 on fixed hardware; "
+                 "higher is better",
+        ylabel="Elo vs Stockfish 15",
+        series=[("", [year_fraction(row["date"]) for row in rows],
+                 [float(row["elo_vs_sf15"]) for row in rows])],
+        source_label="nextchessmove.com fixed-machine development-build "
+                     "tests, vendored as stockfish-ncm-elo.csv",
+        source_url="https://nextchessmove.com/dev-builds",
+        built_by=__file__,
+        note=f"{len(rows):,} tested development builds",
+    )
 
 
 def main() -> None:
@@ -77,3 +97,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

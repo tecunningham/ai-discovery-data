@@ -77,6 +77,11 @@ computable size and an `is_record` of `yes`, one row per kind of agent on a
 symmetric log axis, with a vertical bar at each row's median and the median
 printed above it.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative record steps to date:
+
+![Cumulative record steps to date.](cumulative-math-alphaevolve-records.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) draws both figures from `alphaevolve-records.csv`. For

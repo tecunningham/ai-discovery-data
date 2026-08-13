@@ -41,6 +41,11 @@ technique makes as it exhausts the bugs it can reach in the code it is pointed
 at, and it happens here with no AI involved anywhere. Whatever produced the 2026
 bends in the finder-credited series, it is not automation as such.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative vulnerability records to date:
+
+![Cumulative vulnerability records to date.](cumulative-cyber-oss-fuzz.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `cyber_simple_bars()` shape in

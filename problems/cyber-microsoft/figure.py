@@ -6,6 +6,8 @@ Run: python3 problems/cyber-microsoft/figure.py
 Stacked annual bars of Microsoft-issued CVEs split by what the acknowledgment
 credit names, in the same bands and colours as the Firefox series so the two
 vendors can be read side by side. The 2026 bar is a part year and is outlined.
+cumulative-cyber-microsoft.png redraws the same counts as a running total for
+the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -27,6 +29,7 @@ from lib.chart import (  # noqa: E402
     source_note,
     style,
 )
+from lib.cumulative import counts_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 from matplotlib.ticker import MaxNLocator  # noqa: E402
@@ -34,6 +37,20 @@ from matplotlib.ticker import MaxNLocator  # noqa: E402
 # Affiliation-only credits are drawn in a lighter red than corroborated method
 # credits: same family, visibly weaker evidence. Matches cyber-firefox.
 AI_AFFILIATED = AI_SOFT
+
+
+def cumulative() -> None:
+    rows = read_csv(HERE / "msrc-cves.csv")
+    counts_chart(
+        HERE / "cumulative-cyber-microsoft.png",
+        title="Microsoft security-update CVEs: cumulative",
+        ylabel="CVEs to date",
+        period_labels=[row["year"] for row in rows],
+        counts=[int(row["cves"]) for row in rows],
+        source_label="MSRC Security Update Guide, counted in the vendored CSV",
+        source_url="https://api.msrc.microsoft.com/cvrf/v3.0/updates",
+        built_by=__file__,
+    )
 
 
 def main() -> None:
@@ -104,6 +121,7 @@ def main() -> None:
         ["https://api.msrc.microsoft.com/cvrf/v3.0/updates"],
         __file__,
     )
+    cumulative()
 
 
 if __name__ == "__main__":

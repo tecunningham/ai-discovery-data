@@ -55,6 +55,11 @@ steps fall in just two years, and three of $C_{6.3}$'s four fall in 2025, so mos
 points stack vertically at two x positions, and the two 2025 human points at
 1.17305 and 1.173077 are indistinguishable.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as two standing-record ladders over time:
+
+![Standing records for the C_6.44 and C_6.3 lower bounds over time.](cumulative-math-sums-autoconvolution.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) calls the shared `alphaevolve_value_chart()` shape in

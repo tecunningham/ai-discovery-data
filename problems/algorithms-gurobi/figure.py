@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw discovery-algorithms-gurobi.png from this folder's release speedups.
+"""Draw discovery-algorithms-gurobi.png and cumulative-algorithms-gurobi.png
+from this folder's release speedups.
 
 Run: python3 problems/algorithms-gurobi/figure.py
 """
@@ -23,7 +24,30 @@ from lib.chart import (  # noqa: E402
     style,
     year_fraction,
 )
+from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
+
+
+def cumulative() -> None:
+    rows = sorted(read_csv(HERE / "gurobi-milp-speedups.csv"),
+                  key=lambda row: row["date"])
+    xs = [2022.0] + [year_fraction(row["date"]) for row in rows]
+    ys = [1.0]
+    for row in rows:
+        ys.append(ys[-1] * float(row["release_speedup"]))
+    staircase_chart(
+        HERE / "cumulative-algorithms-gurobi.png",
+        title="Gurobi MILP speed: cumulative speedup",
+        subtitle="Cumulative vendor-reported speedup over v9.5 on fixed "
+                 "machines; higher is better",
+        ylabel="Speedup factor vs v9.5",
+        series=[("", xs, ys)],
+        source_label="Gurobi release announcements; vendor-run figures, "
+                     "transcribed with URLs in gurobi-milp-speedups.csv",
+        source_url=rows[0]["source_url"],
+        built_by=__file__,
+        note="Higher is better; vendor-reported benchmark.",
+    )
 
 
 def main() -> None:
@@ -72,3 +96,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    cumulative()

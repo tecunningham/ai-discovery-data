@@ -36,6 +36,12 @@ appear in the July 2026 posting: one for X-n979-k58 and two successive values fo
 X-n1001-k43. On this fixed cohort, the record-improvement rate is declining,
 not continuously dense.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this cohort
+as instances remaining without an optimality proof, declining toward zero as
+proofs are posted:
+
+![Instances remaining without an optimality proof.](cumulative-algorithms-cvrplib.png)
+
 ## How the chart was built
 
 [`fetch.py`](fetch.py) walks all five pages of the Updates ledger, selects

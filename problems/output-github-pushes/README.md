@@ -35,6 +35,11 @@ shaded 2026 period.
 Every figure in the annotation is computed from the CSV when the chart is drawn,
 so it cannot survive a refetch that changes the numbers.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
+as cumulative git pushes to date:
+
+![Cumulative git pushes to date.](cumulative-output-github-pushes.png)
+
 ## How the chart was built
 
 [`fetch.py`](fetch.py) downloads the three per-economy Innovation Graph files —

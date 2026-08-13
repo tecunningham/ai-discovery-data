@@ -104,6 +104,12 @@ pass the solved count in the final snapshot, 608 against 559. The two count
 different things. Formalizing a statement is not proving it, and the
 formalization drive is a separate effort from the solving.
 
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws the
+snapshot series as open problems remaining — a line that can rise, because new
+problems are catalogued faster than problems fall:
+
+![Open problems remaining at each snapshot.](cumulative-math-erdos.png)
+
 ## How the chart was built
 
 [`figure.py`](figure.py) draws both charts. The first plots three step series

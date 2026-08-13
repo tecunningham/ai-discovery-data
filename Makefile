@@ -1,6 +1,5 @@
-.PHONY: help figure-image figures figure check check-figures check-links index docs fetch fetch-one sync clean
+.PHONY: help figure-image figures figure check check-figures check-links index docs fetch fetch-one clean
 
-BLOG ?= $(HOME)/tecunningham.github.io
 FIGURE_IMAGE ?= ai-discovery-data-figures:python3.12.13
 FIGURE_PLATFORM := linux/amd64
 FIGURE_DOCKERFILE := tools/figures.Dockerfile
@@ -28,7 +27,6 @@ help:
 	@echo "docs               rebuild the interactive chart pages in docs/ (GitHub Pages)"
 	@echo "fetch              refetch every automatable series from upstream (network, slow)"
 	@echo "fetch-one PROBLEM=x  refetch one folder"
-	@echo "sync               copy the figures into the blog repo (BLOG=$(BLOG))"
 
 figure-image:
 	docker build --platform $(FIGURE_PLATFORM) --file $(FIGURE_DOCKERFILE) --tag $(FIGURE_IMAGE) .
@@ -77,9 +75,6 @@ fetch:
 
 fetch-one:
 	python3 problems/$(PROBLEM)/fetch.py
-
-sync:
-	python3 tools/sync_to_blog.py --blog $(BLOG)
 
 # The figures are committed, so this is "throw them away and rebuild", not a
 # routine step. .cache/ holds today's upstream responses and is never part of a

@@ -231,7 +231,6 @@ problems/cyber-curl/
 | `lib/credits.py` | Classification of vulnerability finder credits. |
 | `lib/table.py`, `lib/web.py` | CSV and upstream-fetching helpers. |
 | `tools/check.py` | Cross-folder consistency and reproduction checks. |
-| `tools/sync_to_blog.py` | Copies figures into the blog checkout. |
 | `references.bib` | Bibliography for the problem documents. |
 
 A folder is self-contained except for generic helpers. Cross-series comparison
@@ -302,9 +301,8 @@ argument these series support. It reads the CSVs here directly rather than
 holding copies, so a number that goes stale in its prose fails its audit rather
 than quietly disagreeing with the data. It looks a CSV up by filename, which is
 why filenames are unique across folders and `tools/check.py` enforces it. Its
-only copies are the PNGs, which Quarto has to find inside its own tree to
-publish; `make sync` puts them there and `python3 tools/sync_to_blog.py --check`
-says whether they are current.
+figures are the GitHub-hosted PNGs in this repository, embedded by URL, so it
+holds no copies of those either: what is committed here is what the blog shows.
 
 ## Provenance and licence
 

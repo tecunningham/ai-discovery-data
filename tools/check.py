@@ -475,7 +475,16 @@ def dead_links(problems: list[Problem], timeout: float = 25.0) -> list[str]:
     for problem in problems:
         for url in re.findall(r"https?://[^\s<>()\[\]`\"']+", problem.text):
             urls.setdefault(url.rstrip(".,;"), problem.slug)
-    print(f"fetching {len(urls)} URLs from {len(problems)} documents", flush=True)
+    # The bibliography's url fields rot like any other link, and unlike the
+    # documents' they were checked by nothing (found in review: a bib entry
+    # pointing at a 404 while its README pointed at the live page).
+    if BIB.exists():
+        for url in re.findall(r"^\s*url\s*=\s*\{([^}]+)\}",
+                              BIB.read_text(encoding="utf-8"), re.M):
+            urls.setdefault(url.replace("\\_", "_").rstrip(".,;"),
+                            "references.bib")
+    print(f"fetching {len(urls)} URLs from {len(problems)} documents "
+          "and references.bib", flush=True)
     out = []
     for url, slug in sorted(urls.items()):
         request = urllib.request.Request(
@@ -660,6 +669,76 @@ def checks_rows(problems: list[Problem]) -> str:
     return "\n".join(out)
 
 
+def stale_readme(problems: list[Problem]) -> list[str]:
+    """The committed generated tables must match what the folders generate now.
+
+    A series can be merged without `make index` having run, and nothing else
+    notices: every folder-local check passes, CI reproduces every figure, and
+    the README simply stays one series short. The series index is compared in
+    full because the fast path can compute all of it; the status table's cells
+    depend on the reproduction run, so only its row set is checked here.
+    """
+    text = README.read_text(encoding="utf-8") if README.exists() else ""
+    out = []
+    for begin, end, what in ((INDEX_BEGIN, INDEX_END, "series index"),
+                             (CHECKS_BEGIN, CHECKS_END, "status table")):
+        if begin not in text or end not in text:
+            out.append(f"README.md has no {what} markers")
+    if out:
+        return out
+    committed = text.split(INDEX_BEGIN, 1)[1].split(INDEX_END, 1)[0].strip()
+    if committed != index_rows(problems).strip():
+        out.append("README.md series index does not match the problem folders; "
+                   "run `make index`")
+    checks_block = text.split(CHECKS_BEGIN, 1)[1].split(CHECKS_END, 1)[0]
+    for problem in problems:
+        if f"(problems/{problem.slug}/)" not in checks_block:
+            out.append(f"README.md status table has no row for {problem.slug}; "
+                       "run `make index`")
+    return out
+
+
+def stale_docs(problems: list[Problem]) -> list[str]:
+    """Every series needs a registered, current interactive page.
+
+    `make docs` fails loudly on a missing registry entry, but only when it is
+    run — a series merged without it ships no page, and a CSV refreshed
+    without it leaves a stale one. The pages are deterministic functions of
+    the CSVs and the registry, so staleness is a byte comparison, the same
+    claim `--reproduce` makes for the PNGs. The folder list comes from the
+    same discovery as every other check (not `git ls-files`, which the
+    pinned figure container cannot run).
+    """
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "build_docs", ROOT / "tools" / "build_docs.py")
+    build_docs = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(build_docs)
+    except Exception as error:  # a broken registry is itself the finding
+        return [f"tools/build_docs.py cannot be loaded: {error}"]
+
+    folders = sorted(problem.slug for problem in problems if problem.csvs)
+    out = []
+    for slug in folders:
+        if slug not in build_docs.SERIES:
+            out.append(f"tools/build_docs.py SERIES has no entry for {slug}")
+            continue
+        page = ROOT / "docs" / f"{slug}.html"
+        if not page.exists():
+            out.append(f"docs/{slug}.html is missing; run `make docs`")
+            continue
+        try:
+            rendered = build_docs.render_page(slug, build_docs.SERIES[slug](slug))
+        except Exception as error:
+            out.append(f"docs builder for {slug} fails: {error}")
+            continue
+        if page.read_text(encoding="utf-8") != rendered:
+            out.append(f"docs/{slug}.html is stale; run `make docs`")
+    return out
+
+
 def rewrite(text: str, begin: str, end: str, body: str) -> str | None:
     if begin not in text or end not in text:
         return None
@@ -715,6 +794,10 @@ def main() -> int:
     failures = [message for problem in problems for message in problem.messages()]
     failures += unused_bib(problems, keys)
     failures += strays()
+    if not args.write_index:
+        # Pointless when the tables are about to be rewritten anyway.
+        failures += stale_readme(problems)
+    failures += stale_docs(problems)
     if args.links:
         failures += dead_links(problems)
     if not problems:

@@ -58,7 +58,9 @@ def records() -> list[dict]:
             if handle is None:
                 continue
             text = handle.read().decode("utf-8", "replace")
-            announced = re.search(r"^announced:\s*.*?(20\d{2})", text, re.M | re.S)
+            # No re.S: the year must come from the announced line itself, not
+            # from whatever four-digit number happens to follow in the file.
+            announced = re.search(r"^announced:[^\n]*?(20\d{2})", text, re.M)
             if announced:
                 year = int(announced.group(1))
             else:
@@ -77,6 +79,11 @@ def records() -> list[dict]:
                 ).date().isoformat()
             except ValueError:
                 announced_date = ""
+                if announced_text:
+                    # The dated maximum decides data_through, so a format this
+                    # parser does not know must be said out loud, not dropped.
+                    print(f"  unparseable announced date {announced_text!r} "
+                          f"in {member.name}")
             for key, value in (parsed.get("advisories") or {}).items():
                 if not str(key).startswith("CVE"):
                     continue
@@ -184,7 +191,10 @@ def build_finders(rows: list[dict]) -> list[dict]:
     out = [
         {"year": year, "finder": finder, "category": category, "cves": count}
         for (year, finder, category), count in sorted(
-            counted.items(), key=lambda item: (item[0][0], -item[1])
+            # The finder name breaks count ties: without it the order of tied
+            # rows follows the tarball's member order, and a refetch reshuffles
+            # rows that did not change.
+            counted.items(), key=lambda item: (item[0][0], -item[1], item[0][1])
         )
     ]
     ai = [row for row in out if row["category"] in ("explicit_ai", "ai_affiliated")]
@@ -198,10 +208,44 @@ def build_finders(rows: list[dict]) -> list[dict]:
     return out
 
 
+def build_ai_cves(rows: list[dict]) -> list[dict]:
+    """One row per distinct AI-marked CVE per year, with its credit strings.
+
+    The annual file counts the bands and the finders file counts mentions per
+    reporter string; neither says which CVEs the AI bands actually are, so the
+    per-team claims in the document were unfalsifiable from vendored data.
+    This table closes that, the same role msrc-ai-cves.csv plays for Microsoft.
+    """
+    marks: dict[tuple[int, str], Signals] = {}
+    reporters: dict[tuple[int, str], list[str]] = defaultdict(list)
+    for record in rows:
+        key = (record["year"], record["cve"])
+        found = signals(record["reporter"], record["year"])
+        seen = marks.get(key)
+        marks[key] = found if seen is None else Signals(
+            explicit_ai=seen.explicit_ai or found.explicit_ai,
+            ai_affiliated=seen.ai_affiliated or found.ai_affiliated,
+            fuzz=seen.fuzz or found.fuzz,
+        )
+        reporter = record["reporter"].strip()
+        if reporter and reporter not in reporters[key]:
+            reporters[key].append(reporter)
+    out = [
+        {"year": year, "cve": cve,
+         "band": "explicit_ai" if marked.explicit_ai else "ai_affiliated",
+         "reporters": " | ".join(reporters[year, cve])}
+        for (year, cve), marked in sorted(marks.items())
+        if marked.explicit_ai or marked.ai_affiliated
+    ]
+    print(f"firefox AI-marked distinct CVEs: {len(out)} rows")
+    return out
+
+
 def main() -> None:
     rows = records()
     write_csv(HERE / "firefox-advisories.csv", build_annual(rows))
     write_csv(HERE / "firefox-finders.csv", build_finders(rows))
+    write_csv(HERE / "firefox-ai-cves.csv", build_ai_cves(rows))
 
 
 if __name__ == "__main__":

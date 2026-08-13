@@ -3,7 +3,7 @@
 **Domain:** vulnerabilities
 **Metric:** distinct CVEs per year, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count
 **Coverage:** 2016–2026, partial through the latest advisory on 4 August 2026
-**Data:** [`firefox-advisories.csv`](firefox-advisories.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv)
+**Data:** [`firefox-advisories.csv`](firefox-advisories.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv); every AI-marked CVE with its credit strings in [`firefox-ai-cves.csv`](firefox-ai-cves.csv)
 **Upstream:** <https://github.com/mozilla/foundation-security-advisories> (rendered at <https://www.mozilla.org/en-US/security/advisories/>)
 **Verdict:** accelerating — though distinct CVEs rose 44% from 2021 to 2025 with essentially no AI credit
 
@@ -43,9 +43,9 @@ until 2025, which has exactly one, and 2026 has 37 AI-marked distinct CVEs, or
 11% of that year's total. Those 37 divide into 32 whose credit names an AI system
 or method and 5 that name only an AI-security employer.
 The fuzzer band moves quite differently: 3 distinct CVEs in 2018, 4 in 2022, then
-12, 17, 30 and 32 across 2023 to 2026. Fuzzer-credited discovery grew through
-2025 and then flattened in the same step where AI-credited discovery went from 1
-to 37.
+12, 17, 30 and 32 across 2023 to 2026. The fuzz part year already tops 2025 and
+annualizes to about 54, so fuzzer-credited discovery kept growing through the
+same step where AI-credited discovery went from 1 to 37.
 
 Three things cut the finding down. Distinct CVEs rose 44% from 2021 to 2025 with
 essentially no AI credit anywhere, so an upward trend was already running and

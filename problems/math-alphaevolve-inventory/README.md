@@ -2,7 +2,7 @@
 
 **Domain:** mathematics
 **Metric:** per problem, whether it has a live numeric record and how many dated prior works the paper cites
-**Coverage:** the 65 problems the paper numbers 6.1 to 6.65; cited works span 1898–2025; built 2026-07-26
+**Coverage:** the 65 problems the paper numbers 6.1 to 6.65; cited works span 1852–2025; built 2026-07-26
 **Data:** [`alphaevolve-inventory.csv`](alphaevolve-inventory.csv)
 **Upstream:** <https://arxiv.org/abs/2511.02864> and <https://github.com/google-deepmind/alphaevolve_repository_of_problems>
 **Verdict:** baseline
@@ -55,7 +55,7 @@ reported as 67 mathematical results, two quantities supported a head-to-head at
 the point this inventory was built.
 
 The dating turned out better than expected in one respect. Of the 65 problems,
-64 cite at least one dated reference, 52 cite at least two, and 30 cite at least
+64 cite at least one dated reference, 52 cite at least two, and 31 cite at least
 four; the parsed bibliography yields 302 entries of which 298 carry a year.
 Among problems citing two or more dated works the median span between earliest
 and latest cited year is 42 years, so these are decades-deep literatures rather

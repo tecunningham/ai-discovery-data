@@ -4,7 +4,7 @@
 **Metric:** cumulative record steps in five groups of finite construction and packing problems
 **Coverage:** 1949–2026, 22 record steps across the five groups
 **Data:** [`alphaevolve-records.csv`](alphaevolve-records.csv), with the sampling frame in [`../math-alphaevolve-inventory/alphaevolve-inventory.csv`](../math-alphaevolve-inventory/alphaevolve-inventory.csv)
-**Upstream:** <https://github.com/google-deepmind/alphaevolve_repository_of_problems> and <https://arxiv.org/abs/2506.13131>, with per-step sources recorded in the CSV's `ref` and `note` columns
+**Upstream:** <https://github.com/google-deepmind/alphaevolve_repository_of_problems> and <https://arxiv.org/abs/2511.02864>, with per-step sources recorded in the CSV's `ref` and `note` columns
 **Verdict:** inconclusive — the 2025 cluster is real, but these five groups were selected because an AI system worked on them
 
 ![Cumulative record steps in five finite construction and packing problem groups, with AI steps in red.](discovery-math-alphaevolve-related-records.png)
@@ -160,8 +160,9 @@ dated from [@deepmind2023funsearch].
 
 ## Related literature
 
-The 2025 steps and the bounds they were measured against come from the AlphaEvolve
-white paper and its companion repository, which also supplies the status
+The 2025 steps and the bounds they were measured against come from the
+mathematics paper's appendix [@georgiev2025mathexploration], with the AlphaEvolve
+white paper and its companion repository supplying the status
 classification used as the frame here [@novikov2025alphaevolve;
 @deepmind2025problems]. Tao's account of the mathematics paper is the source for
 the modal-rediscovery finding, for the verifier-gaming caveat, and for the observation

@@ -47,7 +47,7 @@ as an open point because it is not acknowledged by the record-keeper.
 
 The rate is falling as the AI records arrive. Yearly improvement factors over
 this series run 2.9 in 2023 and 2.4 in 2024, both entirely human, then 1.3 in
-2025, the year of the Hiverge record, and 1.09 across the first half of 2026 if
+2025, the year of the Hiverge record, and 1.09 through early July 2026 if
 the claim is granted. Those factors are computed over the vendored series rather
 than stated by any source. So the two facts here point in opposite directions:
 the AI steps are individually deep, and the curve they sit on is flattening.
@@ -93,7 +93,7 @@ record is added to it by reading the same kinds of sources again.
   reason, and the same caution applies to reading the pre-2022 lineage as part of
   the curve.
 - **The yearly factors are this repository's arithmetic** over a series with
-  fewer than a dozen points, so a single date correction can move them.
+  only a dozen points, so a single date correction can move them.
 
 ## LLM contributions
 

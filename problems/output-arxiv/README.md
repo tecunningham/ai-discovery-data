@@ -25,7 +25,8 @@ much weaker thing to establish. A submission is not a result.
 
 Submissions rose from 17,271 in November 2022, the month ChatGPT was released,
 to 29,687 in July 2026, the last complete month: 72% in three years and eight
-months, against decades in which the series took roughly a decade to double.
+months, a pace the series last sustained in the late 1990s; across the two
+decades before ChatGPT it took seven to nine years to double.
 The bend is visible around 2023 and continues through the shaded 2026 period.
 
 The trailing point is drawn open because the last row is the month in progress

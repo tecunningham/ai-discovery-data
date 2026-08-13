@@ -1,13 +1,13 @@
 # Smale's problems
 
 **Domain:** mathematics
-**Metric:** unresolved scored rows remaining, out of 19 scored rows
+**Metric:** current status of 19 scored rows, plus dated resolutions per year
 **Coverage:** 1998–2026, with dated resolutions running 2002–2026
 **Data:** [`smale-problems.csv`](smale-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Smale%27s_problems>, with the 2026 row resting on the independent verifications at <https://zenodo.org/records/21514514> and <https://isa-afp.org/entries/Jacobian_Counterexample.html>
 **Verdict:** inconclusive — one AI-attributed fall in 2026, and a single event cannot set a slope
 
-![Unresolved scored rows over time.](discovery-math-smale.png)
+![Current status of the scored rows, and dated resolutions per year.](discovery-math-smale.png)
 
 ## The problem
 
@@ -98,7 +98,7 @@ There is no `fetch.py`. The rows are hand-scored from the Wikipedia table and, f
 
 ## LLM contributions
 
-One, and it is the only AI-attributed fall on any of the four prestige and corpus
+One, and it is the only AI-attributed fall on any of the six problem-list
 ledgers scored here. In July 2026 Levent Alpöge, working with Claude Fable 5,
 produced a counterexample to the Jacobian conjecture in dimension 3, and
 therefore in every dimension at least 3; the determinant and the collision were
@@ -125,5 +125,6 @@ proofs is too expensive — is what the largest formal-proof-search evaluation o
 open problems was built around [@deepmind2026nexus], and benchmark designers have
 since made cheap verification an explicit selection rule
 [@arxiv2026horizonmath]. The companion ledgers are [Hilbert](../math-hilbert/README.md),
+[Landau](../math-landau/README.md), [Thurston](../math-thurston/README.md),
 [Millennium](../math-millennium/README.md) and [TOPP](../math-topp/README.md), none of which records
 an AI-attributed fall.

@@ -3,8 +3,9 @@
 
 Run: python3 problems/math-landau/figure.py
 
-All four rows are open, so the unresolved count stays flat at four for its whole
-length. That is the chart's content rather than a failure to draw.
+All four rows are open, so the status bar is one open block and the events panel
+records that no dated resolution exists. That is the chart's content rather than
+a failure to draw.
 """
 
 from __future__ import annotations

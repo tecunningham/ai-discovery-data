@@ -81,6 +81,8 @@ def solution_year_claims(failures: list[str]) -> dict[str, str]:
         f"1–{first_total}": "2026 catalogued share",
         f"{preprint_kind} of the {len(dated)} dated rows rest on arXiv "
         f"preprints and {wiki_kind} on wiki entries": "kind totals",
+        f"{sum(row['basis'] == 'ai_wiki' for row in rows)} problems rest on "
+        f"the wiki alone, {wiki_kind} are wiki-dated": "basis-vs-kind split",
     }
 
 

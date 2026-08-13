@@ -42,7 +42,7 @@ baseline in five years.
 
 One further entry is open rather than filled. cmix-lex, by Ibrahim Marcouch, was
 announced on the benchmark page on 2026-06-26 at 109,190,109 bytes, a further
-1.45% and inside the 109,685,197 needed to clear the 1% hurdle, but it was not an
+1.45% and inside the 109,685,196 needed to clear the 1% hurdle, but it was not an
 awarded record on the prize site as read.
 
 The dashed line is the sharper fact. The uncapped leaderboard, which permits

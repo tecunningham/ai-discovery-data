@@ -25,16 +25,22 @@ from lib.chart import (  # noqa: E402
 )
 from lib.table import read_csv  # noqa: E402
 
+# The date of the commit the red marker records; see the README's LLM section.
+# Pinned here so a refetch that appends newer builds cannot silently drag the
+# marker to whatever the new last row happens to be.
+LLM_COMMIT_DATE = "2026-07-26"
+
 
 def main() -> None:
     rows = read_csv(HERE / "stockfish-ncm-elo.csv")
     xs = [year_fraction(row["date"]) for row in rows]
     ys = [float(row["elo_vs_sf15"]) for row in rows]
-    # Eight builds share the final date, spanning about three Elo, so "the
-    # newest build" is a choice rather than a lookup. The file keeps upstream's
-    # test order, and the last row in it is the last build tested; taking the
-    # maximum instead would report whichever run got the luckiest 20,000 games.
-    latest = rows[-1]
+    # Eight builds share the commit's date, spanning about three Elo, so "the
+    # build to mark" is a choice rather than a lookup. The file keeps upstream's
+    # test order, and the last row on that date is the last build tested; taking
+    # the maximum instead would report whichever run got the luckiest 20,000
+    # games.
+    latest = [row for row in rows if row["date"] == LLM_COMMIT_DATE][-1]
     latest_elo = float(latest["elo_vs_sf15"])
     fig, ax = new_chart(
         "Stockfish development builds on fixed hardware",

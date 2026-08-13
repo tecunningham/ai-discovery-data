@@ -222,10 +222,23 @@ def record_steps() -> None:
         "carrying both AI and non-AI steps.",
         fontsize=11.5, x=0.006, ha="left", y=0.995,
     )
+    # tight_layout picks the margins this grid needs; save() then reapplies
+    # exactly those, so the shared helper adds its renderer guard and PNG
+    # provenance without changing the layout.
     fig.tight_layout(rect=(0, 0, 1, 0.90))
-    fig.savefig(HERE / "alphaevolve-record-steps.png", dpi=170)
-    plt.close(fig)
-    print(f"wrote alphaevolve-record-steps ({len(steps)} steps)")
+    pars = fig.subplotpars
+    save(
+        fig,
+        HERE / "alphaevolve-record-steps.png",
+        "AI record steps against human steps on the same AlphaEvolve "
+        "quantities: three contested sequences and every computable step size.",
+        ["https://github.com/google-deepmind/alphaevolve_repository_of_problems",
+         "https://arxiv.org/abs/2511.02864"],
+        __file__,
+        adjust={"left": pars.left, "right": pars.right, "top": pars.top,
+                "bottom": pars.bottom, "wspace": pars.wspace,
+                "hspace": pars.hspace},
+    )
 
 
 def main() -> None:

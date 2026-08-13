@@ -39,8 +39,8 @@ against reading proximity to the agent era as an AI effect.
 
 Eight steps in 120 years, four of them in the twentieth century and four between
 2011 and 2025 — and the last two are the largest since 1947. On the count axis the
-recent bend is unmistakable: three steps in the twelve years to 2025 against one in
-the forty-five years to 1992.
+recent bend is unmistakable: three steps in the thirteen years to 2025 against one
+in the forty-five years to 1992.
 
 Every one of them is a human proof, and the chart says so in a callout. None of
 the papers involves a machine-learning system. Set against the flat

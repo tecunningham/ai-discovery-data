@@ -50,8 +50,8 @@ draws a single amber bar per year from the `discoveries` column of
 collection, so the whole chart is the band that appears as a thin stripe inside
 the Firefox and OpenSSL charts. There is no AI classification here because the
 records carry no finder credit to classify. The `partial_year` row is outlined
-in dark grey; the CSV carries no `data_through` value, so the annotation falls
-back to reading "through latest snapshot" rather than naming a date.
+in dark grey, and its annotation names the `data_through` date carried on the
+CSV's final row.
 
 The axis is linear and January 2026 onward is shaded, as in every figure here.
 

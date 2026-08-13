@@ -121,6 +121,12 @@ arXiv-only, `ai_wiki` when the date is a wiki entry — and plots each dated
 solution against its problem number, with the catalogue's size at the first
 snapshot marked from `erdos-database-history.csv`.
 
+The two splits are not the same rule: the second chart keys on `basis`, what
+dated the problem after review, while the third keys on `reference_kind`, what
+kind of reference did the dating. Seven problems whose dates rest on the wiki
+but were confirmed in review are therefore blue in the second chart and red in
+the third — 40 problems rest on the wiki alone, 47 are wiki-dated.
+
 The AI-standalone stock is drawn as a boxed callout rather than a fourth line.
 About 13 against stocks of 559 and 1,217 would be a flat line on the axis, and
 plotting it as a series would also imply it is measured on the same basis, which
@@ -165,6 +171,13 @@ endpoint that the folder's own fetcher overwrites is not a series anybody can
 rebuild, so the fetcher's value stands and the disagreement is recorded here
 instead. It is worth knowing that the project's own two public counts of the
 same quantity differ by about six.
+
+The solution-years file is a third instrument again: it enumerates the 556
+problems whose `problems.yaml` status read proved, disproved or solved on the
+day `fetch_solutions.py` ran, where the 10 August statistics snapshot records
+559 marked solved. Three counts of nominally one stock — 556, 559, 565 — each
+from a different source read on a different day, which is a caution worth
+carrying to any single-day reading of this catalogue.
 
 ## What it cannot support
 
@@ -242,7 +255,8 @@ produced the only denominated rate here is documented by its vendor
 [@openai2026discretegeometry]. Tao's commentary is the sharpest statement of why
 a solve count is not a success rate, since problem selection, effort, and failed
 attempts are all unobserved [@tao2026interview]. The prestige-list series in
-[Hilbert](../math-hilbert/README.md), [Smale](../math-smale/README.md),
+[Hilbert](../math-hilbert/README.md), [Landau](../math-landau/README.md),
+[Thurston](../math-thurston/README.md), [Smale](../math-smale/README.md),
 [Millennium](../math-millennium/README.md) and [TOPP](../math-topp/README.md) are the ceiling check
 on this corpus: they move far less, and they are selected against cheap
 verification.

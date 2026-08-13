@@ -27,7 +27,10 @@ from lib.table import read_csv  # noqa: E402
 
 
 def main() -> None:
-    rows = read_csv(HERE / "gurobi-milp-speedups.csv")
+    # The cumulative product below is only right in release order, so sort by
+    # date rather than trusting how the CSV rows happen to be appended.
+    rows = sorted(read_csv(HERE / "gurobi-milp-speedups.csv"),
+                  key=lambda row: row["date"])
     xs = [year_fraction(row["date"]) for row in rows]
     factors = []
     cumulative = 1.0

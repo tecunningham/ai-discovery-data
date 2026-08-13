@@ -57,7 +57,16 @@ def fetch_page(page: int) -> list[str]:
 def extract() -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     seen: set[tuple[str, str, str, str]] = set()
-    for page in range(1, 6):
+    # Follow the pagination until a page contributes nothing new, rather than
+    # assuming how many pages the ledger has grown to: a sixth page appearing
+    # upstream would otherwise be skipped without any check noticing. The cap
+    # exists so a site that echoes its last page forever cannot loop this.
+    page = 0
+    while True:
+        page += 1
+        if page > 40:
+            raise RuntimeError("more than 40 update pages; check the pagination")
+        added = 0
         source_url = f"{BASE}?page={page}"
         for text in fetch_page(page):
             date_match = re.match(r"([A-Z][a-z]+ \d{1,2}, \d{4})", text)
@@ -80,6 +89,7 @@ def extract() -> list[dict[str, str]]:
                     if key in seen:
                         continue
                     seen.add(key)
+                    added += 1
                     rows.append({
                         "recorded_date": recorded,
                         "instance": instance,
@@ -87,6 +97,8 @@ def extract() -> list[dict[str, str]]:
                         "event_type": kind,
                         "source_url": source_url,
                     })
+        if added == 0:
+            break
     return sorted(rows, key=lambda row: (
         row["recorded_date"], row["event_type"], row["instance"], row["objective"]
     ))

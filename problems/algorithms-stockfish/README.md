@@ -42,8 +42,9 @@ the chart's marker both use; taking the day's maximum instead would report
 whichever run drew the easiest games, and would move the span figure by a couple
 of Elo without anything having changed in the engine.
 
-The largest single move is one architecture change, not a trend. Calendar 2020
-gained about 121 Elo and 2021 about 114, around the NNUE merge of 2020-08-06.
+The largest single move is one architecture change, not a trend. Year-end to
+year-end, calendar 2020 gained about 117 Elo and 2021 about 117, around the
+NNUE merge of 2020-08-06.
 The project's own regression tables put one patch at roughly 58 Elo — master
 against Stockfish 11 measured +25.49 six days before and +83.42 just after — and
 the announcement described the gain as "currently on > 80 Elo" at faster time

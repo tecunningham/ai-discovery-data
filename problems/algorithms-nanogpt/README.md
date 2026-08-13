@@ -69,9 +69,9 @@ column. January 2026 onward is shaded, as in every figure here.
 
 The y axis is logarithmic, with ticks set explicitly at 1.5, 2, 3, 5, 10, 20 and
 45. A linear axis would compress the whole 2025–2026 stretch into the bottom of
-the frame, which is exactly the region the slope question is about. Nothing is
-plotted with an open marker on this series, because every record in the README
-carries a firm date and an acknowledged holder.
+the frame, which is exactly the region the slope question is about. Apart from
+the two re-timings, nothing is plotted with an open marker on this series,
+because every record row carries a firm date and an acknowledged holder.
 
 The rows are transcribed by hand, since attributing a record needs judgment the
 README states only in prose. [`fetch.py`](fetch.py) is therefore a staleness probe

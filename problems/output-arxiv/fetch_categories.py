@@ -1,27 +1,35 @@
 #!/usr/bin/env python3
-"""Harvest month × primary-category submission counts from arXiv's OAI-PMH.
+"""Build month × primary-category submission counts for the arXiv corpus.
 
-Run by hand:
+Run by hand, either way:
 
-    python3 problems/output-arxiv/fetch_categories.py            # full harvest
+    python3 problems/output-arxiv/fetch_categories.py --snapshot <path>
+    python3 problems/output-arxiv/fetch_categories.py            # OAI harvest
     python3 problems/output-arxiv/fetch_categories.py --resume   # after a crash
 
 Writes arxiv-monthly-by-category.csv: one row per (month, primary category)
 with the count of papers whose first version was submitted that month. The
-month comes from the metadata's <created> date — the v1 submission — not the
-OAI datestamp, which moves on every metadata edit; the category is the primary
+month comes from the v1 submission date — not the OAI datestamp or
+update_date, which move on every metadata edit; the category is the primary
 (first-listed) one, so each paper counts once and the columns sum to the
 monthly totals series up to arXiv's own historical corrections.
 
-This is not part of `make fetch` and is excluded from the weekly freshness
-workflow by its filename: a full harvest walks ~3,100 resumption pages of
-https://oaipmh.arxiv.org/oai at one request a second and takes a few hours.
-Records created after lib/chart.py's AS_OF_DATE are dropped, so a re-run
-reproduces the committed window plus whatever upstream recategorized since.
+The fast path is arXiv's official metadata snapshot — the ~5 GB
+arxiv-metadata-oai-snapshot.json distributed via Kaggle
+(Cornell-University/arxiv), one JSON record per line, updated weekly. It
+needs a Kaggle login to download, so it is an operator convenience rather
+than the documented rebuild: the no-auth path is the OAI-PMH harvest of
+https://oaipmh.arxiv.org/oai, which walks ~2,400 resumption pages and takes
+the better part of a day at the pace the endpoint meters out. Both paths
+produce the same aggregation; papers first submitted after lib/chart.py's
+AS_OF_DATE are dropped, so a re-run reproduces the committed window plus
+whatever upstream recategorized since.
 
-A checkpoint (counts + resumption token) is saved under .cache/ every 25
-pages; --resume continues from it while the token is still valid on arXiv's
-side, which spares re-walking the early pages after a network failure.
+Not part of `make fetch` and excluded from the weekly freshness workflow by
+its filename, on both counts: the snapshot needs credentials and the harvest
+needs hours. For the harvest, a checkpoint (counts + resumption token) is
+saved under .cache/ every 25 pages; --resume continues from it while the
+token is still valid on arXiv's side.
 """
 
 from __future__ import annotations
@@ -184,8 +192,44 @@ def harvest(resume: bool) -> Counter:
         time.sleep(PAGE_DELAY_SECONDS)
 
 
+def from_snapshot(path: Path) -> Counter:
+    """Aggregate the Kaggle snapshot: same counting rule as the harvest."""
+    import email.utils
+
+    cutoff = as_of_date()
+    counts: Counter = Counter()
+    total = 0
+    skipped = 0
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            record = json.loads(line)
+            total += 1
+            versions = record.get("versions") or []
+            v1 = next((v for v in versions if v.get("version") == "v1"), None)
+            categories = (record.get("categories") or "").split()
+            if v1 is None or not v1.get("created") or not categories:
+                skipped += 1
+                continue
+            created = email.utils.parsedate_to_datetime(v1["created"]).date()
+            if created > cutoff:
+                continue
+            counts[(created.isoformat()[:7], categories[0])] += 1
+    print(f"snapshot: {total} records, {sum(counts.values())} counted, "
+          f"{skipped} without a v1 date or category", flush=True)
+    return counts
+
+
 def main() -> None:
-    counts = harvest(resume="--resume" in sys.argv[1:])
+    if "--snapshot" in sys.argv[1:]:
+        after = sys.argv[sys.argv.index("--snapshot") + 1:]
+        # The conventional local home for the snapshot; gitignored, since
+        # five gigabytes of upstream metadata is not this repository's to
+        # vendor.
+        path = (Path(after[0]).expanduser() if after
+                else HERE / "arxiv-metadata-oai-snapshot.json")
+        counts = from_snapshot(path)
+    else:
+        counts = harvest(resume="--resume" in sys.argv[1:])
     rows = [
         {"month": month, "category": category, "submissions": count}
         for (month, category), count in sorted(counts.items())

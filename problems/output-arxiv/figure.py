@@ -106,6 +106,11 @@ def group_of(category: str) -> str:
     return GROUP_OF_ARCHIVE[archive]
 
 
+# arXiv opened in July 1991; a few dozen migrated records carry earlier v1
+# dates, which are metadata archaeology rather than pre-launch submissions.
+LAUNCH_MONTH = "1991-07"
+
+
 def by_field() -> None:
     rows = read_csv(HERE / "arxiv-monthly-by-category.csv")
     per_group: dict[str, defaultdict] = {}
@@ -113,7 +118,8 @@ def by_field() -> None:
         group = group_of(row["category"])
         per_group.setdefault(group, defaultdict(int))
         per_group[group][row["month"]] += int(row["submissions"])
-    months = sorted({row["month"] for row in rows})
+    months = sorted({row["month"] for row in rows
+                     if row["month"] >= LAUNCH_MONTH})
     # The last harvested month is partial; the lines stop at the last
     # complete one so no field appears to collapse.
     months = months[:-1]
@@ -173,7 +179,7 @@ def math_subfields() -> None:
         per_subfield.setdefault(modern, defaultdict(int))
         per_subfield[modern][row["month"]] += int(row["submissions"])
     months = sorted({month for series in per_subfield.values()
-                     for month in series})[:-1]
+                     for month in series if month >= LAUNCH_MONTH})[:-1]
     xs = [year_fraction(month) for month in months]
     order = sorted(per_subfield,
                    key=lambda s: -sum(per_subfield[s].values()))
@@ -211,9 +217,8 @@ def math_subfields() -> None:
         ax.axis("off")
     source_note(
         fig,
-        "Source: arXiv OAI-PMH metadata; legacy archives (alg-geom, q-alg, "
-        "dg-ga, funct-an) are mapped to their modern subfields. The corner "
-        "number is the last complete month.",
+        "Source: arXiv OAI-PMH metadata; legacy archives map to modern "
+        "subfields. Corner numbers are the last complete month.",
     )
     save(
         fig,

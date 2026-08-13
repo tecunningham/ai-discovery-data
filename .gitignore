@@ -3,3 +3,4 @@ __pycache__/
 .DS_Store
 .cache/
 .claude/settings.local.json
+problems/output-arxiv/arxiv-metadata-oai-snapshot.json

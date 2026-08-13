@@ -25,7 +25,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>OSS-Fuzz vulnerability discoveries</h1>
-<p class="metric">vulnerability records published per year by an automated fuzzing programme</p>
+<p class="metric">vulnerability records published per quarter by an automated fuzzing programme</p>
 <p class="links"><a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-oss-fuzz/">Discussion</a> <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-oss-fuzz/#what-it-cannot-support">Caveats</a> <a href="https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip">Source</a></p>
 <h2>Records published</h2>
 <div id="chart0" class="chart"></div>
@@ -34,7 +34,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 repository; both are drawn from the same CSV. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
-vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"note":"","value":1041,"x":"2020"},{"note":"","value":739,"x":"2021"},{"note":"","value":710,"x":"2022"},{"note":"","value":581,"x":"2023"},{"note":"","value":388,"x":"2024"},{"note":"","value":244,"x":"2025"},{"note":"partial year","value":239,"x":"2026"}]},"encoding":{"tooltip":[{"field":"x","title":"year","type":"ordinal"},{"field":"value","title":"Records published","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","title":"Records published","type":"quantitative"}},"height":340,"mark":{"color":"#37474f","type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"note":"","value":1041,"x":"2020"},{"note":"","value":739,"x":"2021"},{"note":"","value":710,"x":"2022"},{"note":"","value":581,"x":"2023"},{"note":"","value":388,"x":"2024"},{"note":"","value":244,"x":"2025"},{"note":"partial year","value":241,"x":"2026"}]},"encoding":{"tooltip":[{"field":"x","title":"year","type":"ordinal"},{"field":"value","title":"Records published","type":"quantitative"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"labelAngle":-45},"field":"x","title":"Year","type":"ordinal"},"y":{"field":"value","title":"Records published","type":"quantitative"}},"height":340,"mark":{"color":"#37474f","type":"bar"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
 </script>
 </body>
 </html>

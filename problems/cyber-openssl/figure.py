@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Draw the annual, batch, severity and cumulative OpenSSL disclosure charts.
+"""Draw the quarterly, batch, severity and cumulative OpenSSL disclosure charts.
 
 Run: python3 problems/cyber-openssl/figure.py
 
-The severity chart cuts the same CVE ledger by OpenSSL's own rating, which is
-what turns a record disclosure count into a question about how much of it
-matters. It starts in 2015: the project's structured metadata carries no
-severity before 2014, and an unrated record is missing data rather than a low
-one. cumulative-cyber-openssl.png redraws the annual counts as a running total
-for the collection-wide cumulative index.
+The main chart counts CVEs by publication quarter, the ledger's native grain;
+the batch chart shows the coordinated 2026 publication dates inside it. The
+severity chart cuts the same CVE ledger by OpenSSL's own rating, as counts a
+reader can take numbers from. It starts in 2015: the project's structured
+metadata carries no severity before 2014, and an unrated record is missing data
+rather than a low one. cumulative-cyber-openssl.png redraws the ledger as a
+running total for the collection-wide cumulative index.
 """
 
 from __future__ import annotations
@@ -18,7 +19,6 @@ from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 
-from matplotlib.patches import Patch
 from matplotlib.ticker import MaxNLocator
 
 HERE = Path(__file__).resolve().parent
@@ -31,12 +31,11 @@ from lib.chart import (  # noqa: E402
     NEUTRAL,
     new_chart,
     save,
-    shade_era,
     source_note,
     style,
 )
 from lib.cumulative import counts_chart  # noqa: E402
-from lib.families import severity_panels  # noqa: E402
+from lib.families import periodic_stacked, severity_heatmap  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 SOURCE_URL = "https://github.com/openssl/release-metadata/tree/main/secjson"
@@ -54,89 +53,52 @@ SERIES = (
 )
 
 
-def _stacked(ax, x, values, width: float) -> None:
-    bottoms = [0] * len(x)
-    for key, _, colour in SERIES:
-        heights = values[key]
-        ax.bar(x, heights, bottom=bottoms, width=width, color=colour, zorder=3)
-        bottoms = [bottom + height for bottom, height in zip(bottoms, heights)]
+def category(row: dict[str, str]) -> str:
+    """The provenance class one CVE row is drawn in, batch and main alike."""
+    if row["explicit_ai"] == "yes":
+        return "corroborated_ai"
+    if row["ai_affiliated"] == "yes":
+        return "ai_affiliated_unverified"
+    if row["reporter"]:
+        return "conventional_or_fuzz"
+    return "unknown"
 
 
-def _legend(ax) -> None:
-    ax.legend(
-        handles=[Patch(facecolor=colour, label=label) for _, label, colour in SERIES],
-        frameon=False,
-        fontsize=7.8,
-        ncol=2,
-        loc="upper left",
-    )
+def quarter_of(published: str) -> str:
+    return f"{published[:4]}-Q{(int(published[5:7]) + 2) // 3}"
 
 
-def annual_chart() -> None:
-    rows = read_csv(HERE / "openssl-vulnerabilities.csv")
-    years = [int(row["year"]) for row in rows]
-    totals = [int(row["total"]) for row in rows]
-    values = {
-        key: [int(row[key]) for row in rows]
-        for key, _, _ in SERIES
-    }
-    fig, ax = new_chart(
-        "OpenSSL vulnerability disclosures",
-        "Annual CVEs; corroborated AI method is separate from affiliation-only credit",
-    )
-    _stacked(ax, years, values, 0.76)
-    partial = [index for index, row in enumerate(rows) if row["partial_year"] == "yes"]
-    for index in partial:
-        ax.bar(
-            years[index],
-            totals[index],
-            width=0.76,
-            facecolor="none",
-            edgecolor="#444444",
-            linewidth=1.3,
-            zorder=4,
-        )
-        ax.annotate(
-            "partial year",
-            (years[index], totals[index]),
-            xytext=(-4, 7),
-            textcoords="offset points",
-            ha="right",
-            fontsize=8,
-            color="#555555",
-        )
-    right = max(years) + 1.2
-    ax.set_xlim(min(years) - 1, right)
-    ax.set_ylim(0, max(totals) * 1.24)
-    shade_era(ax, right, annual=True)
-    style(ax, "Vulnerabilities disclosed that year")
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=7))
-    _legend(ax)
-    if partial:
-        latest = rows[partial[-1]]
-        ax.text(
-            0.02,
-            0.76,
-            f"{latest['total']} disclosures through {latest['data_through']}\n"
-            f"{latest['corroborated_ai']} corroborated AI; "
-            f"{latest['ai_affiliated_unverified']} affiliation only",
-            transform=ax.transAxes,
-            fontsize=8.8,
-            color="#333333",
-            va="top",
-        )
-    source_note(
-        fig,
-        "Source: OpenSSL release-metadata. AI method requires CVE-level evidence; "
-        "affiliation alone is not method.",
-    )
-    save(
-        fig,
+def main_chart() -> None:
+    rows = read_csv(HERE / "openssl-cves.csv")
+    per_quarter: dict[str, Counter] = defaultdict(Counter)
+    for row in rows:
+        per_quarter[quarter_of(row["published"])][category(row)] += 1
+    quarters = sorted(per_quarter)
+    annual = read_csv(HERE / "openssl-vulnerabilities.csv")
+    latest = annual[-1]
+    current = [row for row in rows
+               if row["published"][:4] == latest["year"]]
+    periodic_stacked(
         HERE / "discovery-cyber-openssl.png",
-        "OpenSSL vulnerability disclosures by year and provenance class. "
-        "The latest year is partial.",
-        [SOURCE_URL],
-        __file__,
+        title="OpenSSL vulnerability disclosures",
+        subtitle="Quarterly CVEs; corroborated AI method is separate from "
+                 "affiliation-only credit",
+        ylabel="Vulnerabilities disclosed that quarter",
+        periods=quarters,
+        stacks=[
+            (label, colour,
+             [per_quarter[quarter][key] for quarter in quarters])
+            for key, label, colour in SERIES
+        ],
+        source_label="OpenSSL release-metadata. AI method requires CVE-level "
+                     "evidence; affiliation alone is not method",
+        source_url=SOURCE_URL,
+        built_by=__file__,
+        partial_last=f"partial quarter\nthrough {latest['data_through']}",
+        note=f"{len(current)} disclosures in {latest['year']} through "
+             f"{latest['data_through']};\n"
+             f"{latest['corroborated_ai']} corroborated AI, "
+             f"{latest['ai_affiliated_unverified']} affiliation only",
     )
 
 
@@ -148,27 +110,21 @@ def batch_chart() -> None:
     ]
     per_date: dict[str, Counter] = defaultdict(Counter)
     for row in rows:
-        if row["explicit_ai"] == "yes":
-            category = "corroborated_ai"
-        elif row["ai_affiliated"] == "yes":
-            category = "ai_affiliated_unverified"
-        elif row["reporter"]:
-            category = "conventional_or_fuzz"
-        else:
-            category = "unknown"
-        per_date[row["published"]][category] += 1
+        per_date[row["published"]][category(row)] += 1
     dates = sorted(per_date)
     x = list(range(len(dates)))
-    values = {
-        key: [per_date[published][key] for published in dates]
-        for key, _, _ in SERIES
-    }
     totals = [sum(per_date[published].values()) for published in dates]
     fig, ax = new_chart(
         "OpenSSL's 2026 disclosures arrived in batches",
         "CVEs by coordinated publication date and finder provenance",
     )
-    _stacked(ax, x, values, 0.66)
+    from matplotlib.patches import Patch
+
+    bottoms = [0] * len(x)
+    for key, _, colour in SERIES:
+        heights = [per_date[published][key] for published in dates]
+        ax.bar(x, heights, bottom=bottoms, width=0.66, color=colour, zorder=3)
+        bottoms = [bottom + height for bottom, height in zip(bottoms, heights)]
     for position, total in zip(x, totals):
         ax.text(position, total + 0.35, str(total), ha="center", fontsize=8.5)
     ax.set_xticks(
@@ -182,7 +138,14 @@ def batch_chart() -> None:
     ax.set_ylim(0, max(totals) * 1.2)
     style(ax, "Vulnerabilities disclosed in batch", "2026 publication date")
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-    _legend(ax)
+    ax.legend(
+        handles=[Patch(facecolor=colour, label=label)
+                 for _, label, colour in SERIES],
+        frameon=False,
+        fontsize=7.8,
+        ncol=2,
+        loc="upper left",
+    )
     source_note(
         fig,
         "Source: OpenSSL release-metadata. Dates are datePublic, not discovery dates.",
@@ -206,55 +169,54 @@ def severity_chart() -> None:
             f"(first: {unrated[0]['cve']}); the chart's premise no longer holds"
         )
 
-    def tally(subset) -> dict[str, int]:
-        counts = Counter(row["severity"] for row in subset)
-        return {severity: counts.get(severity, 0) for severity in OPENSSL_SEVERITIES}
+    def tally(subset) -> dict[str, dict[str, int]]:
+        out: dict[str, Counter] = defaultdict(Counter)
+        for row in subset:
+            out[row["published"][:4]][row["severity"]] += 1
+        return out
 
     years = sorted({row["published"][:4] for row in rows})
-    by_year = {year: tally([r for r in rows if r["published"][:4] == year])
-               for year in years}
-
-    current = [row for row in rows if row["published"][:4] == years[-1]]
-    baseline = [row for row in rows if row["published"][:4] != years[-1]]
-    cohorts = [
-        (f"{years[0]}–{years[-2]}, all finders", tally(baseline)),
-        (f"{years[-1]}, conventional or fuzzing", tally(
-            [r for r in current
-             if r["explicit_ai"] == "no" and r["ai_affiliated"] == "no"])),
-        (f"{years[-1]}, AI-affiliated, method unverified", tally(
-            [r for r in current
+    panels = [
+        ("All finders", tally(rows)),
+        ("Conventional or fuzzing credits", tally(
+            [r for r in rows
+             if r["explicit_ai"] == "no" and r["ai_affiliated"] == "no"
+             and r["reporter"]])),
+        ("No reporter credit", tally(
+            [r for r in rows
+             if r["explicit_ai"] == "no" and r["ai_affiliated"] == "no"
+             and not r["reporter"]])),
+        ("AI-affiliated, method unverified", tally(
+            [r for r in rows
              if r["explicit_ai"] == "no" and r["ai_affiliated"] == "yes"])),
-        (f"{years[-1]}, corroborated AI method", tally(
-            [r for r in current if r["explicit_ai"] == "yes"])),
+        ("Corroborated AI method", tally(
+            [r for r in rows if r["explicit_ai"] == "yes"])),
     ]
 
-    severity_panels(
+    severity_heatmap(
         HERE / "severity-cyber-openssl.png",
         "OpenSSL disclosures by severity",
-        "The CVE ledger cut by OpenSSL's own rating, from the first year it rated",
+        "CVE counts by OpenSSL's own rating and finder provenance, "
+        f"from the first rated year ({RATED_FROM})",
         years=years,
-        by_year=by_year,
-        cohorts=cohorts,
+        panels=panels,
         severities=OPENSSL_SEVERITIES,
         source_label="OpenSSL release-metadata, one row per CVE",
         source_url=SOURCE_URL,
         built_by=__file__,
-        year_caption=(
-            f"Shares of each year's rated CVEs; {RATED_FROM} is the first year "
-            "the metadata carries a severity."
-        ),
-        cohort_caption="Share of that cohort's disclosures",
     )
 
 
 def cumulative() -> None:
-    rows = read_csv(HERE / "openssl-vulnerabilities.csv")
+    rows = read_csv(HERE / "openssl-cves.csv")
+    per_quarter = Counter(quarter_of(row["published"]) for row in rows)
+    quarters = sorted(per_quarter)
     counts_chart(
         HERE / "cumulative-cyber-openssl.png",
         title="OpenSSL vulnerabilities: cumulative disclosures",
         ylabel="Disclosures to date",
-        period_labels=[row["year"] for row in rows],
-        counts=[int(row["total"]) for row in rows],
+        period_labels=quarters,
+        counts=[per_quarter[quarter] for quarter in quarters],
         source_label="OpenSSL release-metadata",
         source_url=SOURCE_URL,
         built_by=__file__,
@@ -262,7 +224,7 @@ def cumulative() -> None:
 
 
 def main() -> None:
-    annual_chart()
+    main_chart()
     batch_chart()
     severity_chart()
     cumulative()

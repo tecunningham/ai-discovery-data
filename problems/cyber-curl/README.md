@@ -1,13 +1,13 @@
 # curl vulnerability disclosures
 
 **Domain:** vulnerabilities
-**Metric:** vulnerabilities disclosed per year, split by finder credit
+**Metric:** vulnerabilities disclosed per quarter, split by finder credit
 **Coverage:** 2000–2026, partial through 2026-06-24
 **Data:** [`curl-vulnerabilities.csv`](curl-vulnerabilities.csv) (severity detail in the same file), [`curl-vulnerabilities-quarterly.csv`](curl-vulnerabilities-quarterly.csv), [`curl-finders.csv`](curl-finders.csv)
 **Upstream:** <https://curl.se/docs/vuln.json> (human-readable at <https://curl.se/docs/security.html>)
 **Verdict:** accelerating
 
-![Annual curl vulnerability disclosures, split by explicit AI credit.](discovery-cyber-curl.png)
+![Quarterly curl vulnerability disclosures, split by explicit AI credit.](discovery-cyber-curl.png)
 
 ## The problem
 
@@ -53,21 +53,22 @@ disclosures were 18% Low and 28% High or Critical, and by 2023–2025 the non-AI
 finds were already 67% Low. So AI intensifies a pre-existing trend on a
 hardening codebase rather than starting it.
 
-![curl disclosures by severity: annual composition since 2010, and four finder cohorts compared.](severity-cyber-curl.png)
+![curl disclosures by severity: counts by year and finder credit since 2010.](severity-cyber-curl.png)
 
-The severity chart puts those four numbers next to the trend they sit in. The
-top panel is every year since 2010 as shares rather than counts, because the
-question it answers — what was a year's disclosures made of — is not the
-question the disclosure chart answers, and a year with one disclosure would
-otherwise be invisible beside a year with thirty-six. The drift is plain and it
-starts around 2017, years before any AI credit: High and Critical findings go
-from most of the bar to almost none of it.
+The severity chart puts those four numbers next to the trend they sit in, as
+counts a reader can take a number straight out of: one grid per finder-credit
+cohort, years across, curl's ratings down, every cell printing how many
+disclosures it holds. Shading is scaled within each panel, since the all-finders
+grid dwarfs the AI-marked one and a shared scale would blank everything but the
+largest; a dark cell is a lot for that cohort, not a lot outright. The drift is
+plain in the top grid and it starts around 2017, years before any AI credit:
+the High and Critical rows go quiet while the Low row fills.
 
-The bottom panel is the comparison, one bar per cohort, ordered so the AI-marked
-slice is read last and against the right baseline. The gap between 48% and 80%
-Low in 2026 is real, but the gap that matters is between 18% across 2010–2022
-and 67% for non-AI credits in 2023–2025, which is most of the way to the AI
-figure and contains no AI at all.
+The two lower grids are the comparison, the same rows split by credit so the
+AI-marked cells are read against the right baseline. The gap between 48% and
+80% Low in 2026 is real, but the gap that matters is between 18% across
+2010–2022 and 67% for non-AI credits in 2023–2025, which is most of the way to
+the AI figure and contains no AI at all.
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
 as cumulative disclosures to date:
@@ -76,29 +77,29 @@ as cumulative disclosures to date:
 
 ## How the chart was built
 
-[`figure.py`](figure.py) calls the shared `cyber_stacked()` shape in
-[`../../lib/families.py`](../../lib/families.py), which draws stacked annual bars
-from `curl-vulnerabilities.csv`: `other_attributed`
-in blue, `ai_attributed` in red, with the `partial_year` row outlined rather
-than filled so an incomplete 2026 cannot be misread as a full one. January 2026
-onward is shaded, as in every figure here.
+[`figure.py`](figure.py) calls the shared `periodic_stacked()` shape in
+[`../../lib/families.py`](../../lib/families.py), which draws stacked quarterly
+bars from `curl-vulnerabilities-quarterly.csv`: `other_attributed` in blue,
+`ai_attributed` in red, with the final quarter outlined rather than filled —
+the annual table's `data_through` says where its data stops — so a short last
+bar reads as incomplete rather than as a collapse. January 2026 onward is
+shaded, as in every figure here.
 
 The axis is linear and nothing is normalized, so a bar twice as tall is twice as
 many vulnerabilities. A log axis was avoided deliberately: it would flatten
 exactly the 2026 step the series exists to show.
 
 The severity figure comes from the same script through the shared
-`severity_panels()` shape, which OpenSSL also draws. Severity is an ordered
-scale, not a set of categories, so it is drawn in one hue in even lightness
-steps rather than four unrelated colours: the ordering should be visible in the
-ink without consulting the legend. The hue is deliberately neither the red nor
-the amber the disclosure chart spends on finder identity, so a severity band
-cannot be misread as a finder band. Both panels are shares, and the cohort
-percentages are written on the bars because the lightest step sits below the 3:1
-contrast a reader should have to estimate a length by eye.
+`severity_heatmap()` shape, which OpenSSL also draws: one annotated grid per
+finder cohort, built from the annual table's severity columns, most severe at
+the top. Every cell prints its count, so nothing rests on reading a shade by
+eye. The shading itself reuses the severity hue — deliberately neither the red
+nor the amber the disclosure chart spends on finder identity — so a severity
+grid cannot be misread as a finder band, and it is normalized within each
+panel, as the note on the figure says.
 
 The CSVs are built by [`fetch.py`](fetch.py), which reads curl's JSON and
-buckets by publication year. The shared classifier in
+buckets by publication year and quarter. The shared classifier in
 [`../../lib/credits.py`](../../lib/credits.py) reads three independent signals
 off each `FINDER` string: whether it names an AI system or method (Big Sleep,
 Mythos, Claude, "agent"), whether it names an AI-security employer (Aisle
@@ -124,7 +125,7 @@ column already in use.
   from AI-security researchers rather than reports with a corroborated AI
   method.
 - **2026 is a part-year**, and curl publishes in batches at releases, so the
-  within-year path is lumpy. The quarterly file is the finer-grained view.
+  quarterly bars show batch timing as much as a discovery rate.
 - **No denominator of effort.** A credit records who reported, not how much
   search anybody spent, so this cannot separate better tools from more attention.
 - **Severity is one small team's judgment** applied over twenty-six years, and

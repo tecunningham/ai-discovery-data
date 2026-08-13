@@ -14,6 +14,7 @@ calls save(); it should not restate a colour or re-decide where 2026 starts.
 from __future__ import annotations
 
 import platform
+import re
 import zlib
 from datetime import date
 from pathlib import Path
@@ -80,6 +81,29 @@ def year_fraction(value: str) -> float:
         return parts[0] + (parts[1] - 0.5) / 12
     day = date(*parts[:3])
     return day.year + (day.timetuple().tm_yday - 1) / 365.25
+
+
+
+def period_bounds(label: str) -> tuple[float, float]:
+    """Start and end of a period label as year fractions.
+
+    Accepts the three period vocabularies the vendored CSVs use: a year
+    ("2000"), a quarter ("2020-Q1"), or a month ("1991-07"). Shared by the
+    cumulative shapes (whose steps land at period ends) and the periodic bar
+    charts (whose bars span the period).
+    """
+    if re.fullmatch(r"\d{4}", label):
+        year = int(label)
+        return year, year + 1
+    quarter = re.fullmatch(r"(\d{4})-Q([1-4])", label)
+    if quarter:
+        year, q = int(quarter.group(1)), int(quarter.group(2))
+        return year + (q - 1) / 4, year + q / 4
+    month = re.fullmatch(r"(\d{4})-(\d{2})", label)
+    if month:
+        year, m = int(month.group(1)), int(month.group(2))
+        return year + (m - 1) / 12, year + m / 12
+    raise ValueError(f"unrecognized period label: {label!r}")
 
 
 

@@ -35,6 +35,6 @@ CVE-2026-42984,2026-06-09,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team |
 CVE-2026-49183,2026-07-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Pwnforr777 | Anonymous"
 CVE-2026-49798,2026-07-14,explicit_ai,"Anonymous | Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Minwoo Jeong (P1nkjelly) with KAIST Hacking Lab"
 CVE-2026-50384,2026-07-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Pwnforr777 | Anonymous"
-CVE-2026-50476,2026-07-14,explicit_ai,"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team | Younggi Park (grill66), SEC-agent team"
 CVE-2026-50479,2026-07-14,explicit_ai,Adrian Denkiewicz at Doyensec in collaboration with Anthropic Research [Adrian Denkiewicz at Doyensec in collaboration with Claude and Anthropic Research](https://doyensec.com)
 CVE-2026-50490,2026-07-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team | Dongjun Kim (smlijun), SEC-agent team"
+CVE-2026-50476,2026-07-14,explicit_ai,"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37), SEC-agent team | Younggi Park (grill66), SEC-agent team | k0shl"

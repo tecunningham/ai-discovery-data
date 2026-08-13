@@ -15,15 +15,17 @@ authorship; the folder charts keep the finder splits and the event colouring.
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 from matplotlib.lines import Line2D
 
 from lib.chart import (
+    AI,
+    HUMAN,
     NOW,
     UNATTRIBUTED,
     new_chart,
+    period_bounds,
     save,
     shade_era,
     source_note,
@@ -32,34 +34,19 @@ from lib.chart import (
 )
 from lib.table import read_csv
 
+# The composition of a ledger's terminal remainder, drawn in the palette the
+# retired status bar used so the categories keep their colours across the
+# collection's history: open rows in pale slate, contested / partial / vague in
+# mid grey, resolved-but-undated in the human blue their resolutions would be.
+OPEN_COLOUR = "#d9dee5"
+CONTESTED_COLOUR = "#8c96a0"
+
 # Two ladders in one folder still get one panel on the cumulative page, so a
 # second or third line reuses the same slate ink and varies only its dashing.
 LINE_STYLES = ("-", "--", ":")
 
 # label, xs (year fractions), ys — one step line on the shared panel.
 Series = tuple[str, list[float], list[float]]
-
-
-def _period_bounds(label: str) -> tuple[float, float]:
-    """Start and end of a period label as year fractions.
-
-    Accepts the three period vocabularies the vendored CSVs use: a year
-    ("2000"), a quarter ("2020-Q1"), or a month ("1991-07"). The end matters
-    more than the start: a cumulative total through a period is a fact that
-    becomes true at the period's end, so that is where the step lands.
-    """
-    if re.fullmatch(r"\d{4}", label):
-        year = int(label)
-        return year, year + 1
-    quarter = re.fullmatch(r"(\d{4})-Q([1-4])", label)
-    if quarter:
-        year, q = int(quarter.group(1)), int(quarter.group(2))
-        return year + (q - 1) / 4, year + q / 4
-    month = re.fullmatch(r"(\d{4})-(\d{2})", label)
-    if month:
-        year, m = int(month.group(1)), int(month.group(2))
-        return year + (m - 1) / 12, year + m / 12
-    raise ValueError(f"unrecognized period label: {label!r}")
 
 
 def _draw(
@@ -76,6 +63,7 @@ def _draw(
     ylog: bool = False,
     ylim: tuple[float, float] | None = None,
     note: str = "",
+    decorate=None,
 ) -> None:
     """The one drawing everything on the cumulative page shares.
 
@@ -84,6 +72,10 @@ def _draw(
     so far, a remaining count is what is left, a standing record stands until it
     is beaten. Each line extends flat to the chart snapshot date, so a series
     that stopped moving shows its flat stretch rather than ending early.
+
+    ``decorate`` is called with the axes after the lines are drawn, for the one
+    caller (the ledger view) whose chart carries marks the plain line cannot:
+    an attribution point and the terminal remainder's composition.
     """
     fig, ax = new_chart(title, subtitle)
     for index, (label, xs, ys) in enumerate(series):
@@ -102,6 +94,8 @@ def _draw(
     left = min(xs[0] for _, xs, _ in series)
     right = NOW + max((NOW - left) * 0.03, 0.5)
     ax.set_xlim(left - max((NOW - left) * 0.02, 0.3), right)
+    if decorate is not None:
+        decorate(ax)
     if ylog:
         ax.set_yscale("log")
     elif ylim is not None:
@@ -135,11 +129,11 @@ def counts_chart(
     the data stops.
     """
     running = 0.0
-    xs = [_period_bounds(period_labels[0])[0]]
+    xs = [period_bounds(period_labels[0])[0]]
     ys = [0.0]
     for label, count in zip(period_labels, counts):
         running += count
-        xs.append(min(_period_bounds(label)[1], NOW))
+        xs.append(min(period_bounds(label)[1], NOW))
         ys.append(running)
     _draw(
         out_path,
@@ -211,6 +205,7 @@ def remaining_chart(
     source_url: str,
     built_by: str,
     note: str = "",
+    decorate=None,
 ) -> None:
     """What remains of a known denominator, declining toward zero.
 
@@ -230,6 +225,7 @@ def remaining_chart(
         built_by=built_by,
         caption=f"{title}. Count remaining over time, toward zero.",
         note=note,
+        decorate=decorate,
     )
 
 
@@ -272,36 +268,48 @@ def ledger_remaining_chart(
     csv_path: Path,
     out_path: Path,
     built_by: str,
+    ai_problem: str | None = None,
 ) -> None:
     """The six problem-list ledgers' shared remaining-open view.
 
     Starts at the full list and steps down once per dated resolution, so the
     line answers "how much of this list is left" at any date. Rows resolved
     without a dateable year, and contested or partial rows, never move the
-    line; the note states how many such rows the endpoint hides.
+    line; a thin stacked bar at the snapshot date splits the terminal
+    remainder into open, contested / partial / vague, and resolved-undated, so
+    what the endpoint hides is drawn rather than only footnoted.
+
+    ``ai_problem`` marks one row's resolution step in the AI red, the same
+    hand-set argument the folder's dated-resolutions chart takes: these CSVs
+    carry no agent column, so the attribution lives in the figure code where a
+    reviewer can see it.
     """
     rows = read_csv(csv_path)
     name = rows[0]["list_name"]
     list_year = int(rows[0]["list_year"])
     total = len(rows)
     dated = sorted(
-        int(row["resolved_year"])
-        for row in rows
-        if row["status"] == "resolved" and row["resolved_year"]
+        ((int(row["resolved_year"]), row)
+         for row in rows
+         if row["status"] == "resolved" and row["resolved_year"]),
+        key=lambda item: (item[0], item[1]["problem_id"]),
     )
     undated = sum(
         row["status"] == "resolved" and not row["resolved_year"] for row in rows
     )
     open_count = sum(row["status"] == "open" for row in rows)
     other = total - len(dated) - undated - open_count
-    start = min([list_year, *dated])
+    start = min([list_year, *(year for year, _ in dated)])
     xs = [float(start)]
     ys = [float(total)]
     remaining = total
-    for year in dated:
+    ai_step: tuple[float, float, str] | None = None
+    for year, row in dated:
         remaining -= 1
         xs.append(float(year))
         ys.append(float(remaining))
+        if ai_problem is not None and row["problem_id"] == ai_problem:
+            ai_step = (float(year), float(remaining), row["short_name"])
     parts = [f"{open_count} open"]
     if undated:
         parts.append(f"{undated} resolved undated")
@@ -309,9 +317,52 @@ def ledger_remaining_chart(
         parts.append(f"{other} contested / partial / vague")
     note = (f"{remaining} of {total} rows lack a dated resolution: "
             + ", ".join(parts))
+
+    def decorate(ax) -> None:
+        # The terminal remainder's composition, as a slim stack at the
+        # snapshot date: the line's endpoint equals the bar's top, and the
+        # segments say how much of what remains is genuinely open.
+        segments = [
+            (open_count, OPEN_COLOUR, "open"),
+            (other, CONTESTED_COLOUR, "contested / partial / vague"),
+            (undated, HUMAN, "resolved, undated"),
+        ]
+        span = ax.get_xlim()[1] - ax.get_xlim()[0]
+        bottom = 0.0
+        for count, colour, label in segments:
+            if not count:
+                continue
+            ax.bar([NOW], [count], bottom=bottom, width=span * 0.016,
+                   color=colour, edgecolor="white", linewidth=0.6, zorder=4)
+            ax.annotate(
+                f"{count} {label}",
+                (NOW, bottom + count / 2),
+                xytext=(-8, 0),
+                textcoords="offset points",
+                ha="right",
+                va="center",
+                fontsize=7.6,
+                color="#555555",
+            )
+            bottom += count
+        if ai_step is not None:
+            year, level, short_name = ai_step
+            ax.scatter([year], [level], s=46, color=AI, edgecolor="white",
+                       linewidth=0.7, zorder=5)
+            ax.annotate(
+                f"{short_name}\nAI-attributed",
+                (year, level),
+                xytext=(-10, 14),
+                textcoords="offset points",
+                ha="right",
+                fontsize=7.6,
+                color=AI,
+                arrowprops={"arrowstyle": "-", "color": AI, "linewidth": 0.8},
+            )
+
     remaining_chart(
         out_path,
-        title=f"{name}: rows remaining",
+        title=name,
         subtitle="Scored rows minus cumulative dated resolutions; "
                  "undated statuses do not move the line",
         ylabel="Rows without a dated resolution",
@@ -321,4 +372,5 @@ def ledger_remaining_chart(
         source_url=sorted({row["source"] for row in rows})[0],
         built_by=built_by,
         note=note,
+        decorate=decorate,
     )

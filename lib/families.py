@@ -1,9 +1,10 @@
 """Chart shapes drawn by more than one problem.
 
-Five vulnerability series share annual bar shapes; six problem-list ledgers
-share one dated-resolutions chart; one Hutter corpus and one
-AlphaEvolve ladder folder use the same standing-record plot. Those shapes live
-here, parameterised by the CSV path, so a problem folder holding a series of a
+Eight vulnerability series share the periodic (quarterly or monthly) stacked
+bars and four of them the severity count heatmap; six problem-list ledgers
+share one dated-resolutions chart; one Hutter corpus and one AlphaEvolve
+ladder folder use the same standing-record plot. Those shapes live here,
+parameterised by the CSV path, so a problem folder holding a series of a
 known kind is a short call rather than a copy of 60 lines of matplotlib.
 
 A shape belongs here only once a second problem needs it. One-off charts stay in
@@ -17,19 +18,18 @@ from pathlib import Path
 
 from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch
 from matplotlib.ticker import MaxNLocator
 
 from lib.chart import (
     AI,
     HUMAN,
-    FUZZ,
     SEVERITY_RAMP,
     NEUTRAL,
     NOW,
     UNATTRIBUTED,
     common_legend,
     new_chart,
+    period_bounds,
     record_marker,
     save,
     shade_era,
@@ -41,139 +41,174 @@ from lib.table import read_csv
 
 
 
-def cyber_stacked(
-    csv_path: Path,
+def periodic_stacked(
     out_path: Path,
+    *,
     title: str,
     subtitle: str,
+    ylabel: str,
+    periods: list[str],
+    stacks: list[tuple[str, str, list[int]]],
     source_label: str,
     source_url: str,
     built_by: str,
-    *,
-    ylabel: str = "Vulnerabilities disclosed that year",
-    unit_label: str = "disclosures",
+    partial_last: str = "",
+    note: str = "",
 ) -> None:
-    rows = read_csv(csv_path)
-    years = [int(row["year"]) for row in rows]
-    other = [int(row["other_attributed"]) for row in rows]
-    fuzz = [int(row.get("fuzz_attributed") or 0) for row in rows]
-    ai = [int(row["ai_attributed"]) for row in rows]
-    totals = [int(row["total"]) for row in rows]
+    """Stacked bars at a series' native cadence — quarters or months.
+
+    The annual bar shapes hid the cadence the granular CSVs actually carry, and
+    a within-year surge is exactly the thing an agent-era reading needs to see.
+    ``periods`` are ascending labels ("2016-Q1" or "2016-01" or "2016"); each
+    stack is (label, colour, values per period), drawn bottom-up in the order
+    given. A legend entry appears only for stacks with any ink.
+
+    ``partial_last`` marks the final period as incomplete: it gets the same
+    outline-and-annotation treatment the annual charts gave a part year, because
+    a short final bar otherwise reads as a collapse.
+    """
+    bounds = [period_bounds(label) for label in periods]
+    centers = [(start + end) / 2 for start, end in bounds]
+    width = (bounds[0][1] - bounds[0][0]) * 0.86
     fig, ax = new_chart(title, subtitle)
-    ax.bar(years, other, color=HUMAN, width=0.76, label="human or uncredited", zorder=3)
-    if any(fuzz):
-        ax.bar(years, fuzz, bottom=other, color=FUZZ, width=0.76, label="fuzzer", zorder=3)
-    bottoms = [a + b for a, b in zip(other, fuzz)]
-    ax.bar(years, ai, bottom=bottoms, color=AI, width=0.76, label="AI-credited", zorder=3)
-    partial = [i for i, row in enumerate(rows) if row.get("partial_year") == "yes"]
-    for index in partial:
-        ax.bar(
-            years[index],
-            totals[index],
-            width=0.76,
-            facecolor="none",
-            edgecolor="#444444",
-            linewidth=1.3,
-            zorder=4,
-        )
+    bottoms = [0] * len(periods)
+    for label, colour, values in stacks:
+        if any(values):
+            ax.bar(centers, values, bottom=bottoms, width=width, color=colour,
+                   label=label, zorder=3)
+        bottoms = [b + v for b, v in zip(bottoms, values)]
+    if partial_last:
+        ax.bar(centers[-1], bottoms[-1], width=width, facecolor="none",
+               edgecolor="#444444", linewidth=1.1, zorder=4)
         ax.annotate(
-            "partial year",
-            (years[index], totals[index]),
+            partial_last,
+            (centers[-1], bottoms[-1]),
             xytext=(-4, 7),
             textcoords="offset points",
             ha="right",
             fontsize=8,
             color="#555555",
         )
-    right = max(years) + 1.2
-    ax.set_xlim(min(years) - 1, right)
-    ax.set_ylim(0, max(totals) * 1.23)
-    shade_era(ax, right, annual=True)
+    left = bounds[0][0]
+    right = max(bounds[-1][1] + (bounds[-1][1] - left) * 0.01, NOW + 0.15)
+    ax.set_xlim(left - (right - left) * 0.012, right)
+    ax.set_ylim(0, max(bottoms) * 1.24)
+    shade_era(ax, right)
     style(ax, ylabel)
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=7))
-    ax.legend(handles=common_legend(fuzz=any(fuzz)), frameon=False, fontsize=8, ncol=3)
-    if partial:
-        latest = rows[partial[-1]]
-        through = (
-            f" through {latest['data_through']}"
-            if latest.get("data_through") else ""
-        )
-        ax.text(
-            0.02,
-            0.9,
-            f"{latest['total']} {unit_label} in partial {latest['year']}{through}\n"
-            f"{latest['ai_attributed']} explicitly AI-credited",
-            transform=ax.transAxes,
-            fontsize=9,
-            color="#333333",
-            va="top",
-        )
-    source_note(fig, f"Source: {source_label}. Finder credits are textual markers, not audited causation.")
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=8))
+    handles, labels = ax.get_legend_handles_labels()
+    if handles:
+        # Two columns at upper left: a full-width legend row runs into the era
+        # label the shaded band writes at the top right.
+        ax.legend(handles=handles, labels=labels, frameon=False, fontsize=8,
+                  ncol=2, loc="upper left")
+    if note:
+        ax.text(0.02, 0.78 if handles else 0.92, note, transform=ax.transAxes,
+                fontsize=8.8, color="#333333", va="top", linespacing=1.5)
+    source_note(fig, f"Source: {source_label}.")
     save(
         fig,
         out_path,
-        f"{title}. Annual finder-attributed {unit_label}; "
-        + (f"{rows[partial[-1]]['year']} is partial." if partial else "complete years."),
+        f"{title}. {subtitle}.",
         [source_url],
         built_by,
     )
 
 
 
-def cyber_simple_bars(
-    csv_path: Path,
-    value_column: str,
+def severity_heatmap(
     out_path: Path,
     title: str,
     subtitle: str,
-    ylabel: str,
-    colour: str,
+    *,
+    years: list[str],
+    panels: list[tuple[str, dict[str, dict[str, int]]]],
+    severities: list[str],
     source_label: str,
     source_url: str,
     built_by: str,
+    note: str = "",
 ) -> None:
-    rows = read_csv(csv_path)
-    years = [int(row["year"]) for row in rows]
-    values = [int(row[value_column]) for row in rows]
-    fig, ax = new_chart(title, subtitle)
-    ax.bar(years, values, color=colour, width=0.76, zorder=3)
-    for i, row in enumerate(rows):
-        if row.get("partial_year") != "yes":
-            continue
-        ax.bar(
-            years[i],
-            values[i],
-            width=0.76,
-            facecolor="none",
-            edgecolor="#444444",
-            linewidth=1.3,
-            zorder=4,
-        )
-        ax.annotate(
-            f"partial year\nthrough {row.get('data_through') or 'latest snapshot'}",
-            (years[i], values[i]),
-            xytext=(-5, 7),
-            textcoords="offset points",
-            ha="right",
-            fontsize=8,
-            color="#555555",
-        )
-    right = max(years) + 1.2
-    ax.set_xlim(min(years) - 1, right)
-    ax.set_ylim(0, max(values) * 1.25)
-    shade_era(ax, right, annual=True)
-    style(ax, ylabel)
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=7))
-    ax.legend(
-        handles=[
-            Patch(facecolor=colour, label="annual count"),
-            Patch(facecolor="none", edgecolor="#444444", label="partial calendar year"),
-        ],
-        frameon=False,
-        fontsize=8,
+    """Counts by severity × year, one annotated grid per finder-origin cohort.
+
+    Every cell prints its count, so the chart can be read as a table: the
+    number of disclosures at each severity, in each year, from each origin.
+    Shading is normalized within each panel — the cohorts differ by orders of
+    magnitude, and one shared scale would blank every panel but the largest.
+    The severity ordering runs most severe at the top, and the shading reuses
+    the severity hue so this cannot be misread as a finder-band chart.
+    """
+    from matplotlib.colors import LinearSegmentedColormap
+
+    cmap = LinearSegmentedColormap.from_list(
+        "severity_counts", ["#ffffff", SEVERITY_RAMP[-1]]
     )
-    source_note(fig, f"Source: {source_label}.")
-    save(fig, out_path, f"{title}. Annual count; 2026 is partial.", [source_url], built_by)
+    # A cohort with nothing in it would render as a grid of zeros; its absence
+    # from the chart is the statement, so it is dropped rather than drawn.
+    panels = [
+        (label, by_year)
+        for label, by_year in panels
+        if any(count for years in by_year.values() for count in years.values())
+    ]
+    rows = list(reversed(severities))  # most severe first, top row down
+    height = 1.0 + 0.34 * len(rows) * len(panels) + 0.42 * len(panels)
+    fig, axes = plt.subplots(
+        len(panels),
+        1,
+        figsize=(8.4, max(4.4, height)),
+        squeeze=False,
+    )
+    fig.suptitle(title, x=0.09, y=0.99, ha="left", fontsize=14,
+                 fontweight="bold")
+    fig.text(0.09, 0.99 - 0.42 / max(4.4, height), subtitle, fontsize=9.2,
+             color="#444444", ha="left", va="top")
+    for ax, (label, by_year) in zip(axes[:, 0], panels):
+        grid = [[by_year.get(year, {}).get(severity, 0) for year in years]
+                for severity in rows]
+        peak = max((value for row in grid for value in row), default=0) or 1
+        ax.imshow(grid, cmap=cmap, vmin=0, vmax=peak, aspect="auto",
+                  interpolation="nearest")
+        for r, row in enumerate(grid):
+            for c, value in enumerate(row):
+                dark = value > 0.55 * peak
+                ax.text(c, r, str(value),
+                        ha="center", va="center", fontsize=7.6,
+                        color="white" if dark
+                        else ("#333333" if value else "#b5b5b5"))
+        ax.set_yticks(range(len(rows)))
+        ax.set_yticklabels(rows, fontsize=8)
+        ax.set_xticks(range(len(years)))
+        if ax is axes[-1, 0]:
+            ax.set_xticklabels(years, fontsize=7.6,
+                               rotation=45 if len(years) > 12 else 0,
+                               ha="right" if len(years) > 12 else "center")
+        else:
+            ax.set_xticklabels([])
+        ax.set_title(label, loc="left", fontsize=9.2, color="#444444", pad=6)
+        ax.tick_params(length=0, colors="#777777")
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+        if years and years[-1] == "2026":
+            # The era marker on a categorical grid: box the partial 2026
+            # column rather than shading a year span that has no x-axis.
+            ax.add_patch(plt.Rectangle(
+                (len(years) - 1.5, -0.5), 1, len(rows),
+                facecolor="none", edgecolor=AI, linewidth=1.2, zorder=4,
+            ))
+    caption = "Counts, not shares; shading is scaled within each panel."
+    if note:
+        caption = f"{note} {caption}"
+    source_note(fig, f"Source: {source_label}. {caption}")
+    save(
+        fig,
+        out_path,
+        f"{title}. {subtitle}.",
+        [source_url],
+        built_by,
+        adjust={"left": 0.115, "right": 0.97,
+                "top": 1 - 1.05 / max(4.4, height),
+                "bottom": 0.9 / max(4.4, height), "hspace": 0.5},
+    )
 
 
 
@@ -538,114 +573,3 @@ def volume_series(
     source_note(fig, f"Source: {source_label}. No authorship field, so no AI "
                      "share can be read off it.")
     save(fig, out_path, f"{title}. {subtitle}", [source_url], built_by)
-
-
-def severity_panels(
-    out_path: Path,
-    title: str,
-    subtitle: str,
-    *,
-    years: list[str],
-    by_year: dict[str, dict[str, int]],
-    cohorts: list[tuple[str, dict[str, int]]],
-    severities: list[str],
-    source_label: str,
-    source_url: str,
-    built_by: str,
-    year_caption: str,
-    cohort_caption: str,
-) -> None:
-    """Two views of one severity field: drift over time, and mix by cohort.
-
-    Both panels are drawn as shares rather than counts. A severity chart asks
-    what a year's disclosures were made of, and counts answer a different
-    question the folder's main figure already answers; plotting shares also lets
-    a year with nine disclosures sit beside one with thirty-nine without the
-    small year vanishing.
-
-    The top panel is the drift — whether a codebase's findings are getting
-    shallower — and the bottom panel is the comparison the drift is usually
-    invoked for, one bar per cohort of finders. Keeping them on one figure is
-    the point: the cohort difference means little without the trend it sits in,
-    since a shallow AI cohort inside a series that was already shallowing is a
-    weaker claim than the same gap in a flat series.
-
-    Callers pass only the years their upstream actually rated. A project that
-    scored nothing before some date has an absence of data there, not a run of
-    low-severity findings, and the honest rendering of that is to start the panel
-    where the ratings start and say so in the document.
-    """
-    ramp = dict(zip(severities, SEVERITY_RAMP))
-    bands = list(severities)
-
-    fig, (year_ax, cohort_ax) = plt.subplots(
-        2, 1, figsize=(8.4, 6.4), gridspec_kw={"height_ratios": (2.05, 1.0), "hspace": 0.42}
-    )
-    fig.suptitle(title, x=0.09, y=0.985, ha="left", fontsize=14, fontweight="bold")
-    fig.text(0.09, 0.930, subtitle, fontsize=9.2, color="#444444", ha="left", va="top")
-
-    positions = list(range(len(years)))
-    bottoms = [0.0] * len(years)
-    for band in bands:
-        shares = []
-        for year in years:
-            counts = by_year[year]
-            total = sum(counts.values()) or 1
-            shares.append(100 * counts.get(band, 0) / total)
-        year_ax.bar(positions, shares, bottom=bottoms, width=0.74, color=ramp[band],
-                    label=band, zorder=3, linewidth=0.8, edgecolor="white")
-        bottoms = [b + s for b, s in zip(bottoms, shares)]
-    year_ax.set_xticks(positions)
-    year_ax.set_xticklabels(years)
-    year_ax.set_xlim(-0.7, len(years) - 0.3)
-    year_ax.set_ylim(0, 100)
-    year_ax.set_yticks([0, 25, 50, 75, 100])
-    year_ax.set_yticklabels(["0", "25", "50", "75", "100%"])
-    if years and years[-1] == "2026":
-        # The era band is placed by bar index: this axis is categorical, so the
-        # year-valued constants the other charts shade with do not apply.
-        year_ax.axvspan(len(years) - 1.5, len(years) - 0.3, color=AI, alpha=0.055, zorder=0)
-    style(year_ax, "Share of that year's disclosures")
-
-    labels = [label for label, _ in cohorts]
-    spots = list(range(len(cohorts)))[::-1]
-    lefts = [0.0] * len(cohorts)
-    for band in bands:
-        widths = []
-        for _, counts in cohorts:
-            total = sum(counts.values()) or 1
-            widths.append(100 * counts.get(band, 0) / total)
-        cohort_ax.barh(spots, widths, left=lefts, height=0.52, color=ramp[band],
-                       zorder=3, linewidth=0.8, edgecolor="white")
-        for spot, width, left in zip(spots, widths, lefts):
-            # Direct-label the segments with room for the text. The lightest step
-            # sits below 3:1 on white, so the share it carries is written out
-            # rather than left to the eye to estimate.
-            if width >= 11:
-                cohort_ax.text(left + width / 2, spot, f"{width:.0f}%", ha="center",
-                               va="center", fontsize=8,
-                               color="#22333a" if band == severities[0] else "white",
-                               zorder=4)
-        lefts = [left + width for left, width in zip(lefts, widths)]
-    # The cohort names sit above their bars rather than in the margin. As tick
-    # labels they would need a left margin wide enough for the longest of them,
-    # which would push the year panel above off-centre for no reason.
-    for spot, label in zip(spots, labels):
-        cohort_ax.text(0.4, spot + 0.34, label, fontsize=8.5, color="#444444",
-                       va="bottom", ha="left", zorder=4)
-    cohort_ax.set_yticks(spots)
-    cohort_ax.set_yticklabels([""] * len(spots))
-    cohort_ax.tick_params(axis="y", length=0)
-    cohort_ax.set_ylim(-0.5, len(cohorts) - 0.15)
-    cohort_ax.set_xlim(0, 100)
-    cohort_ax.set_xticks([0, 25, 50, 75, 100])
-    cohort_ax.set_xticklabels(["0", "25", "50", "75", "100%"])
-    style(cohort_ax, "", cohort_caption)
-    cohort_ax.grid(axis="y", visible=False)
-
-    handles = [Patch(facecolor=ramp[band], label=band) for band in bands]
-    year_ax.legend(handles=handles, frameon=False, fontsize=8, ncol=len(bands),
-                   loc="lower left", bbox_to_anchor=(0, 1.03))
-    source_note(fig, f"Source: {source_label}. {year_caption}")
-    save(fig, out_path, f"{title}. {subtitle}.", [source_url], built_by,
-         adjust={"left": 0.095, "right": 0.97, "top": 0.83, "bottom": 0.115})

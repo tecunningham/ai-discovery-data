@@ -33,6 +33,7 @@ def main() -> None:
         HERE / "smale-problems.csv",
         HERE / "cumulative-math-smale.png",
         __file__,
+        ai_problem="16",
     )
 
 

@@ -1,0 +1,1975 @@
+cve,year,quarter,date,impact,band,reporters
+CVE-2016-2827,2016,2016-Q3,2016-09-20,Low,other,Atte Kettunen
+CVE-2016-5250,2016,2016-Q3,2016-09-20,Moderate,other,Catalin Dumitru
+CVE-2016-5256,2016,2016-Q3,2016-09-20,Critical,other,Mozilla developers
+CVE-2016-5257,2016,2016-Q3,2016-09-20,Critical,other,Mozilla developers
+CVE-2016-5261,2016,2016-Q3,2016-09-20,High,other,Samuel Groß
+CVE-2016-5270,2016,2016-Q3,2016-09-20,High,other,Atte Kettunen
+CVE-2016-5271,2016,2016-Q3,2016-09-20,Low,other,Abhishek Arya
+CVE-2016-5272,2016,2016-Q3,2016-09-20,High,other,Abhishek Arya
+CVE-2016-5273,2016,2016-Q3,2016-09-20,High,other,Nils
+CVE-2016-5274,2016,2016-Q3,2016-09-20,High,other,Nils
+CVE-2016-5275,2016,2016-Q3,2016-09-20,Critical,other,Nils
+CVE-2016-5276,2016,2016-Q3,2016-09-20,High,other,Nils
+CVE-2016-5277,2016,2016-Q3,2016-09-20,High,other,Nils
+CVE-2016-5278,2016,2016-Q3,2016-09-20,Critical,other,Nils
+CVE-2016-5279,2016,2016-Q3,2016-09-20,Moderate,other,Rafael Gieschke
+CVE-2016-5280,2016,2016-Q3,2016-09-20,High,other,Mei Wang
+CVE-2016-5281,2016,2016-Q3,2016-09-20,High,other,Brian Carpenter
+CVE-2016-5282,2016,2016-Q3,2016-09-20,Moderate,other,Richard Newman
+CVE-2016-5283,2016,2016-Q3,2016-09-20,High,other,Gavin Sharp
+CVE-2016-5284,2016,2016-Q3,2016-09-20,High,other,Multiple people
+CVE-2016-5287,2016,2016-Q4,2016-10-20,High,other,Philipp
+CVE-2016-5288,2016,2016-Q4,2016-10-20,High,other,Developers at Cliqz.com
+CVE-2016-5289,2016,2016-Q4,2016-11-15,Critical,other,Mozilla developers
+CVE-2016-5290,2016,2016-Q4,2016-11-15,Critical,other,Mozilla developers
+CVE-2016-5291,2016,2016-Q4,2016-11-15,Moderate,other,Yuyang Zhou
+CVE-2016-5292,2016,2016-Q4,2016-11-15,High,other,Daniel Browning
+CVE-2016-5293,2016,2016-Q4,2016-11-15,High,other,Holger Fuhrmannek
+CVE-2016-5294,2016,2016-Q4,2016-11-15,High,other,Holger Fuhrmannek
+CVE-2016-5295,2016,2016-Q4,2016-11-15,Moderate,other,Holger Fuhrmannek
+CVE-2016-5296,2016,2016-Q4,2016-11-15,Critical,other,Abhishek Arya
+CVE-2016-5297,2016,2016-Q4,2016-11-15,High,other,André Bargull
+CVE-2016-5298,2016,2016-Q4,2016-11-15,Moderate,other,Jordi Chancel
+CVE-2016-5299,2016,2016-Q4,2016-11-15,Moderate,other,Ken Okuyama
+CVE-2016-9061,2016,2016-Q4,2016-11-15,Moderate,other,Ken Okuyama
+CVE-2016-9062,2016,2016-Q4,2016-11-15,Moderate,other,Daniel D.
+CVE-2016-9063,2016,2016-Q4,2016-11-15,Low,other,Gustavo Grieco
+CVE-2016-9064,2016,2016-Q4,2016-11-15,High,other,Multiple people
+CVE-2016-9065,2016,2016-Q4,2016-11-15,High,other,Raphael
+CVE-2016-9066,2016,2016-Q4,2016-11-15,High,other,Samuel Groß
+CVE-2016-9067,2016,2016-Q4,2016-11-15,High,other,Nils
+CVE-2016-9068,2016,2016-Q4,2016-11-15,High,other,Nils
+CVE-2016-9070,2016,2016-Q4,2016-11-15,Moderate,other,Abdulrahman Alqabandi
+CVE-2016-9071,2016,2016-Q4,2016-11-15,Low,other,Xiaoyin Liu
+CVE-2016-9072,2016,2016-Q4,2016-11-15,High,other,Bob Owen
+CVE-2016-9073,2016,2016-Q4,2016-11-15,Moderate,other,Will Bamberg
+CVE-2016-9074,2016,2016-Q4,2016-11-15,Moderate,other,Franziskus Kiefer
+CVE-2016-9075,2016,2016-Q4,2016-11-15,High,other,Kris Maglione
+CVE-2016-9076,2016,2016-Q4,2016-11-15,Moderate,other,Mats Palmgren
+CVE-2016-9077,2016,2016-Q4,2016-11-15,High,other,Markus Stange
+CVE-2016-9078,2016,2016-Q4,2016-11-28,Critical,other,Alexander Inführ
+CVE-2016-9079,2016,2016-Q4,2016-11-30,Critical,other,Obscured Team
+CVE-2016-9080,2016,2016-Q4,2016-12-13,Critical,other,Mozilla developers
+CVE-2016-9893,2016,2016-Q4,2016-12-13,Critical,other,Mozilla developers
+CVE-2016-9894,2016,2016-Q4,2016-12-13,Critical,other,Atte Kettunen
+CVE-2016-9895,2016,2016-Q4,2016-12-13,High,other,Andrew Krasichkov
+CVE-2016-9896,2016,2016-Q4,2016-12-13,High,other,Filipe Gomes
+CVE-2016-9897,2016,2016-Q4,2016-12-13,High,other,Aral
+CVE-2016-9898,2016,2016-Q4,2016-12-13,High,other,Nils
+CVE-2016-9899,2016,2016-Q4,2016-12-13,Critical,other,echo
+CVE-2016-9900,2016,2016-Q4,2016-12-13,High,other,insertscript
+CVE-2016-9901,2016,2016-Q4,2016-12-13,Moderate,other,Wladimir Palant
+CVE-2016-9902,2016,2016-Q4,2016-12-13,Moderate,other,Wladimir Palant
+CVE-2016-9903,2016,2016-Q4,2016-12-13,Moderate,other,Kris Maglione
+CVE-2016-9904,2016,2016-Q4,2016-12-13,High,other,Jann Horn
+CVE-2016-9905,2016,2016-Q4,2016-12-13,High,other,Philipp
+CVE-2017-5373,2017,2017-Q1,2017-01-24,Critical,other,Mozilla developers and community
+CVE-2017-5374,2017,2017-Q1,2017-01-24,Critical,other,Mozilla developers and community
+CVE-2017-5375,2017,2017-Q1,2017-01-24,Critical,other,Rh0
+CVE-2017-5376,2017,2017-Q1,2017-01-24,Critical,other,Nicolas Grégoire
+CVE-2017-5377,2017,2017-Q1,2017-01-24,Critical,other,Atte Kettunen
+CVE-2017-5378,2017,2017-Q1,2017-01-24,High,other,Jann Horn
+CVE-2017-5379,2017,2017-Q1,2017-01-24,High,other,Nils
+CVE-2017-5380,2017,2017-Q1,2017-01-24,High,other,Nils
+CVE-2017-5381,2017,2017-Q1,2017-01-24,Moderate,other,Jann Horn
+CVE-2017-5382,2017,2017-Q1,2017-01-24,Moderate,other,Jerri Rice
+CVE-2017-5383,2017,2017-Q1,2017-01-24,Moderate,other,Armin Ebert
+CVE-2017-5384,2017,2017-Q1,2017-01-24,Moderate,other,"Paul Stone, Alex Chapman"
+CVE-2017-5385,2017,2017-Q1,2017-01-24,Moderate,other,Muneaki Nishimura
+CVE-2017-5386,2017,2017-Q1,2017-01-24,Moderate,other,Muneaki Nishimura
+CVE-2017-5387,2017,2017-Q1,2017-01-24,Low,other,Mustafa Hasan
+CVE-2017-5388,2017,2017-Q1,2017-01-24,Low,other,Cullen Jennings
+CVE-2017-5389,2017,2017-Q1,2017-01-24,High,other,Kris Maglione
+CVE-2017-5390,2017,2017-Q1,2017-01-24,High,other,Jerri Rice
+CVE-2017-5391,2017,2017-Q1,2017-01-24,Moderate,other,Jerri Rice
+CVE-2017-5392,2017,2017-Q1,2017-01-24,Moderate,other,Honza Bambas
+CVE-2017-5393,2017,2017-Q1,2017-01-24,Moderate,other,Stuart Colville
+CVE-2017-5394,2017,2017-Q1,2017-01-24,Moderate,other,Jordi Chancel
+CVE-2017-5395,2017,2017-Q1,2017-01-24,Low,other,Jordi Chancel
+CVE-2017-5396,2017,2017-Q1,2017-01-24,High,other,Filipe Gomes
+CVE-2017-5397,2017,2017-Q1,2017-02-09,Critical,other,Jim Chen
+CVE-2017-5398,2017,2017-Q1,2017-03-07,Critical,other,Mozilla developers and community
+CVE-2017-5399,2017,2017-Q1,2017-03-07,Critical,other,Mozilla developers and community
+CVE-2017-5400,2017,2017-Q1,2017-03-07,Critical,other,Rh0
+CVE-2017-5401,2017,2017-Q1,2017-03-07,Critical,other,Anton Eliasson
+CVE-2017-5402,2017,2017-Q1,2017-03-07,Critical,other,Nils
+CVE-2017-5403,2017,2017-Q1,2017-03-07,Critical,other,Nils
+CVE-2017-5404,2017,2017-Q1,2017-03-07,Critical,other,Ivan Fratric of Google Project Zero
+CVE-2017-5405,2017,2017-Q1,2017-03-07,Low,other,Anonymous
+CVE-2017-5406,2017,2017-Q1,2017-03-07,High,other,Atte Kettunen
+CVE-2017-5407,2017,2017-Q1,2017-03-07,High,other,David Kohlbrenner
+CVE-2017-5408,2017,2017-Q1,2017-03-07,Moderate,other,Eric Lawrence of Chrome Security
+CVE-2017-5409,2017,2017-Q1,2017-03-07,Moderate,other,Holger Fuhrmannek
+CVE-2017-5410,2017,2017-Q1,2017-03-07,High,other,Jerri Rice
+CVE-2017-5411,2017,2017-Q1,2017-03-07,High,other,Looben Yang
+CVE-2017-5412,2017,2017-Q1,2017-03-07,Moderate,other,Atte Kettunen
+CVE-2017-5413,2017,2017-Q1,2017-03-07,Moderate,other,Atte Kettunen
+CVE-2017-5414,2017,2017-Q1,2017-03-07,Moderate,other,Abdulrahman Alqabandi
+CVE-2017-5415,2017,2017-Q1,2017-03-07,Moderate,other,Abdulrahman Alqabandi
+CVE-2017-5416,2017,2017-Q1,2017-03-07,Moderate,other,Radek 'sysKin' Czyz
+CVE-2017-5417,2017,2017-Q1,2017-03-07,Moderate,other,Michal Zalewski
+CVE-2017-5418,2017,2017-Q1,2017-03-07,Low,other,Anonymous
+CVE-2017-5419,2017,2017-Q1,2017-03-07,Low,other,Chris Hamono
+CVE-2017-5420,2017,2017-Q1,2017-03-07,Low,other,Abdulrahman Alqabandi
+CVE-2017-5421,2017,2017-Q1,2017-03-07,Low,other,Abdulrahman Alqabandi
+CVE-2017-5422,2017,2017-Q1,2017-03-07,Low,other,Alex Bolton
+CVE-2017-5425,2017,2017-Q1,2017-03-07,Moderate,other,Haik Aftandilian
+CVE-2017-5426,2017,2017-Q1,2017-03-07,Moderate,other,Jed Davis
+CVE-2017-5427,2017,2017-Q1,2017-03-07,Moderate,other,Mike Kaply
+CVE-2017-5428,2017,2017-Q1,2017-03-17,Critical,other,Chaitin Security Research Lab via Trend Micro's Zero Day Initiative
+CVE-2016-10196,2017,2017-Q2,2017-04-19,High,other,Huzaifa Sidhpurwala
+CVE-2017-5429,2017,2017-Q2,2017-04-19,Critical,other,Mozilla developers and community
+CVE-2017-5430,2017,2017-Q2,2017-04-19,Critical,other,Mozilla developers and community
+CVE-2017-5432,2017,2017-Q2,2017-04-19,High,other,Nils
+CVE-2017-5433,2017,2017-Q2,2017-04-19,Critical,other,Nils
+CVE-2017-5434,2017,2017-Q2,2017-04-19,High,other,Nils
+CVE-2017-5435,2017,2017-Q2,2017-04-19,Critical,other,Nils
+CVE-2017-5436,2017,2017-Q2,2017-04-19,Critical,other,Holger Fuhrmannek
+CVE-2017-5438,2017,2017-Q2,2017-04-19,High,other,Nicolas Grégoire
+CVE-2017-5439,2017,2017-Q2,2017-04-19,High,other,Nicolas Grégoire
+CVE-2017-5440,2017,2017-Q2,2017-04-19,High,other,Nicolas Grégoire
+CVE-2017-5441,2017,2017-Q2,2017-04-19,High,other,Nils
+CVE-2017-5442,2017,2017-Q2,2017-04-19,High,other,Nils
+CVE-2017-5443,2017,2017-Q2,2017-04-19,High,other,Chamal De Silva
+CVE-2017-5444,2017,2017-Q2,2017-04-19,High,other,Chamal De Silva
+CVE-2017-5445,2017,2017-Q2,2017-04-19,Moderate,other,Chamal De Silva
+CVE-2017-5446,2017,2017-Q2,2017-04-19,High,other,Chun Han Hsiao
+CVE-2017-5447,2017,2017-Q2,2017-04-19,High,other,Ivan Fratric of Google Project Zero
+CVE-2017-5448,2017,2017-Q2,2017-04-19,High,other,Anonymous working with Trend Micro's Zero Day Initiative
+CVE-2017-5449,2017,2017-Q2,2017-04-19,Moderate,other,Nils
+CVE-2017-5450,2017,2017-Q2,2017-04-19,Moderate,other,Haosheng Wang
+CVE-2017-5451,2017,2017-Q2,2017-04-19,Moderate,other,Jordi Chancel
+CVE-2017-5452,2017,2017-Q2,2017-04-19,Low,other,Jordi Chancel
+CVE-2017-5453,2017,2017-Q2,2017-04-19,Low,other,Jose María Acuña
+CVE-2017-5454,2017,2017-Q2,2017-04-19,High,other,Haik Aftandilian
+CVE-2017-5455,2017,2017-Q2,2017-04-19,High,other,Paul Theriault
+CVE-2017-5456,2017,2017-Q2,2017-04-19,High,other,Julian Hector
+CVE-2017-5458,2017,2017-Q2,2017-04-19,Low,other,Daniel Veditz
+CVE-2017-5459,2017,2017-Q2,2017-04-19,Critical,other,Atte Kettunen
+CVE-2017-5460,2017,2017-Q2,2017-04-19,High,other,Nils
+CVE-2017-5461,2017,2017-Q2,2017-04-19,Critical,other,Ronald Crane
+CVE-2017-5462,2017,2017-Q2,2017-04-19,Moderate,other,"Vladimir Klebanov, Franziskus Kiefer"
+CVE-2017-5463,2017,2017-Q2,2017-04-19,Moderate,other,Muneaki Nishimura
+CVE-2017-5464,2017,2017-Q2,2017-04-19,High,other,Nils
+CVE-2017-5465,2017,2017-Q2,2017-04-19,High,other,Ivan Fratric of Google Project Zero
+CVE-2017-5466,2017,2017-Q2,2017-04-19,Critical,other,Takeshi Terada
+CVE-2017-5467,2017,2017-Q2,2017-04-19,Moderate,other,Heather Miller of Google Skia team
+CVE-2017-5468,2017,2017-Q2,2017-04-19,Low,other,Anonymous
+CVE-2017-5469,2017,2017-Q2,2017-04-19,High,other,Petr Cerny
+CVE-2017-5031,2017,2017-Q2,2017-05-05,High,other,"Bob Clary, Looben Yang"
+CVE-2017-5470,2017,2017-Q2,2017-06-13,Critical,other,Mozilla developers and community
+CVE-2017-5471,2017,2017-Q2,2017-06-13,Critical,other,Mozilla developers and community
+CVE-2017-5472,2017,2017-Q2,2017-06-13,Critical,other,Nils
+CVE-2017-7749,2017,2017-Q2,2017-06-13,High,other,Nils
+CVE-2017-7750,2017,2017-Q2,2017-06-13,High,other,Nils
+CVE-2017-7751,2017,2017-Q2,2017-06-13,High,other,Nils
+CVE-2017-7752,2017,2017-Q2,2017-06-13,Moderate,other,Nils
+CVE-2017-7754,2017,2017-Q2,2017-06-13,High,other,Tobias Klein
+CVE-2017-7755,2017,2017-Q2,2017-06-13,High,other,"Yuji Tounai of NTT Communications, Eili Masami of Tachibana Lab"
+CVE-2017-7756,2017,2017-Q2,2017-06-13,High,other,Abhishek Arya
+CVE-2017-7757,2017,2017-Q2,2017-06-13,High,other,F. Alonso (revskills)
+CVE-2017-7758,2017,2017-Q2,2017-06-13,High,other,Nicolas Trippar of Zimperium zLabs
+CVE-2017-7759,2017,2017-Q2,2017-06-13,High,other,Takeshi Terada
+CVE-2017-7760,2017,2017-Q2,2017-06-13,High,other,Holger Fuhrmannek
+CVE-2017-7761,2017,2017-Q2,2017-06-13,Moderate,other,Holger Fuhrmannek
+CVE-2017-7762,2017,2017-Q2,2017-06-13,Moderate,other,Jun Kokatsu
+CVE-2017-7763,2017,2017-Q2,2017-06-13,Moderate,other,Michał Bentkowski
+CVE-2017-7764,2017,2017-Q2,2017-06-13,Moderate,other,Samuel Erb
+CVE-2017-7765,2017,2017-Q2,2017-06-13,Moderate,other,Jonathan Birch and Microsoft Vulnerability Research
+CVE-2017-7766,2017,2017-Q2,2017-06-13,High,other,Seb Patane
+CVE-2017-7767,2017,2017-Q2,2017-06-13,Moderate,other,Seb Patane
+CVE-2017-7768,2017,2017-Q2,2017-06-13,Moderate,other,Seb Patane
+CVE-2017-7770,2017,2017-Q2,2017-06-13,Moderate,other,Jordi Chancel
+CVE-2017-7778,2017,2017-Q2,2017-06-13,High,other,"Holger Fuhrmannek, Tyson Smith"
+CVE-2017-7753,2017,2017-Q3,2017-08-08,High,other,SkyLined
+CVE-2017-7779,2017,2017-Q3,2017-08-08,Critical,other,Mozilla developers and community
+CVE-2017-7780,2017,2017-Q3,2017-08-08,Critical,other,Mozilla developers and community
+CVE-2017-7781,2017,2017-Q3,2017-08-08,Moderate,other,Antonio Sanso
+CVE-2017-7782,2017,2017-Q3,2017-08-08,Moderate,other,Arthur Edelstein
+CVE-2017-7783,2017,2017-Q3,2017-08-08,Low,other,Amit Sangra
+CVE-2017-7784,2017,2017-Q3,2017-08-08,High,other,Nils
+CVE-2017-7785,2017,2017-Q3,2017-08-08,High,other,Nils
+CVE-2017-7786,2017,2017-Q3,2017-08-08,High,other,Nils
+CVE-2017-7787,2017,2017-Q3,2017-08-08,High,other,Oliver Wagner
+CVE-2017-7788,2017,2017-Q3,2017-08-08,Low,other,Muneaki Nishimura
+CVE-2017-7789,2017,2017-Q3,2017-08-08,Low,other,Muneaki Nishimura
+CVE-2017-7790,2017,2017-Q3,2017-08-08,Low,other,Xiaoyin Liu
+CVE-2017-7791,2017,2017-Q3,2017-08-08,Moderate,other,Jose María Acuña
+CVE-2017-7792,2017,2017-Q3,2017-08-08,High,other,Fraser Tweedale
+CVE-2017-7794,2017,2017-Q3,2017-08-08,Moderate,other,Jann Horn
+CVE-2017-7796,2017,2017-Q3,2017-08-08,Low,other,Matt Howell
+CVE-2017-7797,2017,2017-Q3,2017-08-08,Low,other,Anne van Kesteren
+CVE-2017-7798,2017,2017-Q3,2017-08-08,Critical,other,Frederik Braun
+CVE-2017-7799,2017,2017-Q3,2017-08-08,Moderate,other,Frederik Braun
+CVE-2017-7800,2017,2017-Q3,2017-08-08,Critical,other,Looben Yang
+CVE-2017-7801,2017,2017-Q3,2017-08-08,Critical,other,Nils
+CVE-2017-7802,2017,2017-Q3,2017-08-08,High,other,Nils
+CVE-2017-7803,2017,2017-Q3,2017-08-08,Moderate,other,Rhys Enniks
+CVE-2017-7804,2017,2017-Q3,2017-08-08,High,other,Stephen Fewer
+CVE-2017-7806,2017,2017-Q3,2017-08-08,High,other,Nils
+CVE-2017-7807,2017,2017-Q3,2017-08-08,High,other,Mathias Karlsson
+CVE-2017-7808,2017,2017-Q3,2017-08-08,Moderate,other,Jun Kokatsu
+CVE-2017-7809,2017,2017-Q3,2017-08-08,High,other,Nils
+CVE-2017-7793,2017,2017-Q3,2017-09-28,High,other,Abhishek Arya
+CVE-2017-7805,2017,2017-Q3,2017-09-28,High,other,Martin Thomson
+CVE-2017-7810,2017,2017-Q3,2017-09-28,Critical,other,Mozilla developers and community
+CVE-2017-7811,2017,2017-Q3,2017-09-28,Critical,other,Mozilla developers and community
+CVE-2017-7812,2017,2017-Q3,2017-09-28,Moderate,other,Tooru Fujisawa
+CVE-2017-7813,2017,2017-Q3,2017-09-28,Moderate,other,Abhishek Arya
+CVE-2017-7814,2017,2017-Q3,2017-09-28,Moderate,other,François Marier
+CVE-2017-7815,2017,2017-Q3,2017-09-28,Moderate,other,Jose María Acuña
+CVE-2017-7816,2017,2017-Q3,2017-09-28,Moderate,other,Kestrel
+CVE-2017-7817,2017,2017-Q3,2017-09-28,High,other,Raphael Saniyazov
+CVE-2017-7818,2017,2017-Q3,2017-09-28,High,other,Nils
+CVE-2017-7819,2017,2017-Q3,2017-09-28,High,other,Nils
+CVE-2017-7820,2017,2017-Q3,2017-09-28,Low,other,Oriol Brufau
+CVE-2017-7821,2017,2017-Q3,2017-09-28,Moderate,other,Abdulrahman Alqabandi
+CVE-2017-7822,2017,2017-Q3,2017-09-28,Low,other,Thanh Bui
+CVE-2017-7823,2017,2017-Q3,2017-09-28,Moderate,other,Jun Kokatsu
+CVE-2017-7824,2017,2017-Q3,2017-09-28,High,other,"Omair, Andre Weissflog"
+CVE-2017-7825,2017,2017-Q3,2017-09-28,Moderate,other,Khalil Zhani
+CVE-2017-7826,2017,2017-Q4,2017-11-14,Critical,other,Mozilla developers and community
+CVE-2017-7827,2017,2017-Q4,2017-11-14,Critical,other,Mozilla developers and community
+CVE-2017-7828,2017,2017-Q4,2017-11-14,Critical,other,Nils
+CVE-2017-7830,2017,2017-Q4,2017-11-14,High,other,Jun Kokatsu
+CVE-2017-7831,2017,2017-Q4,2017-11-14,Moderate,other,Oriol Brufau
+CVE-2017-7832,2017,2017-Q4,2017-11-14,Moderate,other,Jonathan Kew
+CVE-2017-7833,2017,2017-Q4,2017-11-14,Moderate,other,Rayyan Bijoora
+CVE-2017-7834,2017,2017-Q4,2017-11-14,Moderate,other,Jordi Chancel
+CVE-2017-7835,2017,2017-Q4,2017-11-14,Moderate,other,Ben Kelly
+CVE-2017-7836,2017,2017-Q4,2017-11-14,Moderate,other,Ezra Caltum
+CVE-2017-7837,2017,2017-Q4,2017-11-14,Moderate,other,Jun Kokatsu
+CVE-2017-7838,2017,2017-Q4,2017-11-14,Low,other,Corey Bonnell
+CVE-2017-7839,2017,2017-Q4,2017-11-14,Low,other,Eric Lawrence
+CVE-2017-7840,2017,2017-Q4,2017-11-14,Low,other,Hanno Böck
+CVE-2017-7842,2017,2017-Q4,2017-11-14,Low,other,Jun Kokatsu
+CVE-2017-7843,2017,2017-Q4,2017-11-29,High,other,Konark
+CVE-2017-7844,2017,2017-Q4,2017-11-29,High,other,Daniel Jackson
+CVE-2017-7845,2017,2017-Q4,2017-12-07,Critical,other,Omair
+CVE-2017-7829,2017,2017-Q4,2017-12-22,Low,other,Sabri Haddouche
+CVE-2017-7846,2017,2017-Q4,2017-12-22,High,other,cure53
+CVE-2017-7847,2017,2017-Q4,2017-12-22,High,other,cure53
+CVE-2017-7848,2017,2017-Q4,2017-12-22,Moderate,other,cure53
+CVE-2018-5089,2018,2018-Q1,2018-01-23,Critical,other,Mozilla developers and community
+CVE-2018-5090,2018,2018-Q1,2018-01-23,Critical,other,Mozilla developers and community
+CVE-2018-5091,2018,2018-Q1,2018-01-23,Critical,other,Looben Yang
+CVE-2018-5092,2018,2018-Q1,2018-01-23,High,other,Looben Yang
+CVE-2018-5093,2018,2018-Q1,2018-01-23,High,fuzz,OSS-Fuzz
+CVE-2018-5094,2018,2018-Q1,2018-01-23,High,fuzz,OSS-Fuzz
+CVE-2018-5095,2018,2018-Q1,2018-01-23,High,other,Anonymous
+CVE-2018-5096,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5097,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5098,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5099,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5100,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5101,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5102,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5103,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5104,2018,2018-Q1,2018-01-23,High,other,Nils
+CVE-2018-5105,2018,2018-Q1,2018-01-23,High,other,Rob Wu
+CVE-2018-5106,2018,2018-Q1,2018-01-23,Moderate,other,Jun Kokatsu
+CVE-2018-5107,2018,2018-Q1,2018-01-23,Moderate,other,Alex Gaynor
+CVE-2018-5108,2018,2018-Q1,2018-01-23,Moderate,other,Andrea Marchesini
+CVE-2018-5109,2018,2018-Q1,2018-01-23,Moderate,other,Andreas Pehrson
+CVE-2018-5110,2018,2018-Q1,2018-01-23,Moderate,other,Ron Warholic
+CVE-2018-5111,2018,2018-Q1,2018-01-23,Moderate,other,Mario Gomes
+CVE-2018-5112,2018,2018-Q1,2018-01-23,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-5113,2018,2018-Q1,2018-01-23,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-5114,2018,2018-Q1,2018-01-23,Moderate,other,Inko
+CVE-2018-5115,2018,2018-Q1,2018-01-23,Moderate,other,Jerry Decime
+CVE-2018-5116,2018,2018-Q1,2018-01-23,Moderate,other,Ronen Zilberman
+CVE-2018-5117,2018,2018-Q1,2018-01-23,Moderate,other,xisigr of Tencent's Xuanwu Lab
+CVE-2018-5118,2018,2018-Q1,2018-01-23,Moderate,other,Paul Theriault
+CVE-2018-5119,2018,2018-Q1,2018-01-23,Low,other,Jun Kokatsu
+CVE-2018-5121,2018,2018-Q1,2018-01-23,Low,other,Khalil Zhani
+CVE-2018-5122,2018,2018-Q1,2018-01-23,Low,other,Casper of Tencent's Xuanwu Lab
+CVE-2018-5125,2018,2018-Q1,2018-03-13,Critical,other,Mozilla developers and community
+CVE-2018-5126,2018,2018-Q1,2018-03-13,Critical,other,Mozilla developers and community
+CVE-2018-5127,2018,2018-Q1,2018-03-13,High,other,Nils
+CVE-2018-5128,2018,2018-Q1,2018-03-13,High,other,Nils
+CVE-2018-5129,2018,2018-Q1,2018-03-13,High,other,James Grant
+CVE-2018-5130,2018,2018-Q1,2018-03-13,High,other,Tony Paloma
+CVE-2018-5131,2018,2018-Q1,2018-03-13,Moderate,other,Ben Kelly
+CVE-2018-5132,2018,2018-Q1,2018-03-13,Moderate,other,Andy McKay
+CVE-2018-5133,2018,2018-Q1,2018-03-13,Moderate,other,François Lajeunesse-Robert
+CVE-2018-5134,2018,2018-Q1,2018-03-13,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-5135,2018,2018-Q1,2018-03-13,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-5136,2018,2018-Q1,2018-03-13,Moderate,other,Jun Kokatsu
+CVE-2018-5137,2018,2018-Q1,2018-03-13,Moderate,other,Masato Kinugawa
+CVE-2018-5138,2018,2018-Q1,2018-03-13,Low,other,rugk
+CVE-2018-5140,2018,2018-Q1,2018-03-13,Low,other,Abdulrahman Alqabandi
+CVE-2018-5141,2018,2018-Q1,2018-03-13,Low,other,Zohar
+CVE-2018-5142,2018,2018-Q1,2018-03-13,Low,other,Jun Kokatsu
+CVE-2018-5143,2018,2018-Q1,2018-03-13,Low,other,Masato Kinugawa
+CVE-2018-5144,2018,2018-Q1,2018-03-13,Moderate,other,Root Object
+CVE-2018-5145,2018,2018-Q1,2018-03-13,Critical,other,Mozilla developers and community
+CVE-2018-5146,2018,2018-Q1,2018-03-16,Critical,other,Richard Zhu via Trend Micro's Zero Day Initiative
+CVE-2018-5147,2018,2018-Q1,2018-03-16,Critical,other,Huzaifa Sidhpurwala
+CVE-2018-5148,2018,2018-Q1,2018-03-26,High,other,Jesse Schwartzentruber
+CVE-2018-5150,2018,2018-Q2,2018-05-09,Critical,other,Mozilla developers and community
+CVE-2018-5151,2018,2018-Q2,2018-05-09,Critical,other,Mozilla developers and community
+CVE-2018-5152,2018,2018-Q2,2018-05-09,Moderate,other,Andy McKay
+CVE-2018-5153,2018,2018-Q2,2018-05-09,Moderate,other,Dennis Fuchs
+CVE-2018-5154,2018,2018-Q2,2018-05-09,High,other,Nils
+CVE-2018-5155,2018,2018-Q2,2018-05-09,High,other,Nils
+CVE-2018-5157,2018,2018-Q2,2018-05-09,High,other,Wladimir Palant
+CVE-2018-5158,2018,2018-Q2,2018-05-09,High,other,Wladimir Palant
+CVE-2018-5159,2018,2018-Q2,2018-05-09,High,other,Ivan Fratric
+CVE-2018-5160,2018,2018-Q2,2018-05-09,High,other,Andreas Perhson
+CVE-2018-5163,2018,2018-Q2,2018-05-09,Moderate,other,Nicolas B. Pierron
+CVE-2018-5164,2018,2018-Q2,2018-05-09,Moderate,other,Khalil Zhani
+CVE-2018-5165,2018,2018-Q2,2018-05-09,Low,other,David Parks
+CVE-2018-5166,2018,2018-Q2,2018-05-09,Moderate,other,Francois Lajeunesse Robert
+CVE-2018-5167,2018,2018-Q2,2018-05-09,Moderate,other,Wladimir Palant
+CVE-2018-5168,2018,2018-Q2,2018-05-09,Moderate,other,Wladimir Palant
+CVE-2018-5169,2018,2018-Q2,2018-05-09,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-5172,2018,2018-Q2,2018-05-09,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-5173,2018,2018-Q2,2018-05-09,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-5174,2018,2018-Q2,2018-05-09,Moderate,other,Jimmy
+CVE-2018-5175,2018,2018-Q2,2018-05-09,Moderate,other,Masato Kinugawa
+CVE-2018-5176,2018,2018-Q2,2018-05-09,Moderate,other,Tadj Youssouf
+CVE-2018-5177,2018,2018-Q2,2018-05-09,Moderate,other,Guyio
+CVE-2018-5178,2018,2018-Q2,2018-05-09,Moderate,other,Root Object
+CVE-2018-5179,2018,2018-Q2,2018-05-09,Low,other,Yannic Bonenberger
+CVE-2018-5180,2018,2018-Q2,2018-05-09,Low,other,Nils
+CVE-2018-5181,2018,2018-Q2,2018-05-09,Low,other,Abdulrahman Alqabandi
+CVE-2018-5182,2018,2018-Q2,2018-05-09,Low,other,Jordi Chancel
+CVE-2018-5183,2018,2018-Q2,2018-05-09,Critical,other,Mozilla Developers
+CVE-2018-5161,2018,2018-Q2,2018-05-18,Moderate,other,cure53
+CVE-2018-5162,2018,2018-Q2,2018-05-18,Moderate,other,"Damian Poddebniak, Christian Dresen, Jens Müller, Fabian Ising, Sebastian Schinzel, Simon Friedberger, Juraj Somorovsky, Jörg Schwenk"
+CVE-2018-5170,2018,2018-Q2,2018-05-18,Moderate,other,cure53
+CVE-2018-5184,2018,2018-Q2,2018-05-18,High,other,"Damian Poddebniak, Christian Dresen, Jens Müller, Fabian Ising, Sebastian Schinzel, Simon Friedberger, Juraj Somorovsky, Jörg Schwenk"
+CVE-2018-5185,2018,2018-Q2,2018-05-18,Low,other,"Damian Poddebniak, Christian Dresen, Jens Müller, Fabian Ising, Sebastian Schinzel, Simon Friedberger, Juraj Somorovsky, Jörg Schwenk"
+CVE-2018-6126,2018,2018-Q2,2018-06-06,High,other,Ivan Fratric of Google Project Zero
+CVE-2018-12358,2018,2018-Q2,2018-06-26,High,other,Ben Kelly
+CVE-2018-12359,2018,2018-Q2,2018-06-26,Critical,other,Nils
+CVE-2018-12360,2018,2018-Q2,2018-06-26,Critical,other,Nils
+CVE-2018-12361,2018,2018-Q2,2018-06-26,Critical,other,R at Zero Day LLC
+CVE-2018-12362,2018,2018-Q2,2018-06-26,High,other,F. Alonso (revskills)
+CVE-2018-12363,2018,2018-Q2,2018-06-26,High,other,Nils
+CVE-2018-12364,2018,2018-Q2,2018-06-26,High,other,David Black
+CVE-2018-12365,2018,2018-Q2,2018-06-26,Moderate,other,Alex Gaynor
+CVE-2018-12366,2018,2018-Q2,2018-06-26,Moderate,fuzz,OSS-Fuzz
+CVE-2018-12367,2018,2018-Q2,2018-06-26,Moderate,other,Andrea Marchesini
+CVE-2018-12368,2018,2018-Q2,2018-06-26,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-12369,2018,2018-Q2,2018-06-26,Moderate,other,Jonathan Kingston
+CVE-2018-12370,2018,2018-Q2,2018-06-26,Low,other,Jun Kokatsu
+CVE-2018-12371,2018,2018-Q2,2018-06-26,Moderate,other,anonymous
+CVE-2018-5156,2018,2018-Q2,2018-06-26,High,other,Nils
+CVE-2018-5186,2018,2018-Q2,2018-06-26,Critical,other,Mozilla developers and community
+CVE-2018-5187,2018,2018-Q2,2018-06-26,Critical,other,Mozilla developers and community
+CVE-2018-5188,2018,2018-Q2,2018-06-26,Critical,other,Mozilla developers and community
+CVE-2018-12372,2018,2018-Q3,2018-07-03,High,other,"Damian Poddebniak, Christian Dresen, Jens Müller, Fabian Ising, Sebastian Schinzel, Simon Friedberger, Juraj Somorovsky, Jörg Schwenk"
+CVE-2018-12373,2018,2018-Q3,2018-07-03,High,other,"Damian Poddebniak, Christian Dresen, Jens Müller, Fabian Ising, Sebastian Schinzel, Simon Friedberger, Juraj Somorovsky, Jörg Schwenk"
+CVE-2018-12374,2018,2018-Q3,2018-07-03,Low,other,Hanno Boeck
+CVE-2017-16541,2018,2018-Q3,2018-09-05,Moderate,other,Filippo Cavallarin
+CVE-2018-12375,2018,2018-Q3,2018-09-05,High,other,Mozilla developers and community
+CVE-2018-12376,2018,2018-Q3,2018-09-05,Critical,other,Mozilla developers and community
+CVE-2018-12377,2018,2018-Q3,2018-09-05,High,other,Nils
+CVE-2018-12378,2018,2018-Q3,2018-09-05,High,other,Zhanjia Song
+CVE-2018-12379,2018,2018-Q3,2018-09-05,Moderate,other,Holger Fuhrmannek
+CVE-2018-12381,2018,2018-Q3,2018-09-05,Low,other,Jana Squires
+CVE-2018-12382,2018,2018-Q3,2018-09-05,Low,other,Jordi Chancel
+CVE-2018-12383,2018,2018-Q3,2018-09-05,Low,other,Jurgen Gaeremyn
+CVE-2018-18499,2018,2018-Q3,2018-09-05,High,other,James Lee (@Windowsrcer) of Kryptos Logic
+CVE-2018-12385,2018,2018-Q3,2018-09-21,Moderate,other,Philipp
+CVE-2018-12386,2018,2018-Q4,2018-10-02,Critical,other,"Niklas Baumstark, Samuel Groß, Bruno Keith via Beyond Security’s SecuriTeam Secure Disclosure program"
+CVE-2018-12387,2018,2018-Q4,2018-10-02,Critical,other,"Bruno Keith, Niklas Baumstark via Beyond Security’s SecuriTeam Secure Disclosure program"
+CVE-2018-12388,2018,2018-Q4,2018-10-23,Critical,other,Mozilla developers and community
+CVE-2018-12389,2018,2018-Q4,2018-10-23,Low,other,Mozilla developers and community
+CVE-2018-12390,2018,2018-Q4,2018-10-23,Critical,other,Mozilla developers and community
+CVE-2018-12391,2018,2018-Q4,2018-10-23,High,other,Jun Kokatsu
+CVE-2018-12392,2018,2018-Q4,2018-10-23,High,other,Nils
+CVE-2018-12393,2018,2018-Q4,2018-10-23,High,other,R at Zero Day LLC
+CVE-2018-12395,2018,2018-Q4,2018-10-23,Moderate,other,"Rob Wu, Andrew Swan"
+CVE-2018-12396,2018,2018-Q4,2018-10-23,Moderate,other,Rob Wu
+CVE-2018-12397,2018,2018-Q4,2018-10-23,Moderate,other,Rob Wu
+CVE-2018-12398,2018,2018-Q4,2018-10-23,Moderate,other,cgvwzq
+CVE-2018-12399,2018,2018-Q4,2018-10-23,Low,other,Mathias Wu
+CVE-2018-12400,2018,2018-Q4,2018-10-23,Low,other,Konark Modi
+CVE-2018-12401,2018,2018-Q4,2018-10-23,Low,other,Abdulrahman Alqabandi
+CVE-2018-12402,2018,2018-Q4,2018-10-23,Moderate,other,"Björn Ruytenberg, 1lastBr3ath"
+CVE-2018-12403,2018,2018-Q4,2018-10-23,Low,other,Yiğit Can Yilmaz
+CVE-2018-12405,2018,2018-Q4,2018-12-11,Critical,other,Mozilla developers and community
+CVE-2018-12406,2018,2018-Q4,2018-12-11,Critical,other,Mozilla developers and community
+CVE-2018-12407,2018,2018-Q4,2018-12-11,High,other,Omair working with iDefense Labs
+CVE-2018-17466,2018,2018-Q4,2018-12-11,High,other,Omair
+CVE-2018-18492,2018,2018-Q4,2018-12-11,High,other,Nils
+CVE-2018-18493,2018,2018-Q4,2018-12-11,High,other,Atte Kettunen
+CVE-2018-18494,2018,2018-Q4,2018-12-11,High,other,James Lee of Kryptos Logic | James Lee (@Windowsrcer) of Kryptos Logic
+CVE-2018-18495,2018,2018-Q4,2018-12-11,Moderate,other,Kestrel
+CVE-2018-18496,2018,2018-Q4,2018-12-11,Moderate,other,Abdulrahman Alqabandi
+CVE-2018-18497,2018,2018-Q4,2018-12-11,Moderate,other,Rob Wu
+CVE-2018-18498,2018,2018-Q4,2018-12-11,Low,other,R at Zero Day LLC
+CVE-2018-18510,2018,2018-Q4,2018-12-11,Low,other,Hanno Böck
+CVE-2016-5824,2019,2019-Q1,2019-01-29,Low,other,Brandon Perry
+CVE-2018-18500,2019,2019-Q1,2019-01-29,Critical,other,Yaniv Frank with SophosLabs
+CVE-2018-18501,2019,2019-Q1,2019-01-29,Critical,other,Mozilla developers and community
+CVE-2018-18502,2019,2019-Q1,2019-01-29,Critical,other,Mozilla developers and community
+CVE-2018-18503,2019,2019-Q1,2019-01-29,Moderate,other,Nils
+CVE-2018-18504,2019,2019-Q1,2019-01-29,High,other,Markus Vervier of X41 D-SEC GmbH
+CVE-2018-18505,2019,2019-Q1,2019-01-29,High,other,Jed Davis
+CVE-2018-18506,2019,2019-Q1,2019-01-29,Moderate,other,Jann Horn
+CVE-2018-18512,2019,2019-Q1,2019-01-29,High,other,Wayne Mery
+CVE-2018-18513,2019,2019-Q1,2019-01-29,Moderate,other,"Hanno Böck, Damian Poddebniak"
+CVE-2018-18335,2019,2019-Q1,2019-02-12,High,other,Anonymous
+CVE-2018-18356,2019,2019-Q1,2019-02-12,High,other,Tran Tien Hung of Viettel Cyber Security
+CVE-2018-18511,2019,2019-Q1,2019-02-12,High,other,AaylaSecura1138
+CVE-2019-5785,2019,2019-Q1,2019-02-12,High,other,Ivan Fratric of Google Project Zero
+CVE-2018-18509,2019,2019-Q1,2019-02-14,High,other,Damian Poddebniak
+CVE-2019-9788,2019,2019-Q1,2019-03-19,Critical,other,Mozilla developers and community
+CVE-2019-9789,2019,2019-Q1,2019-03-19,Critical,other,Mozilla developers and community
+CVE-2019-9790,2019,2019-Q1,2019-03-19,Critical,other,Brandon Wieser
+CVE-2019-9791,2019,2019-Q1,2019-03-19,Critical,other,Samuel Groß of Google Project Zero
+CVE-2019-9792,2019,2019-Q1,2019-03-19,Critical,other,Samuel Groß of Google Project Zero
+CVE-2019-9793,2019,2019-Q1,2019-03-19,High,other,Bruno Keith & Niklas Baumstark from the phoenhex team
+CVE-2019-9794,2019,2019-Q1,2019-03-19,High,other,Joshua Graham
+CVE-2019-9795,2019,2019-Q1,2019-03-19,High,other,Nils
+CVE-2019-9796,2019,2019-Q1,2019-03-19,High,other,Nils
+CVE-2019-9797,2019,2019-Q1,2019-03-19,High,other,AaylaSecura1138
+CVE-2019-9798,2019,2019-Q1,2019-03-19,High,other,Jeff Gilbert
+CVE-2019-9799,2019,2019-Q1,2019-03-19,High,other,Paul Theriault
+CVE-2019-9801,2019,2019-Q1,2019-03-19,Moderate,other,Daniel Veditz
+CVE-2019-9802,2019,2019-Q1,2019-03-19,Moderate,other,Stephen Fewer
+CVE-2019-9803,2019,2019-Q1,2019-03-19,Moderate,other,"Xiaoyin Liu, Vinothkumar Nagasayanan"
+CVE-2019-9804,2019,2019-Q1,2019-03-19,Moderate,other,potatoe
+CVE-2019-9805,2019,2019-Q1,2019-03-19,Moderate,other,mlfbrown
+CVE-2019-9806,2019,2019-Q1,2019-03-19,Low,other,"Hanno Böck, Anca Soncutean"
+CVE-2019-9807,2019,2019-Q1,2019-03-19,Low,other,Hanno Böck
+CVE-2019-9808,2019,2019-Q1,2019-03-19,Low,other,Jun Kokatsu
+CVE-2019-9809,2019,2019-Q1,2019-03-19,Low,other,"schattendeatroth, Hanno Böck"
+CVE-2019-9810,2019,2019-Q1,2019-03-22,Critical,other,Richard Zhu and Amat Cama via Trend Micro's Zero Day Initiative
+CVE-2019-9813,2019,2019-Q1,2019-03-22,Critical,other,Niklas Baumstark via Trend Micro's Zero Day Initiative
+CVE-2019-11691,2019,2019-Q2,2019-05-21,High,other,Nils
+CVE-2019-11692,2019,2019-Q2,2019-05-21,High,other,Nils
+CVE-2019-11693,2019,2019-Q2,2019-05-21,High,other,crixer
+CVE-2019-11694,2019,2019-Q2,2019-05-21,Moderate,other,Jeremy Fetiveau of SSD Secure Disclosure
+CVE-2019-11695,2019,2019-Q2,2019-05-21,Moderate,other,bignis
+CVE-2019-11696,2019,2019-Q2,2019-05-21,Moderate,other,Abdulrahman Alqabandi
+CVE-2019-11697,2019,2019-Q2,2019-05-21,Moderate,other,Abdulrahman Alqabandi
+CVE-2019-11698,2019,2019-Q2,2019-05-21,Moderate,other,Abdulrahman Alqabandi
+CVE-2019-11699,2019,2019-Q2,2019-05-21,Low,other,tzachyr
+CVE-2019-11700,2019,2019-Q2,2019-05-21,Moderate,other,James Lee
+CVE-2019-11701,2019,2019-Q2,2019-05-21,Low,other,Peter af Geijerstam
+CVE-2019-5798,2019,2019-Q2,2019-05-21,Moderate,other,Tran Tien Hung of Viettel Cyber Security
+CVE-2019-7317,2019,2019-Q2,2019-05-21,High,fuzz,"OSS-Fuzz, Eddie Lee"
+CVE-2019-9800,2019,2019-Q2,2019-05-21,Critical,other,Mozilla developers and community
+CVE-2019-9814,2019,2019-Q2,2019-05-21,Critical,other,Mozilla developers and community
+CVE-2019-9815,2019,2019-Q2,2019-05-21,High,other,"<a href=""https://mdsattacks.com/#People"">Multiple independent researchers</a>"
+CVE-2019-9816,2019,2019-Q2,2019-05-21,High,other,Samuel Groß of Google Project Zero
+CVE-2019-9817,2019,2019-Q2,2019-05-21,High,other,Luật Nguyễn
+CVE-2019-9818,2019,2019-Q2,2019-05-21,High,other,Thomas Imbert
+CVE-2019-9819,2019,2019-Q2,2019-05-21,High,other,Nils
+CVE-2019-9820,2019,2019-Q2,2019-05-21,High,other,Nils
+CVE-2019-9821,2019,2019-Q2,2019-05-21,High,other,Nils
+CVE-2019-11702,2019,2019-Q2,2019-06-11,Moderate,other,James Lee
+CVE-2019-11703,2019,2019-Q2,2019-06-13,High,other,Luis Merino of X41 D-Sec
+CVE-2019-11704,2019,2019-Q2,2019-06-13,High,other,Luis Merino of X41 D-Sec
+CVE-2019-11705,2019,2019-Q2,2019-06-13,High,other,Luis Merino of X41 D-Sec
+CVE-2019-11706,2019,2019-Q2,2019-06-13,Low,other,Luis Merino of X41 D-Sec
+CVE-2019-11707,2019,2019-Q2,2019-06-18,Critical,other,"Samuel Groß of Google Project Zero, Coinbase Security"
+CVE-2019-11708,2019,2019-Q2,2019-06-20,High,other,Coinbase Security
+CVE-2019-11709,2019,2019-Q3,2019-07-09,Critical,other,Mozilla developers and community
+CVE-2019-11710,2019,2019-Q3,2019-07-09,Critical,other,Mozilla developers and community
+CVE-2019-11711,2019,2019-Q3,2019-07-09,High,other,Boris Zbarsky
+CVE-2019-11712,2019,2019-Q3,2019-07-09,High,other,Gregory Smiley of Security Compass
+CVE-2019-11713,2019,2019-Q3,2019-07-09,High,other,Hanno Böck
+CVE-2019-11714,2019,2019-Q3,2019-07-09,Moderate,other,Hanno Böck
+CVE-2019-11715,2019,2019-Q3,2019-07-09,Moderate,other,Linus Särud
+CVE-2019-11716,2019,2019-Q3,2019-07-09,Moderate,other,Chris Hacking
+CVE-2019-11717,2019,2019-Q3,2019-07-09,Moderate,other,Tyson Smith
+CVE-2019-11718,2019,2019-Q3,2019-07-09,Moderate,other,Mark Banner
+CVE-2019-11719,2019,2019-Q3,2019-07-09,Moderate,other,Henry Corrigan-Gibbs
+CVE-2019-11720,2019,2019-Q3,2019-07-09,Moderate,other,Rakesh Mane
+CVE-2019-11721,2019,2019-Q3,2019-07-09,Moderate,other,Anonymous
+CVE-2019-11723,2019,2019-Q3,2019-07-09,Low,other,Andreas Wagner
+CVE-2019-11724,2019,2019-Q3,2019-07-09,Low,other,Frederik Braun
+CVE-2019-11725,2019,2019-Q3,2019-07-09,Low,other,Andrey
+CVE-2019-11727,2019,2019-Q3,2019-07-09,Low,other,Hubert Kario
+CVE-2019-11728,2019,2019-Q3,2019-07-09,Low,other,"Trishita Tiwari, Ari Trachtenberg"
+CVE-2019-11729,2019,2019-Q3,2019-07-09,Moderate,other,Jonas Allmann
+CVE-2019-11730,2019,2019-Q3,2019-07-09,Moderate,other,Luigi Gubello
+CVE-2019-9811,2019,2019-Q3,2019-07-09,High,other,Niklas Baumstark
+CVE-2019-11733,2019,2019-Q3,2019-08-14,Moderate,other,None
+CVE-2019-11734,2019,2019-Q3,2019-09-03,High,other,Mozilla developers and community
+CVE-2019-11735,2019,2019-Q3,2019-09-03,High,other,Mozilla developers and community
+CVE-2019-11736,2019,2019-Q3,2019-09-03,High,other,Seb Patane
+CVE-2019-11737,2019,2019-Q3,2019-09-03,Low,other,Xiaoyin Liu
+CVE-2019-11738,2019,2019-Q3,2019-09-03,Low,other,Wladimir Palant
+CVE-2019-11740,2019,2019-Q3,2019-09-03,High,other,Mozilla developers and community
+CVE-2019-11741,2019,2019-Q3,2019-09-03,High,other,Niklas Baumstark via TrendMicro's Zero Day Initiative
+CVE-2019-11742,2019,2019-Q3,2019-09-03,High,other,Paul Stone
+CVE-2019-11743,2019,2019-Q3,2019-09-03,Moderate,other,Yoav Weiss
+CVE-2019-11744,2019,2019-Q3,2019-09-03,High,other,Rakesh Mane
+CVE-2019-11746,2019,2019-Q3,2019-09-03,High,other,Nils
+CVE-2019-11747,2019,2019-Q3,2019-09-03,Low,other,Thomas Henlich
+CVE-2019-11748,2019,2019-Q3,2019-09-03,Moderate,other,Jan-Ivar Bruaroey
+CVE-2019-11749,2019,2019-Q3,2019-09-03,Moderate,other,Andreas Pehrson
+CVE-2019-11750,2019,2019-Q3,2019-09-03,Moderate,other,Qixun Zhao of Qihoo 360 Vulcan Team
+CVE-2019-11751,2019,2019-Q3,2019-09-03,Critical,other,Ping Fan (Zetta) Ke of VXRL working with iDefense Labs
+CVE-2019-11752,2019,2019-Q3,2019-09-03,High,other,Zhanjia Song
+CVE-2019-11753,2019,2019-Q3,2019-09-03,High,other,Holger Fuhrmannek
+CVE-2019-11758,2019,2019-Q3,2019-09-03,High,other,Mozilla developers and community
+CVE-2019-5849,2019,2019-Q3,2019-09-03,Moderate,other,Zhen Zhou of NSFOCUS Security Team
+CVE-2019-9812,2019,2019-Q3,2019-09-03,High,other,Niklas Baumstark via TrendMicro's Zero Day Initiative
+CVE-2019-11739,2019,2019-Q3,2019-09-06,High,other,"Jens Müller, Marcus Brinkmann, Damian Poddebniak, Sebastian Schinzel, Jörg Schwenk"
+CVE-2019-11754,2019,2019-Q3,2019-09-18,Moderate,other,Johann Hofmann
+CVE-2019-11755,2019,2019-Q3,2019-09-25,Moderate,other,Falko Strenzke
+CVE-2018-6156,2019,2019-Q4,2019-10-22,High,other,Google Project Zero
+CVE-2019-11757,2019,2019-Q4,2019-10-22,High,other,Zhanjia Song
+CVE-2019-11759,2019,2019-Q4,2019-10-22,Moderate,other,Guido Vranken
+CVE-2019-11760,2019,2019-Q4,2019-10-22,Moderate,other,Nils
+CVE-2019-11761,2019,2019-Q4,2019-10-22,Moderate,other,Cody Crews
+CVE-2019-11762,2019,2019-Q4,2019-10-22,Moderate,other,Kris Maglione
+CVE-2019-11763,2019,2019-Q4,2019-10-22,Moderate,other,Gareth Heyes
+CVE-2019-11764,2019,2019-Q4,2019-10-22,Critical,other,Mozilla developers and community
+CVE-2019-11765,2019,2019-Q4,2019-10-22,Moderate,other,Paul Theriault
+CVE-2019-15903,2019,2019-Q4,2019-10-22,High,other,Sebastian Pipping
+CVE-2019-17000,2019,2019-Q4,2019-10-22,Moderate,other,Yangzheng Li
+CVE-2019-17001,2019,2019-Q4,2019-10-22,Moderate,other,Matheus Vrech
+CVE-2019-17002,2019,2019-Q4,2019-10-22,Low,other,Kevin Brosnan
+CVE-2019-25136,2019,2019-Q4,2019-10-22,High,other,Emilio Cobos Álvarez
+CVE-2020-12412,2019,2019-Q4,2019-10-22,Moderate,other,Adrian Karolak from ING Tech Poland
+CVE-2019-11745,2019,2019-Q4,2019-12-03,High,other,Craig Disselkoen
+CVE-2019-11756,2019,2019-Q4,2019-12-03,High,other,J.C. Jones
+CVE-2019-13722,2019,2019-Q4,2019-12-03,High,other,Alexandru Michis
+CVE-2019-17005,2019,2019-Q4,2019-12-03,Moderate,other,Mirko Brodesser
+CVE-2019-17008,2019,2019-Q4,2019-12-03,High,other,Looben Yang
+CVE-2019-17009,2019,2019-Q4,2019-12-03,Moderate,other,Robert Strong
+CVE-2019-17010,2019,2019-Q4,2019-12-03,Moderate,other,Nils
+CVE-2019-17011,2019,2019-Q4,2019-12-03,Moderate,other,Nils
+CVE-2019-17012,2019,2019-Q4,2019-12-03,High,other,Mozilla developers and community
+CVE-2019-17013,2019,2019-Q4,2019-12-03,High,other,Mozilla developers and community
+CVE-2019-17014,2019,2019-Q4,2019-12-03,Moderate,other,Abdulrahman Alqabandi
+CVE-2019-17015,2020,2020-Q1,2020-01-07,High,other,Thomas Imbert
+CVE-2019-17016,2020,2020-Q1,2020-01-07,High,other,Michał Bentkowski
+CVE-2019-17017,2020,2020-Q1,2020-01-07,High,other,bo13oy
+CVE-2019-17018,2020,2020-Q1,2020-01-07,Moderate,other,Siye Lui
+CVE-2019-17019,2020,2020-Q1,2020-01-07,Moderate,other,Prithwish Kumar Pal
+CVE-2019-17020,2020,2020-Q1,2020-01-07,Moderate,other,Matthew Somerville
+CVE-2019-17021,2020,2020-Q1,2020-01-07,Moderate,other,Thomas Imbert
+CVE-2019-17022,2020,2020-Q1,2020-01-07,Moderate,other,Michał Bentkowski
+CVE-2019-17023,2020,2020-Q1,2020-01-07,Low,fuzz,Google oss-fuzz
+CVE-2019-17024,2020,2020-Q1,2020-01-07,High,other,Mozilla developers
+CVE-2019-17025,2020,2020-Q1,2020-01-07,High,other,Mozilla developers
+CVE-2019-17026,2020,2020-Q1,2020-01-08,Critical,other,Qihoo 360 ATA
+CVE-2020-6792,2020,2020-Q1,2020-02-11,Low,other,Chiaki ISHIKAWA
+CVE-2020-6793,2020,2020-Q1,2020-02-11,Moderate,other,Chiaki ISHIKAWA
+CVE-2020-6794,2020,2020-Q1,2020-02-11,Moderate,other,Jurgen Gaeremyn
+CVE-2020-6795,2020,2020-Q1,2020-02-11,Moderate,other,Stephan Lauffer
+CVE-2020-6796,2020,2020-Q1,2020-02-11,High,other,Thomas Imbert
+CVE-2020-6797,2020,2020-Q1,2020-02-11,Moderate,other,Vladimir Metnew
+CVE-2020-6798,2020,2020-Q1,2020-02-11,Moderate,other,terjanq
+CVE-2020-6799,2020,2020-Q1,2020-02-11,Moderate,other,Joshua Graham & Brendan Scarvell
+CVE-2020-6800,2020,2020-Q1,2020-02-11,High,other,Mozilla developers and community
+CVE-2020-6801,2020,2020-Q1,2020-02-11,High,other,Mozilla developers
+CVE-2019-20503,2020,2020-Q1,2020-03-10,Moderate,other,Natalie Silvanovich of Google Project Zero
+CVE-2020-6805,2020,2020-Q1,2020-03-10,High,other,Brian Carpenter
+CVE-2020-6806,2020,2020-Q1,2020-03-10,High,other,Sergei Glazunov of Google Project Zero
+CVE-2020-6807,2020,2020-Q1,2020-03-10,High,other,C.M.Chang
+CVE-2020-6808,2020,2020-Q1,2020-03-10,Moderate,other,Abdulrahman Alqabandi
+CVE-2020-6809,2020,2020-Q1,2020-03-10,Moderate,other,Jan Biniok
+CVE-2020-6810,2020,2020-Q1,2020-03-10,Moderate,other,Avi Drissman of the Chrome security team
+CVE-2020-6811,2020,2020-Q1,2020-03-10,Moderate,other,Ophir LOJKINE
+CVE-2020-6812,2020,2020-Q1,2020-03-10,Moderate,other,Jan-Ivar Bruaroey
+CVE-2020-6813,2020,2020-Q1,2020-03-10,Low,other,Matheus Vrech
+CVE-2020-6814,2020,2020-Q1,2020-03-10,High,other,Mozilla developers | Mozilla developers and community
+CVE-2020-6815,2020,2020-Q1,2020-03-10,High,other,Mozilla developers and community
+CVE-2020-6819,2020,2020-Q2,2020-04-03,Critical,other,Francisco Alonso @revskills working with Javier Marcos of @JMPSec
+CVE-2020-6820,2020,2020-Q2,2020-04-03,Critical,other,Francisco Alonso @revskills working with Javier Marcos of @JMPSec
+CVE-2020-6821,2020,2020-Q2,2020-04-07,High,other,"Jeff Gilbert, Kenneth Russell"
+CVE-2020-6822,2020,2020-Q2,2020-04-07,Moderate,other,Deian Stefan
+CVE-2020-6823,2020,2020-Q2,2020-04-07,Moderate,other,Leon Visscher
+CVE-2020-6824,2020,2020-Q2,2020-04-07,Moderate,other,Matthew Noorenberghe
+CVE-2020-6825,2020,2020-Q2,2020-04-07,High,other,Mozilla developers
+CVE-2020-6826,2020,2020-Q2,2020-04-07,High,other,Mozilla developers
+CVE-2020-6827,2020,2020-Q2,2020-04-07,High,other,Juho Nurminen of Mattermost
+CVE-2020-6828,2020,2020-Q2,2020-04-07,High,other,fatal0
+CVE-2020-6830,2020,2020-Q2,2020-05-01,Moderate,other,Vinoth Kumar
+CVE-2020-12387,2020,2020-Q2,2020-05-05,Critical,other,Looben Yang
+CVE-2020-12388,2020,2020-Q2,2020-05-05,Critical,other,James Forshaw of Google Project Zero
+CVE-2020-12389,2020,2020-Q2,2020-05-05,High,other,Niklas Baumstark
+CVE-2020-12390,2020,2020-Q2,2020-05-05,Moderate,other,Giorgio Maone
+CVE-2020-12391,2020,2020-Q2,2020-05-05,Moderate,other,Giorgio Maone
+CVE-2020-12392,2020,2020-Q2,2020-05-05,Moderate,other,Ophir LOJKINE
+CVE-2020-12393,2020,2020-Q2,2020-05-05,Moderate,other,David Yesland
+CVE-2020-12394,2020,2020-Q2,2020-05-05,Low,other,Kestrel
+CVE-2020-12395,2020,2020-Q2,2020-05-05,Critical,other,Mozilla developers and community
+CVE-2020-12396,2020,2020-Q2,2020-05-05,High,other,Mozilla developers and community
+CVE-2020-12397,2020,2020-Q2,2020-05-05,Low,other,Ahmed Elsobky (@0xSobky)
+CVE-2020-6831,2020,2020-Q2,2020-05-05,High,other,Natalie Silvanovich of Google Project Zero
+CVE-2020-12404,2020,2020-Q2,2020-05-30,Moderate,other,Vinoth Kumar
+CVE-2020-12398,2020,2020-Q2,2020-06-02,High,other,Damian Poddebniak
+CVE-2020-12399,2020,2020-Q2,2020-06-02,High,other,Cesar Pereida Garcia and the Network and Information Security Group (NISEC) at Tampere University
+CVE-2020-12405,2020,2020-Q2,2020-06-02,High,other,Marcin 'Icewall' Noga of Cisco Talos
+CVE-2020-12406,2020,2020-Q2,2020-06-02,High,other,Iain Ireland
+CVE-2020-12407,2020,2020-Q2,2020-06-02,Moderate,other,Nicolas Silva
+CVE-2020-12408,2020,2020-Q2,2020-06-02,Low,other,Rayyan Bijoora
+CVE-2020-12409,2020,2020-Q2,2020-06-02,Low,other,Rayyan Bijoora
+CVE-2020-12410,2020,2020-Q2,2020-06-02,High,other,Mozilla developers
+CVE-2020-12411,2020,2020-Q2,2020-06-02,High,other,Mozilla developers
+CVE-2020-12414,2020,2020-Q2,2020-06-25,Moderate,other,Konark Modi - @konarkmodi
+CVE-2020-12402,2020,2020-Q2,2020-06-30,Moderate,other,"Sohaib ul Hassan, Iaroslav Gridin, Ignacio M. Delgado-Lozano, Cesar Pereida García, Jesús-Javier Chi-Domínguez, Alejandro Cabrera Aldaya, and Billy Bob Brumley, Network and Information Security (NISEC) Group, Tampere University, Finland"
+CVE-2020-12415,2020,2020-Q2,2020-06-30,High,other,Kevin Higgs
+CVE-2020-12416,2020,2020-Q2,2020-06-30,High,other,Alex Mayorga
+CVE-2020-12417,2020,2020-Q2,2020-06-30,High,other,Deian Stefan
+CVE-2020-12418,2020,2020-Q2,2020-06-30,High,other,Marcin 'Icewall' Noga of Cisco Talos
+CVE-2020-12419,2020,2020-Q2,2020-06-30,High,other,worcester12345
+CVE-2020-12420,2020,2020-Q2,2020-06-30,High,other,Byron Campen
+CVE-2020-12421,2020,2020-Q2,2020-06-30,Moderate,other,"Chuck Harmston, Robert Hardy"
+CVE-2020-12422,2020,2020-Q2,2020-06-30,Moderate,other,Ronald Crane
+CVE-2020-12423,2020,2020-Q2,2020-06-30,Moderate,other,Riccardo Ancarani
+CVE-2020-12424,2020,2020-Q2,2020-06-30,Low,other,Paul Theriault
+CVE-2020-12425,2020,2020-Q2,2020-06-30,Low,other,Bruno Keith
+CVE-2020-12426,2020,2020-Q2,2020-06-30,High,other,Mozilla developers and community
+CVE-2020-15646,2020,2020-Q2,2020-06-30,High,other,Magnus Melin
+CVE-2020-15647,2020,2020-Q3,2020-07-06,Critical,other,Pedro Oliveira
+CVE-2020-15648,2020,2020-Q3,2020-07-08,Moderate,other,Frederik Braun
+CVE-2020-15649,2020,2020-Q3,2020-07-28,Moderate,other,"Andrea Palazzo, Pedro Oliveira"
+CVE-2020-15650,2020,2020-Q3,2020-07-28,Moderate,other,Pedro Oliveira
+CVE-2020-15651,2020,2020-Q3,2020-07-28,Low,other,superxx
+CVE-2020-15652,2020,2020-Q3,2020-07-28,High,other,Mikhail Oblozhikhin
+CVE-2020-15653,2020,2020-Q3,2020-07-28,Moderate,other,Anne van Kesteren
+CVE-2020-15654,2020,2020-Q3,2020-07-28,Low,other,SophosLabs Offensive Security team
+CVE-2020-15655,2020,2020-Q3,2020-07-28,High,other,Rob Wu
+CVE-2020-15656,2020,2020-Q3,2020-07-28,Moderate,other,"Carl Smith, working with Google Project Zero"
+CVE-2020-15657,2020,2020-Q3,2020-07-28,Low,other,Steve Nyan Lin
+CVE-2020-15658,2020,2020-Q3,2020-07-28,Low,other,belden
+CVE-2020-15659,2020,2020-Q3,2020-07-28,High,other,Mozilla developers and community | Mozilla developers
+CVE-2020-15661,2020,2020-Q3,2020-07-28,High,other,Muneaki Nishimura
+CVE-2020-15662,2020,2020-Q3,2020-07-28,High,other,Muneaki Nishimura
+CVE-2020-6463,2020,2020-Q3,2020-07-28,Moderate,other,Reported by Pawel Wylecial of REDTEAM.PL
+CVE-2020-6514,2020,2020-Q3,2020-07-28,High,other,Natalie Silvanovich of Google Project Zero
+CVE-2020-12400,2020,2020-Q3,2020-08-25,Moderate,other,"Sohaib ul Hassan, Iaroslav Gridin, Ignacio M. Delgado-Lozano, Cesar Pereida García, Jesús-Javier Chi-Domínguez, Alejandro Cabrera Aldaya, and Billy Bob Brumley, Network and Information Security (NISEC) Group, Tampere University, Finland"
+CVE-2020-12401,2020,2020-Q3,2020-08-25,Moderate,other,"Sohaib ul Hassan, Iaroslav Gridin, Ignacio M. Delgado-Lozano, Cesar Pereida García, Jesús-Javier Chi-Domínguez, Alejandro Cabrera Aldaya, and Billy Bob Brumley, Network and Information Security (NISEC) Group, Tampere University, Finland"
+CVE-2020-15663,2020,2020-Q3,2020-08-25,High,other,Xiaoyin Liu
+CVE-2020-15664,2020,2020-Q3,2020-08-25,High,other,Kaizer Soze
+CVE-2020-15665,2020,2020-Q3,2020-08-25,Moderate,other,Luan Herrera
+CVE-2020-15666,2020,2020-Q3,2020-08-25,Low,other,Gunes Acar
+CVE-2020-15667,2020,2020-Q3,2020-08-25,Low,other,crixer
+CVE-2020-15668,2020,2020-Q3,2020-08-25,Low,other,Tyson Smith
+CVE-2020-15669,2020,2020-Q3,2020-08-25,High,other,Jason Kratzer
+CVE-2020-15670,2020,2020-Q3,2020-08-25,High,other,Mozilla developers | Mozilla developers and community
+CVE-2020-6829,2020,2020-Q3,2020-08-25,Moderate,other,"Sohaib ul Hassan, Iaroslav Gridin, Ignacio M. Delgado-Lozano, Cesar Pereida García, Jesús-Javier Chi-Domínguez, Alejandro Cabrera Aldaya, and Billy Bob Brumley, Network and Information Security (NISEC) Group, Tampere University, Finland"
+CVE-2020-15671,2020,2020-Q3,2020-09-02,Low,other,Karol Frejlich
+CVE-2020-15673,2020,2020-Q3,2020-09-22,High,other,Jason Kratzer
+CVE-2020-15674,2020,2020-Q3,2020-09-22,High,other,Mozilla developers
+CVE-2020-15675,2020,2020-Q3,2020-09-22,High,other,Brian Carpenter via the ASAN Nightly project
+CVE-2020-15676,2020,2020-Q3,2020-09-22,Moderate,other,Daniel Fröjdendahl
+CVE-2020-15677,2020,2020-Q3,2020-09-22,Moderate,other,Richard Thomas and Tom Chothia of University of Birmingham
+CVE-2020-15678,2020,2020-Q3,2020-09-22,Moderate,other,Lukas Bernhard
+CVE-2020-15254,2020,2020-Q4,2020-10-20,High,other,Caelum van Ispelen
+CVE-2020-15680,2020,2020-Q4,2020-10-20,Moderate,other,Rotem Kerner
+CVE-2020-15681,2020,2020-Q4,2020-10-20,Moderate,other,Alon Zakai
+CVE-2020-15682,2020,2020-Q4,2020-10-20,Low,other,Lijo A.T.
+CVE-2020-15683,2020,2020-Q4,2020-10-20,High,other,Mozilla developers and community
+CVE-2020-15684,2020,2020-Q4,2020-10-20,High,other,Mozilla developers
+CVE-2020-15969,2020,2020-Q4,2020-10-20,High,other,Mark Wodrich of Google
+CVE-2020-15679,2020,2020-Q4,2020-11-04,Moderate,other,Cure53
+CVE-2020-26950,2020,2020-Q4,2020-11-09,Critical,other,360政企安全漏洞研究院 in Tianfu Cup 2020 International Cybersecurity Contest
+CVE-2020-15999,2020,2020-Q4,2020-11-17,Moderate,other,Sergei Glazunov of Google Project Zero
+CVE-2020-16012,2020,2020-Q4,2020-11-17,Moderate,other,Aleksejs Popovs
+CVE-2020-26951,2020,2020-Q4,2020-11-17,High,other,Irvan Kurniawan (@sourc7)
+CVE-2020-26952,2020,2020-Q4,2020-11-17,High,other,Gary Kwong
+CVE-2020-26953,2020,2020-Q4,2020-11-17,Moderate,other,Abdulrahman Alqabandi of Microsoft Browser Vulnerability Research
+CVE-2020-26954,2020,2020-Q4,2020-11-17,Moderate,other,Muneaki Nishimura
+CVE-2020-26955,2020,2020-Q4,2020-11-17,Moderate,other,Muneaki Nishimura
+CVE-2020-26956,2020,2020-Q4,2020-11-17,Moderate,other,Irvan Kurniawan (@sourc7)
+CVE-2020-26957,2020,2020-Q4,2020-11-17,Moderate,other,Kevin Brosnan
+CVE-2020-26958,2020,2020-Q4,2020-11-17,Moderate,other,Moti Harmats
+CVE-2020-26959,2020,2020-Q4,2020-11-17,Moderate,other,Bharadwaj Machiraju
+CVE-2020-26960,2020,2020-Q4,2020-11-17,Moderate,other,Zijie Zhao
+CVE-2020-26961,2020,2020-Q4,2020-11-17,Moderate,other,Gabriel Corona
+CVE-2020-26962,2020,2020-Q4,2020-11-17,Low,other,Paul Stone
+CVE-2020-26963,2020,2020-Q4,2020-11-17,Low,other,Sachin Raste
+CVE-2020-26964,2020,2020-Q4,2020-11-17,Low,other,Muneaki Nishimura
+CVE-2020-26965,2020,2020-Q4,2020-11-17,Low,other,Makoto Kato
+CVE-2020-26966,2020,2020-Q4,2020-11-17,Low,other,tiebuchen
+CVE-2020-26967,2020,2020-Q4,2020-11-17,Low,other,Kaizer Soze
+CVE-2020-26968,2020,2020-Q4,2020-11-17,High,other,Mozilla developers and community
+CVE-2020-26969,2020,2020-Q4,2020-11-17,High,other,Mozilla developers and community
+CVE-2020-26970,2020,2020-Q4,2020-12-01,High,other,Chiaki Ishikawa
+CVE-2020-16042,2020,2020-Q4,2020-12-15,Critical,other,André Bargull
+CVE-2020-26971,2020,2020-Q4,2020-12-15,High,other,"Omair, Abraruddin Khan"
+CVE-2020-26972,2020,2020-Q4,2020-12-15,High,other,Brian Carpenter via the ASAN Nightly project
+CVE-2020-26973,2020,2020-Q4,2020-12-15,High,other,Kai Engert
+CVE-2020-26974,2020,2020-Q4,2020-12-15,High,other,Pham Bao of VinCSS (Member of Vingroup)
+CVE-2020-26975,2020,2020-Q4,2020-12-15,Moderate,other,Pedro Oliveira
+CVE-2020-26976,2020,2020-Q4,2020-12-15,Moderate,other,Andrew Sutherland
+CVE-2020-26977,2020,2020-Q4,2020-12-15,Moderate,other,andrew g
+CVE-2020-26978,2020,2020-Q4,2020-12-15,Moderate,other,"Samy Kamkar, Ben Seri, and Gregory Vishnepolsky"
+CVE-2020-26979,2020,2020-Q4,2020-12-15,Low,other,David Schütz
+CVE-2020-35111,2020,2020-Q4,2020-12-15,Low,other,Yassine Tioual
+CVE-2020-35112,2020,2020-Q4,2020-12-15,Low,other,Samuel Attard via the Chrome Security Team
+CVE-2020-35113,2020,2020-Q4,2020-12-15,High,other,Christian Holler
+CVE-2020-35114,2020,2020-Q4,2020-12-15,High,other,Mozilla developers
+CVE-2020-16044,2021,2021-Q1,2021-01-06,Critical,other,Ned Williamson
+CVE-2020-15685,2021,2021-Q1,2021-01-26,Moderate,other,Damian Poddebniak
+CVE-2020-26976,2021,2021-Q1,2021-01-26,Moderate,other,Andrew Sutherland
+CVE-2021-23953,2021,2021-Q1,2021-01-26,High,other,Rob Wu
+CVE-2021-23954,2021,2021-Q1,2021-01-26,High,other,Gary Kwong
+CVE-2021-23955,2021,2021-Q1,2021-01-26,High,other,Irvan Kurniawan
+CVE-2021-23956,2021,2021-Q1,2021-01-26,Moderate,other,Abdulrahman Alqabandi
+CVE-2021-23957,2021,2021-Q1,2021-01-26,Moderate,other,Eliya Stein
+CVE-2021-23958,2021,2021-Q1,2021-01-26,Moderate,other,Jan-Ivar Bruaroey
+CVE-2021-23959,2021,2021-Q1,2021-01-26,Moderate,other,Muneaki Nishimura
+CVE-2021-23960,2021,2021-Q1,2021-01-26,Moderate,other,Irvan Kurniawan
+CVE-2021-23961,2021,2021-Q1,2021-01-26,Moderate,other,"Samy Kamkar, Ben Seri, and Gregory Vishnepolsky"
+CVE-2021-23962,2021,2021-Q1,2021-01-26,Low,other,Chiaki ISHIKAWA
+CVE-2021-23963,2021,2021-Q1,2021-01-26,Low,other,Paul Zühlcke
+CVE-2021-23964,2021,2021-Q1,2021-01-26,High,other,Mozilla developers and community
+CVE-2021-23965,2021,2021-Q1,2021-01-26,High,other,Mozilla developers and community
+CVE-2020-16048,2021,2021-Q1,2021-02-05,Critical,other,Abraruddin Khan and Omair working with Trend Micro Zero Day Initiative
+CVE-2021-23968,2021,2021-Q1,2021-02-23,High,other,Ademar Nowasky Junior
+CVE-2021-23969,2021,2021-Q1,2021-02-23,High,other,Masato Kinugawa
+CVE-2021-23970,2021,2021-Q1,2021-02-23,High,other,J. Ryan Stinnett
+CVE-2021-23971,2021,2021-Q1,2021-02-23,Moderate,other,Luca Moretto
+CVE-2021-23972,2021,2021-Q1,2021-02-23,Low,other,Vijay Tikudave
+CVE-2021-23973,2021,2021-Q1,2021-02-23,Low,other,Andreas Pehrson
+CVE-2021-23974,2021,2021-Q1,2021-02-23,Moderate,other,Masato Kinugawa and Michał Bentkowski
+CVE-2021-23975,2021,2021-Q1,2021-02-23,Low,other,Brian Carpenter of Geeknik Labs & Farm
+CVE-2021-23976,2021,2021-Q1,2021-02-23,Moderate,other,Muneaki Nishimura
+CVE-2021-23977,2021,2021-Q1,2021-02-23,Moderate,other,fatal0
+CVE-2021-23978,2021,2021-Q1,2021-02-23,High,other,Mozilla developers and community | Mozilla developers
+CVE-2021-23979,2021,2021-Q1,2021-02-23,High,other,Mozilla developers
+CVE-2021-29950,2021,2021-Q1,2021-03-08,Moderate,other,Cure53
+CVE-2021-23981,2021,2021-Q1,2021-03-23,High,other,Abraruddin Khan and Omair
+CVE-2021-23982,2021,2021-Q1,2021-03-23,Moderate,other,"Samy Kamkar, Ben Seri, and Gregory Vishnepolsky"
+CVE-2021-23983,2021,2021-Q1,2021-03-23,Moderate,other,Irvan Kurniawan
+CVE-2021-23984,2021,2021-Q1,2021-03-23,Moderate,other,Rob Wu
+CVE-2021-23985,2021,2021-Q1,2021-03-23,Low,other,Anonymous working with Trend Micro's Zero Day Initiative
+CVE-2021-23986,2021,2021-Q1,2021-03-23,Low,other,Armin Ebert
+CVE-2021-23987,2021,2021-Q1,2021-03-23,High,other,Mozilla developers and community
+CVE-2021-23988,2021,2021-Q1,2021-03-23,Moderate,other,Mozilla developers and community
+CVE-2021-29951,2021,2021-Q1,2021-03-23,Moderate,other,James Forshaw
+CVE-2021-29955,2021,2021-Q1,2021-03-23,High,other,"Hany Ragab, Enrico Barberis, Herbert Bos, and Cristiano Giuffrida from the VUSec group at VU Amsterdam"
+CVE-2021-4127,2021,2021-Q1,2021-03-23,High,other,"Mozilla Developers, Abraruddin Khan and Omair"
+CVE-2021-23991,2021,2021-Q2,2021-04-08,Moderate,other,Cure53
+CVE-2021-23992,2021,2021-Q2,2021-04-08,Moderate,other,Neal Walfield
+CVE-2021-23993,2021,2021-Q2,2021-04-08,Moderate,other,Neal Walfield
+CVE-2021-29949,2021,2021-Q2,2021-04-08,Low,other,Tuan Vu Pham
+CVE-2021-23994,2021,2021-Q2,2021-04-19,High,other,Abraruddin Khan and Omair
+CVE-2021-23995,2021,2021-Q2,2021-04-19,High,other,Irvan Kurniawan
+CVE-2021-23996,2021,2021-Q2,2021-04-19,High,other,Colin D. Munro
+CVE-2021-23997,2021,2021-Q2,2021-04-19,High,other,Irvan Kurniawan
+CVE-2021-23998,2021,2021-Q2,2021-04-19,Moderate,other,Jordi Chancel
+CVE-2021-23999,2021,2021-Q2,2021-04-19,Moderate,other,Nika Layzell
+CVE-2021-24000,2021,2021-Q2,2021-04-19,Moderate,other,Irvan Kurniawan
+CVE-2021-24001,2021,2021-Q2,2021-04-19,Moderate,other,Andrew McCreight
+CVE-2021-24002,2021,2021-Q2,2021-04-19,Moderate,other,Daniel Santos
+CVE-2021-29944,2021,2021-Q2,2021-04-19,Low,other,Wladimir Palant working with Include Security
+CVE-2021-29945,2021,2021-Q2,2021-04-19,Moderate,other,Christian Holler
+CVE-2021-29946,2021,2021-Q2,2021-04-19,Low,other,Frederik Braun
+CVE-2021-29947,2021,2021-Q2,2021-04-19,High,other,Mozilla developers and community
+CVE-2021-29948,2021,2021-Q2,2021-04-19,Low,other,Cure53
+CVE-2021-29952,2021,2021-Q2,2021-05-05,High,other,Tyson Smith
+CVE-2021-29953,2021,2021-Q2,2021-05-05,Critical,other,Wladimir Palant working with Include Security
+CVE-2021-29954,2021,2021-Q2,2021-05-06,Critical,other,Torsten Trumm
+CVE-2021-29956,2021,2021-Q2,2021-05-17,Low,other,Participants on the Thunderbird E2EE Mailing List
+CVE-2021-29957,2021,2021-Q2,2021-05-17,Low,other,Cure53
+CVE-2021-29958,2021,2021-Q2,2021-06-01,Moderate,other,Muneaki Nishimura
+CVE-2021-29959,2021,2021-Q2,2021-06-01,Low,other,Jan-Ivar Bruaroey
+CVE-2021-29960,2021,2021-Q2,2021-06-01,Moderate,other,Sebastian Hengst
+CVE-2021-29961,2021,2021-Q2,2021-06-01,Moderate,other,Irvan Kurniawan
+CVE-2021-29962,2021,2021-Q2,2021-06-01,Low,other,Wladimir Palant working with Include Security
+CVE-2021-29963,2021,2021-Q2,2021-06-01,Moderate,other,Wladimir Palant working with Include Security
+CVE-2021-29964,2021,2021-Q2,2021-06-01,Moderate,other,Ronald Crane
+CVE-2021-29965,2021,2021-Q2,2021-06-01,High,other,Harshit Mahendra
+CVE-2021-29966,2021,2021-Q2,2021-06-01,Moderate,other,Mozilla developers and community
+CVE-2021-29967,2021,2021-Q2,2021-06-01,High,other,Mozilla developers and community
+CVE-2021-29968,2021,2021-Q2,2021-06-16,Moderate,other,Pascal Chevrel
+CVE-2021-29969,2021,2021-Q3,2021-07-13,High,other,Damian Poddebniak and Fabian Ising
+CVE-2021-29970,2021,2021-Q3,2021-07-13,High,other,Irvan Kurniawan
+CVE-2021-29971,2021,2021-Q3,2021-07-13,High,other,Arturo Mejia
+CVE-2021-29972,2021,2021-Q3,2021-07-13,Moderate,other,Irvan Kurniawan
+CVE-2021-29973,2021,2021-Q3,2021-07-13,Moderate,other,Wladimir Palant working with Include Security
+CVE-2021-29974,2021,2021-Q3,2021-07-13,Moderate,other,Peter Gerber
+CVE-2021-29975,2021,2021-Q3,2021-07-13,Moderate,other,Irvan Kurniawan
+CVE-2021-29976,2021,2021-Q3,2021-07-13,High,other,Mozilla developers
+CVE-2021-29977,2021,2021-Q3,2021-07-13,High,other,Mozilla developers
+CVE-2021-30547,2021,2021-Q3,2021-07-13,High,other,(Unknown)
+CVE-2021-29978,2021,2021-Q3,2021-07-14,Low,other,Cure53
+CVE-2021-29979,2021,2021-Q3,2021-07-14,High,other,Muhammad R. Maulana
+CVE-2021-29980,2021,2021-Q3,2021-08-10,High,other,Irvan Kurniawan
+CVE-2021-29981,2021,2021-Q3,2021-08-10,High,other,Gary Kwong
+CVE-2021-29982,2021,2021-Q3,2021-08-10,Low,other,Lukas Bernhard
+CVE-2021-29983,2021,2021-Q3,2021-08-10,High,other,Irvan Kurniawan
+CVE-2021-29984,2021,2021-Q3,2021-08-10,High,other,Lukas Bernhard
+CVE-2021-29985,2021,2021-Q3,2021-08-10,Moderate,other,Marcin 'Icewall' Noga of Cisco Talos
+CVE-2021-29986,2021,2021-Q3,2021-08-10,High,other,pahhur
+CVE-2021-29987,2021,2021-Q3,2021-08-10,Moderate,other,Irvan Kurniawan
+CVE-2021-29988,2021,2021-Q3,2021-08-10,High,other,Irvan Kurniawan
+CVE-2021-29989,2021,2021-Q3,2021-08-10,High,other,Mozilla developers and community | Mozilla developers
+CVE-2021-29990,2021,2021-Q3,2021-08-10,High,other,Mozilla developers and community
+CVE-2021-29991,2021,2021-Q3,2021-08-16,High,other,Youssef Sammouda
+CVE-2021-29993,2021,2021-Q3,2021-09-07,High,other,Amy Burnett working with Include Security
+CVE-2021-38491,2021,2021-Q3,2021-09-07,Moderate,other,Jonathan Kingston
+CVE-2021-38492,2021,2021-Q3,2021-09-07,Moderate,other,James Lee
+CVE-2021-38493,2021,2021-Q3,2021-09-07,High,other,Mozilla developers and community
+CVE-2021-38494,2021,2021-Q3,2021-09-07,High,other,Mozilla developers and community
+CVE-2021-38495,2021,2021-Q3,2021-09-07,High,other,Mozilla developers and community
+CVE-2021-4221,2021,2021-Q3,2021-09-07,Moderate,other,Rohan Sharma
+CVE-2021-32810,2021,2021-Q4,2021-10-05,Moderate,other,Maor Kleinberger
+CVE-2021-38496,2021,2021-Q4,2021-10-05,High,other,Yangkang of 360 ATA Team
+CVE-2021-38497,2021,2021-Q4,2021-10-05,Moderate,other,Irvan Kurniawan
+CVE-2021-38498,2021,2021-Q4,2021-10-05,Moderate,other,Yangkang of 360 ATA Team
+CVE-2021-38499,2021,2021-Q4,2021-10-05,High,other,Mozilla developers and community
+CVE-2021-38500,2021,2021-Q4,2021-10-05,High,other,Mozilla developers
+CVE-2021-38501,2021,2021-Q4,2021-10-05,High,other,Mozilla developers
+CVE-2021-43535,2021,2021-Q4,2021-10-05,High,other,Julien Cristau
+CVE-2021-38502,2021,2021-Q4,2021-10-06,High,other,Mattias Jacobsson
+CVE-2021-38503,2021,2021-Q4,2021-11-02,High,other,Armin Ebert
+CVE-2021-38504,2021,2021-Q4,2021-11-02,High,other,Irvan Kurniawan
+CVE-2021-38505,2021,2021-Q4,2021-11-02,High,other,Sergey Galich
+CVE-2021-38506,2021,2021-Q4,2021-11-02,High,other,Irvan Kurniawan
+CVE-2021-38507,2021,2021-Q4,2021-11-02,High,other,Takeshi Terada
+CVE-2021-38508,2021,2021-Q4,2021-11-02,Moderate,other,Raphael
+CVE-2021-38509,2021,2021-Q4,2021-11-02,Moderate,other,Ademar Nowasky Junior
+CVE-2021-38510,2021,2021-Q4,2021-11-02,Moderate,other,Hou JingYi
+CVE-2021-43530,2021,2021-Q4,2021-11-02,High,other,Hafiizh
+CVE-2021-43531,2021,2021-Q4,2021-11-02,Moderate,other,Rob Wu
+CVE-2021-43532,2021,2021-Q4,2021-11-02,Low,other,Ademar Nowasky Junior
+CVE-2021-43533,2021,2021-Q4,2021-11-02,Low,other,Taiga Shirakura
+CVE-2021-43534,2021,2021-Q4,2021-11-02,High,other,Mozilla developers
+CVE-2021-43529,2021,2021-Q4,2021-11-03,Critical,other,Tavis Ormandy
+CVE-2021-43527,2021,2021-Q4,2021-12-01,Critical,other,Tavis Ormandy of Google Project Zero
+CVE-2021-4128,2021,2021-Q4,2021-12-07,High,other,Atila Butkovits
+CVE-2021-4129,2021,2021-Q4,2021-12-07,High,other,Mozilla developers and community
+CVE-2021-43528,2021,2021-Q4,2021-12-07,Low,other,Pedro Batista
+CVE-2021-43536,2021,2021-Q4,2021-12-07,High,other,Sunwoo Kim and Youngmin Kim of SNU CompSec Lab
+CVE-2021-43537,2021,2021-Q4,2021-12-07,High,other,bo13oy of Cyber Kunlun Lab
+CVE-2021-43538,2021,2021-Q4,2021-12-07,High,other,Irvan Kurniawan (@sourc7)
+CVE-2021-43539,2021,2021-Q4,2021-12-07,High,other,Asumu Takikawa and Ioanna Dimitriou
+CVE-2021-43540,2021,2021-Q4,2021-12-07,Moderate,other,Jake Heath
+CVE-2021-43541,2021,2021-Q4,2021-12-07,Moderate,other,chriscla
+CVE-2021-43542,2021,2021-Q4,2021-12-07,Moderate,other,Raphael Smolik
+CVE-2021-43543,2021,2021-Q4,2021-12-07,Moderate,other,Armin Ebert
+CVE-2021-43544,2021,2021-Q4,2021-12-07,Moderate,other,Irwan
+CVE-2021-43545,2021,2021-Q4,2021-12-07,Low,other,Paul Zühlcke
+CVE-2021-43546,2021,2021-Q4,2021-12-07,Low,other,Daniel Veditz
+CVE-2021-4126,2021,2021-Q4,2021-12-21,Moderate,other,Kai Engert
+CVE-2021-44538,2021,2021-Q4,2021-12-21,Moderate,other,brevilo
+CVE-2021-4140,2022,2022-Q1,2022-01-11,High,other,Peter Van der Beken
+CVE-2022-22736,2022,2022-Q1,2022-01-11,Low,other,"Kirtikumar Anandrao Ramchandani, Toshihito Kikuchi"
+CVE-2022-22737,2022,2022-Q1,2022-01-11,High,other,bo13oy of Cyber Kunlun Lab
+CVE-2022-22738,2022,2022-Q1,2022-01-11,High,other,Atte Kettunen
+CVE-2022-22739,2022,2022-Q1,2022-01-11,Low,other,Alesandro Ortiz
+CVE-2022-22740,2022,2022-Q1,2022-01-11,High,other,bo13oy of Cyber Kunlun Lab
+CVE-2022-22741,2022,2022-Q1,2022-01-11,High,other,Irvan Kurniawan
+CVE-2022-22742,2022,2022-Q1,2022-01-11,High,other,Irvan Kurniawan
+CVE-2022-22743,2022,2022-Q1,2022-01-11,High,other,Irvan Kurniawan
+CVE-2022-22744,2022,2022-Q1,2022-01-11,Moderate,other,Mattias Jacobsson
+CVE-2022-22745,2022,2022-Q1,2022-01-11,Moderate,other,Jannis Rautenstrauch
+CVE-2022-22746,2022,2022-Q1,2022-01-11,High,other,Irvan Kurniawan
+CVE-2022-22747,2022,2022-Q1,2022-01-11,Low,other,Tavis Ormandy
+CVE-2022-22748,2022,2022-Q1,2022-01-11,Moderate,other,Alesandro Ortiz
+CVE-2022-22749,2022,2022-Q1,2022-01-11,Moderate,other,Wladimir Palant working with Include Security
+CVE-2022-22750,2022,2022-Q1,2022-01-11,Moderate,other,Jed Davis
+CVE-2022-22751,2022,2022-Q1,2022-01-11,High,other,Mozilla developers and community
+CVE-2022-22752,2022,2022-Q1,2022-01-11,Moderate,other,Mozilla developers and community
+CVE-2022-22763,2022,2022-Q1,2022-01-11,Moderate,fuzz,Mozilla Fuzzing Team
+CVE-2022-0511,2022,2022-Q1,2022-02-08,High,other,Mozilla developers and community
+CVE-2022-22753,2022,2022-Q1,2022-02-08,High,other,Seb Patane
+CVE-2022-22754,2022,2022-Q1,2022-02-08,High,other,Rob Wu
+CVE-2022-22755,2022,2022-Q1,2022-02-08,Moderate,other,Jack Wrenn
+CVE-2022-22756,2022,2022-Q1,2022-02-08,Moderate,other,Abdulrahman Alqabandi
+CVE-2022-22757,2022,2022-Q1,2022-02-08,Moderate,other,James Graham
+CVE-2022-22758,2022,2022-Q1,2022-02-08,Moderate,other,"Kirtikumar Anandrao Ramchandani, Patrick Walker & Eric Lawrence"
+CVE-2022-22759,2022,2022-Q1,2022-02-08,Moderate,other,Johan Carlsson
+CVE-2022-22760,2022,2022-Q1,2022-02-08,Moderate,other,Luan Herrera
+CVE-2022-22761,2022,2022-Q1,2022-02-08,Moderate,other,Mart Gil Robles (Mart at FlowCrypt)
+CVE-2022-22762,2022,2022-Q1,2022-02-08,Low,other,James Lee
+CVE-2022-22764,2022,2022-Q1,2022-02-08,High,other,Mozilla developers and community
+CVE-2022-0566,2022,2022-Q1,2022-02-15,High,fuzz,Mozilla Fuzzing Team
+CVE-2022-0517,2022,2022-Q1,2022-02-23,High,other,"DoHyun Lee (@l33d0hyun) of DNSLab, Korea University"
+CVE-2022-26485,2022,2022-Q1,2022-03-05,Critical,other,"Wang Gang, Liu Jialei, Du Sihang, Huang Yi & Yang Kang of 360 ATA"
+CVE-2022-26486,2022,2022-Q1,2022-03-05,Critical,other,"Wang Gang, Liu Jialei, Du Sihang, Huang Yi & Yang Kang of 360 ATA"
+CVE-2022-0843,2022,2022-Q1,2022-03-08,Moderate,other,Mozilla developers
+CVE-2022-26381,2022,2022-Q1,2022-03-08,High,fuzz,Mozilla Fuzzing Team and Hossein Lotfi of Trend Micro Zero Day Initiative
+CVE-2022-26382,2022,2022-Q1,2022-03-08,Moderate,other,Young Min Kim
+CVE-2022-26383,2022,2022-Q1,2022-03-08,High,other,Irvan Kurniawan
+CVE-2022-26384,2022,2022-Q1,2022-03-08,High,other,Ed McManus
+CVE-2022-26385,2022,2022-Q1,2022-03-08,Moderate,other,bo13oy of Cyber Kunlun Lab
+CVE-2022-26386,2022,2022-Q1,2022-03-08,Low,other,attila
+CVE-2022-26387,2022,2022-Q1,2022-03-08,High,other,Armin Ebert
+CVE-2022-1097,2022,2022-Q2,2022-04-05,High,other,Randell Jesup
+CVE-2022-1196,2022,2022-Q2,2022-04-05,Moderate,other,bo13oy of Cyber Kunlun Lab
+CVE-2022-1197,2022,2022-Q2,2022-04-05,Moderate,other,Thunderbird user Johannes König
+CVE-2022-24713,2022,2022-Q2,2022-04-05,Low,other,Addison Crump and Jan-Erik Rediger
+CVE-2022-28281,2022,2022-Q2,2022-04-05,High,other,Axel '0vercl0k' Souchet
+CVE-2022-28282,2022,2022-Q2,2022-04-05,Moderate,other,Kirin
+CVE-2022-28283,2022,2022-Q2,2022-04-05,Moderate,other,Gijs
+CVE-2022-28284,2022,2022-Q2,2022-04-05,Moderate,other,Leo Balter
+CVE-2022-28285,2022,2022-Q2,2022-04-05,Moderate,other,Lukas Bernhard
+CVE-2022-28286,2022,2022-Q2,2022-04-05,Low,other,prada960808
+CVE-2022-28287,2022,2022-Q2,2022-04-05,Low,other,Aryan Sinha
+CVE-2022-28288,2022,2022-Q2,2022-04-05,Moderate,other,Mozilla developers
+CVE-2022-28289,2022,2022-Q2,2022-04-05,High,other,Mozilla developers | Mozilla developers and community
+CVE-2022-1520,2022,2022-Q2,2022-05-03,Low,other,Thunderbird team
+CVE-2022-29909,2022,2022-Q2,2022-05-03,High,other,Armin Ebert
+CVE-2022-29910,2022,2022-Q2,2022-05-03,Moderate,other,Mark B
+CVE-2022-29911,2022,2022-Q2,2022-05-03,High,other,Trung Pham
+CVE-2022-29912,2022,2022-Q2,2022-05-03,Moderate,other,Matheus Vrech
+CVE-2022-29913,2022,2022-Q2,2022-05-03,Moderate,other,Andrew McCreight
+CVE-2022-29914,2022,2022-Q2,2022-05-03,High,other,Irvan Kurniawan
+CVE-2022-29915,2022,2022-Q2,2022-05-03,Low,other,Sohom Datta
+CVE-2022-29916,2022,2022-Q2,2022-05-03,High,other,Mateusz Sionkowski
+CVE-2022-29917,2022,2022-Q2,2022-05-03,High,other,Mozilla developers
+CVE-2022-29918,2022,2022-Q2,2022-05-03,High,other,Mozilla developers
+CVE-2022-1529,2022,2022-Q2,2022-05-20,Critical,other,Manfred Paul via Trend Micro's Zero Day Initiative
+CVE-2022-1802,2022,2022-Q2,2022-05-20,Critical,other,Manfred Paul via Trend Micro's Zero Day Initiative
+CVE-2022-1834,2022,2022-Q2,2022-05-31,High,other,Jonathan von Niessen
+CVE-2022-1919,2022,2022-Q2,2022-05-31,Low,other,Irvan Kurniawan
+CVE-2022-31736,2022,2022-Q2,2022-05-31,High,other,Luan Herrera
+CVE-2022-31737,2022,2022-Q2,2022-05-31,High,other,Atte Kettunen
+CVE-2022-31738,2022,2022-Q2,2022-05-31,High,other,Irvan Kurniawan
+CVE-2022-31739,2022,2022-Q2,2022-05-31,High,other,Chaobin Zhang
+CVE-2022-31740,2022,2022-Q2,2022-05-31,High,other,Gary Kwong
+CVE-2022-31741,2022,2022-Q2,2022-05-31,High,other,Cybeats PSI Team
+CVE-2022-31742,2022,2022-Q2,2022-05-31,Moderate,other,Michal
+CVE-2022-31743,2022,2022-Q2,2022-05-31,Moderate,other,Linus Särud
+CVE-2022-31744,2022,2022-Q2,2022-05-31,Moderate,other,Gertjan
+CVE-2022-31745,2022,2022-Q2,2022-05-31,Moderate,other,Lukas Bernhard
+CVE-2022-31747,2022,2022-Q2,2022-05-31,High,other,Mozilla developers and community
+CVE-2022-31748,2022,2022-Q2,2022-05-31,High,other,Mozilla developers and community
+CVE-2022-1887,2022,2022-Q2,2022-06-01,Moderate,other,Muneaki Nishimura
+CVE-2022-2200,2022,2022-Q2,2022-06-28,Moderate,other,Manfred Paul via Trend Micro's Zero Day Initiative
+CVE-2022-2226,2022,2022-Q2,2022-06-28,Moderate,other,Nickolay Olshevsky
+CVE-2022-34468,2022,2022-Q2,2022-06-28,High,other,Armin Ebert
+CVE-2022-34469,2022,2022-Q2,2022-06-28,Moderate,other,Peter Gerber
+CVE-2022-34470,2022,2022-Q2,2022-06-28,High,other,Armin Ebert
+CVE-2022-34471,2022,2022-Q2,2022-06-28,Moderate,other,Rob Wu
+CVE-2022-34472,2022,2022-Q2,2022-06-28,Moderate,other,Laurent Bigonville
+CVE-2022-34473,2022,2022-Q2,2022-06-28,Low,other,Armin Ebert
+CVE-2022-34474,2022,2022-Q2,2022-06-28,Moderate,other,Amazon Malvertising Team
+CVE-2022-34475,2022,2022-Q2,2022-06-28,Low,other,Gareth Heyes
+CVE-2022-34476,2022,2022-Q2,2022-06-28,Moderate,other,Gustavo Grieco
+CVE-2022-34477,2022,2022-Q2,2022-06-28,Low,other,jannis
+CVE-2022-34478,2022,2022-Q2,2022-06-28,Moderate,other,Gijs
+CVE-2022-34479,2022,2022-Q2,2022-06-28,High,other,Irvan Kurniawan
+CVE-2022-34480,2022,2022-Q2,2022-06-28,Low,other,Ronald Crane
+CVE-2022-34481,2022,2022-Q2,2022-06-28,Moderate,other,Ronald Crane
+CVE-2022-34482,2022,2022-Q2,2022-06-28,Moderate,other,Attila Suszter
+CVE-2022-34483,2022,2022-Q2,2022-06-28,Moderate,other,Eduardo Braun Prado
+CVE-2022-34484,2022,2022-Q2,2022-06-28,High,other,Mozilla developers and community
+CVE-2022-34485,2022,2022-Q2,2022-06-28,Moderate,other,Mozilla developers and community
+CVE-2022-31746,2022,2022-Q2,2022-06-29,Moderate,other,Muneaki Nishimura
+CVE-2022-2505,2022,2022-Q3,2022-07-26,High,other,Mozilla developers and community
+CVE-2022-36314,2022,2022-Q3,2022-07-26,Moderate,other,akucybersec
+CVE-2022-36315,2022,2022-Q3,2022-07-26,Low,other,Hiroshige Hayashizaki
+CVE-2022-36316,2022,2022-Q3,2022-07-26,Low,other,Jannis Rautenstrauch
+CVE-2022-36317,2022,2022-Q3,2022-07-26,Moderate,other,Irwan
+CVE-2022-36318,2022,2022-Q3,2022-07-26,Moderate,other,Gijs Kruitbosch
+CVE-2022-36319,2022,2022-Q3,2022-07-26,Moderate,other,Irvan Kurniawan
+CVE-2022-36320,2022,2022-Q3,2022-07-26,High,other,Mozilla developers and community
+CVE-2022-38472,2022,2022-Q3,2022-08-23,High,other,Armin Ebert
+CVE-2022-38473,2022,2022-Q3,2022-08-23,High,other,Armin Ebert
+CVE-2022-38474,2022,2022-Q3,2022-08-23,Low,other,Agi Sferro
+CVE-2022-38475,2022,2022-Q3,2022-08-23,Low,other,Christian Holler
+CVE-2022-38476,2022,2022-Q3,2022-08-23,Low,other,Marian Laza
+CVE-2022-38477,2022,2022-Q3,2022-08-23,High,other,Mozilla developers and community
+CVE-2022-38478,2022,2022-Q3,2022-08-23,High,other,Mozilla developers and community
+CVE-2022-3032,2022,2022-Q3,2022-08-31,Moderate,other,Sarah Jamie Lewis
+CVE-2022-3033,2022,2022-Q3,2022-08-31,High,other,Sarah Jamie Lewis
+CVE-2022-3034,2022,2022-Q3,2022-08-31,Moderate,other,Thunderbird Team
+CVE-2022-36059,2022,2022-Q3,2022-08-31,Moderate,other,Val Lorentz
+CVE-2022-3155,2022,2022-Q3,2022-09-20,Low,other,Koh M. Nakagawa
+CVE-2022-3266,2022,2022-Q3,2022-09-20,High,other,Willy R. Vasquez at UT Austin
+CVE-2022-40956,2022,2022-Q3,2022-09-20,Low,other,Satoki Tsuji
+CVE-2022-40957,2022,2022-Q3,2022-09-20,Low,other,Gary Kwong
+CVE-2022-40958,2022,2022-Q3,2022-09-20,Moderate,other,Axel Chong (@Haxatron)
+CVE-2022-40959,2022,2022-Q3,2022-09-20,High,other,Armin Ebert
+CVE-2022-40960,2022,2022-Q3,2022-09-20,High,other,Armin Ebert
+CVE-2022-40961,2022,2022-Q3,2022-09-20,Moderate,fuzz,Mozilla Fuzzing Team
+CVE-2022-40962,2022,2022-Q3,2022-09-20,High,other,Mozilla developers and community
+CVE-2022-46880,2022,2022-Q3,2022-09-20,High,other,Atte Kettunen
+CVE-2022-39236,2022,2022-Q3,2022-09-28,Moderate,other,None
+CVE-2022-39249,2022,2022-Q3,2022-09-28,High,other,"Martin R. Albrecht and Dan Jones from the Information Security Group at Royal Holloway University London, Benjamin Dowling from Security of Advanced Systems Group, University of Sheffield and Sofía Celi from Brave Software"
+CVE-2022-39250,2022,2022-Q3,2022-09-28,High,other,"Martin R. Albrecht and Dan Jones from the Information Security Group at Royal Holloway University London, Benjamin Dowling from Security of Advanced Systems Group, University of Sheffield and Sofía Celi from Brave Software"
+CVE-2022-39251,2022,2022-Q3,2022-09-28,High,other,"Martin R. Albrecht and Dan Jones from the Information Security Group at Royal Holloway University London, Benjamin Dowling from Security of Advanced Systems Group, University of Sheffield and Sofía Celi from Brave Software"
+CVE-2022-42927,2022,2022-Q4,2022-10-18,High,other,James Lee
+CVE-2022-42928,2022,2022-Q4,2022-10-18,High,other,Samuel Groß and Carl Smith of Google V8 Security | Samuel Groß
+CVE-2022-42929,2022,2022-Q4,2022-10-18,Moderate,other,Andrei Enache
+CVE-2022-42930,2022,2022-Q4,2022-10-18,Moderate,other,Armin Ebert
+CVE-2022-42931,2022,2022-Q4,2022-10-18,Low,other,Sergey Galich
+CVE-2022-42932,2022,2022-Q4,2022-10-18,Moderate,other,Mozilla developers and community
+CVE-2022-46881,2022,2022-Q4,2022-10-18,High,other,Karl and an Anonymous ASAN Nightly User
+CVE-2022-46884,2022,2022-Q4,2022-10-18,Moderate,other,Timothy Nikkel
+CVE-2022-46885,2022,2022-Q4,2022-10-18,Moderate,other,Mozilla developers
+CVE-2022-40674,2022,2022-Q4,2022-11-15,Moderate,other,Rhodri James
+CVE-2022-45403,2022,2022-Q4,2022-11-15,High,other,Anne van Kesteren and Karl Tomlinson
+CVE-2022-45404,2022,2022-Q4,2022-11-15,High,other,Irvan Kurniawan
+CVE-2022-45405,2022,2022-Q4,2022-11-15,High,other,Atte Kettunen
+CVE-2022-45406,2022,2022-Q4,2022-11-15,High,other,Samuel Groß
+CVE-2022-45407,2022,2022-Q4,2022-11-15,High,other,Armin Ebert
+CVE-2022-45408,2022,2022-Q4,2022-11-15,High,other,Irvan Kurniawan
+CVE-2022-45409,2022,2022-Q4,2022-11-15,High,other,Gary Kwong
+CVE-2022-45410,2022,2022-Q4,2022-11-15,Moderate,other,Dongsung Kim
+CVE-2022-45411,2022,2022-Q4,2022-11-15,Moderate,other,scarlet
+CVE-2022-45412,2022,2022-Q4,2022-11-15,Moderate,other,Armin Ebert
+CVE-2022-45413,2022,2022-Q4,2022-11-15,Moderate,other,Axel Chong
+CVE-2022-45415,2022,2022-Q4,2022-11-15,Moderate,other,Jefferson Scher and Jayateertha Guruprasad
+CVE-2022-45416,2022,2022-Q4,2022-11-15,Moderate,other,"Erik Kraft, Martin Schwarzl, and Andrew McCreight"
+CVE-2022-45417,2022,2022-Q4,2022-11-15,Moderate,other,Kagami
+CVE-2022-45418,2022,2022-Q4,2022-11-15,Moderate,other,Hafiizh
+CVE-2022-45419,2022,2022-Q4,2022-11-15,Low,other,Ronald Crane
+CVE-2022-45420,2022,2022-Q4,2022-11-15,Low,other,Suhwan Song of SNU CompSec Lab
+CVE-2022-45421,2022,2022-Q4,2022-11-15,High,other,Mozilla developers
+CVE-2022-46882,2022,2022-Q4,2022-11-15,Moderate,other,Irvan Kurniawan
+CVE-2022-46883,2022,2022-Q4,2022-11-15,High,other,Mozilla developers
+CVE-2022-45414,2022,2022-Q4,2022-11-30,Moderate,other,Sarah Jamie Lewis
+CVE-2022-46871,2022,2022-Q4,2022-12-13,High,other,Mozilla Developers
+CVE-2022-46872,2022,2022-Q4,2022-12-13,High,other,Nika Layzell
+CVE-2022-46873,2022,2022-Q4,2022-12-13,Moderate,other,Pete Freitag
+CVE-2022-46874,2022,2022-Q4,2022-12-13,Moderate,other,Matthias Zoellner
+CVE-2022-46875,2022,2022-Q4,2022-12-13,Moderate,other,Dohyun Lee
+CVE-2022-46877,2022,2022-Q4,2022-12-13,Low,other,Hafiizh
+CVE-2022-46878,2022,2022-Q4,2022-12-13,High,other,Mozilla developers
+CVE-2022-46879,2022,2022-Q4,2022-12-13,High,other,Mozilla developers and community
+CVE-2022-46871,2023,2023-Q1,2023-01-17,High,other,Mozilla Developers
+CVE-2022-46877,2023,2023-Q1,2023-01-17,Low,other,Hafiizh
+CVE-2023-23597,2023,2023-Q1,2023-01-17,High,other,Niklas Baumstark
+CVE-2023-23598,2023,2023-Q1,2023-01-17,High,other,Tom Schuster
+CVE-2023-23599,2023,2023-Q1,2023-01-17,Moderate,other,Vadim
+CVE-2023-23600,2023,2023-Q1,2023-01-17,Moderate,other,Kazuki Nomoto of Waseda University
+CVE-2023-23601,2023,2023-Q1,2023-01-17,Moderate,other,Luan Herrera
+CVE-2023-23602,2023,2023-Q1,2023-01-17,Moderate,other,Dave Vandyke
+CVE-2023-23603,2023,2023-Q1,2023-01-17,Low,other,Dan Veditz
+CVE-2023-23604,2023,2023-Q1,2023-01-17,Low,other,Nika Layzell
+CVE-2023-23605,2023,2023-Q1,2023-01-17,High,other,Mozilla developers | Mozilla developers and community
+CVE-2023-23606,2023,2023-Q1,2023-01-17,High,other,Mozilla developers
+CVE-2023-0430,2023,2023-Q1,2023-01-23,High,other,Paul Menzel
+CVE-2023-0767,2023,2023-Q1,2023-02-14,High,other,Christian Holler
+CVE-2023-25728,2023,2023-Q1,2023-02-14,High,other,Johan Carlsson
+CVE-2023-25729,2023,2023-Q1,2023-02-14,Moderate,other,Vitor Torres
+CVE-2023-25730,2023,2023-Q1,2023-02-14,High,other,Irvan Kurniawan
+CVE-2023-25731,2023,2023-Q1,2023-02-14,Low,other,pyakovlev & Alexander Volkov
+CVE-2023-25732,2023,2023-Q1,2023-02-14,Moderate,other,Ronald Crane
+CVE-2023-25733,2023,2023-Q1,2023-02-14,Low,other,Ronald Crane
+CVE-2023-25734,2023,2023-Q1,2023-02-14,Moderate,other,Ameen Basha M K and Shaheen Fazim
+CVE-2023-25735,2023,2023-Q1,2023-02-14,High,other,Samuel Groß
+CVE-2023-25736,2023,2023-Q1,2023-02-14,Low,other,Lukas Bernhard
+CVE-2023-25737,2023,2023-Q1,2023-02-14,High,other,Lukas Bernhard
+CVE-2023-25738,2023,2023-Q1,2023-02-14,High,other,Mark
+CVE-2023-25739,2023,2023-Q1,2023-02-14,High,other,Holger Fuhrmannek
+CVE-2023-25740,2023,2023-Q1,2023-02-14,Moderate,other,Axel Chong (@Haxatron)
+CVE-2023-25741,2023,2023-Q1,2023-02-14,Low,other,Dohyun Lee (@l33d0hyun) of SSD Labs
+CVE-2023-25742,2023,2023-Q1,2023-02-14,Low,other,Goras Francesco
+CVE-2023-25743,2023,2023-Q1,2023-02-14,High,other,Hafiizh
+CVE-2023-25744,2023,2023-Q1,2023-02-14,High,other,Mozilla developers and community
+CVE-2023-25745,2023,2023-Q1,2023-02-14,High,other,Mozilla developers and community
+CVE-2023-25746,2023,2023-Q1,2023-02-14,High,other,Mozilla developers and community
+CVE-2023-0616,2023,2023-Q1,2023-02-15,Low,other,Kai Engert
+CVE-2023-25747,2023,2023-Q1,2023-02-28,High,other,Chris Peterson
+CVE-2023-25748,2023,2023-Q1,2023-03-14,High,other,Hafiizh
+CVE-2023-25749,2023,2023-Q1,2023-03-14,High,other,Kirtikumar Anandrao Ramchandani
+CVE-2023-25750,2023,2023-Q1,2023-03-14,High,other,Kagami Rosylight
+CVE-2023-25751,2023,2023-Q1,2023-03-14,High,other,Lukas Bernhard
+CVE-2023-25752,2023,2023-Q1,2023-03-14,Moderate,other,Ronald Crane
+CVE-2023-28159,2023,2023-Q1,2023-03-14,High,other,Axel Chong (@Haxatron)
+CVE-2023-28160,2023,2023-Q1,2023-03-14,Moderate,other,Rob Wu
+CVE-2023-28161,2023,2023-Q1,2023-03-14,Moderate,other,Khiem Tran
+CVE-2023-28162,2023,2023-Q1,2023-03-14,Moderate,other,Lukas Bernhard
+CVE-2023-28163,2023,2023-Q1,2023-03-14,Moderate,other,Shaheen Fazim
+CVE-2023-28164,2023,2023-Q1,2023-03-14,Moderate,other,Luan Herrera
+CVE-2023-28176,2023,2023-Q1,2023-03-14,High,other,Mozilla developers and community
+CVE-2023-28177,2023,2023-Q1,2023-03-14,High,other,Mozilla developers and community
+CVE-2023-28427,2023,2023-Q1,2023-03-28,High,other,Matrix Security Team
+CVE-2023-0547,2023,2023-Q2,2023-04-11,High,other,Paul Menzel
+CVE-2023-1945,2023,2023-Q2,2023-04-11,Moderate,other,Gabriele Svelto
+CVE-2023-1999,2023,2023-Q2,2023-04-11,High,other,Irvan Kurniawan
+CVE-2023-29479,2023,2023-Q2,2023-04-11,Moderate,other,Ribose RNP Team
+CVE-2023-29531,2023,2023-Q2,2023-04-11,High,other,DoHyun Lee
+CVE-2023-29532,2023,2023-Q2,2023-04-11,High,other,Holger Fuhrmannek
+CVE-2023-29533,2023,2023-Q2,2023-04-11,High,other,Irvan Kurniawan
+CVE-2023-29534,2023,2023-Q2,2023-04-11,High,other,Shaheen Fazim and Hafiizh
+CVE-2023-29535,2023,2023-Q2,2023-04-11,High,other,Lukas Bernhard
+CVE-2023-29536,2023,2023-Q2,2023-04-11,High,other,zx from qriousec
+CVE-2023-29537,2023,2023-Q2,2023-04-11,High,other,Looben Yang
+CVE-2023-29538,2023,2023-Q2,2023-04-11,Moderate,other,Alexis aka zoracon
+CVE-2023-29539,2023,2023-Q2,2023-04-11,Moderate,other,Trung Pham
+CVE-2023-29540,2023,2023-Q2,2023-04-11,Moderate,other,Axel Chong (@Haxatron)
+CVE-2023-29541,2023,2023-Q2,2023-04-11,Moderate,other,Ameen Basha M K
+CVE-2023-29542,2023,2023-Q2,2023-04-11,Moderate,other,Shaheen Fazim and Ameen Basha M K
+CVE-2023-29543,2023,2023-Q2,2023-04-11,Moderate,other,Lukas Bernhard
+CVE-2023-29544,2023,2023-Q2,2023-04-11,Moderate,other,Lukas Bernhard
+CVE-2023-29545,2023,2023-Q2,2023-04-11,Moderate,other,Axel Chong (@Haxatron)
+CVE-2023-29546,2023,2023-Q2,2023-04-11,Low,other,Irwan
+CVE-2023-29547,2023,2023-Q2,2023-04-11,Low,other,Marco Squarcina
+CVE-2023-29548,2023,2023-Q2,2023-04-11,Low,other,JunYoung Park
+CVE-2023-29549,2023,2023-Q2,2023-04-11,Low,other,Lukas Bernhard
+CVE-2023-29550,2023,2023-Q2,2023-04-11,High,other,Mozilla developers and community
+CVE-2023-29551,2023,2023-Q2,2023-04-11,High,other,Mozilla developers and community
+CVE-2023-32205,2023,2023-Q2,2023-05-09,High,other,Alesandro Ortiz
+CVE-2023-32206,2023,2023-Q2,2023-05-09,High,other,Irvan Kurniawan
+CVE-2023-32207,2023,2023-Q2,2023-05-09,High,other,Hafiizh
+CVE-2023-32208,2023,2023-Q2,2023-05-09,Moderate,other,Anne van Kesteren
+CVE-2023-32209,2023,2023-Q2,2023-05-09,Moderate,other,Sam Ezeh
+CVE-2023-32210,2023,2023-Q2,2023-05-09,Moderate,other,Nika Layzell
+CVE-2023-32211,2023,2023-Q2,2023-05-09,Moderate,other,P1umer and xmzyshypnc
+CVE-2023-32212,2023,2023-Q2,2023-05-09,Moderate,other,Hafiizh
+CVE-2023-32213,2023,2023-Q2,2023-05-09,Moderate,other,Ronald Crane
+CVE-2023-32214,2023,2023-Q2,2023-05-09,Low,other,Edward Prior
+CVE-2023-32215,2023,2023-Q2,2023-05-09,High,other,Mozilla developers and community
+CVE-2023-32216,2023,2023-Q2,2023-05-09,High,other,Mozilla developers and community
+CVE-2023-32570,2023,2023-Q2,2023-05-09,Moderate,other,Tyson Smith
+CVE-2023-34414,2023,2023-Q2,2023-06-06,High,other,Irvan Kurniawan
+CVE-2023-34415,2023,2023-Q2,2023-06-06,Moderate,other,Jun Kokatsu
+CVE-2023-34416,2023,2023-Q2,2023-06-06,High,other,Mozilla developers and community
+CVE-2023-34417,2023,2023-Q2,2023-06-06,High,other,Mozilla developers and community
+CVE-2023-3417,2023,2023-Q3,2023-07-04,Moderate,other,이준성 (Junsung Lee)
+CVE-2023-3482,2023,2023-Q3,2023-07-04,Moderate,other,Martin Hostettler
+CVE-2023-37201,2023,2023-Q3,2023-07-04,High,other,Irvan Kurniawan
+CVE-2023-37202,2023,2023-Q3,2023-07-04,High,other,zx
+CVE-2023-37203,2023,2023-Q3,2023-07-04,Moderate,other,Paul Nickerson and Ameen Basha M K
+CVE-2023-37204,2023,2023-Q3,2023-07-04,Moderate,other,Irvan Kurniawan
+CVE-2023-37205,2023,2023-Q3,2023-07-04,Moderate,other,Rohan Sharma
+CVE-2023-37206,2023,2023-Q3,2023-07-04,Moderate,other,Ameen Basha M K
+CVE-2023-37207,2023,2023-Q3,2023-07-04,Moderate,other,Shaheen Fazim
+CVE-2023-37208,2023,2023-Q3,2023-07-04,Moderate,other,P Umar Farooq
+CVE-2023-37209,2023,2023-Q3,2023-07-04,Moderate,other,Simon Descarpentries
+CVE-2023-37210,2023,2023-Q3,2023-07-04,Low,other,Hafiizh
+CVE-2023-37211,2023,2023-Q3,2023-07-04,High,fuzz,"Andrew McCreight, Matthew Gaudet, Tom Ritter, and the Mozilla Fuzzing Team,"
+CVE-2023-37212,2023,2023-Q3,2023-07-04,High,fuzz,"Andrew McCreight, and the Mozilla Fuzzing Team"
+CVE-2023-37455,2023,2023-Q3,2023-07-04,Moderate,other,Kazuki Nomoto
+CVE-2023-37456,2023,2023-Q3,2023-07-04,Low,other,Artem Chaykin
+CVE-2023-3600,2023,2023-Q3,2023-07-11,High,other,Andrew McCreight
+CVE-2023-4045,2023,2023-Q3,2023-08-01,High,other,Max Vlasov
+CVE-2023-4046,2023,2023-Q3,2023-08-01,High,other,Alexander Guryanov
+CVE-2023-4047,2023,2023-Q3,2023-08-01,High,other,Axel Chong (@Haxatron)
+CVE-2023-4048,2023,2023-Q3,2023-08-01,High,other,Irvan Kurniawan
+CVE-2023-4049,2023,2023-Q3,2023-08-01,High,other,Nika Layzell
+CVE-2023-4050,2023,2023-Q3,2023-08-01,High,other,Mark Brand
+CVE-2023-4051,2023,2023-Q3,2023-08-01,Moderate,other,Hafiizh
+CVE-2023-4052,2023,2023-Q3,2023-08-01,Moderate,other,ycdxsb
+CVE-2023-4053,2023,2023-Q3,2023-08-01,Moderate,other,P Umar Farooq | Umar Farooq
+CVE-2023-4054,2023,2023-Q3,2023-08-01,Moderate,other,P Umar Farooq
+CVE-2023-4055,2023,2023-Q3,2023-08-01,Low,other,Marco Squarcina
+CVE-2023-4056,2023,2023-Q3,2023-08-01,High,fuzz,"Dianna Smith, Ryan VanderMeulen, Timothy Nikkel, and the Mozilla Fuzzing Team"
+CVE-2023-4057,2023,2023-Q3,2023-08-01,High,fuzz,The Mozilla Fuzzing Team
+CVE-2023-4058,2023,2023-Q3,2023-08-01,High,fuzz,Andrew McCreight and the Mozilla Fuzzing Team
+CVE-2023-4573,2023,2023-Q3,2023-08-29,High,other,sonakkbi
+CVE-2023-4574,2023,2023-Q3,2023-08-29,High,other,sonakkbi
+CVE-2023-4575,2023,2023-Q3,2023-08-29,High,other,sonakkbi
+CVE-2023-4576,2023,2023-Q3,2023-08-29,High,other,fffvr
+CVE-2023-4577,2023,2023-Q3,2023-08-29,High,other,Lukas Bernhard
+CVE-2023-4578,2023,2023-Q3,2023-08-29,Moderate,other,Irvan Kurniawan (@sourc7)
+CVE-2023-4579,2023,2023-Q3,2023-08-29,Moderate,other,Malte Jürgens
+CVE-2023-4580,2023,2023-Q3,2023-08-29,Moderate,other,Harveer Singh
+CVE-2023-4581,2023,2023-Q3,2023-08-29,Moderate,other,Umar Farooq (@Puf)
+CVE-2023-4582,2023,2023-Q3,2023-08-29,Low,other,"Dohyun Lee (@l33d0hyun) of SSD-Disclosure Labs & DNSLab, Korea Univ."
+CVE-2023-4583,2023,2023-Q3,2023-08-29,Low,other,Thejaka Maldeniya
+CVE-2023-4584,2023,2023-Q3,2023-08-29,High,fuzz,"Randell Jesup, Andrew McCreight, the Mozilla Fuzzing Team"
+CVE-2023-4585,2023,2023-Q3,2023-08-29,High,fuzz,"Donal Meehan, Sebastian Hengst, and the Mozilla Fuzzing Team"
+CVE-2023-5732,2023,2023-Q3,2023-08-29,Moderate,other,Armin Ebert
+CVE-2023-4104,2023,2023-Q3,2023-08-30,Moderate,other,Matthias Gerstner
+CVE-2023-4863,2023,2023-Q3,2023-09-12,Critical,other,Apple Security Engineering and Architecture (SEAR) and The Citizen Lab at The University of Toronto's Munk School
+CVE-2023-5168,2023,2023-Q3,2023-09-26,High,other,sonakkbi
+CVE-2023-5169,2023,2023-Q3,2023-09-26,High,other,sonakkbi
+CVE-2023-5170,2023,2023-Q3,2023-09-26,High,other,sonakkbi
+CVE-2023-5171,2023,2023-Q3,2023-09-26,High,other,Lukas Bernhard
+CVE-2023-5172,2023,2023-Q3,2023-09-26,High,fuzz,Mozilla Fuzzing Team
+CVE-2023-5173,2023,2023-Q3,2023-09-26,Moderate,other,Ronald Crane
+CVE-2023-5174,2023,2023-Q3,2023-09-26,Moderate,other,Ronald Crane
+CVE-2023-5175,2023,2023-Q3,2023-09-26,Low,other,Yangkang of 360 ATA Team
+CVE-2023-5176,2023,2023-Q3,2023-09-26,High,fuzz,"Chris Peterson, Andrew McCreight, André Bargull, Nika Layzell and the Mozilla Fuzzing Team"
+CVE-2023-5217,2023,2023-Q3,2023-09-28,Critical,other,Clément Lecigne of Google's Threat Analysis Group
+CVE-2023-5721,2023,2023-Q4,2023-10-24,High,other,Kelsey Gilbert
+CVE-2023-5722,2023,2023-Q4,2023-10-24,Moderate,other,annevk
+CVE-2023-5723,2023,2023-Q4,2023-10-24,Moderate,other,Daniel Veditz
+CVE-2023-5724,2023,2023-Q4,2023-10-24,Moderate,other,pwn2car
+CVE-2023-5725,2023,2023-Q4,2023-10-24,Moderate,other,Shaheen Fazim
+CVE-2023-5726,2023,2023-Q4,2023-10-24,Moderate,other,Edgar Chen and Hafiizh
+CVE-2023-5727,2023,2023-Q4,2023-10-24,Moderate,other,Marco Bonardo
+CVE-2023-5728,2023,2023-Q4,2023-10-24,Moderate,other,anbu
+CVE-2023-5729,2023,2023-Q4,2023-10-24,Low,other,Shaheen Fazim
+CVE-2023-5730,2023,2023-Q4,2023-10-24,High,fuzz,"Jed Davis, Andrew McCreight, Randell Jesup, and the Mozilla Fuzzing Team | Randell Jesup, Andrew McCreight, Jed Davis, and the Mozilla Fuzzing Team"
+CVE-2023-5731,2023,2023-Q4,2023-10-24,High,fuzz,"Steve Fink, Stefan Arentz, and the Mozilla Fuzzing Team"
+CVE-2023-5758,2023,2023-Q4,2023-10-24,High,other,Irwan
+CVE-2023-49060,2023,2023-Q4,2023-11-21,High,other,Muneaki Nishimura
+CVE-2023-49061,2023,2023-Q4,2023-11-21,Moderate,other,Muneaki Nishimura
+CVE-2023-6204,2023,2023-Q4,2023-11-21,High,other,JSec of Hayyim Security
+CVE-2023-6205,2023,2023-Q4,2023-11-21,High,other,Yangkang of 360 ATA Team
+CVE-2023-6206,2023,2023-Q4,2023-11-21,High,other,Hafiizh
+CVE-2023-6207,2023,2023-Q4,2023-11-21,High,other,Yangkang of 360 ATA Team | M. Coolie
+CVE-2023-6208,2023,2023-Q4,2023-11-21,Moderate,other,turistu
+CVE-2023-6209,2023,2023-Q4,2023-11-21,Moderate,other,Rachmat Abdul Rokhim
+CVE-2023-6210,2023,2023-Q4,2023-11-21,Low,other,Godson Bastin
+CVE-2023-6211,2023,2023-Q4,2023-11-21,Low,other,Muneaki Nishimura
+CVE-2023-6212,2023,2023-Q4,2023-11-21,High,other,Mozilla Developers
+CVE-2023-6213,2023,2023-Q4,2023-11-21,High,other,Mozilla Developers
+CVE-2023-4421,2023,2023-Q4,2023-12-12,Moderate,other,Hubert Kario
+CVE-2023-50761,2023,2023-Q4,2023-12-19,High,other,Marcus Brinkmann
+CVE-2023-50762,2023,2023-Q4,2023-12-19,High,other,Marcus Brinkmann
+CVE-2023-6135,2023,2023-Q4,2023-12-19,High,other,George Pantela (Red Hat) and Hubert Kario (Red Hat)
+CVE-2023-6856,2023,2023-Q4,2023-12-19,High,other,DoHyun Lee
+CVE-2023-6857,2023,2023-Q4,2023-12-19,Moderate,other,Jed Davis
+CVE-2023-6858,2023,2023-Q4,2023-12-19,Moderate,other,Irvan Kurniawan
+CVE-2023-6859,2023,2023-Q4,2023-12-19,Moderate,other,Irvan Kurniawan
+CVE-2023-6860,2023,2023-Q4,2023-12-19,Moderate,other,Andrew Osmond
+CVE-2023-6861,2023,2023-Q4,2023-12-19,Moderate,other,Yangkang of 360 ATA Team
+CVE-2023-6862,2023,2023-Q4,2023-12-19,Moderate,other,Randell Jesup
+CVE-2023-6863,2023,2023-Q4,2023-12-19,Low,other,Ronald Crane
+CVE-2023-6864,2023,2023-Q4,2023-12-19,High,fuzz,"Andrew McCreight, Karl Tomlinson, Valentin Gosu, Randell Jesup, Yury Delendik, and the Mozilla Fuzzing Team | Andrew McCreight, Randell Jesup, Valentin Gosu, Karl Tomlinson, and the Mozilla Fuzzing Team,"
+CVE-2023-6865,2023,2023-Q4,2023-12-19,High,other,Jan Varga
+CVE-2023-6866,2023,2023-Q4,2023-12-19,Moderate,other,Tom Schuster
+CVE-2023-6867,2023,2023-Q4,2023-12-19,Moderate,other,Hafiizh
+CVE-2023-6868,2023,2023-Q4,2023-12-19,Moderate,other,John-Mark Gurney
+CVE-2023-6869,2023,2023-Q4,2023-12-19,Low,other,Oriol Brufau
+CVE-2023-6870,2023,2023-Q4,2023-12-19,Low,other,Hafiizh
+CVE-2023-6871,2023,2023-Q4,2023-12-19,Low,other,"Edward ""JankhJankh"" Prior"
+CVE-2023-6872,2023,2023-Q4,2023-12-19,Low,other,honorton via Tor Browser
+CVE-2023-6873,2023,2023-Q4,2023-12-19,High,other,"Andrew McCreight, Yury Delendik"
+CVE-2024-10004,2024,,,Moderate,other,Erik van Straten
+CVE-2024-10458,2024,,,High,other,James Lee
+CVE-2024-10459,2024,,,High,other,Tyson Smith
+CVE-2024-10460,2024,,,Moderate,other,Shaheen Fazim
+CVE-2024-10461,2024,,,Moderate,other,Masato Kinugawa
+CVE-2024-10462,2024,,,Moderate,other,Hafiizh
+CVE-2024-10463,2024,,,Moderate,other,Karl Tomlinson
+CVE-2024-10464,2024,,,Low,other,Andrei Enache
+CVE-2024-10465,2024,,,Low,other,Kang Ali and Nur Fadhillah of Punggawa Cybersecurity
+CVE-2024-10466,2024,,,Low,other,Kagami Rosylight
+CVE-2024-10467,2024,,,Moderate,fuzz,"Andrew McCreight, the Mozilla Fuzzing Team"
+CVE-2024-10468,2024,,,Moderate,other,Tyson Smith
+CVE-2024-11159,2024,,,High,other,Several reporters
+CVE-2024-50336,2024,,,Moderate,other,Patrick Cloke
+CVE-2024-8399,2024,,,High,other,James Lee
+CVE-2024-0605,2024,2024-Q1,2024-01-22,Critical,other,James Lee
+CVE-2024-0606,2024,2024-Q1,2024-01-22,High,other,James Lee
+CVE-2024-0741,2024,2024-Q1,2024-01-23,High,other,Renan Rios
+CVE-2024-0742,2024,2024-Q1,2024-01-23,High,other,Andrew McCreight
+CVE-2024-0743,2024,2024-Q1,2024-01-23,High,other,John Schanck
+CVE-2024-0744,2024,2024-Q1,2024-01-23,High,other,Lukas Bernhard
+CVE-2024-0745,2024,2024-Q1,2024-01-23,High,other,Yangkang of 360 ATA Team
+CVE-2024-0746,2024,2024-Q1,2024-01-23,Moderate,other,Cornel Ionce
+CVE-2024-0747,2024,2024-Q1,2024-01-23,Moderate,other,Seongil Wi
+CVE-2024-0748,2024,2024-Q1,2024-01-23,Moderate,other,Young Min Kim
+CVE-2024-0749,2024,2024-Q1,2024-01-23,Moderate,other,Kestrel
+CVE-2024-0750,2024,2024-Q1,2024-01-23,Moderate,other,Hafiizh
+CVE-2024-0751,2024,2024-Q1,2024-01-23,Moderate,other,Rob Wu
+CVE-2024-0752,2024,2024-Q1,2024-01-23,Moderate,other,Nika Layzell
+CVE-2024-0753,2024,2024-Q1,2024-01-23,Moderate,other,Hanno Böck
+CVE-2024-0754,2024,2024-Q1,2024-01-23,Moderate,other,Christian Holler
+CVE-2024-0755,2024,2024-Q1,2024-01-23,Moderate,fuzz,"Daniel Holbert, Andrew Osmond, and the Mozilla Fuzzing Team"
+CVE-2024-1563,2024,2024-Q1,2024-02-19,High,other,James Lee
+CVE-2024-26281,2024,2024-Q1,2024-02-19,Moderate,other,James Lee
+CVE-2024-26282,2024,2024-Q1,2024-02-19,Moderate,other,Muneaki Nishimura
+CVE-2024-26283,2024,2024-Q1,2024-02-19,Moderate,other,Muneaki Nishimura
+CVE-2024-26284,2024,2024-Q1,2024-02-19,High,other,James Lee
+CVE-2024-1546,2024,2024-Q1,2024-02-20,High,other,Alfred Peters
+CVE-2024-1547,2024,2024-Q1,2024-02-20,High,other,Irvan Kurniawan
+CVE-2024-1548,2024,2024-Q1,2024-02-20,Moderate,other,Hafiizh
+CVE-2024-1549,2024,2024-Q1,2024-02-20,Moderate,other,Hafiizh
+CVE-2024-1550,2024,2024-Q1,2024-02-20,Moderate,other,Hafiizh
+CVE-2024-1551,2024,2024-Q1,2024-02-20,Moderate,other,Johan Carlsson
+CVE-2024-1552,2024,2024-Q1,2024-02-20,Low,other,Gary Kwong
+CVE-2024-1553,2024,2024-Q1,2024-02-20,High,fuzz,"Andrew McCreight, Randell Jesup, Gabriele Svelto, Paul Bone, and the Mozilla Fuzzing Team"
+CVE-2024-1554,2024,2024-Q1,2024-02-20,Moderate,other,scarlet
+CVE-2024-1555,2024,2024-Q1,2024-02-20,Moderate,other,Narendra Bhati
+CVE-2024-1556,2024,2024-Q1,2024-02-20,Low,other,Ronald Crane
+CVE-2024-1557,2024,2024-Q1,2024-02-20,High,fuzz,"Andrew McCreight, Randell Jesup, and the Mozilla Fuzzing Team"
+CVE-2024-1936,2024,2024-Q1,2024-03-04,High,other,Several community reporters
+CVE-2023-5388,2024,2024-Q1,2024-03-19,Moderate,other,Hubert Kario
+CVE-2024-2605,2024,2024-Q1,2024-03-19,High,other,goodbyeselene
+CVE-2024-2606,2024,2024-Q1,2024-03-19,High,other,P1umer
+CVE-2024-2607,2024,2024-Q1,2024-03-19,High,other,Gary Kwong
+CVE-2024-2608,2024,2024-Q1,2024-03-19,High,other,Ronald Crane
+CVE-2024-2609,2024,2024-Q1,2024-03-19,Moderate,other,Shaheen Fazim
+CVE-2024-2610,2024,2024-Q1,2024-03-19,Moderate,other,Georg Felber and Marco Squarcina (TU Wien)
+CVE-2024-2611,2024,2024-Q1,2024-03-19,Moderate,other,Hafiizh
+CVE-2024-2612,2024,2024-Q1,2024-03-19,Moderate,other,Ronald Crane
+CVE-2024-2613,2024,2024-Q1,2024-03-19,Low,other,Max Inden
+CVE-2024-2614,2024,2024-Q1,2024-03-19,High,fuzz,"Noah Lokocz, Kevin Brosnan, Ryan VanderMeulen and the Mozilla Fuzzing Team"
+CVE-2024-2615,2024,2024-Q1,2024-03-19,Critical,fuzz,Paul Bone and the Mozilla Fuzzing Team
+CVE-2024-2616,2024,2024-Q1,2024-03-19,High,other,Ryan VanderMeulen and Dan Minor
+CVE-2024-29943,2024,2024-Q1,2024-03-22,Critical,other,Manfred Paul via Trend Micro's Zero Day Initiative
+CVE-2024-29944,2024,2024-Q1,2024-03-22,Critical,other,Manfred Paul via Trend Micro's Zero Day Initiative
+CVE-2024-31392,2024,2024-Q2,2024-04-02,Low,other,Chaykin Artem
+CVE-2024-31393,2024,2024-Q2,2024-04-02,Moderate,other,Muneaki Nishimura
+CVE-2024-3302,2024,2024-Q2,2024-04-16,Low,other,Bartek Nowotarski via CERT
+CVE-2024-3852,2024,2024-Q2,2024-04-16,High,other,Logan Stratton
+CVE-2024-3853,2024,2024-Q2,2024-04-16,High,other,Gary Kwong
+CVE-2024-3854,2024,2024-Q2,2024-04-16,High,other,Lukas Bernhard
+CVE-2024-3855,2024,2024-Q2,2024-04-16,High,other,Lukas Bernhard
+CVE-2024-3856,2024,2024-Q2,2024-04-16,High,other,Nan Wang
+CVE-2024-3857,2024,2024-Q2,2024-04-16,High,other,Lukas Bernhard
+CVE-2024-3858,2024,2024-Q2,2024-04-16,High,other,Lukas Bernhard
+CVE-2024-3859,2024,2024-Q2,2024-04-16,Moderate,other,Ronald Crane
+CVE-2024-3860,2024,2024-Q2,2024-04-16,Moderate,other,Gary Kwong
+CVE-2024-3861,2024,2024-Q2,2024-04-16,Moderate,other,Ronald Crane
+CVE-2024-3862,2024,2024-Q2,2024-04-16,Moderate,other,Ronald Crane
+CVE-2024-3863,2024,2024-Q2,2024-04-16,Moderate,other,Eduardo Braun Prado working with Trend Micro Zero Day Initiative
+CVE-2024-3864,2024,2024-Q2,2024-04-16,High,other,Paul Bone
+CVE-2024-3865,2024,2024-Q2,2024-04-16,High,fuzz,"the Mozilla Fuzzing Team, Simon Friedberger, Andrew McCreight"
+CVE-2024-5702,2024,2024-Q2,2024-04-16,High,other,Kershaw Chang
+CVE-2024-10941,2024,2024-Q2,2024-05-14,Low,other,Anthony De Los Santos
+CVE-2024-4367,2024,2024-Q2,2024-05-14,High,other,Thomas Rinsma of Codean Labs
+CVE-2024-4764,2024,2024-Q2,2024-05-14,High,other,Jan-Ivar Bruaroey
+CVE-2024-4765,2024,2024-Q2,2024-05-14,Moderate,other,Dana Keeler
+CVE-2024-4766,2024,2024-Q2,2024-05-14,Moderate,other,Hafiizh
+CVE-2024-4767,2024,2024-Q2,2024-05-14,Moderate,other,Kim Do Hun via Tor Browser
+CVE-2024-4768,2024,2024-Q2,2024-05-14,Moderate,other,Hafiizh
+CVE-2024-4769,2024,2024-Q2,2024-05-14,Moderate,other,Shaheen Fazim
+CVE-2024-4770,2024,2024-Q2,2024-05-14,Moderate,other,Irvan Kurniawan
+CVE-2024-4771,2024,2024-Q2,2024-05-14,Moderate,other,Irvan Kurniawan
+CVE-2024-4772,2024,2024-Q2,2024-05-14,Low,other,Hanno Böck
+CVE-2024-4773,2024,2024-Q2,2024-05-14,Low,other,Islam
+CVE-2024-4774,2024,2024-Q2,2024-05-14,Low,other,Ronald Crane
+CVE-2024-4775,2024,2024-Q2,2024-05-14,Low,other,Lukas Bernhard
+CVE-2024-4776,2024,2024-Q2,2024-05-14,Low,other,Raphael
+CVE-2024-4777,2024,2024-Q2,2024-05-14,Moderate,fuzz,Daniel Holbert and the Mozilla Fuzzing Team
+CVE-2024-4778,2024,2024-Q2,2024-05-14,Moderate,fuzz,Mozilla Fuzzing Team
+CVE-2024-5022,2024,2024-Q2,2024-05-16,High,other,James Lee
+CVE-2024-5687,2024,2024-Q2,2024-06-11,High,other,jackyzy823
+CVE-2024-5688,2024,2024-Q2,2024-06-11,High,other,Lukas Bernhard
+CVE-2024-5689,2024,2024-Q2,2024-06-11,Moderate,other,Fabian Fäßler
+CVE-2024-5690,2024,2024-Q2,2024-06-11,Moderate,other,Satoki Tsuji
+CVE-2024-5691,2024,2024-Q2,2024-06-11,Moderate,other,Luan Herrera
+CVE-2024-5692,2024,2024-Q2,2024-06-11,Moderate,other,Raphael Shaniyazov and Axel Chong (@Haxatron) | Raphael Shaniyazov
+CVE-2024-5693,2024,2024-Q2,2024-06-11,Moderate,other,Kirtikumar Anandrao Ramchandani
+CVE-2024-5694,2024,2024-Q2,2024-06-11,Moderate,other,Lukas Bernhard
+CVE-2024-5695,2024,2024-Q2,2024-06-11,Moderate,other,Irvan Kurniawan
+CVE-2024-5696,2024,2024-Q2,2024-06-11,Moderate,other,Irvan Kurniawan
+CVE-2024-5697,2024,2024-Q2,2024-06-11,Low,other,Wil Clouser
+CVE-2024-5698,2024,2024-Q2,2024-06-11,Low,other,Hafiizh
+CVE-2024-5699,2024,2024-Q2,2024-06-11,Low,other,Konstantin Preißer
+CVE-2024-5700,2024,2024-Q2,2024-06-11,High,fuzz,The Mozilla Fuzzing Team
+CVE-2024-5701,2024,2024-Q2,2024-06-11,High,fuzz,Randell Jesup and the Mozilla Fuzzing Team
+CVE-2024-38312,2024,2024-Q2,2024-06-13,Moderate,other,Adam Berry
+CVE-2024-38313,2024,2024-Q2,2024-06-13,High,other,Muneaki Nishimura
+CVE-2024-6600,2024,2024-Q3,2024-07-09,Moderate,other,pwn2car
+CVE-2024-6601,2024,2024-Q3,2024-07-09,Moderate,other,Andreas Farre
+CVE-2024-6602,2024,2024-Q3,2024-07-09,Moderate,other,Ronald Crane
+CVE-2024-6603,2024,2024-Q3,2024-07-09,Moderate,other,Irvan Kurniawan
+CVE-2024-6604,2024,2024-Q3,2024-07-09,High,other,Randell Jesup | Mozilla developers
+CVE-2024-6605,2024,2024-Q3,2024-07-09,High,other,Shaheen Fazim
+CVE-2024-6606,2024,2024-Q3,2024-07-09,High,other,dalmurino
+CVE-2024-6607,2024,2024-Q3,2024-07-09,Moderate,other,Irvan Kurniawan
+CVE-2024-6608,2024,2024-Q3,2024-07-09,Moderate,other,Irvan Kurniawan
+CVE-2024-6609,2024,2024-Q3,2024-07-09,Moderate,other,Irvan Kurniawan
+CVE-2024-6610,2024,2024-Q3,2024-07-09,Moderate,other,Raphael
+CVE-2024-6611,2024,2024-Q3,2024-07-09,Low,other,Pedro Bernardo
+CVE-2024-6612,2024,2024-Q3,2024-07-09,Low,other,Aidan Stephenson & Yannik Marchand
+CVE-2024-6613,2024,2024-Q3,2024-07-09,Low,other,Nils Bars
+CVE-2024-6614,2024,2024-Q3,2024-07-09,Low,other,Nils Bars
+CVE-2024-6615,2024,2024-Q3,2024-07-09,High,fuzz,the Mozilla Fuzzing Team
+CVE-2024-7652,2024,2024-Q3,2024-07-09,High,other,Nils Bars
+CVE-2024-0953,2024,2024-Q3,2024-08-05,Low,other,Lohith Gowda M
+CVE-2024-43111,2024,2024-Q3,2024-08-05,Low,other,James Lee
+CVE-2024-43112,2024,2024-Q3,2024-08-05,Moderate,other,James Lee
+CVE-2024-43113,2024,2024-Q3,2024-08-05,Moderate,other,James Lee
+CVE-2024-7518,2024,2024-Q3,2024-08-06,High,other,Shaheen Fazim
+CVE-2024-7519,2024,2024-Q3,2024-08-06,High,other,dalmurino
+CVE-2024-7520,2024,2024-Q3,2024-08-06,High,other,Nan Wang
+CVE-2024-7521,2024,2024-Q3,2024-08-06,High,other,Nils Bars
+CVE-2024-7522,2024,2024-Q3,2024-08-06,High,other,Irvan Kurniawan
+CVE-2024-7523,2024,2024-Q3,2024-08-06,High,other,Shaheen Fazim
+CVE-2024-7524,2024,2024-Q3,2024-08-06,High,other,Masato Kinugawa
+CVE-2024-7525,2024,2024-Q3,2024-08-06,High,other,Rob Wu
+CVE-2024-7526,2024,2024-Q3,2024-08-06,High,other,s48gs.w
+CVE-2024-7527,2024,2024-Q3,2024-08-06,High,other,Norisz Fay
+CVE-2024-7528,2024,2024-Q3,2024-08-06,High,other,Jason Kratzer
+CVE-2024-7529,2024,2024-Q3,2024-08-06,Moderate,other,Hafiizh
+CVE-2024-7530,2024,2024-Q3,2024-08-06,Moderate,other,Christian Holler
+CVE-2024-7531,2024,2024-Q3,2024-08-06,Low,other,Lars Eggert
+CVE-2024-8900,2024,2024-Q3,2024-08-06,Moderate,other,Om Apip
+CVE-2024-8381,2024,2024-Q3,2024-09-03,High,other,Nils Bars
+CVE-2024-8382,2024,2024-Q3,2024-09-03,Moderate,other,Gregory Pappas
+CVE-2024-8383,2024,2024-Q3,2024-09-03,Moderate,other,D7
+CVE-2024-8384,2024,2024-Q3,2024-09-03,Moderate,fuzz,the Mozilla Fuzzing Team
+CVE-2024-8385,2024,2024-Q3,2024-09-03,High,other,Seunghyun Lee
+CVE-2024-8386,2024,2024-Q3,2024-09-03,Low,other,"Shaheen Fazim, Hafiizh"
+CVE-2024-8387,2024,2024-Q3,2024-09-03,High,fuzz,"Yury Delendik, the Mozilla Fuzzing Team | the Mozilla Fuzzing Team, Yury Delendik"
+CVE-2024-8388,2024,2024-Q3,2024-09-03,Moderate,other,"Shaheen Fazim, Raphael Saniyazov, Rifa&apos;i Rejal Maynando, James Lee, P Umar Farooq, Hafiizh"
+CVE-2024-8389,2024,2024-Q3,2024-09-03,High,fuzz,"the Mozilla Fuzzing Team, Andrew McCreight"
+CVE-2024-8394,2024,2024-Q3,2024-09-03,High,other,Thunderbird Team
+CVE-2024-8897,2024,2024-Q3,2024-09-17,High,other,Thomas Orlita
+CVE-2024-9391,2024,2024-Q4,2024-10-01,High,other,James Lee
+CVE-2024-9392,2024,2024-Q4,2024-10-01,High,other,"Jan Drescher and David Klein from IAS, TU Braunschweig"
+CVE-2024-9393,2024,2024-Q4,2024-10-01,High,other,Masato Kinugawa
+CVE-2024-9394,2024,2024-Q4,2024-10-01,High,other,Masato Kinugawa
+CVE-2024-9395,2024,2024-Q4,2024-10-01,Moderate,other,Hafiizh
+CVE-2024-9396,2024,2024-Q4,2024-10-01,Moderate,other,Nils Bars
+CVE-2024-9397,2024,2024-Q4,2024-10-01,Moderate,other,Shaheen Fazim
+CVE-2024-9398,2024,2024-Q4,2024-10-01,Low,other,Satoki Tsuji
+CVE-2024-9399,2024,2024-Q4,2024-10-01,Low,other,Marten Richter
+CVE-2024-9400,2024,2024-Q4,2024-10-01,Low,other,Gary Kwong
+CVE-2024-9401,2024,2024-Q4,2024-10-01,High,other,"Andrew Osmond, Sebastian Hengst, Andrew McCreight"
+CVE-2024-9402,2024,2024-Q4,2024-10-01,High,fuzz,"Andrew Osmond, Sebastian Hengst, Andrew McCreight, Yury Delendik, the Mozilla Fuzzing Team, | Andrew Osmond, Andrew McCreight, Sebastian Hengst, Yury Delendik, the Mozilla Fuzzing Team"
+CVE-2024-9403,2024,2024-Q4,2024-10-01,High,fuzz,The Mozilla Fuzzing Team
+CVE-2024-9680,2024,2024-Q4,2024-10-09,Critical,other,Damien Schaeffer from ESET
+CVE-2024-9936,2024,2024-Q4,2024-10-14,High,other,Atte Kettunen
+CVE-2024-10474,2024,2024-Q4,2024-10-28,Moderate,other,James Lee
+CVE-2024-11691,2024,2024-Q4,2024-11-26,High,other,"Dohyun Lee (@l33d0hyun) of USELab, Korea University & Youngho Choi of CEL, Korea University & Geumhwan Cho of USELab, Korea University"
+CVE-2024-11692,2024,2024-Q4,2024-11-26,Moderate,other,Shaheen Fazim
+CVE-2024-11693,2024,2024-Q4,2024-11-26,Moderate,other,Marco Bonardo
+CVE-2024-11694,2024,2024-Q4,2024-11-26,Moderate,other,Masato Kinugawa
+CVE-2024-11695,2024,2024-Q4,2024-11-26,Moderate,other,Renwa Hiwa
+CVE-2024-11696,2024,2024-Q4,2024-11-26,Moderate,other,Rob Wu
+CVE-2024-11697,2024,2024-Q4,2024-11-26,Low,other,Umar Farooq
+CVE-2024-11698,2024,2024-Q4,2024-11-26,Low,other,Kang Ali of Punggawa Cybersecurity
+CVE-2024-11699,2024,2024-Q4,2024-11-26,High,other,"Andrew McCreight, Akmat Suleimanov | Akmat Suleimanov, Andrew McCreight"
+CVE-2024-11700,2024,2024-Q4,2024-11-26,Moderate,other,Shaheen Fazim
+CVE-2024-11701,2024,2024-Q4,2024-11-26,Moderate,other,Daniel Holbert
+CVE-2024-11702,2024,2024-Q4,2024-11-26,Moderate,other,Umar Farooq
+CVE-2024-11703,2024,2024-Q4,2024-11-26,Moderate,other,Multiple Reporters
+CVE-2024-11704,2024,2024-Q4,2024-11-26,Low,other,Ronald Crane
+CVE-2024-11705,2024,2024-Q4,2024-11-26,Low,other,coffeys
+CVE-2024-11706,2024,2024-Q4,2024-11-26,Low,other,Marc Schoenefeld
+CVE-2024-11708,2024,2024-Q4,2024-11-26,Low,other,Serban Stanca
+CVE-2024-53975,2024,2024-Q4,2024-11-26,Moderate,other,James Lee
+CVE-2024-53976,2024,2024-Q4,2024-11-26,Moderate,other,Bharat Adhikari
+CVE-2024-43097,2025,2025-Q1,2025-01-07,Critical,other,Google Android
+CVE-2024-50336,2025,2025-Q1,2025-01-07,Moderate,other,Patrick Cloke
+CVE-2025-0237,2025,2025-Q1,2025-01-07,Moderate,other,Andrew McCreight
+CVE-2025-0238,2025,2025-Q1,2025-01-07,Moderate,other,Irvan Kurniawan
+CVE-2025-0239,2025,2025-Q1,2025-01-07,Moderate,other,Paul Gerste
+CVE-2025-0240,2025,2025-Q1,2025-01-07,Moderate,other,Nils Bars
+CVE-2025-0241,2025,2025-Q1,2025-01-07,Moderate,other,Nils Bars
+CVE-2025-0242,2025,2025-Q1,2025-01-07,High,fuzz,"Andrew McCreight, Tooru Fujisawa, and the Mozilla Fuzzing Team"
+CVE-2025-0243,2025,2025-Q1,2025-01-07,Moderate,fuzz,Andrew Osmond and the Mozilla Fuzzing Team
+CVE-2025-0244,2025,2025-Q1,2025-01-07,High,other,Umar Farooq
+CVE-2025-0245,2025,2025-Q1,2025-01-07,Moderate,other,Jurrie Overgoor
+CVE-2025-0246,2025,2025-Q1,2025-01-07,Moderate,other,James Lee
+CVE-2025-0247,2025,2025-Q1,2025-01-07,High,fuzz,"Akmat Suleimanov, Jed Davis, André Bargull, and the Mozilla Fuzzing Team"
+CVE-2025-23108,2025,2025-Q1,2025-01-10,Moderate,other,Renwa
+CVE-2025-23109,2025,2025-Q1,2025-01-10,Moderate,other,Khalil Zhani
+CVE-2024-11704,2025,2025-Q1,2025-02-04,Low,other,Ronald Crane
+CVE-2025-0510,2025,2025-Q1,2025-02-04,High,other,Fabian Densborn
+CVE-2025-1009,2025,2025-Q1,2025-02-04,High,other,Ivan Fratric of Google Project Zero
+CVE-2025-1010,2025,2025-Q1,2025-02-04,High,other,Atte Kettunen
+CVE-2025-1011,2025,2025-Q1,2025-02-04,Moderate,other,Nan Wang
+CVE-2025-1012,2025,2025-Q1,2025-02-04,Moderate,other,Nils Bars
+CVE-2025-1013,2025,2025-Q1,2025-02-04,Low,other,Maruf Bin Murtuza
+CVE-2025-1014,2025,2025-Q1,2025-02-04,Low,other,Theemathas
+CVE-2025-1015,2025,2025-Q1,2025-02-04,Low,other,r3m0t3nu11
+CVE-2025-1016,2025,2025-Q1,2025-02-04,High,fuzz,"Andrew McCreight, Randell Jesup, Andrew Osmond, Akmat Suleimanov and the Mozilla Fuzzing Team | Andrew Osmond, Randell Jesup, Andrew McCreight, Akmat Suleimanov and the Mozilla Fuzzing Team | Randell Jesup, Andrew McCreight, Andrew Osmond, Akmat Suleimanov and the Mozilla Fuzzing Team"
+CVE-2025-1017,2025,2025-Q1,2025-02-04,Moderate,fuzz,"Sebastian Hengst, Maurice Dauer and the Mozilla Fuzzing Team"
+CVE-2025-1018,2025,2025-Q1,2025-02-04,Moderate,other,Irvan Kurniawan
+CVE-2025-1019,2025,2025-Q1,2025-02-04,Moderate,other,Irvan Kurniawan
+CVE-2025-1020,2025,2025-Q1,2025-02-04,High,fuzz,The Mozilla Fuzzing Team
+CVE-2025-1414,2025,2025-Q1,2025-02-18,High,other,Andrew McCreight
+CVE-2025-27424,2025,2025-Q1,2025-02-24,Moderate,other,Renwa
+CVE-2025-27425,2025,2025-Q1,2025-02-24,Low,other,Abhinav Khanna
+CVE-2025-27426,2025,2025-Q1,2025-02-24,High,other,Renwa
+CVE-2024-9956,2025,2025-Q1,2025-03-04,Moderate,other,MasterSplinter
+CVE-2025-1930,2025,2025-Q1,2025-03-04,High,other,dalmurino
+CVE-2025-1931,2025,2025-Q1,2025-03-04,High,other,sherkito
+CVE-2025-1932,2025,2025-Q1,2025-03-04,High,other,Ivan Fratric of Google Project Zero
+CVE-2025-1933,2025,2025-Q1,2025-03-04,High,other,Xiangwei Zhang and kkdong of Tencent Security YUNDING LAB
+CVE-2025-1934,2025,2025-Q1,2025-03-04,Moderate,other,Nils Bars
+CVE-2025-1935,2025,2025-Q1,2025-03-04,Low,other,Hafiizh
+CVE-2025-1936,2025,2025-Q1,2025-03-04,Low,other,Surya Dev Singh
+CVE-2025-1937,2025,2025-Q1,2025-03-04,High,fuzz,"the Mozilla Fuzzing Team, Andrew McCreight"
+CVE-2025-1938,2025,2025-Q1,2025-03-04,High,fuzz,"Julien Wajsberg, the Mozilla Fuzzing Team"
+CVE-2025-1939,2025,2025-Q1,2025-03-04,High,other,Philipp Beer
+CVE-2025-1940,2025,2025-Q1,2025-03-04,Moderate,other,Shaheen Fazim
+CVE-2025-1941,2025,2025-Q1,2025-03-04,Moderate,other,Jurrie Overgoor
+CVE-2025-1942,2025,2025-Q1,2025-03-04,Moderate,other,anbu
+CVE-2025-1943,2025,2025-Q1,2025-03-04,High,fuzz,"the Mozilla Fuzzing Team, Andrew McCreight, Sebastian Hengst, Randell Jesup"
+CVE-2025-26695,2025,2025-Q1,2025-03-04,Low,other,Daniel Huigens
+CVE-2025-26696,2025,2025-Q1,2025-03-04,Moderate,other,Marcus Brinkmann
+CVE-2025-2857,2025,2025-Q1,2025-03-27,Critical,other,Andrew McCreight
+CVE-2025-3028,2025,2025-Q2,2025-04-01,High,other,Ivan Fratric of Google Project Zero
+CVE-2025-3029,2025,2025-Q2,2025-04-01,Moderate,other,Renwa Hiwa
+CVE-2025-3030,2025,2025-Q2,2025-04-01,High,fuzz,"Sylvestre Ledru, Paul Bone and the Mozilla Fuzzing Team"
+CVE-2025-3031,2025,2025-Q2,2025-04-01,Moderate,other,anbu
+CVE-2025-3032,2025,2025-Q2,2025-04-01,Moderate,other,Thinker Li
+CVE-2025-3033,2025,2025-Q2,2025-04-01,Low,other,Ameen Basha M K
+CVE-2025-3034,2025,2025-Q2,2025-04-01,High,fuzz,Andrew McCreight and the Mozilla Fuzzing Team
+CVE-2025-3035,2025,2025-Q2,2025-04-01,Moderate,other,Matthew Noorenberghe
+CVE-2025-2830,2025,2025-Q2,2025-04-15,High,other,Dario Weißer
+CVE-2025-3522,2025,2025-Q2,2025-04-15,High,other,Dario Weißer
+CVE-2025-3523,2025,2025-Q2,2025-04-15,Low,other,Dario Weißer
+CVE-2025-3608,2025,2025-Q2,2025-04-15,High,fuzz,The Mozilla Fuzzing Team
+CVE-2025-3859,2025,2025-Q2,2025-04-21,Moderate,other,James Lee
+CVE-2025-2817,2025,2025-Q2,2025-04-29,High,other,Dong-uk Kim (@justlikebono)
+CVE-2025-4082,2025,2025-Q2,2025-04-29,High,other,un3xploitable & GF
+CVE-2025-4083,2025,2025-Q2,2025-04-29,High,other,Nika Layzell
+CVE-2025-4084,2025,2025-Q2,2025-04-29,Moderate,other,Ameen Basha M K
+CVE-2025-4085,2025,2025-Q2,2025-04-29,Moderate,other,Andrew McCreight
+CVE-2025-4086,2025,2025-Q2,2025-04-29,Moderate,other,Hafiizh
+CVE-2025-4087,2025,2025-Q2,2025-04-29,Moderate,other,Ivan Fratric
+CVE-2025-4088,2025,2025-Q2,2025-04-29,Moderate,other,Chris P. Fredrickson
+CVE-2025-4089,2025,2025-Q2,2025-04-29,Moderate,other,Ameen Basha M K
+CVE-2025-4090,2025,2025-Q2,2025-04-29,Low,other,Seongyun Jeong
+CVE-2025-4091,2025,2025-Q2,2025-04-29,Moderate,fuzz,Maurice Dauer and the Mozilla Fuzzing Team
+CVE-2025-4092,2025,2025-Q2,2025-04-29,High,fuzz,"Randell Jesup, Jens Stutte, and the Mozilla Fuzzing Team"
+CVE-2025-4093,2025,2025-Q2,2025-04-29,High,other,Andrew McCreight
+CVE-2025-3875,2025,2025-Q2,2025-05-13,High,other,xh4vm
+CVE-2025-3909,2025,2025-Q2,2025-05-13,High,other,Dario Weißer
+CVE-2025-3932,2025,2025-Q2,2025-05-13,Low,other,Dario Weißer
+CVE-2025-4918,2025,2025-Q2,2025-05-17,Critical,other,Edouard Bochin and Tao Yan from Palo Alto Networks working with Trend Micro's Zero Day Initiative
+CVE-2025-4919,2025,2025-Q2,2025-05-17,Critical,other,Manfred Paul working with Trend Micro's Zero Day Initiative
+CVE-2025-5020,2025,2025-Q2,2025-05-20,Low,other,James Lee
+CVE-2025-5263,2025,2025-Q2,2025-05-27,Moderate,other,terjanq
+CVE-2025-5264,2025,2025-Q2,2025-05-27,Moderate,other,Ameen Basha M K
+CVE-2025-5265,2025,2025-Q2,2025-05-27,Moderate,other,Ameen Basha M K
+CVE-2025-5266,2025,2025-Q2,2025-05-27,Moderate,other,Jakub Szymsza
+CVE-2025-5267,2025,2025-Q2,2025-05-27,Low,other,Ameen Basha M K
+CVE-2025-5268,2025,2025-Q2,2025-05-27,Moderate,fuzz,"the Mozilla Fuzzing Team, Masayuki Nakano"
+CVE-2025-5269,2025,2025-Q2,2025-05-27,Moderate,other,Randell Jesup
+CVE-2025-5270,2025,2025-Q2,2025-05-27,Low,other,xiulou
+CVE-2025-5271,2025,2025-Q2,2025-05-27,Low,other,Satoki Tsuji
+CVE-2025-5272,2025,2025-Q2,2025-05-27,Moderate,fuzz,"the Mozilla Fuzzing Team, Andrew Osmond"
+CVE-2025-5283,2025,2025-Q2,2025-05-27,Critical,other,Randell Jesup
+CVE-2025-5687,2025,2025-Q2,2025-05-30,High,other,Egor Filatov (Positive Technologies)
+CVE-2025-49709,2025,2025-Q2,2025-06-10,High,other,Yannis Juglaret and Steven Michaud
+CVE-2025-49710,2025,2025-Q2,2025-06-10,High,other,Shaheen Fazim
+CVE-2025-5986,2025,2025-Q2,2025-06-10,High,other,Dario Weißer
+CVE-2025-6424,2025,2025-Q2,2025-06-24,High,other,LJP and HexRabbit (DEVCORE Research Team)
+CVE-2025-6425,2025,2025-Q2,2025-06-24,Moderate,other,Rob Wu
+CVE-2025-6426,2025,2025-Q2,2025-06-24,Moderate,other,pwn2car
+CVE-2025-6427,2025,2025-Q2,2025-06-24,Moderate,other,Alan Li (lebr0nli)
+CVE-2025-6428,2025,2025-Q2,2025-06-24,Moderate,other,Raul Bucata
+CVE-2025-6429,2025,2025-Q2,2025-06-24,Moderate,other,Masato Kinugawa
+CVE-2025-6430,2025,2025-Q2,2025-06-24,Moderate,other,Daniil Satyaev (Positive Technologies)
+CVE-2025-6431,2025,2025-Q2,2025-06-24,Moderate,other,Umar Farooq
+CVE-2025-6432,2025,2025-Q2,2025-06-24,Low,other,Albert
+CVE-2025-6433,2025,2025-Q2,2025-06-24,Low,other,Simon
+CVE-2025-6434,2025,2025-Q2,2025-06-24,Low,other,hafiizh & kang ali
+CVE-2025-6435,2025,2025-Q2,2025-06-24,Low,other,Ameen Basha M K
+CVE-2025-6436,2025,2025-Q2,2025-06-24,High,fuzz,"Andrew McCreight, Gabriele Svelto, Beth Rennie (she/her), Steven Michaud, the Mozilla Fuzzing Team"
+CVE-2025-54143,2025,2025-Q3,2025-07-22,Moderate,other,Narendra Bhati
+CVE-2025-54144,2025,2025-Q3,2025-07-22,Moderate,other,James Lee
+CVE-2025-54145,2025,2025-Q3,2025-07-22,Moderate,other,James Lee
+CVE-2025-8027,2025,2025-Q3,2025-07-22,High,other,Nan Wang
+CVE-2025-8028,2025,2025-Q3,2025-07-22,High,other,Gary Kwong
+CVE-2025-8029,2025,2025-Q3,2025-07-22,Moderate,other,Mirko Brodesser
+CVE-2025-8030,2025,2025-Q3,2025-07-22,Moderate,other,Ameen Basha M K
+CVE-2025-8031,2025,2025-Q3,2025-07-22,Moderate,other,Tom Schuster
+CVE-2025-8032,2025,2025-Q3,2025-07-22,Moderate,other,Joe Turki
+CVE-2025-8033,2025,2025-Q3,2025-07-22,Low,other,Shaheen Fazim
+CVE-2025-8034,2025,2025-Q3,2025-07-22,High,fuzz,the Mozilla Fuzzing Team
+CVE-2025-8035,2025,2025-Q3,2025-07-22,High,fuzz,the Mozilla Fuzzing Team
+CVE-2025-8036,2025,2025-Q3,2025-07-22,Moderate,other,Viktor Bocz
+CVE-2025-8037,2025,2025-Q3,2025-07-22,Moderate,other,Uku Sõrmus
+CVE-2025-8038,2025,2025-Q3,2025-07-22,Low,other,Laurin Weger
+CVE-2025-8039,2025,2025-Q3,2025-07-22,Low,other,Sören Hentzschel
+CVE-2025-8040,2025,2025-Q3,2025-07-22,High,other,"Andrew McCreight, Ashley Zebrowski"
+CVE-2025-8041,2025,2025-Q3,2025-07-22,Moderate,other,Chris Peterson and Kirtikumar Anandrao Ramchandani
+CVE-2025-8042,2025,2025-Q3,2025-07-22,Moderate,other,Axel Chong (@Haxatron)
+CVE-2025-8043,2025,2025-Q3,2025-07-22,Moderate,other,alayersattackers
+CVE-2025-8044,2025,2025-Q3,2025-07-22,High,other,"Akmat Suleimanov, Andrew McCreight"
+CVE-2025-8364,2025,2025-Q3,2025-07-22,Low,other,Rifa'i Rejal Maynando and Ameen Basha M K
+CVE-2025-55028,2025,2025-Q3,2025-08-19,Moderate,other,Antoine Morin
+CVE-2025-55029,2025,2025-Q3,2025-08-19,Low,other,Bharat
+CVE-2025-55030,2025,2025-Q3,2025-08-19,High,other,Renwa
+CVE-2025-55031,2025,2025-Q3,2025-08-19,Moderate,other,Hafiizh
+CVE-2025-55032,2025,2025-Q3,2025-08-19,High,other,Renwa
+CVE-2025-55033,2025,2025-Q3,2025-08-19,Moderate,other,Muneaki Nishimura
+CVE-2025-9179,2025,2025-Q3,2025-08-19,High,other,Oskar
+CVE-2025-9180,2025,2025-Q3,2025-08-19,High,other,Tom Van Goethem
+CVE-2025-9181,2025,2025-Q3,2025-08-19,Moderate,other,Irvan Kurniawan
+CVE-2025-9182,2025,2025-Q3,2025-08-19,Low,other,Irvan Kurniawan
+CVE-2025-9183,2025,2025-Q3,2025-08-19,Low,other,Renwa
+CVE-2025-9184,2025,2025-Q3,2025-08-19,High,fuzz,"Paul Bone, Ryan VanderMeulen and the Mozilla Fuzzing Team"
+CVE-2025-9185,2025,2025-Q3,2025-08-19,High,fuzz,The Mozilla Fuzzing Team
+CVE-2025-9186,2025,2025-Q3,2025-08-19,Low,other,Kevin Brosnan
+CVE-2025-9187,2025,2025-Q3,2025-08-19,High,fuzz,"Andy Leiserson, Maurice Dauer, Sebastian Hengst and the Mozilla Fuzzing Team"
+CVE-2025-10290,2025,2025-Q3,2025-09-16,Moderate,other,Renwa
+CVE-2025-10527,2025,2025-Q3,2025-09-16,High,other,Oskar L
+CVE-2025-10528,2025,2025-Q3,2025-09-16,High,other,Oskar L
+CVE-2025-10529,2025,2025-Q3,2025-09-16,Moderate,other,Daniel Holbert
+CVE-2025-10530,2025,2025-Q3,2025-09-16,Moderate,other,Hafiizh & Kang Ali
+CVE-2025-10531,2025,2025-Q3,2025-09-16,Moderate,other,Nikolaos Mourousias
+CVE-2025-10532,2025,2025-Q3,2025-09-16,Moderate,other,Gary Kwong
+CVE-2025-10533,2025,2025-Q3,2025-09-16,Moderate,other,Andrew Creskey
+CVE-2025-10534,2025,2025-Q3,2025-09-16,Low,other,Emma Zühlcke
+CVE-2025-10535,2025,2025-Q3,2025-09-16,Low,other,Rebeca Tudor
+CVE-2025-10536,2025,2025-Q3,2025-09-16,Low,other,Ibuki Sato
+CVE-2025-10537,2025,2025-Q3,2025-09-16,High,fuzz,Andrew McCreight and the Mozilla Fuzzing Team
+CVE-2025-10859,2025,2025-Q3,2025-09-28,Moderate,other,Muneaki Nishimura
+CVE-2025-11152,2025,2025-Q3,2025-09-30,High,other,Oskar L
+CVE-2025-11153,2025,2025-Q3,2025-09-30,High,other,Nan Wang
+CVE-2025-11708,2025,2025-Q4,2025-10-14,High,other,Irvan Kurniawan
+CVE-2025-11709,2025,2025-Q4,2025-10-14,High,other,Oskar L
+CVE-2025-11710,2025,2025-Q4,2025-10-14,High,other,Oskar L
+CVE-2025-11711,2025,2025-Q4,2025-10-14,High,other,EntryHi
+CVE-2025-11712,2025,2025-Q4,2025-10-14,Moderate,other,Masato Kinugawa
+CVE-2025-11713,2025,2025-Q4,2025-10-14,Moderate,other,Hafiizh & kang ali
+CVE-2025-11714,2025,2025-Q4,2025-10-14,High,fuzz,The Mozilla Fuzzing Team
+CVE-2025-11715,2025,2025-Q4,2025-10-14,High,fuzz,The Mozilla Fuzzing Team
+CVE-2025-11716,2025,2025-Q4,2025-10-14,Moderate,other,Axel Chong (@Haxatron)
+CVE-2025-11717,2025,2025-Q4,2025-10-14,Moderate,other,msd
+CVE-2025-11718,2025,2025-Q4,2025-10-14,Moderate,other,Hafiizh & kang ali
+CVE-2025-11719,2025,2025-Q4,2025-10-14,Moderate,other,Filip Štamcar
+CVE-2025-11720,2025,2025-Q4,2025-10-14,Low,other,Michel Le Bihan
+CVE-2025-11721,2025,2025-Q4,2025-10-14,High,other,None
+CVE-2025-12380,2025,2025-Q4,2025-10-28,High,other,Oskar L
+CVE-2025-13012,2025,2025-Q4,2025-11-11,High,other,Irvan Kurniawan
+CVE-2025-13013,2025,2025-Q4,2025-11-11,Moderate,other,Masato Kinugawa
+CVE-2025-13014,2025,2025-Q4,2025-11-11,Moderate,other,Andrew Osmond
+CVE-2025-13015,2025,2025-Q4,2025-11-11,Low,other,Eemeli Aro
+CVE-2025-13016,2025,2025-Q4,2025-11-11,High,ai_affiliated,Aisle Research | Igor Morgenstern
+CVE-2025-13017,2025,2025-Q4,2025-11-11,Moderate,other,Mochammad Nosa Shandy Prastyo
+CVE-2025-13018,2025,2025-Q4,2025-11-11,Moderate,other,Daniel Veditz
+CVE-2025-13019,2025,2025-Q4,2025-11-11,Moderate,other,Oskar L
+CVE-2025-13020,2025,2025-Q4,2025-11-11,Moderate,other,Andreas Pehrson
+CVE-2025-13021,2025,2025-Q4,2025-11-11,High,other,Atte Kettunen
+CVE-2025-13022,2025,2025-Q4,2025-11-11,High,other,Atte Kettunen
+CVE-2025-13023,2025,2025-Q4,2025-11-11,High,other,Oskar L
+CVE-2025-13024,2025,2025-Q4,2025-11-11,High,fuzz,Project KillFuzz of Qrious Secure
+CVE-2025-13025,2025,2025-Q4,2025-11-11,High,other,Oskar L
+CVE-2025-13026,2025,2025-Q4,2025-11-11,High,other,Jamie Nicol
+CVE-2025-13027,2025,2025-Q4,2025-11-11,High,fuzz,The Mozilla Fuzzing Team
+CVE-2025-14321,2025,2025-Q4,2025-12-09,High,other,Igor Morgenstern
+CVE-2025-14322,2025,2025-Q4,2025-12-09,High,other,Oskar L
+CVE-2025-14323,2025,2025-Q4,2025-12-09,High,other,tiebuchen
+CVE-2025-14324,2025,2025-Q4,2025-12-09,High,other,Lingming Zhang
+CVE-2025-14325,2025,2025-Q4,2025-12-09,High,other,zx
+CVE-2025-14326,2025,2025-Q4,2025-12-09,Moderate,other,Andrew McCreight
+CVE-2025-14327,2025,2025-Q4,2025-12-09,Moderate,other,Caro Kann
+CVE-2025-14328,2025,2025-Q4,2025-12-09,Moderate,other,Ameen Basha M K
+CVE-2025-14329,2025,2025-Q4,2025-12-09,Moderate,other,satrya wira yudha
+CVE-2025-14330,2025,2025-Q4,2025-12-09,Moderate,other,Rong Bao
+CVE-2025-14331,2025,2025-Q4,2025-12-09,Moderate,other,Igor Morgenstern
+CVE-2025-14332,2025,2025-Q4,2025-12-09,Moderate,fuzz,"Jon Coppeard, Maurice Dauer and the Mozilla Fuzzing Team"
+CVE-2025-14333,2025,2025-Q4,2025-12-09,Moderate,fuzz,Maurice Dauer and the Mozilla Fuzzing Team
+CVE-2025-14744,2025,2025-Q4,2025-12-15,Low,other,Azril
+CVE-2025-14860,2025,2025-Q4,2025-12-18,High,other,Irvan Kurniawan
+CVE-2025-14861,2025,2025-Q4,2025-12-18,High,fuzz,Andrew McCreight and the Mozilla Fuzzing Team
+CVE-2025-14327,2026,2026-Q1,2026-01-13,Moderate,other,Caro Kann
+CVE-2026-0877,2026,2026-Q1,2026-01-13,High,other,Mingi Jung (정민기입니다)
+CVE-2026-0878,2026,2026-Q1,2026-01-13,High,other,Oskar L
+CVE-2026-0879,2026,2026-Q1,2026-01-13,High,other,Oskar L
+CVE-2026-0880,2026,2026-Q1,2026-01-13,High,other,Oskar L
+CVE-2026-0881,2026,2026-Q1,2026-01-13,High,other,Andrew McCreight
+CVE-2026-0882,2026,2026-Q1,2026-01-13,High,other,Randell Jesup
+CVE-2026-0883,2026,2026-Q1,2026-01-13,Moderate,other,Vladislav Plyatsok
+CVE-2026-0884,2026,2026-Q1,2026-01-13,Moderate,other,Gary Kwong and Nan Wang
+CVE-2026-0885,2026,2026-Q1,2026-01-13,Moderate,other,Irvan Kurniawan
+CVE-2026-0886,2026,2026-Q1,2026-01-13,Moderate,other,Oskar L
+CVE-2026-0887,2026,2026-Q1,2026-01-13,Moderate,other,Lyra Rebane
+CVE-2026-0888,2026,2026-Q1,2026-01-13,Low,other,Pier Angelo Vendrame
+CVE-2026-0889,2026,2026-Q1,2026-01-13,Low,other,"Elysee Franchuk, Caleb Lerch"
+CVE-2026-0890,2026,2026-Q1,2026-01-13,Low,other,Edgar Chen
+CVE-2026-0891,2026,2026-Q1,2026-01-13,High,fuzz,"Andrew McCreight, Dennis Jackson and the Mozilla Fuzzing Team"
+CVE-2026-0892,2026,2026-Q1,2026-01-13,Moderate,fuzz,"Hiroyuki Ikezoe, Jon Coppeard, Maurice Dauer and the Mozilla Fuzzing Team"
+CVE-2026-0818,2026,2026-Q1,2026-01-27,Moderate,other,"Leon Trampert, Daniel Weber, Christian Rossow, Michael Schwarz"
+CVE-2026-24868,2026,2026-Q1,2026-01-27,Moderate,other,Masato Kinugawa
+CVE-2026-24869,2026,2026-Q1,2026-01-27,High,other,Hiroyuki Ikezoe
+CVE-2026-2032,2026,2026-Q1,2026-02-09,High,other,Qadhafy Muhammad Tera
+CVE-2026-2447,2026,2026-Q1,2026-02-16,High,other,jayjayjazz
+CVE-2026-2634,2026,2026-Q1,2026-02-20,High,other,Renwa
+CVE-2026-2757,2026,2026-Q1,2026-02-24,High,other,Igor Morgenstern
+CVE-2026-2758,2026,2026-Q1,2026-02-24,High,other,Gary Kwong
+CVE-2026-2759,2026,2026-Q1,2026-02-24,High,other,Steven Julian
+CVE-2026-2760,2026,2026-Q1,2026-02-24,High,other,Oskar L
+CVE-2026-2761,2026,2026-Q1,2026-02-24,High,other,Oskar L
+CVE-2026-2762,2026,2026-Q1,2026-02-24,High,other,André Bargull
+CVE-2026-2763,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2764,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2765,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2766,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2767,2026,2026-Q1,2026-02-24,High,other,Sajeeb Lohani
+CVE-2026-2768,2026,2026-Q1,2026-02-24,High,other,Sajeeb Lohani
+CVE-2026-2769,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2770,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2771,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2772,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2773,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2774,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2775,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2776,2026,2026-Q1,2026-02-24,High,other,Sajeeb Lohani
+CVE-2026-2777,2026,2026-Q1,2026-02-24,High,other,Richard Belisle
+CVE-2026-2778,2026,2026-Q1,2026-02-24,High,other,Sajeeb Lohani
+CVE-2026-2779,2026,2026-Q1,2026-02-24,Moderate,other,Alex Mayorga
+CVE-2026-2780,2026,2026-Q1,2026-02-24,Moderate,other,RyotaK of GMO Flatt Security Inc.
+CVE-2026-2781,2026,2026-Q1,2026-02-24,Moderate,other,Clay Ver Valen
+CVE-2026-2782,2026,2026-Q1,2026-02-24,Moderate,other,Cody
+CVE-2026-2783,2026,2026-Q1,2026-02-24,Moderate,other,x0e
+CVE-2026-2784,2026,2026-Q1,2026-02-24,Moderate,other,D. Santos
+CVE-2026-2785,2026,2026-Q1,2026-02-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2786,2026,2026-Q1,2026-02-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2787,2026,2026-Q1,2026-02-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2788,2026,2026-Q1,2026-02-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2789,2026,2026-Q1,2026-02-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2790,2026,2026-Q1,2026-02-24,Low,other,Surya Dev Singh
+CVE-2026-2791,2026,2026-Q1,2026-02-24,Low,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2792,2026,2026-Q1,2026-02-24,High,other,"Andrew McCreight, Maurice Dauer, Olli Pettay, Ryan Hunt"
+CVE-2026-2793,2026,2026-Q1,2026-02-24,High,other,"Andrew McCreight, Christian Holler"
+CVE-2026-2794,2026,2026-Q1,2026-02-24,High,other,Steven Julian
+CVE-2026-2795,2026,2026-Q1,2026-02-24,High,other,x0e
+CVE-2026-2796,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2797,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2798,2026,2026-Q1,2026-02-24,High,other,Sajeeb Lohani
+CVE-2026-2799,2026,2026-Q1,2026-02-24,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2800,2026,2026-Q1,2026-02-24,Moderate,other,hafiizh & kang ali
+CVE-2026-2801,2026,2026-Q1,2026-02-24,Moderate,other,Kanaru Sato
+CVE-2026-2802,2026,2026-Q1,2026-02-24,Moderate,other,Gary Kwong
+CVE-2026-2803,2026,2026-Q1,2026-02-24,Moderate,other,Skywarp
+CVE-2026-2804,2026,2026-Q1,2026-02-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2805,2026,2026-Q1,2026-02-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-2806,2026,2026-Q1,2026-02-24,Low,other,Zijie Zhao
+CVE-2026-2807,2026,2026-Q1,2026-02-24,High,other,"Agi Sferro, Andrew McCreight, Randell Jesup, Tom Schuster"
+CVE-2026-2919,2026,2026-Q1,2026-03-02,High,other,Renwa Hiwa
+CVE-2026-3845,2026,2026-Q1,2026-03-10,High,other,Crixer
+CVE-2026-3846,2026,2026-Q1,2026-03-10,High,other,Jun Yang
+CVE-2026-3847,2026,2026-Q1,2026-03-10,High,fuzz,Jon Coppeard and the Mozilla Fuzzing Team
+CVE-2025-59375,2026,2026-Q1,2026-03-24,Low,other,Jan Horak
+CVE-2026-3889,2026,2026-Q1,2026-03-24,Low,other,Eemeli Aro
+CVE-2026-4371,2026,2026-Q1,2026-03-24,High,other,Rintaro Kobayashi
+CVE-2026-4684,2026,2026-Q1,2026-03-24,High,other,Oskar L
+CVE-2026-4685,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4686,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4687,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4688,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4689,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4690,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4691,2026,2026-Q1,2026-03-24,High,other,Fabius Artrel
+CVE-2026-4692,2026,2026-Q1,2026-03-24,High,other,Tom Ritter
+CVE-2026-4693,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4694,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4695,2026,2026-Q1,2026-03-24,High,other,Atte Kettunen
+CVE-2026-4696,2026,2026-Q1,2026-03-24,High,other,Sota Wada
+CVE-2026-4697,2026,2026-Q1,2026-03-24,High,other,Lorenzo
+CVE-2026-4698,2026,2026-Q1,2026-03-24,High,other,maxpl0it working with Trend Micro Zero Day Initiative
+CVE-2026-4699,2026,2026-Q1,2026-03-24,High,other,Matej Smycka
+CVE-2026-4700,2026,2026-Q1,2026-03-24,Moderate,other,pizzahunthack1
+CVE-2026-4701,2026,2026-Q1,2026-03-24,Moderate,other,Gary Kwong
+CVE-2026-4702,2026,2026-Q1,2026-03-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-4704,2026,2026-Q1,2026-03-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-4705,2026,2026-Q1,2026-03-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-4706,2026,2026-Q1,2026-03-24,Moderate,other,Jun Yang
+CVE-2026-4707,2026,2026-Q1,2026-03-24,Moderate,other,Sajeeb Lohani
+CVE-2026-4708,2026,2026-Q1,2026-03-24,Moderate,other,Sajeeb Lohani
+CVE-2026-4709,2026,2026-Q1,2026-03-24,High,other,Sajeeb Lohani
+CVE-2026-4710,2026,2026-Q1,2026-03-24,Moderate,other,Sajeeb Lohani
+CVE-2026-4711,2026,2026-Q1,2026-03-24,Moderate,other,Josh Aas
+CVE-2026-4712,2026,2026-Q1,2026-03-24,Moderate,other,Josh Aas
+CVE-2026-4713,2026,2026-Q1,2026-03-24,Moderate,other,Sajeeb Lohani
+CVE-2026-4714,2026,2026-Q1,2026-03-24,Moderate,other,Sajeeb Lohani
+CVE-2026-4715,2026,2026-Q1,2026-03-24,Moderate,other,Jun Yang
+CVE-2026-4716,2026,2026-Q1,2026-03-24,Moderate,other,Pwn2addr
+CVE-2026-4717,2026,2026-Q1,2026-03-24,Moderate,other,Satoki Tsuji
+CVE-2026-4718,2026,2026-Q1,2026-03-24,Low,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-4719,2026,2026-Q1,2026-03-24,Low,other,Sajeeb Lohani
+CVE-2026-4720,2026,2026-Q1,2026-03-24,High,fuzz,"Christian Holler, Gabriele Svelto, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-4721,2026,2026-Q1,2026-03-24,High,fuzz,"Christian Holler, Timothy Nikkel, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-4722,2026,2026-Q1,2026-03-24,Moderate,other,Nika Layzell
+CVE-2026-4723,2026,2026-Q1,2026-03-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-4724,2026,2026-Q1,2026-03-24,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-4725,2026,2026-Q1,2026-03-24,Moderate,other,Jun Yang
+CVE-2026-4726,2026,2026-Q1,2026-03-24,Low,other,Hanno Boeck
+CVE-2026-4727,2026,2026-Q1,2026-03-24,Low,other,Cody
+CVE-2026-4728,2026,2026-Q1,2026-03-24,Low,other,Aswinkumar Gokulakannan
+CVE-2026-4729,2026,2026-Q1,2026-03-24,High,fuzz,"Christian Holler, Fatih Kilic, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-5731,2026,2026-Q2,2026-04-07,High,fuzz,"Brian Grinstead, Christian Holler, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-5732,2026,2026-Q2,2026-04-07,High,other,Sajeeb Lohani
+CVE-2026-5733,2026,2026-Q2,2026-04-07,High,other,Inseo An
+CVE-2026-5734,2026,2026-Q2,2026-04-07,High,fuzz,"Brian Grinstead, Christian Holler, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-5735,2026,2026-Q2,2026-04-07,High,fuzz,"Brian Grinstead, Christian Holler and the Mozilla Fuzzing Team"
+CVE-2026-6746,2026,2026-Q2,2026-04-21,High,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-6747,2026,2026-Q2,2026-04-21,High,other,Nan Wang
+CVE-2026-6748,2026,2026-Q2,2026-04-21,High,other,Inseo An
+CVE-2026-6749,2026,2026-Q2,2026-04-21,High,other,Inseo An
+CVE-2026-6750,2026,2026-Q2,2026-04-21,High,other,choeseyeong
+CVE-2026-6751,2026,2026-Q2,2026-04-21,High,other,Joren Afman
+CVE-2026-6752,2026,2026-Q2,2026-04-21,High,other,jmwebdevelopement
+CVE-2026-6753,2026,2026-Q2,2026-04-21,High,other,jmwebdevelopement
+CVE-2026-6754,2026,2026-Q2,2026-04-21,High,other,Xuehao Guo
+CVE-2026-6755,2026,2026-Q2,2026-04-21,Moderate,other,paranoidmoth
+CVE-2026-6756,2026,2026-Q2,2026-04-21,Moderate,other,Hafiizh & Kang Ali
+CVE-2026-6757,2026,2026-Q2,2026-04-21,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-6758,2026,2026-Q2,2026-04-21,Moderate,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+CVE-2026-6759,2026,2026-Q2,2026-04-21,Moderate,other,Steven Michaud
+CVE-2026-6760,2026,2026-Q2,2026-04-21,Moderate,other,Richard Belisle
+CVE-2026-6761,2026,2026-Q2,2026-04-21,Moderate,other,kiyong
+CVE-2026-6762,2026,2026-Q2,2026-04-21,Moderate,other,Farras Givari
+CVE-2026-6763,2026,2026-Q2,2026-04-21,Moderate,other,Tomoya Nakanishi
+CVE-2026-6764,2026,2026-Q2,2026-04-21,Moderate,other,Florian
+CVE-2026-6765,2026,2026-Q2,2026-04-21,Moderate,other,ABDULAZIZ ALASAIQAH
+CVE-2026-6766,2026,2026-Q2,2026-04-21,Moderate,other,Haruto Kimura
+CVE-2026-6767,2026,2026-Q2,2026-04-21,Moderate,other,Haruto Kimura
+CVE-2026-6768,2026,2026-Q2,2026-04-21,Moderate,other,Satoki Tsuji
+CVE-2026-6769,2026,2026-Q2,2026-04-21,Moderate,other,Tomoya Nakanishi
+CVE-2026-6770,2026,2026-Q2,2026-04-21,Moderate,other,Dai
+CVE-2026-6771,2026,2026-Q2,2026-04-21,Moderate,other,Rayhan Hanaputra
+CVE-2026-6772,2026,2026-Q2,2026-04-21,Moderate,other,sseehra
+CVE-2026-6773,2026,2026-Q2,2026-04-21,Low,other,Richard Belisle
+CVE-2026-6774,2026,2026-Q2,2026-04-21,Low,other,lebr0nli
+CVE-2026-6775,2026,2026-Q2,2026-04-21,Low,other,Nan Wang
+CVE-2026-6776,2026,2026-Q2,2026-04-21,Low,other,Nan Wang
+CVE-2026-6777,2026,2026-Q2,2026-04-21,Low,other,b00rito
+CVE-2026-6778,2026,2026-Q2,2026-04-21,Low,other,chanhokim
+CVE-2026-6779,2026,2026-Q2,2026-04-21,Low,other,Gary Kwong
+CVE-2026-6780,2026,2026-Q2,2026-04-21,Low,other,LatticeBased
+CVE-2026-6781,2026,2026-Q2,2026-04-21,Low,other,LatticeBased
+CVE-2026-6782,2026,2026-Q2,2026-04-21,Low,other,Yuki Umemura
+CVE-2026-6783,2026,2026-Q2,2026-04-21,Low,other,crixer
+CVE-2026-6784,2026,2026-Q2,2026-04-21,High,fuzz,"Ben Visness, Brian Grinstead, Christian Holler, Dimi Lee, Jens Stutte, Jim Mathies, John Schanck, Jon Coppeard, Karl Tomlinson, Maurice Dauer, Nika Layzell, Randell Jesup, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-6785,2026,2026-Q2,2026-04-21,High,fuzz,"Andrew McCreight, Ashley Zebrowski, Brian Grinstead, Christian Holler, Maurice Dauer, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-6786,2026,2026-Q2,2026-04-21,High,fuzz,"Alex Franchuk, Andrew McCreight, Brian Grinstead, Christian Holler, Jan de Mooij, Maurice Dauer, Sebastian Hengst, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-7321,2026,2026-Q2,2026-04-21,Moderate,fuzz,The Mozilla Fuzzing Team
+CVE-2026-8091,2026,2026-Q2,2026-04-21,High,fuzz,The Mozilla Fuzzing Team
+CVE-2026-7320,2026,2026-Q2,2026-04-28,High,other,Xuehao Guo
+CVE-2026-7322,2026,2026-Q2,2026-04-28,Critical,fuzz,"C.M.Chang, Christian Holler, Steve Fink and the Mozilla Fuzzing Team"
+CVE-2026-7323,2026,2026-Q2,2026-04-28,High,fuzz,"Ryan Hunt, Steve Fink and the Mozilla Fuzzing Team"
+CVE-2026-7324,2026,2026-Q2,2026-04-28,High,fuzz,The Mozilla Fuzzing Team
+CVE-2026-8090,2026,2026-Q2,2026-05-07,High,other,Kevin Brosnan
+CVE-2026-8092,2026,2026-Q2,2026-05-07,High,fuzz,"Andrew McCreight, Christian Holler, Lee Salzman, Maurice Dauer, Tom Schuster, Wayne Mery and the Mozilla Fuzzing Team"
+CVE-2026-8093,2026,2026-Q2,2026-05-07,High,fuzz,"Andy Leiserson, Jan de Mooij, Michael Froman and the Mozilla Fuzzing Team"
+CVE-2026-8094,2026,2026-Q2,2026-05-07,High,other,Michael Froman
+CVE-2026-8388,2026,2026-Q2,2026-05-12,High,other,ggwhyp
+CVE-2026-8389,2026,2026-Q2,2026-05-12,High,other,ggwhyp
+CVE-2026-8390,2026,2026-Q2,2026-05-12,High,ai_affiliated,"OpenAI Preparedness, Bill Demirkapi"
+CVE-2026-8391,2026,2026-Q2,2026-05-12,High,other,ggwhyp
+CVE-2026-8401,2026,2026-Q2,2026-05-12,High,other,ggwhyp
+CVE-2026-8706,2026,2026-Q2,2026-05-19,High,other,Muneaki Nishimura
+CVE-2026-8945,2026,2026-Q2,2026-05-19,High,other,Daisuke Hatakeyama and Shota Matsuda
+CVE-2026-8946,2026,2026-Q2,2026-05-19,High,other,zx
+CVE-2026-8947,2026,2026-Q2,2026-05-19,High,other,Satoki Tsuji
+CVE-2026-8948,2026,2026-Q2,2026-05-19,High,other,satyamasd
+CVE-2026-8949,2026,2026-Q2,2026-05-19,Moderate,other,q1
+CVE-2026-8950,2026,2026-Q2,2026-05-19,Moderate,other,Jakub Szymsza
+CVE-2026-8951,2026,2026-Q2,2026-05-19,Moderate,other,yfbug123
+CVE-2026-8952,2026,2026-Q2,2026-05-19,Moderate,other,Tomoya Nakanishi
+CVE-2026-8953,2026,2026-Q2,2026-05-19,Moderate,other,Steven Julian
+CVE-2026-8954,2026,2026-Q2,2026-05-19,Moderate,other,Ameen Basha M K
+CVE-2026-8955,2026,2026-Q2,2026-05-19,Moderate,other,lebr0nli
+CVE-2026-8956,2026,2026-Q2,2026-05-19,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-8957,2026,2026-Q2,2026-05-19,Moderate,other,Mateusz Dobrzyński
+CVE-2026-8958,2026,2026-Q2,2026-05-19,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-8959,2026,2026-Q2,2026-05-19,Moderate,other,Ameen Basha M K
+CVE-2026-8960,2026,2026-Q2,2026-05-19,Low,other,Kanaru Sato
+CVE-2026-8961,2026,2026-Q2,2026-05-19,Low,other,Hafiizh
+CVE-2026-8962,2026,2026-Q2,2026-05-19,Low,other,Manojkumar Jaganathan
+CVE-2026-8963,2026,2026-Q2,2026-05-19,Low,other,Qadhafy Muhammad Tera
+CVE-2026-8964,2026,2026-Q2,2026-05-19,Low,other,Satoki Tsuji
+CVE-2026-8965,2026,2026-Q2,2026-05-19,Low,other,Shihab Mirza
+CVE-2026-8966,2026,2026-Q2,2026-05-19,Low,other,Rintaro Kobayashi
+CVE-2026-8967,2026,2026-Q2,2026-05-19,Low,other,Inseo An
+CVE-2026-8968,2026,2026-Q2,2026-05-19,Low,other,Tristan Madani
+CVE-2026-8969,2026,2026-Q2,2026-05-19,Low,other,Atsushi Sada
+CVE-2026-8970,2026,2026-Q2,2026-05-19,Low,other,pakhunov.anton.n
+CVE-2026-8971,2026,2026-Q2,2026-05-19,Low,other,Surya Dev Singh
+CVE-2026-8972,2026,2026-Q2,2026-05-19,Low,other,pakhunov.anton.n
+CVE-2026-8973,2026,2026-Q2,2026-05-19,High,fuzz,"Andrew Creskey, Andrew Osmond, Dana Keeler, Henri Sivonen, Jed Davis, John Schanck, Jon Coppeard, Justin Link, Michael Froman, Nika Layzell, Noah Lokocz, Randell Jesup, Steve Fink, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-8974,2026,2026-Q2,2026-05-19,Moderate,fuzz,"Nika Layzell, Randell Jesup, Timothy Nikkel, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-8975,2026,2026-Q2,2026-05-19,High,fuzz,"Andrew McCreight, Valentin Gosu, Nika Layzell, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-9078,2026,2026-Q2,2026-05-25,Low,other,Barath Stalin K
+CVE-2026-9308,2026,2026-Q2,2026-06-01,High,other,Muneaki Nishimura
+CVE-2026-9309,2026,2026-Q2,2026-06-01,High,other,Muneaki Nishimura
+CVE-2026-10701,2026,2026-Q2,2026-06-02,High,other,taiho kim
+CVE-2026-10702,2026,2026-Q2,2026-06-02,High,other,Nebula Security
+CVE-2026-11799,2026,2026-Q2,2026-06-09,High,other,Renwa Hiwa
+CVE-2026-12289,2026,2026-Q2,2026-06-16,High,other,choeseyeong
+CVE-2026-12290,2026,2026-Q2,2026-06-16,High,other,jayjayjazz
+CVE-2026-12291,2026,2026-Q2,2026-06-16,High,other,Zijie Zhao
+CVE-2026-12292,2026,2026-Q2,2026-06-16,High,other,Zijie Zhao
+CVE-2026-12293,2026,2026-Q2,2026-06-16,High,other,superhei
+CVE-2026-12294,2026,2026-Q2,2026-06-16,High,other,Quy Pham
+CVE-2026-12295,2026,2026-Q2,2026-06-16,High,other,Yaqoub Aldurayhim
+CVE-2026-12296,2026,2026-Q2,2026-06-16,High,other,Yaqoub Aldurayhim
+CVE-2026-12297,2026,2026-Q2,2026-06-16,High,other,zx
+CVE-2026-12298,2026,2026-Q2,2026-06-16,High,other,Haruka Yamazaki
+CVE-2026-12299,2026,2026-Q2,2026-06-16,High,other,Hyeonjun Ahn
+CVE-2026-12300,2026,2026-Q2,2026-06-16,Moderate,other,Niklas
+CVE-2026-12301,2026,2026-Q2,2026-06-16,Moderate,other,Richard Belisle
+CVE-2026-12302,2026,2026-Q2,2026-06-16,Moderate,other,lebr0nli
+CVE-2026-12303,2026,2026-Q2,2026-06-16,Moderate,other,Michal Andryskowski
+CVE-2026-12304,2026,2026-Q2,2026-06-16,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-12305,2026,2026-Q2,2026-06-16,Moderate,other,Zijie Zhao
+CVE-2026-12306,2026,2026-Q2,2026-06-16,Moderate,other,Mihalis Haatainen
+CVE-2026-12307,2026,2026-Q2,2026-06-16,Moderate,other,Atsushi Sada
+CVE-2026-12308,2026,2026-Q2,2026-06-16,Moderate,other,Mihalis Haatainen
+CVE-2026-12309,2026,2026-Q2,2026-06-16,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-12310,2026,2026-Q2,2026-06-16,Moderate,other,Carl Pearson
+CVE-2026-12311,2026,2026-Q2,2026-06-16,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-12312,2026,2026-Q2,2026-06-16,Moderate,other,Rintaro Kawasugi
+CVE-2026-12313,2026,2026-Q2,2026-06-16,Moderate,other,evyatar
+CVE-2026-12314,2026,2026-Q2,2026-06-16,Moderate,other,satyamasd
+CVE-2026-12315,2026,2026-Q2,2026-06-16,Moderate,other,Nguyen Minh
+CVE-2026-12316,2026,2026-Q2,2026-06-16,Moderate,other,Frederik Braun
+CVE-2026-12317,2026,2026-Q2,2026-06-16,Low,other,Frédéric Wang Nélar
+CVE-2026-12318,2026,2026-Q2,2026-06-16,Low,other,Haruto Kimura
+CVE-2026-12319,2026,2026-Q2,2026-06-16,Low,other,jmwebdevelopement
+CVE-2026-12320,2026,2026-Q2,2026-06-16,Low,other,Av0id
+CVE-2026-12321,2026,2026-Q2,2026-06-16,Low,other,JunYoung Park
+CVE-2026-12322,2026,2026-Q2,2026-06-16,Low,other,Abdan Alkayyis
+CVE-2026-12323,2026,2026-Q2,2026-06-16,Low,other,Jody Ritonga
+CVE-2026-12324,2026,2026-Q2,2026-06-16,Low,other,Mihalis Haatainen
+CVE-2026-12325,2026,2026-Q2,2026-06-16,Low,other,Securin
+CVE-2026-12326,2026,2026-Q2,2026-06-16,High,fuzz,"Ashley Zebrowski, Christian Holler, Dan Baker, Jan de Mooij, Jon Coppeard, Maurice Dauer, Nicolas B. Pierron, Nika Layzell, Randell Jesup, Rob Wu, Ryan Hunt, Steve Fink, Tom Schuster, Tomoya Nakanishi, Yannis Juglaret, Serge Guelton and the Mozilla Fuzzing Team"
+CVE-2026-12327,2026,2026-Q2,2026-06-16,Moderate,fuzz,"Christian Holler, Jens Stutte, Nika Layzell, Randell Jesup, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-12328,2026,2026-Q2,2026-06-16,High,fuzz,"Andrew McCreight, Randell Jesup, Tom Ritter and the Mozilla Fuzzing Team"
+CVE-2026-12329,2026,2026-Q2,2026-06-16,High,other,Michael Froman
+CVE-2026-12330,2026,2026-Q2,2026-06-16,Moderate,fuzz,Mozilla Fuzzing Team
+CVE-2026-53899,2026,2026-Q2,2026-06-16,High,other,Muneaki Nishimura
+CVE-2026-53900,2026,2026-Q2,2026-06-16,High,other,Muneaki Nishimura
+CVE-2026-14241,2026,2026-Q2,2026-06-30,High,fuzz,"Christian Holler, Gabriele Svelto, Greg Stoll and the Mozilla Fuzzing Team"
+CVE-2026-57962,2026,2026-Q2,2026-06-30,Unrated,other,Michael Bommarito
+CVE-2026-57963,2026,2026-Q2,2026-06-30,High,other,Michael Bommarito
+CVE-2026-13356,2026,2026-Q3,2026-07-05,Moderate,other,Azza Tegar Naufal Ataullah
+CVE-2026-14906,2026,2026-Q3,2026-07-13,Low,other,Muneaki Nishimura
+CVE-2026-15718,2026,2026-Q3,2026-07-14,Critical,other,Christian Holler
+CVE-2026-15719,2026,2026-Q3,2026-07-14,Critical,other,Atsushi Sada
+CVE-2026-14899,2026,2026-Q3,2026-07-21,Moderate,explicit_ai,"Claude, Kai Engert"
+CVE-2026-16349,2026,2026-Q3,2026-07-21,High,other,Tran Quac
+CVE-2026-16350,2026,2026-Q3,2026-07-21,High,other,Tomoya Nakanishi
+CVE-2026-16351,2026,2026-Q3,2026-07-21,High,other,Yaqoub Aldurayhim
+CVE-2026-16352,2026,2026-Q3,2026-07-21,High,other,Oskar L
+CVE-2026-16353,2026,2026-Q3,2026-07-21,High,other,fedek
+CVE-2026-16354,2026,2026-Q3,2026-07-21,High,other,satyamasd
+CVE-2026-16355,2026,2026-Q3,2026-07-21,High,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-16356,2026,2026-Q3,2026-07-21,High,other,Oskar L
+CVE-2026-16357,2026,2026-Q3,2026-07-21,High,other,5up3rh3i
+CVE-2026-16358,2026,2026-Q3,2026-07-21,Moderate,other,Hcamael
+CVE-2026-16359,2026,2026-Q3,2026-07-21,Moderate,other,Jacolon Walker
+CVE-2026-16360,2026,2026-Q3,2026-07-21,High,fuzz,"Andrew McCreight, Jan de Mooij, Tom Ritter, Vincent Hilla and the Mozilla Fuzzing Team"
+CVE-2026-16361,2026,2026-Q3,2026-07-21,High,fuzz,The Mozilla Fuzzing Team
+CVE-2026-16362,2026,2026-Q3,2026-07-21,High,other,crixer
+CVE-2026-16363,2026,2026-Q3,2026-07-21,High,other,Nebula Security
+CVE-2026-16364,2026,2026-Q3,2026-07-21,High,other,Steven Julian | stevej
+CVE-2026-16365,2026,2026-Q3,2026-07-21,High,other,Khanh Nguyen
+CVE-2026-16366,2026,2026-Q3,2026-07-21,High,other,Khanh Nguyen
+CVE-2026-16367,2026,2026-Q3,2026-07-21,High,other,Oskar L
+CVE-2026-16368,2026,2026-Q3,2026-07-21,High,other,Nebula Security
+CVE-2026-16369,2026,2026-Q3,2026-07-21,High,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-16370,2026,2026-Q3,2026-07-21,Moderate,other,tiebuchen
+CVE-2026-16371,2026,2026-Q3,2026-07-21,Moderate,other,Steven Julian | stevej
+CVE-2026-16372,2026,2026-Q3,2026-07-21,Moderate,other,Sajeeb Lohani
+CVE-2026-16373,2026,2026-Q3,2026-07-21,Moderate,other,Satoki Tsuji
+CVE-2026-16374,2026,2026-Q3,2026-07-21,Moderate,other,Tomoya Nakanishi
+CVE-2026-16375,2026,2026-Q3,2026-07-21,Moderate,other,pakhunov.anton.n
+CVE-2026-16376,2026,2026-Q3,2026-07-21,Moderate,other,Mihalis Haatainen
+CVE-2026-16377,2026,2026-Q3,2026-07-21,Moderate,other,Nikola Kojic
+CVE-2026-16378,2026,2026-Q3,2026-07-21,Moderate,other,Farhad Sajid Barbhuiya
+CVE-2026-16379,2026,2026-Q3,2026-07-21,Moderate,other,Shu Takahashi
+CVE-2026-16380,2026,2026-Q3,2026-07-21,Moderate,other,Rintaro Kawasugi
+CVE-2026-16381,2026,2026-Q3,2026-07-21,Moderate,other,Rintaro Kawasugi
+CVE-2026-16382,2026,2026-Q3,2026-07-21,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-16383,2026,2026-Q3,2026-07-21,Moderate,other,Ibuki Sato and Tomoya Nakanishi
+CVE-2026-16384,2026,2026-Q3,2026-07-21,Moderate,other,5up3rh3i
+CVE-2026-16385,2026,2026-Q3,2026-07-21,Moderate,other,5up3rh3i
+CVE-2026-16386,2026,2026-Q3,2026-07-21,Moderate,other,5up3rh3i
+CVE-2026-16387,2026,2026-Q3,2026-07-21,Moderate,other,Atsushi Sada
+CVE-2026-16388,2026,2026-Q3,2026-07-21,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-16389,2026,2026-Q3,2026-07-21,Moderate,other,Tomoya Nakanishi
+CVE-2026-16390,2026,2026-Q3,2026-07-21,Moderate,other,Souma Ohsawa
+CVE-2026-16391,2026,2026-Q3,2026-07-21,Moderate,other,Tomoya Nakanishi
+CVE-2026-16392,2026,2026-Q3,2026-07-21,Moderate,other,Gary Kwong
+CVE-2026-16393,2026,2026-Q3,2026-07-21,Moderate,other,Atsushi Sada
+CVE-2026-16394,2026,2026-Q3,2026-07-21,Moderate,other,Nithissh
+CVE-2026-16395,2026,2026-Q3,2026-07-21,Moderate,other,Steven Julian | stevej
+CVE-2026-16396,2026,2026-Q3,2026-07-21,Moderate,other,Quy Pham
+CVE-2026-16397,2026,2026-Q3,2026-07-21,Moderate,other,Hafiizh
+CVE-2026-16398,2026,2026-Q3,2026-07-21,Moderate,other,Steven Julian | stevej
+CVE-2026-16399,2026,2026-Q3,2026-07-21,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-16400,2026,2026-Q3,2026-07-21,Moderate,other,Rintaro Kawasugi
+CVE-2026-16401,2026,2026-Q3,2026-07-21,Moderate,other,Brian Carpenter
+CVE-2026-16402,2026,2026-Q3,2026-07-21,Moderate,other,Kai Martin
+CVE-2026-16403,2026,2026-Q3,2026-07-21,Low,other,Renwa
+CVE-2026-16404,2026,2026-Q3,2026-07-21,Low,other,Khiem Tran
+CVE-2026-16405,2026,2026-Q3,2026-07-21,Low,other,Yaqoub Aldurayhim
+CVE-2026-16406,2026,2026-Q3,2026-07-21,Low,other,Rintaro Kawasugi
+CVE-2026-16407,2026,2026-Q3,2026-07-21,Low,other,bug2own
+CVE-2026-16408,2026,2026-Q3,2026-07-21,Low,other,5up3rh3i
+CVE-2026-16409,2026,2026-Q3,2026-07-21,Low,ai_affiliated,Artur Cygan of Trail of Bits in partnership with OpenAI
+CVE-2026-16410,2026,2026-Q3,2026-07-21,Low,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-16411,2026,2026-Q3,2026-07-21,High,fuzz,"C.M.Chang, Christian Holler, David Parks, Dennis Jackson, Gabriele Svelto, Hafiizh, Henrik Skupin, Jan de Mooij, Jens Stutte, Paul Theriault, Randell Jesup, Rob Wu, Tom Ritter, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-16412,2026,2026-Q3,2026-07-21,High,fuzz,"Christian Holler, Frederik Braun, Justin Link, Simon Friedberger, Tom Ritter, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-18809,2026,2026-Q3,2026-08-04,High,fuzz,The Mozilla Fuzzing Team

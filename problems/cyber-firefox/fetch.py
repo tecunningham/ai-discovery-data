@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""Rebuild this folder's two CSVs from Mozilla's security-advisory repository.
+"""Rebuild this folder's CSVs from Mozilla's security-advisory repository.
 
 Run: python3 problems/cyber-firefox/fetch.py
 
 Mozilla publishes one YAML file per advisory under announce/, with a `reporter`
-string against each CVE, which makes Firefox a fixed codebase with named finders.
-Counts are by the advisory's `announced` year. Pre-2016 advisories do not list
-CVEs in this structure, so the series starts there. Two views come out of the
-repository: annual counts split by credit, and one row per reporter per year.
+string and an `impact` rating against each CVE, which makes Firefox a fixed
+codebase with named finders and a native severity scale. Counts are by the
+advisory's `announced` year. Pre-2016 advisories do not list CVEs in this
+structure, so the series starts there. Four views come out of the repository:
+one row per distinct CVE (the granular ledger the others summarize), quarterly
+counts split by credit band, annual counts split by credit, and one row per
+reporter per year. Advisories announced after lib/chart.py's AS_OF_DATE are
+skipped, so a refetch reproduces the committed window.
 
 The plotted unit is the distinct CVE. Mozilla repeats one CVE across the Firefox,
 Firefox ESR and Thunderbird advisories of a release, so a mention count moves
@@ -28,7 +32,7 @@ import re
 import sys
 import tarfile
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -37,6 +41,37 @@ sys.path.insert(0, str(HERE.parents[1]))
 from lib.credits import Signals, band, classify, signals  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch  # noqa: E402
+
+# Mozilla's own scale, mildest first. Advisories rate each CVE (or, on older
+# files, the advisory as a whole); a CVE mentioned at several impacts keeps the
+# most severe, and one with no parseable rating is counted as unrated rather
+# than dropped.
+IMPACTS = ["Low", "Moderate", "High", "Critical"]
+
+
+def as_of_date() -> date:
+    """The repository's committed snapshot date, read from lib/chart.py.
+
+    Parsed rather than imported so a fetch does not pull in matplotlib; the
+    same regex tools/check.py uses to enforce the date against every CSV.
+    """
+    text = (HERE.parents[1] / "lib/chart.py").read_text(encoding="utf-8")
+    match = re.search(
+        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)", text, re.M
+    )
+    if not match:
+        raise SystemExit("lib/chart.py has no parseable AS_OF_DATE")
+    return date(*(int(part) for part in match.groups()))
+
+
+def normalize_impact(value: str) -> str:
+    cleaned = str(value or "").strip().capitalize()
+    return cleaned if cleaned in IMPACTS else "Unrated"
+
+
+def impact_rank(value: str) -> int:
+    """Position on Mozilla's scale; Unrated sorts below every real rating."""
+    return IMPACTS.index(value) if value in IMPACTS else -1
 
 # codeload's /tar.gz/<branch> form 404s for this repo; the archive URL works.
 URL = (
@@ -73,9 +108,12 @@ def records() -> list[dict]:
             except Exception:
                 continue
             announced_text = str(parsed.get("announced") or "")
+            # A few advisories write ordinals — "December 15th, 2025" — which
+            # strptime's %d does not accept.
+            plain = re.sub(r"(\d{1,2})(st|nd|rd|th)\b", r"\1", announced_text)
             try:
                 announced_date = datetime.strptime(
-                    announced_text, "%B %d, %Y"
+                    plain, "%B %d, %Y"
                 ).date().isoformat()
             except ValueError:
                 announced_date = ""
@@ -84,19 +122,118 @@ def records() -> list[dict]:
                     # parser does not know must be said out loud, not dropped.
                     print(f"  unparseable announced date {announced_text!r} "
                           f"in {member.name}")
+            advisory_impact = str(parsed.get("impact") or "")
             for key, value in (parsed.get("advisories") or {}).items():
                 if not str(key).startswith("CVE"):
                     continue
                 reporter = (
                     str(value.get("reporter", "")) if isinstance(value, dict) else ""
                 )
+                impact = (
+                    str(value.get("impact", "")) if isinstance(value, dict) else ""
+                )
                 rows.append({
                     "year": year,
                     "announced": announced_date,
                     "cve": str(key),
                     "reporter": reporter,
+                    "impact": normalize_impact(impact or advisory_impact),
                 })
-    return rows
+    cutoff = as_of_date()
+    kept = [row for row in rows
+            if (row["announced"] <= cutoff.isoformat() if row["announced"]
+                else row["year"] <= cutoff.year)]
+    if len(kept) != len(rows):
+        print(f"  {len(rows) - len(kept)} advisory-CVE mentions announced "
+              f"after {cutoff.isoformat()} dropped (snapshot cap)")
+    return kept
+
+
+def build_cves(rows: list[dict]) -> list[dict]:
+    """One row per distinct CVE per year: the ledger the aggregates summarize.
+
+    Signals are unioned across a year's mentions before the band precedence is
+    applied, exactly as build_annual counts them, so summing this file by year
+    and band reproduces the annual unique columns. The impact keeps the most
+    severe rating any mention carries, and the date is the earliest
+    announcement, which is where the quarterly view places the CVE.
+    """
+    merged: dict[tuple[int, str], dict] = {}
+    for record in rows:
+        key = (record["year"], record["cve"])
+        entry = merged.setdefault(key, {
+            "date": record["announced"],
+            "impact": record["impact"],
+            "signals": Signals(False, False, False),
+            "reporters": [],
+        })
+        if record["announced"]:
+            entry["date"] = (min(entry["date"], record["announced"])
+                             if entry["date"] else record["announced"])
+        if impact_rank(record["impact"]) > impact_rank(entry["impact"]):
+            entry["impact"] = record["impact"]
+        marks = signals(record["reporter"], record["year"])
+        entry["signals"] = Signals(
+            explicit_ai=entry["signals"].explicit_ai or marks.explicit_ai,
+            ai_affiliated=entry["signals"].ai_affiliated or marks.ai_affiliated,
+            fuzz=entry["signals"].fuzz or marks.fuzz,
+        )
+        reporter = record["reporter"].strip()
+        if reporter and reporter not in entry["reporters"]:
+            entry["reporters"].append(reporter)
+    out = [
+        {
+            "cve": cve,
+            "year": year,
+            "quarter": (f"{entry['date'][:4]}-Q{(int(entry['date'][5:7]) + 2) // 3}"
+                        if entry["date"] else ""),
+            "date": entry["date"],
+            "impact": entry["impact"],
+            "band": entry["signals"].band,
+            "reporters": " | ".join(entry["reporters"]),
+        }
+        for (year, cve), entry in sorted(
+            merged.items(), key=lambda item: (item[1]["date"] or f"{item[0][0]}",
+                                              item[0][1])
+        )
+    ]
+    rated = sum(row["impact"] != "Unrated" for row in out)
+    print(f"firefox CVE ledger: {len(out)} rows, {rated} carrying an impact "
+          f"rating, {sum(not row['date'] for row in out)} without a parseable "
+          "date")
+    return out
+
+
+def build_quarterly(cve_rows: list[dict]) -> list[dict]:
+    """Distinct CVEs per quarter by band, from the per-CVE ledger.
+
+    Rows without a parseable announcement date cannot be placed in a quarter
+    and are dropped here (they stay in the annual counts); build_cves prints
+    how many there are, so a quarterly total short of its year's is a stated
+    fact rather than a silent loss.
+    """
+    per_quarter: dict[str, Counter] = defaultdict(Counter)
+    for row in cve_rows:
+        if not row["quarter"]:
+            continue
+        bucket = per_quarter[row["quarter"]]
+        bucket["unique_cves"] += 1
+        bucket[row["band"]] += 1
+    latest = max((row["date"] for row in cve_rows if row["date"]), default="")
+    last_quarter = max(per_quarter) if per_quarter else ""
+    return [
+        {
+            "quarter": quarter,
+            "unique_cves": per_quarter[quarter]["unique_cves"],
+            "explicit_ai": per_quarter[quarter]["explicit_ai"],
+            "ai_affiliated": per_quarter[quarter]["ai_affiliated"],
+            "fuzz": per_quarter[quarter]["fuzz"],
+            "other": per_quarter[quarter]["other"],
+            "partial_quarter": "yes" if quarter == last_quarter else "no",
+            "data_through": latest if quarter == last_quarter else "",
+        }
+        for quarter in sorted(per_quarter)
+    ]
 
 
 def build_annual(rows: list[dict]) -> list[dict]:
@@ -243,6 +380,9 @@ def build_ai_cves(rows: list[dict]) -> list[dict]:
 
 def main() -> None:
     rows = records()
+    cve_rows = build_cves(rows)
+    write_csv(HERE / "firefox-cves.csv", cve_rows)
+    write_csv(HERE / "firefox-quarterly.csv", build_quarterly(cve_rows))
     write_csv(HERE / "firefox-advisories.csv", build_annual(rows))
     write_csv(HERE / "firefox-finders.csv", build_finders(rows))
     write_csv(HERE / "firefox-ai-cves.csv", build_ai_cves(rows))

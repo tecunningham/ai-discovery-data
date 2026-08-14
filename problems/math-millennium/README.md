@@ -1,12 +1,12 @@
 # Millennium Prize Problems
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 7 scored rows
-**Coverage:** list posed 2000; one dated resolution, 2003; statuses read 2026-08-14
-**Data:** [`millennium-problems.csv`](millennium-problems.csv)
-**Upstream:** <https://www.claymath.org/millennium-problems/>
-**Verdict:** no acceleration — 0 resolutions in 2026; 1 dated resolution (2003) over 2000–2025
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 7 scored rows
+- **Coverage:** list posed 2000; one dated resolution, 2003; statuses read 2026-08-14
+- **Data:** [`millennium-problems.csv`](millennium-problems.csv)
+- **Upstream:** <https://www.claymath.org/millennium-problems/>
+- **Verdict:** no acceleration — 0 resolutions in 2026; 1 dated resolution (2003) over 2000–2025
 
 ![Dated resolutions per year.](discovery-math-millennium.png)
 

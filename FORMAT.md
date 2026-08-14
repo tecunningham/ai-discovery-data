@@ -8,7 +8,9 @@ argument belong to the documents that cite these pages, not to the pages.
 
 ## Front matter
 
-Every page opens with one `#` title and these `**Field:**` lines, in order:
+Every page opens with one `#` title and these `- **Field:**` bullet lines, in
+order. They are bullets rather than bare lines because markdown joins
+consecutive bare lines into one run-together paragraph:
 
 | Field | Content |
 |---|---|
@@ -29,7 +31,7 @@ against a stated multi-year mean, or against both. The clause contains
 numbers and units only; no argument, no cross-series comparison.
 
 ```
-**Verdict:** no acceleration — 0 dated resolutions in 2026 against 3 in 2025 and a 1.9/year mean over 2019–2025
+- **Verdict:** no acceleration — 0 dated resolutions in 2026 against 3 in 2025 and a 1.9/year mean over 2019–2025
 ```
 
 A series with no meaningful 2026 measurement states why in the same shape

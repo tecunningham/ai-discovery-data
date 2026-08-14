@@ -1,17 +1,17 @@
 # Matrix-multiplication exponent ω
 
-**Domain:** algorithms
-**Role:** control: no-AI baseline
-**Metric:** best proved upper bound on the asymptotic exponent ω of n×n
+- **Domain:** algorithms
+- **Role:** control: no-AI baseline
+- **Metric:** best proved upper bound on the asymptotic exponent ω of n×n
 matrix multiplication; lower is better
-**Coverage:** 1969 to 2024, fifteen recorded steps; transcription current to
+- **Coverage:** 1969 to 2024, fifteen recorded steps; transcription current to
 2026-08-10
-**Data:** [`matrix-multiplication-omega.csv`](matrix-multiplication-omega.csv)
-**Upstream:**
+- **Data:** [`matrix-multiplication-omega.csv`](matrix-multiplication-omega.csv)
+- **Upstream:**
 <https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms>
 (recorded per row in the CSV); the finite small-matrix results are in the
 AlphaEvolve paper at <https://arxiv.org/abs/2506.13131>
-**Verdict:** declining — 0 new bounds in 2026 and 0 in 2025 against 2 in
+- **Verdict:** declining — 0 new bounds in 2026 and 0 in 2025 against 2 in
 2024; movement of 0.0024 over 2010–2024 against 0.4319 over 1969–1990
 
 ![Best proved upper bound on the matrix-multiplication exponent from 1969 to 2024, every step human.](discovery-matrix-omega.png)

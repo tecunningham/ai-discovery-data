@@ -1,12 +1,12 @@
 # Open-source CVEs represented in OSV
 
-**Domain:** vulnerabilities
-**Role:** discovery series
-**Metric:** distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date
-**Coverage:** 2016–2026, partial through 2026-08-10
-**Data:** quarterly [`osv-cves-by-quarter.csv`](osv-cves-by-quarter.csv); annual [`osv-cves-by-year.csv`](osv-cves-by-year.csv); severity labels in [`osv-severity-by-year.csv`](osv-severity-by-year.csv); finder credits in [`osv-credits-by-year.csv`](osv-credits-by-year.csv); every AI-marked CVE with its credit strings in [`osv-ai-cves.csv`](osv-ai-cves.csv)
-**Upstream:** <https://storage.googleapis.com/osv-vulnerabilities/all.zip> (documentation at <https://google.github.io/osv.dev/data/>)
-**Verdict:** accelerating — 21,321 distinct CVEs through 2026-08-10 annualize to about 35,100, 2.3 times 2025's 15,146
+- **Domain:** vulnerabilities
+- **Role:** discovery series
+- **Metric:** distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date
+- **Coverage:** 2016–2026, partial through 2026-08-10
+- **Data:** quarterly [`osv-cves-by-quarter.csv`](osv-cves-by-quarter.csv); annual [`osv-cves-by-year.csv`](osv-cves-by-year.csv); severity labels in [`osv-severity-by-year.csv`](osv-severity-by-year.csv); finder credits in [`osv-credits-by-year.csv`](osv-credits-by-year.csv); every AI-marked CVE with its credit strings in [`osv-ai-cves.csv`](osv-ai-cves.csv)
+- **Upstream:** <https://storage.googleapis.com/osv-vulnerabilities/all.zip> (documentation at <https://google.github.io/osv.dev/data/>)
+- **Verdict:** accelerating — 21,321 distinct CVEs through 2026-08-10 annualize to about 35,100, 2.3 times 2025's 15,146
 
 ![Quarterly distinct CVEs represented by active affected-package records in OSV.](discovery-cyber-osv-cves.png)
 

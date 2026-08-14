@@ -1,12 +1,12 @@
 # Landau's problems
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 4 scored rows
-**Coverage:** list posed 1912; no dated resolution 1912–2026; statuses read 2026-08-14
-**Data:** [`landau-problems.csv`](landau-problems.csv)
-**Upstream:** <https://en.wikipedia.org/wiki/Landau%27s_problems>
-**Verdict:** no acceleration — 0 resolutions in 2026; 0 dated resolutions over 1912–2025
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 4 scored rows
+- **Coverage:** list posed 1912; no dated resolution 1912–2026; statuses read 2026-08-14
+- **Data:** [`landau-problems.csv`](landau-problems.csv)
+- **Upstream:** <https://en.wikipedia.org/wiki/Landau%27s_problems>
+- **Verdict:** no acceleration — 0 resolutions in 2026; 0 dated resolutions over 1912–2025
 
 ![Dated resolutions per year.](discovery-math-landau.png)
 

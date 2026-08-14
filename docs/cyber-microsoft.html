@@ -41,13 +41,15 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <body>
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Microsoft security-update CVEs</h1>
-<p><strong>Domain:</strong> vulnerabilities
-<strong>Role:</strong> discovery series
-<strong>Metric:</strong> CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
-<strong>Coverage:</strong> 2016–2026, partial through 2026-08-11; no February or March 2016 document exists upstream, so the first year is ten months
-<strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-cves.csv"><code>msrc-cves.csv</code></a>; monthly counts by band in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-monthly.csv"><code>msrc-monthly.csv</code></a>; per-credit rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-finders.csv"><code>msrc-finders.csv</code></a>; every AI-marked CVE with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a>
-<strong>Upstream:</strong> <a href="https://api.msrc.microsoft.com/cvrf/v3.0/updates">https://api.msrc.microsoft.com/cvrf/v3.0/updates</a> (rendered at <a href="https://msrc.microsoft.com/update-guide">https://msrc.microsoft.com/update-guide</a>)
-<strong>Verdict:</strong> accelerating — 1,927 CVEs through 2026-08-11 against 1,243 in 2025; the part year annualizes to about 2.5 times 2025</p>
+<ul>
+<li><strong>Domain:</strong> vulnerabilities</li>
+<li><strong>Role:</strong> discovery series</li>
+<li><strong>Metric:</strong> CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these</li>
+<li><strong>Coverage:</strong> 2016–2026, partial through 2026-08-11; no February or March 2016 document exists upstream, so the first year is ten months</li>
+<li><strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-cves.csv"><code>msrc-cves.csv</code></a>; monthly counts by band in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-monthly.csv"><code>msrc-monthly.csv</code></a>; per-credit rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-finders.csv"><code>msrc-finders.csv</code></a>; every AI-marked CVE with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a></li>
+<li><strong>Upstream:</strong> <a href="https://api.msrc.microsoft.com/cvrf/v3.0/updates">https://api.msrc.microsoft.com/cvrf/v3.0/updates</a> (rendered at <a href="https://msrc.microsoft.com/update-guide">https://msrc.microsoft.com/update-guide</a>)</li>
+<li><strong>Verdict:</strong> accelerating — 1,927 CVEs through 2026-08-11 against 1,243 in 2025; the part year annualizes to about 2.5 times 2025</li>
+</ul>
 <h3>CVEs issued</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial month.</p>

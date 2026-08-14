@@ -1,12 +1,12 @@
 # All software: vulnerabilities disclosed
 
-**Domain:** vulnerabilities
-**Role:** discovery series
-**Metric:** CVEs published per quarter in the US National Vulnerability Database
-**Coverage:** 2016–2026, partial through 2026-08-10
-**Data:** quarterly [`nvd-by-quarter.csv`](nvd-by-quarter.csv); annual totals in [`nvd-by-year.csv`](nvd-by-year.csv)
-**Upstream:** <https://services.nvd.nist.gov/rest/json/cves/2.0> (human-readable at <https://nvd.nist.gov/vuln>)
-**Verdict:** accelerating — 49,838 CVEs through 2026-08-10 annualize to about 82,000, roughly 1.6 times 2025's 49,972, after +32% growth into 2024 and +23% into 2025
+- **Domain:** vulnerabilities
+- **Role:** discovery series
+- **Metric:** CVEs published per quarter in the US National Vulnerability Database
+- **Coverage:** 2016–2026, partial through 2026-08-10
+- **Data:** quarterly [`nvd-by-quarter.csv`](nvd-by-quarter.csv); annual totals in [`nvd-by-year.csv`](nvd-by-year.csv)
+- **Upstream:** <https://services.nvd.nist.gov/rest/json/cves/2.0> (human-readable at <https://nvd.nist.gov/vuln>)
+- **Verdict:** accelerating — 49,838 CVEs through 2026-08-10 annualize to about 82,000, roughly 1.6 times 2025's 49,972, after +32% growth into 2024 and +23% into 2025
 
 ![Quarterly CVE disclosures in the US National Vulnerability Database.](discovery-cyber-nvd-disclosed.png)
 

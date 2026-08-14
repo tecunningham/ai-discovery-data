@@ -1,13 +1,13 @@
 # Stockfish development builds on fixed hardware
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** Elo relative to Stockfish 15, from 20,000 games per build on one
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** Elo relative to Stockfish 15, from 20,000 games per build on one
 fixed machine and time control
-**Coverage:** 2013-04-30 to 2026-07-26, 2,542 tested development builds
-**Data:** [`stockfish-ncm-elo.csv`](stockfish-ncm-elo.csv)
-**Upstream:** <https://nextchessmove.com/dev-builds>
-**Verdict:** no acceleration — 14 Elo through 2026-07-26 (annualizing to
+- **Coverage:** 2013-04-30 to 2026-07-26, 2,542 tested development builds
+- **Data:** [`stockfish-ncm-elo.csv`](stockfish-ncm-elo.csv)
+- **Upstream:** <https://nextchessmove.com/dev-builds>
+- **Verdict:** no acceleration — 14 Elo through 2026-07-26 (annualizing to
 about 24 Elo/year) against 32 Elo in 2025 and a 51 Elo/year mean over
 2013–2026
 

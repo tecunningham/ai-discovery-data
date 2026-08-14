@@ -1,12 +1,12 @@
 # Hilbert's problems
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 28 scored rows
-**Coverage:** list posed 1900; dated resolutions 1900–1998; statuses read 2026-08-14
-**Data:** [`hilbert-problems.csv`](hilbert-problems.csv)
-**Upstream:** <https://en.wikipedia.org/wiki/Hilbert%27s_problems>
-**Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 1998; 12 dated resolutions over 1900–1998
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 28 scored rows
+- **Coverage:** list posed 1900; dated resolutions 1900–1998; statuses read 2026-08-14
+- **Data:** [`hilbert-problems.csv`](hilbert-problems.csv)
+- **Upstream:** <https://en.wikipedia.org/wiki/Hilbert%27s_problems>
+- **Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 1998; 12 dated resolutions over 1900–1998
 
 ![Dated resolutions per year.](discovery-math-hilbert.png)
 

@@ -1,12 +1,12 @@
 # FrontierMath Open Problems
 
-**Domain:** mathematics
-**Role:** discovery series
-**Metric:** dated solution events on Epoch AI's pool of open research problems, placed by curator-assigned notability tier
-**Coverage:** benchmark announced 2026-02-26; pages read 2026-08-14, with recorded solves from 2026-03-23 to 2026-08-12
-**Data:** [`frontiermath-open-problems.csv`](frontiermath-open-problems.csv), [`frontiermath-open-solutions.csv`](frontiermath-open-solutions.csv)
-**Upstream:** <https://epoch.ai/frontiermath/open-problems>
-**Verdict:** too early — 6 dated solves between 2026-03-23 and 2026-08-12; the pool was announced 2026-02-26 and no prior-year rate exists
+- **Domain:** mathematics
+- **Role:** discovery series
+- **Metric:** dated solution events on Epoch AI's pool of open research problems, placed by curator-assigned notability tier
+- **Coverage:** benchmark announced 2026-02-26; pages read 2026-08-14, with recorded solves from 2026-03-23 to 2026-08-12
+- **Data:** [`frontiermath-open-problems.csv`](frontiermath-open-problems.csv), [`frontiermath-open-solutions.csv`](frontiermath-open-solutions.csv)
+- **Upstream:** <https://epoch.ai/frontiermath/open-problems>
+- **Verdict:** too early — 6 dated solves between 2026-03-23 and 2026-08-12; the pool was announced 2026-02-26 and no prior-year rate exists
 
 ![Dated solution events by notability tier, with the surviving pool per tier.](discovery-math-frontiermath-open.png)
 

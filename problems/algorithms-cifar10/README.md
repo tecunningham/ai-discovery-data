@@ -1,15 +1,15 @@
 # CIFAR-10 speedrun
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** seconds of training to 94% test accuracy on CIFAR-10 on a single
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** seconds of training to 94% test accuracy on CIFAR-10 on a single
 A100, per claimed record
-**Coverage:** 2018–2026; the plotted series runs 2022-12-29 to a claim of
+- **Coverage:** 2018–2026; the plotted series runs 2022-12-29 to a claim of
 2026-07-09, with acknowledgment last checked 2026-07-28
-**Data:** [`cifar-speedrun-records.csv`](cifar-speedrun-records.csv)
-**Upstream:** <https://github.com/KellerJordan/cifar10-airbench> and
+- **Data:** [`cifar-speedrun-records.csv`](cifar-speedrun-records.csv)
+- **Upstream:** <https://github.com/KellerJordan/cifar10-airbench> and
 <https://github.com/tysam-code/hlb-CIFAR10>
-**Verdict:** declining — yearly improvement factor 1.09 in 2026 (through
+- **Verdict:** declining — yearly improvement factor 1.09 in 2026 (through
 2026-07-09, claim included) against 1.3 in 2025 and 2.4 in 2024
 
 ![CIFAR-10 speedrun records on a log time axis, with AI records red and the unacknowledged claim open.](discovery-algorithms-cifar10.png)

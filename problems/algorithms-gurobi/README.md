@@ -1,16 +1,16 @@
 # Gurobi mixed-integer programming speed
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** cumulative vendor-reported MILP speedup across releases, every
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** cumulative vendor-reported MILP speedup across releases, every
 version rerun on one machine
-**Coverage:** releases 10 through 13, announced 2022-11-14 to 2025-11-18,
+- **Coverage:** releases 10 through 13, announced 2022-11-14 to 2025-11-18,
 baselined at version 9.5; transcription current to 2026-08-10
-**Data:** [`gurobi-milp-speedups.csv`](gurobi-milp-speedups.csv)
-**Upstream:** <https://www.gurobi.com/misc/lp/all/unmatched-performance>
+- **Data:** [`gurobi-milp-speedups.csv`](gurobi-milp-speedups.csv)
+- **Upstream:** <https://www.gurobi.com/misc/lp/all/unmatched-performance>
 (per-release announcement URLs are carried row by row in the CSV, for example
 <https://www.gurobi.com/whats-new-gurobi-13-0/>)
-**Verdict:** no acceleration — no 2026 release exists (series ends
+- **Verdict:** no acceleration — no 2026 release exists (series ends
 2025-11-18); the 2025 release gained 0.6% against 13.1% in 2024 and a
 cumulative 1.40× over 2022–2025
 

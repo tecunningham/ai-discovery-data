@@ -1,12 +1,12 @@
 # Git pushes to GitHub
 
-**Domain:** outside the three domains
-**Role:** contrast case: volume
-**Metric:** code output; git pushes to GitHub per quarter, summed over economies
-**Coverage:** 2020-Q1 to 2026-Q1, quarterly
-**Data:** [`github-innovationgraph-global.csv`](github-innovationgraph-global.csv)
-**Upstream:** <https://github.com/github/innovationgraph>
-**Verdict:** accelerating — 319.8 million pushes in 2026-Q1 against 246.8 million in 2025-Q4 and a 2025 quarterly mean of 212.2 million
+- **Domain:** outside the three domains
+- **Role:** contrast case: volume
+- **Metric:** code output; git pushes to GitHub per quarter, summed over economies
+- **Coverage:** 2020-Q1 to 2026-Q1, quarterly
+- **Data:** [`github-innovationgraph-global.csv`](github-innovationgraph-global.csv)
+- **Upstream:** <https://github.com/github/innovationgraph>
+- **Verdict:** accelerating — 319.8 million pushes in 2026-Q1 against 246.8 million in 2025-Q4 and a 2025 quarterly mean of 212.2 million
 
 ![Git pushes to GitHub per quarter, 2020 to 2026, with January 2026 onward shaded.](output-github-pushes.png)
 

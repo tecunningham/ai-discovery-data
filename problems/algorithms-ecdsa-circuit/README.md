@@ -1,15 +1,15 @@
 # ECDSA.fail secp256k1 point-addition circuit
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** best validated score (average executed Toffoli count × peak qubit
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** best validated score (average executed Toffoli count × peak qubit
 width) for a reversible secp256k1 point-addition circuit; lower is better
-**Coverage:** 2026-05-30 to 2026-08-10, 433 accepted records
-**Data:** [`ecdsa-circuit-records.csv`](ecdsa-circuit-records.csv)
-**Upstream:** <https://ecdsa.fail/>, challenge harness and results at
+- **Coverage:** 2026-05-30 to 2026-08-10, 433 accepted records
+- **Data:** [`ecdsa-circuit-records.csv`](ecdsa-circuit-records.csv)
+- **Upstream:** <https://ecdsa.fail/>, challenge harness and results at
 <https://github.com/ecdsafail/ecdsafail-challenge>, record ladder from the
 challenge API at <https://api.ecdsa.fail/api/benchmarks>
-**Verdict:** too early — first record 2026-05-30, so no prior-year rate
+- **Verdict:** too early — first record 2026-05-30, so no prior-year rate
 exists; the 2026 series is a 7.3× fall over 72 days
 
 ![Record ladder for the ecdsa.fail secp256k1 point-addition circuit challenge.](discovery-algorithms-ecdsa-circuit.png)

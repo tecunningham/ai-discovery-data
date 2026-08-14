@@ -1,12 +1,12 @@
 # Sphere-packing lower-bound ladder
 
-**Domain:** mathematics
-**Role:** control: no-AI baseline
-**Metric:** cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension
-**Coverage:** 1905–2025, eight recorded steps
-**Data:** [`sphere-packing-lower-bound-records.csv`](sphere-packing-lower-bound-records.csv)
-**Upstream:** per-row `source_url` values, chiefly the survey at <https://arxiv.org/abs/2606.13313>, with the two most recent steps at <https://arxiv.org/abs/2312.10026> and the Klartag preprint recorded in the same survey
-**Verdict:** accelerating — 4 steps over 2011–2025 (2.7/decade) against 4 over 1905–2010 (0.4/decade); 0 steps dated 2026
+- **Domain:** mathematics
+- **Role:** control: no-AI baseline
+- **Metric:** cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension
+- **Coverage:** 1905–2025, eight recorded steps
+- **Data:** [`sphere-packing-lower-bound-records.csv`](sphere-packing-lower-bound-records.csv)
+- **Upstream:** per-row `source_url` values, chiefly the survey at <https://arxiv.org/abs/2606.13313>, with the two most recent steps at <https://arxiv.org/abs/2312.10026> and the Klartag preprint recorded in the same survey
+- **Verdict:** accelerating — 4 steps over 2011–2025 (2.7/decade) against 4 over 1905–2010 (0.4/decade); 0 steps dated 2026
 
 ![Cumulative improvements in the asymptotic sphere-packing lower-bound ladder, 1905 to 2025.](discovery-math-sphere-packing.png)
 

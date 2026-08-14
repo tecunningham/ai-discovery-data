@@ -1,12 +1,12 @@
 # OSS-Fuzz vulnerability discoveries
 
-**Domain:** vulnerabilities
-**Role:** control: no-AI baseline
-**Metric:** vulnerability records published per quarter by an automated fuzzing programme
-**Coverage:** 2020–2026, partial through 2026-08-10
-**Data:** quarterly [`ossfuzz-by-quarter.csv`](ossfuzz-by-quarter.csv); annual [`ossfuzz-discoveries.csv`](ossfuzz-discoveries.csv)
-**Upstream:** <https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip> (browsable at <https://osv.dev/list?q=ecosystem%3AOSS-Fuzz>, programme at <https://google.github.io/oss-fuzz/>)
-**Verdict:** declining — 1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 396
+- **Domain:** vulnerabilities
+- **Role:** control: no-AI baseline
+- **Metric:** vulnerability records published per quarter by an automated fuzzing programme
+- **Coverage:** 2020–2026, partial through 2026-08-10
+- **Data:** quarterly [`ossfuzz-by-quarter.csv`](ossfuzz-by-quarter.csv); annual [`ossfuzz-discoveries.csv`](ossfuzz-discoveries.csv)
+- **Upstream:** <https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip> (browsable at <https://osv.dev/list?q=ecosystem%3AOSS-Fuzz>, programme at <https://google.github.io/oss-fuzz/>)
+- **Verdict:** declining — 1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 396
 
 ![Quarterly OSS-Fuzz vulnerability records, falling from a 2020 peak to a few dozen per quarter by 2025.](discovery-cyber-oss-fuzz.png)
 

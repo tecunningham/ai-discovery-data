@@ -1,12 +1,12 @@
 # Thurston's 24 questions
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 24 scored rows
-**Coverage:** list posed 1982; dated resolutions 1993–2013; statuses read 2026-08-14
-**Data:** [`thurston-questions.csv`](thurston-questions.csv)
-**Upstream:** <https://en.wikipedia.org/wiki/Thurston%27s_24_questions>, cross-checked against Agol's status note at <https://mathoverflow.net/questions/265493/thurstons-24-questions-all-settled>
-**Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 2013; 22 dated resolutions over 1993–2013
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 24 scored rows
+- **Coverage:** list posed 1982; dated resolutions 1993–2013; statuses read 2026-08-14
+- **Data:** [`thurston-questions.csv`](thurston-questions.csv)
+- **Upstream:** <https://en.wikipedia.org/wiki/Thurston%27s_24_questions>, cross-checked against Agol's status note at <https://mathoverflow.net/questions/265493/thurstons-24-questions-all-settled>
+- **Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 2013; 22 dated resolutions over 1993–2013
 
 ![Dated resolutions per year.](discovery-math-thurston.png)
 

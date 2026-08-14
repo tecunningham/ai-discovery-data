@@ -1,12 +1,12 @@
 # Microsoft security-update CVEs
 
-**Domain:** vulnerabilities
-**Role:** discovery series
-**Metric:** CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
-**Coverage:** 2016–2026, partial through 2026-08-11; no February or March 2016 document exists upstream, so the first year is ten months
-**Data:** annual [`msrc-cves.csv`](msrc-cves.csv); monthly counts by band in [`msrc-monthly.csv`](msrc-monthly.csv); per-credit rows in [`msrc-finders.csv`](msrc-finders.csv); every AI-marked CVE with its full credit strings in [`msrc-ai-cves.csv`](msrc-ai-cves.csv)
-**Upstream:** <https://api.msrc.microsoft.com/cvrf/v3.0/updates> (rendered at <https://msrc.microsoft.com/update-guide>)
-**Verdict:** accelerating — 1,927 CVEs through 2026-08-11 against 1,243 in 2025; the part year annualizes to about 2.5 times 2025
+- **Domain:** vulnerabilities
+- **Role:** discovery series
+- **Metric:** CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
+- **Coverage:** 2016–2026, partial through 2026-08-11; no February or March 2016 document exists upstream, so the first year is ten months
+- **Data:** annual [`msrc-cves.csv`](msrc-cves.csv); monthly counts by band in [`msrc-monthly.csv`](msrc-monthly.csv); per-credit rows in [`msrc-finders.csv`](msrc-finders.csv); every AI-marked CVE with its full credit strings in [`msrc-ai-cves.csv`](msrc-ai-cves.csv)
+- **Upstream:** <https://api.msrc.microsoft.com/cvrf/v3.0/updates> (rendered at <https://msrc.microsoft.com/update-guide>)
+- **Verdict:** accelerating — 1,927 CVEs through 2026-08-11 against 1,243 in 2025; the part year annualizes to about 2.5 times 2025
 
 ![Monthly Microsoft security-update CVEs, split by AI method, AI affiliation, and fuzzer credit.](discovery-cyber-microsoft.png)
 

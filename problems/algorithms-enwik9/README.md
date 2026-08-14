@@ -1,16 +1,16 @@
 # Hutter Prize compression: enwik9
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** total size in bytes of decompressor plus archive for a fixed 1 GB
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** total size in bytes of decompressor plus archive for a fixed 1 GB
 text corpus, under a CPU-time and memory cap, per awarded record
-**Coverage:** 2019 baseline to 2026; the prize moved to enwik9 on 2020-02-21;
+- **Coverage:** 2019 baseline to 2026; the prize moved to enwik9 on 2020-02-21;
 prize site read 2026-07-28, benchmark page's own update dated 2026-07-08
-**Data:** [`enwik9-records.csv`](enwik9-records.csv), holding both the
+- **Data:** [`enwik9-records.csv`](enwik9-records.csv), holding both the
 `hutter_enwik9` and `ltcb_enwik9` series
-**Upstream:** <http://prize.hutter1.net/> and
+- **Upstream:** <http://prize.hutter1.net/> and
 <http://mattmahoney.net/dc/text.html>
-**Verdict:** no acceleration — 0 awarded records in 2026 (one pending claim
+- **Verdict:** no acceleration — 0 awarded records in 2026 (one pending claim
 of 2026-06-26) against 2 in 2024 and 4 over 2021–2024; the uncapped
 comparator is unchanged since 2023-10-23
 

@@ -1,12 +1,12 @@
 # ANTEDB analytic-number-theory exponents
 
-**Domain:** mathematics
-**Role:** control: no-AI baseline
-**Metric:** cumulative slice-level record changes across 58 exponent slices in the three families $\mu$, $A$ and $\beta$
-**Coverage:** 1920–2024 in the underlying literature; extracted from the database as of 2026-07-26
-**Data:** [`antedb-sweep.csv`](antedb-sweep.csv), with the six named slices and their attributions in [`antedb-bounds.csv`](antedb-bounds.csv)
-**Upstream:** <https://github.com/teorth/expdb> (human-readable blueprint at <https://teorth.github.io/expdb/>)
-**Verdict:** no acceleration — 0 slice changes in 2025 or 2026 against 2 in 2024 and a 3.5/year mean over 1931–2024
+- **Domain:** mathematics
+- **Role:** control: no-AI baseline
+- **Metric:** cumulative slice-level record changes across 58 exponent slices in the three families $\mu$, $A$ and $\beta$
+- **Coverage:** 1920–2024 in the underlying literature; extracted from the database as of 2026-07-26
+- **Data:** [`antedb-sweep.csv`](antedb-sweep.csv), with the six named slices and their attributions in [`antedb-bounds.csv`](antedb-bounds.csv)
+- **Upstream:** <https://github.com/teorth/expdb> (human-readable blueprint at <https://teorth.github.io/expdb/>)
+- **Verdict:** no acceleration — 0 slice changes in 2025 or 2026 against 2 in 2024 and a 3.5/year mean over 1931–2024
 
 ![Cumulative slice-level record changes in three families of analytic-number-theory exponents, all human.](discovery-math-antedb.png)
 

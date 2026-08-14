@@ -1,12 +1,12 @@
 # Smale's problems
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 19 scored rows
-**Coverage:** list posed 1998; dated resolutions 2002–2026; statuses read 2026-08-14
-**Data:** [`smale-problems.csv`](smale-problems.csv)
-**Upstream:** <https://en.wikipedia.org/wiki/Smale%27s_problems>, with the 2026 row resting on the independent verifications at <https://zenodo.org/records/21514514> and <https://isa-afp.org/entries/Jacobian_Counterexample.html>
-**Verdict:** inconclusive — 1 resolution in 2026 against 4 over 2002–2016; a series of 5 events sets no rate
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 19 scored rows
+- **Coverage:** list posed 1998; dated resolutions 2002–2026; statuses read 2026-08-14
+- **Data:** [`smale-problems.csv`](smale-problems.csv)
+- **Upstream:** <https://en.wikipedia.org/wiki/Smale%27s_problems>, with the 2026 row resting on the independent verifications at <https://zenodo.org/records/21514514> and <https://isa-afp.org/entries/Jacobian_Counterexample.html>
+- **Verdict:** inconclusive — 1 resolution in 2026 against 4 over 2002–2016; a series of 5 events sets no rate
 
 ![Dated resolutions per year.](discovery-math-smale.png)
 

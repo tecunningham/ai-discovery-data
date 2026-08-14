@@ -1,12 +1,12 @@
 # DOI records deposited with Crossref
 
-**Domain:** outside the three domains
-**Role:** contrast case: volume
-**Metric:** formal publishing volume; DOI records deposited with Crossref per year, by created date
-**Coverage:** 2010 to 2026, annual, the last year partial through 2026-08-10
-**Data:** [`crossref-dois-by-year.csv`](crossref-dois-by-year.csv)
-**Upstream:** <https://api.crossref.org/works>
-**Verdict:** no acceleration — 2026 annualizes to roughly 13.3 million records against 12.80 million in 2025 and an 8.63 million/year mean over 2010–2025
+- **Domain:** outside the three domains
+- **Role:** contrast case: volume
+- **Metric:** formal publishing volume; DOI records deposited with Crossref per year, by created date
+- **Coverage:** 2010 to 2026, annual, the last year partial through 2026-08-10
+- **Data:** [`crossref-dois-by-year.csv`](crossref-dois-by-year.csv)
+- **Upstream:** <https://api.crossref.org/works>
+- **Verdict:** no acceleration — 2026 annualizes to roughly 13.3 million records against 12.80 million in 2025 and an 8.63 million/year mean over 2010–2025
 
 ![DOI records deposited with Crossref each year, 2010 to 2026, drawn as annual bars with 2026 outlined as a part year.](output-crossref-dois.png)
 

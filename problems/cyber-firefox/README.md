@@ -1,12 +1,12 @@
 # Firefox vulnerability disclosures
 
-**Domain:** vulnerabilities
-**Role:** discovery series
-**Metric:** distinct CVEs per quarter, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count
-**Coverage:** 2016–2026, partial through 2026-08-04, the latest advisory in the snapshot
-**Data:** per-CVE ledger [`firefox-cves.csv`](firefox-cves.csv); quarterly [`firefox-quarterly.csv`](firefox-quarterly.csv); annual [`firefox-advisories.csv`](firefox-advisories.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv); every AI-marked CVE with its credit strings in [`firefox-ai-cves.csv`](firefox-ai-cves.csv)
-**Upstream:** <https://github.com/mozilla/foundation-security-advisories> (rendered at <https://www.mozilla.org/en-US/security/advisories/>)
-**Verdict:** accelerating — 342 distinct CVEs through 2026-08-04 against 210 in 2025; the part year alone is 1.6 times the 2025 full year
+- **Domain:** vulnerabilities
+- **Role:** discovery series
+- **Metric:** distinct CVEs per quarter, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count
+- **Coverage:** 2016–2026, partial through 2026-08-04, the latest advisory in the snapshot
+- **Data:** per-CVE ledger [`firefox-cves.csv`](firefox-cves.csv); quarterly [`firefox-quarterly.csv`](firefox-quarterly.csv); annual [`firefox-advisories.csv`](firefox-advisories.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv); every AI-marked CVE with its credit strings in [`firefox-ai-cves.csv`](firefox-ai-cves.csv)
+- **Upstream:** <https://github.com/mozilla/foundation-security-advisories> (rendered at <https://www.mozilla.org/en-US/security/advisories/>)
+- **Verdict:** accelerating — 342 distinct CVEs through 2026-08-04 against 210 in 2025; the part year alone is 1.6 times the 2025 full year
 
 ![Quarterly Firefox distinct-CVE disclosures, split by AI method, AI affiliation, and fuzzer credit.](discovery-cyber-firefox.png)
 

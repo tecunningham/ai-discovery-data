@@ -1,123 +1,299 @@
 # Thurston's 24 questions
 
 **Domain:** mathematics
+**Role:** prestige ledger
 **Metric:** dated resolutions per year across 24 scored rows
-**Coverage:** 1982–2026, with dated resolutions running 1993–2013
+**Coverage:** list posed 1982; dated resolutions 1993–2013; statuses read 2026-08-14
 **Data:** [`thurston-questions.csv`](thurston-questions.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Thurston%27s_24_questions>, cross-checked against Agol's status note at <https://mathoverflow.net/questions/265493/thurstons-24-questions-all-settled>
-**Verdict:** no acceleration
+**Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 2013; 22 dated resolutions over 1993–2013
 
 ![Dated resolutions per year.](discovery-math-thurston.png)
 
-## The problem
+## Definition
 
-Thurston closed his 1982 survey of three-dimensional manifolds, Kleinian groups
-and hyperbolic geometry with twenty-four questions, and they organized the field
-for the next thirty years. Twenty-two of them have since been answered.
+William Thurston closed his 1982 survey of three-dimensional manifolds,
+Kleinian groups and hyperbolic geometry with twenty-four questions. This
+ledger scores each question as one row, with the status and year read from
+the Wikipedia table named in the `source` column, cross-checked against
+Agol's public status note. There is no subproblem splitting and no contested
+classification: twenty-two rows are `resolved` and two are `open` (question
+19, on arithmetic quotients of hyperbolic space, and question 23, on the
+rational independence of hyperbolic volumes).
 
-A "discovery" in this series is a row moving to resolved, on the year a secondary
-consensus account gives. The list needs no subproblem splitting and has no
-contested rows: twenty-four questions, twenty-two resolved, two open — question
-19, on the topology and geometry of arithmetic quotients of hyperbolic space, and
-question 23, on whether hyperbolic volumes are rationally independent.
+A "discovery" in this series is a row moving to `resolved`, dated by the
+year the source account gives. Two dating conventions apply and are stated
+in the rows' `notes`: where the source gives a span rather than a year, the
+`resolved_year` is the end of the span (rows 4, 5 and 14), and the three
+software questions (20–22) are dated at a conventional 2000 for work the
+source places in the 1990s and 2000s.
 
-It is in the collection as a baseline, and it is the most useful of the prestige
-baselines because it is the one that moved. The other famous lists here are
-mostly stationary, which makes it easy to mistake inactivity in one ledger for a
-property of famous mathematics. Thurston's questions show
-what a prestige list looks like when it is being answered: a long thin start, then
-a burst that nearly empties it, all of it human, all of it before the agent era.
+## Facts
 
-## What the chart shows
+- **rows:** 24 scored; 22 resolved with a dated year; 2 open
+- **span:** dated resolutions 1993–2013
+- **by-year:** 1993: 1 · 1997: 1 · 2000: 4 · 2003: 1 · 2004: 2 · 2005: 1 ·
+  2009: 2 · 2012: 6 · 2013: 4
+- **ai-attributed:** 0 of 22 dated resolutions
+- **open rows:** 19, 23
 
-Twenty-two resolutions between 1993 and 2013, then thirteen flat years. Twelve
-had fallen by 2009; then ten arrived in 2012 and 2013 alone, the cluster
-containing Brock, Canary and Minsky on the ending lamination conjecture and
-Agol's virtually Haken and virtually fibered theorems. Perelman's geometrization
-work, dated 2003, sits in the middle of the run rather than at its head.
-
-Nothing lands in the shaded 2026 period and no event is red, because no row
-carries an AI attribution.
-
-The burst is the part worth carrying away. A cluster of ten resolutions inside
-two years, on a list twenty years old at the time, happened with no AI anywhere in
-it — so a similar cluster inside the agent era would not by itself be an AI
-signature. The thirteen years since are the other half of the same point: the two
-questions still open are the ones nobody has been able to touch, and a flat right
-edge is what that looks like.
-
-The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
-as rows remaining, declining toward zero as dated resolutions arrive:
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws the
+ledger as rows remaining:
 
 ![Rows remaining without a dated resolution.](cumulative-math-thurston.png)
 
-## How the chart was built
+### 1 — Geometrization conjecture
+- **status:** resolved
+- **resolved:** 2003
+- **resolver:** Perelman
+- **notes:** Includes Poincaré as a special case
 
-[`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
-[`../../lib/families.py`](../../lib/families.py), which reads
-`thurston-questions.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, sorts them by year and then `problem_id`, and counts
-resolution events by year from the 1982 `list_year` to the present. The source
-note is taken from the `source` column.
+> "Solved by Grigori Perelman using Ricci flow with surgery."
+> — Wikipedia, Thurston's 24 questions, question 1, read 2026-08-14
 
-The rows are transcribed by hand from the ledger named in that column, so there is
-no `fetch.py` in this folder. There is no machine-readable upstream: the status of
-a question in geometric topology is a judgment in the literature rather than a
-feed.
+### 2 — Finite group actions isometric
+- **status:** resolved
+- **resolved:** 2009
+- **resolver:** Meeks–Scott; Dinkelbach–Leeb
 
-Two scoring conventions are visible in the chart and worth naming. Where the
-source gives a span rather than a year — 1986–1993 for geometric tameness,
-2000–2013 for the global theory of hyperbolic Dehn surgery, 2009–2012 for
-Cannon–Thurston maps — the `resolved_year` is the end of the span, which pushes
-those steps to the right and tightens the 2012–2013 cluster. And questions 20 to
-22 ask for software rather than for theorems; they are counted resolved, as the
-source counts them, against SnapPea and its successors, at a conventional year of
-2000 for a process that ran through the 1990s and 2000s.
+> "Solved by Meeks, Scott, Dinkelbach, and Leeb."
+> — Wikipedia, Thurston's 24 questions, question 2, read 2026-08-14
 
-No `ai_problem` argument is passed, because no row credits an AI system.
+### 3 — Orbifold geometrization
+- **status:** resolved
+- **resolved:** 2005
+- **resolver:** Boileau–Leeb–Porti
 
-## What it cannot support
+> "Solved by Boileau, Leeb, and Porti."
+> — Wikipedia, Thurston's 24 questions, question 3, read 2026-08-14
 
-- **Resolution landmarks are not effort-adjusted discovery rates.** The dates say
-  when something fell, not how much work it took, and the 2012–2013 cluster rests
-  on a decade of accumulated machinery.
-- **The dates are span ends.** Three rows compress a multi-year effort into its
-  final year, so the cluster is partly an artifact of the dating rule.
-- **Three of the twenty-two falls are software**, not proofs, and their year is a
-  convention rather than a dated event.
-- **Two open rows cannot register a rate.** With twenty-two of twenty-four already
-  answered, the series has almost no room left to move, so its flatness since 2013
-  is close to uninformative about anything recent.
-- **One secondary ledger.** Every row is transcribed from a consensus account,
-  cross-checked against one expert's public status note, rather than from
-  independent review of the literature.
-- **The rows overlap other lists.** Question 1 contains the Poincaré conjecture,
-  which is also the resolved row on the [Millennium](../math-millennium/README.md)
-  list, so these series are not independent.
+### 4 — Hyperbolic Dehn surgery global theory
+- **status:** resolved
+- **resolved:** 2013
+- **resolver:** Agol; Lackenby; others
+- **notes:** Wikipedia range 2000–2013; year is completion end
 
-## LLM contributions
+> "Resolved through work of Agol, Lackenby, and others."
+> — Wikipedia, Thurston's 24 questions, question 4, read 2026-08-14
 
-None. No row in this ledger is attributed to an AI system, and the most recent
-resolution on it is human work from 2013, a decade before the agent era.
+### 5 — Kleinian groups geometrically tame
+- **status:** resolved
+- **resolved:** 1993
+- **resolver:** Bonahon; Canary
+- **notes:** Wikipedia range 1986–1993; year is completion end
 
-The absence carries little information about capability. Both remaining questions
-are open-ended enough that a resolution would arrive as a research programme
-rather than as a checkable object, which is the condition under which nothing in
-this collection has registered an AI result.
+> "Solved through work of Bonahon and Canary."
+> — Wikipedia, Thurston's 24 questions, question 5, read 2026-08-14
 
-## Related literature
+### 6 — Kleinian groups as limits of geometrically finite
+- **status:** resolved
+- **resolved:** 2012
+- **resolver:** Namazi–Souto; Ohshika
 
-The questions and their statuses come from the consensus ledger and the expert
-status note linked above, neither of which has a bibliography entry here. That
-record series arrive in bursts with long gaps and no AI in them, which is what
-makes the 2012–2013 cluster the useful part of this series, is Sherry and
-Thompson's finding across algorithm families [@sherry2021fast]. That AI results
-have arrived where a candidate answer can be checked cheaply is the explicit
-selection rule of benchmark designers who built a problem set on it
-[@arxiv2026horizonmath], and the one place a denominated AI rate on real open
-problems exists is formal proof search over the Erdős corpus
-[@deepmind2026nexus]. The companion ledgers are
-[Hilbert](../math-hilbert/README.md), [Landau](../math-landau/README.md),
-[Smale](../math-smale/README.md), [Millennium](../math-millennium/README.md) and
-[TOPP](../math-topp/README.md); the corpus with measurable AI flow is
-[Erdős](../math-erdos/README.md).
+> "Solved by Namazi-Souto and Ohshika"
+> — Wikipedia, Thurston's 24 questions, question 6, read 2026-08-14
+
+### 7 — Schottky groups and their limits
+- **status:** resolved
+- **resolved:** 2012
+- **resolver:** Brock–Canary–Minsky
+
+> "Resolved through work of Brock, Canary, and Minsky."
+> — Wikipedia, Thurston's 24 questions, question 7, read 2026-08-14
+
+### 8 — Limits of quasi-Fuchsian groups with accidental parabolics
+- **status:** resolved
+- **resolved:** 2000
+- **resolver:** Anderson–Canary
+
+> "Solved by Anderson and Canary."
+> — Wikipedia, Thurston's 24 questions, question 8, read 2026-08-14
+
+### 9 — Kleinian groups topologically tame
+- **status:** resolved
+- **resolved:** 2004
+- **resolver:** Agol; Calegari–Gabai
+- **notes:** Independent solutions
+
+> "Solved independently by Agol and by Calegari-Gabai."
+> — Wikipedia, Thurston's 24 questions, question 9, read 2026-08-14
+
+### 10 — Ahlfors measure-zero problem
+- **status:** resolved
+- **resolved:** 2004
+- **resolver:** Consequence of geometric tameness
+
+> "Solved as consequence of geometric tameness."
+> — Wikipedia, Thurston's 24 questions, question 10, read 2026-08-14
+
+### 11 — Ending lamination conjecture
+- **status:** resolved
+- **resolved:** 2012
+- **resolver:** Brock–Canary–Minsky
+
+> "Solved by Brock, Canary, and Minsky."
+> — Wikipedia, Thurston's 24 questions, question 11, read 2026-08-14
+
+### 12 — Quasi-isometry type of Kleinian groups
+- **status:** resolved
+- **resolved:** 2012
+- **resolver:** With ending lamination theorem
+
+> "Solved with ending lamination theorem."
+> — Wikipedia, Thurston's 24 questions, question 12, read 2026-08-14
+
+### 13 — Limit sets of Hausdorff dimension < 2 geometrically finite
+- **status:** resolved
+- **resolved:** 1997
+- **resolver:** Bishop–Jones
+
+> "Solved by Bishop and Jones."
+> — Wikipedia, Thurston's 24 questions, question 13, read 2026-08-14
+
+### 14 — Cannon–Thurston maps
+- **status:** resolved
+- **resolved:** 2012
+- **resolver:** Mahan Mj
+- **notes:** Wikipedia range 2009–2012; year is completion end
+
+> "Solved by Mahan Mj."
+> — Wikipedia, Thurston's 24 questions, question 14, read 2026-08-14
+
+### 15 — Residual separability of f.g. subgroups in f.g. Kleinian groups
+- **status:** resolved
+- **resolved:** 2013
+- **resolver:** Agol (building on Wise)
+
+> "Solved by Ian Agol, building on work of Wise."
+> — Wikipedia, Thurston's 24 questions, question 15, read 2026-08-14
+
+### 16 — Virtually Haken conjecture
+- **status:** resolved
+- **resolved:** 2012
+- **resolver:** Agol
+
+> "Solved by Ian Agol."
+> — Wikipedia, Thurston's 24 questions, question 16, read 2026-08-14
+
+### 17 — Finite cover with positive first Betti number
+- **status:** resolved
+- **resolved:** 2013
+- **resolver:** Agol
+
+> "Solved by Ian Agol."
+> — Wikipedia, Thurston's 24 questions, question 17, read 2026-08-14
+
+### 18 — Virtually fibered conjecture
+- **status:** resolved
+- **resolved:** 2013
+- **resolver:** Agol
+
+> "Solved by Ian Agol."
+> — Wikipedia, Thurston's 24 questions, question 18, read 2026-08-14
+
+### 20 — Software for surface diffeomorphisms / laminations
+- **status:** resolved
+- **resolved:** 2000
+- **resolver:** SnapPea and successors
+- **notes:** Software ask; Wikipedia counts as addressed (1990s–2000s)
+
+> "Addressed through development of SnapPea and other software."
+> — Wikipedia, Thurston's 24 questions, question 20, read 2026-08-14
+
+### 21 — Software to compute hyperbolic structures
+- **status:** resolved
+- **resolved:** 2000
+- **resolver:** SnapPea and successors
+- **notes:** Software ask; Wikipedia counts as addressed (1990s–2000s)
+
+> "Addressed through development of SnapPea and other software."
+> — Wikipedia, Thurston's 24 questions, question 21, read 2026-08-14
+
+### 22 — Software tabulating 3-manifold invariants
+- **status:** resolved
+- **resolved:** 2000
+- **resolver:** SnapPea and successors
+- **notes:** Software ask; Wikipedia counts as addressed (1990s–2000s)
+
+> "Addressed through development of SnapPea and other software."
+> — Wikipedia, Thurston's 24 questions, question 22, read 2026-08-14
+
+### 24 — Hyperbolic structures at given Heegaard genus
+- **status:** resolved
+- **resolved:** 2009
+- **resolver:** Namazi–Souto
+
+> "Solved by Namazi and Souto."
+> — Wikipedia, Thurston's 24 questions, question 24, read 2026-08-14
+
+## Method
+
+The rows are transcribed by hand from the consensus ledger named in the
+`source` column, cross-checked against Agol's public status note, so there
+is no `fetch.py` in this folder. There is no machine-readable upstream: the
+status of a question in geometric topology is a judgment in the literature
+rather than a feed. The two dating conventions — span ends for rows 4, 5 and
+14, a conventional 2000 for the software rows 20–22 — are stated in the
+Definition and carried in the rows' `notes`.
+
+[`figure.py`](figure.py) calls the shared `problem_list_chart()` in
+[`../../lib/families.py`](../../lib/families.py), which keeps the rows whose
+`status` is `resolved` with a non-empty `resolved_year` and counts
+resolution events by year from the 1982 `list_year` to the present. No
+`ai_problem` argument is passed, because no row carries an AI credit. The
+cumulative view is the shared `ledger_remaining_chart()`.
+[`check.py`](check.py) recomputes the fact lines and the register entries
+from the CSV.
+
+## Limitations
+
+- **effort.** Resolution landmarks are not effort-adjusted discovery rates;
+  the 2012–2013 events rest on years of prior work the dates do not show.
+- **span-end dates.** Rows 4, 5 and 14 compress a multi-year completion into
+  its final year, which shifts those events later.
+- **software rows.** Rows 20–22 are counted resolved against software rather
+  than theorems, at a conventional year of 2000 for work spanning the 1990s
+  and 2000s.
+- **little room to move.** With 22 of 24 rows resolved, the series can
+  register at most two further events.
+- **one secondary ledger.** Every row is transcribed from a consensus
+  account, cross-checked against one expert's public status note, rather
+  than from independent review of the literature.
+- **overlap.** Question 1 contains the Poincaré conjecture, the resolved row
+  of the [Millennium](../math-millennium/README.md) ledger and Smale row 2,
+  so these series are not independent.
+
+## AI attribution
+
+No row in [`thurston-questions.csv`](thurston-questions.csv) names an AI
+system in its `resolver` or `notes` columns; the most recent dated
+resolution is 2013. No AI credit appears in the Wikipedia table the rows are
+scored from as of the 2026-08-14 read.
+
+## Sources
+
+- Wikipedia, Thurston's 24 questions
+  (<https://en.wikipedia.org/wiki/Thurston%27s_24_questions>) — the
+  consensus ledger every row is transcribed from; the register quotes its
+  per-question status wording as read 2026-08-14. It has no bibliography
+  entry here.
+- Agol's status note
+  (<https://mathoverflow.net/questions/265493/thurstons-24-questions-all-settled>)
+  — the expert cross-check named in the `source` column; it has no
+  bibliography entry here.
+- [@sherry2021fast] — measured improvement rates across algorithm families,
+  including clustered gains and multi-decade stationary stretches, with no
+  AI involved.
+- [@arxiv2026horizonmath] — a 2026 benchmark of over 100 predominantly
+  unsolved problems chosen so that "verification is computationally
+  efficient and simple"; frontier models score near 0% on it.
+- [@deepmind2026nexus] — formal proof search over open problems, reporting 9
+  of 353 open Erdős problems resolved.
+- Sibling ledgers of the same instrument type:
+  [Hilbert](../math-hilbert/README.md), [Landau](../math-landau/README.md),
+  [Smale](../math-smale/README.md),
+  [Millennium](../math-millennium/README.md) and
+  [TOPP](../math-topp/README.md).
+- [Erdős](../math-erdos/README.md) — a catalogue ledger over a different
+  corpus, counting a different unit (catalogue problems with imputed
+  solution years).

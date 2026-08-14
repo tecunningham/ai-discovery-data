@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines and verdict clause from the CSV."""
 
 from __future__ import annotations
 
@@ -21,9 +21,9 @@ def main() -> int:
     pending = [row for row in hutter if row["award"] == "pending"]
     failures = []
     if len(awarded) != 4:
-        failures.append(f"{len(awarded)} awarded records; the prose narrates four")
+        failures.append(f"{len(awarded)} awarded records; the page states four")
     if len(pending) != 1:
-        failures.append(f"{len(pending)} pending rows; the prose narrates one")
+        failures.append(f"{len(pending)} pending rows; the page states one")
 
     baseline = hutter[0]
     ladder = [baseline] + awarded
@@ -33,14 +33,16 @@ def main() -> int:
     hurdle = int(int(awarded[-1]["total_bytes"]) * 0.99)
     claim = pending[0]
     further = 100 * (1 - int(claim["total_bytes"]) / int(awarded[-1]["total_bytes"]))
+    awards_2024 = sum(row["date"].startswith("2024") for row in awarded)
+    awards_2026 = sum(row["date"].startswith("2026") for row in awarded)
     uncapped = ltcb[-1]
     if int(uncapped["total_bytes"]) != min(int(row["total_bytes"]) for row in ltcb):
         failures.append("the last LTCB row is not the series minimum, so the "
-                        "'has not moved since' reading no longer holds")
+                        "'unchanged since' reading no longer holds")
 
     claims = {
-        f"{int(baseline['total_bytes']):,} bytes at the 2019 "
-        f"{baseline['program']} baseline": "baseline",
+        f"**baseline:** {int(baseline['total_bytes']):,} bytes at the 2019 "
+        f"{baseline['program']} baseline": "baseline fact",
         f"{awarded[0]['program']} by {awarded[0]['author']} on "
         f"{awarded[0]['date']}": "first award",
         f"{awarded[1]['program']} by {awarded[1]['author']} on "
@@ -56,10 +58,14 @@ def main() -> int:
             "pending claim",
         f"a further {further:.2f}%": "pending step",
         f"inside the {hurdle:,} needed to clear the 1% hurdle": "hurdle",
-        f"{uncapped['program']} reached {int(uncapped['total_bytes']):,} bytes "
-        f"on {uncapped['date']}": "uncapped frontier",
-        f"flat since October 2023 at {int(uncapped['total_bytes']) / 1e6:.1f} MB":
-            "uncapped corner note",
+        f"{uncapped['program']} reached {int(uncapped['total_bytes']):,} "
+        f"bytes on {uncapped['date']}": "uncapped frontier",
+        f"flat since October 2023 at {int(uncapped['total_bytes']) / 1e6:.1f} "
+        "MB": "uncapped corner note",
+        f"no acceleration — {awards_2026} awarded records in 2026 (one "
+        f"pending claim of {claim['date']}) against {awards_2024} in 2024 "
+        f"and {len(awarded)} over 2021–2024; the uncapped comparator is "
+        f"unchanged since {uncapped['date']}": "verdict clause",
     }
     return report(failures + missing(prose(HERE), claims))
 

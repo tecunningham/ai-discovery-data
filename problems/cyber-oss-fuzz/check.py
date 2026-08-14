@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines from the CSVs beside it."""
 
 from __future__ import annotations
 
@@ -22,16 +22,23 @@ def main() -> int:
     quarterly = read_csv(HERE / "ossfuzz-by-quarter.csv")
     published = sum(int(row["discoveries"]) for row in quarterly
                     if row["quarter"].startswith(current["year"]))
+    by_year = " · ".join(f"{year}: {counts[year]:,}"
+                         for year in sorted(counts) if year != current["year"])
     claims = {
-        f"{counts['2020']:,} records in 2020": "2020 count",
-        f"then {counts['2021']}, {counts['2022']}, {counts['2023']}, "
-        f"{counts['2024']} and\n{counts['2025']} in 2025".replace("\n", " "):
-            "middle-year counts",
-        f"{counts['2026']} through": "part-year count",
-        f"roughly {round(pace)}": "annualized pace",
-        f"total is {total:,} records": "cumulative total",
-        f"quarters sum to {published} records against "
-        f"{counts[current['year']]} by record id": "id-year vs published-quarter gap",
+        f"**by-year (record id):** {by_year} · {current['year']} "
+        f"(through {current['data_through']}): {counts[current['year']]}":
+            "by-year fact",
+        f"**2026 annualized:** roughly {round(pace)} records":
+            "annualized fact",
+        f"**total:** {total:,} records over 2020–{current['year']}":
+            "total fact",
+        f"**clock gap:** quarters by published date sum to {published} "
+        f"records in {current['year']} against {counts[current['year']]} "
+        "by record id": "clock-gap fact",
+        f"{counts['2020']:,} records in 2020 to {counts['2025']} in 2025; "
+        f"2026 annualizes to roughly {round(pace)}": "verdict clause",
+        f"Coverage:** 2020–2026, partial through {current['data_through']}":
+            "coverage field",
     }
     return report(missing(prose(HERE), claims))
 

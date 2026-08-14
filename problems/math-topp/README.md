@@ -1,127 +1,255 @@
 # The Open Problems Project
 
 **Domain:** mathematics
+**Role:** prestige ledger
 **Metric:** dated resolutions per year across 78 scored rows
-**Coverage:** 2001–2026, with dated resolutions running 2000–2024
+**Coverage:** list begun 2001; dated resolutions 2000–2024; statuses read 2026-08-14
 **Data:** [`topp-problems.csv`](topp-problems.csv)
 **Upstream:** <https://topp.openproblem.net/>, with the rows transcribed from the project's GitHub sources
-**Verdict:** no acceleration
+**Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 2024; 17 dated resolutions over 2000–2024
 
 ![Dated resolutions per year.](discovery-math-topp.png)
 
-## The problem
+## Definition
 
-The Open Problems Project is a maintained list of computational-geometry problems
-begun in 2001 by Demaine, Mitchell and O'Rourke. Each entry carries a statement, a
-bibliography, and a status line the maintainers update when something happens.
+The Open Problems Project is a maintained list of computational-geometry
+problems begun in 2001 by Erik Demaine, Joseph Mitchell and Joseph O'Rourke
+[@demaine2001topp]. Each entry carries a statement, a bibliography, and a
+Status/Conjectures line the maintainers update when something happens.
 
-A "discovery" in this series is one of those status lines saying solved, settled,
-or closed. That is the maintainers' own language rather than an independent
-consensus review, and it is applied loosely in places: entry 12, dynamic planar
-convex hull, is counted because the project calls it "solved (in a certain
-sense)", although related worst-case questions remain open.
+A "discovery" in this series is an entry whose status line states solved,
+settled or closed, dated by the year that line gives; where the maintainers
+give a month, only the year is scored. The wording is the maintainers' own
+rather than an independent consensus review, and it is qualified in places:
+entry 12 is counted on the "Solved (in a certain sense)" quoted in its
+register entry. One entry, 27 (hexahedral meshing), is scored `partial` on
+its "Partially closed" status line and contributes no event.
 
-Among the lists scored here this is the most useful instrument, and the reason is
-worth stating. Its problems are numerous, they are computational rather than
-foundational, and many have answers of exactly the kind AI systems have been
-producing elsewhere: an algorithm with a stated running time, or an NP-hardness
-proof. It is the closest thing in the mathematics domain to a measurement corpus
-rather than a prestige list, so a zero here carries more information than a zero
-on the [Millennium](../math-millennium/README.md) problems. What it is not is a fixed-cohort
-solve rate, because the 78 entries accumulated over the project's life and the
-ledger does not record when each was added.
+## Facts
 
-## What the chart shows
+- **rows:** 78 scored; 17 resolved with a dated year; 60 open; 1 partial
+- **span:** dated resolutions 2000–2024
+- **by-year:** 2000: 1 · 2002: 1 · 2003: 1 · 2004: 3 · 2006: 1 · 2007: 1 ·
+  2008: 1 · 2009: 3 · 2010: 1 · 2015: 1 · 2019: 1 · 2023: 1 · 2024: 1
+- **ai-attributed:** 0 of 17 dated resolutions
+- **earliest event:** 2000 (entry 18), predating the project's 2001 start
 
-Seventeen resolutions between 2000 and 2024, out of 78 scored rows; 60 remain
-open and one, hexahedral meshing, is recorded as partial. The pace is roughly
-steady and slightly front-loaded: thirteen of the seventeen falls happen by 2010,
-then 2015, 2019, 2023 and 2024. Nothing lands in the shaded 2026 period and no
-event is red.
-
-The two most recent are Wang's optimal algorithm for shortest paths among
-obstacles in the plane, dated 2023, and Abrahamsen and Stade's NP-hardness proof
-for packing unit squares in a simple polygon, dated 2024. Both are human work
-recorded in the project's own citations.
-
-One artifact is visible at the left edge and is not a data error. The leftmost
-resolution is dated 2000, a year before the project's 2001 start, because Bezdek
-and Connelly settled the pushing-disks problem in 2000 and the project's entry for
-it records that resolution rather than an open status. The event timeline therefore
-starts one year before the list itself. It is a small instance of the larger
-problem with this series: the ledger dates resolutions but not entries.
-
-The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
-as rows remaining, declining toward zero as dated resolutions arrive:
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws the
+ledger as rows remaining:
 
 ![Rows remaining without a dated resolution.](cumulative-math-topp.png)
 
-## How the chart was built
+### 1 — Minimum Weight Triangulation
+- **status:** resolved
+- **resolved:** 2006
+- **resolver:**
 
-[`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
-[`../../lib/families.py`](../../lib/families.py), which reads
-`topp-problems.csv`, keeps rows whose `status` is
-`resolved` with a non-empty `resolved_year`, sorts by year then `problem_id`, and
-draws annual resolution-event bars running from the earliest dated event through
-the present, with the 78/17/60/1 breakdown stated in the corner note and the
-prose above. The source note names the `source` column, which for
-every row is the project's GitHub problem directory.
+> "Just solved by Wolfgang Mulzer and Günter Rote, January 2006!"
+> — topp.openproblem.net, problem 1, read 2026-08-14 [@demaine2001topp]
 
-The `status` and `resolved_year` columns were set from the project's own
-Status and Conjectures lines, and the `notes` column keeps the maintainers'
-wording — "Solved: proved NP-hard", "Settled negatively, January 2004", "Now
-closed: false; counterexample appeared in the 2009 CCCG proceedings" — so a reader
-can see what each status rests on. Where the maintainers give a month, only the
-year is scored.
+### 2 — Voronoi Diagram of Moving Points
+- **status:** resolved
+- **resolved:** 2015
+- **resolver:**
 
-No `ai_problem` argument is passed, because no entry credits an AI system.
+> "Long conjectured to be nearly quadratic. Solved now: [Rub15]."
+> — topp.openproblem.net, problem 2, read 2026-08-14 [@demaine2001topp]
 
-There is no `fetch.py`. The 78 rows were transcribed by hand from the project's GitHub problem directory, keeping its maintainers' own status wording; the site publishes no machine-readable index.
+### 12 — Dynamic Planar Convex Hull
+- **status:** resolved
+- **resolved:** 2002
+- **resolver:**
 
-## What it cannot support
+> "Solved (in a certain sense) by Gerth Brodal and Riko Jacob in a FOCS 2002
+> paper [BJ02]."
+> — topp.openproblem.net, problem 12, read 2026-08-14 [@demaine2001topp]
 
-- **There are no entry-addition dates.** The 78 entries accumulated after 2001 and
-  the ledger does not encode when each arrived, so this is a dated-resolution
-  ledger and not a fixed-cohort solve rate. A denominator that grows invisibly
-  cannot support a rate.
-- **One row predates the list.** The 2000 resolution sits a year before the 2001
-  start, which is why the event timeline starts before the list year.
-- **Statuses are the maintainers' own language**, not independent review, and some
-  are qualified — entry 12 is counted on a "solved (in a certain sense)".
-- **Unmaintained entries look open.** A problem whose status was never updated is
-  indistinguishable here from a problem nobody has solved, so the open count is an
-  upper bound on what is genuinely open.
-- **Resolution landmarks are not effort-adjusted discovery rates.** Nothing
-  records how much search each fall took.
-- **Some `resolver` fields are empty**, because the project's status line names a
-  citation rather than a person, so this series cannot be split by finder the way
-  the vulnerability series can.
+### 14 — Binary Space Partition Size
+- **status:** resolved
+- **resolved:** 2009
+- **resolver:** Csaba Tóth
 
-## LLM contributions
+> "Solved by Csaba Tóth [Tót09], [Tót11]."
+> — topp.openproblem.net, problem 14, read 2026-08-14 [@demaine2001topp]
 
-None. No entry in the ledger credits an LLM or an agent with a fall, and the two
-most recent resolutions are human papers from 2023 and 2024.
+### 18 — Pushing Disks Together
+- **status:** resolved
+- **resolved:** 2000
+- **resolver:**
 
-This zero is the more informative of the prestige-list zeros. TOPP's problems are
-computational-geometry questions whose answers are frequently algorithms or
-hardness proofs — the kind of output agents have produced in the algorithms domain
-— and the list is public, indexed, and cheap to point a system at. So the absence
-here is not explained away by expensive verification in the way the
-[Millennium](../math-millennium/README.md) and [Hilbert](../math-hilbert/README.md) zeros are. What
-would change the reading is a denominator: nothing establishes that anybody has
-pointed a system at this list, and an unattempted corpus produces a zero for
-uninteresting reasons.
+> "Solved by K. Bezdek and R. Connelly. … (Update as of 3 Aug. 2000.)"
+> — topp.openproblem.net, problem 18, read 2026-08-14 [@demaine2001topp]
 
-## Related literature
+### 20 — Minimum Stabbing Spanning Tree
+- **status:** resolved
+- **resolved:** 2003
+- **resolver:**
 
-The entries, statuses, and citations are the project's own [@demaine2001topp]. The
-comparison that gives this zero its force is with corpora that were deliberately
-attempted: 9 of 353 open Erdős problems resolved by formal proof search
-[@deepmind2026nexus], and a benchmark of over 100 unsolved problems built around
-cheap automated verification on which frontier models still score near zero
-[@arxiv2026horizonmath]. That records arrive in bursts with long gaps and no AI in
-them is Sherry and Thompson's [@sherry2021fast]. The companion ledgers are
-[Hilbert](../math-hilbert/README.md), [Landau](../math-landau/README.md),
-[Thurston](../math-thurston/README.md), [Smale](../math-smale/README.md) and
-[Millennium](../math-millennium/README.md); the corpus with measurable AI flow is
-[Erdős](../math-erdos/README.md).
+> "Solved, October 2003: the problem is NP-complete."
+> — topp.openproblem.net, problem 20, read 2026-08-14 [@demaine2001topp]
+
+### 21 — Shortest Paths among Obstacles in 2D
+- **status:** resolved
+- **resolved:** 2023
+- **resolver:**
+
+> "Solved by Haitao Wang [Wan23] …"
+> — topp.openproblem.net, problem 21, read 2026-08-14 [@demaine2001topp]
+
+### 27 — Hexahedral Meshing
+- **status:** partial
+- **resolved:**
+- **resolver:**
+- **notes:** partial results; Partially closed, Fall 2006.
+
+> "Partially closed, Fall 2006."
+> — topp.openproblem.net, problem 27, read 2026-08-14 [@demaine2001topp]
+
+### 32 — Bar-Magnet Polyhedra
+- **status:** resolved
+- **resolved:** 2004
+- **resolver:** Bojan Mohar
+
+> "Settled by Bojan Mohar, Apr. 2004."
+> — topp.openproblem.net, problem 32, read 2026-08-14 [@demaine2001topp]
+
+### 36 — Inplace Convex Hull of a Simple Polygonal Chain
+- **status:** resolved
+- **resolved:** 2004
+- **resolver:**
+
+> "Solved [BC04]."
+> — topp.openproblem.net, problem 36, read 2026-08-14 [@demaine2001topp]
+
+### 47 — Hinged Dissections
+- **status:** resolved
+- **resolved:** 2008
+- **resolver:** Abbott et al.
+
+> "Now settled: Hinged dissections exist [AAC+08]."
+> — topp.openproblem.net, problem 47, read 2026-08-14 [@demaine2001topp]
+
+### 48 — Bounded-Degree Minimum Euclidean Spanning Tree
+- **status:** resolved
+- **resolved:** 2009
+- **resolver:**
+
+> "Solved: Proved NP-hard in [FH09]."
+> — topp.openproblem.net, problem 48, read 2026-08-14 [@demaine2001topp]
+
+### 50 — Pointed Spanning Trees in Triangulations
+- **status:** resolved
+- **resolved:** 2004
+- **resolver:** Aichholzer et al.
+
+> "Settled negatively, January 2004."
+> — topp.openproblem.net, problem 50, read 2026-08-14 [@demaine2001topp]
+
+### 53 — Minimum-Turn Cycle Cover in Planar Grid Graphs
+- **status:** resolved
+- **resolved:** 2019
+- **resolver:**
+
+> "Solved: proved NP-hard by Fekete and Krupke [FK19]"
+> — topp.openproblem.net, problem 53, read 2026-08-14 [@demaine2001topp]
+
+### 56 — Packing Unit Squares in a Simple Polygon
+- **status:** resolved
+- **resolved:** 2024
+- **resolver:**
+
+> "Solved: proved NP-hard by Abrahamsen and Stade [AS24]."
+> — topp.openproblem.net, problem 56, read 2026-08-14 [@demaine2001topp]
+
+### 65 — Magic Configurations
+- **status:** resolved
+- **resolved:** 2007
+- **resolver:** Abrego et al.
+
+> "Settled positively, 2007: [ABK+08]"
+> — topp.openproblem.net, problem 65, read 2026-08-14 [@demaine2001topp]
+
+### 69 — Isoceles Planar Graph Drawing
+- **status:** resolved
+- **resolved:** 2010
+- **resolver:** Frati
+
+> "Settled negatively in 2010: [Fra10]."
+> — topp.openproblem.net, problem 69, read 2026-08-14 [@demaine2001topp]
+
+### 71 — Stretch-Factor for Points in Convex Position
+- **status:** resolved
+- **resolved:** 2009
+- **resolver:**
+- **notes:** Now closed: false; counterexample appeared in the 2009 CCCG
+  proceedings.
+
+> "Now closed: false. [This entry awaiting updating.]"
+> — topp.openproblem.net, problem 71, read 2026-08-14 [@demaine2001topp]
+
+## Method
+
+The 78 rows were transcribed by hand from the project's GitHub problem
+directory (edemaine/topp), and the `notes` column keeps the maintainers'
+own status wording; the site publishes no machine-readable index, so there
+is no `fetch.py`. All 78 status lines were re-read at topp.openproblem.net
+on 2026-08-14 and match the ledger's statuses. One wording has moved since
+transcription: entry 71's status line now reads the shorter form quoted in
+its register entry, while the `notes` column keeps the transcribed
+CCCG-counterexample wording; the status and year are unchanged.
+
+[`figure.py`](figure.py) calls the shared `problem_list_chart()` in
+[`../../lib/families.py`](../../lib/families.py), which keeps the rows whose
+`status` is `resolved` with a non-empty `resolved_year` and draws annual
+event bars from the earliest dated event to the present; the corner note
+states how many of the 78 rows have dated resolutions. No `ai_problem`
+argument is passed, because no entry credits an AI system. The cumulative
+view is the shared `ledger_remaining_chart()`. [`check.py`](check.py)
+recomputes the fact lines and the register entries from the CSV.
+
+## Limitations
+
+- **no entry-addition dates.** The 78 entries accumulated after 2001 and the
+  ledger does not record when each was added, so this is a dated-resolution
+  ledger and not a fixed-cohort solve rate.
+- **one row predates the list.** Entry 18's 2000 resolution sits a year
+  before the project's 2001 start, so the event timeline begins before the
+  list itself.
+- **maintainer language.** Statuses are the maintainers' own wording, not
+  independent review, and some are qualified — entry 12 is counted on
+  "Solved (in a certain sense)".
+- **unmaintained entries look open.** An entry whose status line was never
+  updated is indistinguishable here from an unsolved problem, so the 60-row
+  open count is an upper bound on the genuinely open entries.
+- **empty resolver fields.** Many status lines name a citation rather than a
+  person, so several `resolver` fields are empty and the series cannot be
+  split by finder.
+- **effort.** Resolution landmarks are not effort-adjusted discovery rates;
+  nothing records how much search each fall took.
+
+## AI attribution
+
+No status line among the 78 entries names an AI system or agent, as of the
+2026-08-14 read of topp.openproblem.net, and no `resolver` or `notes` field
+in [`topp-problems.csv`](topp-problems.csv) carries an AI credit. The two
+most recent dated resolutions are human papers: Wang (2023, entry 21) and
+Abrahamsen–Stade (2024, entry 56).
+
+## Sources
+
+- [@demaine2001topp] — the project itself: entries, bibliographies and
+  status lines; the register quotes its status wording as read 2026-08-14.
+- [@deepmind2026nexus] — formal proof search over open problems, reporting 9
+  of 353 open Erdős problems resolved.
+- [@arxiv2026horizonmath] — a 2026 benchmark of over 100 predominantly
+  unsolved problems chosen so that "verification is computationally
+  efficient and simple"; frontier models score near 0% on it.
+- [@sherry2021fast] — measured improvement rates across algorithm families,
+  including multi-decade stationary stretches, with no AI involved.
+- Sibling ledgers of the same instrument type:
+  [Hilbert](../math-hilbert/README.md), [Landau](../math-landau/README.md),
+  [Thurston](../math-thurston/README.md), [Smale](../math-smale/README.md)
+  and [Millennium](../math-millennium/README.md).
+- [Erdős](../math-erdos/README.md) — a catalogue ledger over a different
+  corpus, counting a different unit (catalogue problems with imputed
+  solution years).

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines and verdict clause from the CSV."""
 
 from __future__ import annotations
 
@@ -20,9 +20,9 @@ def main() -> int:
     ai = [row for row in records if row["agent"] == "ai"]
     failures = []
     if len(ai) != 5:
-        failures.append(f"{len(ai)} AI-credited records; the prose narrates five")
+        failures.append(f"{len(ai)} AI-credited records; the page states five")
     if len(retimings) != 2:
-        failures.append(f"{len(retimings)} re-timing rows; the prose narrates two")
+        failures.append(f"{len(retimings)} re-timing rows; the page states two")
 
     first, last = records[0], records[-1]
     # Each AI record is measured against the record it displaced, in table order.
@@ -36,30 +36,39 @@ def main() -> int:
             float(by_year["2024"][-1]["minutes"]) / float(by_year["2025"][-1]["minutes"]),
             float(by_year["2025"][-1]["minutes"]) / float(by_year["2026"][-1]["minutes"])]
 
+    ai_list = ", ".join(
+        f"record {row['record']} to {row['ai_system']} at {row['minutes']}"
+        + (" minutes" if row is ai[0] else "") + f" ({row['date']})"
+        for row in ai[:-1]) + (
+        f", and record {ai[-1]['record']} to {ai[-1]['ai_system']} at "
+        f"{ai[-1]['minutes']} ({ai[-1]['date']})")
     claims = {
-        f"{first['minutes']} minutes at the llm.c baseline of {first['date']}":
-            "baseline",
-        f"down to {last['minutes']} minutes at record {last['record']} on "
-        f"{last['date']}": "closing record",
-        f"a reduction of about {round(float(first['minutes']) / float(last['minutes']))} "
-        "times": "total reduction",
-        f"{first['date']} to {last['date']}, all {len(records)} records":
-            "coverage",
-        f"records out of {len(records)}": "AI share denominator",
-        f"gives {steps[0]:.1f}%, {steps[1]:.1f}%, {steps[2]:.1f}%, "
-        f"{steps[3]:.1f}% and {steps[4]:.1f}%": "AI step sizes",
-        f"{len(by_year['2024'])} records in 2024, {len(by_year['2025'])} in "
-        f"2025, and {len(by_year['2026'])} in the first seven months of 2026":
-            "records per period",
-        f"fell by a factor of {fell[0]:.1f}, then {fell[1]:.1f}, then "
-        f"{fell[2]:.1f}": "standing-record falls",
+        f"**span:** {first['minutes']} minutes at the llm.c baseline of "
+        f"{first['date']}, down to {last['minutes']} minutes at record "
+        f"{last['record']} on {last['date']} — a reduction of about "
+        f"{round(float(first['minutes']) / float(last['minutes']))} times":
+            "span fact",
+        f"**records per period:** {len(by_year['2024'])} records in 2024, "
+        f"{len(by_year['2025'])} in 2025, and {len(by_year['2026'])} in the "
+        "first seven months of 2026": "records-per-period fact",
+        f"**standing-record falls:** over the same three periods the "
+        f"standing record fell by a factor of {fell[0]:.1f}, then "
+        f"{fell[1]:.1f}, then {fell[2]:.1f}": "standing-record-falls fact",
+        f"**ai-records:** {len(ai)} records out of {len(records)}: {ai_list}":
+            "ai-records fact",
+        f"the five AI steps are {steps[0]:.1f}%, {steps[1]:.1f}%, "
+        f"{steps[2]:.1f}%, {steps[3]:.1f}% and {steps[4]:.1f}%":
+            "ai-step-sizes fact",
         f"at {retimings[0]['minutes']} minutes and again on the then-current "
         f"torch at {retimings[1]['minutes']}": "re-timing values",
+        f"no acceleration — the standing record fell {fell[2]:.1f}× in 2026 "
+        f"({len(by_year['2026'])} records through {last['date']}) against "
+        f"{fell[1]:.1f}× in 2025 ({len(by_year['2025'])} records) and "
+        f"{fell[0]:.1f}× in 2024 ({len(by_year['2024'])} records)":
+            "verdict clause",
+        f"{first['date']} to {last['date']}, all {len(records)} records":
+            "coverage field",
     }
-    for row in ai:
-        claims[f"record {row['record']} to {row['ai_system']} at "
-               f"{row['minutes']}"] = f"AI record {row['record']}"
-        claims[f"({row['date']})"] = f"AI record {row['record']} date"
     twenty_two = [row for row in records if row["record"] in ("22", "23", "24")]
     claims[f"records 22 to 24 at {twenty_two[0]['minutes']}, "
            f"{twenty_two[1]['minutes']} and {twenty_two[2]['minutes']}"] = \

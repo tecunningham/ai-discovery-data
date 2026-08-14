@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines and verdict clause from the CSV."""
 
 from __future__ import annotations
 
@@ -30,23 +30,31 @@ def main() -> int:
     gain = {year: last_of_year[year] - last_of_year[str(int(year) - 1)]
             for year in ("2020", "2021", "2022", "2023", "2024", "2025", "2026")}
     claims = {
-        f"{first['elo_vs_sf15']} ± {first['elo_err']} against Stockfish 15 on "
-        f"{first['date']}".replace("-537.61", "−537.61"): "opening measurement",
-        f"+{last['elo_vs_sf15']} ± {last['elo_err']} on {last['date']}":
-            "closing measurement",
-        f"about\n{round(span)} Elo of pure software progress".replace("\n", " "):
-            "total span",
-        f"averaging {round(span / years)} Elo a year": "annual average",
-        f"{len(same_day)} builds share that final date": "tied-build count",
-        f"span {min(same_day)} to {max(same_day)}": "tied-build spread",
-        f"{len(rows):,} tested development builds": "build count",
-        f"2020 gained about {round(gain['2020'])} Elo and 2021 about "
-        f"{round(gain['2021'])}": "NNUE-era year gains",
-        f"gives {round(gain['2022'])} in 2022, {round(gain['2023'])} in 2023, "
+        f"**span:** Stockfish 3 measures {first['elo_vs_sf15']} ± "
+        f"{first['elo_err']} against Stockfish 15 on {first['date']}, and "
+        f"the newest build measures +{last['elo_vs_sf15']} ± "
+        f"{last['elo_err']} on {last['date']} — about {round(span)} Elo of "
+        f"pure software progress, averaging {round(span / years)} Elo a "
+        "year".replace("-537.61", "−537.61"): "span fact",
+        f"**builds:** {len(rows):,} tested development builds": "builds fact",
+        f"**final-day spread:** {len(same_day)} builds share that final date "
+        f"and span {min(same_day)} to {max(same_day)}": "final-day fact",
+        f"**nnue-era gains:** year-end to year-end, calendar 2020 gained "
+        f"about {round(gain['2020'])} Elo and 2021 about "
+        f"{round(gain['2021'])}": "NNUE-era fact",
+        f"**recent gains:** the same year-end convention gives "
+        f"{round(gain['2022'])} in 2022, {round(gain['2023'])} in 2023, "
         f"{round(gain['2024'])} in 2024, {round(gain['2025'])} in 2025, and "
-        f"{round(gain['2026'])} through {last['date']}": "recent year gains",
-        f"annualizes to about {round(annualized(gain['2026'], last['date']))}":
-            "part-year annualization",
+        f"{round(gain['2026'])} through {last['date']}, which annualizes to "
+        f"about {round(annualized(gain['2026'], last['date']))}":
+            "recent-gains fact",
+        f"no acceleration — {round(gain['2026'])} Elo through "
+        f"{last['date']} (annualizing to about "
+        f"{round(annualized(gain['2026'], last['date']))} Elo/year) against "
+        f"{round(gain['2025'])} Elo in 2025 and a {round(span / years)} "
+        "Elo/year mean over 2013–2026": "verdict clause",
+        f"Coverage:** {first['date']} to {last['date']}, {len(rows):,} "
+        "tested development builds": "coverage field",
     }
     return report(missing(prose(HERE), claims))
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines from the CSVs beside it."""
 
 from __future__ import annotations
 
@@ -29,25 +29,56 @@ def main() -> int:
     credited = sum(int(row["distinct_cves"]) - int(row["uncredited"])
                    for row in credits)
     ai_rows = read_csv(HERE / "osv-ai-cves.csv")
+    explicit = [row for row in ai_rows if row["band"] == "explicit_ai"]
+    affiliated = [row for row in ai_rows if row["band"] == "ai_affiliated"]
+    aisle = sum("Aisle Research" in row["credits"] for row in affiliated)
+    ant = sum("AntAISecurityLab" in row["credits"] for row in affiliated)
+    by_year_line = " · ".join(
+        f"{row['year']}: {int(row['distinct_cves']):,}" for row in annual
+        if row["partial_year"] == "no")
+
+    failures: list[str] = []
+    if len(explicit) + len(affiliated) != len(ai_rows):
+        failures.append("the AI ledger holds bands other than explicit_ai "
+                        "and ai_affiliated")
+    # The peak-quarter fact compares one quarter against whole prior years.
+    pre_2022_max = max(count for year, count in counts.items()
+                       if year < "2022")
+    if int(peak["distinct_cves"]) <= pre_2022_max:
+        failures.append(
+            f"the peak quarter ({peak['distinct_cves']}) no longer exceeds "
+            f"every full year before 2022 (max {pre_2022_max})")
+
     claims = {
-        f"from {counts['2016']:,} in 2016": "2016 count",
-        f"{counts['2020']:,} in 2020": "2020 count",
-        f"{counts['2022']:,} in 2022": "2022 count",
-        f"{counts['2024']:,} in 2024": "2024 count",
-        f"{counts['2025']:,} in 2025": "2025 count",
-        f"{counts['2026']:,} through": "part-year count",
-        f"about {round(pace, -2):,.0f}": "annualized pace",
-        f"{pace / counts['2025']:.1f} times the\n2025 count".replace("\n", " "):
-            "pace against 2025",
-        f"{peak['quarter']} alone holds {int(peak['distinct_cves']):,}":
-            "peak quarter",
-        f"{rated:,} of the {total:,} CVEs ({100 * rated / total:.0f}%)":
-            "severity label coverage",
-        f"{credited:,} CVEs ({100 * credited / total:.1f}%) carry any credit":
-            "credit coverage",
-        f"{len(ai_rows)} AI-marked": "AI-marked ledger size",
+        f"Coverage:** 2016–2026, partial through {through}":
+            "coverage field",
+        f"{counts['2026']:,} distinct CVEs through {through} annualize to "
+        f"about {round(pace, -2):,.0f}, {pace / counts['2025']:.1f} times "
+        f"2025's {counts['2025']:,}": "verdict clause",
+        f"**by-year:** {by_year_line}": "by-year fact",
+        f"**2026 (through {through}):** {counts['2026']:,} distinct CVEs; "
+        f"annualizes to about {round(pace, -2):,.0f}, or "
+        f"{pace / counts['2025']:.1f} times the 2025 count":
+            "part-year fact",
+        f"**peak quarter:** {peak['quarter']} alone holds "
+        f"{int(peak['distinct_cves']):,} distinct CVEs, more than any full "
+        "year before 2022": "peak-quarter fact",
+        f"**severity coverage:** {rated:,} of the {total:,} CVEs "
+        f"({100 * rated / total:.0f}%) carry an ecosystem severity label":
+            "severity-coverage fact",
+        f"**credit coverage:** {credited:,} CVEs "
+        f"({100 * credited / total:.1f}%) carry any credit":
+            "credit-coverage fact",
+        f"**ai-marked:** {len(ai_rows)} CVEs — {len(explicit)} whose "
+        f"credits state an AI method and {len(affiliated)} carrying an "
+        "AI-lab affiliation only": "ai-marked fact",
+        f"The AI-marked ledger holds {len(ai_rows)} CVEs. {len(explicit)} "
+        "carry credits stating an AI method": "AI register lead",
+        f"The other {len(affiliated)} carry an AI-lab affiliation with no "
+        f"method stated: {aisle} name Aisle Research, {ant} name "
+        "AntAISecurityLab hackerone handles": "affiliation split",
     }
-    return report(missing(prose(HERE), claims))
+    return report(failures + missing(prose(HERE), claims))
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines and verdict clause from the CSV."""
 
 from __future__ import annotations
 
@@ -28,6 +28,7 @@ def main() -> int:
     first_score, last_score = int(first["score"]), int(last["score"])
     days = (date.fromisoformat(last["date"])
             - date.fromisoformat(first["date"])).days
+    factor = first_score / last_score
     solvers = len({row["solver"] for row in rows})
     named = sum(row["ai_tool_in_note"] == "yes" for row in rows)
     blank = sum(row["ai_tool_in_note"] == "" for row in rows)
@@ -44,20 +45,27 @@ def main() -> int:
         failures.append(f"starting score renders {sci(first_score)}")
 
     claims = {
-        f"from the challenge's starting circuit at {sci(first_score)} to":
-            "starting score",
-        f"{sci(last_score)} over {days} days": "final score and span",
-        f"about {first_score / last_score:.1f}× lower": "improvement factor",
-        f"across {len(rows)} accepted records from {solvers} distinct solvers":
-            "record and solver counts",
-        f"on 31 May, cut the score from {sci(before)} to {sci(after)}":
-            "largest step",
-        f"{named} of the {len(rows)} notes name one": "AI-tool share",
+        f"**span:** from the challenge's starting circuit at "
+        f"{sci(first_score)} on {first['date']} to {sci(last_score)} on "
+        f"{last['date']}, about {factor:.1f}× lower over {days} days":
+            "span fact",
+        f"**records:** {len(rows)} accepted records from {solvers} distinct "
+        "solvers": "records fact",
+        f"**largest step:** on {rows[biggest]['date']}, from {sci(before)} "
+        f"to {sci(after)}": "largest-step fact",
+        f"**ai-noted:** {named} of {len(rows)} notes name an AI tool; "
+        f"{blank} rows carry no note; {no_tool} carry a note naming no tool":
+            "ai-noted fact",
+        f"too early — first record {first['date']}, so no prior-year rate "
+        f"exists; the 2026 series is a {factor:.1f}× fall over {days} days":
+            "verdict clause",
+        f"Coverage:** {first['date']} to {last['date']}, {len(rows)} "
+        "accepted records": "coverage field",
+        f"Of {len(rows)} accepted records, {named} carry notes naming an AI "
+        "tool": "AI-attribution counts",
         f"blank where no note was left ({blank} rows)": "blank-note count",
         f'"no" where a note exists but names no tool ({no_tool} rows)':
             "no-tool count",
-        f"Of {len(rows)} accepted records, {named} carry notes naming an AI tool":
-            "LLM-section counts",
     }
     return report(failures + missing(prose(HERE), claims))
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines and cross-check the vendored CSVs."""
 
 from __future__ import annotations
 
@@ -30,8 +30,8 @@ def main() -> int:
                             f"{row['cves']} CVEs")
         if int(row["year"]) < 2025 and (int(row["explicit_ai"])
                                         or int(row["ai_affiliated"])):
-            failures.append(f"{row['year']} has AI-marked CVEs; the prose says "
-                            "none exist before 2025")
+            failures.append(f"{row['year']} has AI-marked CVEs; the ai-marked "
+                            "fact line says none exist before 2025")
     monthly_by_year: dict[str, int] = {}
     for row in monthly:
         year = row["month"][:4]
@@ -42,10 +42,11 @@ def main() -> int:
     ai_by_year = {y: [r for r in ai_rows if r["date"].startswith(y)]
                   for y in ("2025", "2026")}
     for year in ai_by_year:
-        marked = int(by_year[year]["explicit_ai"]) + int(by_year[year]["ai_affiliated"])
+        marked = (int(by_year[year]["explicit_ai"])
+                  + int(by_year[year]["ai_affiliated"]))
         if len(ai_by_year[year]) != marked:
-            failures.append(f"{year} AI CSV has {len(ai_by_year[year])} rows but "
-                            f"the annual bands sum to {marked}")
+            failures.append(f"{year} AI CSV has {len(ai_by_year[year])} rows "
+                            f"but the annual bands sum to {marked}")
 
     def team(row_list, test):
         return sum(
@@ -65,58 +66,91 @@ def main() -> int:
     ai_2026 = int(latest["explicit_ai"]) + int(latest["ai_affiliated"])
     if sec_2026 + xbow_2026 + claude_2026 + other_2026 != ai_2026:
         failures.append("the 2026 team split double-counts a CVE")
+    if sec_2025 != len(ai_by_year["2025"]):
+        failures.append("not every 2025 AI-marked CVE carries a SEC-agent "
+                        "credit; the 'All ... of 2025' sentence is wrong")
+    # The OpenAI remainder bullet states a date and a shared credit string;
+    # both are claims about every row in that remainder.
+    remainder = [row for row in ai_by_year["2026"]
+                 if not any(k in row["credits"]
+                            for k in ("SEC-agent", "XBOW", "Claude",
+                                      "Anthropic"))]
+    if any(row["date"] != "2026-08-11"
+           or "Thomas Neil James Shadwell (zemnmez) with OpenAI"
+           not in row["credits"] for row in remainder):
+        failures.append("the OpenAI remainder rows no longer share the "
+                        "quoted credit string and 2026-08-11 date")
+    warp = [row for row in ai_by_year["2026"] if "WARP" in row["credits"]]
+    if len(warp) != 1 or warp[0]["cve"] != "CVE-2026-33096":
+        failures.append("the WARP & MORSE co-credit no longer sits on "
+                        "CVE-2026-33096 alone")
 
     plateau = [count[str(year)] for year in range(2019, 2024)]
     ratio = annualized(count["2026"], latest["data_through"]) / count["2025"]
-    ack_2016 = round(100 * int(by_year["2016"]["acknowledged"]) / count["2016"])
-    ack_2026 = round(100 * int(by_year["2026"]["acknowledged"]) / count["2026"])
+    ack_2016 = round(100 * int(by_year["2016"]["acknowledged"])
+                     / count["2016"])
+    ack_2026 = round(100 * int(by_year["2026"]["acknowledged"])
+                     / count["2026"])
     months_2016 = sum(1 for row in monthly if row["month"].startswith("2016"))
     month_count = {row["month"]: int(row["cves"]) for row in monthly}
+    by_year_line = " · ".join(
+        f"{row['year']}: {int(row['cves']):,}" for row in rows
+        if row["partial_year"] == "no")
     claims = {
-        f"{count['2016']} CVEs across "
-        f"{'ten' if months_2016 == 10 else months_2016} documented months of "
-        "2016": "2016 count",
-        f"{count['2017']} in 2017": "2017 count",
-        f"between {min(plateau)} and {max(plateau)} a year from 2019 through "
-        "2023": "plateau range",
-        f"{round(100 * (count['2024'] / count['2023'] - 1))}% in each of 2024 "
-        f"and 2025" if round(100 * (count['2024'] / count['2023'] - 1))
-        == round(100 * (count['2025'] / count['2024'] - 1)) else
-        "GROWTH RATES DIVERGED; REWRITE THE 2024-2025 SENTENCE": "2024-25 growth",
-        f"{count['2024']:,} in 2024": "2024 count",
-        f"{count['2025']:,} in 2025": "2025 count",
-        f"{count['2026']:,} CVEs through {latest['data_through']}":
-            "part-year count",
-        f"{count['2026'] / count['2025']:.2f} times the 2025 full year":
-            "part-year ratio",
-        f"about {ratio:.1f} times 2025": "annualized ratio",
-        f"{month_count['2026-06']} CVEs dated June 2026": "June 2026 record",
-        f"{month_count['2026-07']} CVEs dated July 2026": "July 2026 record",
-        f"{month_count['2026-07'] / month_count['2026-06']:.1f} times the June "
-        "record": "July against June",
-        f"{by_year['2025']['explicit_ai']} AI-marked CVEs": "2025 AI count",
-        f"{ai_2026} AI-marked CVEs, or "
-        f"{100 * ai_2026 / count['2026']:.1f}% of the part year":
-            "2026 AI share",
+        f"Coverage:** 2016–2026, partial through {latest['data_through']}":
+            "coverage field",
+        f"{count['2026']:,} CVEs through {latest['data_through']} against "
+        f"{count['2025']:,} in 2025; the part year annualizes to about "
+        f"{ratio:.1f} times 2025": "verdict clause",
+        f"**by-year:** {by_year_line}": "by-year fact",
+        f"**2016 span:** {count['2016']} CVEs across "
+        f"{'ten' if months_2016 == 10 else months_2016} documented months":
+            "2016 span fact",
+        f"**plateau and growth:** between {min(plateau)} and {max(plateau)} "
+        "a year from 2019 through 2023; "
+        + (f"{round(100 * (count['2024'] / count['2023'] - 1))}% growth in "
+           "each of 2024 and 2025"
+           if round(100 * (count['2024'] / count['2023'] - 1))
+           == round(100 * (count['2025'] / count['2024'] - 1)) else
+           "GROWTH RATES DIVERGED; REWRITE THE PLATEAU FACT LINE"):
+            "plateau fact",
+        f"**2026 (through {latest['data_through']}):** {count['2026']:,} "
+        f"CVEs, {count['2026'] / count['2025']:.2f} times the 2025 full "
+        f"year; annualizes to about {ratio:.1f} times 2025":
+            "part-year fact",
+        f"**record months:** {month_count['2026-06']} CVEs dated June 2026, "
+        f"then {month_count['2026-07']} CVEs dated July 2026, "
+        f"{month_count['2026-07'] / month_count['2026-06']:.1f} times the "
+        "June figure": "record-months fact",
+        f"**ai-marked:** 0 before 2025; "
+        f"{int(by_year['2025']['explicit_ai']) + int(by_year['2025']['ai_affiliated'])} "
+        f"in 2025; {ai_2026} in 2026, or "
+        f"{100 * ai_2026 / count['2026']:.1f}% of the part year — "
         f"{latest['explicit_ai']} name an AI system or method and "
         f"{latest['ai_affiliated']} name only an AI-security employer":
-            "2026 AI band split",
-        f"never exceeds {max(int(row['fuzz']) for row in rows)} CVEs":
-            "fuzz ceiling",
-        f"{ack_2016}% of 2016's CVEs carry at least one named credit, rising "
-        f"to {ack_2026}% in the 2026 part year": "acknowledgment coverage",
-        f"{by_year['2024']['no_customer_action']} CVEs in 2024, "
+            "ai-marked fact",
+        "**fuzz band:** never exceeds "
+        f"{max(int(row['fuzz']) for row in rows)} CVEs in any year":
+            "fuzz fact",
+        f"**acknowledgments:** {ack_2016}% of 2016's CVEs carry at least one "
+        f"named credit, rising to {ack_2026}% in the 2026 part year":
+            "acknowledgment fact",
+        f"**no-customer-action CVEs:** "
+        f"{by_year['2024']['no_customer_action']} in 2024, "
         f"{by_year['2025']['no_customer_action']} in 2025 and "
         f"{by_year['2026']['no_customer_action']} in the 2026 part year":
-            "cloud-CVE counts",
-        f"all {sec_2025} credit the SEC-agent team": "2025 team",
-        f"{enki_2025} of them jointly with ENKI WhiteHat": "2025 ENKI overlap",
-        f"{sec_2026} credit the SEC-agent team, {claude_2026} credit Claude or "
-        f"Anthropic": "2026 team split",
-        f"{xbow_2026} credit XBOW": "2026 XBOW count",
-        (f"{other_2026} credit another AI affiliation" if other_2026 else
-         "AI AFFILIATION REMAINDER IS ZERO; DROP THE OTHER-AFFILIATION "
-         "SENTENCE"): "2026 other affiliations",
+            "cloud-CVE fact",
+        f"All {sec_2025} AI-marked CVEs of 2025 carry a SEC-agent credit, "
+        f"{enki_2025} of them jointly with ENKI WhiteHat": "2025 team",
+        f"{sec_2026} of 2026's {ai_2026} AI-marked CVEs carry one":
+            "2026 SEC-agent count",
+        f"{claude_2026} of 2026's AI-marked CVEs credit Claude or Anthropic":
+            "2026 Claude count",
+        f'{xbow_2026} CVEs credit "XBOW"': "2026 XBOW count",
+        (f"The remaining {other_2026} CVEs, both dated 2026-08-11"
+         if other_2026 == 2 else
+         "OPENAI REMAINDER IS NOT TWO; REWRITE THE OPENAI BULLET"):
+            "2026 OpenAI remainder",
     }
     return report(failures + missing(prose(HERE), claims))
 

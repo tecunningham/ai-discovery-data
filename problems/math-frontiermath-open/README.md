@@ -1,154 +1,249 @@
 # FrontierMath Open Problems
 
 **Domain:** mathematics
+**Role:** discovery series
 **Metric:** dated solution events on Epoch AI's pool of open research problems, placed by curator-assigned notability tier
 **Coverage:** benchmark announced 2026-02-26; pages read 2026-08-14, with recorded solves from 2026-03-23 to 2026-08-12
 **Data:** [`frontiermath-open-problems.csv`](frontiermath-open-problems.csv), [`frontiermath-open-solutions.csv`](frontiermath-open-solutions.csv)
 **Upstream:** <https://epoch.ai/frontiermath/open-problems>
-**Verdict:** too early — a six-month-old pool built for cheap verification; every solve sits in its two lowest notability tiers
+**Verdict:** too early — 6 dated solves between 2026-03-23 and 2026-08-12; the pool was announced 2026-02-26 and no prior-year rate exists
 
 ![Dated solution events by notability tier, with the surviving pool per tier.](discovery-math-frontiermath-open.png)
 
-## The problem
+## Definition
 
-FrontierMath: Open Problems is Epoch AI's pool of genuinely unsolved research
-mathematics — problems that are open, that at least two professional
-mathematicians have seriously attempted, and whose solutions "can be verified
-to a high degree of confidence by a typical computer program running on a
-typical laptop in under an hour" [@epoch2026openproblems]. That last criterion
-is the reason the series is here: this is the cheap-verification selection
-rule made explicit and institutional, the same design choice
-[@arxiv2026horizonmath] describes and the same mechanism this collection's
-[Smale](../math-smale/README.md) and
-[Erdős top-10](../math-erdos-top10/README.md) ledgers surface one event at a
-time. Each problem also carries an editorial notability tier — moderately
-interesting, solid result, major advance, breakthrough — which makes the pool
-the one corpus in this collection where the *significance* of what falls is
-scored by the curator rather than argued after the fact.
+FrontierMath: Open Problems is Epoch AI's pool of unsolved research
+mathematics, announced in late February 2026 [@epoch2026openproblems]. The
+site's front page states the selection:
 
-A "discovery" in this series is a problem page moving to a solved status. The
-pool is young and still moving: announced in late February 2026, recently
-expanded, with problems added, retired after solves, and in one case withdrawn
-for failing the publishable-result bar.
+> "A collection of unsolved mathematics problems that have resisted serious
+> attempts by professional mathematicians."
+> — Epoch AI, FrontierMath: Open Problems front page, read 2026-08-14 [@epoch2026openproblems]
 
-## What the chart shows
+Computational verification is an admission criterion:
 
-As of 2026-08-14 the sitemap lists 54 problem pages: 6 are marked solved by
-AI, 1 by humans, and 47 stand unsolved. The tiers split 23 moderately
-interesting, 20 solid result, 6 major advance, and 4 breakthrough, plus one
-withdrawn page badged outside the tier scale. 6 of the 7 recorded solves
-carry a date, running from 2026-03-23 to 2026-08-12 — roughly one a month,
-with a cluster in late July around the expanded release's pre-testing.
+> "Problems are only included if their solutions can be verified
+> computationally. This lets us evaluate AI systems at scale without
+> requiring humans to read AI-generated proofs each time."
+> — Epoch AI, FrontierMath: Open Problems FAQ, read 2026-08-14 [@epoch2026openproblems]
 
-The placement is the reading. Four solves sit in the lowest tier (a hypergraph
-Ramsey construction by GPT-5.4 Pro; short superpermutations over 8, 9 and 10
-and a genus-2 torsion record, both by GPT-5.6 Sol; a Hadamard matrix of order
-668 credited to a team of three humans and Claude) and two in the second tier
-(a presentation of the absolute Galois group of $\mathbb{Q}_2$, first produced
-by Claude Fable 5, and the inverse Galois problem for $M_{23}$, scored as a
-human solve). The top two tiers — ten problems the editors call a major
-advance or a breakthrough — are untouched. The genus-2 solve is also a
-caution about what "solved by AI" can mean: the model found an existing curve
-in a public database whose torsion nobody had checked, a literature-search
-result the curators themselves flag, not new mathematics.
+Each problem carries an editorial notability tier — moderately interesting,
+solid result, major advance, breakthrough. The FAQ defines the lowest tier's
+floor:
 
-Two scoring judgments are worth quoting because they show where the AI/human
-line is drawn. The $M_{23}$ solve involved AI heavily, but Epoch requires
-"that the core ideas of the solution be unambiguously contributed by AI", and
-one author said no sharp line could be drawn — so it counts as human. The
-Hadamard solve, reported by Levent Alpöge crediting three humans and Claude,
-is "provisionally" AI pending detail on the human share. Both defaults could
-reasonably have gone the other way, which is the usual floor-not-measurement
-caveat running in both directions.
+> "Moderately Interesting: The problem was posed at least 10 years ago and
+> has been worked on by at least two independent teams of mathematicians. It
+> has connections to broader questions, but is not a priority for any large
+> research program."
+> — Epoch AI, FrontierMath: Open Problems FAQ, read 2026-08-14 [@epoch2026openproblems]
 
-The site's own front page tallies differently — "recently expanded to 50
-problems", with AI solves of 3/22, 1/18, 0/6 and 0/3 across the four tiers —
-than a page-by-page read of its sitemap, consistent with recent additions,
-retirement of solved rows from the active pool, and the withdrawal. The same
-one-stock-several-counts pattern appears on the
-[Erdős catalogue](../math-erdos/README.md), and the CSVs here vendor the
-page-by-page read.
+A "discovery" in this series is a problem page moving to a solved status,
+solved by AI or solved by humans. Solve dates come from the pages'
+solution-update prose and Epoch's announcement posts: the ramsey-hypergraphs
+row is dated by the announcement post because its page states no solve date,
+the hadamard row by the day of the public report its page links, and the
+withdrawn explicit-deformations row carries no date. The pool is edited as
+events arrive: problems are added, retired after solves, and in one case
+withdrawn.
+
+## Facts
+
+- **pages:** 54 problem pages in the sitemap read of 2026-08-14; 6 marked solved by AI, 1 by humans, 47 unsolved
+- **tiers:** 23 moderately interesting · 20 solid result · 6 major advance · 4 breakthrough; 1 withdrawn page badged Novel example
+- **events:** 7 recorded solves; 6 carry a date, running 2026-03-23 to 2026-08-12
+- **placement:** 4 solves in moderately interesting, 2 in solid result, 1 on the Novel-example page; 0 in major advance and 0 in breakthrough
+- **front-page tally:** AI solves of 3/22, 1/18, 0/6 and 0/3 across the four tiers, under the headline "Recently expanded to 50 problems", read 2026-08-14
+
+The front-page tally differs from the page-by-page sitemap read the CSVs
+vendor, consistent with recent additions, retirement of solved rows from
+the active pool, and the withdrawal. The
+[Erdős catalogue](../math-erdos/README.md) records the same
+one-stock-several-counts pattern on its corpus.
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws the six
 dated events as a running count:
 
 ![Cumulative dated solution events.](cumulative-math-frontiermath-open.png)
 
-## How the chart was built
+### ramsey-hypergraphs — A Ramsey-style Problem on Hypergraphs
+- **event:** solved_ai
+- **date:** 2026-03-23
+- **system:** GPT-5.4 Pro
+- **elicited by:** Kevin Barreto and Liam Price
+- **tier:** Moderately interesting
+- **notes:** First AI solve on the benchmark; confirmed by problem contributor Will Brian; dated by Epoch's announcement since the page states no solve date
+
+> "This problem has been solved! A solution was first elicited by Kevin
+> Barreto and Liam Price, using GPT-5.4 Pro. This solution was confirmed by
+> problem contributor Will Brian, and will be written up for publication."
+> — Epoch AI, ramsey-hypergraphs problem page, read 2026-08-14 [@epoch2026openproblems]
+
+### explicit-deformations — Explicit Deformations of Algebras
+- **event:** solved_ai
+- **date:**
+- **system:** GPT-5.2 Pro
+- **elicited by:** David Turturean
+- **tier:** Novel example
+
+> "The solution was generated by GPT-5.2 Pro running in a harness developed
+> by David Turturean."
+> — Epoch AI, explicit-deformations problem page, read 2026-08-14 [@epoch2026openproblems]
+
+> "Update (2026-03-12): We have determined that any solution to this problem
+> would not meet our bar of being a publishable result in its own right. As
+> a result, we have removed the problem from the benchmark."
+> — Epoch AI, explicit-deformations problem page, read 2026-08-14 [@epoch2026openproblems]
+
+### q2-absolute-galois — A Presentation of the Absolute Galois Group of \(\mathbb{Q}_2\)
+- **event:** solved_ai
+- **date:** 2026-06-09
+- **system:** Claude Fable 5
+- **elicited by:** David Roe
+- **tier:** Solid result
+- **notes:** GPT-5.5 Pro independently reproduced the solution on 2026-06-24 in a harness by David Turturean; write-up by Roe and Turturean
+
+> "Progress Update (2026-07-06): Multiple AI systems have now generated
+> solutions that are accepted by the verifier for this problem. The first
+> solution we were made aware of was generated by Claude Fable 5, elicited
+> by problem contributor David Roe on 2026-06-09."
+> — Epoch AI, q2-absolute-galois problem page, read 2026-08-14 [@epoch2026openproblems]
+
+### superpermutations — Short Superpermutations over 8, 9, and 10
+- **event:** solved_ai
+- **date:** 2026-07-26
+- **system:** GPT-5.6 Sol
+- **elicited by:** William Echols
+- **tier:** Moderately interesting
+- **notes:** Building on Uku Raudvere's same-day n=8 post; verified in Epoch pre-release testing 2026-07-27 and recorded solved on release
+
+> "Since the superpermutations problem appears to have been solved by AI
+> after we accepted the problem into the benchmark, we are recording this
+> problem as solved on release."
+> — Epoch AI, superpermutations problem page, read 2026-08-14 [@epoch2026openproblems]
+
+### genus-2-jacobian-torsion — A Genus 2 Curve over the Rationals with a Rational Torsion Point of Prime Order at Least 31
+- **event:** solved_ai
+- **date:** 2026-07-30
+- **system:** GPT-5.6 Sol
+- **elicited by:** Epoch pre-release test
+- **tier:** Moderately interesting
+- **notes:** Found an existing curve of Costa and Keller by literature search; recorded solved on release with order 37 set as the next target
+
+> "In this instance, the solution to the problem was latent in the existing
+> literature: the curve, which is part of a substantial project to create a
+> dataset of curves, is in a public database, and would have been recognized
+> as a solution had someone checked its torsion subgroup."
+> — Epoch AI, genus-2-jacobian-torsion problem page, read 2026-08-14 [@epoch2026openproblems]
+
+### inverse-galois — The Inverse Galois Problem for the Mathieu Group \(M_{23}\)
+- **event:** solved_human
+- **date:** 2026-08-11
+- **system:**
+- **elicited by:** Huang et al.
+- **tier:** Solid result
+- **notes:** Solved with heavy AI involvement but scored human: Epoch requires the core ideas be unambiguously AI's and the authors say no sharp line can be drawn
+
+> "We hold a high bar for considering a problem “solved by AI”, in
+> particular requiring that the core ideas of the solution be unambiguously
+> contributed by AI."
+> — Epoch AI, inverse-galois problem page, read 2026-08-14 [@epoch2026openproblems]
+
+> "The boundaries between the human- and AI-contributed reasoning are not
+> clear. Probably, it would be practically impossible to draw a sharp line."
+> — author of the \(M_{23}\) solution, quoted on Epoch AI's inverse-galois problem page, read 2026-08-14 [@epoch2026openproblems]
+
+### hadamard — Hadamard Matrix of Order 668
+- **event:** solved_ai
+- **date:** 2026-08-12
+- **system:** Claude
+- **elicited by:** Levent Alpöge and a team of three humans
+- **tier:** Moderately interesting
+- **notes:** Provisionally marked solved by AI pending detail on the human share; the construction encodes Hadamard matrices of all previously unknown admissible orders up to 2000
+
+> "We have provisionally marked the problem as being solved by AI, though
+> will revise this if further reports from the team indicate that humans
+> contributed significantly to the core mathematical ideas."
+> — Epoch AI, hadamard problem page, read 2026-08-14 [@epoch2026openproblems]
+
+## Method
 
 [`fetch.py`](fetch.py) reads the site's sitemap, fetches each problem page,
 and rebuilds [`frontiermath-open-problems.csv`](frontiermath-open-problems.csv)
 from the server-rendered status chip, field chip, task-type chips and
 notability badge; an unrecognised status is a hard failure rather than a
-guessed category. [`frontiermath-open-solutions.csv`](frontiermath-open-solutions.csv)
-is hand-transcribed from the pages' solution-update prose and Epoch's
-announcement posts, because the dates, systems and elicitors of each solve are
-stated only in prose; the ramsey-hypergraphs row is dated by the announcement
-post since its page states no solve date, and the hadamard date is the day of
-the public report the page links. [`check.py`](check.py) cross-checks the two
-ledgers, so a refetch that flips a status without the event ledger being
-reviewed fails the folder rather than passing silently.
+guessed category.
+[`frontiermath-open-solutions.csv`](frontiermath-open-solutions.csv) is
+hand-transcribed from the pages' solution-update prose and Epoch's
+announcement posts, because the dates, systems and elicitors of each solve
+are stated only in prose. [`check.py`](check.py) cross-checks the two
+ledgers — every solved status in the page ledger must have an event row and
+vice versa — and recomputes the fact lines and register entries, so a
+refetch that flips a status without the event ledger being reviewed fails
+the folder rather than passing silently.
 
 [`figure.py`](figure.py) places each dated event at its date and tier lane,
-and beside the timeline draws the denominator: the whole pool today as one
-stacked bar per tier — open, solved by AI, solved by humans — with each
-bar's reading stating how much of the tier survives, so the six events on
-the left are read against the 47 problems still standing. It also draws the
-cumulative count of dated solves for [CUMULATIVE.md](../../CUMULATIVE.md).
-The one undated solve — the withdrawn explicit-deformations page — is
-stated in a corner note rather than drawn.
+and beside the timeline draws the whole pool as one stacked bar per tier —
+open, solved by AI, solved by humans — with each bar's label stating how
+much of the tier remains unsolved. The one undated solve — the withdrawn
+explicit-deformations page — is stated in a corner note rather than drawn.
+It also draws the cumulative count of dated solves for
+[CUMULATIVE.md](../../CUMULATIVE.md).
 
-## What it cannot support
+## Limitations
 
-- **Six months of data cannot show a trend.** The verdict is "too early" for
-  the same reason as the [ECDSA circuit sprint](../algorithms-ecdsa-circuit/README.md):
-  there is no pre-agent-era baseline, and the pool itself is being edited as
-  the events arrive.
-- **The pool is selected to be solvable by machines.** Cheap verification is
-  an admission criterion, so a solve rate here measures AI reach into
-  machine-checkable mathematics, not into mathematics.
-- **The denominator moves.** Problems are added, retired on solving, and in
-  one case withdrawn; the site's own front-page tally and its sitemap
-  disagree, and this folder's page count is one day's read of a moving pool.
-- **Solve dates are announcement dates.** Pre-release solves are dated by when
-  Epoch tested or announced them, not when a model first produced the answer;
-  one solve has no recoverable date at all.
-- **"Solved by AI" is an editorial call with a high bar** — the $M_{23}$
-  case shows a heavily-AI solve scored human, and the Hadamard case a
-  provisional AI credit that may be revised. Neither direction of the
-  scoring is a measurement of the AI share of the work.
-- **Notability tiers are one editorial board's judgment**, and the tier
-  denominators are small — six major-advance and four breakthrough rows —
-  so a single future solve would move a top tier from 0% to a large-looking
-  share.
+- **no baseline.** The pool is six months old and there is no pre-2026
+  series; no rate comparison against earlier years is possible.
+- **machine-checkable selection.** Computational verification is an
+  admission criterion, and the FAQ states the resulting bias:
 
-## LLM contributions
+  > "Does the verifiability constraint introduce a bias to the kinds of
+  > math represented here? Yes. The problems have a constructive bent,
+  > asking for concrete mathematical objects or algorithms."
+  > — Epoch AI, FrontierMath: Open Problems FAQ, read 2026-08-14 [@epoch2026openproblems]
 
-This series is itself an AI-evaluation instrument, so the contributions are
-the data: six of seven recorded solves are credited to AI systems — GPT-5.4
-Pro, GPT-5.6 Sol twice, Claude Fable 5, Claude, and one unnamed system on the
-withdrawn problem — with humans eliciting, verifying and writing up in every
-case [@epoch2026openproblems]. What the instrument adds over the
-[Erdős catalogue's](../math-erdos/README.md) larger counts is the notability
-axis: it shows machine solves reaching real but minor open mathematics —
-record-type constructions and searches, several explicitly latent in the
-literature — while the rows its editors rank as major advances or
-breakthroughs stand at zero. That is the cheap-verification prediction from
-the [Smale ledger](../math-smale/README.md) stated as a scoreboard: what falls
-is what can be certified, and how much it matters is a separate, currently
-low, number.
+- **moving denominator.** Problems are added, retired on solving, and in
+  one case withdrawn; the front-page tally and the sitemap disagree, and
+  this folder's page count is one day's read of a moving pool.
+- **solve dates are announcement dates.** Pre-release solves are dated by
+  when Epoch tested or announced them, not when a model first produced the
+  answer; one solve has no recoverable date at all.
+- **the AI/human line is an editorial call.** The inverse-galois solve
+  involved AI heavily and is scored human; the hadamard solve is
+  provisionally scored AI pending detail on the human share (both scoring
+  statements are quoted in the register above).
+- **tier denominators are small.** The top two tiers hold 6 and 4 rows, so
+  tier-level shares rest on single-digit denominators.
 
-## Related literature
+## AI attribution
 
-The pool, its criteria, and every status here are Epoch AI's pages
-[@epoch2026openproblems]; the explicit cheap-verification design is shared
-with other post-2025 benchmarks [@arxiv2026horizonmath]. The corpus-scale
-companion is the [Erdős catalogue](../math-erdos/README.md) with its frozen
-AI-contribution wiki [@erdosproblems2026wiki]; the importance-selected
-companions are the [Erdős top-10](../math-erdos-top10/README.md) and
-[Ben Green's list](../math-green/README.md), and two of this pool's rows
-(no-three-in-line, Chowla's cosine problem) appear on Green's list under
-different framing. Tao's remark that a solve count is not a success rate —
-selection, effort and failed attempts are all unobserved — applies here with
-the unusual advantage that this curator publishes the denominator
-[@tao2026interview].
+6 of the 7 recorded solves are credited to AI systems in the event ledger:
+GPT-5.4 Pro (ramsey-hypergraphs), Claude Fable 5 (q2-absolute-galois),
+GPT-5.6 Sol (superpermutations and genus-2-jacobian-torsion), Claude
+(hadamard), and one solve on the withdrawn explicit-deformations page for
+which the event ledger records no date and no system
+[@epoch2026openproblems]. The seventh, inverse-galois, is scored
+solved-by-humans under the bar quoted in its register entry. The
+genus-2-jacobian-torsion solve is a literature-search result: the page
+states the solving curve was already in a public database (quoted above).
+No solve is recorded in the major-advance or breakthrough tiers as of the
+2026-08-14 read.
+
+## Sources
+
+- [@epoch2026openproblems] — the pool, its criteria, every status and tier
+  in the page ledger, and the solution-update prose quoted in the register.
+- [@arxiv2026horizonmath] — a second 2026 benchmark whose design states
+  that discovery is hard while "verification is computationally efficient
+  and simple" (its bibliography note); cited as the contemporaneous
+  instance of the same admission criterion.
+- [@erdosproblems2026wiki] — the AI-contribution record on the neighbouring
+  Erdős corpus, frozen 2026-06-30.
+- [@tao2026interview] — the 2026-03-20 interview quoted in
+  [math-erdos](../math-erdos/README.md) on catalogue-scale solve counts.
+- Ledgers over related corpora: the
+  [Erdős catalogue](../math-erdos/README.md), the
+  [Erdős top-10](../math-erdos-top10/README.md),
+  [Ben Green's list](../math-green/README.md) — two of this pool's rows
+  (no-three-in-line, Chowla's cosine problem) appear on Green's list — and
+  the [Smale ledger](../math-smale/README.md), another list scored one
+  status event at a time.

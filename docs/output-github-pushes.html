@@ -42,106 +42,100 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Git pushes to GitHub</h1>
 <p><strong>Domain:</strong> outside the three domains
+<strong>Role:</strong> contrast case: volume
 <strong>Metric:</strong> code output; git pushes to GitHub per quarter, summed over economies
 <strong>Coverage:</strong> 2020-Q1 to 2026-Q1, quarterly
 <strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/github-innovationgraph-global.csv"><code>github-innovationgraph-global.csv</code></a>
 <strong>Upstream:</strong> <a href="https://github.com/github/innovationgraph">https://github.com/github/innovationgraph</a>
-<strong>Verdict:</strong> accelerating — on volume, which is not discovery</p>
+<strong>Verdict:</strong> accelerating — 319.8 million pushes in 2026-Q1 against 246.8 million in 2025-Q4 and a 2025 quarterly mean of 212.2 million</p>
 <h3>GitHub global git pushes</h3>
 <div id="chart0" class="chart"></div>
-<h2 id="the-problem">The problem</h2>
-<p>Does the volume of code output bend upward in the agent era? GitHub is the
-largest single place where code is written down, and it publishes its own
-quarterly counts through the Innovation Graph, so the count comes from the
-platform hosting the thing being counted rather than from a survey or an
-estimate.</p>
-<p>This is a contrast case, not a discovery series. Every folder in the three
-domains asks whether some record, bound or vulnerability count moved. This one
-asks whether the flow of artifacts moved, which is far easier to measure and a
-much weaker thing to establish. A push is an upload of commits, not working
-software and not a result.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>Pushes rose from 135.4 million in 2022-Q4, the quarter ChatGPT was released, to
-167.8 million in 2024-Q4 and 319.8 million in 2026-Q1, roughly doubling over the
-last five quarters of the series. This is the sharpest bend of the three volume
-series, and the bend is late: 2020-Q1 through 2022-Q4 adds 68%, while 2022-Q4
-through 2026-Q1 adds 136%, and the steepest part of the climb runs from 2025 into the
-shaded 2026 period.</p>
-<p>Every figure in the annotation is computed from the CSV when the chart is drawn,
-so it cannot survive a refetch that changes the numbers.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as cumulative git pushes to date:</p>
+<h2 id="definition">Definition</h2>
+<p>The GitHub Innovation Graph is GitHub's own quarterly data release: one file
+per metric, one row per economy and quarter, covering git pushes,
+repositories and developers. Economies below its 100-developer reporting
+threshold are absent from the files, and the EU row is an aggregate that
+repeats its member states.</p>
+<p>An event in this series is one git push — an upload of one or more commits
+— counted in its quarter. The global total is assembled here by summing the
+per-economy files over economies with the EU aggregate row excluded, so its
+pushes are not counted twice. The vendored CSV carries all three metrics
+and a note recording the exclusion; the chart plots pushes. The dataset
+carries no authorship field.</p>
+<h2 id="facts">Facts</h2>
+<ul>
+<li><strong>chatgpt quarter:</strong> 135.4 million in 2022-Q4 (the quarter ChatGPT was
+  released)</li>
+<li><strong>recent quarters:</strong> from 167.8 million in 2024-Q4 to 319.8 million in
+  2026-Q1, 1.9 times in five quarters</li>
+<li><strong>growth split:</strong> 2020-Q1 to 2022-Q4 adds 68%; 2022-Q4 to 2026-Q1 adds
+  136%</li>
+<li><strong>2025 mean:</strong> a 2025 quarterly mean of 212.2 million pushes</li>
+</ul>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as cumulative git pushes to date:</p>
 <p><img alt="Cumulative git pushes to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/output-github-pushes/cumulative-output-github-pushes.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/fetch.py"><code>fetch.py</code></a> downloads the three per-economy Innovation Graph files —
-pushes, repositories and developers — and sums each over economies for every
-quarter. The EU row is an aggregate of its member states, so including it would
-count those pushes twice; it is dropped. The CSV carries all three metrics and a
-note recording that exclusion; the chart plots pushes.</p>
-<p>That exclusion is the one thing in this folder that could go wrong without
-looking wrong: the EU row is about a fifth of the total, and upstream renamed the
-economy column from <code>iso2</code> to <code>iso2_code</code> in 2026, which is the kind of change
-that can make a filter silently stop matching. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/check.py"><code>check.py</code></a> therefore
-asserts every vendored row records the exclusion, that the quarters are
-contiguous and the cumulative metrics never fall, and that the README's printed
-figures match the CSV. Run with <code>--upstream</code> it also re-sums the published files
+<h2 id="method">Method</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/fetch.py"><code>fetch.py</code></a> downloads the three per-economy Innovation Graph
+files — pushes, repositories and developers — and sums each over economies
+for every quarter. The EU row is an aggregate of its member states, about a
+fifth of the total, so including it would count those pushes twice; it is
+dropped, and the note column on every vendored row records the exclusion.
+Upstream renamed the economy column from <code>iso2</code> to <code>iso2_code</code> in 2026.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/check.py"><code>check.py</code></a> asserts that every vendored row records the
+exclusion, that the quarters are contiguous, that the cumulative repository
+and developer columns never fall, and that the README's printed figures
+match the CSV. Run with <code>--upstream</code> it also re-sums the published files
 and fails if any vendored quarter is not exactly the EU-free sum:</p>
 <pre><code class="language-sh">python3 problems/output-github-pushes/check.py --upstream
 </code></pre>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/figure.py"><code>figure.py</code></a> draws the series through
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>lib/families.py</code></a>'s shared volume shape: years on the
-x-axis, the count on the y-axis, January 2026 onward shaded. A marker is drawn
-on each quarter, since the series is twenty-five points rather than the hundreds
-the monthly series carry. The three volume folders use that one shape so a
-difference in appearance between any two of them is a difference in the data. It
-is drawn in slate rather than the blue the other charts use for human or
-uncredited finders, because this series has no authorship field at all.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>lib/families.py</code></a>'s shared volume shape: years on
+the x-axis, the count on the y-axis, January 2026 onward shaded. A marker
+is drawn on each quarter, since the series is twenty-five points rather
+than the hundreds the monthly series carry. The three volume folders draw
+through that one shape. The series is drawn in slate rather than the blue
+used elsewhere for human or uncredited finders because it has no authorship
+field.</p>
+<h2 id="limitations">Limitations</h2>
 <ul>
-<li><strong>A push is an upload event.</strong> An agent pushing, a CI job pushing, and a
+<li><strong>a push is an upload event.</strong> An agent pushing, a CI job pushing, and a
   person committing more often are the same row, and nothing in the file
   separates them.</li>
-<li><strong>The global total is assembled here.</strong> GitHub publishes per-economy files
-  rather than a world total. Economies below its 100-developer reporting
-  threshold are absent from those files altogether, so the sum slightly
-  undercounts, and the exclusion of the EU aggregate row is a choice made in
-  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/fetch.py"><code>fetch.py</code></a> rather than something upstream marks.</li>
-<li><strong>No authorship labels.</strong> The series does not record whether a human or a
-  model produced the commits, so no AI share can be read off it and the
-  attribution of the bend is open.</li>
-<li><strong>Volume is not discovery.</strong> These count artifacts produced. The domain
-  folders count results, and the two need not move together.</li>
-<li><strong>The file's other columns are not a denominator of effort.</strong> The same
-  download carries repository and developer counts, but they rise in every
-  quarter here, including quarters in which pushes fell, so they behave like
-  cumulative platform totals rather than counts of who was active. Pushes per
-  developer is not readable off them without first establishing what GitHub
-  means by the field.</li>
-<li><strong>Composition is invisible.</strong> A rise is consistent with smaller and more
-  frequent commits, with more automation, or with more code being written, and
-  the series cannot distinguish those.</li>
+<li><strong>the global total is assembled here.</strong> GitHub publishes per-economy
+  files rather than a world total; economies below the 100-developer
+  threshold are absent, so the sum slightly undercounts, and the EU
+  exclusion is a choice made in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/fetch.py"><code>fetch.py</code></a> rather than
+  something upstream marks.</li>
+<li><strong>no authorship field.</strong> The file records counts per quarter only;
+  whether a human or a model produced the commits is not recorded.</li>
+<li><strong>volume, not discovery.</strong> The series counts artifacts produced; the
+  domain folders count results, and the two need not move together.</li>
+<li><strong>the other columns are not a denominator of effort.</strong> The repository and
+  developer counts rise in every quarter here, including quarters in which
+  pushes fell, so they behave like cumulative platform totals rather than
+  counts of who was active.</li>
+<li><strong>composition is invisible.</strong> A rise is consistent with smaller and more
+  frequent commits, with more automation, or with more code being written.</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>Nothing in this series is attributable to a model, by construction, and that is
-worth stating plainly rather than leaving as an omission: it is a count of push
-events with no authorship field, so the rise is consistent with agents pushing,
-with more people pushing more often, or with both.</p>
-<p>The timing is suggestive and no more. The steep part runs from 2025 into 2026,
-which is when coding agents that commit on their own became widely available,
-but the same period covers continued growth in the reported developer
-population, and the discovery series in the three domain folders do not bend
-over it.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The comparison this folder exists for is with the rest of the collection. Set it
-against <a href="cyber-curl.html">curl</a>, where a fixed codebase yields a step
-change in disclosures, and against the mathematics folders, where the records
-barely move. <a href="output-arxiv.html">arXiv</a> is the same shape over a much
-longer history, and <a href="output-crossref.html">Crossref</a> is the control:
-publishing volume rose steeply through the same period with no clean bend, so a
-rising volume curve is not by itself evidence of anything new. HackerOne's
-platform self-report of a 210% rise in AI-attributed vulnerability reports
-[@hackerone2025autonomy] is a statement of the same kind: a count of submissions
-rather than of what was found.</p>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>The dataset carries no authorship field; no AI share can be computed from
+it. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-github-pushes/github-innovationgraph-global.csv"><code>github-innovationgraph-global.csv</code></a>
+holds per-quarter totals of pushes, repositories and developers; no AI
+credit appears in the Innovation Graph files as of the vendored 2026-Q1
+release.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://github.com/github/innovationgraph">https://github.com/github/innovationgraph</a> — the per-economy files the
+  totals are summed from.</li>
+<li>[@hackerone2025autonomy] — HackerOne's platform self-report of a 210%
+  rise in AI-attributed vulnerability reports; a count of reports submitted
+  to one platform, the same unit type as this series.</li>
+<li><a href="output-arxiv.html">output-arxiv</a> and
+  <a href="output-crossref.html">output-crossref</a> — the other two volume
+  series, drawn through the same shared shape; they count preprint
+  submissions and DOI registrations where this folder counts push events.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/output-github-pushes/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

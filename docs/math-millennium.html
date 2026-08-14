@@ -42,104 +42,100 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Millennium Prize Problems</h1>
 <p><strong>Domain:</strong> mathematics
+<strong>Role:</strong> prestige ledger
 <strong>Metric:</strong> dated resolutions per year across 7 scored rows
-<strong>Coverage:</strong> 2000–2026, with one dated resolution in 2003
+<strong>Coverage:</strong> list posed 2000; one dated resolution, 2003; statuses read 2026-08-14
 <strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-millennium/millennium-problems.csv"><code>millennium-problems.csv</code></a>
 <strong>Upstream:</strong> <a href="https://www.claymath.org/millennium-problems/">https://www.claymath.org/millennium-problems/</a>
-<strong>Verdict:</strong> no acceleration</p>
+<strong>Verdict:</strong> no acceleration — 0 resolutions in 2026; 1 dated resolution (2003) over 2000–2025</p>
 <h3>Per-problem resolution timeline</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
-<h2 id="the-problem">The problem</h2>
+<h2 id="definition">Definition</h2>
 <p>The Clay Mathematics Institute named seven problems in 2000 and attached a
-million dollars to each. They are what the public means by open mathematics, and
-that is the whole of their value here: the list is a ceiling check, the place to
-look when someone claims AI is solving the great problems.</p>
-<p>A "discovery" in this series is a prize problem being resolved. Unlike the other
-ledgers scored in this collection, the list needs no subproblem splitting and has
-no contested rows: seven problems, one resolved, six open. That cleanliness is
-also what makes it useless as a rate.</p>
-<p>It is the worst instrument in the collection for measuring anything, and it is
-worth being explicit about why, because the low count is easy to misread. The
-list has seven rows, so its finest possible resolution is one seventh. The
-problems were selected for depth. And verification is extremely expensive:
-Perelman's Poincaré work reached arXiv in 2002 and 2003, and the prize was not
-announced until 2010, which is the checking cost made visible. Under any story in
-which AI results arrive first where a candidate answer can be scored cheaply, the
-predicted AI count here is zero, and the observed count of zero therefore
-discriminates between almost nothing.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>One dated resolution, in 2003, and none in the twenty-three years since. One
-row is resolved and six are open: Birch–Swinnerton-Dyer, the
-Hodge conjecture, Navier–Stokes existence and smoothness, P versus NP,
-Yang–Mills existence and mass gap, and the Riemann hypothesis. No event is red,
-because no row carries an AI attribution.</p>
-<p>There is nothing else in the reading. A single event cannot show a slope, and the
-absence of events since cannot distinguish a hard frontier from a short window: at
-one resolution per twenty-six years, a twenty-three-year gap is what the series
-looks like when nothing has changed.</p>
-<p>The one thing the chart does establish is a bound on the strongest possible claim.
-Whatever AI has contributed to mathematics through mid-2026, it has not resolved
-a Millennium problem, and no credible claim to have done so exists in the sources
-behind this collection.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this ledger
-as rows remaining, declining toward zero as dated resolutions arrive:</p>
-<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-millennium/cumulative-math-millennium.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-millennium/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> shape in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which reads
-<code>millennium-problems.csv</code>, keeps the rows whose <code>status</code> is
-<code>resolved</code> with a non-empty <code>resolved_year</code>, and counts resolution events by
-year from the 2000 <code>list_year</code> to the present. The source note names the
-<code>source</code> column, which for every row here is the Clay Mathematics Institute.</p>
-<p>The resolution year is 2003, taken from the arXiv postings; the row's <code>notes</code>
-field records that the preprints ran 2002 to 2003 and that the prize was
-announced in 2010. Which of those three dates counts as the resolution is a real
-choice, and the chart takes the earliest defensible one. On a series with one
-event, that choice moves the only step by up to seven years.</p>
-<p>No <code>ai_problem</code> argument is passed, because there is no such row. The y-axis is
-forced to integers and the axis limits leave room for two, so the flatness is
-visible as flatness rather than as a chart that has been zoomed until nothing
-moves.</p>
-<p>There is no <code>fetch.py</code>. Seven rows, hand-scored from the Clay Mathematics Institute's own pages; a feed would be more machinery than a list that has moved once in twenty-six years deserves.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+US$1 million prize to each [@clay2000millennium]. A "discovery" in this
+series is a row moving to <code>resolved</code>, dated by the year of the resolving
+work. The list needs no subproblem splitting and has no contested rows:
+seven problems, one resolved, six open.</p>
+<p>The one resolved row is the Poincaré conjecture. The ledger dates it 2003,
+the year of the last of Perelman's arXiv preprints; the row's <code>notes</code> column
+records that the preprints ran 2002 to 2003 and that the prize was announced
+in 2010.</p>
+<h2 id="facts">Facts</h2>
 <ul>
-<li><strong>Seven rows cannot carry a rate.</strong> The finest change this series can register
-  is one seventh, and it has registered one event in its lifetime.</li>
-<li><strong>Verification is expensive</strong>, so the lag between a solution and its
-  acknowledgement is measured in years, and any recent result would not yet be
-  visible here.</li>
-<li><strong>The resolution date is a choice.</strong> Preprints 2002–2003, prize 2010; the chart
-  uses 2003.</li>
-<li><strong>The rows overlap other lists.</strong> Riemann appears on <a href="math-hilbert.html">Hilbert</a>
-  and <a href="math-smale.html">Smale</a> too, and P versus NP on Smale, so this is not an
-  independent sample of hard problems.</li>
-<li><strong>Selection against cheap verification makes the zero uninformative.</strong> These
-  problems are chosen to be deep, and depth here means no mechanical check
-  exists, which is the condition under which every AI result in this collection
-  has failed to appear.</li>
+<li><strong>rows:</strong> 7 scored; 1 resolved with a dated year; 6 open</li>
+<li><strong>by-year:</strong> 2003: 1</li>
+<li><strong>ai-attributed:</strong> 0 of 1 dated resolutions</li>
+<li><strong>open rows:</strong> bsd, hodge, navier_stokes, p_vs_np, yang_mills, riemann</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>None, and none claimed. The list stands where it stood in 2003.</p>
-<p>Where a series has no AI step at all, the useful question is whether the absence
-is informative, and here it mostly is not. A zero on seven problems selected for
-depth and expensive verification is the predicted outcome under both the
-optimistic and the pessimistic readings of AI's mathematical ability, so it
-cannot separate them. The place where the same question does get an informative
-answer is <a href="math-smale.html">Smale</a>, where one row fell in 2026 to an AI-assisted
-finite counterexample that could be machine-checked, and <a href="math-erdos.html">Erdős</a>,
-where the problems are numerous enough and cheap enough to verify that a flow can
-be measured at all.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The seven problems and their status are the Institute's own
-[@clay2000millennium]. The argument that scored mathematical progress lives where
-verification is cheap is made explicitly by benchmark designers who selected
-problems on that basis and found frontier models scoring near zero even so
-[@arxiv2026horizonmath]. That flat stretches in record series are normal, with no
-AI anywhere in them, is Sherry and Thompson's finding across algorithm families
-[@sherry2021fast]. The companion ledgers are <a href="math-hilbert.html">Hilbert</a>,
-<a href="math-landau.html">Landau</a>, <a href="math-thurston.html">Thurston</a>,
-<a href="math-smale.html">Smale</a> and <a href="math-topp.html">TOPP</a>.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws the
+ledger as rows remaining:</p>
+<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-millennium/cumulative-math-millennium.png" /></p>
+<h3 id="poincare-poincare-conjecture">poincare — Poincaré conjecture</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2003</li>
+<li><strong>resolver:</strong> Perelman</li>
+<li><strong>notes:</strong> arXiv 2002–2003; Clay prize announced 2010</li>
+</ul>
+<blockquote>
+<p>"Nearly a century passed between its formulation in 1904 by Henri Poincaré
+and its solution by Grigoriy Perelman, announced in preprints posted on
+ArXiv.org in 2002 and 2003."
+— Clay Mathematics Institute, Poincaré Conjecture page, read 2026-08-14 [@clay2000millennium]</p>
+</blockquote>
+<h2 id="method">Method</h2>
+<p>The seven rows are hand-scored from the Clay Mathematics Institute's own
+pages, which the <code>source</code> column names for every row; there is no
+<code>fetch.py</code>. The Institute's site lists the Poincaré conjecture under solved
+problems and the other six as open, and the ledger mirrors that split. Of
+the three candidate dates for the one event — preprints 2002–2003, prize
+announced 2010 — the <code>resolved_year</code> takes 2003, the end of the preprint
+span.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-millennium/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which keeps the rows whose
+<code>status</code> is <code>resolved</code> with a non-empty <code>resolved_year</code> and counts
+resolution events by year from the 2000 <code>list_year</code> to the present. No
+<code>ai_problem</code> argument is passed, because no row carries an AI credit. The
+cumulative view is the shared <code>ledger_remaining_chart()</code>.
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-millennium/check.py"><code>check.py</code></a> recomputes the fact lines and the register entry from
+the CSV.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>sample size.</strong> One dated resolution in 26 years; no rate or trend is
+  estimable from this series.</li>
+<li><strong>dating.</strong> Preprints 2002–2003, prize announced 2010; the ledger dates
+  the event 2003, and a different defensible choice moves the only step by
+  up to seven years.</li>
+<li><strong>acknowledgement lag.</strong> Seven years passed between the 2003 preprints and
+  the 2010 prize announcement, so a recent resolution of another row could
+  predate its appearance here by years.</li>
+<li><strong>overlap.</strong> riemann is Hilbert row 8a and Smale row 1; p_vs_np is Smale
+  row 3. The prestige ledgers are not independent samples.</li>
+<li><strong>effort.</strong> Resolution landmarks are not effort-adjusted discovery rates.</li>
+</ul>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>No row in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-millennium/millennium-problems.csv"><code>millennium-problems.csv</code></a> names an AI
+system in its <code>resolver</code> or <code>notes</code> columns; the one dated resolution is
+Perelman's, dated 2003. No AI credit appears on the Clay Mathematics
+Institute's problem pages as of the 2026-08-14 read.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@clay2000millennium] — the Institute's own list and status pages, the
+  ledger source for every row and the register quote.</li>
+<li>[@arxiv2026horizonmath] — a 2026 benchmark of over 100 predominantly
+  unsolved problems chosen so that "verification is computationally
+  efficient and simple"; frontier models score near 0% on it.</li>
+<li>[@sherry2021fast] — measured improvement rates across algorithm families,
+  including multi-decade stationary stretches, with no AI involved.</li>
+<li>Sibling ledgers of the same instrument type:
+  <a href="math-hilbert.html">Hilbert</a>, <a href="math-landau.html">Landau</a>,
+  <a href="math-thurston.html">Thurston</a>, <a href="math-smale.html">Smale</a>
+  and <a href="math-topp.html">TOPP</a>.</li>
+<li><a href="math-erdos.html">Erdős</a> — a catalogue ledger over a different
+  corpus, counting a different unit (catalogue problems with imputed
+  solution years).</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-millennium/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

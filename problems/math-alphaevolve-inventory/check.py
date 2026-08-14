@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute the numerical claims in this folder's prose."""
+"""Recompute this page's fact lines from the inventory CSV."""
 
 from __future__ import annotations
 
@@ -46,20 +46,29 @@ def main() -> int:
     claims = {
         f"the {len(rows)} problems the paper numbers 6.1 to 6.65": "frame size",
         f"cited works span {earliest}–{latest}": "coverage span",
-        f"{counts['world_record']} where AlphaEvolve holds the record, "
-        f"{counts['matched_optimal']} where it matched a known optimum, "
-        f"{counts['worse_than_record']} where it came in below the record, "
-        f"{counts['former_record']} where its result has since been surpassed, "
-        f"and {counts['unclassified']} unclassified": "status composition",
-        f"The {live} in the first, third and fourth groups": "live-record count",
-        f"{live} with a live numeric record": "funnel second stage",
-        f"that {live} of them had a live numeric record": "denominator sentence",
+        f"**status composition:** {counts['world_record']} where AlphaEvolve "
+        f"holds the record, {counts['matched_optimal']} where it matched a "
+        f"known optimum, {counts['worse_than_record']} where it came in below "
+        f"the record, {counts['former_record']} where its result has since "
+        f"been surpassed, and {counts['unclassified']} unclassified":
+            "status composition fact",
+        f"**live records:** {live} of the {len(rows)} problems have a live "
+        "numeric record (the first, third and fourth groups above)":
+            "live-record fact",
+        f"**funnel:** {len(rows)} numbered in the paper · {live} with a live "
+        "numeric record · 12 drawn as the pre-committed sample · 6 that "
+        "yielded a dated scalar record sequence · 2 carrying both AI and "
+        "human steps": "funnel fact",
+        f"**citation depth:** of the {len(rows)} problems, "
         f"{sum(value >= 1 for value in cited)} cite at least one dated "
         f"reference, {sum(value >= 2 for value in cited)} cite at least two, "
         f"and {sum(value >= 4 for value in cited)} cite at least four":
-            "citation depth",
-        f"median span between earliest and latest cited year is "
-        f"{spans[len(spans) // 2]} years": "median span",
+            "citation-depth fact",
+        f"**cited-year spans:** among problems citing two or more dated works "
+        f"the median span between earliest and latest cited year is "
+        f"{spans[len(spans) // 2]} years": "median-span fact",
+        f"baseline — {len(rows)} problems inventoried, {live} with a live "
+        "numeric record; built 2026-07-26": "verdict clause",
     }
     return report(failures + missing(prose(HERE), claims))
 

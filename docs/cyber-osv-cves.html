@@ -42,11 +42,12 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Open-source CVEs represented in OSV</h1>
 <p><strong>Domain:</strong> vulnerabilities
+<strong>Role:</strong> discovery series
 <strong>Metric:</strong> distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date
 <strong>Coverage:</strong> 2016–2026, partial through 2026-08-10
 <strong>Data:</strong> quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-cves-by-quarter.csv"><code>osv-cves-by-quarter.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-cves-by-year.csv"><code>osv-cves-by-year.csv</code></a>; severity labels in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-severity-by-year.csv"><code>osv-severity-by-year.csv</code></a>; finder credits in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-credits-by-year.csv"><code>osv-credits-by-year.csv</code></a>; every AI-marked CVE with its credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a>
 <strong>Upstream:</strong> <a href="https://storage.googleapis.com/osv-vulnerabilities/all.zip">https://storage.googleapis.com/osv-vulnerabilities/all.zip</a> (documentation at <a href="https://google.github.io/osv.dev/data/">https://google.github.io/osv.dev/data/</a>)
-<strong>Verdict:</strong> accelerating — 2026 annualizes to about 2.3 times 2025, though source growth and disclosure processes can also bend this aggregate</p>
+<strong>Verdict:</strong> accelerating — 21,321 distinct CVEs through 2026-08-10 annualize to about 35,100, 2.3 times 2025's 15,146</p>
 <h3>Distinct CVEs</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial quarter; hover for the flag.</p>
@@ -56,54 +57,49 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <h3>Finder credits by year</h3>
 <div id="chart2" class="chart"></div>
 <p class="note">About 1% of CVEs carry any credit; the uncredited majority is not drawn.</p>
-<h2 id="the-problem">The problem</h2>
-<p>OSV aggregates machine-readable vulnerability records from open-source package
-ecosystems, project databases, Linux distributions, GitHub advisories and a
-converted subset of NVD [@osv2026data]. That makes it a useful second
-all-open-source view beside the all-software NVD count.</p>
-<p>This series does not require a finder credit. Its purpose is to ask a prior,
-simpler question: under one stable rule, did the volume of published
-vulnerabilities accelerate? If it did, attribution and alternative mechanisms
-are a separate interpretive step. Requiring every event to name an AI system
-would discard most of the usable evidence before asking whether a bend exists.</p>
+<h2 id="definition">Definition</h2>
+<p>OSV aggregates machine-readable vulnerability records from open-source
+package ecosystems, project databases, Linux distributions, GitHub
+advisories and a converted subset of NVD [@osv2026data]. It is an
+all-open-source aggregate beside the all-software NVD count, and its
+headline series requires no finder credit.</p>
 <p>A counted event is one distinct CVE identifier linked by at least one
-non-withdrawn OSV record to an affected package. It is dated to the earliest
-<code>published</code> date among all such records for that CVE.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>The deduplicated count rises from 1,472 in 2016 to 5,317 in 2020, 10,821 in
-2022, 12,269 in 2024 and 15,146 in 2025. There are 21,321 through 10 August
-2026. Scaling that part-year mechanically gives about 35,100, or 2.3 times the
-2025 count. The quarterly bars localize the rise: 2026-Q2 alone holds 10,193
-distinct CVEs, more than any full year before 2022.</p>
-<p>That is acceleration under this instrument, but not a clean structural break.
-The history is uneven: 2022 rose sharply, 2023 fell, and growth resumed in 2024
-and 2025 before the larger 2026 rise. A growing source population, backfills,
-more CVE assignment, and faster advisory publication can all raise the bars
-without a matching rise in newly discovered underlying flaws.</p>
+non-withdrawn OSV record to an affected package. It is dated to the
+earliest <code>published</code> date among all such records for that CVE. Multiple
+distribution and ecosystem advisories pointing to the same flaw collapse to
+one event; an advisory naming several CVEs contributes one event per CVE.</p>
+<h2 id="facts">Facts</h2>
+<ul>
+<li><strong>by-year:</strong> 2016: 1,472 · 2017: 4,588 · 2018: 4,877 · 2019: 5,161 ·
+  2020: 5,317 · 2021: 6,911 · 2022: 10,821 · 2023: 8,812 · 2024: 12,269 ·
+  2025: 15,146</li>
+<li><strong>2026 (through 2026-08-10):</strong> 21,321 distinct CVEs; annualizes to about
+  35,100, or 2.3 times the 2025 count</li>
+<li><strong>peak quarter:</strong> 2026-Q2 alone holds 10,193 distinct CVEs, more than any
+  full year before 2022</li>
+<li><strong>severity coverage:</strong> 34,163 of the 96,695 CVEs (35%) carry an ecosystem
+  severity label</li>
+<li><strong>credit coverage:</strong> 1,129 CVEs (1.2%) carry any credit</li>
+<li><strong>ai-marked:</strong> 24 CVEs — 2 whose credits state an AI method and 22
+  carrying an AI-lab affiliation only — each kept with its full credit
+  strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a></li>
+</ul>
 <p><img alt="OSV CVEs by ecosystem severity label, with the Unrated majority drawn as its own row." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-osv-cves/severity-cyber-osv-cves.png" /></p>
-<p>Severity is the first cut at whether the extra volume is consequential, and
-here it mostly cannot say: 34,163 of the 96,695 CVEs (35%) carry an ecosystem
-severity label, and the heatmap draws the Unrated majority as its own row
-rather than silently dropping it. The rated mix is also not a random sample.
-Labels come from whichever upstream databases choose to assign them — GitHub's
-advisory database does, the converted NVD subset and several distributions do
-not — and that composition shifts over time, so a drift in the rated mix can be
-a drift in which sources publish labels rather than in the vulnerabilities
+<p>The severity heatmap draws the Unrated majority as its own row rather than
+silently dropping it. The rated mix is not a random sample: labels come from
+whichever upstream databases choose to assign them — GitHub's advisory
+database does, the converted NVD subset and several distributions do not —
+and that composition shifts over time, so a drift in the rated mix can be a
+drift in which sources publish labels rather than in the vulnerabilities
 themselves.</p>
 <p><img alt="OSV CVEs with finder credits; the uncredited majority is not drawn." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-osv-cves/credits-cyber-osv-cves.png" /></p>
-<p>Finder credits are thinner still: 1,129 CVEs (1.2%) carry any credit, so the
-credits chart draws that sliver alone and its note says the uncredited 99% is
-not drawn. Within the sliver sit 24 AI-marked CVEs — two with an explicitly
-stated AI method, the rest carrying an AI-lab affiliation only — each kept
-with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a> so the
-classification can be re-audited. Nearly all come from the few projects whose
-maintainers write credit strings at all, curl and Erlang/OTP above the rest.
-These counts are a floor set by which ecosystems publish credits, not a
-measurement of AI's share of discovery.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as cumulative distinct CVEs to date:</p>
+<p>The credits chart draws the credited sliver alone, and its note states that
+the uncredited majority is not drawn. These counts are a floor set by which
+ecosystems publish credits, not a measurement of AI's share of discovery.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as cumulative distinct CVEs to date:</p>
 <p><img alt="Cumulative distinct CVEs to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-osv-cves/cumulative-cyber-osv-cves.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<h2 id="method">Method</h2>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/fetch.py"><code>fetch.py</code></a> downloads OSV's official full-database archive, then
 applies the same inclusion rule to every JSON record:</p>
 <ol>
@@ -112,72 +108,83 @@ applies the same inclusion rule to every JSON record:</p>
 <li>count each distinct CVE once, at its earliest valid <code>published</code> date.</li>
 </ol>
 <p>The second step deliberately excludes OSV's malicious-package reports,
-non-security distribution updates, and advisories that have no CVE. The third
-collapses the multiple distribution and ecosystem advisories that often point
-to the same flaw. If one advisory legitimately names several CVEs, each CVE
-still counts once. CVEs first published after the repository's snapshot date
-(lib/chart.py's <code>AS_OF_DATE</code>) are dropped, so a refetch reproduces the
-committed window.</p>
+non-security distribution updates, and advisories that have no CVE. CVEs
+first published after the repository's snapshot date (<code>AS_OF_DATE</code> in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/chart.py"><code>../../lib/chart.py</code></a>) are dropped, so a refetch
+reproduces the committed window.</p>
 <p>The merged per-CVE entries feed five CSVs: quarterly and annual counts, the
 severity and credits cuts, and the AI-marked ledger. Severity is the
-<code>database_specific.severity</code> label an ecosystem database assigns (GHSA-style
-LOW/MODERATE/HIGH/CRITICAL, with MEDIUM folded into Moderate), taken at the
-highest label across a CVE's records; records carrying only a CVSS vector stay
-Unrated rather than being scored by a calculator this repository would then
-have to defend. Credits are OSV <code>credits</code> names unioned across a CVE's records
-and classified with the shared lib/credits.py rules; a CVE with no credit on
-any record is uncredited, which is the majority and is its own column.</p>
-<p>The plotted series starts in 2016. Earlier years in the present export contain
-only tens or low hundreds of matching CVEs, a clear coverage discontinuity
-rather than a credible measure of open-source disclosure volume. The current
-quarter is outlined and labelled partial. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/figure.py"><code>figure.py</code></a> draws the
-main chart from the quarterly CSV in the shared periodic-bar shape, in the
-unattributed colour because the headline count carries no finder split; the
-severity heatmap and the credits chart come from their annual CSVs, with the
-coverage percentages in their subtitles and notes computed from the data at
-draw time. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/check.py"><code>check.py</code></a> recomputes the numbers this document states
-from the vendored CSVs.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<code>database_specific.severity</code> label an ecosystem database assigns
+(GHSA-style LOW/MODERATE/HIGH/CRITICAL, with MEDIUM folded into Moderate),
+taken at the highest label across a CVE's records; records carrying only a
+CVSS vector stay Unrated rather than being scored by a calculator this
+repository would then have to defend. Credits are OSV <code>credits</code> names
+unioned across a CVE's records and classified with the shared
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/credits.py"><code>../../lib/credits.py</code></a> rules; a CVE with no credit
+on any record is uncredited, which is the majority and is its own column.</p>
+<p>The plotted series starts in 2016. Earlier years in the present export
+contain only tens or low hundreds of matching CVEs, a coverage
+discontinuity rather than a measure of open-source disclosure volume.
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/figure.py"><code>figure.py</code></a> draws the main chart from the quarterly CSV in the
+shared periodic-bar shape, in the unattributed colour because the headline
+count carries no finder split, with the current quarter outlined and
+labelled partial; the severity heatmap and the credits chart come from
+their annual CSVs, with the coverage percentages in their subtitles and
+notes computed from the data at draw time. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/check.py"><code>check.py</code></a>
+recomputes the fact lines above from the vendored CSVs.</p>
+<h2 id="limitations">Limitations</h2>
 <ul>
-<li><strong>The count does not attribute discoveries.</strong> The headline series has no
+<li><strong>the count does not attribute discoveries.</strong> The headline series has no
   finder field, and the credit columns cover 1.2% of CVEs — a floor set by
   which ecosystems publish credits, not an attribution of the rest.</li>
-<li><strong>The severity mix is a coverage artifact first.</strong> Most CVEs are Unrated,
-  and which sources assign labels changes over time, so composition shifts can
-  masquerade as severity shifts.</li>
-<li><strong>It is publication, not discovery.</strong> The date is an advisory's publication
-  date; discovery, CVE assignment and publication can be far apart.</li>
-<li><strong>The denominator is not fixed.</strong> OSV adds sources and packages while the
-  open-source software population itself grows.</li>
-<li><strong>The snapshot can revise history.</strong> A newly imported or corrected record can
-  add a CVE to an earlier publication year on the next fetch.</li>
-<li><strong>CVE-only is a conservative slice of OSV.</strong> Valid GHSA-only, ecosystem-only
-  and project advisories are omitted so that duplicate records can be collapsed
-  with a simple, auditable identifier rule.</li>
-<li><strong>Annualization is only arithmetic.</strong> The 2026 projection assumes an even
+<li><strong>the severity mix is a coverage artifact first.</strong> Most CVEs are Unrated,
+  and which sources assign labels changes over time, so composition shifts
+  can masquerade as severity shifts.</li>
+<li><strong>it is publication, not discovery.</strong> The date is an advisory's
+  publication date; discovery, CVE assignment and publication can be far
+  apart.</li>
+<li><strong>the denominator is not fixed.</strong> OSV adds sources and packages while the
+  open-source software population itself grows, so a rise in the bars can
+  reflect source growth, backfills, more CVE assignment or faster advisory
+  publication as well as more newly found flaws.</li>
+<li><strong>the snapshot can revise history.</strong> A newly imported or corrected record
+  can add a CVE to an earlier publication year on the next fetch.</li>
+<li><strong>CVE-only is a conservative slice of OSV.</strong> Valid GHSA-only,
+  ecosystem-only and project advisories are omitted so that duplicate
+  records can be collapsed with a simple, auditable identifier rule.</li>
+<li><strong>annualization is only arithmetic.</strong> The 2026 projection assumes an even
   publication rate and is not a forecast.</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>The aggregate count remains unattributable, and that does not disqualify the
-series: the chart is a detector for a change in a consistently defined output,
-not an estimator of what share AI caused. The credits view adds a thin evidence
-ledger on top — the 24 AI-marked CVEs in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a> — but at 1.2% credit coverage that is a
-floor, not a share. A bend can motivate comparison with finder-credited
-fixed-codebase series and contemporaneous evidence about tools and disclosure
-pipelines; it cannot supply causation by itself.</p>
-<p>That distinction also works in the other direction. A flat OSV series would
-count against a broad acceleration claim even if a handful of individual
-records carried strong AI attribution.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>OSV documents both the full export and its mix of native and converted data
-sources [@osv2026data]. The broader comparator is
-<a href="cyber-nvd-disclosed.html">all CVEs published by NVD</a>; the narrower
-programme-level slice is <a href="cyber-oss-fuzz.html">OSS-Fuzz</a>. Dense finder
-credits live in the project-level <a href="cyber-curl.html">curl</a>,
-<a href="cyber-openssl.html">OpenSSL</a> and
-<a href="cyber-firefox.html">Firefox</a> series; here they exist only for the
-1.2% sliver above.</p>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>The AI-marked ledger holds 24 CVEs. 2 carry credits stating an AI method:</p>
+<blockquote>
+<p>"Google Big Sleep | Daniel Stenberg"
+— OSV credit strings for CVE-2025-9086, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a>, read 2026-08-14</p>
+<p>"Andrew Nesbitt (powered by Mythos) | Stefan Eissing"
+— OSV credit strings for CVE-2026-8286, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a>, read 2026-08-14</p>
+</blockquote>
+<p>The other 22 carry an AI-lab affiliation with no method stated: 17 name
+Aisle Research, 3 name AntAISecurityLab hackerone handles, 1 names "Filipe
+Casal of Trail of Bits in collaboration with OpenAI" and 1 names "Eunsoo
+Kim (Autonomous Code Security team at Microsoft)", all quoted from
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a> as read 2026-08-14. Several of the
+same credit strings appear in the curl series' finder table
+(<a href="cyber-curl.html">curl</a>), which counts the same projects'
+disclosures at the project level. No other CVE in the export carries any AI
+marker in its credits, as of the 2026-08-10 read.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@osv2026data] — OSV's documentation of the full export and its mix of
+  native and converted data sources; accessed 2026-08-11.</li>
+<li>Sibling series:
+  <a href="cyber-nvd-disclosed.html">all software: disclosed</a> is the
+  broader all-software comparator;
+  <a href="cyber-oss-fuzz.html">OSS-Fuzz</a> is the narrower programme-level
+  slice; dense finder credits live in the project-level
+  <a href="cyber-curl.html">curl</a>, <a href="cyber-openssl.html">OpenSSL</a>
+  and <a href="cyber-firefox.html">Firefox</a> series, while here they exist
+  only for the 1.2% sliver above.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-osv-cves/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

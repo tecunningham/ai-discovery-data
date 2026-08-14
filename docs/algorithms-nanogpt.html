@@ -42,116 +42,134 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>modded-nanogpt training speedrun</h1>
 <p><strong>Domain:</strong> algorithms
-<strong>Metric:</strong> minutes of training to a fixed target validation loss, per accepted record
-<strong>Coverage:</strong> 2024-05-28 to 2026-07-17, all 89 records listed in the repository README
+<strong>Role:</strong> discovery series
+<strong>Metric:</strong> minutes of training to a fixed target validation loss, per
+accepted record
+<strong>Coverage:</strong> 2024-05-28 to 2026-07-17, all 89 records listed in the
+repository README
 <strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/nanogpt-records.csv"><code>nanogpt-records.csv</code></a>
-<strong>Upstream:</strong> <a href="https://github.com/KellerJordan/modded-nanogpt">https://github.com/KellerJordan/modded-nanogpt</a> (record table in the README at <a href="https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md">https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md</a>)
-<strong>Verdict:</strong> no acceleration</p>
+<strong>Upstream:</strong> <a href="https://github.com/KellerJordan/modded-nanogpt">https://github.com/KellerJordan/modded-nanogpt</a> (record table
+in the README at
+<a href="https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md">https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md</a>)
+<strong>Verdict:</strong> no acceleration — the standing record fell 1.5× in 2026 (33
+records through 2026-07-17) against 1.9× in 2025 (39 records) and 12.6× in
+2024 (17 records)</p>
 <h3>modded-nanogpt speedrun records</h3>
 <div id="chart0" class="chart"></div>
-<h2 id="the-problem">The problem</h2>
-<p>A public competition to train a GPT-2-scale language model to a fixed target
-validation loss in as little wall-clock time as possible. The target is fixed by
-the rules, so a record is not a better model: it is the same capability reached
-with less compute. That is what makes the series an efficiency curve rather than
-a capability curve, and it is why an AI-set record here is directly comparable
-with a human one.</p>
-<p>A "discovery" is one record accepted into the README's table, dated and credited
-to a named entrant. The ledger is unusually good for this collection — every
-record carries a day-precise date and an author, which is what allows the AI
-share to be counted rather than estimated.</p>
-<p>The fixed-hardware assumption comes from the leaderboard's own rules. The
-vendored CSV carries only the record number, date, minutes, agent, credited AI
-system, and a note, so nothing in the data itself pins the machine.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>45.0 minutes at the llm.c baseline of 2024-05-28, down to 1.23 minutes at
-record 89 on 2026-07-17 — a reduction of about 37 times in a little over two
-years. Five of the 89 records are credited to AI-agent companies: record 32 to
-hiverge.ai at 2.625 minutes (2025-09-11), record 60 to Locus at 1.765
-(2026-01-16), record 69 to Aster at 1.528 (2026-02-02), record 72 to Station at
-1.496 (2026-02-10), and record 87 to Recursive at 1.256 (2026-06-11).</p>
-<p>The AI records are real and small. Measuring each against the record it
-displaced gives 1.2%, 0.9%, 0.5%, 1.3% and 0.8% — this repository's arithmetic
-over the vendored series, not figures the README prints. The deep gains are human:
-the Muon optimizer at about 21% and U-Net skip connections at about 8%.</p>
-<p>Records arrive faster in the agent era while each one buys less: 17 records in
-2024, 39 in 2025, and 33 in the first seven months of 2026. Over the same three
-periods the standing record fell by a factor of 12.6, then 1.9, then 1.5. So the
-flat tail is where the AI records sit, and the series does not bend upward when
-they arrive.</p>
-<p>One wrinkle in the fine structure has a documented cause. Records 22 to 24, in
-May 2025, are slower than record 21 of January 2025 as printed in the README's
-own table, because the leaderboard changed how it times a run after record 21:
-ten formerly untimed warmup steps became timed, worth about 850ms, and
-<code>torch._inductor.config.coordinate_descent_tuning</code> was banned, worth about
-three seconds. Upstream re-timed record 21 under the new rules at 2.997 minutes
-and again on the then-current torch at 3.014. Against 3.014, records 22 to 24
-at 2.990, 2.979 and 2.966 are genuine improvements, not a regression. Both
-re-timings are vendored as <code>kind=retiming</code> rows and drawn as open markers, so
-the discontinuity is visible rather than inferred.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as the standing record's value over time:</p>
-<p><img alt="Standing record for training minutes over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-nanogpt/cumulative-algorithms-nanogpt.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/figure.py"><code>figure.py</code></a>
-reads <code>nanogpt-records.csv</code>, converts each <code>date</code> to a year fraction, and draws
-<code>minutes</code> as a step function through all 89 rows with <code>kind=record</code>. Each record is a point
-coloured by the <code>agent</code> column, red where it is <code>ai</code> and blue where it is
-<code>human</code>, with the AI points drawn larger and labelled from the <code>ai_system</code>
-column. January 2026 onward is shaded, as in every figure here.</p>
-<p>The y axis is logarithmic, with ticks set explicitly at 1.5, 2, 3, 5, 10, 20 and
-45. A linear axis would compress the whole 2025–2026 stretch into the bottom of
-the frame, which is exactly the region the slope question is about. Apart from
-the two re-timings, nothing is plotted with an open marker on this series,
-because every record row carries a firm date and an acknowledged holder.</p>
-<p>The rows are transcribed by hand, since attributing a record needs judgment the
-README states only in prose. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/fetch.py"><code>fetch.py</code></a> is therefore a staleness probe
-rather than a fetcher: it reads the upstream README and reports if a record past
-the vendored series has been accepted.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<h2 id="definition">Definition</h2>
+<p>modded-nanogpt is a public competition to train a GPT-2-scale language model
+to a fixed target validation loss in as little wall-clock time as possible.
+The target is fixed by the rules, so a record is the same capability reached
+with less compute — an efficiency series rather than a capability series —
+and an AI-set record is directly comparable with a human one.</p>
+<p>A "discovery" is one record accepted into the README's table, dated and
+credited to a named entrant. Every record carries a day-precise date and an
+author, which is what allows the AI share to be counted rather than
+estimated. The fixed-hardware assumption comes from the leaderboard's own
+rules; the vendored CSV carries only the record number, date, minutes, agent,
+credited AI system, and a note, so nothing in the data itself pins the
+machine.</p>
+<h2 id="facts">Facts</h2>
 <ul>
-<li><strong>A leaderboard measures what people chose to optimize.</strong> Eighty-nine records
-  on one training task say nothing about the value of the improvement, or about
-  how much of it transfers to a model anybody ships.</li>
-<li><strong>The AI share is a floor.</strong> The <code>agent</code> column reflects the README's own
-  labels, so a record set with undisclosed model assistance counts as human.</li>
-<li><strong>The step sizes are this repository's arithmetic.</strong> The README prints
-  standing times, not per-record deltas. Only the Muon and U-Net figures come
-  from the source log; the five AI step sizes are computed here.</li>
-<li><strong>Nothing separates better ideas from more attention.</strong> There is no denominator
-  of effort, spend, or attempts, so a faster cadence in 2026 cannot be split
-  into better tools and more entrants.</li>
-<li><strong>Approaching a floor is not the same as exhausting ideas.</strong> Time to a fixed
-  loss has a hard lower bound, so flattening is the expected shape late in any
-  speedrun and is not by itself evidence about the supply of discoveries.</li>
+<li><strong>span:</strong> 45.0 minutes at the llm.c baseline of 2024-05-28, down to 1.23
+  minutes at record 89 on 2026-07-17 — a reduction of about 37 times</li>
+<li><strong>records per period:</strong> 17 records in 2024, 39 in 2025, and 33 in the
+  first seven months of 2026</li>
+<li><strong>standing-record falls:</strong> over the same three periods the standing record
+  fell by a factor of 12.6, then 1.9, then 1.5</li>
+<li><strong>ai-records:</strong> 5 records out of 89: record 32 to hiverge.ai at 2.625
+  minutes (2025-09-11), record 60 to Locus at 1.765 (2026-01-16), record 69
+  to Aster at 1.528 (2026-02-02), record 72 to Station at 1.496
+  (2026-02-10), and record 87 to Recursive at 1.256 (2026-06-11)</li>
+<li><strong>ai-step-sizes:</strong> measured against the record each displaced, the five AI
+  steps are 1.2%, 0.9%, 0.5%, 1.3% and 0.8% — this repository's arithmetic
+  over the vendored series, not figures the README prints</li>
+<li><strong>deep human steps (README figures):</strong> the Muon optimizer at about 21% and
+  U-Net skip connections at about 8%</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>Five records out of 89, held by hiverge.ai, Locus, Aster, Station and
-Recursive, each worth
-roughly one percent. Where the content of an AI record is described it is
-mechanical rather than conceptual: Locus's entry is an explicit fused Triton
-kernel, which is kernel fusion rather than a new idea. Hiverge also holds the
-first acknowledged AI record on the <a href="algorithms-cifar10.html">CIFAR-10 speedrun</a>,
-so the AI-set records on the two ML speedruns are partly the same small set of
-firms.</p>
-<p>Two adjacent results bear on this series without appearing on it. TTT-Discover's
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as the standing record's value over time:</p>
+<p><img alt="Standing record for training minutes over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-nanogpt/cumulative-algorithms-nanogpt.png" /></p>
+<h2 id="method">Method</h2>
+<p>The rows are transcribed by hand, since attributing a record needs judgment
+the README states only in prose. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/fetch.py"><code>fetch.py</code></a> is therefore a
+staleness probe rather than a fetcher: it reads the upstream README and
+reports if a record past the vendored series has been accepted.
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/check.py"><code>check.py</code></a> recomputes the fact lines above from the CSV.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/figure.py"><code>figure.py</code></a> reads <code>nanogpt-records.csv</code>, converts each <code>date</code> to
+a year fraction, and draws <code>minutes</code> as a step function through all 89 rows
+with <code>kind=record</code>. Each record is a point coloured by the <code>agent</code> column,
+red where it is <code>ai</code> and blue where it is <code>human</code>, with the AI points drawn
+larger and labelled from the <code>ai_system</code> column. The y axis is logarithmic,
+with ticks set explicitly at 1.5, 2, 3, 5, 10, 20 and 45; a linear axis would
+compress the whole 2025–2026 stretch into the bottom of the frame. January
+2026 onward is shaded, as in every figure here.</p>
+<p>One discontinuity in the series has a documented cause. Records 22 to 24, in
+May 2025, are slower than record 21 of January 2025 as printed in the
+README's own table, because the leaderboard changed how it times a run after
+record 21: ten formerly untimed warmup steps became timed, worth about 850ms,
+and <code>torch._inductor.config.coordinate_descent_tuning</code> was banned, worth
+about three seconds. Upstream re-timed record 21 under the new rules at 2.997
+minutes and again on the then-current torch at 3.014. Against 3.014, records
+22 to 24 at 2.990, 2.979 and 2.966 are improvements rather than a regression.
+Both re-timings are vendored as <code>kind=retiming</code> rows and drawn as open
+markers. Apart from the two re-timings, nothing is plotted with an open
+marker on this series, because every record row carries a firm date and an
+acknowledged holder.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>a leaderboard measures what people chose to optimize.</strong> Eighty-nine
+  records on one training task say nothing about the value of the
+  improvement, or about how much of it transfers to a model anybody ships.</li>
+<li><strong>the AI share is a floor.</strong> The <code>agent</code> column reflects the README's own
+  labels, so a record set with undisclosed model assistance counts as human.</li>
+<li><strong>the step sizes are this repository's arithmetic.</strong> The README prints
+  standing times, not per-record deltas; only the Muon and U-Net figures
+  come from the source log.</li>
+<li><strong>nothing separates better ideas from more attention.</strong> There is no
+  denominator of effort, spend, or attempts, so a faster cadence cannot be
+  split into better tools and more entrants.</li>
+<li><strong>approaching a floor is not the same as exhausting ideas.</strong> Time to a
+  fixed loss has a hard lower bound, so flattening is the expected shape
+  late in any speedrun.</li>
+</ul>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>Five of the 89 records are credited to AI-agent companies: hiverge.ai,
+Locus, Aster, Station and Recursive, at the dates and times listed in the
+fact lines above, each measuring roughly one percent against the record it
+displaced. The README's entry for record 60 (Locus) is an explicit fused
+Triton kernel [@kellerjordan2026moddednanogpt], and the CSV note for record
+87 records a faster ReLU^2 kernel "credited to @cong_ml and AI System
+Recursive". hiverge.ai also holds the first acknowledged AI record on the
+<a href="algorithms-cifar10.html">CIFAR-10 speedrun</a>, so the AI-set records
+on the two ML speedruns partly belong to the same small set of firms. No
+other record in the CSV carries an <code>agent</code> value of <code>ai</code>.</p>
+<p>Two adjacent results are AI-credited off this leaderboard. TTT-Discover's
 test-time-training harness, running the open gpt-oss-120b model, found TriMul
 GPU kernels 15 to 51% faster than the best human submission depending on GPU
-type [@yuksekgonul2026learning]. And Karpathy left an agent tuning nanochat for
-about two days in March 2026; it worked through roughly 700 changes, about 20 of
-which improved validation loss, after which Karpathy himself tested, transferred
-and stacked them and measured an 11% cut in time to GPT-2. Both are the same
-kind of work this leaderboard rewards, done off it.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The lumpiness here is the field's normal shape: half of all algorithm families
-never improve at all, while 14% improve more than a thousandfold per year
-[@sherry2021fast]. The leaderboard itself is the primary record
-[@kellerjordan2026moddednanogpt], and the two off-leaderboard demonstrations are
-TTT-Discover [@yuksekgonul2026learning] and Karpathy's autoresearch run
-[@karpathy2026autoresearch]. The curve this series is a proxy for — the labs'
-own training efficiency — is not published; Epoch's best guess is about 10 times
-a year inside an 80% interval of 2 to 50 times [@epoch2026driver], which is too
-wide to show a bend.</p>
+type [@yuksekgonul2026learning]. Karpathy left an agent tuning nanochat for
+about two days in March 2026; it worked through roughly 700 changes, about 20
+of which improved validation loss, after which Karpathy himself tested,
+transferred and stacked them and measured an 11% cut in time to GPT-2
+[@karpathy2026autoresearch].</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@kellerjordan2026moddednanogpt] — the leaderboard README: the record
+  table every row is transcribed from, and the Muon and U-Net step figures.</li>
+<li>[@yuksekgonul2026learning] — the TTT-Discover kernel result in the
+  AI-attribution register.</li>
+<li>[@karpathy2026autoresearch] — Karpathy's self-reported nanochat tuning run
+  in the AI-attribution register.</li>
+<li>[@epoch2026driver] — Epoch AI's stated estimate of the labs' own
+  unpublished training-efficiency curve: about 10 times a year inside an 80%
+  interval of 2 to 50 times.</li>
+<li>[@sherry2021fast] — the published base rate across 113 algorithm families:
+  half never improve at all, while 14% improve more than a thousandfold per
+  year.</li>
+<li>Sibling series: the <a href="algorithms-cifar10.html">CIFAR-10 speedrun</a>
+  measures seconds to a fixed test accuracy on the same kind of fixed-target
+  training task.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-nanogpt/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

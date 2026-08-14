@@ -46,9 +46,14 @@ PROBLEMS = ROOT / "problems"
 BIB = ROOT / "references.bib"
 README = ROOT / "README.md"
 
-FIELDS = ("Domain", "Metric", "Coverage", "Data", "Upstream", "Verdict")
-SECTIONS = ("The problem", "What the chart shows", "How the chart was built",
-            "What it cannot support", "LLM contributions", "Related literature")
+FIELDS = ("Domain", "Role", "Metric", "Coverage", "Data", "Upstream",
+          "Verdict")
+SECTIONS = ("Definition", "Facts", "Method", "Limitations", "AI attribution",
+            "Sources")
+# The one place a page states why it is in the collection, as a controlled
+# phrase rather than a paragraph; FORMAT.md defines the vocabulary.
+ROLES = {"discovery series", "prestige ledger", "control: no-AI baseline",
+         "contrast case: volume", "denominator frame"}
 VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive",
             "too early", "baseline"}
 # The index separates open-problem ledgers from mathematical records and bounds:
@@ -115,6 +120,31 @@ NO_FIGURE_REASONS = re.compile(
     r"no chart|no figure|not plotted|no visualization|not a digitized series",
     re.I,
 )
+
+# The pages are reference material (see FORMAT.md): facts a reader can check,
+# not readings. These are the rhetorical devices the 2026-08 style audit found
+# doing interpretive work; each match is a Document failure. Blockquote lines
+# are exempt, since quoted sources may use any words they like.
+STYLE_LINT = (
+    r"\bworth (stating|naming|noting|recording|carrying|knowing|having"
+    r"|being explicit)\b",
+    r"\bthe story of\b",
+    r"\bis the (reading|finding|whole point)\b",
+    r"\bthat is the reading\b",
+    r"\bcuts? the (reading|finding) down\b",
+    r"\bfamously\b",
+    r"\bremarkabl",
+    r"\binterestingly\b",
+    r"\bthe interesting (number|one|part|region)\b",
+    r"\bhonest (summary|alternative|layer)\b",
+    r"\bearns (a|its own) (place|document)\b",
+    r"\b(best|worst|weakest|cleanest|sharpest|most useful) "
+    r"(available )?(instrument|aggregate|baseline|control|warning)\b",
+)
+
+# A quote a reader cannot locate is not checkable. Every blockquote block must
+# end with an attribution line naming its source and carrying a year.
+QUOTE_ATTRIBUTION = re.compile(r"^>\s*[—–-]\s+.*\b(19|20)\d{2}\b")
 
 INDEX_BEGIN = "<!-- BEGIN GENERATED: series-index -->"
 INDEX_END = "<!-- END GENERATED: series-index -->"
@@ -207,8 +237,31 @@ class Problem:
             self.fail("Document",
                       f"links ../{sibling}/README.md, which does not exist")
 
+        # Style register (FORMAT.md): quoted sources are exempt, the page's
+        # own prose is not.
+        own_prose = "\n".join(line for line in self.text.splitlines()
+                              if not line.startswith(">"))
+        for pattern in STYLE_LINT:
+            match = re.search(pattern, own_prose, re.I)
+            if match:
+                self.fail("Document",
+                          f"style lint: {match.group(0)!r} (see FORMAT.md)")
+        lines = self.text.splitlines()
+        for index, line in enumerate(lines):
+            block_end = (line.startswith(">")
+                         and (index + 1 == len(lines)
+                              or not lines[index + 1].startswith(">")))
+            if block_end and not QUOTE_ATTRIBUTION.match(line):
+                self.fail("Document",
+                          f"quote block ending {line[:48]!r} has no dated "
+                          "attribution line (see FORMAT.md)")
+
+        role = self.fields.get("Role", "")
+        if role and role not in ROLES:
+            self.fail("Document", f"role {role!r} not one of {sorted(ROLES)}")
+
         figure_script = self.folder / "figure.py"
-        built = re.search(r"## How the chart was built\n(.*?)(?=\n## |\Z)",
+        built = re.search(r"## Method\n(.*?)(?=\n## |\Z)",
                           self.text, re.S)
         built_body = built.group(1) if built else ""
         if not figure_script.exists() and not self.figures:
@@ -260,9 +313,8 @@ class Problem:
         elif NO_FETCHER_REASONS.search(built_body):
             self.status["Refetch"] = HAND
         else:
-            self.fail("Refetch", "has no fetch.py, and 'How the chart was "
-                                 "built' does not say how the data is "
-                                 "maintained instead")
+            self.fail("Refetch", "has no fetch.py, and 'Method' does not say "
+                                 "how the data is maintained instead")
 
         folder_check = self.folder / "check.py"
         if folder_check.exists():

@@ -7,7 +7,7 @@
 **Upstream:** <https://epoch.ai/frontiermath/open-problems>
 **Verdict:** too early — a six-month-old pool built for cheap verification; every solve sits in its two lowest notability tiers
 
-![Dated solution events by notability tier.](discovery-math-frontiermath-open.png)
+![Dated solution events by notability tier, with the surviving pool per tier.](discovery-math-frontiermath-open.png)
 
 ## The problem
 
@@ -90,10 +90,13 @@ ledgers, so a refetch that flips a status without the event ledger being
 reviewed fails the folder rather than passing silently.
 
 [`figure.py`](figure.py) places each dated event at its date and tier lane,
-with each lane's unsolved count at the right edge, and draws the cumulative
-count of dated solves for [CUMULATIVE.md](../../CUMULATIVE.md). The one
-undated solve — the withdrawn explicit-deformations page — is stated in a
-corner note rather than drawn.
+and beside the timeline draws the denominator: the whole pool today as one
+stacked bar per tier — open, solved by AI, solved by humans — with each
+bar's reading stating how much of the tier survives, so the six events on
+the left are read against the 47 problems still standing. It also draws the
+cumulative count of dated solves for [CUMULATIVE.md](../../CUMULATIVE.md).
+The one undated solve — the withdrawn explicit-deformations page — is
+stated in a corner note rather than drawn.
 
 ## What it cannot support
 

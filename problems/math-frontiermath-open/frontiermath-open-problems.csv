@@ -1,0 +1,55 @@
+slug,title,field,task_type,notability,status,source_url
+apery-irrationality,Apéry-Style Irrationality Proofs via Linear Recurrences,Number theory,Construction - Finite,Breakthrough,unsolved,https://epoch.ai/frontiermath/open-problems/apery-irrationality
+arithmetic-kakeya,The Arithmetic Kakeya Conjecture,Number theory,Construction - Finite; Improved Bound,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/arithmetic-kakeya
+baillie-psw,A Baillie–PSW Pseudoprime,Number theory,Counterexample; Integer Solution,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/baillie-psw
+chowla-cosine,Chowla's Cosine Problem,Analysis,Construction - Finite; Improved Bound,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/chowla-cosine
+class-group-rank,Large \(\ell\)-Rank in Class Groups of Imaginary Quadratic Fields,Algebraic number theory,Record Breaking,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/class-group-rank
+committee-election,The Core in Approval-Based Committee Elections,Social choice,Construction - Finite; Counterexample,Major advance,unsolved,https://epoch.ai/frontiermath/open-problems/committee-election
+condorcet-winning-sets,Condorcet Winning Sets,Social choice,Construction - Finite; Counterexample,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/condorcet-winning-sets
+conway-99-graph,Conway's 99-Graph Problem,Graph theory,Construction - Finite,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/conway-99-graph
+degree-sensitivity-boolean,Sensitivity versus Degree for Boolean Multilinear Polynomials,Combinatorics,Construction - Finite; Improved Bound,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/degree-sensitivity-boolean
+diophantine-septuple,A Rational Diophantine Septuple,Diophantine,Integer Solution,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/diophantine-septuple
+earth-moon,The Earth–Moon Problem,Graph theory,Construction - Finite; Improved Bound,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/earth-moon
+efx,Existence of EFX Allocations,Social choice,Construction - Finite; Counterexample,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/efx
+elliptic-curve-discrete-logarithm,The Elliptic-Curve Discrete Logarithm Problem (ECDLP),Number theory,Algorithm,Major advance,unsolved,https://epoch.ai/frontiermath/open-problems/elliptic-curve-discrete-logarithm
+elliptic-curve-point-count,Elliptic Curves with Prescribed Number of Points,Arithmetic geometry,Algorithm,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/elliptic-curve-point-count
+elliptic-curve-rank,Elliptic Curves over \(\mathbb{Q}\) of Large Rank,Arithmetic geometry,Construction - Finite; Record Breaking,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/elliptic-curve-rank
+euler-sum-of-powers,Euler's Sum of Powers Conjecture,Diophantine,Counterexample; Integer Solution,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/euler-sum-of-powers
+explicit-deformations,Explicit Deformations of Algebras,Algebraic Geometry,,Novel example,solved_ai,https://epoch.ai/frontiermath/open-problems/explicit-deformations
+genus-2-jacobian-torsion,A Genus 2 Curve over the Rationals with a Rational Torsion Point of Prime Order at Least 31,Arithmetic geometry,Construction - Finite; Record Breaking,Moderately interesting,solved_ai,https://epoch.ai/frontiermath/open-problems/genus-2-jacobian-torsion
+genus-2-rational-points,Many Rational Points on a Genus-2 Curve,Diophantine,Construction - Finite; Record Breaking,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/genus-2-rational-points
+hadamard,Hadamard Matrix of Order 668,Combinatorics,Construction - Finite; Record Breaking,Moderately interesting,solved_ai,https://epoch.ai/frontiermath/open-problems/hadamard
+hall-conjecture,Hall's Conjecture,Diophantine,Counterexample; Record Breaking,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/hall-conjecture
+heesch-number,A shape with Heesch number 7,Topology/Geometry,Construction - Finite; Record Breaking,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/heesch-number
+hirsch-conjecture,The Hirsch Conjecture in Dimension 4,Discrete geometry,Construction - Finite; Improved Bound,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/hirsch-conjecture
+inverse-galois,The Inverse Galois Problem for the Mathieu Group \(M_{23}\),Number theory,Construction - Finite,Solid result,solved_human,https://epoch.ai/frontiermath/open-problems/inverse-galois
+jones-unknot,The Jones Unknot Conjecture,Knot theory,Construction - Finite; Counterexample,Major advance,unsolved,https://epoch.ai/frontiermath/open-problems/jones-unknot
+klt-del-pezzo-surface,Surface with a High Number of Singularities,Algebraic Geometry,,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/klt-del-pezzo-surface
+large-mahler-measure,Littlewood Polynomials with Large Normalized Mahler Measure,Analysis,Construction - Finite; Improved Bound,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/large-mahler-measure
+large-steiner-systems,Large Steiner Systems,Combinatorics,Construction - Finite; Record Breaking,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/large-steiner-systems
+leech-trees,Leech Trees,Combinatorics,Construction - Finite; Record Breaking,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/leech-trees
+lonely-runner,The Lonely Runner Conjecture,Diophantine,Counterexample,Major advance,unsolved,https://epoch.ai/frontiermath/open-problems/lonely-runner
+matrix-multiplication,The Rank of the \(4\times4\) Matrix-Multiplication Tensor,Combinatorics,Algorithm; Record Breaking,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/matrix-multiplication
+missing-moore-graph,The Missing Moore Graph,Graph theory,Construction - Finite,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/missing-moore-graph
+no-three-in-line,The No-Three-in-Line Problem,Discrete geometry,Construction - Family; Improved Bound,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/no-three-in-line
+numerical-semigroups,A counterexample to Wilf's Conjecture,Number theory,Construction - Finite; Counterexample,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/numerical-semigroups
+polya-laplacian-spectrum,Pólya's Conjecture for the Dirichlet Laplacian,Spectral geometry,Construction - Finite; Counterexample,Major advance,unsolved,https://epoch.ai/frontiermath/open-problems/polya-laplacian-spectrum
+polynomial-minimal-surface,Polynomial Entire Minimal Graphs,Analysis,Construction - Finite,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/polynomial-minimal-surface
+polynomial-square-few-coefficients,Dense Polynomials Whose Squares Are Sparse,Number theory,Construction - Finite,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/polynomial-square-few-coefficients
+prime-factorization,Improve the Best-known Classical Factorization Algorithms,Number theory,Algorithm,Breakthrough,unsolved,https://epoch.ai/frontiermath/open-problems/prime-factorization
+prime-generating-polynomials,Prime-Generating Polynomial Systems in Five Variables,Number theory,Construction - Finite; Improved Bound,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/prime-generating-polynomials
+q2-absolute-galois,A Presentation of the Absolute Galois Group of \(\mathbb{Q}_2\),Number theory,Construction - Finite,Solid result,solved_ai,https://epoch.ai/frontiermath/open-problems/q2-absolute-galois
+quadratic-field-class-number,Class Group Algorithms,Algebraic number theory,Construction - Family,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/quadratic-field-class-number
+ramsey-66,"The Ramsey Number \(R(6,6)\)",Graph theory,Construction - Finite; Improved Bound,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/ramsey-66
+ramsey-book-graphs,Book Ramsey Numbers,Graph theory,Construction - Family,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/ramsey-book-graphs
+ramsey-hypergraphs,A Ramsey-style Problem on Hypergraphs,Combinatorics,,Moderately interesting,solved_ai,https://epoch.ai/frontiermath/open-problems/ramsey-hypergraphs
+slice-ribbon,The Slice–Ribbon Conjecture and the GST Knot,Knot theory,Construction - Finite; Counterexample,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/slice-ribbon
+small-diophantine,Large Integer Solutions to a Cubic Diophantine Equation,Diophantine,Integer Solution,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/small-diophantine
+smooth-poincare-4d,The Smooth Four-Dimensional Poincaré Conjecture,Topology/Geometry,Construction - Finite; Counterexample,Breakthrough,unsolved,https://epoch.ai/frontiermath/open-problems/smooth-poincare-4d
+square-class-groups,A Prescribed Class-Group Structure for an Imaginary Quadratic Field,Algebraic number theory,Construction - Finite,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/square-class-groups
+stretched-lr-coefficients,A Negative Coefficient in a Stretched Littlewood–Richardson Polynomial,Combinatorics,Construction - Finite; Counterexample,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/stretched-lr-coefficients
+sum-of-three-cubes,Sum of Three Cubes,Diophantine,Integer Solution; Record Breaking,Moderately interesting,unsolved,https://epoch.ai/frontiermath/open-problems/sum-of-three-cubes
+superpermutations,"Short Superpermutations over 8, 9, and 10",Combinatorics,Construction - Family; Improved Bound,Moderately interesting,solved_ai,https://epoch.ai/frontiermath/open-problems/superpermutations
+symplectic-ball-packing,Symplectic Ball Packing,Topology/Geometry,Construction - Family,Major advance,unsolved,https://epoch.ai/frontiermath/open-problems/symplectic-ball-packing
+thrackles,Conway's Thrackle Conjecture,Graph theory,Construction - Finite,Solid result,unsolved,https://epoch.ai/frontiermath/open-problems/thrackles
+unknotting-number,Deciding Unknotting Number One,Low-dimensional topology,,Breakthrough,unsolved,https://epoch.ai/frontiermath/open-problems/unknotting-number

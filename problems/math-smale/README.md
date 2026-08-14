@@ -14,8 +14,8 @@
 Smale's 1998 list of eighteen "problems for the next century" is the modern
 successor to Hilbert's, assembled by one mathematician with a stated view of what
 mattered. It is scored here for the same reason as the other prestige lists — it
-is a ceiling check — and it earns its own document because it is the only one of
-them with an AI-attributed fall.
+is a ceiling check — and it earns its own document because it was the first of
+them to record an AI-attributed fall.
 
 A "discovery" in this series is a row moving to resolved. Nineteen rows are
 scored rather than eighteen problems, because Smale 11 splits into two
@@ -103,8 +103,9 @@ There is no `fetch.py`. The rows are hand-scored from the Wikipedia table and, f
 
 ## LLM contributions
 
-One, and it is the only AI-attributed fall on any of the six problem-list
-ledgers scored here. In July 2026 Levent Alpöge, working with Claude Fable 5,
+One — and among the problem-list ledgers scored here, only the
+[Erdős top-10 subset](../math-erdos-top10/README.md) records another.
+In July 2026 Levent Alpöge, working with Claude Fable 5,
 produced a counterexample to the Jacobian conjecture in dimension 3, and
 therefore in every dimension at least 3; the determinant and the collision were
 independently kernel-checked in Lean [@zenodo2026jacobian] and in Isabelle
@@ -132,4 +133,6 @@ since made cheap verification an explicit selection rule
 [@arxiv2026horizonmath]. The companion ledgers are [Hilbert](../math-hilbert/README.md),
 [Landau](../math-landau/README.md), [Thurston](../math-thurston/README.md),
 [Millennium](../math-millennium/README.md) and [TOPP](../math-topp/README.md), none of which records
-an AI-attributed fall.
+an AI-attributed fall; among the newer ledgers, the
+[Erdős top-10 subset](../math-erdos-top10/README.md) records one and
+[Ben Green's list](../math-green/README.md) none.

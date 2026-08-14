@@ -217,6 +217,7 @@ def problem_list_chart(
     out_path: Path,
     built_by: str,
     ai_problem: str | None = None,
+    ai_caption: str = "formal checks complete; peer review pending",
 ) -> None:
     """Show a list's dated resolution events by year.
 
@@ -225,6 +226,10 @@ def problem_list_chart(
     same instrument. The present-day status split — open, contested, undated
     resolutions — lives in the CSV and the document's prose; a one-line note
     here says how much of the list the dated events account for.
+
+    ``ai_caption`` is the second line of the ``ai_problem`` annotation. The
+    default is the Smale row's verification status; a ledger whose AI event has
+    a different standing passes its own line.
     """
     rows = read_csv(csv_path)
     name = rows[0]["list_name"]
@@ -285,7 +290,7 @@ def problem_list_chart(
         if ai_row:
             year, row = ai_row
             timeline_ax.annotate(
-                f"{row['short_name']}\nformal checks complete; peer review pending",
+                f"{row['short_name']}\n{ai_caption}",
                 (year, human_by_year[year] + ai_by_year[year]),
                 xytext=(-10, 26),
                 textcoords="offset points",

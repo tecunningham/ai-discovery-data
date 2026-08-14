@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ben Green&#x27;s 100 open problems — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Ben Green&#x27;s 100 open problems</h1>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> dated resolutions per year across 101 scored rows
+<strong>Coverage:</strong> 2018–2026, with dated resolutions running 2019 to 2025; statuses as the list's December 2025 revision records them
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-green/green-problems.csv"><code>green-problems.csv</code></a>
+<strong>Upstream:</strong> <a href="https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf">https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf</a>
+<strong>Verdict:</strong> no acceleration — under two dated resolutions per year since the list circulated, none dated 2026, and none AI-attributed</p>
+<h3>Per-problem resolution timeline</h3>
+<div id="chart0" class="chart"></div>
+<p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
+<h2 id="the-problem">The problem</h2>
+<p>Ben Green's "100 open problems" is a working mathematician's list: one hundred
+questions in additive combinatorics, number theory, discrete geometry and
+harmonic analysis, circulated since 2018 and revised roughly yearly, with the
+statuses updated by the list's own author as problems fall. It sits between the
+prestige lists and the Erdős catalogue in character — broader and more personal
+than <a href="math-hilbert.html">Hilbert</a> or
+<a href="math-millennium.html">Millennium</a>, but curated by one expert rather
+than crowd-assembled — and it earns a place here because Green marks his own
+scoreboard: a problem's heading carries "(Solved)" when he judges it solved,
+and a dated update note names what solved it.</p>
+<p>A "discovery" in this series is a row carrying Green's solved marker together
+with the year of the update note recording the solution, which in every case
+but one is also the year the resolving work first appeared; the exception is
+Problem 9(i), where the update note is dated a year after the Kelley–Meka
+preprint and the row carries the preprint's year. The document self-dates its
+most recent revision to December 2025, so the ledger is a snapshot of his
+scoring as of that revision, read on 2026-08-13.</p>
+<p>There are 101 scored rows rather than 100 problems because Problem 9's part
+(i) carries its own solved marker while parts (ii) and (iii) stand open, so it
+is split into two rows, following how the <a href="math-smale.html">Smale ledger</a>
+handles its split row 11.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Of the 101 scored rows, 13 of them carry a dated resolution, running 2019 to
+2025: 2 in 2019, 2 in 2021, 1 in 2022, 4 in 2023, 1 in 2024, and 3 in 2025.
+One row is scored partial — Problem 11, which Green marks "mostly solved" —
+and 87 rows stand open. That is 13 resolutions in 7 years, a steady rate of
+just under two per year, with no upward bend at the agent era and no dated
+resolution in 2026 at all in this snapshot.</p>
+<p>The names on the resolutions are the small circle familiar from the
+<a href="math-erdos.html">Erdős catalogue's</a> recent surge — Sah and Sawhney
+appear on three rows, Bedert on one, and Green himself on two — and every one
+of them is human. The one AI event Green's document records is not a
+resolution: a 2025 update to Problem 35 notes that an "AI-based approach" —
+AlphaEvolve [@novikov2025alphaevolve] — improved the upper bound on the
+autoconvolution constant $c_\infty$ from 0.75049 to 0.75026, the same family
+of constants whose lower-bound ladder is tracked in
+<a href="math-sums-autoconvolution.html">math-sums-autoconvolution</a>.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+ledger as rows remaining, declining as dated resolutions arrive:</p>
+<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-green/cumulative-math-green.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-green/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> shape in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, reading
+<code>green-problems.csv</code>, keeping rows with <code>status</code> equal to <code>resolved</code> and a
+non-empty <code>resolved_year</code>, and counting resolution events by year from the
+2018 <code>list_year</code> to the present. The cumulative view is the shared
+<code>ledger_remaining_chart()</code>.</p>
+<p>There is no <code>fetch.py</code>. The rows are hand-scored from the PDF itself: the
+status column follows the "(Solved)" and "(Mostly solved)" markers Green puts
+on problem headings, the year comes from his dated update notes, and the
+resolver from the names those notes credit. The scoring rule is deliberately
+his, not this repository's — a problem counts as resolved exactly when the
+list's own author marks it so — which makes the ledger rebuildable by anyone
+reading the same PDF, at the cost of the lag documented below.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>The ledger lags the mathematics by up to a revision cycle.</strong> Green updates
+  roughly once a year, so a problem solved after December 2025 still reads
+  open here. This is not hypothetical: Problem 90 was resolved by Ma, Tang and
+  Xu in May 2026 (arXiv 2605.13454), and its row keeps the document's open
+  status with a note. The zero at 2026 on the chart is an artifact of the
+  revision cycle, not a measurement of 2026.</li>
+<li><strong>An update year is not a solution date.</strong> The rule dates each resolution to
+  Green's update note, which usually matches the resolving preprint's year but
+  is his bookkeeping, not the event itself.</li>
+<li><strong>Marker judgments are one mathematician's.</strong> Problem 22's 2025 bound
+  "arguably addresses the original formulation" in Green's own words, and
+  Problem 87's solution was announced at Oberwolfach in November 2025 by
+  Sawhney in joint work with Green himself — yet neither heading is marked
+  solved, so neither is counted. A different scorer would draw the line
+  elsewhere.</li>
+<li><strong>Thirteen events cannot set a slope.</strong> At under two resolutions per year,
+  a one-year gap or cluster is noise; the flat verdict is a reading of scale,
+  not a fitted trend.</li>
+<li><strong>Selection is personal.</strong> The list is what one expert found beautiful and
+  plausibly attackable around 2018, which is not a sample of mathematics, and
+  several rows overlap the Erdős catalogue and the
+  <a href="math-frontiermath-open.html">FrontierMath list</a> (Problems 72 and 81
+  appear on the latter), so the ledgers are correlated.</li>
+<li><strong>Resolution landmarks are not effort-adjusted discovery rates</strong>, here as on
+  every ledger in this collection.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>None, on the resolution ledger — every solved marker credits human
+mathematicians. The document's one AI event is the AlphaEvolve bound
+improvement on Problem 35 noted above [@novikov2025alphaevolve]: a numerical
+record on a continuous quantity, exactly the shape of contribution the
+<a href="math-alphaevolve-records.html">AlphaEvolve records series</a> tracks,
+and not a resolution. Around the list rather than on it, Google DeepMind's
+formal-conjectures project maintains a milestone formalizing these problems'
+statements in Lean (<a href="https://github.com/google-deepmind/formal-conjectures/milestone/2">https://github.com/google-deepmind/formal-conjectures/milestone/2</a>),
+the same statement-formalization infrastructure whose growth the
+<a href="math-erdos.html">Erdős catalogue</a> charts — a marker that AI groups
+treat this list as a target set, which makes the zero on its scoreboard the
+interesting number. The contrast with the Erdős catalogue is the point: on
+that neighbouring corpus, AI systems resolved dozens of problems in 2026 under
+a cheap-verification selection; on this list, whose problems ask for bounds
+and structural understanding rather than machine-checkable objects, the AI
+column is empty.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The list and every status in this ledger are Green's own document
+[@green2025openproblems]; the AlphaEvolve note it carries is documented by the
+system's paper [@novikov2025alphaevolve]. The Kelley–Meka bound behind row
+9(i) and the Gowers–Green–Manners–Tao resolution of Marton's conjecture behind
+row 49 are the two results here with their own literatures. The neighbouring
+instruments are the <a href="math-erdos.html">Erdős catalogue</a> and its
+<a href="math-erdos-top10.html">top-10 subset</a>, where AI activity is intense,
+and the prestige ledgers (<a href="math-hilbert.html">Hilbert</a>,
+<a href="math-landau.html">Landau</a>, <a href="math-thurston.html">Thurston</a>,
+<a href="math-smale.html">Smale</a>, <a href="math-millennium.html">Millennium</a>,
+<a href="math-topp.html">TOPP</a>), which move less than this list does.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-green/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"notes":"Any n-element integer set has a sum-free subset of size n/3 + c log log n","problem":"Sum-free subsets of size n/3 + \u03c9(n)","resolver":"Bedert","status":"resolved","year":2025},{"notes":"Beker 2025 sharpened the Sanders exponent","problem":"Restricted sumset S+\u0302S avoiding A (Erd\u0151s\u2013Moser)","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Product-free open subsets of [0;1] of measure above 1/3","resolver":"\u2014","status":"open","year":2026},{"notes":"Solved with a stability result characterising extremal sets","problem":"Largest product-free set in the alternating group","resolver":"Keevash\u2013Lifshitz\u2013Minzer","status":"resolved","year":2022},{"notes":"","problem":"Groups with the smallest largest product-free sets","resolver":"\u2014","status":"open","year":2026},{"notes":"Lepsveridze\u2013Sun 2023 determined the d=3 and d=4 constants","problem":"Largest sum-free subset of the grid [N]^d","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Structure and density of Ulam's sequence","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Sets with few solutions to x+y=z","resolver":"\u2014","status":"open","year":2026},{"notes":"Green marks part (i) solved; his 2024 update records the 2023 Kelley\u2013Meka bound","problem":"Is r3(N) below N/(log N)^10","resolver":"Kelley\u2013Meka","status":"resolved","year":2023},{"notes":"Parts (ii) and (iii); Leng\u2013Sah\u2013Sawhney 2024 improved the general rk(N) bounds","problem":"Same question for r5(N) and for r4 over F5^n","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Roth's theorem with random common differences","resolver":"\u2014","status":"open","year":2026},{"notes":"Marked mostly solved: Peluse\u2013Sah\u2013Sawhney 2023 and Leng 2025 settle part (i) up to what Green concedes is reasonable; Tao\u2013Ter\u00e4v\u00e4inen 2021 advanced part (ii)","problem":"Progressions with square-minus-one or prime-minus-one differences","resolver":"\u2014","status":"partial","year":2026},{"notes":"","problem":"Sidorenko count for the M\u00f6bius ladder in abelian groups","resolver":"\u2014","status":"open","year":2026},{"notes":"Deng\u2013Tidor\u2013Zhao 2023 improved the exponent and conjectured a negative answer","problem":"4-term progressions in Fourier-uniform sets","resolver":"\u2014","status":"open","year":2026},{"notes":"Resolved in the negative by a superpolynomial lower bound","problem":"Is W(3;r) polynomial in r","resolver":"Green","status":"resolved","year":2021},{"notes":"","problem":"Lipschitz graph in Z^2 free of 3-term progressions","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Largest set with no solution to x+3y=2z+2w in distinct integers","resolver":"\u2014","status":"open","year":2026},{"notes":"Bhangale\u2013Khot\u2013Minzer 2023 and with Liu 2025 made progress","problem":"3-term progressions with {0;1}^n common difference in F3^n","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Corners over arbitrary finite groups (BMZ corners)","resolver":"\u2014","status":"open","year":2026},{"notes":"Showed the exponent C equals 4","problem":"Corner-count exponent over F2^n","resolver":"Fox\u2013Sah\u2013Sawhney\u2013Stoner\u2013Zhao","status":"resolved","year":2019},{"notes":"Jaber\u2013Liu\u2013Lovett\u2013Ostuni\u2013Sawhney 2025 gave quasipolynomial-type corner bounds","problem":"Bounds for the multidimensional Szemer\u00e9di theorem","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Density bounds for non-Rado equations","resolver":"\u2014","status":"open","year":2026},{"notes":"Green\u2013Sawhney 2025 proved a double-exponential bound Green says arguably addresses the original formulation; headline still unmarked","problem":"Bounds for monochromatic {x+y; xy}","resolver":"\u2014","status":"open","year":2026},{"notes":"Partition regularity of Pythagorean pairs; the full x^2+y^2=z^2 question stays open","problem":"Monochromatic x and y with x^2+y^2 a square","resolver":"Frantzikinakis\u2013Klurman\u2013Moreira","status":"resolved","year":2023},{"notes":"","problem":"Affine copies of {0;1;3} in an n-element set","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Restricted sumsets over partitions of [N]","resolver":"\u2014","status":"open","year":2026},{"notes":"Solved with 100 replaced by 4; the Fp^n analogue remains open","problem":"Do 100 cubes in F3^n sum to everything","resolver":"Yu","status":"resolved","year":2025},{"notes":"Bedert 2023 narrowed the answer to between roughly log p and log^2 p","problem":"Smallest set in Z/pZ with no unique sum in A+A","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Does uniform X+Y force uniform X and Y","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Large subset of an approximate group with S^8 inside A^4","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Structured subsets certifying small doubling","resolver":"\u2014","status":"open","year":2026},{"notes":"Balogh\u2013F\u00fcredi\u2013Roy 2021 obtained a small improvement","problem":"Improve the Sidon-set bounds F(N)","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Gapped dilates of sets in Z/pZ","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Near-perfect difference sets modulo non-prime-power q","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Dense sets with bounded representation function","resolver":"\u2014","status":"open","year":2026},{"notes":"An AI-based approach (AlphaEvolve) improved the upper bound to 0.75026 in 2025 \u2014 the only AI event Green's document records","problem":"Autoconvolution constants c_p","resolver":"\u2014","status":"open","year":2026},{"notes":"Pilatte 2023 resolved the related question Green cites","problem":"Disjoint sumsets behind fast matrix multiplication","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Smallest set containing progressions of every difference","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Largest A in F7^n with A\u2212A avoiding {\u22121;0;1}^n","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Covering Z/pZ with 100 translates of a random set","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Efficient subspace coverings by Hamming balls","resolver":"\u2014","status":"open","year":2026},{"notes":"Kravitz\u2013Leng 2025 gave the first quantitative bounds","problem":"Rotated pyjama sets covering the plane","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Cohn\u2013Elkies scheme for optimal circle packing","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Sieving by one residue class per large prime","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Halving sieve: what size set survives","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Residue classes hitting every integer up to N","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Covering an initial interval by classes mod primes up to N","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Is a quadratic-size large-sieve residue set quadratic","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Structure of maximal small-sieve survivors","resolver":"\u2014","status":"open","year":2026},{"notes":"The integer analogue remains wide open","problem":"Marton's conjecture (polynomial Freiman\u2013Ruzsa over F2)","resolver":"Gowers\u2013Green\u2013Manners\u2013Tao","status":"resolved","year":2023},{"notes":"Ko\u015bciuszko 2024 made progress on a related instance","problem":"Polynomial Bogolyubov over finite fields","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Largest coset guaranteed inside 2A","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Cosets in 2A for sets with small additive complements","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Cosets in 2A_i over partitions of F2^n","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Talagrand's convex-body question for 10K","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Bilinear inverse question over Fp^n","resolver":"\u2014","status":"open","year":2026},{"notes":"Effective and quasipolynomial bounds arrived 2023\u20132025 for low-order cases","problem":"Bounds for the inverse theorem for Gowers norms","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Convex combinations of triple convolutions","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Does A+B contain a composite number (inverse Goldbach)","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Every integer a sum of two smooth numbers","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Sumset growth for sets of squares","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"If A+A contains the first n squares must A be large","resolver":"\u2014","status":"open","year":2026},{"notes":"Matom\u00e4ki\u2013Ter\u00e4v\u00e4inen 2023 made significant progress","problem":"Products of two primes covering residues mod p","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Density of the multiplicative closure of {2;3}","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Primes p with p\u22122 having an odd number of prime factors","resolver":"\u2014","status":"open","year":2026},{"notes":"Green\u2013Sawhney 2025 and Kowalska 2025 sharpened both directions","problem":"Difference sets of dense sets containing a square","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Sums of two squares in short intervals","resolver":"\u2014","status":"open","year":2026},{"notes":"Algebro-geometric asymptotic formula with s = O(k) summands","problem":"Waring's problem over finite fields","resolver":"Sawin","status":"resolved","year":2025},{"notes":"","problem":"Arcs in F_p^2: must 2-point-per-line sets lie on cubics","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Many collinear pairs force a rich cubic curve","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"k on a line or \u2113 mutually visible points","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Do many collinear 4-tuples force 5 points on a line","resolver":"\u2014","status":"open","year":2026},{"notes":"Also posed as a FrontierMath open problem; see ../math-frontiermath-open/","problem":"No-three-in-line in the grid [N]^2","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Codimension-2 surfaces meeting a 2-plane in 5 points","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Largest subset of [N]^d with no 5 points on a 2-plane","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"A halving line through two points of the set","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Half the points hitting every rich axis-parallel rectangle","resolver":"\u2014","status":"open","year":2026},{"notes":"Cohen\u2013Pohoata\u2013Zakharov improved the bound in 2023 and again in 2025","problem":"Smallest triangle among n points in a disc","resolver":"\u2014","status":"open","year":2026},{"notes":"Machado subsequently extended the result to all compact connected Lie groups","problem":"Measure growth \u00b5(A\u00b7A) \u2265 (4\u2212\u03b5)\u00b5(A) in SO(3)","resolver":"Jing\u2013Tran\u2013Zhang","status":"resolved","year":2023},{"notes":"","problem":"Random elements of A_n expand","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Effective classification of approximate groups","resolver":"\u2014","status":"open","year":2026},{"notes":"Bedert 2025 and Jin\u2013Milojevi\u0107\u2013Tomon\u2013Zhang 2025 independently reached polynomial savings; also posed as a FrontierMath open problem","problem":"Chowla's cosine problem","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"How many zeros must a cosine sum have","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Inverse Littlewood: structure of small L1 Fourier norm","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Flat Littlewood polynomials exist","resolver":"Balister\u2013Bollob\u00e1s\u2013Morris\u2013Sahasrabudhe\u2013Tiba","status":"resolved","year":2019},{"notes":"","problem":"Carbery's rectangle problem","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Dilates avoiding concentration in short intervals","resolver":"\u2014","status":"open","year":2026},{"notes":"Sawhney announced a solution with Green at Oberwolfach in November 2025 covering also the multiplication table problem; the headline is not yet marked solved","problem":"Probability a random permutation preserves a k-set","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Comparable triples in [N]^3 (Gowers\u2013Long)","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Stable-density subspaces (arithmetic Conlon\u2013Fox)","resolver":"\u2014","status":"open","year":2026},{"notes":"Resolved by Ma\u2013Tang\u2013Xu in May 2026 (arXiv 2605.13454) after the December 2025 revision scored here; the row keeps the document's own status","problem":"Almost affine-invariant sets in Z/pZ","resolver":"\u2014","status":"open","year":2026},{"notes":"Minzer\u2013Sah\u2013Sawhney 2023 comprehensively strengthened the result","problem":"Friendly bisections of random graphs","resolver":"Ferber\u2013Kwan\u2013Narayanan\u2013Sah\u2013Sawhney","status":"resolved","year":2021},{"notes":"","problem":"Trace reconstruction problem","resolver":"\u2014","status":"open","year":2026},{"notes":"Bary-Soroker\u2013Koukoulopoulos\u2013Kozma 2023 settled coefficient ranges of 34 and above","problem":"Random 0/1 polynomials almost surely irreducible","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Erd\u0151s similarity problem for the sequence 1; 1/2; 1/4 ...","resolver":"\u2014","status":"open","year":2026},{"notes":"Resolved in the negative: such integers have density zero","problem":"Positive proportion of integers as sums of two palindromes","resolver":"Zakharov","status":"resolved","year":2024},{"notes":"","problem":"The dichotomy problem (Sidon versus analyticity)","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Asymptotics of the n-queens problem","resolver":"\u2014","status":"open","year":2026},{"notes":"Lampert\u2013Snowden\u2013Ziegler 2025 advanced the many-forms variant","problem":"Effective bounds in Birch's theorem on odd-degree forms","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Counting solutions with variables in a dense set","resolver":"\u2014","status":"open","year":2026},{"notes":"","problem":"Is every group sofic or hyperlinear","resolver":"\u2014","status":"open","year":2026}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["open","partial","resolved"],"range":["#aaaaaa","#8fb3d9","#2f6cc1"]},"title":null,"type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"resolver","title":"resolver","type":"nominal"},{"field":"notes","title":"notes","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"domain":[2016,2028]},"title":"Resolution year (open problems drawn at 2026; list posed 2018)","type":"quantitative"},"y":{"field":"problem","sort":["Sum-free subsets of size n/3 + \u03c9(n)","Restricted sumset S+\u0302S avoiding A (Erd\u0151s\u2013Moser)","Product-free open subsets of [0;1] of measure above 1/3","Largest product-free set in the alternating group","Groups with the smallest largest product-free sets","Largest sum-free subset of the grid [N]^d","Structure and density of Ulam's sequence","Sets with few solutions to x+y=z","Is r3(N) below N/(log N)^10","Same question for r5(N) and for r4 over F5^n","Roth's theorem with random common differences","Progressions with square-minus-one or prime-minus-one differences","Sidorenko count for the M\u00f6bius ladder in abelian groups","4-term progressions in Fourier-uniform sets","Is W(3;r) polynomial in r","Lipschitz graph in Z^2 free of 3-term progressions","Largest set with no solution to x+3y=2z+2w in distinct integers","3-term progressions with {0;1}^n common difference in F3^n","Corners over arbitrary finite groups (BMZ corners)","Corner-count exponent over F2^n","Bounds for the multidimensional Szemer\u00e9di theorem","Density bounds for non-Rado equations","Bounds for monochromatic {x+y; xy}","Monochromatic x and y with x^2+y^2 a square","Affine copies of {0;1;3} in an n-element set","Restricted sumsets over partitions of [N]","Do 100 cubes in F3^n sum to everything","Smallest set in Z/pZ with no unique sum in A+A","Does uniform X+Y force uniform X and Y","Large subset of an approximate group with S^8 inside A^4","Structured subsets certifying small doubling","Improve the Sidon-set bounds F(N)","Gapped dilates of sets in Z/pZ","Near-perfect difference sets modulo non-prime-power q","Dense sets with bounded representation function","Autoconvolution constants c_p","Disjoint sumsets behind fast matrix multiplication","Smallest set containing progressions of every difference","Largest A in F7^n with A\u2212A avoiding {\u22121;0;1}^n","Covering Z/pZ with 100 translates of a random set","Efficient subspace coverings by Hamming balls","Rotated pyjama sets covering the plane","Cohn\u2013Elkies scheme for optimal circle packing","Sieving by one residue class per large prime","Halving sieve: what size set survives","Residue classes hitting every integer up to N","Covering an initial interval by classes mod primes up to N","Is a quadratic-size large-sieve residue set quadratic","Structure of maximal small-sieve survivors","Marton's conjecture (polynomial Freiman\u2013Ruzsa over F2)","Polynomial Bogolyubov over finite fields","Largest coset guaranteed inside 2A","Cosets in 2A for sets with small additive complements","Cosets in 2A_i over partitions of F2^n","Talagrand's convex-body question for 10K","Bilinear inverse question over Fp^n","Bounds for the inverse theorem for Gowers norms","Convex combinations of triple convolutions","Does A+B contain a composite number (inverse Goldbach)","Every integer a sum of two smooth numbers","Sumset growth for sets of squares","If A+A contains the first n squares must A be large","Products of two primes covering residues mod p","Density of the multiplicative closure of {2;3}","Primes p with p\u22122 having an odd number of prime factors","Difference sets of dense sets containing a square","Sums of two squares in short intervals","Waring's problem over finite fields","Arcs in F_p^2: must 2-point-per-line sets lie on cubics","Many collinear pairs force a rich cubic curve","k on a line or \u2113 mutually visible points","Do many collinear 4-tuples force 5 points on a line","No-three-in-line in the grid [N]^2","Codimension-2 surfaces meeting a 2-plane in 5 points","Largest subset of [N]^d with no 5 points on a 2-plane","A halving line through two points of the set","Half the points hitting every rich axis-parallel rectangle","Smallest triangle among n points in a disc","Measure growth \u00b5(A\u00b7A) \u2265 (4\u2212\u03b5)\u00b5(A) in SO(3)","Random elements of A_n expand","Effective classification of approximate groups","Chowla's cosine problem","How many zeros must a cosine sum have","Inverse Littlewood: structure of small L1 Fourier norm","Flat Littlewood polynomials exist","Carbery's rectangle problem","Dilates avoiding concentration in short intervals","Probability a random permutation preserves a k-set","Comparable triples in [N]^3 (Gowers\u2013Long)","Stable-density subspaces (arithmetic Conlon\u2013Fox)","Almost affine-invariant sets in Z/pZ","Friendly bisections of random graphs","Trace reconstruction problem","Random 0/1 polynomials almost surely irreducible","Erd\u0151s similarity problem for the sequence 1; 1/2; 1/4 ...","Positive proportion of integers as sums of two palindromes","The dichotomy problem (Sidon versus analyticity)","Asymptotics of the n-queens problem","Effective bounds in Birch's theorem on odd-degree forms","Counting solutions with variables in a dense set","Is every group sofic or hyperlinear"],"title":null,"type":"nominal"}},"height":2020,"mark":{"cursor":"default","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

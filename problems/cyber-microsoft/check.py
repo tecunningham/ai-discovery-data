@@ -58,9 +58,12 @@ def main() -> int:
                      lambda c: "SEC-agent" in c and "ENKI" in c)
     sec_2026 = team(ai_by_year["2026"], lambda c: "SEC-agent" in c)
     xbow_2026 = team(ai_by_year["2026"], lambda c: "XBOW" in c)
-    claude_2026 = len(ai_by_year["2026"]) - sec_2026 - xbow_2026
+    claude_2026 = team(ai_by_year["2026"],
+                       lambda c: "Claude" in c or "Anthropic" in c)
+    other_2026 = (len(ai_by_year["2026"])
+                  - sec_2026 - xbow_2026 - claude_2026)
     ai_2026 = int(latest["explicit_ai"]) + int(latest["ai_affiliated"])
-    if sec_2026 + xbow_2026 + claude_2026 != ai_2026:
+    if sec_2026 + xbow_2026 + claude_2026 + other_2026 != ai_2026:
         failures.append("the 2026 team split double-counts a CVE")
 
     plateau = [count[str(year)] for year in range(2019, 2024)]
@@ -111,6 +114,9 @@ def main() -> int:
         f"{sec_2026} credit the SEC-agent team, {claude_2026} credit Claude or "
         f"Anthropic": "2026 team split",
         f"{xbow_2026} credit XBOW": "2026 XBOW count",
+        (f"{other_2026} credit another AI affiliation" if other_2026 else
+         "AI AFFILIATION REMAINDER IS ZERO; DROP THE OTHER-AFFILIATION "
+         "SENTENCE"): "2026 other affiliations",
     }
     return report(failures + missing(prose(HERE), claims))
 

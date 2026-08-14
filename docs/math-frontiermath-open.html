@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FrontierMath Open Problems — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>FrontierMath Open Problems</h1>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> dated solution events on Epoch AI's pool of open research problems, placed by curator-assigned notability tier
+<strong>Coverage:</strong> benchmark announced 2026-02-26; pages read 2026-08-14, with recorded solves from 2026-03-23 to 2026-08-12
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-frontiermath-open/frontiermath-open-problems.csv"><code>frontiermath-open-problems.csv</code></a>, <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-frontiermath-open/frontiermath-open-solutions.csv"><code>frontiermath-open-solutions.csv</code></a>
+<strong>Upstream:</strong> <a href="https://epoch.ai/frontiermath/open-problems">https://epoch.ai/frontiermath/open-problems</a>
+<strong>Verdict:</strong> too early — a six-month-old pool built for cheap verification; every solve sits in its two lowest notability tiers</p>
+<h3>Per-problem status and solve dates</h3>
+<div id="chart0" class="chart"></div>
+<p class="note">Rows are grouped by notability tier, most notable first. Unsolved problems sit at the right edge; click a point to open its page, hover for the system and notes.</p>
+<h2 id="the-problem">The problem</h2>
+<p>FrontierMath: Open Problems is Epoch AI's pool of genuinely unsolved research
+mathematics — problems that are open, that at least two professional
+mathematicians have seriously attempted, and whose solutions "can be verified
+to a high degree of confidence by a typical computer program running on a
+typical laptop in under an hour" [@epoch2026openproblems]. That last criterion
+is the reason the series is here: this is the cheap-verification selection
+rule made explicit and institutional, the same design choice
+[@arxiv2026horizonmath] describes and the same mechanism this collection's
+<a href="math-smale.html">Smale</a> and
+<a href="math-erdos-top10.html">Erdős top-10</a> ledgers surface one event at a
+time. Each problem also carries an editorial notability tier — moderately
+interesting, solid result, major advance, breakthrough — which makes the pool
+the one corpus in this collection where the <em>significance</em> of what falls is
+scored by the curator rather than argued after the fact.</p>
+<p>A "discovery" in this series is a problem page moving to a solved status. The
+pool is young and still moving: announced in late February 2026, recently
+expanded, with problems added, retired after solves, and in one case withdrawn
+for failing the publishable-result bar.</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>As of 2026-08-14 the sitemap lists 54 problem pages: 6 are marked solved by
+AI, 1 by humans, and 47 stand unsolved. The tiers split 23 moderately
+interesting, 20 solid result, 6 major advance, and 4 breakthrough, plus one
+withdrawn page badged outside the tier scale. 6 of the 7 recorded solves
+carry a date, running from 2026-03-23 to 2026-08-12 — roughly one a month,
+with a cluster in late July around the expanded release's pre-testing.</p>
+<p>The placement is the reading. Four solves sit in the lowest tier (a hypergraph
+Ramsey construction by GPT-5.4 Pro; short superpermutations over 8, 9 and 10
+and a genus-2 torsion record, both by GPT-5.6 Sol; a Hadamard matrix of order
+668 credited to a team of three humans and Claude) and two in the second tier
+(a presentation of the absolute Galois group of $\mathbb{Q}_2$, first produced
+by Claude Fable 5, and the inverse Galois problem for $M_{23}$, scored as a
+human solve). The top two tiers — ten problems the editors call a major
+advance or a breakthrough — are untouched. The genus-2 solve is also a
+caution about what "solved by AI" can mean: the model found an existing curve
+in a public database whose torsion nobody had checked, a literature-search
+result the curators themselves flag, not new mathematics.</p>
+<p>Two scoring judgments are worth quoting because they show where the AI/human
+line is drawn. The $M_{23}$ solve involved AI heavily, but Epoch requires
+"that the core ideas of the solution be unambiguously contributed by AI", and
+one author said no sharp line could be drawn — so it counts as human. The
+Hadamard solve, reported by Levent Alpöge crediting three humans and Claude,
+is "provisionally" AI pending detail on the human share. Both defaults could
+reasonably have gone the other way, which is the usual floor-not-measurement
+caveat running in both directions.</p>
+<p>The site's own front page tallies differently — "recently expanded to 50
+problems", with AI solves of 3/22, 1/18, 0/6 and 0/3 across the four tiers —
+than a page-by-page read of its sitemap, consistent with recent additions,
+retirement of solved rows from the active pool, and the withdrawal. The same
+one-stock-several-counts pattern appears on the
+<a href="math-erdos.html">Erdős catalogue</a>, and the CSVs here vendor the
+page-by-page read.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws the six
+dated events as a running count:</p>
+<p><img alt="Cumulative dated solution events." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-frontiermath-open/cumulative-math-frontiermath-open.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-frontiermath-open/fetch.py"><code>fetch.py</code></a> reads the site's sitemap, fetches each problem page,
+and rebuilds <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-frontiermath-open/frontiermath-open-problems.csv"><code>frontiermath-open-problems.csv</code></a>
+from the server-rendered status chip, field chip, task-type chips and
+notability badge; an unrecognised status is a hard failure rather than a
+guessed category. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-frontiermath-open/frontiermath-open-solutions.csv"><code>frontiermath-open-solutions.csv</code></a>
+is hand-transcribed from the pages' solution-update prose and Epoch's
+announcement posts, because the dates, systems and elicitors of each solve are
+stated only in prose; the ramsey-hypergraphs row is dated by the announcement
+post since its page states no solve date, and the hadamard date is the day of
+the public report the page links. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-frontiermath-open/check.py"><code>check.py</code></a> cross-checks the two
+ledgers, so a refetch that flips a status without the event ledger being
+reviewed fails the folder rather than passing silently.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-frontiermath-open/figure.py"><code>figure.py</code></a> places each dated event at its date and tier lane,
+and beside the timeline draws the denominator: the whole pool today as one
+stacked bar per tier — open, solved by AI, solved by humans — with each
+bar's reading stating how much of the tier survives, so the six events on
+the left are read against the 47 problems still standing. It also draws the
+cumulative count of dated solves for <a href="cumulative.html">CUMULATIVE.md</a>.
+The one undated solve — the withdrawn explicit-deformations page — is
+stated in a corner note rather than drawn.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>Six months of data cannot show a trend.</strong> The verdict is "too early" for
+  the same reason as the <a href="algorithms-ecdsa-circuit.html">ECDSA circuit sprint</a>:
+  there is no pre-agent-era baseline, and the pool itself is being edited as
+  the events arrive.</li>
+<li><strong>The pool is selected to be solvable by machines.</strong> Cheap verification is
+  an admission criterion, so a solve rate here measures AI reach into
+  machine-checkable mathematics, not into mathematics.</li>
+<li><strong>The denominator moves.</strong> Problems are added, retired on solving, and in
+  one case withdrawn; the site's own front-page tally and its sitemap
+  disagree, and this folder's page count is one day's read of a moving pool.</li>
+<li><strong>Solve dates are announcement dates.</strong> Pre-release solves are dated by when
+  Epoch tested or announced them, not when a model first produced the answer;
+  one solve has no recoverable date at all.</li>
+<li><strong>"Solved by AI" is an editorial call with a high bar</strong> — the $M_{23}$
+  case shows a heavily-AI solve scored human, and the Hadamard case a
+  provisional AI credit that may be revised. Neither direction of the
+  scoring is a measurement of the AI share of the work.</li>
+<li><strong>Notability tiers are one editorial board's judgment</strong>, and the tier
+  denominators are small — six major-advance and four breakthrough rows —
+  so a single future solve would move a top tier from 0% to a large-looking
+  share.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>This series is itself an AI-evaluation instrument, so the contributions are
+the data: six of seven recorded solves are credited to AI systems — GPT-5.4
+Pro, GPT-5.6 Sol twice, Claude Fable 5, Claude, and one unnamed system on the
+withdrawn problem — with humans eliciting, verifying and writing up in every
+case [@epoch2026openproblems]. What the instrument adds over the
+<a href="math-erdos.html">Erdős catalogue's</a> larger counts is the notability
+axis: it shows machine solves reaching real but minor open mathematics —
+record-type constructions and searches, several explicitly latent in the
+literature — while the rows its editors rank as major advances or
+breakthroughs stand at zero. That is the cheap-verification prediction from
+the <a href="math-smale.html">Smale ledger</a> stated as a scoreboard: what falls
+is what can be certified, and how much it matters is a separate, currently
+low, number.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The pool, its criteria, and every status here are Epoch AI's pages
+[@epoch2026openproblems]; the explicit cheap-verification design is shared
+with other post-2025 benchmarks [@arxiv2026horizonmath]. The corpus-scale
+companion is the <a href="math-erdos.html">Erdős catalogue</a> with its frozen
+AI-contribution wiki [@erdosproblems2026wiki]; the importance-selected
+companions are the <a href="math-erdos-top10.html">Erdős top-10</a> and
+<a href="math-green.html">Ben Green's list</a>, and two of this pool's rows
+(no-three-in-line, Chowla's cosine problem) appear on Green's list under
+different framing. Tao's remark that a solve count is not a success rate —
+selection, effort and failed attempts are all unobserved — applies here with
+the unusual advantage that this curator publishes the denominator
+[@tao2026interview].</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-frontiermath-open/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"date":"2026-08-14","note":"","problem":"Ap\u00e9ry-Style Irrationality Proofs via Linear Recurrences","status":"unsolved","system":"\u2014","tier":"Breakthrough","url":"https://epoch.ai/frontiermath/open-problems/apery-irrationality"},{"date":"2026-08-14","note":"","problem":"Deciding Unknotting Number One","status":"unsolved","system":"\u2014","tier":"Breakthrough","url":"https://epoch.ai/frontiermath/open-problems/unknotting-number"},{"date":"2026-08-14","note":"","problem":"Improve the Best-known Classical Factorization Algorithms","status":"unsolved","system":"\u2014","tier":"Breakthrough","url":"https://epoch.ai/frontiermath/open-problems/prime-factorization"},{"date":"2026-08-14","note":"","problem":"The Smooth Four-Dimensional Poincar\u00e9 Conjecture","status":"unsolved","system":"\u2014","tier":"Breakthrough","url":"https://epoch.ai/frontiermath/open-problems/smooth-poincare-4d"},{"date":"2026-08-14","note":"","problem":"P\u00f3lya's Conjecture for the Dirichlet Laplacian","status":"unsolved","system":"\u2014","tier":"Major advance","url":"https://epoch.ai/frontiermath/open-problems/polya-laplacian-spectrum"},{"date":"2026-08-14","note":"","problem":"Symplectic Ball Packing","status":"unsolved","system":"\u2014","tier":"Major advance","url":"https://epoch.ai/frontiermath/open-problems/symplectic-ball-packing"},{"date":"2026-08-14","note":"","problem":"The Core in Approval-Based Committee Elections","status":"unsolved","system":"\u2014","tier":"Major advance","url":"https://epoch.ai/frontiermath/open-problems/committee-election"},{"date":"2026-08-14","note":"","problem":"The Elliptic-Curve Discrete Logarithm Problem (ECDLP)","status":"unsolved","system":"\u2014","tier":"Major advance","url":"https://epoch.ai/frontiermath/open-problems/elliptic-curve-discrete-logarithm"},{"date":"2026-08-14","note":"","problem":"The Jones Unknot Conjecture","status":"unsolved","system":"\u2014","tier":"Major advance","url":"https://epoch.ai/frontiermath/open-problems/jones-unknot"},{"date":"2026-08-14","note":"","problem":"The Lonely Runner Conjecture","status":"unsolved","system":"\u2014","tier":"Major advance","url":"https://epoch.ai/frontiermath/open-problems/lonely-runner"},{"date":"2026-08-14","note":"","problem":"A counterexample to Wilf's Conjecture","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/numerical-semigroups"},{"date":"2026-08-14","note":"","problem":"A Negative Coefficient in a Stretched Littlewood\u2013Richardson Poly","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/stretched-lr-coefficients"},{"date":"2026-08-14","note":"","problem":"A Prescribed Class-Group Structure for an Imaginary Quadratic Fi","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/square-class-groups"},{"date":"2026-06-09","note":"GPT-5.5 Pro independently reproduced the solution on 2026-06-24 in a harness by David Turturean; write-up by Roe and Turturean","problem":"A Presentation of the Absolute Galois Group of \\(\\mathbb{Q}_2\\)","status":"solved_ai","system":"Claude Fable 5","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/q2-absolute-galois"},{"date":"2026-08-14","note":"","problem":"A shape with Heesch number 7","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/heesch-number"},{"date":"2026-08-14","note":"","problem":"Class Group Algorithms","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/quadratic-field-class-number"},{"date":"2026-08-14","note":"","problem":"Condorcet Winning Sets","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/condorcet-winning-sets"},{"date":"2026-08-14","note":"","problem":"Conway's 99-Graph Problem","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/conway-99-graph"},{"date":"2026-08-14","note":"","problem":"Conway's Thrackle Conjecture","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/thrackles"},{"date":"2026-08-14","note":"","problem":"Dense Polynomials Whose Squares Are Sparse","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/polynomial-square-few-coefficients"},{"date":"2026-08-14","note":"","problem":"Elliptic Curves with Prescribed Number of Points","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/elliptic-curve-point-count"},{"date":"2026-08-14","note":"","problem":"Large Steiner Systems","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/large-steiner-systems"},{"date":"2026-08-14","note":"","problem":"Polynomial Entire Minimal Graphs","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/polynomial-minimal-surface"},{"date":"2026-08-14","note":"","problem":"Sensitivity versus Degree for Boolean Multilinear Polynomials","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/degree-sensitivity-boolean"},{"date":"2026-08-14","note":"","problem":"Surface with a High Number of Singularities","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/klt-del-pezzo-surface"},{"date":"2026-08-14","note":"","problem":"The Arithmetic Kakeya Conjecture","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/arithmetic-kakeya"},{"date":"2026-08-14","note":"","problem":"The Hirsch Conjecture in Dimension 4","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/hirsch-conjecture"},{"date":"2026-08-11","note":"Solved with heavy AI involvement but scored human: Epoch requires the core ideas be unambiguously AI's and the authors say no sharp line can be drawn","problem":"The Inverse Galois Problem for the Mathieu Group \\(M_{23}\\)","status":"solved_human","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/inverse-galois"},{"date":"2026-08-14","note":"","problem":"The Missing Moore Graph","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/missing-moore-graph"},{"date":"2026-08-14","note":"","problem":"The Slice\u2013Ribbon Conjecture and the GST Knot","status":"unsolved","system":"\u2014","tier":"Solid result","url":"https://epoch.ai/frontiermath/open-problems/slice-ribbon"},{"date":"2026-08-14","note":"","problem":"A Baillie\u2013PSW Pseudoprime","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/baillie-psw"},{"date":"2026-07-30","note":"Found an existing curve of Costa and Keller by literature search; recorded solved on release with order 37 set as the next target","problem":"A Genus 2 Curve over the Rationals with a Rational Torsion Point","status":"solved_ai","system":"GPT-5.6 Sol","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/genus-2-jacobian-torsion"},{"date":"2026-03-23","note":"First AI solve on the benchmark; confirmed by problem contributor Will Brian; dated by Epoch's announcement since the page states no solve date","problem":"A Ramsey-style Problem on Hypergraphs","status":"solved_ai","system":"GPT-5.4 Pro","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/ramsey-hypergraphs"},{"date":"2026-08-14","note":"","problem":"A Rational Diophantine Septuple","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/diophantine-septuple"},{"date":"2026-08-14","note":"","problem":"Book Ramsey Numbers","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/ramsey-book-graphs"},{"date":"2026-08-14","note":"","problem":"Chowla's Cosine Problem","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/chowla-cosine"},{"date":"2026-08-14","note":"","problem":"Elliptic Curves over \\(\\mathbb{Q}\\) of Large Rank","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/elliptic-curve-rank"},{"date":"2026-08-14","note":"","problem":"Euler's Sum of Powers Conjecture","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/euler-sum-of-powers"},{"date":"2026-08-14","note":"","problem":"Existence of EFX Allocations","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/efx"},{"date":"2026-08-12","note":"Provisionally marked solved by AI pending detail on the human share; the construction encodes Hadamard matrices of all previously unknown admissible orders up to 2000","problem":"Hadamard Matrix of Order 668","status":"solved_ai","system":"Claude","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/hadamard"},{"date":"2026-08-14","note":"","problem":"Hall's Conjecture","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/hall-conjecture"},{"date":"2026-08-14","note":"","problem":"Large \\(\\ell\\)-Rank in Class Groups of Imaginary Quadratic Field","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/class-group-rank"},{"date":"2026-08-14","note":"","problem":"Large Integer Solutions to a Cubic Diophantine Equation","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/small-diophantine"},{"date":"2026-08-14","note":"","problem":"Leech Trees","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/leech-trees"},{"date":"2026-08-14","note":"","problem":"Littlewood Polynomials with Large Normalized Mahler Measure","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/large-mahler-measure"},{"date":"2026-08-14","note":"","problem":"Many Rational Points on a Genus-2 Curve","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/genus-2-rational-points"},{"date":"2026-08-14","note":"","problem":"Prime-Generating Polynomial Systems in Five Variables","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/prime-generating-polynomials"},{"date":"2026-07-26","note":"Building on Uku Raudvere's same-day n=8 post; verified in Epoch pre-release testing 2026-07-27 and recorded solved on release","problem":"Short Superpermutations over 8, 9, and 10","status":"solved_ai","system":"GPT-5.6 Sol","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/superpermutations"},{"date":"2026-08-14","note":"","problem":"Sum of Three Cubes","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/sum-of-three-cubes"},{"date":"2026-08-14","note":"","problem":"The Earth\u2013Moon Problem","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/earth-moon"},{"date":"2026-08-14","note":"","problem":"The No-Three-in-Line Problem","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/no-three-in-line"},{"date":"2026-08-14","note":"","problem":"The Ramsey Number \\(R(6,6)\\)","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/ramsey-66"},{"date":"2026-08-14","note":"","problem":"The Rank of the \\(4\\times4\\) Matrix-Multiplication Tensor","status":"unsolved","system":"\u2014","tier":"Moderately interesting","url":"https://epoch.ai/frontiermath/open-problems/matrix-multiplication"},{"date":"2026-08-14","note":"Page marks the problem solved by AI but states no date or system; removed from the benchmark 2026-03-12 as below the publishable bar","problem":"Explicit Deformations of Algebras","status":"solved_ai","system":"\u2014","tier":"Novel example","url":"https://epoch.ai/frontiermath/open-problems/explicit-deformations"}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["solved_ai","solved_human","unsolved"],"range":["#c1442f","#2f6cc1","#aaaaaa"]},"title":null,"type":"nominal"},"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"tier","title":"notability","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"date","title":"date","type":"temporal"},{"field":"system","title":"system","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"field":"date","title":"Solve date (unsolved rows drawn at the read date)","type":"temporal"},"y":{"field":"problem","sort":["Ap\u00e9ry-Style Irrationality Proofs via Linear Recurrences","Deciding Unknotting Number One","Improve the Best-known Classical Factorization Algorithms","The Smooth Four-Dimensional Poincar\u00e9 Conjecture","P\u00f3lya's Conjecture for the Dirichlet Laplacian","Symplectic Ball Packing","The Core in Approval-Based Committee Elections","The Elliptic-Curve Discrete Logarithm Problem (ECDLP)","The Jones Unknot Conjecture","The Lonely Runner Conjecture","A counterexample to Wilf's Conjecture","A Negative Coefficient in a Stretched Littlewood\u2013Richardson Poly","A Prescribed Class-Group Structure for an Imaginary Quadratic Fi","A Presentation of the Absolute Galois Group of \\(\\mathbb{Q}_2\\)","A shape with Heesch number 7","Class Group Algorithms","Condorcet Winning Sets","Conway's 99-Graph Problem","Conway's Thrackle Conjecture","Dense Polynomials Whose Squares Are Sparse","Elliptic Curves with Prescribed Number of Points","Large Steiner Systems","Polynomial Entire Minimal Graphs","Sensitivity versus Degree for Boolean Multilinear Polynomials","Surface with a High Number of Singularities","The Arithmetic Kakeya Conjecture","The Hirsch Conjecture in Dimension 4","The Inverse Galois Problem for the Mathieu Group \\(M_{23}\\)","The Missing Moore Graph","The Slice\u2013Ribbon Conjecture and the GST Knot","A Baillie\u2013PSW Pseudoprime","A Genus 2 Curve over the Rationals with a Rational Torsion Point","A Ramsey-style Problem on Hypergraphs","A Rational Diophantine Septuple","Book Ramsey Numbers","Chowla's Cosine Problem","Elliptic Curves over \\(\\mathbb{Q}\\) of Large Rank","Euler's Sum of Powers Conjecture","Existence of EFX Allocations","Hadamard Matrix of Order 668","Hall's Conjecture","Large \\(\\ell\\)-Rank in Class Groups of Imaginary Quadratic Field","Large Integer Solutions to a Cubic Diophantine Equation","Leech Trees","Littlewood Polynomials with Large Normalized Mahler Measure","Many Rational Points on a Genus-2 Curve","Prime-Generating Polynomial Systems in Five Variables","Short Superpermutations over 8, 9, and 10","Sum of Three Cubes","The Earth\u2013Moon Problem","The No-Three-in-Line Problem","The Ramsey Number \\(R(6,6)\\)","The Rank of the \\(4\\times4\\) Matrix-Multiplication Tensor","Explicit Deformations of Algebras"],"title":null,"type":"nominal"}},"height":864,"mark":{"cursor":"pointer","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

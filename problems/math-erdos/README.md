@@ -234,10 +234,14 @@ Dated single events:
   1.014, stated by Sawin (arXiv 2605.20579). The wiki's table carries the
   same event as "OpenAI internal model", dated "20 May, 2026", which is the
   date the imputed series records for problem 90.
-- Astra announced claims on catalogue problems 146, 180 and 183 in August
-  2026. They post-date the wiki freeze, carry Lean certificates, and were
-  awaiting peer review as of 2026-08-14; none of the three appears in the
-  wiki's tables.
+- OpenAI's 2026-08-01 Astra release — ten claimed solutions published with
+  a 249-page manuscript and public Lean 4 certificates — includes, per the
+  press account cited, "three problems from Paul Erdős's famous catalogue,
+  including problem 183 on multicolored Ramsey numbers"
+  [@openai2026astra]. The claims post-date the wiki freeze and were awaiting
+  peer review as of 2026-08-14; the catalogue's pages for problems 146, 180
+  and 183 all still read open with no mention of the claims, read
+  2026-08-14, and none of the three appears in the wiki's tables.
 
 On scale, Tao's statement in the 2026-03-20 interview:
 
@@ -262,6 +266,8 @@ whether a row's date rests on the wiki, as stated in Method.
 - [@openai2026discretegeometry] — the 2026-05-20 unit-distance disproof:
   vendor announcement, the nine-author verified account (arXiv 2605.20695),
   and Sawin's explicit exponent (arXiv 2605.20579).
+- [@openai2026astra] — press account of the 2026-08-01 Astra release behind
+  the three-catalogue-problems claim quoted above.
 - [@tao2026interview] — the interview quoted above; also the source note
   for the "fifty-odd problems" scale.
 - Prestige ledgers over importance-selected corpora, of the same instrument

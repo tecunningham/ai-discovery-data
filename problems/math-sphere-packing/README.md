@@ -106,11 +106,26 @@ for all $d$, and the further gain of a whole power of $n$ — are attributed
 to named human papers in the rows' `source_url` values
 [@campos2023sphere; @arxiv2026spherepacking].
 
+One AI claim exists on the adjacent quantity. OpenAI's 2026-08-01 Astra
+release of ten Lean-certified results includes, per the press account
+cited:
+
+> "the first improvement to the general upper bound on high-dimensional
+> sphere-packing density since 1978"
+> — Tech Times on the Astra release, 2026-08-02 [@openai2026astra]
+
+Upper bounds on packing density are a different quantity from the
+lower-bound ladder this series tracks: no row of the vendored CSV is
+affected by the claim. Peer review of the release was not complete as of
+2026-08-14.
+
 ## Sources
 
 - [@arxiv2026spherepacking] — the survey most rows cite through
   `source_url`, recording the ladder's dates, finders and bound forms.
 - [@campos2023sphere] — the 2023 step's preprint.
+- [@openai2026astra] — press account of the 2026-08-01 Astra release behind
+  the upper-bound claim quoted in AI attribution.
 - [@sherry2021fast] — measured improvement rates across algorithm families;
   records arrive in bursts with long gaps.
 - Sibling series:

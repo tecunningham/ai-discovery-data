@@ -154,10 +154,18 @@ On formal verification, the database's contributing guide states:
 > exponential sum growth exponent chapters)"
 > — ANTEDB contributing guide, github.com/teorth/expdb, read 2026-08-14 [@tao2025antedb]
 
+OpenAI's 2026-08-01 Astra release of ten Lean-certified claims spans, per
+the press account cited, "group theory, von Neumann algebras,
+high-dimensional geometry, quantum complexity, lattice cryptography, and
+extremal combinatorics" [@openai2026astra]; none of the ten concerns the
+exponent families tracked here, as of 2026-08-14.
+
 ## Sources
 
 - [@tao2025antedb] — the database, its blueprint, and the contributing guide
   quoted above.
+- [@openai2026astra] — press account of the 2026-08-01 Astra release, cited
+  for the scope statement in AI attribution.
 - [@tao2025exponent] — the launch paper reporting four new exponent pairs,
   new zero-density estimates and new additive-energy estimates from
   optimization over collated relations.

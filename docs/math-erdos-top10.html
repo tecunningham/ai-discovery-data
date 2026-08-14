@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top 10 Erdős problems — ai-discovery-data</title>
+<base target="_blank">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
+       sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
+       padding: 24px 18px 60px; }
+h1 { font-size: 1.5em; margin-bottom: 0.2em; }
+h2 { font-size: 1.15em; margin: 1.8em 0 0.4em; border-bottom: 1px solid
+     #d8dee4; padding-bottom: 0.2em; }
+h3 { font-size: 1.02em; margin: 1.4em 0 0.3em; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; margin: 0.8em 0; display: block;
+        overflow-x: auto; }
+th, td { border: 1px solid #d8dee4; padding: 4px 10px; }
+th { background: #f6f8fa; }
+code { background: #f6f8fa; padding: 0.1em 0.3em; border-radius: 4px;
+       font-size: 0.9em; }
+pre { background: #f6f8fa; padding: 10px 12px; border-radius: 6px;
+      overflow-x: auto; }
+pre code { background: none; padding: 0; }
+blockquote { color: #57606a; border-left: 3px solid #d8dee4;
+             margin: 0.8em 0; padding: 0 1em; }
+.metric { color: #57606a; margin: 0 0 0.6em; }
+.links a { margin-right: 1.2em; }
+.chart { width: 100%; }
+.note { color: #57606a; font-size: 0.88em; margin-top: 0.3em; }
+footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
+         border-top: 1px solid #d8dee4; padding-top: 0.8em; }
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a></p>
+<h1>Top 10 Erdős problems</h1>
+<p><strong>Domain:</strong> mathematics
+<strong>Metric:</strong> dated resolutions per year across 12 scored rows
+<strong>Coverage:</strong> 1936–2026, with dated resolutions in 1975, 2016 and 2026; the list itself was posed 2026-04-16
+<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos-top10/erdos-top10-problems.csv"><code>erdos-top10-problems.csv</code></a>
+<strong>Upstream:</strong> <a href="https://www.erdosproblems.com/forum/thread/blog:5">https://www.erdosproblems.com/forum/thread/blog:5</a>, with the unit-distance row resting on the human-verified account at <a href="https://arxiv.org/abs/2605.20695">https://arxiv.org/abs/2605.20695</a>
+<strong>Verdict:</strong> inconclusive — one AI-attributed fall among the four resolutions ever, and a single event cannot set a slope</p>
+<h3>Per-problem resolution timeline</h3>
+<div id="chart0" class="chart"></div>
+<p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
+<h2 id="the-problem">The problem</h2>
+<p>In April 2026, Thomas Bloom — the mathematician who built and maintains
+erdosproblems.com — published a personal "top 10" of the most important Erdős
+problems, solved and unsolved, naming twelve problem numbers: 3, 139, 4, 20,
+28, 52, 61, 67, 77, 90, 571 and 713 [@bloom2026top10]. His stated reason for
+writing it is this collection's reason for scoring it: he had seen
+mathematicians "grow dismissive of Erdős problems recently, perhaps because
+they have seen reports of AI solving problems on this site that turned out to
+be quite simple", and wanted to mark out the problems that carry the
+catalogue's mathematical weight.</p>
+<p>That makes this subset the deliberate opposite of the corpus it comes from.
+The full <a href="math-erdos.html">Erdős catalogue</a> is the largest body of
+individually stated open mathematics AI systems have been pointed at, and its
+solved count is surging; this ledger holds the twelve entries its own curator
+selected for importance rather than tractability. It is scored here as a
+prestige list, like <a href="math-hilbert.html">Hilbert</a> or
+<a href="math-smale.html">Smale</a>: if AI systems were reaching the mathematics
+that matters most on that site, this is the dozen rows where it would show.</p>
+<p>A "discovery" in this series is a row moving to resolved, dated by the year of
+the resolving work. Twelve rows are scored rather than ten because Bloom's ten
+entries name twelve site numbers: the progressions entry spans [3] and [139],
+and the Turán-exponents entry spans [571] and [713].</p>
+<h2 id="what-the-chart-shows">What the chart shows</h2>
+<p>Of the twelve scored rows, four carry a dated resolution and eight stand open.
+The four resolutions span ninety years of effort: Szemerédi's theorem in 1975,
+nearly forty years after the 1936 Erdős–Turán conjecture; then two fell in
+2016 — the large-gaps-between-primes problem ($10,000, the largest prize Erdős
+ever offered, standing about 60 years) to Maynard and to Ford, Green, Konyagin
+and Tao, and the Erdős discrepancy problem to Tao — and one in 2026: the
+unit-distance conjecture, disproved in May by an OpenAI model, with nine
+mathematicians digesting the argument into a human-verified account
+[@openai2026discretegeometry]. The chart marks that row in red.</p>
+<p>The reading is the same as the <a href="math-smale.html">Smale ledger's</a> and
+worth stating twice because the two events landed within months of each other:
+an AI-attributed fall on an importance-selected list is now possible, at a
+rate of one event, on a list where the historical rate is roughly one
+resolution per generation. Four events in ninety years cannot show
+acceleration, and the verdict says so. What the row does show is reach — the
+unit-distance problem was posed in 1946, carried a $500 prize, and its
+standing 44-year-old partial bound had resisted everyone — and shape: like the
+Jacobian counterexample on the Smale list, what fell was a disproof anchored
+by an explicit construction, not a proof of the conjectured statement.</p>
+<p>The eight open rows are where Bloom's argument lives: the $5000
+reciprocal-sums conjecture, the sunflower conjecture, the Erdős–Turán basis
+conjecture, sum-product, Erdős–Hajnal, the Ramsey constant, and the two
+Turán-exponent conjectures. None records any AI progress worth a note as of
+the list's writing.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+ledger as rows remaining:</p>
+<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-erdos-top10/cumulative-math-erdos-top10.png" /></p>
+<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos-top10/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> shape in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a> with <code>ai_problem="90"</code>,
+reading <code>erdos-top10-problems.csv</code>, keeping rows with <code>status</code> equal to
+<code>resolved</code> and a non-empty <code>resolved_year</code>, and counting resolution events by
+year. The <code>ai_caption</code> argument replaces the default annotation with this
+row's actual standing — an AI disproof digested into a human-verified account
+— since the default text describes the Smale row's formal kernel checks, which
+is not what happened here. The cumulative view is the shared
+<code>ledger_remaining_chart()</code>.</p>
+<p>There is no <code>fetch.py</code>. The rows are hand-scored from the blog post itself,
+which discusses each problem's status and history; the resolution years for
+rows 4, 67 and 139 match the imputed solution years the
+<a href="math-erdos.html">math-erdos</a> folder derives independently from the
+catalogue's own pages, and the 2026 unit-distance row is dated by the same
+May 2026 record used there, with its source column naming the human-verified
+account rather than the blog.</p>
+<h2 id="what-it-cannot-support">What it cannot support</h2>
+<ul>
+<li><strong>Ten entries chosen by one mathematician are a judgment, not a sample.</strong>
+  Bloom calls the list "very subjective (and probably will change even for
+  myself day to day)". A different expert's top ten would overlap but not
+  coincide, and commenters on the post immediately proposed alternates
+  (Erdős–Straus, the similarity problem, covering systems).</li>
+<li><strong>The list was posed in 2026, after most of its history.</strong> Its selection
+  already knows which problems fell and how; a solved problem can be chosen
+  partly <em>because</em> its solution was celebrated, which inflates the apparent
+  resolution rate of the chosen set.</li>
+<li><strong>Four events in ninety years is not a rate.</strong> The chart can show that the
+  2026 event happened; it cannot show whether anything about the underlying
+  process changed.</li>
+<li><strong>The unit-distance row is a partial negative resolution on a different
+  verification standard.</strong> The conjecture is disproved — the truth of the
+  growth exponent is now known to exceed 1.014 — but the sharp form of the
+  question (the exact exponent) remains open, and the row rests on a
+  human-verified account of a model's argument, not on formal kernel checks
+  or completed peer review.</li>
+<li><strong>Rows overlap the parent catalogue by construction</strong>, so this ledger is a
+  re-reading of twelve of <a href="math-erdos.html">math-erdos</a>'s rows, not
+  independent evidence about a different corpus.</li>
+<li><strong>Resolution landmarks are not effort-adjusted discovery rates</strong>, here as on
+  every ledger in this collection.</li>
+</ul>
+<h2 id="llm-contributions">LLM contributions</h2>
+<p>One, and it is the strongest single AI event anywhere in this collection: the
+May 2026 disproof of the 1946 unit-distance conjecture, row 90 here, described
+by the vendor and digested by nine mathematicians into a human-verified
+account with Sawin making the exponent explicit at greater than 1.014
+[@openai2026discretegeometry]. On the full catalogue that event sits among
+dozens of AI resolutions of mostly minor problems
+[@erdosproblems2026wiki]; on this importance-selected dozen it is the only AI
+mark, and the other eleven rows include every problem Bloom considers
+hardest. That asymmetry is the useful measurement: AI reach into this list's
+top tier currently consists of one negative resolution whose verification ran
+through human digestion, against eight open rows untouched — the same
+one-event-of-the-right-shape pattern as the Jacobian counterexample on the
+<a href="math-smale.html">Smale list</a>.</p>
+<h2 id="related-literature">Related literature</h2>
+<p>The list, its reasoning, and every status here are Bloom's post
+[@bloom2026top10], read against the catalogue he maintains
+[@erdosproblems2026catalogue]. The unit-distance record is the vendor
+announcement and the nine-author verified account
+[@openai2026discretegeometry]; the AI-contribution ledger for the parent
+corpus is the frozen wiki [@erdosproblems2026wiki]. The companion instruments
+are <a href="math-erdos.html">math-erdos</a> for the full catalogue,
+<a href="math-green.html">math-green</a> for a neighbouring expert-curated list
+with no AI-attributed fall at all, and the prestige ledgers
+(<a href="math-hilbert.html">Hilbert</a>, <a href="math-smale.html">Smale</a>,
+<a href="math-millennium.html">Millennium</a>) this subset is scored to match.</p>
+<footer>This page renders the folder's
+<a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-erdos-top10/">README</a> with the interactive
+chart inline; the PNGs committed in the repository remain the archival
+record, drawn from the same CSVs. Rebuilt by
+<code>tools/build_docs.py</code>.</footer>
+<script>
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"notes":"$5000 prize; roughly equivalent to r_k(N) \u2264 N/(log N)^{1+o(1)}, out of reach even for k=4","problem":"Divergent reciprocal sums force long progressions","resolver":"\u2014","status":"open","year":2026},{"notes":"$10000 prize; open for about 60 years after Rankin's 1938 bound","problem":"Large gaps between primes","resolver":"Maynard; Ford\u2013Green\u2013Konyagin\u2013Tao","status":"resolved","year":2016},{"notes":"$1000 prize; Alweiss\u2013Lovett\u2013Wu\u2013Zhang 2020 broke the 60-year-old Erd\u0151s\u2013Rado bound","problem":"Sunflower conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"Can an additive basis have a bounded representation function","problem":"Erd\u0151s\u2013Tur\u00e1n additive basis conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"Best exponent still only slightly above Solymosi's 4/3 (Cushman 2025)","problem":"Sum-product problem","resolver":"\u2014","status":"open","year":2026},{"notes":"Known for all excluded subgraphs on 5 or fewer vertices only since 2026","problem":"Erd\u0151s\u2013Hajnal conjecture","resolver":"\u2014","status":"open","year":2026},{"notes":"$500 prize; the quantitative log-growth version remains open","problem":"Erd\u0151s discrepancy problem","resolver":"Tao","status":"resolved","year":2016},{"notes":"Whether R(k)^{1/k} even converges is open; bounds stand at sqrt(2) and 3.7992","problem":"Ramsey number growth constant","resolver":"\u2014","status":"open","year":2026},{"notes":"$500 prize; disproved May 2026: unit-distance counts grow faster than n^1.014, digested by nine mathematicians into a human-verified account","problem":"Unit distances","resolver":"OpenAI model","status":"resolved","year":2026},{"notes":"Posed with Tur\u00e1n in 1936; the proof introduced the regularity lemma","problem":"Density version of long progressions","resolver":"Szemer\u00e9di","status":"resolved","year":1975},{"notes":"Erd\u0151s\u2013Simonovits; paired with the converse row 713","problem":"Every rational Tur\u00e1n exponent is achieved","resolver":"\u2014","status":"open","year":2026},{"notes":"Converse of row 571","problem":"Every Tur\u00e1n exponent is rational","resolver":"\u2014","status":"open","year":2026}]},"encoding":{"color":{"field":"status","legend":{"orient":"top"},"scale":{"domain":["open","resolved"],"range":["#aaaaaa","#2f6cc1"]},"title":null,"type":"nominal"},"tooltip":[{"field":"problem","title":"problem","type":"nominal"},{"field":"status","title":"status","type":"nominal"},{"field":"year","title":"year","type":"quantitative"},{"field":"resolver","title":"resolver","type":"nominal"},{"field":"notes","title":"notes","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"domain":[1973,2028]},"title":"Resolution year (open problems drawn at 2026; list posed 2026)","type":"quantitative"},"y":{"field":"problem","sort":["Divergent reciprocal sums force long progressions","Large gaps between primes","Sunflower conjecture","Erd\u0151s\u2013Tur\u00e1n additive basis conjecture","Sum-product problem","Erd\u0151s\u2013Hajnal conjecture","Erd\u0151s discrepancy problem","Ramsey number growth constant","Unit distances","Density version of long progressions","Every rational Tur\u00e1n exponent is achieved","Every Tur\u00e1n exponent is rational"],"title":null,"type":"nominal"}},"height":240,"mark":{"cursor":"default","filled":true,"opacity":0.85,"size":72,"type":"point"},"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+</script>
+</body>
+</html>

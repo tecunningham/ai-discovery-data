@@ -57,6 +57,9 @@ VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive",
 # look interchangeable.
 OPEN_PROBLEM_SLUGS = {
     "math-erdos",
+    "math-erdos-top10",
+    "math-frontiermath-open",
+    "math-green",
     "math-hilbert",
     "math-landau",
     "math-millennium",

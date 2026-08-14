@@ -1,0 +1,13 @@
+list_id,list_name,list_year,problem_id,short_name,status,resolved_year,resolver,notes,source
+erdos-top10,Top 10 Erdős problems,2026,3,Divergent reciprocal sums force long progressions,open,,,"$5000 prize; roughly equivalent to r_k(N) ≤ N/(log N)^{1+o(1)}, out of reach even for k=4",Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,4,Large gaps between primes,resolved,2016,Maynard; Ford–Green–Konyagin–Tao,$10000 prize; open for about 60 years after Rankin's 1938 bound,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,20,Sunflower conjecture,open,,,$1000 prize; Alweiss–Lovett–Wu–Zhang 2020 broke the 60-year-old Erdős–Rado bound,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,28,Erdős–Turán additive basis conjecture,open,,,Can an additive basis have a bounded representation function,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,52,Sum-product problem,open,,,Best exponent still only slightly above Solymosi's 4/3 (Cushman 2025),Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,61,Erdős–Hajnal conjecture,open,,,Known for all excluded subgraphs on 5 or fewer vertices only since 2026,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,67,Erdős discrepancy problem,resolved,2016,Tao,$500 prize; the quantitative log-growth version remains open,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,77,Ramsey number growth constant,open,,,Whether R(k)^{1/k} even converges is open; bounds stand at sqrt(2) and 3.7992,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,90,Unit distances,resolved,2026,OpenAI model,"$500 prize; disproved May 2026: unit-distance counts grow faster than n^1.014, digested by nine mathematicians into a human-verified account",erdosproblems.com #90 and the human-verified account (arXiv 2605.20695)
+erdos-top10,Top 10 Erdős problems,2026,139,Density version of long progressions,resolved,1975,Szemerédi,Posed with Turán in 1936; the proof introduced the regularity lemma,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,571,Every rational Turán exponent is achieved,open,,,Erdős–Simonovits; paired with the converse row 713,Thomas Bloom's Top 10 Erdős Problems (blog:5)
+erdos-top10,Top 10 Erdős problems,2026,713,Every Turán exponent is rational,open,,,Converse of row 571,Thomas Bloom's Top 10 Erdős Problems (blog:5)

@@ -265,4 +265,6 @@ attempts are all unobserved [@tao2026interview]. The prestige-list series in
 [Thurston](../math-thurston/README.md), [Smale](../math-smale/README.md),
 [Millennium](../math-millennium/README.md) and [TOPP](../math-topp/README.md) are the ceiling check
 on this corpus: they move far less, and they are selected against cheap
-verification.
+verification. The catalogue's own curator has since named a
+[top-10 subset](../math-erdos-top10/README.md), scored in this collection as
+its own prestige ledger.

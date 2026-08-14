@@ -59,7 +59,7 @@ ANNUAL_ERA_START = 2025.5
 # A committed snapshot date keeps PNG bytes stable. tools/check.py rejects data
 # newer than this date, so a refetch cannot silently leave standing-record lines
 # ending before their newest observation.
-AS_OF_DATE = date(2026, 8, 10)
+AS_OF_DATE = date(2026, 8, 14)
 NOW = AS_OF_DATE.year + (AS_OF_DATE.timetuple().tm_yday - 1) / 365.25
 
 

@@ -43,6 +43,9 @@ marked "(Mostly solved)" is scored partial.
 - **span:** dated resolutions 2019–2025
 - **by-year:** 2019: 2 · 2021: 2 · 2022: 1 · 2023: 4 · 2024: 1 · 2025: 3
 - **ai-attributed:** 0 of 13 dated resolutions
+- **post-revision:** resolutions reported after the December 2025 revision
+  are recorded in the notes of rows 44, 90 and 100; the rows keep the
+  document's own statuses (see AI attribution)
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
 ledger as rows remaining:
@@ -209,10 +212,12 @@ and the register entries from the CSV.
 ## Limitations
 
 - **revision lag.** Green updates roughly once a year, so a problem solved
-  after December 2025 still reads open here. Problem 90 was resolved by Ma,
-  Tang and Xu in May 2026 (arXiv 2605.13454) per its row's note; the row
-  keeps the document's open status. The zero at 2026 on the chart is an
-  artifact of the revision cycle, not a measurement of 2026.
+  after December 2025 still reads open here. Three such resolutions are
+  known as of 2026-08-14 and recorded in their rows' notes: Problem 90 (Ma,
+  Tang and Xu, arXiv 2605.13454, May 2026), Problem 44 and the sofic half of
+  Problem 100 (both AI-credited; see AI attribution). All three rows keep
+  the document's open status. The zero at 2026 on the chart is an artifact
+  of the revision cycle, not a measurement of 2026.
 - **update years are not solution dates.** The rule dates each resolution to
   Green's update note, which usually matches the resolving preprint's year
   but is his bookkeeping, not the event itself.
@@ -238,8 +243,46 @@ and the register entries from the CSV.
 No solved marker in the December 2025 revision credits an AI system: 0 of
 the 13 dated resolutions carry AI credit, and every resolver named in the
 ledger is a human mathematician or group of mathematicians, as of the
-2026-08-13 read. The one AI event the document records is not a resolution
-but a bound improvement, in the 2025 update to Problem 35:
+2026-08-13 read. Two AI-credited resolutions after that revision are known
+as of 2026-08-14; both rows keep the document's own open status per the
+scoring rule, with the events recorded here and in the rows' notes.
+
+### 44 — Halving sieve: what size set survives
+
+The problem is catalogued as erdosproblems.com problem 1202, citing the
+same Erdős 1980 survey Green cites; the catalogue's page states:
+
+> "This was resolved in the negative by Price and GPT-5.4 Pro."
+> — erdosproblems.com, problem 1202, read 2026-08-14 [@erdosproblems2026catalogue]
+
+The catalogue's AI-contribution wiki dates the solve 2026-04-01 and grades
+it a full solution [@erdosproblems2026wiki]. The December 2025 revision's
+own comment on the problem is:
+
+> "I must admit that I do not know anything about this problem other than
+> what Erdős wrote nearly 40 years ago; this part of his paper does not
+> appear to have been cited since."
+> — Ben Green, 100 open problems (December 2025 revision), Problem 44, read 2026-08-13 [@green2025openproblems]
+
+### 100 — Is every group sofic or hyperlinear (sofic half)
+
+The document states the problem as two questions:
+
+> "There are really two questions here, namely is every group sofic? and is
+> every group hyperlinear?"
+> — Ben Green, 100 open problems (December 2025 revision), Problem 100, read 2026-08-13 [@green2025openproblems]
+
+On 2026-08-01 OpenAI released ten claimed solutions by its Astra model,
+published with a 249-page manuscript and a public repository of Lean 4
+certificates, headlined by the construction of a non-sofic group
+[@openai2026astra]. That construction answers the sofic question in the
+negative. It does not answer the hyperlinear question: the document notes
+that "all sofic groups are hyperlinear, but the reverse implication is not"
+known, so a non-sofic group leaves the hyperlinear half open. Peer review of
+the release is not complete as of 2026-08-14.
+
+The one AI event the document itself records is not a resolution but a
+bound improvement, in the 2025 update to Problem 35:
 
 > "Update 2025. An AI-based approach [313] has slightly improved the upper
 > bound of Matolcsi and Vinuesa to c∞ ⩽ 0.75026."
@@ -265,6 +308,12 @@ status in this ledger.
   in this ledger.
 - [@novikov2025alphaevolve] — AlphaEvolve, the system behind the document's
   reference [313] and the Problem 35 bound improvement.
+- [@erdosproblems2026catalogue] — the catalogue whose problem 1202 page
+  records the Problem 44 resolution, quoted in AI attribution.
+- [@erdosproblems2026wiki] — the AI-contribution wiki dating that solve
+  2026-04-01.
+- [@openai2026astra] — press account of the 2026-08-01 Astra release behind
+  the Problem 100 sofic-half entry.
 - Ledgers over overlapping corpora: the
   [Erdős catalogue](../math-erdos/README.md) and its
   [top-10 subset](../math-erdos-top10/README.md), and the

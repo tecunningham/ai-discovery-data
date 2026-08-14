@@ -38,6 +38,20 @@ def main() -> int:
     if per_year.get(2026, 0):
         failures.append(f"{per_year[2026]} rows dated 2026; the verdict and "
                         "the AI-attribution section assume zero")
+    # Post-revision resolutions live in row notes, never in statuses: the
+    # scoring rule is the document's own markers, so these rows must stay
+    # open until a revision marks them.
+    post = [row for row in rows
+            if "after the December 2025 revision" in row["notes"]]
+    if [row["problem_id"] for row in post] != ["44", "90", "100"]:
+        failures.append("post-revision notes are not exactly rows 44, 90 and "
+                        "100; update the fact line, the limitation, and the "
+                        "AI-attribution section together")
+    for row in post:
+        if row["status"] != "open":
+            failures.append(f"row {row['problem_id']} carries a post-revision "
+                            "note but is no longer open; a new revision has "
+                            "been scored and the note structure is stale")
 
     claims = {
         f"**rows:** {len(rows)} scored; {len(dated)} resolved with a dated "
@@ -52,6 +66,16 @@ def main() -> int:
             "coverage field",
         f"0 of the {len(dated)} dated resolutions carry AI credit":
             "AI negative",
+        "**post-revision:** resolutions reported after the December 2025 "
+        "revision are recorded in the notes of rows "
+        + ", ".join(row["problem_id"] for row in post[:-1])
+        + f" and {post[-1]['problem_id']}" if post else
+        "POST-REVISION ROWS ARE GONE; DROP THE FACT LINE":
+            "post-revision fact",
+        f"### 44 — {next(r['short_name'] for r in rows if r['problem_id'] == '44')}":
+            "AI-attribution entry 44",
+        f"### 100 — {next(r['short_name'] for r in rows if r['problem_id'] == '100')}":
+            "AI-attribution entry 100",
     }
     # Every non-open row appears in the register with the CSV's own values,
     # in the fixed key order status / resolved / resolver / notes. Values are

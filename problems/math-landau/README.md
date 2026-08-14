@@ -1,99 +1,99 @@
 # Landau's problems
 
 **Domain:** mathematics
+**Role:** prestige ledger
 **Metric:** dated resolutions per year across 4 scored rows
-**Coverage:** 1912–2026, with no dated resolution anywhere in that span
+**Coverage:** list posed 1912; no dated resolution 1912–2026; statuses read 2026-08-14
 **Data:** [`landau-problems.csv`](landau-problems.csv)
 **Upstream:** <https://en.wikipedia.org/wiki/Landau%27s_problems>
-**Verdict:** no acceleration
+**Verdict:** no acceleration — 0 resolutions in 2026; 0 dated resolutions over 1912–2025
 
 ![Dated resolutions per year.](discovery-math-landau.png)
 
-## The problem
+## Definition
 
-Landau named four problems about the primes at the 1912 International Congress
-of Mathematicians: Goldbach's conjecture, the twin prime conjecture, Legendre's
-conjecture that a prime lies between consecutive squares, and the infinitude of
-primes of the form $n^2+1$. All four are still open.
+Edmund Landau named four problems about the primes at the 1912 International
+Congress of Mathematicians: Goldbach's conjecture, the twin prime
+conjecture, Legendre's conjecture that a prime lies between consecutive
+squares, and the infinitude of primes of the form $n^2+1$. A "discovery" in
+this series is a row moving to `resolved`, dated by the year a secondary
+consensus account gives. The ledger has four rows, no subproblem splitting
+and no contested classifications, and no row has ever moved. The upstream
+page states the standing in one clause:
 
-A "discovery" in this series is a row moving to resolved, on the year a secondary
-consensus account gives. There are four rows, no subproblem splitting, and no
-contested classifications, so the ledger is as simple as a ledger gets — and as
-coarse.
+> "all four problems are unresolved"
+> — Wikipedia, Landau's problems, "As of 2026" statement, read 2026-08-14
 
-It is in the collection as a baseline rather than as a test. A famous list that
-has not moved in one hundred and fourteen years is what the pre-AI resolution
-cadence of prestige mathematics looks like at its slowest, and it is the
-comparison against which a claim about AI and famous open problems has to be
-read. The instrument warning that applies to [Hilbert](../math-hilbert/README.md)
-applies with more force here: these are problems selected for depth, and depth
-here means no candidate answer can be scored cheaply, which is the condition
-under which every AI result in this collection has arrived.
+## Facts
 
-## What the chart shows
+- **rows:** 4 scored; 0 resolved with a dated year; 4 open
+- **open rows:** goldbach, twin_primes, legendre, n2_plus_1
+- **ai-attributed:** 0 of 4 scored rows
 
-Nothing, and that is the reading. All four rows are open, and the chart says no
-row has a dated resolution. There is no red event because there are no events at
-all.
-
-The one thing this establishes is a bound. Whatever AI has contributed to
-mathematics through mid-2026, it has not closed a Landau problem, and no source
-behind this collection claims otherwise.
-
-The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this ledger
-as rows remaining, declining toward zero as dated resolutions arrive:
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws the
+ledger as rows remaining:
 
 ![Rows remaining without a dated resolution.](cumulative-math-landau.png)
 
-## How the chart was built
+The register of non-open rows is empty: every row's status is `open`.
 
-[`figure.py`](figure.py) calls the shared `problem_list_chart()` shape in
-[`../../lib/families.py`](../../lib/families.py), which reads
-`landau-problems.csv`, keeps the rows whose `status` is `resolved` with a
-non-empty `resolved_year`, and counts resolution events by year from the 1912
-`list_year` to the present. Here that event set is empty, so the chart states
-that directly.
+## Method
 
-The rows are transcribed by hand from the consensus ledger named in the `source`
-column, so there is no `fetch.py` in this folder. There is no machine-readable
-upstream to rebuild from: the status of a famous conjecture is a judgment in the
-literature rather than a feed.
+The rows are transcribed by hand from the consensus ledger named in the
+`source` column, so there is no `fetch.py` in this folder. There is no
+machine-readable upstream to rebuild from: the status of a famous conjecture
+is a judgment in the literature rather than a feed.
 
-No `ai_problem` argument is passed, because there is no such row.
+[`figure.py`](figure.py) calls the shared `problem_list_chart()` in
+[`../../lib/families.py`](../../lib/families.py), which keeps the rows whose
+`status` is `resolved` with a non-empty `resolved_year` and counts
+resolution events by year from the 1912 `list_year` to the present. That
+event set is empty here, so the chart states that no row has a dated
+resolution. No `ai_problem` argument is passed, because there is no such
+row. The cumulative view is the shared `ledger_remaining_chart()`.
+[`check.py`](check.py) recomputes the fact lines from the CSV.
 
-## What it cannot support
+## Limitations
 
-- **Zero events cannot carry a rate.** A series with no resolutions in it has no
-  event rate to compare, in either direction.
-- **Four rows is the coarsest ledger here.** The finest change it can register is
-  one quarter.
-- **A binary status hides real progress.** Bounded gaps between primes were
-  established in 2013 by Zhang and sharpened by the Polymath follow-ons, and the
-  ternary Goldbach problem was settled by Helfgott, none of which moves a row on
-  this ledger. The series measures falls, not advances.
-- **The rows overlap other lists.** Goldbach and twin primes are also scored on
-  Hilbert's list, as its row 8b [@wikipedia2026hilbert], so this is not an
-  independent draw.
-- **Resolution landmarks are not effort-adjusted discovery rates**, and effort on
-  the primes has certainly risen over the century.
+- **no events.** A series with zero resolutions has no event rate to compare
+  across periods, in either direction.
+- **four rows.** The finest change the ledger can register is one quarter of
+  the list.
+- **binary statuses.** Partial progress moves no row: the upstream page as
+  read 2026-08-14 records Zhang's 2013 bound of 70 million on prime gaps,
+  since improved to 246, and Helfgott's 2013 proof of Goldbach's weak
+  conjecture, and both rows remain open here.
+- **overlap.** goldbach and twin_primes are jointly scored as row 8b of
+  [Hilbert's list](../math-hilbert/README.md) [@wikipedia2026hilbert], so
+  the two ledgers are not independent.
+- **effort.** Resolution landmarks are not effort-adjusted discovery rates,
+  and effort on the primes has risen over the century.
 
-## LLM contributions
+## AI attribution
 
-None. No AI system has resolved a Landau problem, and none is credited with
-partial progress on one in any source behind this collection.
+No row in [`landau-problems.csv`](landau-problems.csv) carries a resolver or
+an AI credit; all four rows are open. No AI credit appears on the Wikipedia
+page the rows are scored from as of the 2026-08-14 read.
 
-## Related literature
+## Sources
 
-The four problems and their statuses come from the consensus ledger linked above,
-which has no bibliography entry here; the overlapping Hilbert row is
-[@wikipedia2026hilbert]. That a record series can sit still for decades with no
-AI anywhere in it, so that flatness is not evidence of an exhausted frontier, is
-Sherry and Thompson's finding across algorithm families [@sherry2021fast]. That
-scored mathematical progress arrives where verification is cheap — which these
-four problems are the opposite of — is the explicit selection rule of the
-benchmark designers who built a problem set on it [@arxiv2026horizonmath]. The
-companion ledgers are [Hilbert](../math-hilbert/README.md),
-[Thurston](../math-thurston/README.md), [Smale](../math-smale/README.md),
-[Millennium](../math-millennium/README.md) and [TOPP](../math-topp/README.md);
-the corpus where an AI-contributed flow is measurable at all is
-[Erdős](../math-erdos/README.md).
+- Wikipedia, Landau's problems
+  (<https://en.wikipedia.org/wiki/Landau%27s_problems>) — the consensus
+  ledger the four rows are transcribed from, quoted above for the four
+  statuses; it has no bibliography entry here. It also states the
+  bounded-gaps and weak-Goldbach facts in Limitations.
+- [@wikipedia2026hilbert] — the Hilbert ledger holding the overlapping row
+  8b.
+- [@arxiv2026horizonmath] — a 2026 benchmark of over 100 predominantly
+  unsolved problems chosen so that "verification is computationally
+  efficient and simple"; frontier models score near 0% on it.
+- [@sherry2021fast] — measured improvement rates across algorithm families,
+  including multi-decade stationary stretches, with no AI involved.
+- Sibling ledgers of the same instrument type:
+  [Hilbert](../math-hilbert/README.md),
+  [Thurston](../math-thurston/README.md), [Smale](../math-smale/README.md),
+  [Millennium](../math-millennium/README.md) and
+  [TOPP](../math-topp/README.md).
+- [Erdős](../math-erdos/README.md) — a catalogue ledger over a different
+  corpus, counting a different unit (catalogue problems with imputed
+  solution years).

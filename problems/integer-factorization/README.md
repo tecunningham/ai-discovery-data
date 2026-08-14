@@ -1,117 +1,146 @@
 # Integer factorization records
 
 **Domain:** outside the three domains
-**Metric:** cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum
+**Role:** control: no-AI baseline
+**Metric:** cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum over dated records
 **Coverage:** 1991-04 to 2020-02, confirmed unmoved as of 2026-08-10
 **Data:** [`factoring-records.csv`](factoring-records.csv) (all 23 published RSA factorizations, plus the 795-bit discrete-logarithm record and the first SHA-1 collision for context)
 **Upstream:** <https://en.wikipedia.org/wiki/RSA_numbers>, with the last two records from <https://caramba.loria.fr/rsa250.txt> and <https://caramba.loria.fr/dlp240-rsa240.txt>
-**Verdict:** no acceleration — no record since February 2020, and the fourfold slowdown before that predates AI entirely
+**Verdict:** no acceleration — 0 records in 2026 against 0 in 2025 and a 0.4/year mean over 1991–2025; the standing record is 250 digits, set 2020-02-28
 
 ![Integer factorization records: the running maximum in decimal digits, rising from 1991 to 2020 and flat thereafter, with every published RSA factorization behind it.](discovery-integer-factorization.png)
 
-## The problem
+## Definition
 
-Factoring is the cheap-verifier extreme, included to span a variable that the
-three worked domains barely vary: the cost of checking an answer. Multiplying
-two claimed factors takes microseconds, so a result is verified instantly, for
-free, by anyone. The field also has everything else a scoreboard needs — a
-published list of targets, three decades of dated records with named teams, and
-a cash-prize history.
+The RSA numbers are a published list of hard semiprimes — each the product
+of two primes of similar size — posed as factoring targets by RSA
+Laboratories. The upstream record of them is Wikipedia's RSA-numbers page,
+which lists every published factorization with its date, team and method;
+the two most recent records are announced in their teams' own texts at
+caramba.loria.fr. The cash-prize programme attached to the list ended
+before the last records were set:
 
-A discovery here is one new largest factorization. That is a coarse instrument
-by construction: the record is a running maximum over a fixed list of targets,
-so it moves only when someone commits a very large computation to the next
-number on the list.
+> "While the RSA challenge officially ended in 2007, people are still
+> attempting to find the factorizations."
+> — en.wikipedia.org, RSA numbers, read 2026-08-14
 
-## What the chart shows
+A "discovery" in this series is a published factorization that raises the
+running maximum of decimal digits over the 23 vendored RSA factorizations.
+Rows are dated by announcement date. Two adjacent rows are vendored for
+context and excluded from the maximum — the 795-bit discrete-logarithm
+record and the first SHA-1 collision — because they are different
+quantities. A claimed factorization is verified by multiplying the factors.
 
-Thirteen records between April 1991 and February 2020, and nothing since.
+## Facts
 
-The rate falls fourfold inside the series, well before AI: about 7.1 digits a
-year from RSA-100 in 1991 to RSA-768 in December 2009, then about 1.8 a year to
-RSA-250 in February 2020. Both figures are computed in the figure code from the
-running maximum. RSA-250 has stood for about six and a half years, across exactly
-the period in which AI systems were setting records on speedruns, kernels, a SAT
-competition, and a dozen mathematical bounds. RSA-260, RSA-270, RSA-896 and
-RSA-1024 remain unfactored.
+- **rows:** 25 rows: 23 RSA factorizations, 1 discrete-logarithm record,
+  1 hash collision
+- **records:** 13 running-maximum records, RSA-100 (100 digits, 1991-04-01)
+  to RSA-250 (250 digits, 2020-02-28)
+- **rate split:** 7.1 digits/year from RSA-100 (1991-04-01) to RSA-768
+  (232 digits, 2009-12-12), then 1.8 digits/year to RSA-250 (2020-02-28)
+- **standing:** the 250-digit record is unmoved from 2020-02-28 to
+  2026-08-10, 6.4 years
+- **non-records:** 10 of the 23 factorizations set no new maximum
+- **ai-involved:** `no` on all 25 rows
+- **context rows:** the discrete-logarithm record is dated 2019-12-02, the
+  same date and team as RSA-240; the SHA-1 collision is dated 2017-02-23
+  with method "differential path + brute force (2^63.1 SHA-1 evals)"
+- **unfactored targets:** the Wikipedia list records RSA-260, RSA-270,
+  RSA-896 and RSA-1024 as "has not been factored so far", read 2026-08-14
 
-The open markers behind the line are every published RSA factorization,
-including the ones that were not records — RSA-170, RSA-180, RSA-190, RSA-210
-and others, factored in the 2010s while the maximum stood at 232 digits. They
-are there so a flat line is not misread as nobody working.
+The two most recent record computations state their own cost:
 
-Every record in the series is the number field sieve, or the quadratic sieve for
-the earliest ones, run as a large parallel computation by a human team. The
-`ai_involved` column is `no` on all 23 rows.
+> "The total computation time was roughly 2700 core-years, using Intel Xeon
+> Gold 6130 CPUs as a reference (2.1GHz)"
+> — Boudot, Gaudry, Guillevic, Heninger, Thomé and Zimmermann, caramba.loria.fr/rsa250.txt, 2020-02-28
 
-The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
-as the standing record's value over time:
+> "The CPU time spent on finding these factors by a collection of parallel
+> computers amounted approximately to the equivalent of almost 2000 years
+> of computing on a single-core 2.2 GHz AMD Opteron-based computer."
+> — en.wikipedia.org, RSA numbers, RSA-768 section, read 2026-08-14
+
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
+series as the standing record's value over time:
 
 ![Standing record for decimal digits factored over time.](cumulative-integer-factorization.png)
 
-## How the chart was built
+## Method
+
+There is no fetcher; the rows are hand-collected from the Wikipedia list
+and from the two caramba.loria.fr announcements. The record list is a
+hand-maintained page rather than an API, and the fields scored here — who,
+which method, whether machine learning was involved — are read from prose
+rather than parsed.
 
 [`figure.py`](figure.py) filters `factoring-records.csv` to the
-`integer_factorization` rows, sorts by date, and takes the running maximum over
-`digits` as a step function; the two adjacent records in the file, a discrete
-logarithm and a hash collision, are excluded because they are different
-quantities. Three records are labelled — the first, the last of the fast era,
-and the current one — and the rest are left unlabelled to keep the steps
-readable. The rates in the annotation are computed at plot time from the running
-maximum, split at RSA-768, so they cannot drift from the CSV. January 2026
-onward is shaded, as in every figure here.
+`integer_factorization` rows, sorts by date, and takes the running maximum
+over `digits` as a step function; the discrete-logarithm and hash-collision
+rows are excluded because they are different quantities. The open markers
+behind the line are every published RSA factorization, record or not,
+including the ten factored while the maximum stood still. Three records are
+labelled — RSA-100, RSA-768 and RSA-250 — and the rates in the annotation
+are computed at plot time from the running maximum, split at RSA-768, so
+they cannot drift from the CSV. January 2026 onward is shaded, as in every
+figure here. The same script draws the cumulative view as the standing
+record's value over time. [`check.py`](check.py) recomputes the fact lines
+from the CSV.
 
-There is no fetcher. The record list is a hand-maintained page rather than an
-API, the last two records come from the record-setters' own announcements, and
-the fields that matter here — who, which method, whether machine learning was
-involved — need reading rather than parsing.
+## Limitations
 
-## What it cannot support
+- **sample size.** Thirteen records in twenty-nine years; a modest change
+  in rate is not detectable in a series this sparse.
+- **running maximum.** Effort spent on numbers smaller than the standing
+  record does not move the line; the ten non-record factorizations appear
+  only as open markers.
+- **no prize after 2007.** The records of 2019-12-02 and 2020-02-28
+  postdate the challenge's cash prizes.
+- **cost of a record.** The quoted efforts for the last records run to
+  thousands of core-years; a step in this series is a computation of that
+  scale committed to the next number on the list.
+- **attempts are unrecorded.** The list holds published factorizations
+  only; a standing record does not distinguish problems unattempted from
+  attempts unpublished.
 
-- **A stalled record is not a demonstration that AI could not do it.** No one
-  has published a serious AI-assisted attempt. The arithmetic is not the kind of
-  task current systems are pointed at, and no attempt means no evidence either
-  way.
-- **The prize is gone, which is a sufficient explanation on its own.** The RSA
-  Factoring Challenge was formally discontinued in 2007, so the 2019 and 2020
-  records were one-off academic efforts.
-- **A record here costs real money.** RSA-250 took "roughly 2700 core-years",
-  and RSA-768 was reported as "the equivalent of almost 2000 years of computing
-  on a single-core 2.2 GHz AMD Opteron". The stall is not disinterest in a cheap
-  prize.
-- **Thirteen points cannot detect a modest change in rate.** The series is dense
-  enough to show a fourfold slowdown and a six-year stop; it is far too sparse
-  to rule out a smaller effect.
-- **The running maximum hides the work.** Effort that goes into a number smaller
-  than the current record leaves no mark on the line at all, which is why the
-  non-record factorizations are drawn.
+## AI attribution
 
-## LLM contributions
+The `ai_involved` column is `no` on all 25 rows of
+[`factoring-records.csv`](factoring-records.csv). Every record row's method
+is the quadratic sieve or the number field sieve, run as a parallel
+computation by a named human team. No AI credit appears on the Wikipedia
+list or in the two caramba.loria.fr announcements as of 2026-08-14.
 
-None recorded anywhere in the series. The one announcement that separates
-algorithm from hardware attributes the gain to human work: the RSA-240 team
-report that "our computation was 3 times faster than the expected time that
-would have been extrapolated from previous records", and that "the acceleration
-can be attributed to various algorithmic improvements that were implemented for
-these computations. The CADO-NFS implementation was also vastly improved." So
-the last real step in this series was human algorithmic and implementation work
-worth about 3x against a hardware-adjusted baseline.
+The RSA-240/DLP-240 announcement states its own split between algorithmic
+gain and hardware:
 
-The two adjacent records in the file point the same way. The 795-bit discrete
-logarithm was set by the same team on the same day as RSA-240, and the first
-SHA-1 collision was published in February 2017 by a Google and CWI team using a
-differential path and about 2^63.1 hash evaluations. Neither involved machine
-learning either.
+> "Taking this into account, and still using identical hardware, our
+> computation was 3 times faster than the expected time that would have
+> been extrapolated from previous records."
+> — Boudot, Gaudry, Guillevic, Heninger, Thomé and Zimmermann, caramba.loria.fr/dlp240-rsa240.txt, 2019-12-02
 
-## Related literature
+> "The acceleration can be attributed to various algorithmic improvements
+> that were implemented for these computations. The CADO-NFS implementation
+> was also vastly improved."
+> — Boudot, Gaudry, Guillevic, Heninger, Thomé and Zimmermann, caramba.loria.fr/dlp240-rsa240.txt, 2019-12-02
 
-Grace's 2013 survey of algorithmic progress in six domains recorded factoring
-improving "about 5.5 digits per year for the last two decades"
-[@grace2013algorithmic], which this series confirms for the window she had and
-which makes the subsequent deceleration visible as a departure from a documented
-trend. The heterogeneity of pre-AI improvement rates across algorithm families
-is Sherry and Thompson's subject [@sherry2021fast], and it is the reason a single
-stalled family is weak evidence on its own. Within this collection,
-[sphere packing](../math-sphere-packing/README.md) is a useful contrast: a
-similarly old ladder took its two largest steps since 1947 in 2023 and 2025 —
-both of them human proofs.
+## Sources
+
+- <https://en.wikipedia.org/wiki/RSA_numbers> — the record list the rows
+  are hand-collected from; the RSA-768 effort sentence, the challenge-end
+  statement and the unfactored-target statuses quoted above (read
+  2026-08-14).
+- <https://caramba.loria.fr/rsa250.txt> and
+  <https://caramba.loria.fr/dlp240-rsa240.txt> — the record-setters'
+  announcements of the 2020-02-28 and 2019-12-02 records, quoted above.
+- [@grace2013algorithmic] — the pre-2013 rate for this problem:
+
+> "Since the 1970s, the numbers that can be factored have apparently
+> increased from around twenty digits to 222 digits, or 5.5 digits per
+> year."
+> — Katja Grace, Algorithmic Progress in Six Domains, p. 33, 2013 [@grace2013algorithmic]
+
+- [@sherry2021fast] — measured improvement rates across many algorithm
+  families; the base-rate reference for uneven pre-AI progress.
+- [math-sphere-packing](../math-sphere-packing/README.md) — a sibling
+  series that also tracks a dated numerical record over decades; it counts
+  a different quantity (sphere-packing density bounds).

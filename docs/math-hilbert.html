@@ -42,112 +42,353 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Hilbert&#x27;s problems</h1>
 <p><strong>Domain:</strong> mathematics
+<strong>Role:</strong> prestige ledger
 <strong>Metric:</strong> dated resolutions per year across 28 scored rows
-<strong>Coverage:</strong> 1900–2026, with dated resolutions running 1900–1998
+<strong>Coverage:</strong> list posed 1900; dated resolutions 1900–1998; statuses read 2026-08-14
 <strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-hilbert/hilbert-problems.csv"><code>hilbert-problems.csv</code></a>
 <strong>Upstream:</strong> <a href="https://en.wikipedia.org/wiki/Hilbert%27s_problems">https://en.wikipedia.org/wiki/Hilbert%27s_problems</a>
-<strong>Verdict:</strong> no acceleration</p>
+<strong>Verdict:</strong> no acceleration — 0 resolutions in 2026 and 0 since 1998; 12 dated resolutions over 1900–1998</p>
 <h3>Per-problem resolution timeline</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
-<h2 id="the-problem">The problem</h2>
-<p>Hilbert's 1900 list is the canonical statement of what the mathematics of a
-century was going to be about, and its problems have been tracked ever since. It
-is scored here because it is the clearest available ceiling: whatever else AI has
-done in mathematics, the public question is whether it has touched problems of
-this kind.</p>
-<p>A "discovery" in this series is a ledger row moving to resolved, on the year a
-secondary consensus account gives for the resolution. Twenty-eight rows are
-scored rather than twenty-three problems, because several of Hilbert's problems
-split into parts that fell separately — 18a, 18b and 18c; 6a and 6b; 8a, 8b and
-8c — and because nine rows are recorded as contested or vague rather than as
-resolved or open. The continuum hypothesis is the standing example: Gödel and
-Cohen established independence, and there is no consensus that this resolves what
-Hilbert asked.</p>
-<p>It is a bad instrument for a discovery rate, and the reason is selection. These
-problems were chosen for depth and for the interest of the answer, which in
-practice means they are exactly the problems whose solutions are most expensive
-to check: a proof here takes years of expert reading, not a script. Every strong
-AI result in this collection sits on a problem where a candidate answer can be
-scored cheaply. So a count of zero AI-attributed Hilbert falls is close to what
-the cheap-verification story predicts, and is weak evidence about capability in
-either direction.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>Twelve dated resolutions, from Dehn in 1900 to Hales's computer-assisted
-sphere-packing proof in 1998, and nothing in the twenty-eight years since. Of the
-twenty-eight scored rows, twelve are resolved, seven are open, and nine are
-disputed, partial or vague. The chart places the twelve resolution events by
-year, with the 12/7/9 split stated in its corner note. Nothing lands in the
-shaded 2026 period, and no event is red, because no row carries an AI attribution.</p>
-<p>The visible clustering — five falls between 1924 and 1934, then a gap, then three
-between 1957 and 1970 — is a reminder that this ledger was never a steady
-process even when it was moving. Reading a twenty-eight-year flat stretch at the
-right edge as exhaustion would require distinguishing it from the flat stretches
-of 1934–1957 and 1970–1989, which nothing in the series lets you do.</p>
-<p>The open ledger is the more useful reading: the seven rows still open
-are Riemann, the Goldbach and twin-prime family, general reciprocity,
-Kronecker–Weber over arbitrary base fields, limit cycles, general boundary-value
-problems, and uniformization. That is the list against which any claim about AI
-and famous open problems should be checked.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this ledger
-as rows remaining, declining toward zero as dated resolutions arrive:</p>
-<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-hilbert/cumulative-math-hilbert.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-hilbert/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> shape in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which reads
-<code>hilbert-problems.csv</code>, keeps the rows whose <code>status</code> is
-<code>resolved</code> and whose <code>resolved_year</code> is non-empty, sorts them by resolution year
-and then <code>problem_id</code>, and counts dated resolutions in each year from the
-<code>list_year</code> of 1900 to the present. A corner note states how much of the list
-the dated events account for. The source note is taken from the <code>source</code> column.</p>
-<p>The scoring rule is the strict one. <code>contested</code> and <code>vague</code> rows are excluded
-rather than counted as half-resolutions, so problems with a defensible claim to
-being settled under some reading — Hilbert 1, 2, 5, 6b, 8c, 13, 15 — do not
-appear in the resolution-event chart at all. That choice makes the count smaller and the series
-more comparable to the other ledgers here, and it is the reason the chart says
-twelve rather than any of the larger numbers in circulation.</p>
-<p>The function takes an <code>ai_problem</code> argument that colours one event bar red. It is
-not supplied for this list, because there is no such row.</p>
-<p>There is no <code>fetch.py</code>. The ledger is hand-scored from the Wikipedia problem table named above: one row per problem or subproblem, with the status and the resolution year read off that account and the scoring rule applied by hand. Nothing upstream publishes it in a form a script could take, so a correction means editing the CSV and saying here why.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<h2 id="definition">Definition</h2>
+<p>David Hilbert stated his list of mathematical problems in 1900. The ledger
+here scores the standing of each problem as recorded in the Wikipedia
+problem table [@wikipedia2026hilbert], with 28 rows rather than 23 problems:
+problems 6, 8 and 18 are split into parts tracked separately (6a/6b,
+8a/8b/8c, 18a/18b/18c), and the unpublished 24th problem is not scored.</p>
+<p>Each row carries one of four statuses. A <code>resolved</code> row has a
+<code>resolved_year</code>, the year the consensus account gives for the resolving
+work, and is one event in the series. An <code>open</code> row has no resolution claim.
+A <code>contested</code> row has a claimed or partial resolution without consensus that
+it settles what Hilbert asked; the continuum hypothesis (row 1) is scored
+contested because the Gödel–Cohen independence results are not agreed to
+answer Hilbert's statement. A <code>vague</code> row (4 and 23) is not stated precisely
+enough to score either way. Only <code>resolved</code> rows with a dated year count as
+events; <code>contested</code> and <code>vague</code> rows contribute nothing to the series.</p>
+<h2 id="facts">Facts</h2>
 <ul>
-<li><strong>Resolution landmarks are not effort-adjusted discovery rates.</strong> The dates say
-  when something fell, not how much work was spent, and effort on these problems
-  has certainly risen over the century.</li>
-<li><strong>Twenty-eight rows are not twenty-three problems.</strong> The subproblem splitting
-  is the ledger's, so the count is not comparable across lists that split
-  differently.</li>
-<li><strong>The contested rows are a judgment call.</strong> Nine of twenty-eight rows turn on
-  what Hilbert meant, and a different reasonable reading would move the line.</li>
-<li><strong>One secondary ledger.</strong> Every row here is transcribed from a single
-  consensus account rather than from independent review of the literature.</li>
-<li><strong>The rows overlap other lists.</strong> Riemann appears on Hilbert, Smale and the
-  Millennium list, and Hilbert's 16th is Smale's 13th, so these series are not
-  independent draws from one urn.</li>
+<li><strong>rows:</strong> 28 scored; 12 resolved with a dated year; 7 open; 7 contested;
+  2 vague</li>
+<li><strong>span:</strong> dated resolutions 1900–1998</li>
+<li><strong>by-year:</strong> 1900: 1 · 1910: 1 · 1924: 1 · 1927: 1 · 1928: 1 · 1933: 1 ·
+  1934: 1 · 1957: 1 · 1959: 1 · 1970: 1 · 1989: 1 · 1998: 1</li>
+<li><strong>ai-attributed:</strong> 0 of 12 dated resolutions</li>
+<li><strong>open rows:</strong> 8a, 8b, 9, 12, 16, 20, 22</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>None. No row in this ledger is attributed to an AI system, and the last dated
-piece of it is human work from 1998.</p>
-<p>The absence is worth stating precisely, because it is easy to over-read. It is
-not evidence that AI systems cannot do deep mathematics; it is evidence that they
-have not resolved a Hilbert problem, on a list whose selection principle is
-almost the inverse of the conditions under which AI results have arrived. The one
-prestige list here with an AI-attributed fall is <a href="math-smale.html">Smale</a>, and it
-fell to a finite counterexample — an object that can be checked mechanically.
-That contrast, rather than the zero, is the informative part.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The rows and their contested classifications come from the consensus ledger
-[@wikipedia2026hilbert]. The selection argument above — that scored mathematical
-targets are the ones with cheap verification — is made explicitly by the
-benchmark designers who built a problem set on that principle, choosing problems
-where "discovery is hard, requiring meaningful mathematical insight, but
-verification is computationally efficient and simple" [@arxiv2026horizonmath]. The general warning that record series are lumpy
-with no AI in them, so that a flat stretch is not an exhausted frontier, is
-Sherry and Thompson's [@sherry2021fast]. The companion ledgers are
-<a href="math-landau.html">Landau</a>, <a href="math-thurston.html">Thurston</a>,
-<a href="math-smale.html">Smale</a>, <a href="math-millennium.html">Millennium</a> and
-<a href="math-topp.html">TOPP</a>; the high-volume corpus that actually shows AI flow is
-<a href="math-erdos.html">Erdős</a>.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws the
+ledger as rows remaining:</p>
+<p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-hilbert/cumulative-math-hilbert.png" /></p>
+<h3 id="3-scissor-congruence-of-polyhedra">3 — Scissor congruence of polyhedra</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1900</li>
+<li><strong>resolver:</strong> Dehn</li>
+<li><strong>notes:</strong> First of the list to fall; equal-volume polyhedra need not be
+  equidissectable</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: No, proven by Max Dehn using Dehn invariants."
+— Wikipedia, Hilbert's problems, problem 3, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="18a-finitely-many-space-groups-in-n-dimensions">18a — Finitely many space groups in n dimensions</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1910</li>
+<li><strong>resolver:</strong> Bieberbach</li>
+<li><strong>notes:</strong> Part (a) of problem 18</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: Yes (by Ludwig Bieberbach)"
+— Wikipedia, Hilbert's problems, problem 18, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="11-quadratic-forms-over-number-fields">11 — Quadratic forms over number fields</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1924</li>
+<li><strong>resolver:</strong> Hasse</li>
+<li><strong>notes:</strong> Local-global principle</li>
+</ul>
+<blockquote>
+<p>"Resolved. Helmut Hasse in 1924 created a general theory of classification
+and deciding solvability of quadratic forms over number fields using the
+local-global principle."
+— Wikipedia, Hilbert's problems, problem 11, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="17-nonnegative-forms-as-sums-of-squares">17 — Nonnegative forms as sums of squares</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1927</li>
+<li><strong>resolver:</strong> Artin</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: Yes, due to Emil Artin."
+— Wikipedia, Hilbert's problems, problem 17, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="18b-anisohedral-polyhedron-in-3d">18b — Anisohedral polyhedron in 3D</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1928</li>
+<li><strong>resolver:</strong> Reinhardt</li>
+<li><strong>notes:</strong> Part (b) of problem 18</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: Yes (by Karl Reinhardt)."
+— Wikipedia, Hilbert's problems, problem 18, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="6a-axiomatic-probability">6a — Axiomatic probability</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1933</li>
+<li><strong>resolver:</strong> Kolmogorov</li>
+<li><strong>notes:</strong> Part (a) of problem 6; part (b) remains contested</li>
+</ul>
+<blockquote>
+<p>"(a) Resolved. Kolmogorov's axiomatics is accepted as the foundation of
+probability theory."
+— Wikipedia, Hilbert's problems, problem 6, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="7-transcendence-of-ab">7 — Transcendence of a^b</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1934</li>
+<li><strong>resolver:</strong> Gelfond–Schneider</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: Yes, illustrated by the Gelfond–Schneider theorem."
+— Wikipedia, Hilbert's problems, problem 7, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="19-analyticity-of-regular-variational-solutions">19 — Analyticity of regular variational solutions</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1957</li>
+<li><strong>resolver:</strong> De Giorgi; Nash</li>
+<li><strong>notes:</strong> Independent proofs</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: Yes, proven by Ennio De Giorgi and, independently and
+using different methods, by John Forbes Nash."
+— Wikipedia, Hilbert's problems, problem 19, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="14-finiteness-of-invariant-rings">14 — Finiteness of invariant rings</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1959</li>
+<li><strong>resolver:</strong> Nagata</li>
+<li><strong>notes:</strong> Negative answer: counterexample</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: No, a counterexample was constructed by Masayoshi
+Nagata."
+— Wikipedia, Hilbert's problems, problem 14, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="10-decidability-of-diophantine-equations">10 — Decidability of Diophantine equations</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1970</li>
+<li><strong>resolver:</strong> Matiyasevich</li>
+<li><strong>notes:</strong> Negative answer: no such algorithm</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: Impossible; Matiyasevich's theorem implies that there
+is no such algorithm."
+— Wikipedia, Hilbert's problems, problem 10, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="21-fuchsian-equations-with-prescribed-monodromy">21 — Fuchsian equations with prescribed monodromy</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1989</li>
+<li><strong>resolver:</strong> Bolibrukh</li>
+<li><strong>notes:</strong> Negative answer in the general case</li>
+</ul>
+<blockquote>
+<p>"Resolved. Result: No, a counterexample was shown by Andrei Bolibrukh."
+— Wikipedia, Hilbert's problems, problem 21, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="18c-densest-sphere-packing-in-3d">18c — Densest sphere packing in 3D</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 1998</li>
+<li><strong>resolver:</strong> Hales</li>
+<li><strong>notes:</strong> Part (c) of problem 18; computer-assisted; later formalized</li>
+</ul>
+<blockquote>
+<p>"Resolved, by computer-assisted proof (by Thomas Callister Hales) and
+later with a machine-verified proof in project flyspeck."
+— Wikipedia, Hilbert's problems, problem 18, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="1-continuum-hypothesis">1 — Continuum hypothesis</h3>
+<ul>
+<li><strong>status:</strong> contested</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Gödel–Cohen independence; no consensus that this solves
+  Hilbert's statement</li>
+</ul>
+<blockquote>
+<p>"There is no consensus on whether this is a solution to the problem."
+— Wikipedia, Hilbert's problems, problem 1, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="2-consistency-of-arithmetic">2 — Consistency of arithmetic</h3>
+<ul>
+<li><strong>status:</strong> contested</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Gödel incompleteness / Gentzen; no consensus</li>
+</ul>
+<blockquote>
+<p>"There is no consensus on whether the results of Gödel and Gentzen give a
+solution to the problem as stated by Hilbert."
+— Wikipedia, Hilbert's problems, problem 2, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="4-straight-line-as-shortest-distance">4 — Straight line as shortest distance</h3>
+<ul>
+<li><strong>status:</strong> vague</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Too vague to score as solved or open</li>
+</ul>
+<blockquote>
+<p>"Too vague to be stated resolved or not."
+— Wikipedia, Hilbert's problems, problem 4, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="5-continuous-groups-without-differentiability">5 — Continuous groups without differentiability</h3>
+<ul>
+<li><strong>status:</strong> contested</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Gleason for one reading; Hilbert–Smith conjecture open for
+  another</li>
+</ul>
+<blockquote>
+<p>"Depends on the interpretation of "continuous group". If the term is
+understood as a topological group that is also a topological manifold:
+yes, proven by Andrew Gleason. If "continuous group" is understood as a
+topological group acting on a manifold, the problem becomes the
+Hilbert–Smith conjecture, which is still unresolved."
+— Wikipedia, Hilbert's problems, problem 5, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="6b-atomistic-to-continuum-limit-in-physics">6b — Atomistic-to-continuum limit in physics</h3>
+<ul>
+<li><strong>status:</strong> contested</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Interpretation-dependent</li>
+</ul>
+<blockquote>
+<p>"Depends on the interpretation of the problem."
+— Wikipedia, Hilbert's problems, problem 6 part (b), read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="8c-primes-in-number-fields-via-zeta">8c — Primes in number fields via zeta</h3>
+<ul>
+<li><strong>status:</strong> contested</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Hecke 1917 for some readings; extended RH still open</li>
+</ul>
+<blockquote>
+<p>"Depends on the interpretation of expected results. In 1917, Erich Hecke
+constructed an analytic continuation for Dedekind zeta functions and
+proved functional equation, which allowed for obtaining results similar to
+that currently accessible using Riemann zeta function."
+— Wikipedia, Hilbert's problems, problem 8 part (c), read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="13-seventh-degree-equation-composition">13 — Seventh-degree equation / composition</h3>
+<ul>
+<li><strong>status:</strong> contested</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Continuous variant resolved (Kolmogorov–Arnold 1957); algebraic
+  variant open</li>
+</ul>
+<blockquote>
+<p>"Depends on the variant of the problem. For the continuous variant: No;
+the Kolmogorov–Arnold representation theorem shows that every multivariate
+continuous function can be obtained through such composition."
+— Wikipedia, Hilbert's problems, problem 13, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="15-schubert-enumerative-calculus">15 — Schubert enumerative calculus</h3>
+<ul>
+<li><strong>status:</strong> contested</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Claims of resolution exist; no consensus</li>
+</ul>
+<blockquote>
+<p>"Significant developments for resolving this problem have been made since
+the publication of the list …"
+— Wikipedia, Hilbert's problems, problem 15, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h3 id="23-further-development-of-calculus-of-variations">23 — Further development of calculus of variations</h3>
+<ul>
+<li><strong>status:</strong> vague</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Deliberately open-ended</li>
+</ul>
+<blockquote>
+<p>"Too vague to be stated resolved or not. Since the list was proposed,
+Hilbert and many other mathematicians have made numerous contributions to
+the calculus of variations."
+— Wikipedia, Hilbert's problems, problem 23, read 2026-08-14 [@wikipedia2026hilbert]</p>
+</blockquote>
+<h2 id="method">Method</h2>
+<p>The ledger is hand-scored from the Wikipedia problem table named in the
+<code>source</code> column: one row per problem or subproblem, with the status and the
+resolution year read off that account. There is no <code>fetch.py</code>; nothing
+upstream publishes the table in a form a script could take, so a correction
+means editing the CSV. The scoring rule is strict: <code>contested</code> and <code>vague</code>
+rows carry no <code>resolved_year</code> and contribute no event, so rows with a
+defensible claim to being settled under some reading (1, 2, 5, 6b, 8c, 13,
+15) do not appear in the event count.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-hilbert/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which keeps the rows whose
+<code>status</code> is <code>resolved</code> with a non-empty <code>resolved_year</code> and draws one event
+bar per year from the 1900 <code>list_year</code> to the present; a corner note states
+how many of the 28 rows have dated resolutions. No <code>ai_problem</code> argument is
+passed, because no row carries an AI credit. The cumulative view is the
+shared <code>ledger_remaining_chart()</code>. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-hilbert/check.py"><code>check.py</code></a> recomputes the
+fact lines and the register entries from the CSV.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>effort.</strong> Resolution landmarks are not effort-adjusted discovery rates;
+  the dates say when a row fell, not how much work was spent.</li>
+<li><strong>row count.</strong> 28 rows are not 23 problems; the subproblem split is this
+  ledger's, so the counts are not comparable across lists that split
+  differently.</li>
+<li><strong>contested rows.</strong> 9 of 28 rows turn on what Hilbert meant; a different
+  reasonable reading of those rows moves every count above.</li>
+<li><strong>one secondary ledger.</strong> Every row is transcribed from a single consensus
+  account rather than from independent review of the literature.</li>
+<li><strong>overlap.</strong> Row 8a is the Riemann hypothesis, also scored on
+  <a href="math-smale.html">Smale</a> and
+  <a href="math-millennium.html">Millennium</a>; row 16 is Smale's 13th. The
+  prestige ledgers are not independent samples.</li>
+</ul>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>No row in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-hilbert/hilbert-problems.csv"><code>hilbert-problems.csv</code></a> names an AI system
+in its <code>resolver</code> or <code>notes</code> columns; the most recent dated resolution is
+problem 18c in 1998 (Hales). No AI credit appears in the Wikipedia ledger
+the rows are scored from as of the 2026-08-14 read.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@wikipedia2026hilbert] — the consensus ledger every row is transcribed
+  from; the register quotes its per-problem status wording as read
+  2026-08-14.</li>
+<li>[@arxiv2026horizonmath] — a 2026 benchmark of over 100 predominantly
+  unsolved problems chosen so that "verification is computationally
+  efficient and simple"; frontier models score near 0% on it.</li>
+<li>[@sherry2021fast] — measured improvement rates across algorithm families,
+  including multi-decade stationary stretches, with no AI involved.</li>
+<li>Sibling ledgers of the same instrument type:
+  <a href="math-landau.html">Landau</a>,
+  <a href="math-thurston.html">Thurston</a>, <a href="math-smale.html">Smale</a>,
+  <a href="math-millennium.html">Millennium</a> and
+  <a href="math-topp.html">TOPP</a>.</li>
+<li><a href="math-erdos.html">Erdős</a> — a catalogue ledger over a different
+  corpus, counting a different unit (catalogue problems with imputed
+  solution years).</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-hilbert/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

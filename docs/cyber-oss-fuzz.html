@@ -42,108 +42,99 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>OSS-Fuzz vulnerability discoveries</h1>
 <p><strong>Domain:</strong> vulnerabilities
+<strong>Role:</strong> control: no-AI baseline
 <strong>Metric:</strong> vulnerability records published per quarter by an automated fuzzing programme
-<strong>Coverage:</strong> 2020–2026, partial through 10 August 2026
+<strong>Coverage:</strong> 2020–2026, partial through 2026-08-10
 <strong>Data:</strong> quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/ossfuzz-by-quarter.csv"><code>ossfuzz-by-quarter.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/ossfuzz-discoveries.csv"><code>ossfuzz-discoveries.csv</code></a>
 <strong>Upstream:</strong> <a href="https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip">https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip</a> (browsable at <a href="https://osv.dev/list?q=ecosystem%3AOSS-Fuzz">https://osv.dev/list?q=ecosystem%3AOSS-Fuzz</a>, programme at <a href="https://google.github.io/oss-fuzz/">https://google.github.io/oss-fuzz/</a>)
-<strong>Verdict:</strong> declining</p>
+<strong>Verdict:</strong> declining — 1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 396</p>
 <h3>Records published</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial quarter; hover for the flag.</p>
-<h2 id="the-problem">The problem</h2>
-<p>OSS-Fuzz is Google's continuous fuzzing service for open-source software: it
-runs automated search against hundreds of projects, all the time, and publishes
-every finding as a dated record in the OSV database. It is the automated-but-not-AI
-baseline the rest of this domain lacks.</p>
-<p>The reason it earns a document of its own is that it answers the obvious
-alternative explanation for the 2026 rises on curl, OpenSSL and Firefox — that
-automation in general finds more bugs — and answers it in the negative. A decade
-of the largest automated discovery programme in open source is exactly the
-control a claim about AI-driven discovery needs, and it is a control nobody had
-to construct after the fact.</p>
-<p>A "discovery" here is one published OSV record attributed to OSS-Fuzz. It is not
-a severity-weighted count, and it is not restricted to any single codebase: the
-target set is hundreds of projects and it grew over the period.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>A steady fourfold decline. 1,041 records in 2020, then 739, 710, 581, 388 and
-244 in 2025, with 241 through 10 August 2026. Annualizing the part-year gives
-roughly 396, which is an uptick against 2025 but still far below where the
-series started. The 2020-onward total is 3,944 records. The quarterly bars add
-the shape inside those years: one enormous quarter carries most of 2020, the
-slide from there is noisy but unbroken, and the 2026 uptick is already visible
-in the first quarter.</p>
-<p>The decline is the finding, and it is sharpened by what happened to the
-denominator. OSS-Fuzz has onboarded projects continuously over the period, so
-the search space was growing while the yield fell. That is the shape a fixed
-technique makes as it exhausts the bugs it can reach in the code it is pointed
-at, and it happens here with no AI involved anywhere. Whatever produced the 2026
-bends in the finder-credited series, it is not automation as such.</p>
+<h2 id="definition">Definition</h2>
+<p>OSS-Fuzz is Google's continuous fuzzing service for open-source software. It
+runs automated search against the projects enrolled in it and publishes each
+finding as a dated record in the OSV database. The programme states its own
+scale:</p>
+<blockquote>
+<p>"As of August 2023, OSS-Fuzz has helped identify and fix over 10,000
+vulnerabilities and 36,000 bugs across 1,000 projects."
+— OSS-Fuzz documentation, google.github.io/oss-fuzz, read 2026-08-14 [@google2026ossfuzz]</p>
+</blockquote>
+<p>A "discovery" in this series is one published OSV record in the OSS-Fuzz
+ecosystem. The count is not severity-weighted and is not restricted to any
+single codebase. Records carry an ecosystem and dates but no finder credit
+and no severity field.</p>
+<h2 id="facts">Facts</h2>
+<ul>
+<li><strong>by-year (record id):</strong> 2020: 1,041 · 2021: 739 · 2022: 710 · 2023: 581 · 2024: 388 · 2025: 244 · 2026 (through 2026-08-10): 241</li>
+<li><strong>2026 annualized:</strong> roughly 396 records</li>
+<li><strong>total:</strong> 3,944 records over 2020–2026</li>
+<li><strong>clock gap:</strong> quarters by published date sum to 247 records in 2026 against 241 by record id</li>
+</ul>
 <p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
 as cumulative vulnerability records to date:</p>
 <p><img alt="Cumulative vulnerability records to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-oss-fuzz/cumulative-cyber-oss-fuzz.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<h2 id="method">Method</h2>
+<p>Both CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/fetch.py"><code>fetch.py</code></a> from the same OSV archive, on
+two different clocks. The annual <code>ossfuzz-discoveries.csv</code> counts records by
+the year embedded in the record identifier (<code>OSV-YYYY-N</code>); the quarterly
+<code>ossfuzz-by-quarter.csv</code> buckets the same records by their <code>published</code> date.
+Records predating 2020 were backfilled into OSV during 2021, so their
+publication dates all land in that year; counting by identifier year avoids
+assigning those 267 pre-2020 records to 2021, and the series is reported from
+2020, where the two clocks agree closely (1,041 against 1,031 for 2020, 710
+against 716 for 2022). The clocks can still disagree at a year boundary; the
+2026 gap is stated in the facts above. Records published after the
+repository's snapshot date (<code>AS_OF_DATE</code> in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/chart.py"><code>../../lib/chart.py</code></a>) are dropped, so a refetch
+reproduces the committed window; that snapshot is the <code>data_through</code> date the
+partial rows carry.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/figure.py"><code>figure.py</code></a> calls the shared <code>periodic_stacked()</code> shape in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which draws a single amber
-bar per quarter from the <code>discoveries</code> column of <code>ossfuzz-by-quarter.csv</code>.
-Amber is the fuzzer colour throughout this collection, so the whole chart is
-the band that appears as a thin stripe inside the Firefox and OpenSSL charts.
-There is no AI classification here because the records carry no finder credit
-to classify. The <code>partial_quarter</code> row is outlined in dark grey, and its
-annotation names the <code>data_through</code> date carried on the CSV's final row.</p>
-<p>The axis is linear and January 2026 onward is shaded, as in every figure here.</p>
-<p>Both CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/fetch.py"><code>fetch.py</code></a> from the same archive, on two
-different clocks. The annual <code>ossfuzz-discoveries.csv</code> counts records by the
-year embedded in the record identifier (<code>OSV-YYYY-N</code>) rather than by the
-<code>published</code> date. That choice matters. Records predating 2020 were backfilled
-into OSV during 2021, so their publication dates all land in that year and
-would manufacture a spurious 2021 peak while emptying 2016 to 2019. The two
-fields agree closely from 2020 onward — 1,041 against 1,031 for 2020, 710
-against 716 for 2022 — so the series is reported from 2020 and the 267 earlier
-records are dropped. The quarterly CSV buckets the same records by their
-<code>published</code> date, which is trustworthy in that range; the two clocks can still
-disagree slightly at a year boundary, and in 2026 the quarters sum to 247
-records against 241 by record id. Records published after the repository's
-snapshot date (<code>AS_OF_DATE</code> in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/chart.py"><code>../../lib/chart.py</code></a>) are
-dropped, so a refetch reproduces the committed window; that snapshot is the
-<code>data_through</code> date the partial rows carry. The annual CSV keeps the id-year
-series the prose quotes and <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/check.py"><code>check.py</code></a> recomputes.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, drawing one amber bar per
+quarter from the <code>discoveries</code> column — amber is the collection's fuzzer
+colour. There is no AI/human split because the records carry no finder
+credit. The partial quarter is outlined and annotated with the <code>data_through</code>
+date. The axis is linear and January 2026 onward is shaded, as in every
+figure here. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/check.py"><code>check.py</code></a> recomputes the fact lines from the
+annual CSV.</p>
+<h2 id="limitations">Limitations</h2>
 <ul>
-<li><strong>This is publication, not discovery.</strong> These are the findings OSS-Fuzz chose
-  to publish through OSV, so a change in disclosure practice would move the
-  series and nothing here rules that out.</li>
-<li><strong>The project set is not fixed.</strong> Unlike curl or OpenSSL this is not a clean
-  per-codebase depletion curve; the target set grew while the count fell, which
-  strengthens the reading but is not the same measurement.</li>
-<li><strong>No severity anywhere.</strong> The records carry none, so nothing here says whether
-  the declining finds were getting shallower, deeper, or neither.</li>
-<li><strong>No finder attribution at all.</strong> There is no AI-versus-human split to be made
-  in this series, only the programme-level total.</li>
-<li><strong>The 2026 annualization is this repository's arithmetic</strong>, scaled from a
-  part-year on the assumption of an even rate, which fuzzing output need not
-  follow.</li>
+<li><strong>publication, not discovery.</strong> The series counts findings OSS-Fuzz
+  published through OSV; a change in disclosure practice would move it, and
+  nothing in the data distinguishes that from a change in yield.</li>
+<li><strong>the project set is not fixed.</strong> Enrolment changed over the period, and no
+  per-project denominator is vendored here, so the series is programme output
+  rather than a per-codebase depletion curve.</li>
+<li><strong>no severity field.</strong> Nothing in the records supports comparing the
+  consequence of a 2020 finding with a 2026 one.</li>
+<li><strong>no finder attribution.</strong> The records name no finder, so no AI/human split
+  can be made from this series.</li>
+<li><strong>the 2026 annualization is this repository's arithmetic</strong>, scaled from a
+  part-year on an even-rate assumption.</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>None is separable in this series, and that is the point of including it. OSV
-records an ecosystem and a date but no finder, so there is no credit string to
-classify the way the curl, OpenSSL and Firefox records allow. The one place the
-boundary genuinely blurs is OSS-Fuzz-Gen, an LLM-assisted generator of fuzzing
-harnesses: it appears by name in OpenSSL's credits, and this collection counts
-those CVEs as fuzzing because the credit names the fuzzer. So models have
-touched the tooling, but the published OSS-Fuzz records do not identify an LLM
-discovery flow and this chart should not be read as evidence either way about
-one [@osv2026ossfuzz; @google2026ossfuzz].</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The declining yield here is the depletion mechanism this collection exists to
-test, measured on automated search with no models in it; the heterogeneity of
-such rates across algorithm families is Sherry and Thompson's subject
-[@sherry2021fast]. Autonomous discovery long predates language models, and the
-2016 DARPA Cyber Grand Challenge is the standing reminder that machines were
-already finding and patching bugs in unseen software [@darpa2016cgc]. Google's
-own AI vulnerability work runs alongside this programme rather than inside it
-[@googlebigsleep2024]. The three finder-credited series this one is a control
-for are <a href="cyber-curl.html">curl</a>, <a href="cyber-openssl.html">OpenSSL</a>
-and <a href="cyber-firefox.html">Firefox</a>.</p>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>No OSS-Fuzz record names a finder, so no record carries an AI credit, as of
+the 2026-08-10 read of the archive. One adjacent fact: OSS-Fuzz-Gen, an
+LLM-assisted generator of fuzzing harnesses, appears by name in OpenSSL
+credit strings vendored in <a href="cyber-openssl.html"><code>../cyber-openssl/</code></a>,
+and this collection classifies those CVEs as fuzzing because the credit
+names the fuzzer [@osv2026ossfuzz; @google2026ossfuzz].</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@osv2026ossfuzz] — the OSV export the CSVs are built from.</li>
+<li>[@google2026ossfuzz] — the programme's documentation, quoted above for its
+  stated scale.</li>
+<li>[@darpa2016cgc] — the 2016 Cyber Grand Challenge, cited as the dated
+  precedent for autonomous vulnerability discovery without language models.</li>
+<li>[@googlebigsleep2024] — Google's AI vulnerability-discovery work, which
+  runs outside this programme; no record here is attributed to it.</li>
+<li>[@sherry2021fast] — measured heterogeneity of improvement rates across
+  algorithm families, the published base rate for declining yields.</li>
+<li>Finder-credited series over codebases this programme also fuzzes:
+  <a href="cyber-curl.html">curl</a>, <a href="cyber-openssl.html">OpenSSL</a>,
+  <a href="cyber-firefox.html">Firefox</a>.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-oss-fuzz/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

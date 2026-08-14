@@ -42,126 +42,298 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Ben Green&#x27;s 100 open problems</h1>
 <p><strong>Domain:</strong> mathematics
+<strong>Role:</strong> prestige ledger
 <strong>Metric:</strong> dated resolutions per year across 101 scored rows
-<strong>Coverage:</strong> 2018–2026, with dated resolutions running 2019 to 2025; statuses as the list's December 2025 revision records them
+<strong>Coverage:</strong> 2018–2026; statuses as the December 2025 revision records them, read 2026-08-13; dated resolutions 2019–2025
 <strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-green/green-problems.csv"><code>green-problems.csv</code></a>
 <strong>Upstream:</strong> <a href="https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf">https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf</a>
-<strong>Verdict:</strong> no acceleration — under two dated resolutions per year since the list circulated, none dated 2026, and none AI-attributed</p>
+<strong>Verdict:</strong> no acceleration — 0 dated resolutions in 2026 against 3 in 2025 and a 1.9/year mean over 2019–2025</p>
 <h3>Per-problem resolution timeline</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Open problems sit on the right edge. Hover a point for resolver and notes.</p>
-<h2 id="the-problem">The problem</h2>
-<p>Ben Green's "100 open problems" is a working mathematician's list: one hundred
-questions in additive combinatorics, number theory, discrete geometry and
-harmonic analysis, circulated since 2018 and revised roughly yearly, with the
-statuses updated by the list's own author as problems fall. It sits between the
-prestige lists and the Erdős catalogue in character — broader and more personal
-than <a href="math-hilbert.html">Hilbert</a> or
-<a href="math-millennium.html">Millennium</a>, but curated by one expert rather
-than crowd-assembled — and it earns a place here because Green marks his own
-scoreboard: a problem's heading carries "(Solved)" when he judges it solved,
-and a dated update note names what solved it.</p>
-<p>A "discovery" in this series is a row carrying Green's solved marker together
-with the year of the update note recording the solution, which in every case
-but one is also the year the resolving work first appeared; the exception is
-Problem 9(i), where the update note is dated a year after the Kelley–Meka
-preprint and the row carries the preprint's year. The document self-dates its
-most recent revision to December 2025, so the ledger is a snapshot of his
-scoring as of that revision, read on 2026-08-13.</p>
+<h2 id="definition">Definition</h2>
+<p>Ben Green's "100 open problems" is a list of one hundred questions in
+additive combinatorics, number theory, discrete geometry and harmonic
+analysis, circulated since 2018 and revised by its author, with statuses
+updated as problems fall [@green2025openproblems]. A problem's heading
+carries "(Solved)" when Green marks it solved, and a dated update note names
+what solved it. The document states its own revision cadence:</p>
+<blockquote>
+<p>"Perhaps once a year or so. Most recent update: December 2025. Updates are
+generally in the form of additional remarks, with the original text
+unchanged."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<p>A "discovery" in this series is a row carrying Green's solved marker
+together with the year of the update note recording the solution. In every
+case but one that is also the year the resolving work first appeared; the
+exception is Problem 9(i), where the update note is dated a year after the
+Kelley–Meka preprint and the row carries the preprint's year. The ledger is
+a snapshot of the December 2025 revision, read on 2026-08-13.</p>
 <p>There are 101 scored rows rather than 100 problems because Problem 9's part
-(i) carries its own solved marker while parts (ii) and (iii) stand open, so it
-is split into two rows, following how the <a href="math-smale.html">Smale ledger</a>
-handles its split row 11.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>Of the 101 scored rows, 13 of them carry a dated resolution, running 2019 to
-2025: 2 in 2019, 2 in 2021, 1 in 2022, 4 in 2023, 1 in 2024, and 3 in 2025.
-One row is scored partial — Problem 11, which Green marks "mostly solved" —
-and 87 rows stand open. That is 13 resolutions in 7 years, a steady rate of
-just under two per year, with no upward bend at the agent era and no dated
-resolution in 2026 at all in this snapshot.</p>
-<p>The names on the resolutions are the small circle familiar from the
-<a href="math-erdos.html">Erdős catalogue's</a> recent surge — Sah and Sawhney
-appear on three rows, Bedert on one, and Green himself on two — and every one
-of them is human. The one AI event Green's document records is not a
-resolution: a 2025 update to Problem 35 notes that an "AI-based approach" —
-AlphaEvolve [@novikov2025alphaevolve] — improved the upper bound on the
-autoconvolution constant $c_\infty$ from 0.75049 to 0.75026, the same family
-of constants whose lower-bound ladder is tracked in
-<a href="math-sums-autoconvolution.html">math-sums-autoconvolution</a>.</p>
+(i) carries its own solved marker while parts (ii) and (iii) stand open, so
+it is split into two rows — the same split rule the
+<a href="math-smale.html">Smale ledger</a> applies to its row 11. A heading
+marked "(Mostly solved)" is scored partial.</p>
+<h2 id="facts">Facts</h2>
+<ul>
+<li><strong>rows:</strong> 101 scored; 13 resolved with a dated year; 1 partial; 87 open</li>
+<li><strong>span:</strong> dated resolutions 2019–2025</li>
+<li><strong>by-year:</strong> 2019: 2 · 2021: 2 · 2022: 1 · 2023: 4 · 2024: 1 · 2025: 3</li>
+<li><strong>ai-attributed:</strong> 0 of 13 dated resolutions</li>
+</ul>
 <p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
-ledger as rows remaining, declining as dated resolutions arrive:</p>
+ledger as rows remaining:</p>
 <p><img alt="Rows remaining without a dated resolution." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/math-green/cumulative-math-green.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<h3 id="1-sum-free-subsets-of-size-n3-n">1 — Sum-free subsets of size n/3 + ω(n)</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2025</li>
+<li><strong>resolver:</strong> Bedert</li>
+<li><strong>notes:</strong> Any n-element integer set has a sum-free subset of size n/3 + c log log n</li>
+</ul>
+<blockquote>
+<p>"Update 2025. Bedert [28] has solved the original question, showing that
+any set A ⊂ Z of size n contains a sum-free set of size at least
+n/3 + c log log n."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="4-largest-product-free-set-in-the-alternating-group">4 — Largest product-free set in the alternating group</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2022</li>
+<li><strong>resolver:</strong> Keevash–Lifshitz–Minzer</li>
+<li><strong>notes:</strong> Solved with a stability result characterising extremal sets</li>
+</ul>
+<blockquote>
+<p>"Update 2022. This question has been solved (together with a stability
+result characterising sets close to the extremum) by Keevash, Lifshitz and
+Minzer [192]."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="9a-is-r3n-below-nlog-n10">9a — Is r3(N) below N/(log N)^10</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2023</li>
+<li><strong>resolver:</strong> Kelley–Meka</li>
+<li><strong>notes:</strong> Green marks part (i) solved; his 2024 update records the 2023 Kelley–Meka bound</li>
+</ul>
+<blockquote>
+<p>"Update 2024. In a remarkable breakthrough, Kelley and Meka [194] […]"
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="11-progressions-with-square-minus-one-or-prime-minus-one-differences">11 — Progressions with square-minus-one or prime-minus-one differences</h3>
+<ul>
+<li><strong>status:</strong> partial</li>
+<li><strong>resolved:</strong></li>
+<li><strong>resolver:</strong></li>
+<li><strong>notes:</strong> Marked mostly solved: Peluse–Sah–Sawhney 2023 and Leng 2025 settle part (i) up to what Green concedes is reasonable; Tao–Teräväinen 2021 advanced part (ii)</li>
+</ul>
+<blockquote>
+<p>"Update 2023. Depending on one’s definition of ‘reasonable’, problem (i)
+has been resolved by Peluse, Sah and Sawhney [241] […]"
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="14-is-w3r-polynomial-in-r">14 — Is W(3;r) polynomial in r</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2021</li>
+<li><strong>resolver:</strong> Green</li>
+<li><strong>notes:</strong> Resolved in the negative by a superpolynomial lower bound</li>
+</ul>
+<blockquote>
+<p>"Update 2021. I [150] resolved this question in the negative by proving a
+lower bound of shape […]"
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="19-corner-count-exponent-over-f2n">19 — Corner-count exponent over F2^n</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2019</li>
+<li><strong>resolver:</strong> Fox–Sah–Sawhney–Stoner–Zhao</li>
+<li><strong>notes:</strong> Showed the exponent C equals 4</li>
+</ul>
+<blockquote>
+<p>"Update 2019. This question has been resolved by Fox, Sah, Sawhney,
+Stoner, and Zhao [125], showing that C = 4."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="23-monochromatic-x-and-y-with-x2y2-a-square">23 — Monochromatic x and y with x^2+y^2 a square</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2023</li>
+<li><strong>resolver:</strong> Frantzikinakis–Klurman–Moreira</li>
+<li><strong>notes:</strong> Partition regularity of Pythagorean pairs; the full x^2+y^2=z^2 question stays open</li>
+</ul>
+<blockquote>
+<p>"Update 2023. This problem has now been resolved by Frantzikinakis,
+Klurman and Moreira [128]."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="26-do-100-cubes-in-f3n-sum-to-everything">26 — Do 100 cubes in F3^n sum to everything</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2025</li>
+<li><strong>resolver:</strong> Yu</li>
+<li><strong>notes:</strong> Solved with 100 replaced by 4; the Fp^n analogue remains open</li>
+</ul>
+<blockquote>
+<p>"Update 2025. Yang Yu [308] has solved the original problem (with 100
+replaced by 4)."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="49-martons-conjecture-polynomial-freimanruzsa-over-f2">49 — Marton's conjecture (polynomial Freiman–Ruzsa over F2)</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2023</li>
+<li><strong>resolver:</strong> Gowers–Green–Manners–Tao</li>
+<li><strong>notes:</strong> The integer analogue remains wide open</li>
+</ul>
+<blockquote>
+<p>"Update 2023. This has been solved by Gowers, Manners, Tao and me [135]."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="67-warings-problem-over-finite-fields">67 — Waring's problem over finite fields</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2025</li>
+<li><strong>resolver:</strong> Sawin</li>
+<li><strong>notes:</strong> Algebro-geometric asymptotic formula with s = O(k) summands</li>
+</ul>
+<blockquote>
+<p>"Update 2025. Sawin [275] has used algebro-geometric methods to obtain an
+asymptotic formula with s = O(k), provided say p ⩾ 2k."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="78-measure-growth-aa-4a-in-so3">78 — Measure growth µ(A·A) ≥ (4−ε)µ(A) in SO(3)</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2023</li>
+<li><strong>resolver:</strong> Jing–Tran–Zhang</li>
+<li><strong>notes:</strong> Machado subsequently extended the result to all compact connected Lie groups</li>
+</ul>
+<blockquote>
+<p>"Update 2023. The original question has been resolved positively by Jing,
+Tran and Zhang [183]."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="84-flat-littlewood-polynomials-exist">84 — Flat Littlewood polynomials exist</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2019</li>
+<li><strong>resolver:</strong> Balister–Bollobás–Morris–Sahasrabudhe–Tiba</li>
+</ul>
+<blockquote>
+<p>"Update 2019. This problem, though not the further problems below, has now
+been solved in very nice work of Balister, Bollobás, Morris, Sahasrabudhe
+and Tiba [18]."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="91-friendly-bisections-of-random-graphs">91 — Friendly bisections of random graphs</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2021</li>
+<li><strong>resolver:</strong> Ferber–Kwan–Narayanan–Sah–Sawhney</li>
+<li><strong>notes:</strong> Minzer–Sah–Sawhney 2023 comprehensively strengthened the result</li>
+</ul>
+<blockquote>
+<p>"Update 2021. Ferber, Kwan, Narayanan, Sah and Sawhney [118] have shown
+that this is indeed true."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h3 id="95-positive-proportion-of-integers-as-sums-of-two-palindromes">95 — Positive proportion of integers as sums of two palindromes</h3>
+<ul>
+<li><strong>status:</strong> resolved</li>
+<li><strong>resolved:</strong> 2024</li>
+<li><strong>resolver:</strong> Zakharov</li>
+<li><strong>notes:</strong> Resolved in the negative: such integers have density zero</li>
+</ul>
+<blockquote>
+<p>"Update 2024. D. Zakharov [309] has shown that the answer to Problem 95 is
+negative […]"
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<h2 id="method">Method</h2>
+<p>There is no <code>fetch.py</code>. The rows are hand-scored from the PDF itself: the
+status column follows the "(Solved)" and "(Mostly solved)" markers Green
+puts on problem headings, the year comes from his dated update notes, and
+the resolver from the names those notes credit. A problem counts as resolved
+exactly when the list's own author marks it so; the scoring is rebuildable
+by reading the same PDF.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-green/figure.py"><code>figure.py</code></a> calls the shared <code>problem_list_chart()</code> shape in
 <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, reading
 <code>green-problems.csv</code>, keeping rows with <code>status</code> equal to <code>resolved</code> and a
 non-empty <code>resolved_year</code>, and counting resolution events by year from the
 2018 <code>list_year</code> to the present. The cumulative view is the shared
-<code>ledger_remaining_chart()</code>.</p>
-<p>There is no <code>fetch.py</code>. The rows are hand-scored from the PDF itself: the
-status column follows the "(Solved)" and "(Mostly solved)" markers Green puts
-on problem headings, the year comes from his dated update notes, and the
-resolver from the names those notes credit. The scoring rule is deliberately
-his, not this repository's — a problem counts as resolved exactly when the
-list's own author marks it so — which makes the ledger rebuildable by anyone
-reading the same PDF, at the cost of the lag documented below.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<code>ledger_remaining_chart()</code>. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-green/check.py"><code>check.py</code></a> recomputes the fact lines
+and the register entries from the CSV.</p>
+<h2 id="limitations">Limitations</h2>
 <ul>
-<li><strong>The ledger lags the mathematics by up to a revision cycle.</strong> Green updates
-  roughly once a year, so a problem solved after December 2025 still reads
-  open here. This is not hypothetical: Problem 90 was resolved by Ma, Tang and
-  Xu in May 2026 (arXiv 2605.13454), and its row keeps the document's open
-  status with a note. The zero at 2026 on the chart is an artifact of the
-  revision cycle, not a measurement of 2026.</li>
-<li><strong>An update year is not a solution date.</strong> The rule dates each resolution to
-  Green's update note, which usually matches the resolving preprint's year but
-  is his bookkeeping, not the event itself.</li>
-<li><strong>Marker judgments are one mathematician's.</strong> Problem 22's 2025 bound
-  "arguably addresses the original formulation" in Green's own words, and
-  Problem 87's solution was announced at Oberwolfach in November 2025 by
-  Sawhney in joint work with Green himself — yet neither heading is marked
-  solved, so neither is counted. A different scorer would draw the line
-  elsewhere.</li>
-<li><strong>Thirteen events cannot set a slope.</strong> At under two resolutions per year,
-  a one-year gap or cluster is noise; the flat verdict is a reading of scale,
-  not a fitted trend.</li>
-<li><strong>Selection is personal.</strong> The list is what one expert found beautiful and
-  plausibly attackable around 2018, which is not a sample of mathematics, and
-  several rows overlap the Erdős catalogue and the
-  <a href="math-frontiermath-open.html">FrontierMath list</a> (Problems 72 and 81
-  appear on the latter), so the ledgers are correlated.</li>
-<li><strong>Resolution landmarks are not effort-adjusted discovery rates</strong>, here as on
-  every ledger in this collection.</li>
+<li><strong>revision lag.</strong> Green updates roughly once a year, so a problem solved
+  after December 2025 still reads open here. Problem 90 was resolved by Ma,
+  Tang and Xu in May 2026 (arXiv 2605.13454) per its row's note; the row
+  keeps the document's open status. The zero at 2026 on the chart is an
+  artifact of the revision cycle, not a measurement of 2026.</li>
+<li><strong>update years are not solution dates.</strong> The rule dates each resolution to
+  Green's update note, which usually matches the resolving preprint's year
+  but is his bookkeeping, not the event itself.</li>
+<li><strong>single scorer.</strong> Statuses are one mathematician's markings. Problem 22's
+  heading stands unmarked although its 2025 update records a Green–Sawhney
+  bound that, in Green's words, "arguably addresses the original
+  formulation of the problem"; Problem 87's heading stands unmarked although
+  its 2025 update records that "At a meeting in Oberwolfach in November
+  2025, Sawhney announced a solution (in joint work with me) to this
+  problem".</li>
+<li><strong>sample size.</strong> Thirteen dated events over 2019–2025; no rate or trend is
+  estimable from this series.</li>
+<li><strong>selection.</strong> The list is one expert's choice of problems around 2018,
+  not a sample of mathematics; several rows overlap the
+  <a href="math-erdos.html">Erdős catalogue</a>, and Problems 72 and 81 are
+  also posed as
+  <a href="math-frontiermath-open.html">FrontierMath open problems</a>, so the
+  ledgers are correlated.</li>
+<li><strong>resolution landmarks are not effort-adjusted discovery rates.</strong></li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>None, on the resolution ledger — every solved marker credits human
-mathematicians. The document's one AI event is the AlphaEvolve bound
-improvement on Problem 35 noted above [@novikov2025alphaevolve]: a numerical
-record on a continuous quantity, exactly the shape of contribution the
-<a href="math-alphaevolve-records.html">AlphaEvolve records series</a> tracks,
-and not a resolution. Around the list rather than on it, Google DeepMind's
-formal-conjectures project maintains a milestone formalizing these problems'
-statements in Lean (<a href="https://github.com/google-deepmind/formal-conjectures/milestone/2">https://github.com/google-deepmind/formal-conjectures/milestone/2</a>),
-the same statement-formalization infrastructure whose growth the
-<a href="math-erdos.html">Erdős catalogue</a> charts — a marker that AI groups
-treat this list as a target set, which makes the zero on its scoreboard the
-interesting number. The contrast with the Erdős catalogue is the point: on
-that neighbouring corpus, AI systems resolved dozens of problems in 2026 under
-a cheap-verification selection; on this list, whose problems ask for bounds
-and structural understanding rather than machine-checkable objects, the AI
-column is empty.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The list and every status in this ledger are Green's own document
-[@green2025openproblems]; the AlphaEvolve note it carries is documented by the
-system's paper [@novikov2025alphaevolve]. The Kelley–Meka bound behind row
-9(i) and the Gowers–Green–Manners–Tao resolution of Marton's conjecture behind
-row 49 are the two results here with their own literatures. The neighbouring
-instruments are the <a href="math-erdos.html">Erdős catalogue</a> and its
-<a href="math-erdos-top10.html">top-10 subset</a>, where AI activity is intense,
-and the prestige ledgers (<a href="math-hilbert.html">Hilbert</a>,
-<a href="math-landau.html">Landau</a>, <a href="math-thurston.html">Thurston</a>,
-<a href="math-smale.html">Smale</a>, <a href="math-millennium.html">Millennium</a>,
-<a href="math-topp.html">TOPP</a>), which move less than this list does.</p>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>No solved marker in the December 2025 revision credits an AI system: 0 of
+the 13 dated resolutions carry AI credit, and every resolver named in the
+ledger is a human mathematician or group of mathematicians, as of the
+2026-08-13 read. The one AI event the document records is not a resolution
+but a bound improvement, in the 2025 update to Problem 35:</p>
+<blockquote>
+<p>"Update 2025. An AI-based approach [313] has slightly improved the upper
+bound of Matolcsi and Vinuesa to c∞ ⩽ 0.75026."
+— Ben Green, 100 open problems (December 2025 revision), read 2026-08-13 [@green2025openproblems]</p>
+</blockquote>
+<p>The document's reference [313] is "Google DeepMind, AlphaEvolve: A coding
+agent for scientific and algorithmic discovery, white paper"; the system is
+documented in [@novikov2025alphaevolve]. The prior bound in the same
+problem's comments is c∞ ⩽ 0.75049. The autoconvolution constants are the
+family whose lower-bound ladder
+<a href="math-sums-autoconvolution.html">math-sums-autoconvolution</a> tracks,
+and the bound-improvement contribution type is the one
+<a href="math-alphaevolve-records.html">math-alphaevolve-records</a> counts.
+Google DeepMind's formal-conjectures project maintains a milestone
+formalizing this list's statements in Lean
+(<a href="https://github.com/google-deepmind/formal-conjectures/milestone/2">https://github.com/google-deepmind/formal-conjectures/milestone/2</a>); that
+is statement formalization, not resolution, and no formalization changes any
+status in this ledger.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@green2025openproblems] — the list; every status, update note, and quote
+  in this ledger.</li>
+<li>[@novikov2025alphaevolve] — AlphaEvolve, the system behind the document's
+  reference [313] and the Problem 35 bound improvement.</li>
+<li>Ledgers over overlapping corpora: the
+  <a href="math-erdos.html">Erdős catalogue</a> and its
+  <a href="math-erdos-top10.html">top-10 subset</a>, and the
+  <a href="math-frontiermath-open.html">FrontierMath open-problems pool</a>,
+  which poses Problems 72 and 81 under its own framing.</li>
+<li>Prestige ledgers of the same instrument type:
+  <a href="math-hilbert.html">Hilbert</a>, <a href="math-landau.html">Landau</a>,
+  <a href="math-thurston.html">Thurston</a>, <a href="math-smale.html">Smale</a>,
+  <a href="math-millennium.html">Millennium</a>, <a href="math-topp.html">TOPP</a>.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/math-green/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

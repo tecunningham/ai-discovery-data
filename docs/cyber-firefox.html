@@ -42,177 +42,178 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Firefox vulnerability disclosures</h1>
 <p><strong>Domain:</strong> vulnerabilities
+<strong>Role:</strong> discovery series
 <strong>Metric:</strong> distinct CVEs per quarter, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count
-<strong>Coverage:</strong> 2016–2026, partial through the latest advisory on 4 August 2026
+<strong>Coverage:</strong> 2016–2026, partial through 2026-08-04, the latest advisory in the snapshot
 <strong>Data:</strong> per-CVE ledger <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-cves.csv"><code>firefox-cves.csv</code></a>; quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-quarterly.csv"><code>firefox-quarterly.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-advisories.csv"><code>firefox-advisories.csv</code></a>; per-reporter rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-finders.csv"><code>firefox-finders.csv</code></a>; every AI-marked CVE with its credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-ai-cves.csv"><code>firefox-ai-cves.csv</code></a>
 <strong>Upstream:</strong> <a href="https://github.com/mozilla/foundation-security-advisories">https://github.com/mozilla/foundation-security-advisories</a> (rendered at <a href="https://www.mozilla.org/en-US/security/advisories/">https://www.mozilla.org/en-US/security/advisories/</a>)
-<strong>Verdict:</strong> accelerating — though distinct CVEs rose 44% from 2021 to 2025 with essentially no AI credit</p>
+<strong>Verdict:</strong> accelerating — 342 distinct CVEs through 2026-08-04 against 210 in 2025; the part year alone is 1.6 times the 2025 full year</p>
 <h3>Distinct CVEs</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial quarter.</p>
 <h3>Every distinct CVE, by impact</h3>
 <div id="chart1" class="chart"></div>
 <p class="note">Mozilla&#x27;s advisory impact rating; colour is the credit band. The few undated CVEs are absent.</p>
-<h2 id="the-problem">The problem</h2>
-<p>Mozilla publishes one YAML file per security advisory, and each CVE inside it
-carries a <code>reporter</code> string. The same CVE can appear in advisories for several
-products or releases, so a mention count moves with how Mozilla packages
-releases as well as with discovery. The plotted unit is therefore the distinct
-CVE ID: a flaw fixed in Firefox, Firefox ESR and Thunderbird on the same day is
-one discovery, not three. That makes Firefox the third fixed codebase in this
-collection where the finder is named, and by far the largest: a browser is two
-orders of magnitude bigger than curl, with a correspondingly bigger attack
-surface and a much larger population of people looking at it.</p>
-<p>Firefox adds something the other two records barely support. Mozilla's reporter
-strings frequently name a fuzzer, so fuzzing can be counted as its own category
-rather than being folded into either the human or the AI side. That distinction
-is the whole reason this series is worth having next to curl: it separates
-"automated search found it" from "a model found it", which is exactly the
-ambiguity the 2026 numbers otherwise carry.</p>
-<p>A "discovery" here is one distinct CVE ID appearing in that year's advisories.
-It is a disclosure count, not a count of bugs found or bugs remaining.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>A codebase whose distinct-CVE count was drifting up slowly and then jumped: 65
-in 2016, 187 in 2017, then a range of roughly 140 to 200 a year through 2024,
-210 in 2025, and 342 through the latest advisory on 4 August 2026 — a part-year
-total already 1.6 times the 2025 full year. The quarterly bars locate that
-surge: 126 distinct CVEs in 2026-Q1 and 146 in 2026-Q2, each larger than any
-complete quarter before them.</p>
-<p>The AI bands appear almost from nothing. No reporter string carries an AI marker
-until 2025, which has exactly one, and 2026 has 37 AI-marked distinct CVEs, or
-11% of that year's total. Those 37 divide into 32 whose credit names an AI system
-or method and 5 that name only an AI-security employer.
-The fuzzer band moves quite differently: 3 distinct CVEs in 2018, 4 in 2022, then
-12, 17, 30 and 32 across 2023 to 2026. The fuzz part year already tops 2025 and
-annualizes to about 54, so fuzzer-credited discovery kept growing through the
-same step where AI-credited discovery went from 1 to 37.</p>
-<p>Three things cut the finding down. Distinct CVEs rose 44% from 2021 to 2025 with
-essentially no AI credit anywhere, so an upward trend was already running and
-nothing here separates AI from Mozilla's own growing security investment. The
-2016 and 2017 figures reflect a change in how Mozilla bundles CVEs into
-advisories rather than a discovery swing, so the series should not be read
-across that break. And the ratio of mentions to distinct CVEs is itself rising —
-1.8 in 2016, 3.0 in 2025, 3.3 in 2026 — which is why the old mention-based
-headline of "1,140 in 2026, 1.8 times 2025" overstated the change.</p>
-<p><img alt="Firefox CVEs by impact: distinct-CVE counts by Mozilla's impact rating and reporter credit." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-firefox/impact-cyber-firefox.png" /></p>
-<p>The impact heatmap cuts the same per-CVE ledger by Mozilla's own rating, one
-count grid for all finders and one per credit band, so each cell can be read
-as a number rather than a share. Across all finders 46% of distinct CVEs are rated High or Critical and
-15% Low, and the AI-marked set sits close to that mix rather than below it: of
-the 38 AI-marked CVEs, 19 are High, 15 Moderate and 4 Low, with none Critical —
-50% Low or Moderate against 54% across all finders. On a base of 38 that is at
-most an absence of evidence that the AI credits are shallow, but it runs
-against the pattern in <a href="cyber-openssl.html">OpenSSL</a>, whose
-corroborated-AI cohort is mostly Low. The band that does depart from the
-codebase mix is the fuzzer one: 79 of its 100 CVEs are High or Critical, which
-is what fuzzers are pointed at — the memory-safety crashes Mozilla rates
-highest. Unrated is a missing rating, not a mild one; its row stays on the
-chart because 1 of the 1,974 ledger rows carries it.</p>
-<p><img alt="Advisory–CVE mentions against distinct CVE IDs for Firefox." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-firefox/counting-units-cyber-firefox.png" /></p>
-<p>The two units are plotted together above. The gap between them is Mozilla's
-packaging: more products shipping the same fix multiply mentions without adding
-a discovery.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as cumulative distinct CVEs to date:</p>
-<p><img alt="Cumulative distinct CVEs to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-firefox/cumulative-cyber-firefox.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/figure.py"><code>figure.py</code></a> draws stacked quarterly bars from
-<code>firefox-quarterly.csv</code>: <code>other</code> in blue, <code>fuzz</code> in amber, <code>ai_affiliated</code> in
-pale red and <code>explicit_ai</code> in full red, with the <code>partial_quarter</code> bar outlined
-so the incomplete final quarter cannot be misread as a collapse. The two red
-bands are the same family in different strengths because they are different
-grades of evidence, not different kinds of finder. January 2026 onward is
-shaded, as in every figure here. The same script draws the impact heatmap from
-the per-CVE ledger — one count grid for all finders and one per credit band,
-every cell printing its count, with shading scaled within each panel because
-the bands differ by orders of magnitude — and the counting-units chart, which
-is kept separate
-because by 2026 mentions are more than three times distinct CVEs and sharing
-an axis would flatten the bars.</p>
-<p>The axis is linear and nothing is normalized, so a bar twice as tall is twice as
-many distinct CVEs, and the amber band can be compared with the red ones by
-eye.</p>
-<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/fetch.py"><code>fetch.py</code></a>,
-which walks every <code>announce/*.yml</code> file in Mozilla's repository, takes each
-advisory's date and year from its <code>announced</code> field — normalizing the ordinal
-forms a few advisories write, like "December 15th, 2025" — and skips advisories
-announced after the repository's snapshot date, so a refetch reproduces the
-committed window. It classifies each CVE's <code>reporter</code>
-string with two regexes from <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/credits.py"><code>../../lib/credits.py</code></a>.
-The classifier reads three independent signals. <code>EXPLICIT_AI_METHOD</code> matches a
-named system or method — Claude, GPT, Gemini, Big Sleep, Mythos, and the bare
-words "LLM" and "agent". <code>AI_AFFILIATION</code> matches an employer — Anthropic,
-OpenAI, Aisle, XBOW, ZeroPath, AntAISecurityLab — which says who the reporter
-works for and nothing about how the bug was found. <code>FUZZ</code> matches "fuzz" and is
-orthogonal to both, so an AI-written harness can be true in two columns at once.
-Bare "Claude" is accepted only from 2024 onward so a human reporter with that
-given name cannot create a historical AI credit. Pre-2016 advisories do not list
-CVEs in this structure, which is where the series starts.</p>
-<p>Bars need one band per segment, so the chart applies a display precedence:
-method, then affiliation, then fuzz, then none. Where one CVE carries different
-reporter strings in different advisories, its signals are unioned across the year
-before that precedence is applied, so which advisory happened to be read last
-cannot decide its band. The annual CSV keeps the mention-level columns
-(<code>total</code>, <code>ai_attributed</code>, <code>fuzz_attributed</code>, <code>other_attributed</code>) beside the
-distinct-CVE ones, so the older unit remains auditable rather than discarded.</p>
-<p><code>firefox-cves.csv</code> is the ledger the aggregates summarize: one row per distinct
-CVE per year, carrying its earliest announcement date and quarter, the most
-severe impact any of its mentions carries, its credit band and its verbatim
-reporter strings. <code>firefox-quarterly.csv</code> sums it by quarter and band; 15 of
-its 1,974 rows have no parseable announcement date, so those CVEs appear in the
-annual counts but not in any quarter, and the main and cumulative charts state
-that remainder rather than leaving the two grains to disagree silently.
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/check.py"><code>check.py</code></a> recomputes the prose numbers from these files and fails
-when the ledger, the quarterly sums and the annual bands stop agreeing.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<h2 id="definition">Definition</h2>
+<p>Mozilla publishes one YAML file per security advisory, and each CVE inside
+it carries a <code>reporter</code> string. The same CVE can appear in advisories for
+several products or releases, so a mention count moves with how Mozilla
+packages releases as well as with discovery. The counted unit is therefore
+the distinct CVE ID: a flaw fixed in Firefox, Firefox ESR and Thunderbird on
+the same day is one event, not three.</p>
+<p>A "discovery" in this series is one distinct CVE ID appearing in that year's
+advisories, dated by its earliest announcement. It is a disclosure count,
+not a count of bugs found or bugs remaining. Each CVE carries one of four
+credit bands: <code>explicit_ai</code> when a reporter string names an AI system or
+method, <code>ai_affiliated</code> when it names only an AI-security employer, <code>fuzz</code>
+when it names a fuzzer, and <code>other</code> otherwise. Because Mozilla's reporter
+strings frequently name fuzzers, fuzzing is counted as its own band rather
+than folded into the human or the AI side.</p>
+<h2 id="facts">Facts</h2>
 <ul>
-<li><strong>The AI share has error in both directions.</strong> A reporter string is free text,
-  so a researcher who used a model and did not say so counts as human; equally,
-  the 5 affiliation-only CVEs name an employer and not a method, and some of them
-  may have been found by hand. The 11% is not a floor, and only the 32
-  method-naming CVEs are evidence about how a bug was found.</li>
-<li><strong>Distinct CVEs still depend on Mozilla's process.</strong> Deduplicating by CVE ID
-  removes the product-packaging inflation but not the question of when Mozilla
-  assigns one ID versus several to related flaws.</li>
-<li><strong>Impact ratings inherit Mozilla's process.</strong> Older advisories rate the
-  advisory rather than each CVE, so the ledger falls back to the advisory-level
-  <code>impact</code> where a CVE has no rating of its own, and a CVE mentioned at several
-  impacts keeps the most severe. The heatmap reads Mozilla's rating practice as
-  well as flaw depth.</li>
-<li><strong>A disclosure is not a discovery.</strong> The count moves when Mozilla's own
-  advisory process changes, which is visible in the 2016–2017 break.</li>
-<li><strong>The codebase is fixed but the effort is not.</strong> Nothing here gives a
-  denominator of search effort, and Mozilla's security investment grew over the
-  same period.</li>
-<li><strong>2026 is a part-year</strong> through the latest advisory on 4 August, so the final
-  quarter's bar is outlined and should not be compared directly with the
-  complete quarters beside it.</li>
+<li><strong>by-year (distinct CVEs):</strong> 2016: 65 · 2017: 187 · 2018: 152 ·
+  2019: 139 · 2020: 162 · 2021: 146 · 2022: 177 · 2023: 194 · 2024: 200 ·
+  2025: 210</li>
+<li><strong>2026 (through 2026-08-04):</strong> 342 distinct CVEs, 1.6 times the 2025 full
+  year; annualizes to about 578</li>
+<li><strong>2026 quarters:</strong> 126 distinct CVEs in 2026-Q1 and 146 in 2026-Q2, each
+  larger than any complete quarter before them</li>
+<li><strong>prior trend:</strong> distinct CVEs rose 44% from 2021 to 2025; AI-marked CVEs
+  over those years total 1</li>
+<li><strong>ai-marked:</strong> 0 before 2025; 1 in 2025; 37 in 2026, or 11% of the part
+  year — 32 name an AI system or method and 5 name only an AI-security
+  employer</li>
+<li><strong>fuzz band:</strong> 3 distinct CVEs in 2018, 4 in 2022, then 12, 17, 30 and 32
+  across 2023–2026; the part year annualizes to about 54</li>
+<li><strong>mentions per distinct CVE:</strong> 1.8 in 2016, 3.0 in 2025, 3.3 in 2026</li>
+<li><strong>impact mix (all finders):</strong> 46% of distinct CVEs are rated High or
+  Critical and 15% Low</li>
+<li><strong>impact mix (AI-marked):</strong> of the 38 AI-marked CVEs, 19 are High, 15
+  Moderate and 4 Low, with none Critical — 50% Low or Moderate against 54%
+  across all finders</li>
+<li><strong>impact mix (fuzz):</strong> 79 of the 100 fuzz-credited CVEs are High or
+  Critical</li>
+<li><strong>remainders:</strong> 15 of the ledger's 1,974 rows have no parseable
+  announcement date; 1 of the 1,974 ledger rows carries an Unrated impact</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>The concentration is extreme and is the main finding of this series. Of the 37
-AI-marked distinct CVEs in 2026, 31 are credited to a single seven-person team —
-Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman,
-Alex Gaynor and Joel Weinberger, using Claude from Anthropic — so roughly 9% of
-everything Firefox disclosed in 2026 traces to one coordinated effort with one
-tool, and that credit names the model outright. The rest are 11 advisory–CVE
-mentions credited to Amy Burnett of OpenAI, 2 to Artur Cygan of Trail of Bits in
-partnership with OpenAI, 2 to "Claude, Kai Engert", and 1 to OpenAI Preparedness
-with Bill Demirkapi; of these only the Kai Engert credit names a model, which is
-why the affiliation-only band exists. The single 2025 AI credit is Aisle
-Research, an affiliation with no method stated. Alex Gaynor also appears in OpenSSL's credits, so this is not a
-diffuse capability arriving everywhere at once
+<p><img alt="Firefox CVEs by impact: distinct-CVE counts by Mozilla's impact rating and reporter credit." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-firefox/impact-cyber-firefox.png" /></p>
+<p>The impact heatmap cuts the per-CVE ledger by Mozilla's own rating, one
+count grid for all finders and one per credit band, each cell printing its
+count. Unrated is a missing rating, not a mild one; its row stays on the
+chart while the ledger holds such a row.</p>
+<p><img alt="Advisory–CVE mentions against distinct CVE IDs for Firefox." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-firefox/counting-units-cyber-firefox.png" /></p>
+<p>The counting-units chart plots the two units together. The gap between them
+is Mozilla's packaging: more products shipping the same fix multiply
+mentions without adding a distinct CVE.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as cumulative distinct CVEs to date:</p>
+<p><img alt="Cumulative distinct CVEs to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-firefox/cumulative-cyber-firefox.png" /></p>
+<h2 id="method">Method</h2>
+<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/fetch.py"><code>fetch.py</code></a>, which walks every
+<code>announce/*.yml</code> file in Mozilla's repository, takes each advisory's date
+and year from its <code>announced</code> field — normalizing the ordinal forms a few
+advisories write, like "December 15th, 2025" — and skips advisories
+announced after the repository's snapshot date, so a refetch reproduces the
+committed window. It classifies each CVE's <code>reporter</code> string with the shared
+markers in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/credits.py"><code>../../lib/credits.py</code></a>:
+<code>EXPLICIT_AI_METHOD</code> matches a named system or method (Claude, GPT, Gemini,
+Big Sleep, Mythos, and the bare words "LLM" and "agent");
+<code>AI_AFFILIATION</code> matches an employer (Anthropic, OpenAI, Aisle, XBOW,
+ZeroPath, AntAISecurityLab); <code>FUZZ</code> matches "fuzz" and is orthogonal to
+both, so an AI-written harness can be true in two columns at once. Bare
+"Claude" is accepted only from 2024 onward, so a human reporter with that
+given name cannot create a historical AI credit. Pre-2016 advisories do not
+list CVEs in this structure, which is where the series starts.</p>
+<p>Bars need one band per segment, so a display precedence applies: method,
+then affiliation, then fuzz, then none. Where one CVE carries different
+reporter strings in different advisories, its signals are unioned across the
+year before that precedence is applied. The annual CSV keeps the
+mention-level columns (<code>total</code>, <code>ai_attributed</code>, <code>fuzz_attributed</code>,
+<code>other_attributed</code>) beside the distinct-CVE ones, so the older unit remains
+auditable.</p>
+<p><code>firefox-cves.csv</code> is the ledger the aggregates summarize: one row per
+distinct CVE per year, carrying its earliest announcement date and quarter,
+the most severe impact any of its mentions carries, its credit band and its
+verbatim reporter strings. <code>firefox-quarterly.csv</code> sums it by quarter and
+band; rows with no parseable announcement date appear in the annual counts
+but not in any quarter, and the main and cumulative charts state that
+remainder.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/figure.py"><code>figure.py</code></a> draws stacked quarterly bars from
+<code>firefox-quarterly.csv</code>: <code>other</code> in blue, <code>fuzz</code> in amber, <code>ai_affiliated</code>
+in pale red and <code>explicit_ai</code> in full red, with the <code>partial_quarter</code> bar
+outlined. The two red bands are one colour family in two strengths because
+they are two grades of evidence, not two kinds of finder. January 2026
+onward is shaded, as in every figure here. The same script draws the impact
+heatmap from the per-CVE ledger — shading scaled within each panel — and the
+counting-units chart, kept as a separate figure because by 2026 mentions run
+more than three times distinct CVEs and sharing an axis would flatten the
+bars. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/check.py"><code>check.py</code></a> recomputes the fact lines above and fails when
+the ledger, the quarterly sums and the annual bands stop agreeing.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>the AI share has error in both directions.</strong> A reporter string is free
+  text, so a researcher who used a model and did not say so counts as human;
+  equally, the 5 affiliation-only CVEs name an employer and not a method.
+  Only the 32 method-naming CVEs are evidence about how a bug was found.</li>
+<li><strong>distinct CVEs still depend on Mozilla's process.</strong> Deduplicating by CVE
+  ID removes the product-packaging inflation but not the question of when
+  Mozilla assigns one ID versus several to related flaws.</li>
+<li><strong>impact ratings inherit Mozilla's process.</strong> Older advisories rate the
+  advisory rather than each CVE, so the ledger falls back to the
+  advisory-level <code>impact</code> where a CVE has no rating of its own, and a CVE
+  mentioned at several impacts keeps the most severe.</li>
+<li><strong>a disclosure is not a discovery.</strong> The count moves when Mozilla's own
+  advisory process changes; the 2016–2017 step reflects a change in how
+  Mozilla bundles CVEs into advisories, so the series is not comparable
+  across that break.</li>
+<li><strong>the codebase is fixed but the effort is not.</strong> Nothing here gives a
+  denominator of search effort, and Mozilla's security investment grew over
+  the period.</li>
+<li><strong>2026 is a part-year</strong> through the latest advisory on 2026-08-04, so the
+  final quarter's bar is outlined and is not comparable with the complete
+  quarters beside it.</li>
+</ul>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>Of the 37 AI-marked distinct CVEs in 2026, 31 are credited to a single
+seven-person team using Claude; the credit string is identical on all 31
+rows of <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-ai-cves.csv"><code>firefox-ai-cves.csv</code></a>:</p>
+<blockquote>
+<p>"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel
+Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+— Mozilla advisory reporter string for CVE-2026-2763 and 30 further CVEs, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-ai-cves.csv"><code>firefox-ai-cves.csv</code></a>, read 2026-08-14</p>
+</blockquote>
+<p>Those 31 CVEs are roughly 9% of everything Firefox disclosed in 2026 through
+2026-08-04. The remaining 6 AI-marked CVEs of 2026, with credit strings
+quoted from the same file as read 2026-08-14: 3 credit "Amy Burnett of
+OpenAI", 1 credits "Artur Cygan of Trail of Bits in partnership with
+OpenAI", 1 credits "OpenAI Preparedness, Bill Demirkapi" — all affiliation
+credits naming no method — and 1 carries the method-naming credit "Claude,
+Kai Engert" (CVE-2026-14899).</p>
+<p>The single AI-marked CVE of 2025 is CVE-2025-13016, whose reporter strings
+are "Aisle Research | Igor Morgenstern" in the vendored ledger — an
+affiliation with no method stated. No reporter string carries an AI marker
+before 2025, as of the 2026-08-04 snapshot. Alex Gaynor also appears in
+OpenSSL's finder table (<a href="cyber-openssl.html"><code>../cyber-openssl/</code></a>)
 [@anthropicmythos2026; @aisle2026].</p>
-<h2 id="related-literature">Related literature</h2>
-<p>Press coverage frames 2026 as AI finding record numbers of flaws
-[@bloomberg2026recordflaws]; on this codebase that headline is mostly a handful
-of teams. The fuzzer band is the local version of the control in
-<a href="cyber-oss-fuzz.html">OSS-Fuzz</a>, which runs the other way over the same
-period, and the two smaller fixed codebases are <a href="cyber-curl.html">curl</a>
-and <a href="cyber-openssl.html">OpenSSL</a>. Every count here is an aggregation of Mozilla's
-published advisory data [@mozilla2026advisories]. On the reporting side rather
-than the finding side, HackerOne's platform statistics are the only public
-figures on how many reports autonomous systems file and how widely human
-researchers have adopted models [@hackerone2025autonomy].</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@mozilla2026advisories] — the advisory repository every count here
+  aggregates.</li>
+<li>[@bloomberg2026recordflaws] — press reporting connecting the 2026
+  disclosure records to AI systems; the counts here are built from Mozilla's
+  primary record, not from that reporting.</li>
+<li>[@anthropicmythos2026] — Anthropic's Mythos preview, background on the
+  vendor whose model is named in the 31-CVE credit string.</li>
+<li>[@aisle2026] — Aisle Research vendor commentary; Aisle holds the single
+  2025 AI-marked credit.</li>
+<li>[@hackerone2025autonomy] — HackerOne's platform statistics, the only
+  public figures on how many reports autonomous systems file.</li>
+<li>Sibling series: <a href="cyber-curl.html">curl</a> and
+  <a href="cyber-openssl.html">OpenSSL</a> are the other open-source fixed
+  codebases with named finders; <a href="cyber-oss-fuzz.html">OSS-Fuzz</a>
+  counts fuzzer-programme output over the same period, with no finder
+  credit.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-firefox/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

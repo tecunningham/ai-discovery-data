@@ -1,98 +1,97 @@
 # DOI records deposited with Crossref
 
 **Domain:** outside the three domains
+**Role:** contrast case: volume
 **Metric:** formal publishing volume; DOI records deposited with Crossref per year, by created date
-**Coverage:** 2010 to 2026, annual, the last year partial
+**Coverage:** 2010 to 2026, annual, the last year partial through 2026-08-10
 **Data:** [`crossref-dois-by-year.csv`](crossref-dois-by-year.csv)
 **Upstream:** <https://api.crossref.org/works>
-**Verdict:** no acceleration
+**Verdict:** no acceleration — 2026 annualizes to roughly 13.3 million records against 12.80 million in 2025 and an 8.63 million/year mean over 2010–2025
 
 ![DOI records deposited with Crossref each year, 2010 to 2026, drawn as annual bars with 2026 outlined as a part year.](output-crossref-dois.png)
 
-## The problem
+## Definition
 
-This is the control on the other output-volume series. The rest of them rise,
-and a rising curve through the agent era invites the reading that the agent era
-produced it. Crossref is the series that shows what such a curve is worth on its
-own: it counts registrations of formal publications, the most institutionally
-conservative output anywhere in the collection, and it was climbing steeply long
-before there was an agent era to explain it.
+Crossref registers DOIs for scholarly publishing: member publishers deposit
+a metadata record for each item they register, and each record carries a
+`created` date, the day it was registered. The REST API reports how many
+records fall in any created-date range.
 
-Like the rest of the volume folders it is a contrast case rather than a
-discovery series. A deposited DOI is a record that something was published, not
-a result, and nothing here says whether the work behind it was any good.
+An event in this series is one DOI record, counted in the calendar year of
+its `created` date. The count is by registration date, not by publication
+date, so a backfile deposit of older work lands in the year it was
+registered. The last row is the year in progress at fetch time,
+year-to-date through 2026-08-10. The CSV holds the yearly totals the API
+reports; the records behind them are not vendored. The dataset carries no
+authorship field.
 
-## What the chart shows
+## Facts
 
-Deposits rose from 5.28 million records in 2010 to 12.80 million in 2025, up
-143% over fifteen years, with no clean bend anywhere along the way. The rise is
-not smooth: six of those fifteen year-on-year changes are falls, the most recent
-of them in 2024, when deposits dropped to 11.31 million from 12.69 million in
-2023 before recovering to a new high the year after.
+- **span:** from 5.28 million records in 2010 to 12.80 million in 2025, up
+  143%
+- **falls:** six of the fifteen year-on-year changes over 2010–2025 are
+  falls
+- **2024 dip:** deposits fell to 11.31 million from 12.69 million in 2023,
+  then rose to 12.80 million in 2025
+- **2026 year-to-date:** 8,108,195 records through 2026-08-10, annualizing
+  to roughly 13.3 million
 
-That 2024 dip is the most instructive part of the series, because it cannot be
-read as a fall in publishing. The count is by deposit date, so which year a
-record lands in is a fact about when a publisher registered it.
-
-The 2026 bar is drawn outlined and labelled a part year: the last row is the
-year in progress at fetch time, year-to-date through 10 August 2026, and read as a
-full year it would look like a collapse. Every figure in the chart's annotation
-is computed from the CSV when the chart is drawn, so the annotation cannot
-survive a refetch that changes the numbers.
-
-The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
-as cumulative DOI records to date:
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
+series as cumulative DOI records to date:
 
 ![Cumulative DOI records to date.](cumulative-output-crossref.png)
 
-## How the chart was built
+## Method
 
-[`fetch.py`](fetch.py) makes one Crossref REST API request per year from 2010,
-filtered to that year's created-date range and asking for `rows=0` so the
-response is a count rather than the records themselves. The row for the current
-year is marked year-to-date with the date it was fetched. The requests are
-sequential with a sleep between them, which is what keeps a rebuild polite.
+[`fetch.py`](fetch.py) makes one Crossref REST API request per year from
+2010, filtered to that year's created-date range and asking for `rows=0` so
+the response is a count rather than the records themselves. The row for the
+current year is marked year-to-date with the date it was fetched. The
+requests are sequential with a sleep between them, which is what keeps a
+rebuild polite.
 
 [`figure.py`](figure.py) draws the series through
-[`lib/families.py`](../../lib/families.py)'s shared volume shape: years on the
-x-axis, the count on the y-axis, 2026 shaded, the part year outlined rather than
-filled. The three volume folders use that one shape so a difference in appearance
-between any two of them is a difference in the data. It is drawn in slate rather
-than the blue the other charts use for human or uncredited finders, because this
-series has no authorship field at all.
+[`lib/families.py`](../../lib/families.py)'s shared volume shape: years on
+the x-axis, the count on the y-axis, 2026 shaded, the part year outlined
+rather than filled. The three volume folders draw through that one shape.
+The series is drawn in slate rather than the blue used elsewhere for human
+or uncredited finders because it has no authorship field.
+[`check.py`](check.py) recomputes the fact lines from the CSV; the
+annualization uses the shared day-count rule in
+[`lib/prose.py`](../../lib/prose.py).
 
-## What it cannot support
+## Limitations
 
-- **Deposits are not publications.** Backfile deposits of old work land in
-  whatever year they were registered, which is what makes the 2024 dip
-  uninterpretable as a change in publishing.
-- **No authorship labels.** The series does not record whether a human or a
-  model wrote the work behind a record, so no AI share can be read off it.
-- **Volume is not discovery.** These count artifacts registered. The domain
-  folders count results, and the two need not move together.
-- **Membership is not held fixed.** A deposit exists because a publisher who
-  registers DOIs registered one, so the series cannot separate more work being
-  published from more of publishing being registered with Crossref.
-- **No denominator of effort.** Nothing here measures how many researchers were
-  working, so output per unit of input cannot be separated from more input.
+- **deposits are not publications.** The count is by `created` date;
+  backfile deposits of old work land in whatever year they were registered,
+  so a year-on-year fall is not readable as a fall in publishing.
+- **no authorship field.** The CSV records years and counts only; whether a
+  human or a model wrote the work behind a record is not recorded.
+- **volume, not discovery.** The series counts artifacts registered; the
+  domain folders count results, and the two need not move together.
+- **membership is not held fixed.** A deposit exists because a publisher
+  that registers DOIs registered one, so more work being published cannot
+  be separated from more of publishing being registered with Crossref.
+- **no denominator of effort.** Nothing here measures how many researchers
+  were working, so output per unit of input cannot be separated from more
+  input.
+- **the 2026 annualization is this repository's arithmetic**, scaled from a
+  part year on an even-rate assumption.
 
-## LLM contributions
+## AI attribution
 
-Nothing in this series is attributable to a model, by construction: it is a
-count of registrations with no authorship field. The series is here for the
-opposite reason to the others, and the absence works in its favour — the shape
-that matters is the one predating any model at all.
+The dataset carries no authorship field; no AI share can be computed from
+it. [`crossref-dois-by-year.csv`](crossref-dois-by-year.csv) holds a year,
+a count and a part-year note per row; no AI credit appears in it as of the
+2026-08-10 fetch.
 
-The most that can be said about the agent era in this chart is that nothing
-distinctive happens in it. The 2023 high, the 2024 fall and the 2025 recovery
-are the same size as movements the series was already making in the 2010s.
+## Sources
 
-## Related literature
-
-The comparison this folder exists for is with its three siblings, which is why
-[arXiv](../output-arxiv/README.md) names it as its own control.
-[GitHub pushes](../output-github-pushes/README.md) bend upward; this one does
-not, over a longer window than either of them. Set the whole group against
-[curl](../cyber-curl/README.md), where a fixed codebase yields a step change in
-disclosures, and against the mathematics folders such as
-[the Erdős problems](../math-erdos/README.md), where the records barely move.
+- <https://api.crossref.org/works> — the REST API the yearly counts are
+  read from; this page carries no bibliography citekeys, and the counts
+  rest on the API alone.
+- [output-arxiv](../output-arxiv/README.md) and
+  [output-github-pushes](../output-github-pushes/README.md) — the other two
+  volume series, drawn through the same shared shape; they count preprint
+  submissions and git pushes where this folder counts DOI registrations of
+  formal publications.

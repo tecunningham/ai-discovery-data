@@ -42,122 +42,151 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Gurobi mixed-integer programming speed</h1>
 <p><strong>Domain:</strong> algorithms
-<strong>Metric:</strong> cumulative vendor-reported MILP speedup across releases, every version rerun on one machine
-<strong>Coverage:</strong> releases 10 through 13, announced 2022-11-14 to 2025-11-18, baselined at version 9.5
+<strong>Role:</strong> discovery series
+<strong>Metric:</strong> cumulative vendor-reported MILP speedup across releases, every
+version rerun on one machine
+<strong>Coverage:</strong> releases 10 through 13, announced 2022-11-14 to 2025-11-18,
+baselined at version 9.5; transcription current to 2026-08-10
 <strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-gurobi/gurobi-milp-speedups.csv"><code>gurobi-milp-speedups.csv</code></a>
-<strong>Upstream:</strong> <a href="https://www.gurobi.com/misc/lp/all/unmatched-performance">https://www.gurobi.com/misc/lp/all/unmatched-performance</a> (per-release announcement URLs are carried row by row in the CSV, for example <a href="https://www.gurobi.com/whats-new-gurobi-13-0/">https://www.gurobi.com/whats-new-gurobi-13-0/</a>)
-<strong>Verdict:</strong> no acceleration</p>
+<strong>Upstream:</strong> <a href="https://www.gurobi.com/misc/lp/all/unmatched-performance">https://www.gurobi.com/misc/lp/all/unmatched-performance</a>
+(per-release announcement URLs are carried row by row in the CSV, for example
+<a href="https://www.gurobi.com/whats-new-gurobi-13-0/">https://www.gurobi.com/whats-new-gurobi-13-0/</a>)
+<strong>Verdict:</strong> no acceleration — no 2026 release exists (series ends
+2025-11-18); the 2025 release gained 0.6% against 13.1% in 2024 and a
+cumulative 1.40× over 2022–2025</p>
 <h3>Gurobi vendor-reported MILP speedup</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Click a point to open the vendor announcement.</p>
-<h2 id="the-problem">The problem</h2>
-<p>Mixed-integer programming is the workhorse of applied optimization, and solver
-speed on it is one of the oldest measured algorithmic-progress series there is.
-The measurement design is the good part: every released version is recompiled and
-rerun on one bank of identical machines, so the ratio between versions is
-machine-independent by construction rather than by regression. Gurobi reports
-both an overall MILP figure for models taking over one second and a larger
-hard-model figure for those taking over 100 seconds. This chart consistently
-uses the overall figure. The vendor describes a 9,423-model test set, a
-10,000-second time limit, and an Intel Xeon E3-1240 v5 at 3.50 GHz with 4 cores,
-8 hyper-threads and 32 GB of RAM.</p>
-<p>That design is Robert Bixby's, from the canonical measurement of solver progress
-[@bixby2012history], now run by the company he founded. A "discovery" here is a
-released version that solves the same models faster, so the unit is a release
-rather than a paper or a record.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>Four annual releases and four single-digit-to-low-double-digit gains: 13% for
-version 10 on 2022-11-14, 8.6% for version 11 on 2023-12-04, 13.1% for version 12
-on 2024-11-19, and 0.6% for version 13 on 2025-11-18. Multiplied together that is
-a cumulative factor of 1.40 since version 9.5. The latest gain is the smallest
-in the window; the 8.2% number also reported for version 13 applies only to the
-hard-model bracket and is not mixed into this overall series.</p>
-<p>The comparison that matters is with the same problem's earlier history. A 2013
-survey recorded MIP algorithms as having "roughly doubled in speed each year"
-[@grace2013algorithmic], and Bixby's own fixed-hardware test over CPLEX versions
-released between 1991 and 2007 multiplied out to a machine-independent factor of
-over 29,000 [@bixby2012history]. Against either, 0.6 to 13.1% a year is an order
-of magnitude slower or worse, on the vendor's own numbers. The vendor's cumulative
-claim tells the same story from the other end: its performance page moved from
-"a more than 75x speedup on MILP since version 1.1" in the version-10 era to
-"A 92x speed-up over version 1.1" by the version-13 era, which is most of a
-lifetime's progress already banked.</p>
-<p>None of the version 11, 12 or 13 announcements credits AI or a language model
-with any solver improvement. The largest recent gains the vendor highlights are
-in nonconvex problem classes, such as a 5.8-fold speedup on nonconvex MIQCP in
-version 11.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as the cumulative speedup factor over time:</p>
-<p><img alt="Cumulative vendor-reported speedup factor over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-gurobi/cumulative-algorithms-gurobi.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-gurobi/figure.py"><code>figure.py</code></a> reads
-<code>gurobi-milp-speedups.csv</code> and takes the running product of the
-<code>release_speedup</code> column in row order, so the plotted quantity is cumulative
-rather than per-release. The line starts at 1.0 at the beginning of 2022, steps
-at the year fraction of each <code>date</code>, and each point is labelled from the <code>release</code>
-column. The whole series is drawn in the collection's vendor grey rather than the
-human blue, because the figures are the vendor's own and were not independently
-rerun; the corner note states the cumulative factor and that no AI credit appears
-in the release notes. The axis is linear and January 2026 onward is shaded.</p>
-<p>Each row also carries <code>credit</code>, <code>source</code> and <code>source_url</code>, so the provenance of
-every percentage is in the data rather than only in this document.</p>
-<p>There is no <code>fetch.py</code> in this folder. The four percentages are hand-transcribed
-from prose release announcements, some of them through archive captures, and each
-new release is read and typed in the same way.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<h2 id="definition">Definition</h2>
+<p>Mixed-integer programming is the workhorse of applied optimization, and
+solver speed on it is one of the oldest measured algorithmic-progress series.
+Gurobi recompiles and reruns every released version on one bank of identical
+machines, so the ratio between versions is machine-independent by
+construction. The vendor reports both an overall MILP figure for models
+taking over one second and a larger hard-model figure for those taking over
+100 seconds; this series uses the overall figure throughout. The vendor
+describes a 9,423-model test set, a 10,000-second time limit, and an Intel
+Xeon E3-1240 v5 at 3.50 GHz with 4 cores, 8 hyper-threads and 32 GB of RAM
+[@gurobi2026performance].</p>
+<p>The fixed-hardware rerun design is Robert Bixby's, from the canonical
+measurement of solver progress [@bixby2012history], now run by the company he
+founded. A "discovery" is a released version that solves the same models
+faster, dated by its announcement, so the unit is a release rather than a
+paper or a record.</p>
+<h2 id="facts">Facts</h2>
 <ul>
-<li><strong>The figures are vendor-run on a vendor-selected test set.</strong> Nothing here was
+<li><strong>releases:</strong> v10: 13% on 2022-11-14 · v11: 8.6% on 2023-12-04 · v12:
+  13.1% on 2024-11-19 · v13: 0.6% on 2025-11-18</li>
+<li><strong>cumulative:</strong> a factor of 1.40 since version 9.5 across the four
+  releases</li>
+<li><strong>hard-model bracket:</strong> the 8.2% also reported for version 13 applies only
+  to models taking over 100 seconds and is not mixed into this overall
+  series</li>
+<li><strong>vendor-highlighted gains:</strong> version 11's announcement highlights a
+  5.8-fold speedup on nonconvex MIQCP</li>
+<li><strong>historical rates (cited, not vendored):</strong> a 2013 survey recorded MIP
+  algorithms as having "roughly doubled in speed each year"
+  [@grace2013algorithmic]; Bixby's fixed-hardware test over CPLEX versions
+  released 1991–2007 multiplies to a machine-independent factor of over
+  29,000 [@bixby2012history]</li>
+</ul>
+<p>The vendor's cumulative claim on its performance page moved between release
+eras:</p>
+<blockquote>
+<p>"a more than 75x speedup on MILP since version 1.1"
+— Gurobi Optimization, unmatched-performance page, version-10-era capture (version 10 released 2022-11-14) [@gurobi2026performance]</p>
+<p>"A 92x speed-up over version 1.1"
+— Gurobi Optimization, unmatched-performance page, version-13-era capture (version 13 released 2025-11-18) [@gurobi2026performance]</p>
+</blockquote>
+<p>Independent benchmarking of Gurobi ended during the covered window. Hans
+Mittelmann's public benchmark page records that IBM and FICO demanded removal
+after 2018, and:</p>
+<blockquote>
+<p>"In August 2024 Gurobi decided to withdraw from the benchmarks as well"
+— Hans D. Mittelmann, Benchmarks for Optimization Software, plato.asu.edu/bench.html, 2024 [@mittelmann2024benchmarks]</p>
+</blockquote>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as the cumulative speedup factor over time:</p>
+<p><img alt="Cumulative vendor-reported speedup factor over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-gurobi/cumulative-algorithms-gurobi.png" /></p>
+<h2 id="method">Method</h2>
+<p>There is no <code>fetch.py</code> in this folder. The four percentages are
+hand-transcribed from prose release announcements, some of them through
+archive captures, and each new release is read and typed in the same way.
+Each row carries <code>credit</code>, <code>source</code> and <code>source_url</code>, so the provenance of
+every percentage is in the data rather than only in this document.
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-gurobi/check.py"><code>check.py</code></a> recomputes the fact lines above from the CSV.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-gurobi/figure.py"><code>figure.py</code></a> reads <code>gurobi-milp-speedups.csv</code> and takes the
+running product of the <code>release_speedup</code> column in row order, so the plotted
+quantity is cumulative rather than per-release. The line starts at 1.0 at the
+beginning of 2022, steps at the year fraction of each <code>date</code>, and each point
+is labelled from the <code>release</code> column. The whole series is drawn in the
+collection's vendor grey rather than the human blue, because the figures are
+the vendor's own and were not independently rerun; the corner note states the
+cumulative factor and that no AI credit appears in the release notes. The
+axis is linear and January 2026 onward is shaded, as in every figure here.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>vendor-run figures on a vendor-selected test set.</strong> Nothing here was
   independently rerun, the models are the vendor's choice, and thousands are
   discarded by the vendor's own rules before the ratio is computed.</li>
-<li><strong>Independent benchmarking ended in 2024.</strong> Hans Mittelmann's public benchmark
-  page records that IBM and FICO demanded removal after 2018 and that "In August
-  2024 Gurobi decided to withdraw from the benchmarks as well"
-  [@mittelmann2024benchmarks]. So over exactly the window in which an agent-era
-  bend would appear, the only surviving MIP series is the one the vendor runs.</li>
-<li><strong>The chart cannot show the early history it is compared against.</strong> The
-  per-version charts for versions 2 through 9 are images that were not
-  transcribed, so this series starts at version 9.5 as 1.0; the doubling-per-year
-  and 29,000-fold figures come from the cited literature, not from these rows.</li>
-<li><strong>Percentages transcribed by hand from prose announcements.</strong> The four
-  <code>release_speedup</code> values are read off release pages, some through archive
-  captures, and a cumulative product of four vendor point estimates carries no
-  error bar.</li>
-<li><strong>The headline percentages are aggregates.</strong> Each plotted value is the overall
-  geometric-mean figure for models taking over one second. The vendor also
-  reports a larger over-100-second bracket, so the same release can be quoted at
-  two different sizes; version 13 is 0.6% overall and 8.2% on hard models.</li>
-<li><strong>One date upstream is unverified.</strong> Version 1.0's commonly cited 2009 release
-  is not confirmed on any primary Gurobi page; the vendor's own support table
-  starts at version 7.0 in 2016. Nothing in this chart depends on it, but the
-  cumulative "since version 1.1" claims do.</li>
+<li><strong>no independent benchmark covers Gurobi after August 2024.</strong> Following
+  the withdrawal recorded by Mittelmann, the only MIP series covering
+  2025–2026 is the one the vendor runs [@mittelmann2024benchmarks].</li>
+<li><strong>the series starts at version 9.5.</strong> The per-version charts for versions
+  2 through 9 are images that were not transcribed; the doubling-per-year
+  and 29,000-fold figures come from the cited literature, not from these
+  rows.</li>
+<li><strong>hand-transcribed point estimates.</strong> The four <code>release_speedup</code> values
+  are read off release pages, some through archive captures, and a
+  cumulative product of four vendor point estimates carries no error bar.</li>
+<li><strong>the headline percentages are aggregates.</strong> Each plotted value is the
+  overall geometric-mean figure for models taking over one second; the same
+  release can be quoted at two sizes, and version 13 is 0.6% overall against
+  8.2% on hard models.</li>
+<li><strong>one date upstream is unverified.</strong> Version 1.0's commonly cited 2009
+  release is not confirmed on any primary Gurobi page; the vendor's own
+  support table starts at version 7.0 in 2016. Nothing in this chart depends
+  on it, but the cumulative "since version 1.1" claims do.</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>None credited on this series. The four releases plotted here span the whole
-period of frontier-agent deployment and their announcements attribute nothing to
-AI.</p>
-<p>The nearest AI result in classical combinatorial optimization is on a different
-instrument. AE-Kissat-MAB, a solver evolved with a language-model loop, won the
+<h2 id="ai-attribution">AI attribution</h2>
+<p>No AI or language-model credit appears in the version 10 to 13 release
+announcements as transcribed (announcement URLs carried row by row in the
+CSV; transcription current to 2026-08-10) [@gurobi2025release13].</p>
+<p>Two adjacent AI results in classical combinatorial optimization sit off this
+series. AE-Kissat-MAB, a solver evolved with a language-model loop, won the
 2025 SAT Competition's Main Sequential Track, solving 327 of 400 instances
 against 321 for the human-written Kissat lineage it descends from
-[@satcompetition2025results]. That is a margin of about 2%, the same order as the
-AI steps on the machine-learning speedruns, and it is deliberately excluded from
-the curves in this collection because the competition changes its benchmark set
-every year, so a win cannot be placed on a fixed-hardware long-run curve. The
-other adjacent result is AlphaEvolve's data-centre scheduling heuristic, self
-reported to recover about 0.7% of fleet-wide compute [@novikov2025alphaevolve],
-which is a scheduling heuristic in production rather than a solver record.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>Bixby's fixed-hardware CPLEX measurement is the methodological parent and the
-source of the historical rate [@bixby2012history]; the 2013 six-domain survey
-supplies the doubling-per-year figure and, unusually, warns that MIP was singled
-out precisely because it improved fast [@grace2013algorithmic]. The independent
-benchmark that no longer covers Gurobi is Mittelmann's
-[@mittelmann2024benchmarks], and the vendor's standing claims are on its
-performance page [@gurobi2026performance] and its version 13 announcement
-[@gurobi2025release13]. For how unusual a plateau is not, half of all algorithm
-families show little or no improvement at all [@sherry2021fast], and the SAT
-Museum finds progress "mostly rather slow, except for performance jumps in some
-years" [@biere2023satmuseum].</p>
+[@satcompetition2025results]; it is not placed on any curve in this
+collection because the competition changes its benchmark set every year.
+AlphaEvolve's data-centre scheduling heuristic is self-reported to recover
+about 0.7% of fleet-wide compute, a production heuristic rather than a
+solver record [@novikov2025alphaevolve].</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@gurobi2026performance] — the vendor performance page: the test-set
+  description and the cumulative MILP claims quoted above, read from dated
+  captures.</li>
+<li>[@gurobi2025release13] — the version 13 announcement: the 0.6% overall and
+  8.2% hard-model figures.</li>
+<li>[@bixby2012history] — the fixed-hardware CPLEX measurement, the
+  methodological parent and the source of the 29,000-fold historical factor.</li>
+<li>[@grace2013algorithmic] — the 2013 six-domain survey quoted above for the
+  doubling-per-year rate; the report states its own optimistic selection
+  bias.</li>
+<li>[@mittelmann2024benchmarks] — the independent benchmark page quoted above
+  for the 2024 withdrawal.</li>
+<li>[@satcompetition2025results] — the 2025 SAT Competition results behind the
+  AE-Kissat-MAB entry in the AI-attribution register.</li>
+<li>[@novikov2025alphaevolve] — the AlphaEvolve scheduling figure in the
+  AI-attribution register.</li>
+<li>[@sherry2021fast] — the published base rate: about half of algorithm
+  families show little or no improvement over decades.</li>
+<li>[@biere2023satmuseum] — historic SAT solvers rerun on one machine, finding
+  progress "mostly rather slow, except for performance jumps in some years".</li>
+<li>Sibling series: <a href="algorithms-miplib.html">MIPLIB 2017</a> counts
+  announced solution updates to a fixed instance library rather than solver
+  release speedups.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-gurobi/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

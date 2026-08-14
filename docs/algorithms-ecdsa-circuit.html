@@ -42,110 +42,106 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>ECDSA.fail secp256k1 point-addition circuit</h1>
 <p><strong>Domain:</strong> algorithms
-<strong>Metric:</strong> best validated score (average executed Toffoli count × peak qubit width) for a reversible secp256k1 point-addition circuit; lower is better
+<strong>Role:</strong> discovery series
+<strong>Metric:</strong> best validated score (average executed Toffoli count × peak qubit
+width) for a reversible secp256k1 point-addition circuit; lower is better
 <strong>Coverage:</strong> 2026-05-30 to 2026-08-10, 433 accepted records
 <strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-ecdsa-circuit/ecdsa-circuit-records.csv"><code>ecdsa-circuit-records.csv</code></a>
-<strong>Upstream:</strong> <a href="https://ecdsa.fail/">https://ecdsa.fail/</a>, challenge harness and results at <a href="https://github.com/ecdsafail/ecdsafail-challenge">https://github.com/ecdsafail/ecdsafail-challenge</a>, record ladder from the challenge API at <a href="https://api.ecdsa.fail/api/benchmarks">https://api.ecdsa.fail/api/benchmarks</a>
-<strong>Verdict:</strong> too early — a single ten-week optimization sprint with no pre-agent-era baseline to compare against</p>
+<strong>Upstream:</strong> <a href="https://ecdsa.fail/">https://ecdsa.fail/</a>, challenge harness and results at
+<a href="https://github.com/ecdsafail/ecdsafail-challenge">https://github.com/ecdsafail/ecdsafail-challenge</a>, record ladder from the
+challenge API at <a href="https://api.ecdsa.fail/api/benchmarks">https://api.ecdsa.fail/api/benchmarks</a>
+<strong>Verdict:</strong> too early — first record 2026-05-30, so no prior-year rate
+exists; the 2026 series is a 7.3× fall over 72 days</p>
 <h3>secp256k1 point-addition record ladder</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">Each point is an accepted record; click to open the solver&#x27;s GitHub profile.</p>
-<h2 id="the-problem">The problem</h2>
+<h2 id="definition">Definition</h2>
 <p>ECDSA.fail is an Eigen Labs challenge to build the leanest reversible quantum
 circuit that performs one elliptic-curve point addition on secp256k1 — the
 curve securing Bitcoin and Ethereum. Point addition is the inner primitive
 Shor's algorithm repeats thousands of times to compute a discrete logarithm,
-so its cost dominates the quantum resource estimate for breaking the curve.
-Each submission is scored as the average executed Toffoli count times the peak
-number of live qubits, and is accepted only after simulating correctly on 9024
-test points whose inputs are fixed by a Fiat-Shamir hash of the submitted op
-stream, so a circuit cannot be tuned against the test set. Lower is better.</p>
-<p>This is a genuine discovery-event series by the repository's standard: each
-accepted record is a validated improvement to a published performance frontier,
-under a fixed and cheaply checkable success rule. It is unusual here in being
-born entirely inside the agent era — the challenge opened on 30 May 2026 — and
-in being, by the submitters' own notes, overwhelmingly AI-driven.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>The score fell from the challenge's starting circuit at 1.08 × 10¹⁰ to
-1.48 × 10⁹ over 72 days, about 7.3× lower, across 433 accepted records from 63
-distinct solvers. The curve has the shape of an optimization sprint rather than
-a steady rate: most of the ground is taken in the first few days — the largest
-single step, on 31 May, cut the score from 9.59 × 10⁹ to 8.45 × 10⁹ — after
-which improvements arrive in ever-smaller increments as the frontier hardens.</p>
-<p>The dotted line is the best circuit published before the challenge, Google's
-low-qubit Pareto point at roughly 3.0 × 10⁹ (as quoted in the challenge's own
-README). The leaderboard passed it in June and the standing record now sits
-about 2× below it. That crossing is the substantive claim of this series: an
-open, AI-assisted contest improved on the best prior published construction for
-this primitive within weeks.</p>
-<p>Points are red where the submission's free-text note names an AI tool and grey
-where it does not. 389 of the 433 notes name one; the model lines that
-submitters volunteered are dominated by Claude Opus 4.8 (150), GPT-5 Codex
-(77), and GPT-5 (64), with a long tail of Gemini, DeepSeek, Devin, and others.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as the standing record's value over time:</p>
+so its cost dominates the quantum resource estimate for breaking the curve
+[@litinski2023ellipticcurve].</p>
+<p>Each submission is scored as the average executed Toffoli count times the
+peak number of live qubits, and is accepted only after simulating correctly
+on 9024 test points whose inputs are fixed by a Fiat-Shamir hash of the
+submitted op stream, so a circuit cannot be tuned against the test set. Lower
+is better. The API accepts only submissions that beat the standing record, so
+a "discovery" is one accepted record, dated by its submission timestamp. The
+challenge opened on 2026-05-30, inside the agent era.</p>
+<h2 id="facts">Facts</h2>
+<ul>
+<li><strong>span:</strong> from the challenge's starting circuit at 1.08 × 10¹⁰ on
+  2026-05-30 to 1.48 × 10⁹ on 2026-08-10, about 7.3× lower over 72 days</li>
+<li><strong>records:</strong> 433 accepted records from 63 distinct solvers</li>
+<li><strong>largest step:</strong> on 2026-05-31, from 9.59 × 10⁹ to 8.45 × 10⁹</li>
+<li><strong>ai-noted:</strong> 389 of 433 notes name an AI tool; 12 rows carry no note; 32
+  carry a note naming no tool</li>
+<li><strong>prior frontier:</strong> the best circuit published before the challenge,
+  Google's low-qubit Pareto point at roughly 3.0 × 10⁹ as quoted in the
+  challenge README, was passed in June 2026; the standing record is about 2×
+  below it [@ecdsafail2026challenge]</li>
+</ul>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as the standing record's value over time:</p>
 <p><img alt="Standing record for the validated circuit score over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-ecdsa-circuit/cumulative-algorithms-ecdsa-circuit.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<h2 id="method">Method</h2>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-ecdsa-circuit/fetch.py"><code>fetch.py</code></a> reads the challenge API's list of accepted submissions
 for the live <code>gpsanant/ecdsafail-challenge</code> benchmark. The API only accepts a
-submission that beats the standing record, so the accepted submissions already
-are the record ladder — one row per record, carrying its date, official score,
-the Toffoli and qubit metrics behind it, the solver's username, and whether the
-submission's note names an AI tool. Submissions dated after <code>lib/chart.py</code>'s
-<code>AS_OF_DATE</code> are dropped so a refetch cannot push the vendored CSV past the
-repository's committed snapshot date.</p>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-ecdsa-circuit/figure.py"><code>figure.py</code></a> plots score on a log axis against calendar day. The
-whole series sits inside 2026, so the usual year axis would compress it to a
-sliver; this uses month ticks on a day count instead. The two reference lines —
-the starting circuit and Google's published point — are the anchors quoted in
-the challenge README.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+submission that beats the standing record, so the accepted submissions
+already are the record ladder — one row per record, carrying its date,
+official score, the Toffoli and qubit metrics behind it, the solver's
+username, and whether the submission's note names an AI tool. Submissions
+dated after <code>lib/chart.py</code>'s <code>AS_OF_DATE</code> are dropped so a refetch cannot
+push the vendored CSV past the repository's committed snapshot date.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-ecdsa-circuit/figure.py"><code>figure.py</code></a> plots score on a log axis against calendar day; the
+whole series sits inside 2026, so month ticks on a day count replace the
+usual year axis. The two reference lines — the starting circuit and Google's
+published point — are the anchors quoted in the challenge README. Points are
+red where the submission's free-text note names an AI tool and grey where it
+does not. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-ecdsa-circuit/check.py"><code>check.py</code></a> recomputes the fact lines above from the
+CSV.</p>
+<h2 id="limitations">Limitations</h2>
 <ul>
-<li><strong>No pre-era baseline exists.</strong> The challenge is ten weeks old and opened in
-  the agent era, so this series cannot compare an agent-era rate against a human
-  one. It shows that a burst happened, not that the burst is faster than some
-  earlier norm — hence the "too early" verdict.</li>
-<li><strong>A record ladder is not a discovery rate.</strong> The API stores only improving
-  submissions, so the 433 rows are the winners, not the attempts; the many
-  rejected and failed submissions behind them are not counted here. The
-  front-loaded shape is what any bounded optimization contest produces.</li>
-<li><strong>The AI-tool flag is a lower bound from free text.</strong> It is a regex over
+<li><strong>no pre-era baseline exists.</strong> The challenge opened in the agent era, so
+  this series cannot compare an agent-era rate against a human one.</li>
+<li><strong>a record ladder is not a discovery rate.</strong> The API stores only improving
+  submissions, so the 433 rows are the winners, not the attempts; rejected
+  and failed submissions are not counted here, and a front-loaded shape is
+  what any bounded optimization contest produces.</li>
+<li><strong>the AI-tool flag is a lower bound from free text.</strong> It is a regex over
   submitter-written notes, blank where no note was left (12 rows) and "no"
   where a note exists but names no tool (32 rows). It records what solvers
   chose to disclose, not an audited provenance.</li>
-<li><strong>The score is a benchmark metric, not a broken cipher.</strong> A leaner point-
-  addition circuit lowers the resource estimate for a future fault-tolerant
-  attack on secp256k1; it does not threaten any deployed system today, and no
-  quantum computer can run these circuits at scale.</li>
-<li><strong>One vendor's frontier is the comparison.</strong> The "best prior" line is
+<li><strong>the score is a benchmark metric, not a broken cipher.</strong> A leaner
+  point-addition circuit lowers the resource estimate for a future
+  fault-tolerant attack on secp256k1; it does not threaten any deployed
+  system today, and no quantum computer can run these circuits at scale.</li>
+<li><strong>one vendor's frontier is the comparison.</strong> The "best prior" line is
   Google's Pareto point as quoted by the challenge organizers, not an
   independent recount of the cryptographic-engineering literature.</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>This is one of the few series in the collection where the discovery process is
-openly and predominantly AI-driven, and the submitters say so themselves. Of
-433 accepted records, 389 carry notes naming an AI tool, and 374 include an
+<h2 id="ai-attribution">AI attribution</h2>
+<p>Of 433 accepted records, 389 carry notes naming an AI tool. Counted from the
+free-text notes the challenge API returned at the 2026-08-10 read — the
+vendored CSV carries only the per-row yes/no flag — 374 notes include an
 explicit <code>Model:</code> line: Claude Opus 4.8 leads at 150, followed by GPT-5 Codex
 (77) and GPT-5 (64), with Claude Opus 5, Devin, Gemini, DeepSeek V4 Pro, and
-Grok among the rest. Notes describe the agents doing the actual cryptographic-
-engineering work — merging Kaliski binary-GCD inverse steps across iteration
-boundaries, tightening Solinas reductions, swapping in measurement-uncomputed
-Cuccaro adders — with the human role often reduced to running the harness and
-submitting. The result is a concrete, dated instance of AI systems improving a
-published quantum-resource-estimation frontier through hundreds of small
-verified optimizations, which is exactly the kind of contribution the wider
-<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">cryptographic-weaknesses discussion</a>
-anticipates, on a narrow benchmark where every step is machine-checked.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The primitive and its resource cost are Litinski's, whose construction is the
-reference point behind the challenge's frontier
-[@litinski2023ellipticcurve]. The prior best circuits and the scoring metric
-come from the challenge itself [@ecdsafail2026challenge]. The nearest series in
-this collection are the other agent-era optimization ladders —
-<a href="algorithms-nanogpt.html">modded-nanogpt</a> and the
-<a href="algorithms-cifar10.html">CIFAR-10 speedrun</a> — which share the sprint
-shape and the difficulty of separating a real capability gain from the
-front-loading any fresh benchmark shows.</p>
+Grok among the rest. Notes describe the agents doing the
+cryptographic-engineering work — merging Kaliski binary-GCD inverse steps
+across iteration boundaries, tightening Solinas reductions, swapping in
+measurement-uncomputed Cuccaro adders — with the human role often described
+as running the harness and submitting.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@ecdsafail2026challenge] — the challenge itself: the scoring metric, the
+  validation rule, the starting circuit, and the quoted prior frontier.</li>
+<li>[@litinski2023ellipticcurve] — the construction behind the challenge's
+  reference resource estimate for secp256k1.</li>
+<li>Sibling record-ladder series with AI-credited records:
+  <a href="algorithms-nanogpt.html">modded-nanogpt</a> and the
+  <a href="algorithms-cifar10.html">CIFAR-10 speedrun</a>.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/algorithms-ecdsa-circuit/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

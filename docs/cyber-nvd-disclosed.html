@@ -42,115 +42,114 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>All software: vulnerabilities disclosed</h1>
 <p><strong>Domain:</strong> vulnerabilities
+<strong>Role:</strong> discovery series
 <strong>Metric:</strong> CVEs published per quarter in the US National Vulnerability Database
 <strong>Coverage:</strong> 2016–2026, partial through 2026-08-10
 <strong>Data:</strong> quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-nvd-disclosed/nvd-by-quarter.csv"><code>nvd-by-quarter.csv</code></a>; annual totals in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-nvd-disclosed/nvd-by-year.csv"><code>nvd-by-year.csv</code></a>
 <strong>Upstream:</strong> <a href="https://services.nvd.nist.gov/rest/json/cves/2.0">https://services.nvd.nist.gov/rest/json/cves/2.0</a> (human-readable at <a href="https://nvd.nist.gov/vuln">https://nvd.nist.gov/vuln</a>)
-<strong>Verdict:</strong> accelerating — but growth was already +32% and +23% in 2024 and 2025, and no disclosure here is attributed to anyone</p>
+<strong>Verdict:</strong> accelerating — 49,838 CVEs through 2026-08-10 annualize to about 82,000, roughly 1.6 times 2025's 49,972, after +32% growth into 2024 and +23% into 2025</p>
 <h3>CVEs published</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial quarter; hover for the flag.</p>
-<h2 id="the-problem">The problem</h2>
-<p>This is the aggregate: every CVE published in the US government's vulnerability
-database, across all software, for eleven years. It is the series behind the
-claim that AI has bent the cyber discovery curve, and it is here so the
-reporting's arithmetic can be checked against the primary source rather than
-trusted.</p>
-<p>It is the weakest instrument in this domain and the most quoted, which is why it
-needs a document. There is no fixed codebase, so the population being searched
-grows along with the count. There is no finder attribution, so nothing in the
-series says who found anything or with what. And a CVE is published when a
-vendor's process publishes it, so a single organization's internal pipeline can
-move the aggregate without the world's stock of bugs changing at all.</p>
-<p>A "discovery" here is one CVE record, counted in the quarter NVD published it.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>A steep and mostly monotonic climb. Summed to years: 6,517 CVEs in 2016,
-18,113 in 2017, then a slow rise through 19,222 in 2020 and 26,431 in 2022 to
-40,704 in 2024 and 49,972 in 2025, which was itself a record. The 2026 count
-stands at 49,838 through 2026-08-10,
-day 222 of the year, which annualizes to about 82,000 — roughly 1.6 times 2025.</p>
-<p>The quarterly grain adds a shape those annual totals hide: the 2026 surge steepens
-within the year. Q1's 16,255 already topped every quarter before it, and Q2's
-20,871 is another 28% above Q1 and 59% above 2025's largest quarter. Whether
-that is discovery or a publication pipeline clearing is exactly what this
-series cannot say.</p>
-<p>Two things cut the reading down, and both are arithmetic on the same series.
-First, the curve was already steepening before any of this: year-on-year growth
-was +32% into 2024 and +23% into 2025, against about +64% annualized for 2026.
-Reading 2026 against a flat baseline would overstate the change by a wide
-margin. Second, the widely reported claim that 2026 is "on pace to roughly
-double" 2025 does not survive the annualization, which would require about
-99,900 disclosures; the count is on pace for about 1.6 times, not twice. The
-reported part-year figure itself checked out at the time: 45,207 in the report
-against this query's 45,601 on 28 July, and NVD is continuously amended, so a
-small gap is expected. The annualization, the growth rates and the correction
-are this repository's arithmetic, not a source's stated claim.</p>
-<p>The 2016-to-2017 near-tripling is a process break — the expansion of CVE
+<h2 id="definition">Definition</h2>
+<p>This series counts every CVE published in the US government's vulnerability
+database, across all software. There is no fixed codebase, so the population
+being searched grows along with the count. There is no finder attribution.
+A CVE is published when a numbering authority's process publishes it, so a
+single organization's pipeline can move the aggregate without the world's
+stock of bugs changing.</p>
+<p>A "discovery" here is one CVE record, counted in the quarter NVD published
+it. The 2016-to-2017 near-tripling is a process break — the expansion of CVE
 numbering authorities — so the series is comparable only from about 2018.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as cumulative CVEs published to date:</p>
-<p><img alt="Cumulative CVEs published to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-nvd-disclosed/cumulative-cyber-nvd-disclosed.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-nvd-disclosed/figure.py"><code>figure.py</code></a> calls the shared <code>periodic_stacked()</code> shape in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which
-draws one bar per quarter from the <code>nvd_published</code> column of <code>nvd-by-quarter.csv</code>.
-The bars are blue, the colour this collection uses for human or uncredited
-finders, because nothing in this series is attributed to anyone; there is no red
-band to draw. The <code>partial_quarter</code> row is outlined in dark grey and annotated with
-the <code>data_through</code> value, so the bar reads as partial through 2026-08-10. The
-axis is linear and January 2026 onward is shaded, as in every figure here.</p>
-<p>The <code>kev_added</code> counts plotted in
-<a href="cyber-kev-exploited.html">all software: known exploited</a> were once a
-second column of this file and now live in that folder. The two are drawn as
-separate figures rather than overlaid because they differ by two orders of
-magnitude, and putting them on one axis previously required a log scale that
-obscured exactly the comparison they exist to make.</p>
-<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-nvd-disclosed/fetch.py"><code>fetch.py</code></a>.
-NVD caps a query window at 120 days and rate-limits unkeyed callers, so each
-year is fetched as four quarterly windows with a pause between calls and a
-backoff for the HTML error pages the API returns when the limit is hit; the
-script reads <code>totalResults</code> rather than the records themselves. Quarters are
-therefore the query's native grain, and the annual file is their sum.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<h2 id="facts">Facts</h2>
 <ul>
-<li><strong>A disclosure count is not a discovery count.</strong> It rises when vendors process
-  and publish more reports, whatever produced the reports.</li>
-<li><strong>No attribution of any kind.</strong> Not one row here is credited to AI, to a
+<li><strong>by-year:</strong> 2016: 6,517 · 2017: 18,113 · 2018: 18,154 · 2019: 18,938 ·
+  2020: 19,222 · 2021: 21,950 · 2022: 26,431 · 2023: 30,949 ·
+  2024: 40,704 · 2025: 49,972</li>
+<li><strong>2026 (through 2026-08-10):</strong> 49,838 CVEs, day 222 of the year;
+  annualizes to about 82,000, roughly 1.6 times 2025</li>
+<li><strong>growth:</strong> +32% into 2024 and +23% into 2025, against about +64%
+  annualized for 2026</li>
+<li><strong>2026 quarters:</strong> Q1's 16,255 topped every quarter before it; Q2's
+  20,871 is another 28% above Q1 and 59% above 2025's largest quarter</li>
+<li><strong>doubling arithmetic:</strong> a 2026 double of 2025 would require about 99,900
+  disclosures; the annualized pace is about 82,000, or roughly 1.6 times</li>
+</ul>
+<p>The annualization, the growth rates and the doubling arithmetic are this
+repository's calculations over the vendored counts, not figures any source
+states.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as cumulative CVEs published to date:</p>
+<p><img alt="Cumulative CVEs published to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-nvd-disclosed/cumulative-cyber-nvd-disclosed.png" /></p>
+<h2 id="method">Method</h2>
+<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-nvd-disclosed/fetch.py"><code>fetch.py</code></a>. NVD caps a query window at
+120 days and rate-limits unkeyed callers, so each year is fetched as four
+quarterly windows with a pause between calls and a backoff for the HTML
+error pages the API returns when the limit is hit; the script reads
+<code>totalResults</code> rather than the records themselves. Quarters are therefore
+the query's native grain, and the annual file is their sum.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-nvd-disclosed/figure.py"><code>figure.py</code></a> calls the shared <code>periodic_stacked()</code> shape in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, drawing one bar per
+quarter from the <code>nvd_published</code> column of <code>nvd-by-quarter.csv</code>. The bars
+are blue, the colour this collection uses for human or uncredited finders,
+because nothing in this series is attributed to anyone; there is no red band
+to draw. The <code>partial_quarter</code> row is outlined in dark grey and annotated
+with the <code>data_through</code> value. The axis is linear and January 2026 onward is
+shaded, as in every figure here. The <code>kev_added</code> counts plotted in
+<a href="cyber-kev-exploited.html">all software: known exploited</a> were once
+a second column of this file and now live in that folder; the two are drawn
+as separate figures because they differ by two orders of magnitude.
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-nvd-disclosed/check.py"><code>check.py</code></a> recomputes the fact lines above from the CSVs.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>a disclosure count is not a discovery count.</strong> It rises when vendors
+  process and publish more reports, whatever produced the reports.</li>
+<li><strong>no attribution of any kind.</strong> Not one row here is credited to AI, to a
   human, or to a tool, so any AI reading of this chart is imported from
   elsewhere.</li>
-<li><strong>The population grows with the count.</strong> There is more software every year and
-  more numbering authorities publishing about it, so this is not a depletion
-  curve on a fixed target the way the curl and OpenSSL series are.</li>
-<li><strong>One vendor can move the aggregate.</strong> Press reporting on July 2026 records
-  433 Chrome fixes against 11 a year earlier, of which 401 were reported inside
-  Google, which is a single internal pipeline showing up in a national count.</li>
-<li><strong>The enrichment step lags the submissions.</strong> NIST reports enriching nearly
-  42,000 CVEs in 2025, 45% more than any prior year, and still not keeping pace,
-  so the published series reflects a processing constraint as well as a
-  discovery one.</li>
+<li><strong>the population grows with the count.</strong> There is more software every
+  year and more numbering authorities publishing about it, so this is not a
+  depletion curve on a fixed target the way the curl and OpenSSL series
+  are.</li>
+<li><strong>one vendor can move the aggregate.</strong> A CVE is published when a
+  numbering authority's process publishes it, so one organization's
+  internal pipeline shift shows up in the national count.</li>
+<li><strong>the enrichment step lags the submissions.</strong> NIST reports 263% growth in
+  submissions between 2020 and 2025, and enrichment of nearly 42,000 CVEs
+  in 2025 that still fails to keep pace, so the published series reflects a
+  processing constraint as well as a discovery one [@nist2026cvegrowth].</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>Nothing in this series is separable, because the series carries no finder
-credit. The named AI efforts sit outside it and have to be brought in from
-vendor and press claims: Oracle reporting 1,449 fixes in its July 2026 update
-against 309 a year earlier, Microsoft 642 bugs disclosed in July, and Google 433
-Chrome fixes against 11, with Chrome's director of engineering attributing the
-"unprecedented scale and speed" to advances in AI models and a corresponding
-investment. Those are the mechanism this chart is consistent with, not evidence
-it contains. For attribution that can be counted, the fixed-codebase series are
-the instrument [@bloomberg2026recordflaws; @anthropicmythos2026].</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The claim that AI has doubled discovery originates in press reporting
-[@bloomberg2026recordflaws], and the counts above are this repository's own
-query against the government API behind it [@nvd2026api]. NIST's own account of
-record CVE growth and its enrichment backlog is the operational context for
-reading the series as a publication pipeline rather than a discovery rate
-[@nist2026cvegrowth]. The counterweight series is
-<a href="cyber-kev-exploited.html">all software: known exploited</a>, and the
-fixed-codebase alternative with named finders is
-<a href="cyber-curl.html">curl</a>. For capability measured
-on a task set held fixed across a year, which no aggregate can supply, the DARPA
-AI Cyber Challenge is the anchor [@darpa2025aixcc].</p>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>No CVE record in this series carries a finder credit; nothing here can be
+attributed to AI, to a human, or to a tool, as of the 2026-08-10 read of the
+API [@nvd2026api]. Claims connecting the 2026 records to AI sit outside the
+series: Anthropic's Mythos preview claims "thousands" of previously unknown
+vulnerabilities, an unaudited vendor figure [@anthropicmythos2026], and
+press reporting frames the 2026 records as AI-driven
+[@bloomberg2026recordflaws]. Neither maps to identifiable rows here; for
+attribution that can be counted, the fixed-codebase series under Sources
+are the instrument.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@nvd2026api] — the query interface behind every count here; windows are
+  capped at 120 days and unkeyed callers are rate-limited.</li>
+<li>[@nist2026cvegrowth] — NIST's account of record CVE growth and its
+  enrichment backlog, cited for the processing-constraint limitation.</li>
+<li>[@bloomberg2026recordflaws] — press reporting of record 2026 disclosure
+  counts; the counts here are this repository's own query against the
+  government API behind that reporting.</li>
+<li>[@anthropicmythos2026] — the Mythos preview, an unaudited vendor claim
+  with no per-CVE mapping into this series.</li>
+<li>[@darpa2025aixcc] — the AI Cyber Challenge: seven autonomous systems
+  measured on a fixed task set, which no aggregate disclosure count
+  supplies.</li>
+<li>Sibling series:
+  <a href="cyber-kev-exploited.html">all software: known exploited</a> counts
+  catalogue additions for observed exploitation, a different unit on a
+  different clock; <a href="cyber-curl.html">curl</a> is a fixed codebase with
+  named finders; <a href="cyber-microsoft.html">Microsoft</a> counts one
+  vendor's own CVEs, a subset of this aggregate.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-nvd-disclosed/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

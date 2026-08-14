@@ -67,6 +67,7 @@ def offline(rows: list[dict[str, str]], prose: str) -> list[str]:
         "135.4 million in 2022-Q4": ("2022-Q4", 135.4),
         "167.8 million in 2024-Q4": ("2024-Q4", 167.8),
         "319.8 million in 2026-Q1": ("2026-Q1", 319.8),
+        "246.8 million in 2025-Q4": ("2025-Q4", 246.8),
     }
     for phrase, (quarter, millions) in claims.items():
         if phrase not in prose:
@@ -95,6 +96,25 @@ def offline(rows: list[dict[str, str]], prose: str) -> list[str]:
                 f"README says {phrase} from {start['quarter']} to {end['quarter']}, "
                 f"recomputed {actual}%"
             )
+
+    # The recent-quarters ratio and the verdict clause, recomputed from the
+    # same rows the claims above check.
+    ratio = int(last["git_pushes"]) / int(rows[-6]["git_pushes"])
+    mean_2025 = sum(int(by_quarter[f"2025-Q{i}"]["git_pushes"])
+                    for i in range(1, 5)) / 4
+    recomputed = {
+        f"{ratio:.1f} times in five quarters": "recent-quarters ratio",
+        f"{int(last['git_pushes']) / 1e6:.1f} million pushes in "
+        f"{last['quarter']} against "
+        f"{int(by_quarter['2025-Q4']['git_pushes']) / 1e6:.1f} million in "
+        f"2025-Q4 and a 2025 quarterly mean of {mean_2025 / 1e6:.1f} million":
+            "verdict clause",
+        f"Coverage:** {first['quarter']} to {last['quarter']}, quarterly":
+            "coverage field",
+    }
+    for phrase, label in recomputed.items():
+        if phrase not in prose:
+            failures.append(f"README lacks recomputed {label}: {phrase!r}")
     return failures
 
 

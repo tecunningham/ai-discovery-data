@@ -42,138 +42,135 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>curl vulnerability disclosures</h1>
 <p><strong>Domain:</strong> vulnerabilities
-<strong>Metric:</strong> vulnerabilities disclosed per quarter, split by finder credit
+<strong>Role:</strong> discovery series
+<strong>Metric:</strong> vulnerabilities disclosed per quarter, split by whether the finder credit carries an AI marker
 <strong>Coverage:</strong> 2000–2026, partial through 2026-06-24
-<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-vulnerabilities.csv"><code>curl-vulnerabilities.csv</code></a> (severity detail in the same file), <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-vulnerabilities-quarterly.csv"><code>curl-vulnerabilities-quarterly.csv</code></a>, <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>
+<strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-vulnerabilities.csv"><code>curl-vulnerabilities.csv</code></a> (severity detail in the same file); quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-vulnerabilities-quarterly.csv"><code>curl-vulnerabilities-quarterly.csv</code></a>; per-finder <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>
 <strong>Upstream:</strong> <a href="https://curl.se/docs/vuln.json">https://curl.se/docs/vuln.json</a> (human-readable at <a href="https://curl.se/docs/security.html">https://curl.se/docs/security.html</a>)
-<strong>Verdict:</strong> accelerating</p>
+<strong>Verdict:</strong> accelerating — 36 disclosures through 2026-06-24 annualize to roughly 75 against 9 in 2025 and a 13.1/year mean over 2014–2023</p>
 <h3>CVEs disclosed</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial quarter.</p>
-<h2 id="the-problem">The problem</h2>
-<p>curl is a small, extremely widely deployed C library that has been audited for
-twenty-six years. The project publishes a machine-readable record of every
-vulnerability it has ever disclosed, with a severity rating set by the
-maintainers and a credit naming who found it.</p>
-<p>That combination is rare, and it is why this series carries so much weight here.
-The codebase is effectively fixed, so the stock of findable bugs should be
-<em>depleting</em>: a searcher of constant ability should find fewer over time, not
-more. There is no growing population of software to confound the count, as there
-is in the aggregate CVE series. And because finders are named, the share of
-discovery attributable to AI can be read off the record rather than inferred.</p>
-<p>A "discovery" here is one disclosed vulnerability. That is a disclosure count,
-not a count of bugs introduced or bugs remaining.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>Roughly twelve disclosures a year from 2017 through 2025, then 36 through
-24 June 2026 alone — with 15 of those crediting an AI system or an AI-security
-firm. Annualized from that exact date, 2026 is running near 75 a year against
-13.1 a year across 2014–2023.</p>
-<p>Those 15 are mostly an employer, not a method. Reading the credit strings in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>, one names a system — Andrew Nesbitt
-"powered by Mythos" — and the other fourteen name a person at Aisle Research,
-AntAISecurityLab, OpenAI or Microsoft's Autonomous Code Security team without
-saying how the bug was found. curl's own credits therefore support "researchers
-at AI-security companies reported a record number of curl flaws in 2026" and do
-not by themselves support "AI found them". The 2025 Big Sleep credit is the
-other case where the system is named.</p>
-<p>This is the clearest bend in any series in the collection, and the one place
-where a collective-progress curve visibly changes slope in the agent era.</p>
-<p>Two things cut the finding down, both visible in the data rather than argued.
-The AI-credited issues are shallower: within 2026, 80% are rated Low and none
-High or Critical, against 48% Low for the other finders. But the drift toward
-low-severity findings started well before AI — across 2010–2022 curl's
-disclosures were 18% Low and 28% High or Critical, and by 2023–2025 the non-AI
-finds were already 67% Low. So AI intensifies a pre-existing trend on a
-hardening codebase rather than starting it.</p>
-<p><img alt="curl disclosures by severity: counts by year and finder credit since 2010." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-curl/severity-cyber-curl.png" /></p>
-<p>The severity chart puts those four numbers next to the trend they sit in, as
-counts a reader can take a number straight out of: one grid per finder-credit
-cohort, years across, curl's ratings down, every cell printing how many
-disclosures it holds. Shading is scaled within each panel, since the all-finders
-grid dwarfs the AI-marked one and a shared scale would blank everything but the
-largest; a dark cell is a lot for that cohort, not a lot outright. The drift is
-plain in the top grid and it starts around 2017, years before any AI credit:
-the High and Critical rows go quiet while the Low row fills.</p>
-<p>The two lower grids are the comparison, the same rows split by credit so the
-AI-marked cells are read against the right baseline. The gap between 48% and
-80% Low in 2026 is real, but the gap that matters is between 18% across
-2010–2022 and 67% for non-AI credits in 2023–2025, which is most of the way to
-the AI figure and contains no AI at all.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as cumulative disclosures to date:</p>
-<p><img alt="Cumulative disclosures to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-curl/cumulative-cyber-curl.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/figure.py"><code>figure.py</code></a> calls the shared <code>periodic_stacked()</code> shape in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which draws stacked quarterly
-bars from <code>curl-vulnerabilities-quarterly.csv</code>: <code>other_attributed</code> in blue,
-<code>ai_attributed</code> in red, with the final quarter outlined rather than filled —
-the annual table's <code>data_through</code> says where its data stops — so a short last
-bar reads as incomplete rather than as a collapse. January 2026 onward is
-shaded, as in every figure here.</p>
-<p>The axis is linear and nothing is normalized, so a bar twice as tall is twice as
-many vulnerabilities. A log axis was avoided deliberately: it would flatten
-exactly the 2026 step the series exists to show.</p>
-<p>The severity figure comes from the same script through the shared
-<code>severity_heatmap()</code> shape, which OpenSSL also draws: one annotated grid per
-finder cohort, built from the annual table's severity columns, most severe at
-the top. Every cell prints its count, so nothing rests on reading a shade by
-eye. The shading itself reuses the severity hue — deliberately neither the red
-nor the amber the disclosure chart spends on finder identity — so a severity
-grid cannot be misread as a finder band, and it is normalized within each
-panel, as the note on the figure says.</p>
-<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/fetch.py"><code>fetch.py</code></a>, which reads curl's JSON and
-buckets by publication year and quarter. The shared classifier in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/credits.py"><code>../../lib/credits.py</code></a> reads three independent signals
-off each <code>FINDER</code> string: whether it names an AI system or method (Big Sleep,
-Mythos, Claude, "agent"), whether it names an AI-security employer (Aisle
-Research, AntAISecurityLab, OpenAI, Anthropic), and whether it names fuzzing.
-The per-finder table <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a> records which band
-each credit falls in, so the affiliation-only rows can be counted separately.</p>
-<p>The annual and quarterly tables keep a single combined <code>ai_attributed</code> column,
-which is true when a credit carries either AI signal. That column is not a
-statement about method, and the chart's red band inherits the same caveat. It is
-kept combined rather than split because these two files are read directly by the
-blog, and the split can be recovered from the finder table without redefining a
-column already in use.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<h2 id="definition">Definition</h2>
+<p>curl is a widely deployed C library and command-line tool. The project
+publishes a machine-readable record of every vulnerability it has ever
+disclosed, with a severity rating set by the maintainers and a credit string
+naming who reported it.</p>
+<p>A "discovery" in this series is one disclosed vulnerability, counted in the
+quarter of its publication date. It is a disclosure count, not a count of
+bugs introduced or bugs remaining. An "AI-marked" disclosure is one whose
+credit string names an AI system or method, or names an AI-security
+employer; the two signals are recorded separately in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a> and combined into the annual and
+quarterly tables' <code>ai_attributed</code> column.</p>
+<h2 id="facts">Facts</h2>
 <ul>
-<li><strong>The AI share is not a floor.</strong> Classification is by textual marker, and it
-  errs in both directions: a researcher who used a model and did not say so
-  counts as human, while fourteen of 2026's fifteen AI-marked reports name only
-  an employer and may or may not have involved a model on that finding.</li>
-<li><strong>Severity is compared across the combined AI band.</strong> The Low-severity
-  comparison below is computed against <code>ai_attributed</code>, so it describes reports
-  from AI-security researchers rather than reports with a corroborated AI
-  method.</li>
-<li><strong>2026 is a part-year</strong>, and curl publishes in batches at releases, so the
-  quarterly bars show batch timing as much as a discovery rate.</li>
-<li><strong>No denominator of effort.</strong> A credit records who reported, not how much
-  search anybody spent, so this cannot separate better tools from more attention.</li>
-<li><strong>Severity is one small team's judgment</strong> applied over twenty-six years, and
-  may not be consistent across that span.</li>
-<li><strong>Triage, not discovery, became the binding constraint.</strong> curl closed its bug
-  bounty in January 2026 after AI-assisted submissions reached about 20% of
-  entries while genuine yield fell, so the rise in confirmed disclosures and a
-  flood of low-quality reports are the same phenomenon seen from two ends.</li>
+<li><strong>2026 (through 2026-06-24):</strong> 36 disclosures; 15 AI-marked, 21 other</li>
+<li><strong>2026 annualized:</strong> roughly 75 disclosures</li>
+<li><strong>prior rate:</strong> 9 disclosures in 2025; a 13.1/year mean over 2014–2023</li>
+<li><strong>2026 quarters:</strong> 2026-Q1: 10 · 2026-Q2: 26</li>
+<li><strong>ai-band severity (2026):</strong> 12 of 15 AI-marked disclosures rated Low
+  (80%), none High or Critical; 10 of 21 other disclosures rated Low (48%)</li>
+<li><strong>severity drift:</strong> 2010–2022 disclosures were 18% Low and 28% High or
+  Critical; 2023–2025 non-AI disclosures were 67% Low</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>The 2026 credits name identifiable efforts rather than a diffuse capability:
-an entry crediting Anthropic's Mythos, a Trail of Bits report made in
-collaboration with OpenAI, Microsoft's Autonomous Code Security team, three
-HackerOne handles crediting AntAISecurityLab, and 9 from Aisle Research.
-Big Sleep's curl credit is in 2025, not 2026. Stanislav Fort of Aisle Research
-appears in both curl and OpenSSL, so the AI-credited discovery visible across
-these codebases is substantially a few well-resourced people pointed at high-value targets
+<p><img alt="curl disclosures by severity: counts by year and finder credit since 2010." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-curl/severity-cyber-curl.png" /></p>
+<p>The severity figure cuts the same rows by curl's own rating: one grid per
+finder-credit cohort, years across, ratings down, every cell printing the
+number of disclosures it holds. Shading is scaled within each panel, as the
+note on the figure states.</p>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as cumulative disclosures to date:</p>
+<p><img alt="Cumulative disclosures to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-curl/cumulative-cyber-curl.png" /></p>
+<h2 id="method">Method</h2>
+<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/fetch.py"><code>fetch.py</code></a>, which reads curl's JSON record
+and buckets disclosures by publication year and quarter. The shared
+classifier in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/credits.py"><code>../../lib/credits.py</code></a> reads three
+independent signals off each <code>FINDER</code> string: whether it names an AI system
+or method (Big Sleep, Mythos, Claude, "agent"), whether it names an
+AI-security employer (Aisle Research, AntAISecurityLab, OpenAI, Anthropic),
+and whether it names fuzzing. The per-finder table
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a> records which band each credit falls
+in. The annual and quarterly tables keep a single combined <code>ai_attributed</code>
+column, true when a credit carries either AI signal; it describes the
+credit's text, not the method used.</p>
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/figure.py"><code>figure.py</code></a> calls the shared <code>periodic_stacked()</code> shape in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, drawing stacked quarterly
+bars from <code>curl-vulnerabilities-quarterly.csv</code>: <code>other_attributed</code> in blue,
+<code>ai_attributed</code> in red, the final quarter outlined rather than filled and
+annotated with the annual table's <code>data_through</code> date. The axis is linear
+and January 2026 onward is shaded, as in every figure here. The severity
+figure comes from the same script through the shared <code>severity_heatmap()</code>
+shape, built from the annual table's severity columns and normalized within
+each panel. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/check.py"><code>check.py</code></a> recomputes the fact lines above from the
+CSVs.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>credit text is not method evidence.</strong> Classification is by textual
+  marker and errs in both directions: a researcher who used a model without
+  saying so counts as human, and 14 of the 15 AI-marked credits of 2026 name
+  only an employer.</li>
+<li><strong>severity is compared across the combined AI band.</strong> The Low-severity
+  shares above are computed against <code>ai_attributed</code>, so they describe
+  reports from AI-security researchers rather than reports with a
+  corroborated AI method.</li>
+<li><strong>2026 is a part-year</strong>, and curl publishes in batches at releases, so the
+  quarterly bars show batch timing as well as a discovery rate.</li>
+<li><strong>no denominator of effort.</strong> A credit records who reported, not how much
+  search anybody spent.</li>
+<li><strong>severity is one small team's judgment</strong> applied over twenty-six years,
+  and may not be consistent across that span.</li>
+<li><strong>triage load moved with the count.</strong> The Register reports that curl
+  closed its bug bounty in January 2026 after AI-assisted submissions
+  reached about 20% of entries while genuine yield fell
+  [@stenberg2026bounty].</li>
+</ul>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>15 of the 36 disclosures of 2026 (through 2026-06-24) are AI-marked. One
+credit names a system:</p>
+<blockquote>
+<p>"Andrew Nesbitt (powered by Mythos)"
+— curl credit string for one 2026 disclosure, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>, read 2026-08-14</p>
+</blockquote>
+<p>The other 14 name an AI-security employer without stating a method: 9
+credit Aisle Research ("Joshua Rogers (Aisle Research)" on 6, "Stanislav
+Fort (Aisle Research)" on 3), 3 credit AntAISecurityLab hackerone handles,
+1 credits "Filipe Casal of Trail of Bits in collaboration with OpenAI",
+and 1 credits "Eunsoo Kim (Autonomous Code Security team at Microsoft)",
+all quoted from <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a> as read 2026-08-14.</p>
+<p>2025 has 2 AI-marked disclosures: one system-naming credit,</p>
+<blockquote>
+<p>"Google Big Sleep"
+— curl credit string for one 2025 disclosure, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>, read 2026-08-14</p>
+</blockquote>
+<p>and one affiliation-only credit, "Stanislav Fort (Aisle Research)". No
+AI marker appears in any credit string before 2025, as of the 2026-06-24
+snapshot. Stanislav Fort of Aisle Research appears in both curl and OpenSSL
+finder tables (<a href="cyber-openssl.html"><code>../cyber-openssl/</code></a>)
 [@googlebigsleep2024; @anthropicmythos2026; @aisle2026].</p>
-<h2 id="related-literature">Related literature</h2>
-<p>Reporting on the 2026 surge in disclosures treats it as an AI effect
-[@bloomberg2026recordflaws]; the aggregate series in
-<a href="cyber-nvd-disclosed.html">all software: disclosed</a> is the check on that reading.
-The depletion logic — a fixed codebase yielding less to constant effort — is the
-apple-picking mechanism this collection is built to test, and its
-non-AI baseline is the heterogeneity Sherry and Thompson measure across
-algorithm families [@sherry2021fast]. curl's own maintainers have written about
-the triage cost of AI-assisted reports [@stenberg2026bounty].</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@bloomberg2026recordflaws] — press reporting connecting the 2026
+  disclosure records to AI systems; the counts here are built from curl's
+  primary record, not from that reporting.</li>
+<li>[@googlebigsleep2024] — Google's vendor self-report on Big Sleep, the
+  system named in the 2025 credit string.</li>
+<li>[@anthropicmythos2026] — Anthropic's Mythos preview, the system named in
+  the 2026 "powered by Mythos" credit.</li>
+<li>[@aisle2026] — Aisle Research vendor commentary; Aisle researchers hold
+  many of the AI-credited curl and OpenSSL findings.</li>
+<li>[@stenberg2026bounty] — The Register's report of the January 2026 bug
+  bounty closure, cited for the limitation above.</li>
+<li>[@sherry2021fast] — measured heterogeneity of improvement rates across
+  algorithm families; the published base rate for declining yields on a
+  fixed target.</li>
+<li>Sibling series: <a href="cyber-openssl.html">OpenSSL</a> and
+  <a href="cyber-firefox.html">Firefox</a> are the other fixed codebases with
+  named finders; <a href="cyber-nvd-disclosed.html">all software: disclosed</a>
+  counts CVE records across all software;
+  <a href="cyber-oss-fuzz.html">OSS-Fuzz</a> is the no-AI automation baseline
+  over codebases that include curl.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-curl/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

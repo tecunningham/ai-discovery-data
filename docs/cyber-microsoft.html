@@ -42,152 +42,182 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <p class="links"><a href="index.html" target="_self">← all series</a></p>
 <h1>Microsoft security-update CVEs</h1>
 <p><strong>Domain:</strong> vulnerabilities
+<strong>Role:</strong> discovery series
 <strong>Metric:</strong> CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
 <strong>Coverage:</strong> 2016–2026, partial through 2026-08-11; no February or March 2016 document exists upstream, so the first year is ten months
-<strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-cves.csv"><code>msrc-cves.csv</code></a>; monthly counts by band in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-monthly.csv"><code>msrc-monthly.csv</code></a>; per-credit rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-finders.csv"><code>msrc-finders.csv</code></a>; every AI-marked CVE with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a>
+<strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-cves.csv"><code>msrc-cves.csv</code></a>; monthly counts by band in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-monthly.csv"><code>msrc-monthly.csv</code></a>; per-credit rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-finders.csv"><code>msrc-finders.csv</code></a>; every AI-marked CVE with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a>
 <strong>Upstream:</strong> <a href="https://api.msrc.microsoft.com/cvrf/v3.0/updates">https://api.msrc.microsoft.com/cvrf/v3.0/updates</a> (rendered at <a href="https://msrc.microsoft.com/update-guide">https://msrc.microsoft.com/update-guide</a>)
-<strong>Verdict:</strong> accelerating — the 2026 part year annualizes to about 2.5 times 2025, and at most 1.3% of it carries any AI marker</p>
+<strong>Verdict:</strong> accelerating — 1,927 CVEs through 2026-08-11 against 1,243 in 2025; the part year annualizes to about 2.5 times 2025</p>
 <h3>CVEs issued</h3>
 <div id="chart0" class="chart"></div>
 <p class="note">The final bar is a partial month.</p>
-<h2 id="the-problem">The problem</h2>
+<h2 id="definition">Definition</h2>
 <p>Microsoft ships security fixes in one coordinated monthly release — Patch
-Tuesday, running since October 2003 — and publishes each month since January
-2016 as a machine-readable CVRF document in the Security Update Guide, with
-acknowledgments naming who reported most entries. That makes Microsoft the
-fourth fixed codebase in this collection where the finder is named, and the
-first closed-source one: curl, OpenSSL and Firefox are all open source, and a
-Windows vulnerability is found against shipped binaries and a bug bounty
-rather than a public repository.</p>
-<p>How many CVEs a given Patch Tuesday contains is famously ambiguous: the
-security-vendor recaps of June 2026 put the same release at anywhere from 200
-to 568 items, because the monthly documents also republish CVEs Microsoft did
-not author — Chromium fixes shipped through Edge, and from 2023 the Linux CVEs
-of Azure Linux — and every tracker folds those in differently. This folder
-pins one rule to the primary source instead: an entry counts when the CNA note
-in its document says Microsoft, or when it has no CNA note at all, which is
-the pre-2018 document format. Everything that rule excludes from the vendored
-data is verifiably third-party — the excluded entries carry Chrome, Linux
-distribution, curl or similar CNA notes. Each CVE is dated by the earliest
-revision in its history across every document that mentions it, so an
-out-of-band fix lands in the month it shipped.</p>
-<p>A "discovery" here is one Microsoft-issued CVE first published that month. It
-is a patch-and-disclosure count, not a count of bugs found or bugs remaining.</p>
-<h2 id="what-the-chart-shows">What the chart shows</h2>
-<p>A vendor whose CVE count climbed, sat still, and then took off. Summed to
-years, the monthly bars give 371 CVEs across ten documented months of 2016,
-622 in 2017, then between 825 and 961 a year from 2019 through 2023, growth of
-about 14% in each of 2024 and 2025 to 1,095 in 2024, then 1,243 in 2025 — and
-1,927 CVEs through 2026-08-11, a part year already 1.55 times the 2025 full
-year, annualizing to about 2.5 times 2025.</p>
-<p>Drawing the series at its Patch Tuesday cadence locates the surge precisely.
-The releases the recaps called the largest in Patch Tuesday's history are the
-chart's two tallest bars: 220 CVEs dated June 2026, then 662 CVEs dated July
-2026, 3.0 times the June record that had itself set the all-time high a month
-earlier.</p>
-<p>The AI bands barely register against that. No credit string carries an AI
-marker until 2025, which has 17 AI-marked CVEs; the 2026 part year has 26
-AI-marked CVEs, or 1.3% of the part year, of which 21 name an AI system or
-method and 5 name only an AI-security employer. Whatever is driving the 2026
-surge, it is not showing up in the acknowledgment strings: the growth is
-overwhelmingly in the blue band. Nor is it fuzzing credit — the fuzzer band
-never exceeds 2 CVEs in any year, because Microsoft's acknowledgments almost
-never state a method at all.</p>
-<p>The blue band is mostly named humans rather than silence: 87% of 2016's CVEs
-carry at least one named credit, rising to 98% in the 2026 part year.</p>
-<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this series
-as cumulative CVEs to date:</p>
+Tuesday, running since October 2003 [@arcticwolf2026june] — and publishes
+each month since January 2016 as a machine-readable CVRF document in the
+Security Update Guide, with acknowledgments naming who reported most
+entries. A Windows vulnerability is found against shipped binaries and a bug
+bounty rather than a public repository; curl, OpenSSL and Firefox, the other
+finder-named codebases in this collection, are all open source.</p>
+<p>Trackers count a given Patch Tuesday differently: Arctic Wolf counts the
+June 2026 release at 206 vulnerabilities [@arcticwolf2026june], and Tenable
+counts the July 2026 release at 569 CVEs while other trackers put the same
+release at up to 622 [@tenable2026july]. The spread arises because the
+monthly documents also republish CVEs Microsoft did not author — Chromium
+fixes shipped through Edge, and from 2023 the Linux CVEs of Azure Linux —
+and every tracker folds those in differently. This folder pins one rule to
+the primary source: an entry counts when the CNA note in its document says
+Microsoft, or when it has no CNA note at all, which is the pre-2018 document
+format. Everything that rule excludes is verifiably third-party — the
+excluded entries carry Chrome, Linux distribution, curl or similar CNA
+notes. Each CVE is dated by the earliest revision in its history across
+every document that mentions it, so an out-of-band fix lands in the month it
+shipped.</p>
+<p>A "discovery" here is one Microsoft-issued CVE first published that month.
+It is a patch-and-disclosure count, not a count of bugs found or bugs
+remaining.</p>
+<h2 id="facts">Facts</h2>
+<ul>
+<li><strong>by-year:</strong> 2016: 371 · 2017: 622 · 2018: 639 · 2019: 863 · 2020: 825 ·
+  2021: 877 · 2022: 956 · 2023: 961 · 2024: 1,095 · 2025: 1,243</li>
+<li><strong>2016 span:</strong> 371 CVEs across ten documented months</li>
+<li><strong>plateau and growth:</strong> between 825 and 961 a year from 2019 through
+  2023; 14% growth in each of 2024 and 2025</li>
+<li><strong>2026 (through 2026-08-11):</strong> 1,927 CVEs, 1.55 times the 2025 full year;
+  annualizes to about 2.5 times 2025</li>
+<li><strong>record months:</strong> 220 CVEs dated June 2026, then 662 CVEs dated July
+  2026, 3.0 times the June figure</li>
+<li><strong>ai-marked:</strong> 0 before 2025; 17 in 2025; 26 in 2026, or 1.3% of the part
+  year — 21 name an AI system or method and 5 name only an AI-security
+  employer</li>
+<li><strong>fuzz band:</strong> never exceeds 2 CVEs in any year</li>
+<li><strong>acknowledgments:</strong> 87% of 2016's CVEs carry at least one named credit,
+  rising to 98% in the 2026 part year</li>
+<li><strong>no-customer-action CVEs:</strong> 23 in 2024, 68 in 2025 and 128 in the 2026
+  part year</li>
+</ul>
+<p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
+series as cumulative CVEs to date:</p>
 <p><img alt="Cumulative CVEs to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-microsoft/cumulative-cyber-microsoft.png" /></p>
-<h2 id="how-the-chart-was-built">How the chart was built</h2>
+<h2 id="method">Method</h2>
+<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/fetch.py"><code>fetch.py</code></a>, which walks every monthly
+security-update document in the CVRF API — matched on document title,
+because the IDs are irregular — and applies the CNA rule above. Documents
+released after <code>lib/chart.py</code>'s snapshot date are skipped, so a refetch
+reproduces the committed window; the vendored window ends at the August 2026
+Patch Tuesday, released 2026-08-11. Acknowledgment strings are stripped of
+HTML and classified with the shared markers in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/credits.py"><code>../../lib/credits.py</code></a>: <code>EXPLICIT_AI_METHOD</code> for a
+named system or method, <code>AI_AFFILIATION</code> for an employer, <code>FUZZ</code> for
+fuzzing, with one CVE's signals unioned across all its credit strings before
+the display precedence — method, then affiliation, then fuzz, then none —
+picks its band. Anonymized hex handles count as credits, since an anonymous
+credit is still a credit. <code>msrc-monthly.csv</code> carries the same four bands at
+the monthly grain, banded per CVE by the same rule, so the months of a year
+sum to that year's row in <code>msrc-cves.csv</code>. The annual CSV keeps an
+<code>acknowledged</code> column beside the bands, and a <code>no_customer_action</code> column
+counting the cloud-service CVEs Microsoft patches itself, so both facts stay
+auditable.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/figure.py"><code>figure.py</code></a> draws stacked monthly bars from <code>msrc-monthly.csv</code>:
 <code>other</code> in blue, <code>fuzz</code> in amber, <code>ai_affiliated</code> in pale red and
 <code>explicit_ai</code> in full red, in the same bands and colours as the
-<a href="cyber-firefox.html">Firefox series</a>. The part year ends on a complete
-month — data run through 2026-07-31 — so no bar is drawn partial; the chart
-note says where the data stop. January 2026 onward is shaded, as in every
-figure here. The axis is linear and nothing is normalized.</p>
-<p>The CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/fetch.py"><code>fetch.py</code></a>, which walks every monthly
-security-update document in the CVRF API — matched on document title, because
-the IDs are irregular — and applies the CNA rule above. Documents released
-after <code>lib/chart.py</code>'s snapshot date are skipped, which currently excludes the
-August 2026 document released on 2026-08-11; a refetch after the date is
-bumped picks it up. Acknowledgment strings are stripped of HTML and classified
-with the shared markers in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/credits.py"><code>../../lib/credits.py</code></a>:
-<code>EXPLICIT_AI_METHOD</code> for a named system or method, <code>AI_AFFILIATION</code> for an
-employer, <code>FUZZ</code> for fuzzing, with one CVE's signals unioned across all its
-credit strings before the display precedence — method, then affiliation, then
-fuzz, then none — picks its band. Anonymized hex handles count as credits,
-since an anonymous credit is still a credit. <code>msrc-monthly.csv</code> carries the
-same four bands at the monthly grain, banded per CVE by the same rule, so the
-months of a year sum to that year's row in <code>msrc-cves.csv</code>. The annual CSV
-keeps an <code>acknowledged</code> column beside the bands, and a <code>no_customer_action</code>
-column counting the cloud-service CVEs Microsoft patches itself, so both
-caveats below stay auditable.</p>
-<h2 id="what-it-cannot-support">What it cannot support</h2>
+<a href="cyber-firefox.html">Firefox series</a>. No bar is drawn partial —
+Microsoft ships one coordinated release per month, and the final month's
+release is in the data — and the on-chart note states where the data stop.
+January 2026 onward is shaded, as in every figure here. The axis is linear
+and nothing is normalized. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/check.py"><code>check.py</code></a> recomputes the fact lines
+above and fails when the monthly, annual and per-CVE files stop agreeing.</p>
+<h2 id="limitations">Limitations</h2>
 <ul>
-<li><strong>A disclosure is not a discovery, and here it is not even dated like one.</strong>
-  CVEs are batched to a monthly release cadence and published when fixed, not
-  when found or reported; the 662 CVEs of July 2026 are a release event, and
-  the gap between report and patch can be months. The count moves with
-  Microsoft's triage and engineering throughput as much as with anyone's rate
-  of finding.</li>
-<li><strong>Vendor policy moves the count.</strong> In mid-2024 Microsoft began issuing CVEs
-  for cloud-service flaws it patches itself, with no customer action required:
-  23 CVEs in 2024, 68 in 2025 and 128 in the 2026 part year. That is real but
-  small next to the surge — removing it entirely leaves the 2026 acceleration
-  intact. Other policy shifts would not be so visible.</li>
-<li><strong>The AI share has error in both directions.</strong> Acknowledgments are free
+<li><strong>a disclosure is not a discovery, and here it is not dated like one.</strong>
+  CVEs are batched to a monthly release cadence and published when fixed,
+  not when found or reported; the 662 CVEs of July 2026 are a release
+  event, and the gap between report and patch can be months. The count
+  moves with Microsoft's triage and engineering throughput as well as with
+  anyone's rate of finding.</li>
+<li><strong>vendor policy moves the count.</strong> In mid-2024 Microsoft began issuing
+  CVEs for cloud-service flaws it patches itself, with no customer action
+  required: 23 CVEs in 2024, 68 in 2025 and 128 in the 2026 part year.
+  Removing that column entirely leaves the 2026 rise in place; other policy
+  shifts would not be so visible.</li>
+<li><strong>the AI share has error in both directions.</strong> Acknowledgments are free
   text; a researcher who used a model silently counts as human, an
   affiliation-only credit may not have used one, and the SEC-agent team's
-  marker is the word "agent" in its own name. Only the method-naming credits
-  are evidence about how a bug was found, and even those are the finder's own
-  account.</li>
-<li><strong>No severity or depth comparison.</strong> The documents rate severity, but this
-  folder has not extracted it, so a 2026 CVE cannot be compared in
+  marker is the word "agent" in its own name. Only the method-naming
+  credits are evidence about how a bug was found, and even those are the
+  finder's own account.</li>
+<li><strong>no severity or depth comparison.</strong> The documents rate severity, but
+  this folder has not extracted it, so a 2026 CVE cannot be compared in
   consequence with a 2019 one here.</li>
-<li><strong>The codebase is fixed but the surface and the effort are not.</strong> Microsoft
-  added cloud services, acquired products and an expanded bounty over the
-  period, and nothing here gives a denominator of code or search effort.</li>
-<li><strong>Edges of coverage.</strong> The first year is ten months, and a month with no
-  bar — February 2017, for one — is a month in which no CVE has its earliest
-  publication; 2026 is a part year through 2026-08-11, ending on the August
-  Patch Tuesday rather than a complete month. The rare Microsoft-product CVE issued by another CNA — a 2022
-  Windows SMB flaw issued by Rapid7's CNA, for instance — is excluded by the
-  counting rule.</li>
+<li><strong>the codebase is fixed but the surface and the effort are not.</strong>
+  Microsoft added cloud services, acquired products and an expanded bounty
+  over the period, and nothing here gives a denominator of code or search
+  effort.</li>
+<li><strong>edges of coverage.</strong> The first year is ten months; a month with no
+  bar — February 2017, for one — is a month in which no CVE has its
+  earliest publication; 2026 is a part year through 2026-08-11, ending on
+  the August Patch Tuesday rather than a complete calendar month. The rare
+  Microsoft-product CVE issued by another CNA — a 2022 Windows SMB flaw
+  issued by Rapid7's CNA, for instance — is excluded by the counting rule.</li>
 </ul>
-<h2 id="llm-contributions">LLM contributions</h2>
-<p>Concentrated in a handful of teams, like every finder-attributed series in
-this collection. In 2025, all 17 credit the SEC-agent team — Hwiwon Lee,
-Jongseong Kim and colleagues, an academic group whose SLYP pipeline runs
-LLM agents end to end against Windows COTS binaries — 14 of them jointly with
-ENKI WhiteHat [@secagent2026slyp]. In the 2026 part year, of the 26 AI-marked
-CVEs, 14 credit the SEC-agent team, 7 credit Claude or Anthropic — Calif.io
-and Milad Nasr of Anthropic "with Claude", and Adrian Denkiewicz at Doyensec
-with Anthropic Research [@anthropicmythos2026] — 3 credit XBOW, an
-affiliation with no method stated, and 2 credit another AI affiliation, both
-naming a researcher "with OpenAI" on the August Patch Tuesday. One of the
-Claude-credited CVEs is co-credited to Microsoft's own WARP and MORSE teams.
-Set against the 1,927
-CVEs of the part year, the story of this series is the same as Firefox's in a
-heavier codebase: the AI credit is real, growing, and nowhere near large
-enough to explain the record totals around it.</p>
-<h2 id="related-literature">Related literature</h2>
-<p>The June and July 2026 releases were covered as successive all-time records
-[@arcticwolf2026june; @tenable2026july], and the spread across those recaps —
-200 to 568 for the same June release — is the ambiguity this folder's counting
-rule exists to remove; every count here is an aggregation of Microsoft's
-published documents [@msrc2026sug]. Press coverage frames 2026 as AI finding
-record numbers of flaws [@bloomberg2026recordflaws]; on this vendor, as on
-<a href="cyber-firefox.html">Firefox</a>, the AI-credited share is a sliver of a
-much larger rise. The all-software counterparts are
-<a href="cyber-nvd-disclosed.html">NVD disclosures</a>, of which these CVEs are a
-subset, and <a href="cyber-kev-exploited.html">known-exploited additions</a>; the
-open-source fixed codebases with named finders are
-<a href="cyber-curl.html">curl</a>, <a href="cyber-openssl.html">OpenSSL</a> and
-<a href="cyber-firefox.html">Firefox</a>, with
-<a href="cyber-oss-fuzz.html">OSS-Fuzz</a> as the automation control. On the
-reporting side, HackerOne's platform statistics remain the only public figures
-on how many reports autonomous systems file [@hackerone2025autonomy].</p>
+<h2 id="ai-attribution">AI attribution</h2>
+<p>Every AI-marked CVE is itemized with its full credit strings in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a>; the quotes below are read from that
+file as vendored, 2026-08-14. No AI marker appears in any acknowledgment
+before 2025, as of the 2026-08-11 snapshot.</p>
+<ul>
+<li><strong>SEC-agent team.</strong> All 17 AI-marked CVEs of 2025 carry a SEC-agent
+  credit, 14 of them jointly with ENKI WhiteHat, and 14 of 2026's 26
+  AI-marked CVEs carry one. The team's SLYP pipeline runs LLM agents
+  against Windows COTS binaries [@secagent2026slyp].</li>
+</ul>
+<blockquote>
+<p>"Hwiwon Lee (hwiwonl), SEC-agent team | Jongseong Kim (nevul37),
+SEC-agent team with ENKI WhiteHat"
+— MSRC acknowledgment strings for CVE-2025-53802, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a>, read 2026-08-14</p>
+</blockquote>
+<ul>
+<li><strong>Claude and Anthropic.</strong> 7 of 2026's AI-marked CVEs credit Claude or
+  Anthropic [@anthropicmythos2026]. One of them, CVE-2026-33096, is
+  co-credited to "WARP &amp; MORSE teams at Microsoft".</li>
+</ul>
+<blockquote>
+<p>"Calif.io in collaboration with Claude and Anthropic Research"
+— MSRC acknowledgment for CVE-2026-40380, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a>, read 2026-08-14</p>
+</blockquote>
+<ul>
+<li><strong>XBOW.</strong> 3 CVEs credit "XBOW", an affiliation with no method stated.</li>
+<li><strong>OpenAI.</strong> The remaining 2 CVEs, both dated 2026-08-11, credit "Thomas
+  Neil James Shadwell (zemnmez) with OpenAI" — an affiliation with no
+  method stated.</li>
+</ul>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>[@msrc2026sug] — the CVRF API; the primary source every vendored count
+  here aggregates.</li>
+<li>[@arcticwolf2026june] — Arctic Wolf's June 2026 recap: 206
+  vulnerabilities, called the largest single security update since the
+  program began in October 2003.</li>
+<li>[@tenable2026july] — Tenable's July 2026 recap: 569 CVEs, with other
+  trackers putting the same release at up to 622.</li>
+<li>[@secagent2026slyp] — the SLYP pipeline behind the SEC-agent credits:
+  LLM agents over binary-exploration and debugging MCP servers.</li>
+<li>[@anthropicmythos2026] — Anthropic's Mythos preview, background on the
+  vendor named in the Claude credits.</li>
+<li>[@bloomberg2026recordflaws] — press reporting connecting 2026 disclosure
+  records to AI systems; on this vendor the AI-marked share of the part
+  year is 1.3%.</li>
+<li>[@hackerone2025autonomy] — HackerOne's platform statistics, the only
+  public figures on how many reports autonomous systems file.</li>
+<li>Sibling series: these CVEs are a subset of
+  <a href="cyber-nvd-disclosed.html">all software: disclosed</a>; the
+  open-source fixed codebases with named finders are
+  <a href="cyber-curl.html">curl</a>, <a href="cyber-openssl.html">OpenSSL</a>
+  and <a href="cyber-firefox.html">Firefox</a>, with
+  <a href="cyber-oss-fuzz.html">OSS-Fuzz</a> as the automation control and
+  <a href="cyber-kev-exploited.html">known-exploited additions</a> as the
+  exploitation-side count.</li>
+</ul>
 <footer>This page renders the folder's
 <a href="https://github.com/tecunningham/ai-discovery-data/tree/main/problems/cyber-microsoft/">README</a> with the interactive
 chart inline; the PNGs committed in the repository remain the archival

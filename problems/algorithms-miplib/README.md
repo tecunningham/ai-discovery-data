@@ -1,16 +1,16 @@
 # MIPLIB 2017 solution frontier
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** better feasible incumbents, first feasible solutions and
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** better feasible incumbents, first feasible solutions and
 optimality updates announced in MIPLIB 2017 solufile releases
-**Coverage:** 2019-08-26 through 2026-01-26, 28 releases with explicit
+- **Coverage:** 2019-08-26 through 2026-01-26, 28 releases with explicit
 solution counts
-**Data:** [`miplib-solution-releases.csv`](miplib-solution-releases.csv), one
+- **Data:** [`miplib-solution-releases.csv`](miplib-solution-releases.csv), one
 public solufile release per row
-**Upstream:** <https://miplib.zib.de/news.html> and
+- **Upstream:** <https://miplib.zib.de/news.html> and
 <https://miplib.zib.de/download.html>
-**Verdict:** no acceleration — 40 announced updates in the single 2026
+- **Verdict:** no acceleration — 40 announced updates in the single 2026
 release against 13 in 2025 and a 90.1/year mean over 2019–2025
 
 ![Annual MIPLIB incumbent, first-feasible and optimality updates.](discovery-algorithms-miplib.png)

@@ -1,12 +1,12 @@
 # Erdős problems catalogue
 
-**Domain:** mathematics
-**Role:** discovery series
-**Metric:** problems catalogued, statuses marked solved, and statements formalized in Lean, at monthly site snapshots; plus an imputed solution year per solved problem
-**Coverage:** thirteen monthly snapshots, 2025-08-31 to 2026-08-10; imputed solution years 1940–2026
-**Data:** [`erdos-database-history.csv`](erdos-database-history.csv), [`erdos-solution-years.csv`](erdos-solution-years.csv), [`erdos-solution-year-overrides.csv`](erdos-solution-year-overrides.csv)
-**Upstream:** <https://www.erdosproblems.com/>, with the snapshot statistics and Lean counts from <https://github.com/teorth/erdosproblems> and the AI-resolution count from <https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems>
-**Verdict:** inconclusive — 55 imputed resolutions in 2026 through 2026-08-10, against 33 in 2025 and a 5.9/year mean over 2000–2023
+- **Domain:** mathematics
+- **Role:** discovery series
+- **Metric:** problems catalogued, statuses marked solved, and statements formalized in Lean, at monthly site snapshots; plus an imputed solution year per solved problem
+- **Coverage:** thirteen monthly snapshots, 2025-08-31 to 2026-08-10; imputed solution years 1940–2026
+- **Data:** [`erdos-database-history.csv`](erdos-database-history.csv), [`erdos-solution-years.csv`](erdos-solution-years.csv), [`erdos-solution-year-overrides.csv`](erdos-solution-year-overrides.csv)
+- **Upstream:** <https://www.erdosproblems.com/>, with the snapshot statistics and Lean counts from <https://github.com/teorth/erdosproblems> and the AI-resolution count from <https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems>
+- **Verdict:** inconclusive — 55 imputed resolutions in 2026 through 2026-08-10, against 33 in 2025 and a 5.9/year mean over 2000–2023
 
 ![Monthly Erdős catalogue snapshots: problems catalogued, statuses marked solved, and statements formalized in Lean.](discovery-math-erdos.png)
 

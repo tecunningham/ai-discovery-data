@@ -1,12 +1,12 @@
 # Integer factorization records
 
-**Domain:** outside the three domains
-**Role:** control: no-AI baseline
-**Metric:** cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum over dated records
-**Coverage:** 1991-04 to 2020-02, confirmed unmoved as of 2026-08-10
-**Data:** [`factoring-records.csv`](factoring-records.csv) (all 23 published RSA factorizations, plus the 795-bit discrete-logarithm record and the first SHA-1 collision for context)
-**Upstream:** <https://en.wikipedia.org/wiki/RSA_numbers>, with the last two records from <https://caramba.loria.fr/rsa250.txt> and <https://caramba.loria.fr/dlp240-rsa240.txt>
-**Verdict:** no acceleration — 0 records in 2026 against 0 in 2025 and a 0.4/year mean over 1991–2025; the standing record is 250 digits, set 2020-02-28
+- **Domain:** outside the three domains
+- **Role:** control: no-AI baseline
+- **Metric:** cryptanalysis; decimal digits in the largest hard semiprime factored, as a running maximum over dated records
+- **Coverage:** 1991-04 to 2020-02, confirmed unmoved as of 2026-08-10
+- **Data:** [`factoring-records.csv`](factoring-records.csv) (all 23 published RSA factorizations, plus the 795-bit discrete-logarithm record and the first SHA-1 collision for context)
+- **Upstream:** <https://en.wikipedia.org/wiki/RSA_numbers>, with the last two records from <https://caramba.loria.fr/rsa250.txt> and <https://caramba.loria.fr/dlp240-rsa240.txt>
+- **Verdict:** no acceleration — 0 records in 2026 against 0 in 2025 and a 0.4/year mean over 1991–2025; the standing record is 250 digits, set 2020-02-28
 
 ![Integer factorization records: the running maximum in decimal digits, rising from 1991 to 2020 and flat thereafter, with every published RSA factorization behind it.](discovery-integer-factorization.png)
 

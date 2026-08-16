@@ -1,12 +1,12 @@
 # curl vulnerability disclosures
 
-**Domain:** vulnerabilities
-**Role:** discovery series
-**Metric:** vulnerabilities disclosed per quarter, split by whether the finder credit carries an AI marker
-**Coverage:** 2000–2026, partial through 2026-06-24
-**Data:** annual [`curl-vulnerabilities.csv`](curl-vulnerabilities.csv) (severity detail in the same file); quarterly [`curl-vulnerabilities-quarterly.csv`](curl-vulnerabilities-quarterly.csv); per-finder [`curl-finders.csv`](curl-finders.csv)
-**Upstream:** <https://curl.se/docs/vuln.json> (human-readable at <https://curl.se/docs/security.html>)
-**Verdict:** accelerating — 36 disclosures through 2026-06-24 annualize to roughly 75 against 9 in 2025 and a 13.1/year mean over 2014–2023
+- **Domain:** vulnerabilities
+- **Role:** discovery series
+- **Metric:** vulnerabilities disclosed per quarter, split by whether the finder credit carries an AI marker
+- **Coverage:** 2000–2026, partial through 2026-06-24
+- **Data:** annual [`curl-vulnerabilities.csv`](curl-vulnerabilities.csv) (severity detail in the same file); quarterly [`curl-vulnerabilities-quarterly.csv`](curl-vulnerabilities-quarterly.csv); per-finder [`curl-finders.csv`](curl-finders.csv)
+- **Upstream:** <https://curl.se/docs/vuln.json> (human-readable at <https://curl.se/docs/security.html>)
+- **Verdict:** accelerating — 36 disclosures through 2026-06-24 annualize to roughly 75 against 9 in 2025 and a 13.1/year mean over 2014–2023
 
 ![Quarterly curl vulnerability disclosures, split by explicit AI credit.](discovery-cyber-curl.png)
 

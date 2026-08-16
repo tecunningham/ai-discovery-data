@@ -1,12 +1,12 @@
 # Inventory of the AlphaEvolve problem set
 
-**Domain:** mathematics
-**Role:** denominator frame
-**Metric:** per problem, whether it has a live numeric record and how many dated prior works the paper cites
-**Coverage:** the 65 problems the paper numbers 6.1 to 6.65; cited works span 1852–2025; built 2026-07-26
-**Data:** [`alphaevolve-inventory.csv`](alphaevolve-inventory.csv)
-**Upstream:** <https://arxiv.org/abs/2511.02864> and <https://github.com/google-deepmind/alphaevolve_repository_of_problems>
-**Verdict:** baseline — 65 problems inventoried, 31 with a live numeric record; built 2026-07-26
+- **Domain:** mathematics
+- **Role:** denominator frame
+- **Metric:** per problem, whether it has a live numeric record and how many dated prior works the paper cites
+- **Coverage:** the 65 problems the paper numbers 6.1 to 6.65; cited works span 1852–2025; built 2026-07-26
+- **Data:** [`alphaevolve-inventory.csv`](alphaevolve-inventory.csv)
+- **Upstream:** <https://arxiv.org/abs/2511.02864> and <https://github.com/google-deepmind/alphaevolve_repository_of_problems>
+- **Verdict:** baseline — 65 problems inventoried, 31 with a live numeric record; built 2026-07-26
 
 ![Composition of the AlphaEvolve problem set, and how many problems survive each filter a historical comparison requires.](alphaevolve-frame-funnel.png)
 

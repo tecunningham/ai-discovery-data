@@ -1,12 +1,12 @@
 # OpenSSL vulnerability disclosures
 
-**Domain:** vulnerabilities
-**Role:** discovery series
-**Metric:** vulnerabilities disclosed per quarter, split by finder provenance: corroborated AI method, AI affiliation with method unverified, conventional or fuzzing credit, or no reporter credit
-**Coverage:** 2002–2026, partial through 2026-08-05
-**Data:** CVE-level [`openssl-cves.csv`](openssl-cves.csv); annual [`openssl-vulnerabilities.csv`](openssl-vulnerabilities.csv); per-finder [`openssl-finders.csv`](openssl-finders.csv)
-**Upstream:** <https://github.com/openssl/release-metadata/tree/main/secjson>
-**Verdict:** accelerating — 39 CVEs by 2026-08-05 against 6 in all of 2025; the largest prior full years were 35 in 2016 and 32 in 2015
+- **Domain:** vulnerabilities
+- **Role:** discovery series
+- **Metric:** vulnerabilities disclosed per quarter, split by finder provenance: corroborated AI method, AI affiliation with method unverified, conventional or fuzzing credit, or no reporter credit
+- **Coverage:** 2002–2026, partial through 2026-08-05
+- **Data:** CVE-level [`openssl-cves.csv`](openssl-cves.csv); annual [`openssl-vulnerabilities.csv`](openssl-vulnerabilities.csv); per-finder [`openssl-finders.csv`](openssl-finders.csv)
+- **Upstream:** <https://github.com/openssl/release-metadata/tree/main/secjson>
+- **Verdict:** accelerating — 39 CVEs by 2026-08-05 against 6 in all of 2025; the largest prior full years were 35 in 2016 and 32 in 2015
 
 ![Quarterly OpenSSL vulnerability disclosures, separating corroborated AI discovery from affiliation-only credits.](discovery-cyber-openssl.png)
 

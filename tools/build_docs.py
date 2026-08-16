@@ -91,7 +91,7 @@ def readme_fields(slug: str) -> dict[str, str]:
     text = (ROOT / "problems" / slug / "README.md").read_text(encoding="utf-8")
     fields = {"title": re.search(r"^#\s+(.+)$", text, re.M).group(1).strip()}
     for field in ("Metric", "Upstream", "Data"):
-        match = re.search(rf"^\*\*{field}:\*\*\s*(.+)$", text, re.M)
+        match = re.search(rf"^- \*\*{field}:\*\*\s*(.+)$", text, re.M)
         fields[field.lower()] = match.group(1).strip() if match else ""
     return fields
 

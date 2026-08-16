@@ -1,12 +1,12 @@
 # The Open Problems Project
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 78 scored rows
-**Coverage:** list begun 2001; dated resolutions 2000–2024; statuses read 2026-08-14
-**Data:** [`topp-problems.csv`](topp-problems.csv)
-**Upstream:** <https://topp.openproblem.net/>, with the rows transcribed from the project's GitHub sources
-**Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 2024; 17 dated resolutions over 2000–2024
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 78 scored rows
+- **Coverage:** list begun 2001; dated resolutions 2000–2024; statuses read 2026-08-14
+- **Data:** [`topp-problems.csv`](topp-problems.csv)
+- **Upstream:** <https://topp.openproblem.net/>, with the rows transcribed from the project's GitHub sources
+- **Verdict:** no acceleration — 0 resolutions in 2026 and 0 since 2024; 17 dated resolutions over 2000–2024
 
 ![Dated resolutions per year.](discovery-math-topp.png)
 

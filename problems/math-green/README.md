@@ -1,12 +1,12 @@
 # Ben Green's 100 open problems
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 101 scored rows
-**Coverage:** 2018–2026; statuses as the December 2025 revision records them, read 2026-08-13; dated resolutions 2019–2025
-**Data:** [`green-problems.csv`](green-problems.csv)
-**Upstream:** <https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf>
-**Verdict:** no acceleration — 0 dated resolutions in 2026 against 3 in 2025 and a 1.9/year mean over 2019–2025
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 101 scored rows
+- **Coverage:** 2018–2026; statuses as the December 2025 revision records them, read 2026-08-13; dated resolutions 2019–2025
+- **Data:** [`green-problems.csv`](green-problems.csv)
+- **Upstream:** <https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf>
+- **Verdict:** no acceleration — 0 dated resolutions in 2026 against 3 in 2025 and a 1.9/year mean over 2019–2025
 
 ![Dated resolutions per year.](discovery-math-green.png)
 

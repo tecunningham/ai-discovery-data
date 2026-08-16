@@ -1,16 +1,16 @@
 # modded-nanogpt training speedrun
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** minutes of training to a fixed target validation loss, per
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** minutes of training to a fixed target validation loss, per
 accepted record
-**Coverage:** 2024-05-28 to 2026-07-17, all 89 records listed in the
+- **Coverage:** 2024-05-28 to 2026-07-17, all 89 records listed in the
 repository README
-**Data:** [`nanogpt-records.csv`](nanogpt-records.csv)
-**Upstream:** <https://github.com/KellerJordan/modded-nanogpt> (record table
+- **Data:** [`nanogpt-records.csv`](nanogpt-records.csv)
+- **Upstream:** <https://github.com/KellerJordan/modded-nanogpt> (record table
 in the README at
 <https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md>)
-**Verdict:** no acceleration — the standing record fell 1.5× in 2026 (33
+- **Verdict:** no acceleration — the standing record fell 1.5× in 2026 (33
 records through 2026-07-17) against 1.9× in 2025 (39 records) and 12.6× in
 2024 (17 records)
 

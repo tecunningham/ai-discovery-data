@@ -191,7 +191,7 @@ class Problem:
                           for key in re.findall(r"@([A-Za-z0-9_:-]+)", group)}
         self.fields = {}
         for field in FIELDS:
-            match = re.search(rf"^\*\*{field}:\*\*\s*(.+)$", self.text, re.M)
+            match = re.search(rf"^- \*\*{field}:\*\*\s*(.+)$", self.text, re.M)
             if match:
                 self.fields[field] = match.group(1).strip()
         # Reproduction is off unless asked for, since it redraws every figure.

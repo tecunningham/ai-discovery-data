@@ -1,12 +1,12 @@
 # Top 10 Erdős problems
 
-**Domain:** mathematics
-**Role:** prestige ledger
-**Metric:** dated resolutions per year across 12 scored rows
-**Coverage:** list posed 2026-04-16; dated resolutions 1975–2026; statuses read 2026-08-14
-**Data:** [`erdos-top10-problems.csv`](erdos-top10-problems.csv)
-**Upstream:** <https://www.erdosproblems.com/forum/thread/blog:5>, with the unit-distance row resting on the human-verified account at <https://arxiv.org/abs/2605.20695>
-**Verdict:** inconclusive — 1 resolution in 2026 against 3 in the 90 years since 1936; a series this small sets no rate
+- **Domain:** mathematics
+- **Role:** prestige ledger
+- **Metric:** dated resolutions per year across 12 scored rows
+- **Coverage:** list posed 2026-04-16; dated resolutions 1975–2026; statuses read 2026-08-14
+- **Data:** [`erdos-top10-problems.csv`](erdos-top10-problems.csv)
+- **Upstream:** <https://www.erdosproblems.com/forum/thread/blog:5>, with the unit-distance row resting on the human-verified account at <https://arxiv.org/abs/2605.20695>
+- **Verdict:** inconclusive — 1 resolution in 2026 against 3 in the 90 years since 1936; a series this small sets no rate
 
 ![Dated resolutions per year.](discovery-math-erdos-top10.png)
 

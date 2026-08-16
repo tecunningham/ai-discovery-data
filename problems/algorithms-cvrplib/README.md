@@ -1,14 +1,14 @@
 # CVRPLIB X-instance record frontier
 
-**Domain:** algorithms
-**Role:** discovery series
-**Metric:** better best-known objectives and later optimality proofs recorded
+- **Domain:** algorithms
+- **Role:** discovery series
+- **Metric:** better best-known objectives and later optimality proofs recorded
 for a fixed cohort of 100 CVRP X instances, one event per posting
-**Coverage:** 2015–2026, 289 event rows posted through 2026-07-04
-**Data:** [`cvrplib-x-frontier.csv`](cvrplib-x-frontier.csv), one
+- **Coverage:** 2015–2026, 289 event rows posted through 2026-07-04
+- **Data:** [`cvrplib-x-frontier.csv`](cvrplib-x-frontier.csv), one
 instance–posting-date–objective–event tuple per row
-**Upstream:** <https://galgos.inf.puc-rio.br/cvrplib/index.php/en/updates/>
-**Verdict:** declining — 3 events in 2026 against 3 in 2025; 264 of the 267
+- **Upstream:** <https://galgos.inf.puc-rio.br/cvrplib/index.php/en/updates/>
+- **Verdict:** declining — 3 events in 2026 against 3 in 2025; 264 of the 267
 better-objective events were posted 2015–2021
 
 ![Annual better objectives and optimality proofs in the fixed CVRPLIB X cohort.](discovery-algorithms-cvrplib.png)

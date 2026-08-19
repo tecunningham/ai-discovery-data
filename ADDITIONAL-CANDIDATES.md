@@ -52,6 +52,7 @@ ties keep the earlier ordering. The criteria are:
 | **Enzymology — [ENZYME](https://enzyme.expasy.org/) + [BRENDA](https://www.brenda-enzymes.org/)** · first characterization of each EC activity | ✅ | 🟡 | 🟡 | ✅ | ✅ | **8** | A newly demonstrated catalytic activity is close to a stable unit of biological function. Dates are recoverable only per-entry from BRENDA, whose licence restricts redistribution — the two soft spots. |
 | **Structural biology — [Protein Data Bank](https://www.rcsb.org/)** · first experimental structure per UniProt protein / Pfam family | 🟡 | ✅ | ✅ | 🟡 | ✅ | **8** | Deposition and release dates are clean and AlphaFold makes it highly AI-exposed. Needs a dedup rule to turn raw structure throughput into first-of-kind events. |
 | **Astronomy — [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/docs/API_PS_columns.html)** · confirmed exoplanets, especially re-found in archival Kepler/TESS data | 🟡 | ✅ | ✅ | 🟡 | ✅ | **8** | Discovery year, method, facility and instrument are all programmatic. The raw count is detector-limited throughput; the AI-legible frontier is the archival-reanalysis subset (design #6), which must be carved out. |
+| **Algorithms — [Algorithm Wiki](https://algorithm-wiki.org/) (MIT FutureTech)** · first algorithm to improve a family's best-known time or space complexity | ✅ | ✅ | 🟡 | ✅ | 🟡 | **8** | Roughly 1,907 catalogued algorithms across 100+ problem families, each with publication year and complexity classes — the theoretical counterpart to the solver and speedrun folders. Curation verified active through a 2025-11 follow-up paper; whether any 2026 entries exist is unverified, and licence and export stability are the other open audits. See the [Algorithm Wiki section](#algorithm-wiki-mit-futuretech) below. |
 | **Superconductivity — NIMS SuperCon** · new superconductors, record critical-temperature frontier | ✅ | 🟡 | 🟡 | ✅ | 🟡 | **7** | More than ten thousand materials with transition temperatures and citations. Whether consistent first-report dates can be recovered is the open audit question, and access is a database rather than a clean bulk file. |
 | **Medical genetics — [ClinVar archives](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/)** · first high-confidence pathogenic variant–disease call | 🟡 | ✅ | ✅ | 🟡 | 🟡 | **7** | Retained monthly releases let you reconstruct new expert-reviewed classifications and later state transitions rather than counting all submissions. The "high-confidence + first" rule still has to be pinned. |
 | **Particle physics — [PDG historical editions](https://pdg.lbl.gov/rpp-archive/)** · precision frontiers for masses, lifetimes, couplings | 🟡 | ✅ | 🟡 | ✅ | 🟡 | **7** | Editions reach back to 1957; recent ones have an API, older ones are PDF archaeology. It is a constructed uncertainty-fall index rather than discrete events, and fundamental-constant precision is only weakly AI-exposed — useful partly as a low-exposure frontier. |
@@ -60,6 +61,73 @@ ties keep the earlier ordering. The criteria are:
 | **Cryo-EM — [EMDB releases](https://www.ebi.ac.uk/emdb/statistics_main.html)** · first structure per biological target | 🟡 | ✅ | ✅ | ❌ | 🟡 | **6** | An exceptionally clean release series (640 in 2015, 3,820 in 2020, 11,657 in 2025), but the rise reflects microscopes and methods more than AI. Best after deduplication, and most useful as a throughput comparison or control. |
 | **Gravitational waves — [GWOSC](https://gwosc.org/eventapi/)** · catalog events per observing day | ✅ | ✅ | ✅ | ❌ | ❌ | **6** | Clean, machine-readable events, but discovery is strongly detector-sensitivity constrained and AI exposure is low. Include it explicitly as a negative / low-exposure control (designs #2, #10), not as a positive AI series. |
 | **Weakness classes — [CWE](https://cwe.mitre.org/) composition of CVE series** · NVD's per-CVE CWE assignments as a composition cut | ❌ | ✅ | ✅ | ❌ | 🟡 | **4** | Not a discovery series of its own: CWE is a taxonomy, and its value here is as a dimension on the existing CVE series — whether agent-era disclosures differ in *kind* (use-after-free vs injection vs XSS), a depth signal orthogonal to severity. Would extend the NVD folder with per-year counts for the top weakness classes; assignment coverage and NVD's analysis backlog are the caveats. |
+
+## Algorithm Wiki (MIT FutureTech)
+
+The [Algorithm Wiki](https://algorithm-wiki.org/)
+([MediaWiki instance](https://algorithm-wiki.csail.mit.edu/wiki/Main_Page)) is
+the living continuation of Sherry and Thompson's 2021 "How Fast Do Algorithms
+Improve?" dataset — the same paper cited from the main README as the base rate
+for how rarely algorithm families improve. It now holds roughly 1,907 algorithm
+records across 100+ problem families, each carrying publication year, time
+complexity and space complexity, with a
+[custom dataset export](https://algorithm-wiki.org/download) and a bulk
+download on the [FutureTech datasets page](https://futuretech.mit.edu/datasets).
+As a problem folder it would count one event per published algorithm that
+improved a family's best-known asymptotic complexity, plotted as improvements
+per year since 1940 — a genuine frontier series, and a useful low-AI-exposure
+contrast (design #10) with one already-AI-credited exception: the 2026
+matrix-multiplication exponent record in
+[`problems/matrix-omega/`](problems/matrix-omega/), whose family the wiki also
+tracks.
+
+### How up to date is it?
+
+Verified as of 2026-08-19:
+
+- The 2021 paper compiled 113 families from 57 textbooks and more than 1,110
+  research papers, with coverage effectively through the late 2010s.
+- A follow-up survey of space complexity
+  ([arXiv 2511.22084](https://arxiv.org/abs/2511.22084), submitted 2025-11-27)
+  reuses and extends the same dataset — 118 problems, 800+ algorithms — so
+  curation was active through late 2025.
+- Whether any 2026-dated algorithm appears in the wiki is not verified: the
+  wiki and the FutureTech datasets page were unreachable from the session that
+  wrote this entry (network egress blocked), and no indexed page settles it.
+  Until the export is inspected, coverage should be assumed to end near the
+  2025 survey's compilation, with 2026 absent.
+
+The censoring consequence matters more than the average lag: the most recent
+bins of a per-year series built from the wiki would count when curators caught
+up, not when improvements were published, so 2024–2026 bins under-count until
+audited. An empty 2026 bin would be censoring, not a flat frontier, and the
+folder's verdict would have to say so.
+
+### How much work to bring it current?
+
+Bounded, because genuinely new best-known-complexity results are rare — a few
+per year across all families, against the 2021 paper's finding that about half
+of families never improve at all and the average family records 1.44
+improvements since 1940. The matrix-multiplication ledger in this repository
+shows the cadence at the fast end: four exponent records over 2022–2026 in one
+of the most-watched families in the field. The path:
+
+1. **Audit the export against known ledgers** — cross-check the fast-moving
+   families against `problems/matrix-omega/` and against recent SODA/STOC/FOCS
+   results. This also answers the 2026 question directly. About a day.
+2. **One-time recency sweep** — check the families with post-2015 activity
+   against the recent literature; the majority of families are static and need
+   only a spot-check. A few days, front-loaded on the active families.
+3. **Ongoing maintenance** — a small annual sweep thereafter, or contributions
+   filed upstream to the wiki itself, which is the better home for corrections.
+
+Two audits sit on the critical path before a problem folder: no licence is
+stated anywhere findable, so a note to the FutureTech team is needed (and would
+also establish their update cadence); and the export appears to be an
+interactive builder rather than a stable URL, so the first ingest would be a
+hand-vendored CSV with a retrieval date — the ✍️ maintenance status the
+repository already supports — with a MediaWiki-API `fetch.py` as a possible
+later upgrade if `api.php` proves to be enabled.
 
 ## Deferred algorithm benchmark reconstructions
 

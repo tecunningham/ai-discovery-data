@@ -43,18 +43,19 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <h1>Matrix-multiplication exponent ω</h1>
 <ul>
 <li><strong>Domain:</strong> algorithms</li>
-<li><strong>Role:</strong> control: no-AI baseline</li>
+<li><strong>Role:</strong> discovery series</li>
 <li><strong>Metric:</strong> best proved upper bound on the asymptotic exponent ω of n×n
 matrix multiplication; lower is better</li>
-<li><strong>Coverage:</strong> 1969 to 2024, fifteen recorded steps; transcription current to
-2026-08-10</li>
+<li><strong>Coverage:</strong> 1969 to 2026, sixteen recorded steps; transcription current
+to 2026-08-18</li>
 <li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/matrix-omega/matrix-multiplication-omega.csv"><code>matrix-multiplication-omega.csv</code></a></li>
 <li><strong>Upstream:</strong>
 <a href="https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms">https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms</a>
-(recorded per row in the CSV); the finite small-matrix results are in the
-AlphaEvolve paper at <a href="https://arxiv.org/abs/2506.13131">https://arxiv.org/abs/2506.13131</a></li>
-<li><strong>Verdict:</strong> declining — 0 new bounds in 2026 and 0 in 2025 against 2 in
-2024; movement of 0.0024 over 2010–2024 against 0.4319 over 1969–1990</li>
+(recorded per row in the CSV for the 1969–2024 rows);
+<a href="https://arxiv.org/abs/2608.16884">https://arxiv.org/abs/2608.16884</a> (the 2026 row); the finite small-matrix
+results are in the AlphaEvolve paper at <a href="https://arxiv.org/abs/2506.13131">https://arxiv.org/abs/2506.13131</a></li>
+<li><strong>Verdict:</strong> inconclusive — 1 new bound in 2026 against 0 in 2025 and 2 in
+2024; movement of 0.0025 over 2010–2026 against 0.4319 over 1969–1990</li>
 </ul>
 <h3>Matrix-multiplication exponent ω</h3>
 <div id="chart0" class="chart"></div>
@@ -79,45 +80,54 @@ improvement on a finite problem; it is not a point on this curve and does
 not move ω.</p>
 <h2 id="facts">Facts</h2>
 <ul>
-<li><strong>steps:</strong> 15 recorded steps, 1969 to 2024, all credited human</li>
-<li><strong>span:</strong> 2.8074 (Strassen, 1969) to 2.371339
-  (Alman–Duan–Williams–Xu–Xu–Zhou, 2024)</li>
+<li><strong>steps:</strong> 16 recorded steps, 1969 to 2026, 15 credited human and 1
+  credited ai</li>
+<li><strong>span:</strong> 2.8074 (Strassen, 1969) to 2.371177 (Dupont et al., 2026)</li>
 <li><strong>first two decades:</strong> the bound fell 0.4319 from 1969 to 1990, closing at
   2.3755 (Coppersmith–Winograd, 1990)</li>
 <li><strong>post-2010 steps:</strong> 2.3737 (Stothers, 2010) · 2.3729 (Williams, 2012) ·
   2.3728639 (Le Gall, 2014) · 2.3728596 (Alman–Williams, 2020) · 2.371866
   (Duan–Wu–Zhou, 2022) · 2.371552 (Williams et al., 2024) · 2.371339
-  (Alman–Duan–Williams–Xu–Xu–Zhou, 2024)</li>
-<li><strong>since 2010:</strong> the six steps after the 2010 record total 0.0024 over
-  fourteen years</li>
-<li><strong>last step:</strong> first posted in April 2024 and subsequently published at
-  SODA 2025; the record has not moved since</li>
+  (Alman–Duan–Williams–Xu–Xu–Zhou, 2024) · 2.371177 (Dupont et al., 2026)</li>
+<li><strong>since 2010:</strong> the seven steps after the 2010 record total 0.0025 over
+  sixteen years</li>
+<li><strong>last step:</strong> posted to arXiv on 2026-08-17; the only row whose credit
+  column is ai</li>
 </ul>
 <p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
 series as the standing record's value over time:</p>
 <p><img alt="Standing record for ω over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/matrix-omega/cumulative-matrix-omega.png" /></p>
 <h2 id="method">Method</h2>
-<p>There is no <code>fetch.py</code> here. The chronology is transcribed by hand from a
-published record list, one <code>source_url</code> per row, so the CSV is edited
-directly [@wikipedia2026matmul]. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/matrix-omega/check.py"><code>check.py</code></a> recomputes the fact
-lines above from the CSV.</p>
+<p>There is no <code>fetch.py</code> here. The chronology is transcribed by hand, one
+<code>source_url</code> per row, so the CSV is edited directly. The 1969–2024 rows
+reproduce a published record list [@wikipedia2026matmul]; the 2026 row is
+transcribed from the arXiv abstract that states the new bound
+[@dupont2026omega], which that record list does not yet include as of
+2026-08-18. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/matrix-omega/check.py"><code>check.py</code></a> recomputes the fact lines above from the
+CSV.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/matrix-omega/figure.py"><code>figure.py</code></a> reads <code>matrix-multiplication-omega.csv</code> and plots
 the <code>omega</code> column against <code>year</code> as a step function, extended flat to the
-present so the standing record is visible as a plateau, with every row also
-drawn as a point in human blue. A dotted horizontal line at 2 is labelled
-"conjectured limit = 2". Three rows are annotated by matching the
-<code>discoverer</code> column against Strassen, Coppersmith–Winograd and Alman et al.;
-when a name occurs more than once, the latest record is labelled. The axis
-is linear and clipped to 1.96 to 2.9, which keeps the post-1990 stretch
-readable; January 2026 onward is shaded, and the legend carries the
-collection's shared human and AI key even though only human points exist.
-The chart's corner note takes the 2010 record as its baseline and counts the
-six further improvements after it.</p>
+present so the standing record is visible as a plateau. Every row is also
+drawn as a point, coloured by the <code>credit</code> column: human blue for <code>human</code>
+rows and AI red for <code>ai</code> rows. A dotted horizontal line at 2 is labelled
+"conjectured limit = 2". Four rows are annotated by matching the
+<code>discoverer</code> column against Strassen, Coppersmith–Winograd, Alman et al. and
+Dupont et al.; when a name occurs more than once, the latest record is
+labelled. The axis is linear and clipped to 1.96 to 2.9, which keeps the
+post-1990 stretch readable; January 2026 onward is shaded, and the legend
+carries the collection's shared human and AI key. The chart's corner note
+takes the 2010 record as its baseline and counts the further improvements
+after it and the AI-credited rows, both at plot time.</p>
 <h2 id="limitations">Limitations</h2>
 <ul>
-<li><strong>a secondary chronology.</strong> The rows reproduce a published record list and
-  the source log's earlier transcription of it, one URL for every row,
-  rather than fifteen primary papers read in turn.</li>
+<li><strong>a secondary chronology.</strong> The 1969–2024 rows reproduce a published
+  record list and the source log's earlier transcription of it, one URL for
+  every row, rather than fifteen primary papers read in turn; the 2026 row
+  is transcribed from its arXiv abstract alone.</li>
+<li><strong>the 2026 row is a preprint.</strong> The bound 2.371177 was posted 2026-08-17
+  and has not yet appeared in a peer-reviewed venue or in the record list
+  the other rows are transcribed from; the 2024 rows followed the same path
+  before publication at SODA 2025.</li>
 <li><strong>bounds are not implementations.</strong> None of the post-Strassen algorithms
   in this series is used in practice; the constants and crossover sizes make
   them galactic. A falling curve here is not a falling cost of multiplying
@@ -126,31 +136,54 @@ six further improvements after it.</p>
   change in the sixth decimal place of an exponent into a quantity
   comparable with the solver-release and speedrun series in this
   collection.</li>
-<li><strong>an absence of AI steps on this axis says nothing about the finite
-  problem.</strong> The 4×4 complex result exists and is not plotted, by design.</li>
+<li><strong>the credit column is a binary.</strong> The 2026 row is credited ai on the
+  paper's own description of its pipeline; the row does not apportion the
+  result between the reformulation, the machine-learned optimizer, the
+  AlphaEvolve refinement, and the ten authors.</li>
 </ul>
 <h2 id="ai-attribution">AI attribution</h2>
-<p>No step in the series carries an AI credit: the <code>credit</code> column is <code>human</code>
-for all 15 rows, and no AI credit appears in the chronology's source list as
-of the 2026-08-10 transcription [@wikipedia2026matmul].</p>
-<p>The AI results in this area are on finite matrix sizes. AlphaTensor,
-published in 2022, used reinforcement learning with no language model
-involved and found faster algorithms for multiplying small matrices, the
-first improvement in that setting on Strassen-era results
-[@fawzi2022alphatensor]. AlphaEvolve, in 2025, extended the same line,
-finding a procedure for two 4×4 complex-valued matrices in 48 scalar
-multiplications and describing it as "the first improvement, after 56 years,
-over Strassen's algorithm in this setting" [@novikov2025alphaevolve]. Both
-results are on the finite object, not on ω. On asymptotic,
-structure-heavy problems, Tao's account of AlphaEvolve's run across 67
-mathematical problems reports that on analytic number theory it "struggled
-to take advantage of the number theoretic structure in the problem, even
-when given suitable expert hints", while it "does seem to do well when the
-constructions have some algebraic structure" [@tao2025exploration].</p>
+<p>One step in the series carries an AI credit: the <code>credit</code> column is <code>ai</code> for
+the 2026 row and <code>human</code> for the other 15 rows. Before that row was added,
+no AI credit appeared in the chronology's source list as of the 2026-08-10
+transcription [@wikipedia2026matmul].</p>
+<h3 id="2026-dupont-et-al-2371177">2026 — Dupont et al., ω &lt; 2.371177</h3>
+<ul>
+<li><strong>credit:</strong> ai</li>
+<li><strong>discoverer:</strong> Dupont et al. — ten authors: Emilien Dupont, Marvin
+  Eisenberger, Borislav Kozlovskii, Abbas Mehrabian, Francisco J. R. Ruiz,
+  Abigail See, Renfei Zhou, Josh Alman, Virginia Vassilevska Williams and
+  Matej Balog</li>
+<li><strong>note:</strong> Alman, Vassilevska Williams and Zhou are authors of the prior
+  record rows dated 2024</li>
+</ul>
+<blockquote>
+<p>"Second, we leverage recent advances in machine learning to design a new
+optimization algorithm for this problem. Finally, we refine the resulting
+optimization algorithm with AlphaEvolve. Our combined approach yields an
+upper bound of ω &lt; 2.371177, improving the previous best bound of
+2.371339."
+— arXiv:2608.16884, abstract, posted 2026-08-17 [@dupont2026omega]</p>
+</blockquote>
+<p>The earlier AI results in this area were on finite matrix sizes and are not
+points on this curve. AlphaTensor, published in 2022, used reinforcement
+learning with no language model involved and found faster algorithms for
+multiplying small matrices, the first improvement in that setting on
+Strassen-era results [@fawzi2022alphatensor]. AlphaEvolve, in 2025, extended
+the same line, finding a procedure for two 4×4 complex-valued matrices in 48
+scalar multiplications and describing it as "the first improvement, after 56
+years, over Strassen's algorithm in this setting" [@novikov2025alphaevolve].
+On asymptotic, structure-heavy problems, Tao's account of AlphaEvolve's run
+across 67 mathematical problems reports that on analytic number theory it
+"struggled to take advantage of the number theoretic structure in the
+problem, even when given suitable expert hints", while it "does seem to do
+well when the constructions have some algebraic structure"
+[@tao2025exploration].</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li>[@wikipedia2026matmul] — the published record chronology, recorded as the
-  per-row source in the CSV.</li>
+  per-row source in the CSV for the 1969–2024 rows.</li>
+<li>[@dupont2026omega] — the 2026 record ω &lt; 2.371177, recorded as the per-row
+  source of the ai-credited row and quoted in the AI-attribution register.</li>
 <li>[@fawzi2022alphatensor] — AlphaTensor: the finite-size reinforcement
   learning result in the AI-attribution register, with no language model
   involved.</li>
@@ -172,7 +205,7 @@ chart inline; the PNGs committed in the repository remain the archival
 record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
-vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"credit":"human","discoverer":"Strassen","note":"Value reproduces the existing source-log transcription","omega":2.8074,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1969},{"credit":"human","discoverer":"Pan","note":"Value reproduces the existing source-log transcription","omega":2.796,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1978},{"credit":"human","discoverer":"Bini et al.","note":"Value reproduces the existing source-log transcription","omega":2.78,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1979},{"credit":"human","discoverer":"Sch\u00f6nhage","note":"Value reproduces the existing source-log transcription","omega":2.522,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Romani","note":"Value reproduces the existing source-log transcription","omega":2.517,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Coppersmith\u2013Winograd","note":"Value reproduces the existing source-log transcription","omega":2.496,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Strassen","note":"Value reproduces the existing source-log transcription","omega":2.479,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1986},{"credit":"human","discoverer":"Coppersmith\u2013Winograd","note":"Value reproduces the existing source-log transcription","omega":2.3755,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1990},{"credit":"human","discoverer":"Stothers","note":"Value reproduces the existing source-log transcription","omega":2.3737,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2010},{"credit":"human","discoverer":"Williams","note":"Value reproduces the existing source-log transcription","omega":2.3729,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2012},{"credit":"human","discoverer":"Le Gall","note":"Value reproduces the existing source-log transcription","omega":2.3728639,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2014},{"credit":"human","discoverer":"Alman\u2013Williams","note":"Value reproduces the existing source-log transcription","omega":2.3728596,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2020},{"credit":"human","discoverer":"Duan\u2013Wu\u2013Zhou","note":"Value reproduces the existing source-log transcription","omega":2.371866,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2022},{"credit":"human","discoverer":"Williams et al.","note":"Value reproduces the existing source-log transcription","omega":2.371552,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2024},{"credit":"human","discoverer":"Alman\u2013Duan\u2013Williams\u2013Xu\u2013Xu\u2013Zhou","note":"First posted April 2024; subsequently published at SODA 2025","omega":2.371339,"url":"https://arxiv.org/abs/2404.16349","year":2024}]},"height":340,"layer":[{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"omega","title":"\u03c9","type":"quantitative"},{"field":"discoverer","title":"discoverer","type":"nominal"},{"field":"credit","title":"credit","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"omega","scale":{"zero":false},"title":"Best proved upper bound on \u03c9","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"omega","title":"\u03c9","type":"quantitative"},{"field":"discoverer","title":"discoverer","type":"nominal"},{"field":"credit","title":"credit","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"omega","scale":{"zero":false},"title":"Best proved upper bound on \u03c9","type":"quantitative"}},"mark":{"cursor":"pointer","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"credit":"human","discoverer":"Strassen","note":"Value reproduces the existing source-log transcription","omega":2.8074,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1969},{"credit":"human","discoverer":"Pan","note":"Value reproduces the existing source-log transcription","omega":2.796,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1978},{"credit":"human","discoverer":"Bini et al.","note":"Value reproduces the existing source-log transcription","omega":2.78,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1979},{"credit":"human","discoverer":"Sch\u00f6nhage","note":"Value reproduces the existing source-log transcription","omega":2.522,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Romani","note":"Value reproduces the existing source-log transcription","omega":2.517,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Coppersmith\u2013Winograd","note":"Value reproduces the existing source-log transcription","omega":2.496,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1981},{"credit":"human","discoverer":"Strassen","note":"Value reproduces the existing source-log transcription","omega":2.479,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1986},{"credit":"human","discoverer":"Coppersmith\u2013Winograd","note":"Value reproduces the existing source-log transcription","omega":2.3755,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":1990},{"credit":"human","discoverer":"Stothers","note":"Value reproduces the existing source-log transcription","omega":2.3737,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2010},{"credit":"human","discoverer":"Williams","note":"Value reproduces the existing source-log transcription","omega":2.3729,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2012},{"credit":"human","discoverer":"Le Gall","note":"Value reproduces the existing source-log transcription","omega":2.3728639,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2014},{"credit":"human","discoverer":"Alman\u2013Williams","note":"Value reproduces the existing source-log transcription","omega":2.3728596,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2020},{"credit":"human","discoverer":"Duan\u2013Wu\u2013Zhou","note":"Value reproduces the existing source-log transcription","omega":2.371866,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2022},{"credit":"human","discoverer":"Williams et al.","note":"Value reproduces the existing source-log transcription","omega":2.371552,"url":"https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms","year":2024},{"credit":"human","discoverer":"Alman\u2013Duan\u2013Williams\u2013Xu\u2013Xu\u2013Zhou","note":"First posted April 2024; subsequently published at SODA 2025","omega":2.371339,"url":"https://arxiv.org/abs/2404.16349","year":2024},{"credit":"ai","discoverer":"Dupont et al.","note":"First posted August 2026; ten authors; the optimization algorithm behind the bound was refined with AlphaEvolve","omega":2.371177,"url":"https://arxiv.org/abs/2608.16884","year":2026}]},"height":340,"layer":[{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"omega","title":"\u03c9","type":"quantitative"},{"field":"discoverer","title":"discoverer","type":"nominal"},{"field":"credit","title":"credit","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"omega","scale":{"zero":false},"title":"Best proved upper bound on \u03c9","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"href":{"field":"url","type":"nominal"},"tooltip":[{"field":"year","title":"year","type":"quantitative"},{"field":"omega","title":"\u03c9","type":"quantitative"},{"field":"discoverer","title":"discoverer","type":"nominal"},{"field":"credit","title":"credit","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"d"},"field":"year","scale":{"zero":false},"title":"Year","type":"quantitative"},"y":{"field":"omega","scale":{"zero":false},"title":"Best proved upper bound on \u03c9","type":"quantitative"}},"mark":{"cursor":"pointer","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
 </script>
 </body>
 </html>

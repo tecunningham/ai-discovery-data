@@ -908,6 +908,56 @@ def build_sphere_packing(slug: str):
              "Click a point for the survey it is documented in.")]
 
 
+def build_elliptic_rank(slug: str):
+    """Two Dujella frontiers on one chart, then the ICARM board's own cut."""
+    def steps(name, sign):
+        return [{"year": num(r["year"]), "rank": num(r["rank"]),
+                 "frontier": f"rank {sign}",
+                 "discoverer": r["discoverer"],
+                 "credit": r.get("credit", "human"),
+                 "url": r["source_url"]}
+                for r in load(slug, name)]
+
+    values = (steps("elliptic-curve-rank-records.csv", "at least")
+              + steps("elliptic-curve-rank-exact.csv", "known exactly"))
+    frontier = record_steps(
+        values, x="year", x_type="quantitative", y="rank",
+        y_title="Record rank", x_title="Year", href=True,
+        color=("frontier", {"rank at least": HUMAN,
+                            "rank known exactly": NEUTRAL}),
+        tips=[("year", "quantitative", "year"),
+              ("rank", "quantitative", "rank"),
+              ("discoverer", "nominal", "discoverer"),
+              ("frontier", "nominal", "frontier"),
+              ("credit", "nominal", "credit")])
+    frontier["layer"][0]["encoding"]["x"]["scale"] = {"zero": False}
+
+    board = [{"rank": num(r["rank"]),
+              "log_conductor": num(r["log_conductor"]),
+              "naive_height": num(r["naive_height"]),
+              "curve": f"#{r['curve_id']}",
+              "submitter": r["submitter"], "date": r["date"]}
+             for r in load(slug, "elliptic-rank-leaderboard.csv")
+             if r["log_conductor"]]
+    small = scatter(board, x="rank", x_type="quantitative",
+                    y="log_conductor", y_type="quantitative",
+                    y_title="log conductor", x_title="Rank (proved lower bound)",
+                    tips=[("curve", "nominal", "curve"),
+                          ("rank", "quantitative", "rank"),
+                          ("log_conductor", "quantitative", "log conductor"),
+                          ("naive_height", "quantitative", "naive height"),
+                          ("submitter", "nominal", "submitted by"),
+                          ("date", "nominal", "submitted")])
+    return [
+        ("Record rank over time", frontier,
+         "Click a step for the curve and its independent points on Dujella's "
+         "subpage."),
+        ("Small curves of high rank", small,
+         "Every curve on the ICARM leaderboard; its rank bound was certified "
+         "by 2-descent before it was recorded."),
+    ]
+
+
 def build_omega(slug: str):
     values = [{"year": num(r["year"]), "omega": num(r["omega"]),
                "discoverer": r["discoverer"], "credit": r["credit"],
@@ -1196,6 +1246,7 @@ SERIES: dict[str, object] = {
     "math-antedb": build_antedb,
     "math-erdos": build_erdos_with_history,
     "math-erdos-top10": ledger_series("erdos-top10-problems.csv"),
+    "math-elliptic-rank": build_elliptic_rank,
     "math-frontiermath-open": build_frontiermath_open,
     "math-green": ledger_series("green-problems.csv"),
     "math-hilbert": ledger_series("hilbert-problems.csv"),

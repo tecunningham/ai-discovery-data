@@ -16,8 +16,17 @@ FIGURE_SCRIPTS := $(wildcard problems/*/figure.py)
 # cddlib-backed pycddlib<3, so it is run by hand and its output vendored.
 FETCH_SCRIPTS := $(filter-out problems/math-antedb/fetch.py, $(wildcard problems/*/fetch.py))
 
+# figure and fetch-one operate on one folder; catch a missing PROBLEM= before
+# any docker build starts.
+ifneq (,$(filter figure fetch-one,$(MAKECMDGOALS)))
+ifndef PROBLEM
+$(error set PROBLEM=<slug>, e.g. make $(filter figure fetch-one,$(MAKECMDGOALS)) PROBLEM=cyber-curl)
+endif
+endif
+
 help:
 	@echo "figure-image       build the pinned Linux renderer (requires Docker)"
+	@echo "clean              delete every problems/*/*.png and the .cache/ directory"
 	@echo "figures            redraw every problems/*/*.png in that renderer (no data network)"
 	@echo "figure PROBLEM=x   redraw one folder in that renderer"
 	@echo "check              verify every folder accounts for its data, figure and sources"
@@ -28,8 +37,15 @@ help:
 	@echo "fetch              refetch every automatable series from upstream (network, slow)"
 	@echo "fetch-one PROBLEM=x  refetch one folder"
 
+# CI loads a cached tarball of this image and sets FIGURE_IMAGE_PRELOADED to
+# skip the rebuild; the image is a pure function of the Dockerfile and
+# requirements.txt, which key the cache.
 figure-image:
-	docker build --platform $(FIGURE_PLATFORM) --file $(FIGURE_DOCKERFILE) --tag $(FIGURE_IMAGE) .
+	@if [ -n "$$FIGURE_IMAGE_PRELOADED" ]; then \
+		echo "using preloaded $(FIGURE_IMAGE)"; \
+	else \
+		docker build --platform $(FIGURE_PLATFORM) --file $(FIGURE_DOCKERFILE) --tag $(FIGURE_IMAGE) .; \
+	fi
 
 figures: figure-image
 	@$(FIGURE_RUN) sh -c 'for script in $(FIGURE_SCRIPTS); do python3 "$$script" || exit 1; done'
@@ -69,7 +85,10 @@ fetch:
 	if [ $$status -ne 0 ]; then \
 		echo "one or more fetchers reported stale data or failed" >&2; \
 	fi; \
-	echo "problems/math-antedb/fetch.py needs github.com/teorth/expdb and pycddlib<3; run it by hand"; \
+	echo "three fetchers are hand-run and not covered by this target:"; \
+	echo "  problems/math-antedb/fetch.py            needs github.com/teorth/expdb and pycddlib<3"; \
+	echo "  problems/math-erdos/fetch_solutions.py   ~560 throttled page fetches"; \
+	echo "  problems/output-arxiv/fetch_categories.py  needs the Kaggle snapshot or a day-long OAI harvest"; \
 	echo "if any series now reaches past lib/dates.py's AS_OF_DATE, bump it and rerun make index"; \
 	exit $$status
 

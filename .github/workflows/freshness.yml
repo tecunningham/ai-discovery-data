@@ -10,6 +10,9 @@ name: Check data freshness
 # check.yml means the repository is inconsistent with itself and somebody broke
 # something; a red freshness run means the world moved, which is expected and is
 # resolved by refetching rather than by fixing a bug.
+#
+# GitHub disables a schedule after 60 days without repository activity; if the
+# repo goes quiet, re-enable it under Actions or fire workflow_dispatch.
 
 on:
   schedule:
@@ -21,9 +24,13 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: freshness
+
 jobs:
   freshness:
     runs-on: ubuntu-24.04
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,17 +39,28 @@ jobs:
           cache: pip
       - run: python -m pip install --requirement requirements.txt
 
+      # Before the refetch, while the tree is the committed state: check-links
+      # runs the full consistency check plus every documented URL, and running
+      # it after `make fetch` would re-run the folder arithmetic against
+      # refreshed CSVs and report ordinary data drift as link rot.
+      - name: Check documented URLs
+        run: make check-links
+
       # Several upstreams rate-limit or go down. A transient failure here is not
       # a stale series, so fetch failures are reported and do not fail the job;
       # the diff below is what decides.
       - name: Refetch every automatable series
+        id: fetch
         continue-on-error: true
         run: make fetch
 
       - name: Report series whose upstream has moved
         run: |
+          if [ "${{ steps.fetch.outcome }}" = "failure" ]; then
+            echo "::warning::one or more fetchers failed; those series were not verified against upstream this run"
+          fi
           if git diff --quiet -- problems; then
-            echo "every vendored series still matches its upstream"
+            echo "every fetched series still matches its upstream"
             exit 0
           fi
           echo "::error::vendored data differs from upstream; run make fetch locally"
@@ -52,10 +70,3 @@ jobs:
           echo
           git diff -- problems
           exit 1
-
-      - name: Check documented URLs
-        # Link rot is the other thing invisible from inside the repository, and
-        # it is checked here rather than in check.yml because it can fail for
-        # reasons that are nobody's fault.
-        if: always()
-        run: make check-links

@@ -51,7 +51,7 @@ assigning those 267 pre-2020 records to 2021, and the series is reported from
 against 716 for 2022). The clocks can still disagree at a year boundary; the
 2026 gap is stated in the facts above. Records published after the
 repository's snapshot date (`AS_OF_DATE` in
-[`../../lib/chart.py`](../../lib/chart.py)) are dropped, so a refetch
+[`../../lib/dates.py`](../../lib/dates.py)) are dropped, so a refetch
 reproduces the committed window; that snapshot is the `data_through` date the
 partial rows carry.
 

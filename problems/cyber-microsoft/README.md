@@ -69,7 +69,7 @@ series as cumulative CVEs to date:
 The CSVs are built by [`fetch.py`](fetch.py), which walks every monthly
 security-update document in the CVRF API — matched on document title,
 because the IDs are irregular — and applies the CNA rule above. Documents
-released after `lib/chart.py`'s snapshot date are skipped, so a refetch
+released after `lib/dates.py`'s snapshot date are skipped, so a refetch
 reproduces the committed window; the vendored window ends at the August 2026
 Patch Tuesday, released 2026-08-11. Acknowledgment strings are stripped of
 HTML and classified with the shared markers in

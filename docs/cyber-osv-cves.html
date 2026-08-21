@@ -112,7 +112,7 @@ applies the same inclusion rule to every JSON record:</p>
 <p>The second step deliberately excludes OSV's malicious-package reports,
 non-security distribution updates, and advisories that have no CVE. CVEs
 first published after the repository's snapshot date (<code>AS_OF_DATE</code> in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/chart.py"><code>../../lib/chart.py</code></a>) are dropped, so a refetch
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/dates.py"><code>../../lib/dates.py</code></a>) are dropped, so a refetch
 reproduces the committed window.</p>
 <p>The merged per-CVE entries feed five CSVs: quarterly and annual counts, the
 severity and credits cuts, and the AI-marked ledger. Severity is the

@@ -1,0 +1,9 @@
+# Actions only. Python pins are the figure ABI (see requirements.txt): bumping
+# them changes PNG bytes and is done deliberately, with a figure re-render —
+# never by an automated PR.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

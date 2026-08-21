@@ -21,7 +21,7 @@ needs a Kaggle login to download, so it is an operator convenience rather
 than the documented rebuild: the no-auth path is the OAI-PMH harvest of
 https://oaipmh.arxiv.org/oai, which walks ~2,400 resumption pages and takes
 the better part of a day at the pace the endpoint meters out. Both paths
-produce the same aggregation; papers first submitted after lib/chart.py's
+produce the same aggregation; papers first submitted after lib/dates.py's
 AS_OF_DATE are dropped, so a re-run reproduces the committed window plus
 whatever upstream recategorized since.
 

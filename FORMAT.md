@@ -106,6 +106,18 @@ rows later; the CSV remains the complete table.
 - Quotes are never invented, trimmed to change meaning, or reconstructed
   from memory; ellipses mark elisions.
 
+## Files
+
+- The folder's primary time-series figure is `discovery-<slug>.png` and its
+  CUMULATIVE.md panel is `cumulative-<slug>.png`. Both prefixes are reserved
+  for exactly those names — the index and the cumulative page find the
+  figures by name — and `tools/check.py` rejects a near-miss.
+- Secondary figures in new folders are `<aspect>-<slug>.png`
+  (`severity-cyber-openssl.png`); several older folders predate the rule and
+  keep their names.
+- CSV and PNG filenames are unique across all folders, not just within one:
+  downstream consumers resolve them by name alone.
+
 ## Register (style)
 
 - No first person, no reader address, no imperatives to the reader.

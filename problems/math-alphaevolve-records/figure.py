@@ -3,7 +3,7 @@
 
 Run: python3 problems/math-alphaevolve-records/figure.py
 
-discovery-math-alphaevolve-related-records.png plots the five groups' steps;
+discovery-math-alphaevolve-records.png plots the five groups' steps;
 alphaevolve-record-steps.png compares AI and human steps across the frame;
 cumulative-math-alphaevolve-records.png pools the five groups' record steps
 into one line, for the collection-wide cumulative index.
@@ -117,7 +117,7 @@ def related_groups() -> None:
     source_note(fig, "Source: alphaevolve-records.csv. Multiple quantities within a group are counted separately.")
     save(
         fig,
-        HERE / "discovery-math-alphaevolve-related-records.png",
+        HERE / "discovery-math-alphaevolve-records.png",
         "Cumulative record steps in selected finite construction and packing problems.",
         sorted({row["ref"] for row in rows if row["ref"]}),
         __file__,

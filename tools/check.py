@@ -228,6 +228,15 @@ class Problem:
         for field in FIELDS:
             if field not in self.fields:
                 self.fail("Document", f"no **{field}:** line")
+        # FORMAT.md: Coverage carries the span, the cadence, and the as-of
+        # date of the last read. Presence of the field is not enough — a
+        # coverage line with no date leaves the reader no way to tell a
+        # current series from an abandoned one.
+        coverage = self.fields.get("Coverage", "")
+        if coverage and not re.search(r"\b20\d{2}-\d{2}-\d{2}\b", coverage):
+            self.fail("Document",
+                      "**Coverage:** carries no as-of date (FORMAT.md: the "
+                      "span, the cadence, and the date of the last read)")
         verdict = self.fields.get("Verdict", "").split(" —")[0].strip()
         if verdict and verdict not in VERDICTS:
             self.fail("Document",
@@ -288,6 +297,17 @@ class Problem:
                 if figure.name not in script_text:
                     self.fail("Figure", f"{figure.name} is not named in figure.py, so "
                                         "nothing rebuilds it")
+                # The two prefixed names are reserved: the index takes
+                # discovery-<slug>.png as the folder's primary figure and
+                # CUMULATIVE.md takes cumulative-<slug>.png, so a near-miss
+                # name silently drops the figure from those pages.
+                for prefix in ("discovery-", "cumulative-"):
+                    expected = f"{prefix}{self.slug}.png"
+                    if figure.name.startswith(prefix) and figure.name != expected:
+                        self.fail("Figure",
+                                  f"{figure.name} does not match {expected}; the "
+                                  f"{prefix}*.png name is reserved for the folder's "
+                                  "own view (FORMAT.md)")
             for name in sorted(self.embedded):
                 if not (self.folder / name).exists():
                     self.fail("Figure", f"embeds {name}, which is not in the folder")
@@ -513,16 +533,42 @@ def duplicate_names(problems: list[Problem]) -> None:
     return None
 
 
+# The root documents also cite the bibliography, so their citekeys join both
+# directions of the bibliography check. FORMAT.md is excluded: its [@citekey]
+# is a literal example, not a citation.
+ROOT_DOCS = ("README.md", "CUMULATIVE.md", "ADDITIONAL-CANDIDATES.md")
+
+
+def root_citations() -> dict[str, str]:
+    """Citekey to the root document that cites it."""
+    cited: dict[str, str] = {}
+    for name in ROOT_DOCS:
+        text = (ROOT / name).read_text(encoding="utf-8")
+        # A `[@citekey]` inside backticks is the syntax being described, not a
+        # citation (README's check-table legend carries one).
+        text = re.sub(r"`[^`]*`", "", text)
+        for group in re.findall(r"\[@[^\]]*\]", text):
+            for key in re.findall(r"@([A-Za-z0-9_:-]+)", group):
+                cited.setdefault(key, name)
+    return cited
+
+
 def unused_bib(problems: list[Problem], keys: set[str]) -> list[str]:
-    """A bibliography entry no document cites.
+    """A bibliography entry no document cites, or a root citation no entry backs.
 
     The reverse of the per-problem citation check, and it catches the residue of
     a rewrite: prose gets reworded, the citation goes with it, and the entry sits
-    in references.bib looking like part of the apparatus.
+    in references.bib looking like part of the apparatus. Root documents were
+    once invisible here, so a key cited only by README.md read as unused, and a
+    root citation with no entry was checked by nothing.
     """
+    rooted = root_citations()
     cited = {key for problem in problems for key in problem.citations}
-    return [f"references.bib: @{key} is cited by no document"
-            for key in sorted(keys - cited)]
+    out = [f"references.bib: @{key} is cited by no document"
+           for key in sorted(keys - cited - set(rooted))]
+    out += [f"{name}: citation @{key} has no bibliography entry"
+            for key, name in sorted(rooted.items()) if key not in keys]
+    return out
 
 
 def dead_links(problems: list[Problem], timeout: float = 25.0) -> list[str]:

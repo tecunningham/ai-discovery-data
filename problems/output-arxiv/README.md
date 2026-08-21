@@ -3,7 +3,8 @@
 - **Domain:** outside the three domains
 - **Role:** contrast case: volume
 - **Metric:** research output; preprints submitted to arXiv per month
-- **Coverage:** 1991-07 to 2026-08, monthly, the last month partial
+- **Coverage:** 1991-07 to 2026-08, monthly, the last month partial at
+the 2026-08-10 fetch
 - **Data:** [`arxiv-monthly.csv`](arxiv-monthly.csv); per-category [`arxiv-monthly-by-category.csv`](arxiv-monthly-by-category.csv)
 - **Upstream:** <https://arxiv.org/stats/monthly_submissions>, with per-category counts from <https://oaipmh.arxiv.org/oai>
 - **Verdict:** accelerating — a 28,450 submissions/month mean over 2026-01 to 2026-07 against monthly means of 23,707 in 2025 and 20,336 in 2024

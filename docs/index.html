@@ -757,9 +757,13 @@ stretch is not by itself an exhausted frontier.</p>
   curl-by-year.csv           the series, vendored from a public source
   curl-finders.csv           who was credited with each find
   fetch.py                   rebuilds those CSVs from curl's vuln.json
-  figure.py                  draws the PNG from the adjacent CSVs
+  figure.py                  draws the PNGs from the adjacent CSVs
+  chart_spec.py              declares the docs page's interactive charts
+  check.py                   recomputes the numbers the document states
   discovery-cyber-curl.png   committed, never hand-edited
 </code></pre>
+<p>Every <code>README.md</code> follows the reference format defined in
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/FORMAT.md">FORMAT.md</a>, which <code>tools/check.py</code> enforces.</p>
 <table>
 <thead>
 <tr>
@@ -777,20 +781,44 @@ stretch is not by itself an exhausted frontier.</p>
 <td>Shared chart styling, saving, and the canonical renderer contract.</td>
 </tr>
 <tr>
-<td><code>lib/families.py</code></td>
-<td>Chart shapes used by more than one problem.</td>
+<td><code>lib/families.py</code>, <code>lib/cumulative.py</code></td>
+<td>PNG chart shapes used by more than one problem, and <a href="cumulative.html">CUMULATIVE.md</a>'s shared step format.</td>
+</tr>
+<tr>
+<td><code>lib/vega.py</code></td>
+<td>The interactive pages' chart shapes and families.</td>
+</tr>
+<tr>
+<td><code>lib/dates.py</code>, <code>lib/palette.py</code></td>
+<td>The snapshot date and the palette, importable without matplotlib.</td>
 </tr>
 <tr>
 <td><code>lib/credits.py</code></td>
 <td>Classification of vulnerability finder credits.</td>
 </tr>
 <tr>
+<td><code>lib/document.py</code>, <code>lib/prose.py</code></td>
+<td>Front-matter reading, and the helpers folder checks recompute prose with.</td>
+</tr>
+<tr>
 <td><code>lib/table.py</code>, <code>lib/web.py</code></td>
 <td>CSV and upstream-fetching helpers.</td>
 </tr>
 <tr>
-<td><code>tools/check.py</code></td>
-<td>Cross-folder consistency and reproduction checks.</td>
+<td><code>tools/check.py</code>, <code>tools/tables.py</code></td>
+<td>Cross-folder consistency and reproduction checks, and the renderer for the generated tables.</td>
+</tr>
+<tr>
+<td><code>tools/build_docs.py</code></td>
+<td>Builds <code>docs/</code>, the GitHub Pages site, from the folders.</td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>The generated site, committed because Pages serves it from the branch.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/FORMAT.md"><code>FORMAT.md</code></a></td>
+<td>The reference format every problem page follows.</td>
 </tr>
 <tr>
 <td><code>references.bib</code></td>
@@ -809,6 +837,8 @@ make figures                    # redraw every PNG in the pinned renderer
 make figure PROBLEM=cyber-curl  # redraw one folder in the pinned renderer
 make check                      # fast host-side data/document/source checks
 make check-figures              # containerized redraw and byte comparison
+make index                      # rewrite the generated README/CUMULATIVE tables
+make docs                       # rebuild the interactive pages in docs/
 </code></pre>
 <p>Do not run a <code>figure.py</code> directly. The shared save helper rejects PNG writes
 outside the canonical container and points back to the corresponding Make
@@ -832,16 +862,17 @@ make fetch-one PROBLEM=cyber-curl   # run one folder's fetcher
 </code></pre>
 <p>Refetching can leave the repository failing its own check, by design. Every
 chart is drawn as of one date, <code>AS_OF_DATE</code> in
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/chart.py"><code>lib/chart.py</code></a>, which is where the shaded era ends and where a
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/dates.py"><code>lib/dates.py</code></a>, which is where the shaded era ends and where a
 series that stops early is understood to stop. <code>tools/check.py</code> fails when any
 vendored row is newer than that date, because a figure drawn to an older
 horizon than its data is a figure that quietly omits rows. So a successful
 <code>make fetch</code> that pulls in newer data is followed by bumping <code>AS_OF_DATE</code> and
 rerunning <code>make index</code>. <code>make fetch</code> prints a reminder to that effect.</p>
 <p>Some sources are prose pages rather than feeds, so their rows are transcribed by
-hand with source URLs recorded in the CSV. The Hilbert, Landau, Thurston, Smale,
-Millennium, and TOPP status ledgers are hand-scored from the secondary accounts
-their documents name.</p>
+hand with source URLs recorded in the CSV. Every folder without a <code>fetch.py</code>
+states in its Method section how its data is maintained — hand-scored status
+ledgers, transcriptions from a paper, a series confirmed unmoved as of a stated
+date — and <code>tools/check.py</code> fails a folder that does neither.</p>
 <p><code>problems/math-alphaevolve-records/fetch.py</code> also writes the
 sums-and-differences slice into its sibling folder so those datasets cannot
 drift apart.</p>

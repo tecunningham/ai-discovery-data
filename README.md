@@ -228,18 +228,29 @@ problems/cyber-curl/
   curl-by-year.csv           the series, vendored from a public source
   curl-finders.csv           who was credited with each find
   fetch.py                   rebuilds those CSVs from curl's vuln.json
-  figure.py                  draws the PNG from the adjacent CSVs
+  figure.py                  draws the PNGs from the adjacent CSVs
+  chart_spec.py              declares the docs page's interactive charts
+  check.py                   recomputes the numbers the document states
   discovery-cyber-curl.png   committed, never hand-edited
 ```
+
+Every `README.md` follows the reference format defined in
+[FORMAT.md](FORMAT.md), which `tools/check.py` enforces.
 
 | Path | What is in it |
 |---|---|
 | `problems/<slug>/` | One folder per problem, as above. |
 | `lib/chart.py`, `lib/renderer.py` | Shared chart styling, saving, and the canonical renderer contract. |
-| `lib/families.py` | Chart shapes used by more than one problem. |
+| `lib/families.py`, `lib/cumulative.py` | PNG chart shapes used by more than one problem, and [CUMULATIVE.md](CUMULATIVE.md)'s shared step format. |
+| `lib/vega.py` | The interactive pages' chart shapes and families. |
+| `lib/dates.py`, `lib/palette.py` | The snapshot date and the palette, importable without matplotlib. |
 | `lib/credits.py` | Classification of vulnerability finder credits. |
+| `lib/document.py`, `lib/prose.py` | Front-matter reading, and the helpers folder checks recompute prose with. |
 | `lib/table.py`, `lib/web.py` | CSV and upstream-fetching helpers. |
-| `tools/check.py` | Cross-folder consistency and reproduction checks. |
+| `tools/check.py`, `tools/tables.py` | Cross-folder consistency and reproduction checks, and the renderer for the generated tables. |
+| `tools/build_docs.py` | Builds `docs/`, the GitHub Pages site, from the folders. |
+| `docs/` | The generated site, committed because Pages serves it from the branch. |
+| [`FORMAT.md`](FORMAT.md) | The reference format every problem page follows. |
 | `references.bib` | Bibliography for the problem documents. |
 
 A folder is self-contained except for generic helpers. Cross-series comparison
@@ -257,6 +268,8 @@ make figures                    # redraw every PNG in the pinned renderer
 make figure PROBLEM=cyber-curl  # redraw one folder in the pinned renderer
 make check                      # fast host-side data/document/source checks
 make check-figures              # containerized redraw and byte comparison
+make index                      # rewrite the generated README/CUMULATIVE tables
+make docs                       # rebuild the interactive pages in docs/
 ```
 
 Do not run a `figure.py` directly. The shared save helper rejects PNG writes
@@ -287,7 +300,7 @@ make fetch-one PROBLEM=cyber-curl   # run one folder's fetcher
 
 Refetching can leave the repository failing its own check, by design. Every
 chart is drawn as of one date, `AS_OF_DATE` in
-[`lib/chart.py`](lib/chart.py), which is where the shaded era ends and where a
+[`lib/dates.py`](lib/dates.py), which is where the shaded era ends and where a
 series that stops early is understood to stop. `tools/check.py` fails when any
 vendored row is newer than that date, because a figure drawn to an older
 horizon than its data is a figure that quietly omits rows. So a successful
@@ -295,9 +308,10 @@ horizon than its data is a figure that quietly omits rows. So a successful
 rerunning `make index`. `make fetch` prints a reminder to that effect.
 
 Some sources are prose pages rather than feeds, so their rows are transcribed by
-hand with source URLs recorded in the CSV. The Hilbert, Landau, Thurston, Smale,
-Millennium, and TOPP status ledgers are hand-scored from the secondary accounts
-their documents name.
+hand with source URLs recorded in the CSV. Every folder without a `fetch.py`
+states in its Method section how its data is maintained — hand-scored status
+ledgers, transcriptions from a paper, a series confirmed unmoved as of a stated
+date — and `tools/check.py` fails a folder that does neither.
 
 `problems/math-alphaevolve-records/fetch.py` also writes the
 sums-and-differences slice into its sibling folder so those datasets cannot

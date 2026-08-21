@@ -101,7 +101,7 @@ def main() -> None:
     if dropped_late:
         print(f"oss-fuzz: {dropped_late} records past the snapshot date dropped")
     cutoff = AS_OF_DATE
-    write_csv(HERE / "ossfuzz-discoveries.csv", build_annual(by_id, cutoff))
+    write_csv(HERE / "ossfuzz-by-year.csv", build_annual(by_id, cutoff))
     write_csv(HERE / "ossfuzz-by-quarter.csv", build_quarterly(by_quarter, cutoff))
 
 

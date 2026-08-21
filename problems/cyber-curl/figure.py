@@ -41,7 +41,7 @@ def counts(row: dict[str, str], prefix: str = "") -> dict[str, int]:
 
 
 def cumulative() -> None:
-    rows = read_csv(HERE / "curl-vulnerabilities-quarterly.csv")
+    rows = read_csv(HERE / "curl-by-quarter.csv")
     counts_chart(
         HERE / "cumulative-cyber-curl.png",
         title="curl vulnerabilities: cumulative disclosures",
@@ -55,8 +55,8 @@ def cumulative() -> None:
 
 
 def main() -> None:
-    quarterly = read_csv(HERE / "curl-vulnerabilities-quarterly.csv")
-    annual = read_csv(HERE / "curl-vulnerabilities.csv")
+    quarterly = read_csv(HERE / "curl-by-quarter.csv")
+    annual = read_csv(HERE / "curl-by-year.csv")
     latest = annual[-1]
     periodic_stacked(
         HERE / "discovery-cyber-curl.png",

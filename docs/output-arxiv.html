@@ -47,7 +47,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Metric:</strong> research output; preprints submitted to arXiv per month</li>
 <li><strong>Coverage:</strong> 1991-07 to 2026-08, monthly, the last month partial at
 the 2026-08-10 fetch</li>
-<li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly.csv"><code>arxiv-monthly.csv</code></a>; per-category <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly-by-category.csv"><code>arxiv-monthly-by-category.csv</code></a></li>
+<li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-by-month.csv"><code>arxiv-by-month.csv</code></a>; per-category <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-categories-by-month.csv"><code>arxiv-categories-by-month.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://arxiv.org/stats/monthly_submissions">https://arxiv.org/stats/monthly_submissions</a>, with per-category counts from <a href="https://oaipmh.arxiv.org/oai">https://oaipmh.arxiv.org/oai</a></li>
 <li><strong>Verdict:</strong> accelerating — a 28,450 submissions/month mean over 2026-01 to 2026-07 against monthly means of 23,707 in 2025 and 20,336 in 2024</li>
 </ul>
@@ -144,17 +144,17 @@ each, sorted by total volume and scaled independently.
 </ul>
 <h2 id="ai-attribution">AI attribution</h2>
 <p>The dataset carries no authorship field; no AI share can be computed from
-it. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly.csv"><code>arxiv-monthly.csv</code></a> holds a month and a count per
-row, and <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly-by-category.csv"><code>arxiv-monthly-by-category.csv</code></a>
+it. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-by-month.csv"><code>arxiv-by-month.csv</code></a> holds a month and a count per
+row, and <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-categories-by-month.csv"><code>arxiv-categories-by-month.csv</code></a>
 holds a month, a category and a count; no AI credit appears in either
 vendored file or in arXiv's published monthly-submissions series as of the
 2026-08 fetch.</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li><a href="https://arxiv.org/stats/monthly_submissions">https://arxiv.org/stats/monthly_submissions</a> — the monthly totals in
-  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly.csv"><code>arxiv-monthly.csv</code></a>.</li>
+  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-by-month.csv"><code>arxiv-by-month.csv</code></a>.</li>
 <li><a href="https://oaipmh.arxiv.org/oai">https://oaipmh.arxiv.org/oai</a> — the no-credentials harvest behind
-  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly-by-category.csv"><code>arxiv-monthly-by-category.csv</code></a>.</li>
+  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-categories-by-month.csv"><code>arxiv-categories-by-month.csv</code></a>.</li>
 <li>[@nist2026cvegrowth] — NIST's report of 263% growth in CVE submissions
   between 2020 and 2025, with its enrichment of nearly 42,000 CVEs in 2025
   failing to keep pace; a submission count in the vulnerabilities domain,

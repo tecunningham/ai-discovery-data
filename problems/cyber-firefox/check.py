@@ -15,7 +15,7 @@ from lib.table import read_csv  # noqa: E402
 
 
 def main() -> int:
-    rows = read_csv(HERE / "firefox-advisories.csv")
+    rows = read_csv(HERE / "firefox-by-year.csv")
     ai_cves = read_csv(HERE / "firefox-ai-cves.csv")
     by_year = {row["year"]: row for row in rows}
     latest = next(row for row in rows if row["partial_year"] == "yes")
@@ -63,7 +63,7 @@ def main() -> int:
     # by year and band must reproduce the annual columns, and its dated rows
     # must reproduce the quarterly totals.
     cves = read_csv(HERE / "firefox-cves.csv")
-    quarterly = read_csv(HERE / "firefox-quarterly.csv")
+    quarterly = read_csv(HERE / "firefox-by-quarter.csv")
     per_band: Counter = Counter((row["year"], row["band"]) for row in cves)
     for row in rows:
         for band in ("explicit_ai", "ai_affiliated", "fuzz", "other"):

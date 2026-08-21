@@ -15,7 +15,7 @@ from lib.table import read_csv  # noqa: E402
 
 def main() -> int:
     rows = read_csv(HERE / "msrc-cves.csv")
-    monthly = read_csv(HERE / "msrc-monthly.csv")
+    monthly = read_csv(HERE / "msrc-by-month.csv")
     ai_rows = read_csv(HERE / "msrc-ai-cves.csv")
     by_year = {row["year"]: row for row in rows}
     latest = next(row for row in rows if row["partial_year"] == "yes")

@@ -28,7 +28,7 @@ def as_of_month() -> str:
 
 
 def main() -> int:
-    rows = read_csv(HERE / "arxiv-monthly.csv")
+    rows = read_csv(HERE / "arxiv-by-month.csv")
     counts = {row["month"]: int(row["submissions"]) for row in rows}
     # The final row is the month in progress at fetch time, so the last complete
     # month is the one before it. The prose quotes that one. The rule silently
@@ -75,7 +75,7 @@ def main() -> int:
                "chem-ph", "plasm-ph", "supr-con", "mtrl-th"}
     group_totals: dict[tuple[str, str], int] = {}
     subfield_totals: dict[tuple[str, str], int] = {}
-    for row in read_csv(HERE / "arxiv-monthly-by-category.csv"):
+    for row in read_csv(HERE / "arxiv-categories-by-month.csv"):
         category = legacy.get(row["category"], row["category"])
         archive = category.split(".")[0]
         group = "physics" if archive in physics else archive

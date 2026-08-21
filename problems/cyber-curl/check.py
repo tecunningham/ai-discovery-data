@@ -14,8 +14,8 @@ from lib.table import read_csv  # noqa: E402
 
 
 def main() -> int:
-    annual = read_csv(HERE / "curl-vulnerabilities.csv")
-    quarterly = read_csv(HERE / "curl-vulnerabilities-quarterly.csv")
+    annual = read_csv(HERE / "curl-by-year.csv")
+    quarterly = read_csv(HERE / "curl-by-quarter.csv")
     finders = read_csv(HERE / "curl-finders.csv")
     openssl_finders = read_csv(HERE.parent / "cyber-openssl"
                                / "openssl-finders.csv")

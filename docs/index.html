@@ -66,7 +66,7 @@ zero where the series has a known denominator.</p>
 </thead>
 <tbody>
 <tr>
-<td><b><a href="cyber-curl.html">curl vulnerability disclosures</a></b><br><b>Metric:</b> vulnerabilities disclosed per quarter,<br>split by whether the finder credit carries an<br>AI marker<br><b>Coverage:</b> 2000–2026, partial through<br>2026-06-24<br><b>Acceleration?</b> 📈 accelerating — 36 disclosures<br>through 2026-06-24 annualize to roughly 75<br>against 9 in 2025 and a 13.1/year mean over<br>2014–2023<br><a href="cyber-curl.html">Discussion</a> · <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-vulnerabilities.csv">Data</a> · <a href="https://curl.se/docs/vuln.json">Source</a> · <a href="https://tecunningham.github.io/ai-discovery-data/cyber-curl.html">Interactive</a></td>
+<td><b><a href="cyber-curl.html">curl vulnerability disclosures</a></b><br><b>Metric:</b> vulnerabilities disclosed per quarter,<br>split by whether the finder credit carries an<br>AI marker<br><b>Coverage:</b> 2000–2026, partial through<br>2026-06-24<br><b>Acceleration?</b> 📈 accelerating — 36 disclosures<br>through 2026-06-24 annualize to roughly 75<br>against 9 in 2025 and a 13.1/year mean over<br>2014–2023<br><a href="cyber-curl.html">Discussion</a> · <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-by-year.csv">Data</a> · <a href="https://curl.se/docs/vuln.json">Source</a> · <a href="https://tecunningham.github.io/ai-discovery-data/cyber-curl.html">Interactive</a></td>
 <td><a href="cyber-curl.html"><img src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-curl/discovery-cyber-curl.png" width="400" alt="curl vulnerability disclosures"></a></td>
 </tr>
 <tr>
@@ -246,7 +246,7 @@ zero where the series has a known denominator.</p>
 <td><a href="integer-factorization.html"><img src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/integer-factorization/discovery-integer-factorization.png" width="400" alt="Integer factorization records"></a></td>
 </tr>
 <tr>
-<td><b><a href="output-arxiv.html">arXiv submissions</a></b><br><b>Metric:</b> research output; preprints submitted<br>to arXiv per month<br><b>Coverage:</b> 1991-07 to 2026-08, monthly, the<br>last month partial at the 2026-08-10 fetch<br><b>Acceleration?</b> 📈 accelerating — a 28,450<br>submissions/month mean over 2026-01 to 2026-07<br>against monthly means of 23,707 in 2025 and<br>20,336 in 2024<br><a href="output-arxiv.html">Discussion</a> · <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly.csv">Data</a> · <a href="https://arxiv.org/stats/monthly_submissions">Source</a> · <a href="https://tecunningham.github.io/ai-discovery-data/output-arxiv.html">Interactive</a></td>
+<td><b><a href="output-arxiv.html">arXiv submissions</a></b><br><b>Metric:</b> research output; preprints submitted<br>to arXiv per month<br><b>Coverage:</b> 1991-07 to 2026-08, monthly, the<br>last month partial at the 2026-08-10 fetch<br><b>Acceleration?</b> 📈 accelerating — a 28,450<br>submissions/month mean over 2026-01 to 2026-07<br>against monthly means of 23,707 in 2025 and<br>20,336 in 2024<br><a href="output-arxiv.html">Discussion</a> · <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-by-month.csv">Data</a> · <a href="https://arxiv.org/stats/monthly_submissions">Source</a> · <a href="https://tecunningham.github.io/ai-discovery-data/output-arxiv.html">Interactive</a></td>
 <td><a href="output-arxiv.html"><img src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/output-arxiv/output-arxiv-submissions.png" width="400" alt="arXiv submissions"></a></td>
 </tr>
 <tr>
@@ -625,7 +625,7 @@ zero where the series has a known denominator.</p>
 <td>✅</td>
 <td>✅</td>
 <td>✅</td>
-<td>✅</td>
+<td>❌</td>
 </tr>
 <tr>
 <td><a href="output-crossref.html">DOI records deposited with Crossref</a></td>
@@ -649,7 +649,9 @@ zero where the series has a known denominator.</p>
 </tr>
 </tbody>
 </table>
-<p>37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. No failing cells.</p>
+<p>37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. 1 failing cell.</p>
+<p>Failing:
+- <code>output-arxiv</code> Reproduces: cumulative-output-arxiv.png, output-arxiv-submissions.png differs from what figure.py draws today, so the committed figure is stale</p>
 <!-- END GENERATED: checks-table -->
 
 <h2 id="how-to-read-the-series">How to read the series</h2>
@@ -751,7 +753,7 @@ stretch is not by itself an exhausted frontier.</p>
 <p>One folder holds everything about each problem:</p>
 <pre><code>problems/cyber-curl/
   README.md                  what the problem is and what the chart supports
-  curl-vulnerabilities.csv   the series, vendored from a public source
+  curl-by-year.csv           the series, vendored from a public source
   curl-finders.csv           who was credited with each find
   fetch.py                   rebuilds those CSVs from curl's vuln.json
   figure.py                  draws the PNG from the adjacent CSVs

@@ -5,7 +5,7 @@
 - **Metric:** research output; preprints submitted to arXiv per month
 - **Coverage:** 1991-07 to 2026-08, monthly, the last month partial at
 the 2026-08-10 fetch
-- **Data:** [`arxiv-monthly.csv`](arxiv-monthly.csv); per-category [`arxiv-monthly-by-category.csv`](arxiv-monthly-by-category.csv)
+- **Data:** [`arxiv-by-month.csv`](arxiv-by-month.csv); per-category [`arxiv-categories-by-month.csv`](arxiv-categories-by-month.csv)
 - **Upstream:** <https://arxiv.org/stats/monthly_submissions>, with per-category counts from <https://oaipmh.arxiv.org/oai>
 - **Verdict:** accelerating — a 28,450 submissions/month mean over 2026-01 to 2026-07 against monthly means of 23,707 in 2025 and 20,336 in 2024
 
@@ -108,8 +108,8 @@ each, sorted by total volume and scaled independently.
 ## AI attribution
 
 The dataset carries no authorship field; no AI share can be computed from
-it. [`arxiv-monthly.csv`](arxiv-monthly.csv) holds a month and a count per
-row, and [`arxiv-monthly-by-category.csv`](arxiv-monthly-by-category.csv)
+it. [`arxiv-by-month.csv`](arxiv-by-month.csv) holds a month and a count per
+row, and [`arxiv-categories-by-month.csv`](arxiv-categories-by-month.csv)
 holds a month, a category and a count; no AI credit appears in either
 vendored file or in arXiv's published monthly-submissions series as of the
 2026-08 fetch.
@@ -117,9 +117,9 @@ vendored file or in arXiv's published monthly-submissions series as of the
 ## Sources
 
 - <https://arxiv.org/stats/monthly_submissions> — the monthly totals in
-  [`arxiv-monthly.csv`](arxiv-monthly.csv).
+  [`arxiv-by-month.csv`](arxiv-by-month.csv).
 - <https://oaipmh.arxiv.org/oai> — the no-credentials harvest behind
-  [`arxiv-monthly-by-category.csv`](arxiv-monthly-by-category.csv).
+  [`arxiv-categories-by-month.csv`](arxiv-categories-by-month.csv).
 - [@nist2026cvegrowth] — NIST's report of 263% growth in CVE submissions
   between 2020 and 2025, with its enrichment of nearly 42,000 CVEs in 2025
   failing to keep pace; a submission count in the vulnerabilities domain,

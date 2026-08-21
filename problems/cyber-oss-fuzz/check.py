@@ -14,7 +14,7 @@ from lib.table import read_csv  # noqa: E402
 
 
 def main() -> int:
-    annual = read_csv(HERE / "ossfuzz-discoveries.csv")
+    annual = read_csv(HERE / "ossfuzz-by-year.csv")
     counts = {row["year"]: int(row["discoveries"]) for row in annual}
     current = next(row for row in annual if row["partial_year"] == "yes")
     pace = annualized(counts[current["year"]], current["data_through"])

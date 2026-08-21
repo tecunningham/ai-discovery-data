@@ -46,7 +46,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Role:</strong> discovery series</li>
 <li><strong>Metric:</strong> distinct CVEs per quarter, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count</li>
 <li><strong>Coverage:</strong> 2016–2026, partial through 2026-08-04, the latest advisory in the snapshot</li>
-<li><strong>Data:</strong> per-CVE ledger <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-cves.csv"><code>firefox-cves.csv</code></a>; quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-quarterly.csv"><code>firefox-quarterly.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-advisories.csv"><code>firefox-advisories.csv</code></a>; per-reporter rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-finders.csv"><code>firefox-finders.csv</code></a>; every AI-marked CVE with its credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-ai-cves.csv"><code>firefox-ai-cves.csv</code></a></li>
+<li><strong>Data:</strong> per-CVE ledger <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-cves.csv"><code>firefox-cves.csv</code></a>; quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-by-quarter.csv"><code>firefox-by-quarter.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-by-year.csv"><code>firefox-by-year.csv</code></a>; per-reporter rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-finders.csv"><code>firefox-finders.csv</code></a>; every AI-marked CVE with its credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/firefox-ai-cves.csv"><code>firefox-ai-cves.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://github.com/mozilla/foundation-security-advisories">https://github.com/mozilla/foundation-security-advisories</a> (rendered at <a href="https://www.mozilla.org/en-US/security/advisories/">https://www.mozilla.org/en-US/security/advisories/</a>)</li>
 <li><strong>Verdict:</strong> accelerating — 342 distinct CVEs through 2026-08-04 against 210 in 2025; the part year alone is 1.6 times the 2025 full year</li>
 </ul>
@@ -136,12 +136,12 @@ auditable.</p>
 <p><code>firefox-cves.csv</code> is the ledger the aggregates summarize: one row per
 distinct CVE per year, carrying its earliest announcement date and quarter,
 the most severe impact any of its mentions carries, its credit band and its
-verbatim reporter strings. <code>firefox-quarterly.csv</code> sums it by quarter and
+verbatim reporter strings. <code>firefox-by-quarter.csv</code> sums it by quarter and
 band; rows with no parseable announcement date appear in the annual counts
 but not in any quarter, and the main and cumulative charts state that
 remainder.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-firefox/figure.py"><code>figure.py</code></a> draws stacked quarterly bars from
-<code>firefox-quarterly.csv</code>: <code>other</code> in blue, <code>fuzz</code> in amber, <code>ai_affiliated</code>
+<code>firefox-by-quarter.csv</code>: <code>other</code> in blue, <code>fuzz</code> in amber, <code>ai_affiliated</code>
 in pale red and <code>explicit_ai</code> in full red, with the <code>partial_quarter</code> bar
 outlined. The two red bands are one colour family in two strengths because
 they are two grades of evidence, not two kinds of finder. January 2026

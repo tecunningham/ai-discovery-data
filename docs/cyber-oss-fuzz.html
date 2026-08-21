@@ -46,7 +46,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Role:</strong> control: no-AI baseline</li>
 <li><strong>Metric:</strong> vulnerability records published per quarter by an automated fuzzing programme</li>
 <li><strong>Coverage:</strong> 2020–2026, partial through 2026-08-10</li>
-<li><strong>Data:</strong> quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/ossfuzz-by-quarter.csv"><code>ossfuzz-by-quarter.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/ossfuzz-discoveries.csv"><code>ossfuzz-discoveries.csv</code></a></li>
+<li><strong>Data:</strong> quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/ossfuzz-by-quarter.csv"><code>ossfuzz-by-quarter.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/ossfuzz-by-year.csv"><code>ossfuzz-by-year.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip">https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip</a> (browsable at <a href="https://osv.dev/list?q=ecosystem%3AOSS-Fuzz">https://osv.dev/list?q=ecosystem%3AOSS-Fuzz</a>, programme at <a href="https://google.github.io/oss-fuzz/">https://google.github.io/oss-fuzz/</a>)</li>
 <li><strong>Verdict:</strong> declining — 1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 396</li>
 </ul>
@@ -79,7 +79,7 @@ as cumulative vulnerability records to date:</p>
 <p><img alt="Cumulative vulnerability records to date." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/cyber-oss-fuzz/cumulative-cyber-oss-fuzz.png" /></p>
 <h2 id="method">Method</h2>
 <p>Both CSVs are built by <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-oss-fuzz/fetch.py"><code>fetch.py</code></a> from the same OSV archive, on
-two different clocks. The annual <code>ossfuzz-discoveries.csv</code> counts records by
+two different clocks. The annual <code>ossfuzz-by-year.csv</code> counts records by
 the year embedded in the record identifier (<code>OSV-YYYY-N</code>); the quarterly
 <code>ossfuzz-by-quarter.csv</code> buckets the same records by their <code>published</code> date.
 Records predating 2020 were backfilled into OSV during 2021, so their

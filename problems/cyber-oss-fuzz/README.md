@@ -4,7 +4,7 @@
 - **Role:** control: no-AI baseline
 - **Metric:** vulnerability records published per quarter by an automated fuzzing programme
 - **Coverage:** 2020–2026, partial through 2026-08-10
-- **Data:** quarterly [`ossfuzz-by-quarter.csv`](ossfuzz-by-quarter.csv); annual [`ossfuzz-discoveries.csv`](ossfuzz-discoveries.csv)
+- **Data:** quarterly [`ossfuzz-by-quarter.csv`](ossfuzz-by-quarter.csv); annual [`ossfuzz-by-year.csv`](ossfuzz-by-year.csv)
 - **Upstream:** <https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip> (browsable at <https://osv.dev/list?q=ecosystem%3AOSS-Fuzz>, programme at <https://google.github.io/oss-fuzz/>)
 - **Verdict:** declining — 1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 396
 
@@ -41,7 +41,7 @@ as cumulative vulnerability records to date:
 ## Method
 
 Both CSVs are built by [`fetch.py`](fetch.py) from the same OSV archive, on
-two different clocks. The annual `ossfuzz-discoveries.csv` counts records by
+two different clocks. The annual `ossfuzz-by-year.csv` counts records by
 the year embedded in the record identifier (`OSV-YYYY-N`); the quarterly
 `ossfuzz-by-quarter.csv` buckets the same records by their `published` date.
 Records predating 2020 were backfilled into OSV during 2021, so their

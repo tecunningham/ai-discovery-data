@@ -6,7 +6,7 @@ Run: python3 problems/cyber-oss-fuzz/figure.py
 discovery-cyber-oss-fuzz.png counts records by publication quarter, the grain
 the archive carries reliably from 2020 onward; cumulative-cyber-oss-fuzz.png
 redraws the same quarters as a running total for the collection-wide cumulative
-index. The annual ossfuzz-discoveries.csv keeps the id-year counts the prose
+index. The annual ossfuzz-by-year.csv keeps the id-year counts the prose
 quotes; fetch.py explains why the two groupings differ slightly.
 """
 

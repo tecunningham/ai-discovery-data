@@ -307,7 +307,7 @@ def main() -> None:
     cutoff = AS_OF_DATE
     cves = records(cutoff)
     write_csv(HERE / "msrc-cves.csv", build_annual(cves, cutoff))
-    write_csv(HERE / "msrc-monthly.csv", build_monthly(cves))
+    write_csv(HERE / "msrc-by-month.csv", build_monthly(cves))
     write_csv(HERE / "msrc-finders.csv", build_finders(cves))
     write_csv(HERE / "msrc-ai-cves.csv", build_ai_cves(cves))
 

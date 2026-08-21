@@ -46,7 +46,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Role:</strong> discovery series</li>
 <li><strong>Metric:</strong> CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these</li>
 <li><strong>Coverage:</strong> 2016–2026, partial through 2026-08-11; no February or March 2016 document exists upstream, so the first year is ten months</li>
-<li><strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-cves.csv"><code>msrc-cves.csv</code></a>; monthly counts by band in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-monthly.csv"><code>msrc-monthly.csv</code></a>; per-credit rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-finders.csv"><code>msrc-finders.csv</code></a>; every AI-marked CVE with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a></li>
+<li><strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-cves.csv"><code>msrc-cves.csv</code></a>; monthly counts by band in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-by-month.csv"><code>msrc-by-month.csv</code></a>; per-credit rows in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-finders.csv"><code>msrc-finders.csv</code></a>; every AI-marked CVE with its full credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/msrc-ai-cves.csv"><code>msrc-ai-cves.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://api.msrc.microsoft.com/cvrf/v3.0/updates">https://api.msrc.microsoft.com/cvrf/v3.0/updates</a> (rendered at <a href="https://msrc.microsoft.com/update-guide">https://msrc.microsoft.com/update-guide</a>)</li>
 <li><strong>Verdict:</strong> accelerating — 1,927 CVEs through 2026-08-11 against 1,243 in 2025; the part year annualizes to about 2.5 times 2025</li>
 </ul>
@@ -114,13 +114,13 @@ named system or method, <code>AI_AFFILIATION</code> for an employer, <code>FUZZ<
 fuzzing, with one CVE's signals unioned across all its credit strings before
 the display precedence — method, then affiliation, then fuzz, then none —
 picks its band. Anonymized hex handles count as credits, since an anonymous
-credit is still a credit. <code>msrc-monthly.csv</code> carries the same four bands at
+credit is still a credit. <code>msrc-by-month.csv</code> carries the same four bands at
 the monthly grain, banded per CVE by the same rule, so the months of a year
 sum to that year's row in <code>msrc-cves.csv</code>. The annual CSV keeps an
 <code>acknowledged</code> column beside the bands, and a <code>no_customer_action</code> column
 counting the cloud-service CVEs Microsoft patches itself, so both facts stay
 auditable.</p>
-<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/figure.py"><code>figure.py</code></a> draws stacked monthly bars from <code>msrc-monthly.csv</code>:
+<p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-microsoft/figure.py"><code>figure.py</code></a> draws stacked monthly bars from <code>msrc-by-month.csv</code>:
 <code>other</code> in blue, <code>fuzz</code> in amber, <code>ai_affiliated</code> in pale red and
 <code>explicit_ai</code> in full red, in the same bands and colours as the
 <a href="cyber-firefox.html">Firefox series</a>. No bar is drawn partial —

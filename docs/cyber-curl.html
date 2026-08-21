@@ -46,7 +46,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Role:</strong> discovery series</li>
 <li><strong>Metric:</strong> vulnerabilities disclosed per quarter, split by whether the finder credit carries an AI marker</li>
 <li><strong>Coverage:</strong> 2000–2026, partial through 2026-06-24</li>
-<li><strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-vulnerabilities.csv"><code>curl-vulnerabilities.csv</code></a> (severity detail in the same file); quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-vulnerabilities-quarterly.csv"><code>curl-vulnerabilities-quarterly.csv</code></a>; per-finder <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a></li>
+<li><strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-by-year.csv"><code>curl-by-year.csv</code></a> (severity detail in the same file); quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-by-quarter.csv"><code>curl-by-quarter.csv</code></a>; per-finder <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://curl.se/docs/vuln.json">https://curl.se/docs/vuln.json</a> (human-readable at <a href="https://curl.se/docs/security.html">https://curl.se/docs/security.html</a>)</li>
 <li><strong>Verdict:</strong> accelerating — 36 disclosures through 2026-06-24 annualize to roughly 75 against 9 in 2025 and a 13.1/year mean over 2014–2023</li>
 </ul>
@@ -98,7 +98,7 @@ column, true when a credit carries either AI signal; it describes the
 credit's text, not the method used.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/figure.py"><code>figure.py</code></a> calls the shared <code>periodic_stacked()</code> shape in
 <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, drawing stacked quarterly
-bars from <code>curl-vulnerabilities-quarterly.csv</code>: <code>other_attributed</code> in blue,
+bars from <code>curl-by-quarter.csv</code>: <code>other_attributed</code> in blue,
 <code>ai_attributed</code> in red, the final quarter outlined rather than filled and
 annotated with the annual table's <code>data_through</code> date. The axis is linear
 and January 2026 onward is shaded, as in every figure here. The severity

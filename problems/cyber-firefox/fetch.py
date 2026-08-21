@@ -368,8 +368,8 @@ def main() -> None:
     rows = records()
     cve_rows = build_cves(rows)
     write_csv(HERE / "firefox-cves.csv", cve_rows)
-    write_csv(HERE / "firefox-quarterly.csv", build_quarterly(cve_rows))
-    write_csv(HERE / "firefox-advisories.csv", build_annual(rows))
+    write_csv(HERE / "firefox-by-quarter.csv", build_quarterly(cve_rows))
+    write_csv(HERE / "firefox-by-year.csv", build_annual(rows))
     write_csv(HERE / "firefox-finders.csv", build_finders(rows))
     write_csv(HERE / "firefox-ai-cves.csv", build_ai_cves(rows))
 

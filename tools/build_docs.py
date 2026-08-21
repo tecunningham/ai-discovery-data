@@ -974,7 +974,7 @@ def build_omega(slug: str):
 
 def build_firefox(slug: str):
     charts = periodic_split_series(
-        "firefox-quarterly.csv", "quarter",
+        "firefox-by-quarter.csv", "quarter",
         {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
          "fuzz": "fuzzer", "other": "other"},
         {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,
@@ -1063,7 +1063,7 @@ def build_arxiv(slug: str):
 
     values = [{"x": f'{r["month"]}-01', "series": "submissions",
                "value": num(r["submissions"])}
-              for r in load(slug, "arxiv-monthly.csv")]
+              for r in load(slug, "arxiv-by-month.csv")]
     spec = plain_lines(values, x="x", x_type="temporal",
                        y_title="Submissions per month",
                        series_colors={"submissions": DARKGREY})
@@ -1072,7 +1072,7 @@ def build_arxiv(slug: str):
     by_group: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     by_subfield: dict[str, dict[str, int]] = defaultdict(
         lambda: defaultdict(int))
-    for r in load(slug, "arxiv-monthly-by-category.csv"):
+    for r in load(slug, "arxiv-categories-by-month.csv"):
         if r["month"] < "1991-07":
             continue
         category = ARXIV_LEGACY.get(r["category"], r["category"])
@@ -1212,7 +1212,7 @@ SERIES: dict[str, object] = {
     "algorithms-nanogpt": build_nanogpt,
     "algorithms-stockfish": build_stockfish,
     "cyber-curl": periodic_split_series(
-        "curl-vulnerabilities-quarterly.csv", "quarter",
+        "curl-by-quarter.csv", "quarter",
         {"ai_attributed": "AI-attributed", "other_attributed": "other"},
         {"AI-attributed": AI, "other": HUMAN}, "CVEs disclosed"),
     "cyber-firefox": build_firefox,
@@ -1220,7 +1220,7 @@ SERIES: dict[str, object] = {
         "kev-by-quarter.csv", "quarter", "kev_added", "CVEs added to KEV",
         drop_leading_zeros=True),
     "cyber-microsoft": periodic_split_series(
-        "msrc-monthly.csv", "month",
+        "msrc-by-month.csv", "month",
         {"explicit_ai": "explicit AI", "ai_affiliated": "AI-affiliated",
          "fuzz": "fuzzer", "other": "other"},
         {"explicit AI": AI, "AI-affiliated": AI_SOFT, "fuzzer": FUZZ,

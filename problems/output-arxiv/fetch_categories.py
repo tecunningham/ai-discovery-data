@@ -7,7 +7,7 @@ Run by hand, either way:
     python3 problems/output-arxiv/fetch_categories.py            # OAI harvest
     python3 problems/output-arxiv/fetch_categories.py --resume   # after a crash
 
-Writes arxiv-monthly-by-category.csv: one row per (month, primary category)
+Writes arxiv-categories-by-month.csv: one row per (month, primary category)
 with the count of papers whose first version was submitted that month. The
 month comes from the v1 submission date — not the OAI datestamp or
 update_date, which move on every metadata edit; the category is the primary
@@ -222,7 +222,7 @@ def main() -> None:
     print(f"arxiv categories: {len(rows)} month-category rows, "
           f"{len(categories)} primary categories, "
           f"{rows[0]['month']}–{rows[-1]['month']}")
-    write_csv(HERE / "arxiv-monthly-by-category.csv", rows)
+    write_csv(HERE / "arxiv-categories-by-month.csv", rows)
 
 
 if __name__ == "__main__":

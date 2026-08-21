@@ -38,6 +38,7 @@ import markdown
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from lib.document import front_matter  # noqa: E402
 from lib.document import title as document_title  # noqa: E402
 
 DOCS = ROOT / "docs"
@@ -47,10 +48,23 @@ RAW_BASE = ("https://raw.githubusercontent.com/tecunningham/"
             "ai-discovery-data/main")
 BLOB_BASE = f"{REPO_BASE}/blob/main"
 
+# The one place the pages' math is rendered; a couple of documents carry
+# $…$ TeX. Inline math spans are shielded from the markdown pass in
+# render_markdown.
+#
+# The CDN scripts here and in VEGA_CDN are pinned to exact versions with
+# subresource integrity, the same standard the PNGs meet with the pinned
+# renderer: a floating @major would let every published page change under a
+# CDN release nobody reviewed. Each hash is the sha384 of the file exactly as
+# published on npm (which jsdelivr serves verbatim for exact-version paths);
+# when bumping a version, recompute it from the npm tarball, e.g.
+#   curl -sL https://registry.npmjs.org/vega/-/vega-<v>.tgz | tar -xzO \
+#     package/build/vega.min.js | openssl dgst -sha384 -binary | base64
 MATHJAX_CDN = (
     "<script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>\n"
-    '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">'
-    "</script>"
+    '<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"'
+    ' integrity="sha384-AHAnt9ZhGeHIrydA1Kp1L7FN+2UosbF7RQg6C+9Is/a7kDpQ1684C2'
+    'iH2VWil6r4" crossorigin="anonymous"></script>'
 )
 
 
@@ -58,15 +72,44 @@ CHARTS_PLACEHOLDER = "\x00CHARTS\x00"
 
 
 VEGA_CDN = (
-    '<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>\n'
-    '<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>\n'
-    '<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>'
+    '<script src="https://cdn.jsdelivr.net/npm/vega@5.33.1/build/vega.min.js"'
+    ' integrity="sha384-NMXhl2TbCXxcN7o4ROC56Funm78m4AylL8gMg/7Kn4YU+wrm23K9l7'
+    'cY8lDRXQ9d" crossorigin="anonymous"></script>\n'
+    '<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/'
+    'vega-lite.min.js" integrity="sha384-D9LYH0esGjcxQJsBuxOuXtCDJGXRWW1+Khluz'
+    'WPqi0rLJmiR/ygPChefaD+rFFDQ" crossorigin="anonymous"></script>\n'
+    '<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/'
+    'vega-embed.min.js" integrity="sha384-M+Ax7e/WFJpxSOF09HzI+Sj4wg9ottVd/uxm'
+    'V2ItGGh02fLH28t2FAOJx3TJBap5" crossorigin="anonymous"></script>'
 )
 
 
 def page_title(slug: str) -> str:
     text = (ROOT / "problems" / slug / "README.md").read_text(encoding="utf-8")
     return document_title(text)
+
+
+def _clip(text: str, limit: int = 180) -> str:
+    """One collapsed line for a meta description, cut at a word boundary."""
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)  # [text](url) -> text
+    collapsed = re.sub(r"\s+", " ", text).strip()
+    if len(collapsed) <= limit:
+        return collapsed
+    return collapsed[:limit].rsplit(" ", 1)[0] + "…"
+
+
+def page_description(slug: str) -> str:
+    """The Metric field — what the series counts — as the page description."""
+    text = (ROOT / "problems" / slug / "README.md").read_text(encoding="utf-8")
+    return _clip(front_matter(text).get("Metric", "") or document_title(text))
+
+
+def root_description(text: str) -> str:
+    """A root document's first prose paragraph, for its page description."""
+    for block in re.split(r"\n\s*\n", text)[1:]:
+        if not block.lstrip().startswith(("#", "|", "<", "-", ">", "!")):
+            return _clip(block)
+    return ""
 
 
 def _protect_math(text: str) -> tuple[str, list[str]]:
@@ -169,6 +212,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — ai-discovery-data</title>
+<meta name="description" content="{description}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{description}">
 <base target="_blank">
 {vega}
 {mathjax}
@@ -197,6 +243,9 @@ ROOT_TEMPLATE = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
+<meta name="description" content="{description}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{description}">
 <base target="_blank">
 <style>{style}</style>
 </head>
@@ -237,6 +286,7 @@ def render_page(slug: str, charts) -> str:
         body += charts_html
     return PAGE_TEMPLATE.format(
         title=html.escape(page_title(slug)),
+        description=html.escape(page_description(slug)),
         vega=VEGA_CDN, mathjax=MATHJAX_CDN, style=STYLE, body=body,
         repo=REPO_BASE, slug=slug, embeds="\n".join(embeds))
 
@@ -274,6 +324,7 @@ def render_root(source: str) -> str:
            "← all series</a></p>")
     return ROOT_TEMPLATE.format(
         title=html.escape(title), style=STYLE, nav=nav,
+        description=html.escape(root_description(text)),
         body=render_markdown(_rewrite_root_markdown(text)),
         repo=REPO_BASE, source=source)
 

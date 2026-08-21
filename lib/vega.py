@@ -194,7 +194,7 @@ def scatter(values: list[dict], *, x: str, x_type: str, y: str, y_type: str,
     return spec
 
 
-# ---------------------------------------------------------------- series ----
+# ------------------------------------------------------------- families ----
 
 
 def _period_axis(period: str) -> dict:

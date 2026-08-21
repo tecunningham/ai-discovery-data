@@ -21,6 +21,9 @@ from lib.vega import (  # noqa: E402
 )
 
 
+# Mirrors the grouping in this folder's figure.py; the folder check
+# recomputes the prose from the same rule, so the three cannot drift
+# apart without a red cell.
 ARXIV_LEGACY = {
     "alg-geom": "math.AG", "dg-ga": "math.DG", "funct-an": "math.FA",
     "q-alg": "math.QA", "cmp-lg": "cs.CL", "chao-dyn": "nlin.CD",

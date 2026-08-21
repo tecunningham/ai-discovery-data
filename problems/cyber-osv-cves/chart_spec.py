@@ -49,7 +49,3 @@ def charts(slug: str):
                    "majority is not drawn."))
     return charts
 
-
-# Mirrors the grouping in problems/output-arxiv/figure.py; the folder check
-# recomputes the prose from the same rule, so the three cannot drift apart
-# without a red cell.

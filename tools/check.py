@@ -45,6 +45,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from lib.dates import AS_OF_DATE  # noqa: E402  (matplotlib-free)
+from lib.document import front_matter, title  # noqa: E402
 
 PROBLEMS = ROOT / "problems"
 BIB = ROOT / "references.bib"
@@ -181,11 +182,12 @@ class Problem:
         self.slug = folder.name
         self.doc = folder / "README.md"
         self.text = self.doc.read_text(encoding="utf-8") if self.doc.exists() else ""
-        title = re.search(r"^#\s+(.+)$", self.text, re.M)
-        self.title = title.group(1).strip() if title else ""
+        self.title = title(self.text)
         # Folder-local links only: an embed or a data link reaching outside the
-        # folder means the split is incomplete.
-        self.embedded = set(re.findall(r"!\[[^\]]*\]\(([^)/]+\.png)\)", self.text))
+        # folder means the split is incomplete. Embeds keep document order, so
+        # the index can take "the first figure the page shows" as its primary.
+        self.embed_order = re.findall(r"!\[[^\]]*\]\(([^)/]+\.png)\)", self.text)
+        self.embedded = set(self.embed_order)
         self.linked_csvs = set(re.findall(r"\(([^)/]+\.csv)\)", self.text))
         self.siblings = set(re.findall(r"\(\.\./([a-z0-9-]+)/README\.md\)", self.text))
         # A bracket can hold several keys, `[@a; @b]`. Matching `@key]` would see
@@ -193,11 +195,9 @@ class Problem:
         self.citations = {key
                           for group in re.findall(r"\[@[^\]]*\]", self.text)
                           for key in re.findall(r"@([A-Za-z0-9_:-]+)", group)}
-        self.fields = {}
-        for field in FIELDS:
-            match = re.search(rf"^- \*\*{field}:\*\*\s*(.+)$", self.text, re.M)
-            if match:
-                self.fields[field] = match.group(1).strip()
+        self.fields = {field: value
+                       for field, value in front_matter(self.text).items()
+                       if field in FIELDS and value}
         # Reproduction is off unless asked for, since it redraws every figure.
         self.status = {name: SKIP for name in CHECKS}
         self.failures: dict[str, list[str]] = {}
@@ -606,18 +606,19 @@ def thumbnails(problem: Problem) -> str:
     Problem pages may carry diagnostics and sensitivity figures, but the main
     index is a scan of series rather than a gallery of every output.  By
     convention ``discovery-*.png`` is the primary time-series figure; when a
-    folder has no such file, its first (usually only) figure is the fallback.
-    Written as HTML because markdown image syntax has no width.
+    folder has no such file, the first figure its own document embeds is the
+    fallback — the folder's stated primary, where an alphabetical pick once
+    put a sensitivity figure on the index. Written as HTML because markdown
+    image syntax has no width.
     """
     if not problem.figures:
         return "<em>document + data only</em>"
     preferred = [figure for figure in problem.figures
                  if figure.name.startswith("discovery-")]
-    # The cumulative view is CUMULATIVE.md's panel, never the main index's:
-    # without this exclusion a folder with no discovery-*.png would fall back
-    # to it by alphabetical accident.
-    fallback = [figure for figure in problem.figures
-                if not figure.name.startswith("cumulative-")]
+    # The cumulative view is CUMULATIVE.md's panel, never the main index's.
+    fallback = [problem.folder / name for name in problem.embed_order
+                if not name.startswith("cumulative-")
+                and (problem.folder / name).exists()]
     figure = (preferred or fallback or problem.figures)[0]
     return (
         f'<a href="problems/{problem.slug}/">'
@@ -738,12 +739,15 @@ def checks_rows(problems: list[Problem]) -> str:
     fetched = sum(p.status["Refetch"] == PASS for p in problems)
     hand = sum(p.status["Refetch"] == HAND for p in problems)
     checked = sum(p.status["Arithmetic"] != SKIP for p in problems)
+    unchecked = len(problems) - checked
     red = sum(p.status[group] == FAIL for p in problems for group in CHECKS)
+    arithmetic = f"{checked} recompute their prose arithmetic" + (
+        f"; the other {unchecked} state numbers no check reads. "
+        if unchecked else ". ")
     out += ["", f"{len(problems)} problems holding {sum(len(p.figures) for p in problems)} "
                 f"figures and {sum(len(p.csvs) for p in problems)} data files. "
                 f"{fetched} refetch from upstream and {hand} are maintained by hand "
-                f"and say so. {checked} recompute their prose arithmetic; the other "
-                f"{len(problems) - checked} state numbers no check reads. "
+                f"and say so. {arithmetic}"
                 f"{red or 'No'} failing "
                 f"{'cell' if red == 1 else 'cells'}."]
     if red:

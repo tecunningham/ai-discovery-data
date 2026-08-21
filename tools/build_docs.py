@@ -37,6 +37,7 @@ import markdown
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from lib.document import title as document_title  # noqa: E402
 from lib.palette import (  # noqa: E402
     AI,
     AI_SOFT,
@@ -86,13 +87,9 @@ def num(value: str) -> float | int | None:
     return int(parsed) if parsed.is_integer() else parsed
 
 
-def readme_fields(slug: str) -> dict[str, str]:
+def page_title(slug: str) -> str:
     text = (ROOT / "problems" / slug / "README.md").read_text(encoding="utf-8")
-    fields = {"title": re.search(r"^#\s+(.+)$", text, re.M).group(1).strip()}
-    for field in ("Metric", "Upstream", "Data"):
-        match = re.search(rf"^- \*\*{field}:\*\*\s*(.+)$", text, re.M)
-        fields[field.lower()] = match.group(1).strip() if match else ""
-    return fields
+    return document_title(text)
 
 
 def _protect_math(text: str) -> tuple[str, list[str]]:
@@ -1364,7 +1361,7 @@ def render_page(slug: str, charts) -> str:
     else:
         body += charts_html
     return PAGE_TEMPLATE.format(
-        title=html.escape(readme_fields(slug)["title"]),
+        title=html.escape(page_title(slug)),
         vega=VEGA_CDN, mathjax=MATHJAX_CDN, style=STYLE, body=body,
         repo=REPO_BASE, slug=slug, embeds="\n".join(embeds))
 

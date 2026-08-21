@@ -10,18 +10,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.prose import missing, prose, report  # noqa: E402
+from lib.prose import missing, prose, register_entry, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
-
-
-def register_entry(row: dict[str, str]) -> str:
-    """A register ### block, collapsed the way prose() collapses the page."""
-    return " ".join((
-        f"### {row['problem_id']} — {row['short_name']}",
-        f"- **status:** {row['status']}",
-        f"- **resolved:** {row['resolved_year']}".rstrip(),
-        f"- **resolver:** {row['resolver']}".rstrip(),
-    ))
 
 
 def main() -> int:

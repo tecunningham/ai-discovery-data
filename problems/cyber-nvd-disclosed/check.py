@@ -9,7 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.prose import annualized, missing, prose, report  # noqa: E402
+from lib.prose import by_year_line, annualized, missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 
@@ -31,9 +31,7 @@ def main() -> int:
                      if quarter < "2026")
     peak_2025 = max(count for quarter, count in q_counts.items()
                     if quarter.startswith("2025"))
-    by_year_line = " · ".join(
-        f"{row['year']}: {int(row['nvd_published']):,}" for row in annual
-        if row["partial_year"] == "no")
+    year_line = by_year_line(annual, "nvd_published", thousands=True)
 
     claims = {
         f"Coverage:** 2016–2026, partial through {through}":
@@ -43,7 +41,7 @@ def main() -> int:
         f"2025's {counts['2025']:,}, after +{growth('2023', '2024')}% growth "
         f"into 2024 and +{growth('2024', '2025')}% into 2025":
             "verdict clause",
-        f"**by-year:** {by_year_line}": "by-year fact",
+        f"**by-year:** {year_line}": "by-year fact",
         f"**2026 (through {through}):** {counts['2026']:,} CVEs, day {day} "
         f"of the year; annualizes to about {round(pace, -3):,.0f}, roughly "
         f"{pace / counts['2025']:.1f} times 2025": "part-year fact",

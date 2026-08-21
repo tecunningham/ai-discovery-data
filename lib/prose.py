@@ -55,6 +55,41 @@ def report(failures: list[str]) -> int:
     return bool(failures)
 
 
+def register_entry(row: dict[str, str]) -> str:
+    """A ledger register ### block, collapsed the way prose() collapses the page.
+
+    The problem-list folders assert every non-open row's register entry in the
+    fixed key order status / resolved / resolver; one builder keeps the order
+    and the collapsing identical across them.
+    """
+    return " ".join((
+        f"### {row['problem_id']} — {row['short_name']}",
+        f"- **status:** {row['status']}",
+        f"- **resolved:** {row['resolved_year']}".rstrip(),
+        f"- **resolver:** {row['resolver']}".rstrip(),
+    ))
+
+
+def by_year_line(rows: list[dict[str, str]], column: str, *,
+                 thousands: bool = False, skip_zero: bool = False) -> str:
+    """The `2019: 2 · 2021: 2` joining of an annual rollup's complete years.
+
+    Partial years never appear in the line — the document quotes them
+    separately, with their as-of date — and a page whose line skips empty
+    years passes skip_zero.
+    """
+    parts = []
+    for row in rows:
+        if row["partial_year"] != "no":
+            continue
+        value = int(row[column])
+        if skip_zero and not value:
+            continue
+        parts.append(f"{row['year']}: {value:,}" if thousands
+                     else f"{row['year']}: {value}")
+    return " · ".join(parts)
+
+
 def annualized(count: int, through: str) -> float:
     """Scale a part-year count to a full year by elapsed days.
 

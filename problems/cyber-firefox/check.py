@@ -10,7 +10,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.prose import annualized, missing, prose, report  # noqa: E402
+from lib.prose import by_year_line, annualized, missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 
@@ -102,9 +102,7 @@ def main() -> int:
     if len(ai_2025) != 1:
         failures.append(f"firefox-ai-cves.csv holds {len(ai_2025)} rows for "
                         "2025; the AI attribution section describes one")
-    by_year_line = " · ".join(
-        f"{row['year']}: {row['unique_cves']}"
-        for row in rows if row["partial_year"] == "no")
+    year_line = by_year_line(rows, "unique_cves")
 
     claims = {
         f"Coverage:** 2016–2026, partial through {latest['data_through']}":
@@ -113,7 +111,7 @@ def main() -> int:
         f"against {unique['2025']} in 2025; the part year alone is "
         f"{unique['2026'] / unique['2025']:.1f} times the 2025 full year":
             "verdict clause",
-        f"**by-year (distinct CVEs):** {by_year_line}": "by-year fact",
+        f"**by-year (distinct CVEs):** {year_line}": "by-year fact",
         f"**2026 (through {latest['data_through']}):** {unique['2026']} "
         f"distinct CVEs, {unique['2026'] / unique['2025']:.1f} times the "
         "2025 full year; annualizes to about "

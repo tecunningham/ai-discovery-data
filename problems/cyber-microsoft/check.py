@@ -9,7 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.prose import annualized, missing, prose, report  # noqa: E402
+from lib.prose import by_year_line, annualized, missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 
@@ -93,16 +93,14 @@ def main() -> int:
                      / count["2026"])
     months_2016 = sum(1 for row in monthly if row["month"].startswith("2016"))
     month_count = {row["month"]: int(row["cves"]) for row in monthly}
-    by_year_line = " · ".join(
-        f"{row['year']}: {int(row['cves']):,}" for row in rows
-        if row["partial_year"] == "no")
+    year_line = by_year_line(rows, "cves", thousands=True)
     claims = {
         f"Coverage:** 2016–2026, partial through {latest['data_through']}":
             "coverage field",
         f"{count['2026']:,} CVEs through {latest['data_through']} against "
         f"{count['2025']:,} in 2025; the part year annualizes to about "
         f"{ratio:.1f} times 2025": "verdict clause",
-        f"**by-year:** {by_year_line}": "by-year fact",
+        f"**by-year:** {year_line}": "by-year fact",
         f"**2016 span:** {count['2016']} CVEs across "
         f"{'ten' if months_2016 == 10 else months_2016} documented months":
             "2016 span fact",

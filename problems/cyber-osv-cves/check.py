@@ -9,7 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.prose import annualized, missing, prose, report  # noqa: E402
+from lib.prose import by_year_line, annualized, missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 
@@ -33,9 +33,7 @@ def main() -> int:
     affiliated = [row for row in ai_rows if row["band"] == "ai_affiliated"]
     aisle = sum("Aisle Research" in row["credits"] for row in affiliated)
     ant = sum("AntAISecurityLab" in row["credits"] for row in affiliated)
-    by_year_line = " · ".join(
-        f"{row['year']}: {int(row['distinct_cves']):,}" for row in annual
-        if row["partial_year"] == "no")
+    year_line = by_year_line(annual, "distinct_cves", thousands=True)
 
     failures: list[str] = []
     if len(explicit) + len(affiliated) != len(ai_rows):
@@ -55,7 +53,7 @@ def main() -> int:
         f"{counts['2026']:,} distinct CVEs through {through} annualize to "
         f"about {round(pace, -2):,.0f}, {pace / counts['2025']:.1f} times "
         f"2025's {counts['2025']:,}": "verdict clause",
-        f"**by-year:** {by_year_line}": "by-year fact",
+        f"**by-year:** {year_line}": "by-year fact",
         f"**2026 (through {through}):** {counts['2026']:,} distinct CVEs; "
         f"annualizes to about {round(pace, -2):,.0f}, or "
         f"{pace / counts['2025']:.1f} times the 2025 count":

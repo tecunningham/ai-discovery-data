@@ -19,23 +19,15 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.cumulative import ledger_remaining_chart  # noqa: E402
-from lib.families import problem_list_chart  # noqa: E402
+from lib.families import ledger_figures  # noqa: E402
 
 
 def main() -> None:
-    problem_list_chart(
-        HERE / "erdos-top10-problems.csv",
-        HERE / "discovery-math-erdos-top10.png",
+    ledger_figures(
+        "erdos-top10-problems.csv",
         __file__,
         ai_problem="90",
         ai_caption="AI disproof; human-verified account",
-    )
-    ledger_remaining_chart(
-        HERE / "erdos-top10-problems.csv",
-        HERE / "cumulative-math-erdos-top10.png",
-        __file__,
-        ai_problem="90",
     )
 
 

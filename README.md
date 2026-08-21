@@ -127,14 +127,11 @@ zero where the series has a known denominator.
 | [modded-nanogpt training speedrun](problems/algorithms-nanogpt/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Stockfish development builds on fixed hardware](problems/algorithms-stockfish/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Integer factorization records](problems/integer-factorization/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. 1 failing cell.
-
-Failing:
-- `output-arxiv` Reproduces: cumulative-output-arxiv.png, output-arxiv-submissions.png differs from what figure.py draws today, so the committed figure is stale
+37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. No failing cells.
 <!-- END GENERATED: checks-table -->
 
 ## How to read the series

@@ -9,6 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.dates import AS_OF_DATE  # noqa: E402
 from lib.prose import missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
@@ -22,15 +23,8 @@ def month_name(month: str) -> str:
 
 
 def as_of_month() -> str:
-    """lib/chart.py's snapshot month, read textually: importing lib.chart would
-    pull in matplotlib, which the host-side checks deliberately do not need."""
-    import re
-
-    text = (HERE.parents[1] / "lib" / "chart.py").read_text(encoding="utf-8")
-    year, month, _ = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)",
-        text, re.M).groups()
-    return f"{year}-{int(month):02d}"
+    """The snapshot month, from the matplotlib-free lib/dates.py."""
+    return f"{AS_OF_DATE.year}-{AS_OF_DATE.month:02d}"
 
 
 def main() -> int:

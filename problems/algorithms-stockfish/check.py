@@ -9,7 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.chart import year_fraction  # noqa: E402
+from lib.dates import year_fraction  # noqa: E402
 from lib.prose import annualized, missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 

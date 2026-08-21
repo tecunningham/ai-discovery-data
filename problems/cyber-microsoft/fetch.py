@@ -21,7 +21,7 @@ so on). Non-CVE advisory IDs (ADV..., "Mariner" rows) are skipped.
 A CVE is dated by the earliest revision in its history, across every document
 that mentions it, so an out-of-band fix released late in a month lands in the
 month it actually shipped rather than the document it was filed under.
-Documents released after lib/chart.py's AS_OF_DATE are skipped, and so are
+Documents released after lib/dates.py's AS_OF_DATE are skipped, and so are
 entries first published after it: the vendored CSVs are a snapshot as of that
 date, and a refetch after the date is bumped picks the newer releases up.
 
@@ -48,6 +48,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.credits import Signals, signals  # noqa: E402
+from lib.dates import AS_OF_DATE  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch_json  # noqa: E402
 
@@ -56,21 +57,6 @@ JSON = "application/json"
 
 TAGS = re.compile(r"<[^>]+>")
 SPACE = re.compile(r"\s+")
-
-
-def as_of_date() -> date:
-    """The repository's committed snapshot date, read from lib/chart.py.
-
-    Parsed rather than imported so a fetch does not pull in matplotlib; the
-    same regex tools/check.py uses to enforce the date against every CSV.
-    """
-    text = (HERE.parents[1] / "lib/chart.py").read_text(encoding="utf-8")
-    match = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)", text, re.M
-    )
-    if not match:
-        raise SystemExit("lib/chart.py has no parseable AS_OF_DATE")
-    return date(*(int(part) for part in match.groups()))
 
 
 def monthly_documents(cutoff: date) -> list[str]:
@@ -318,7 +304,7 @@ def build_finders(cves: dict[str, dict]) -> list[dict]:
 
 
 def main() -> None:
-    cutoff = as_of_date()
+    cutoff = AS_OF_DATE
     cves = records(cutoff)
     write_csv(HERE / "msrc-cves.csv", build_annual(cves, cutoff))
     write_csv(HERE / "msrc-monthly.csv", build_monthly(cves))

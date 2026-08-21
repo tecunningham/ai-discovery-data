@@ -10,7 +10,7 @@ advisory's `announced` year. Pre-2016 advisories do not list CVEs in this
 structure, so the series starts there. Four views come out of the repository:
 one row per distinct CVE (the granular ledger the others summarize), quarterly
 counts split by credit band, annual counts split by credit, and one row per
-reporter per year. Advisories announced after lib/chart.py's AS_OF_DATE are
+reporter per year. Advisories announced after lib/dates.py's AS_OF_DATE are
 skipped, so a refetch reproduces the committed window.
 
 The plotted unit is the distinct CVE. Mozilla repeats one CVE across the Firefox,
@@ -32,13 +32,14 @@ import re
 import sys
 import tarfile
 from collections import Counter, defaultdict
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.credits import Signals, band, classify, signals  # noqa: E402
+from lib.dates import AS_OF_DATE  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch  # noqa: E402
 
@@ -47,21 +48,6 @@ from lib.web import fetch  # noqa: E402
 # most severe, and one with no parseable rating is counted as unrated rather
 # than dropped.
 IMPACTS = ["Low", "Moderate", "High", "Critical"]
-
-
-def as_of_date() -> date:
-    """The repository's committed snapshot date, read from lib/chart.py.
-
-    Parsed rather than imported so a fetch does not pull in matplotlib; the
-    same regex tools/check.py uses to enforce the date against every CSV.
-    """
-    text = (HERE.parents[1] / "lib/chart.py").read_text(encoding="utf-8")
-    match = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)", text, re.M
-    )
-    if not match:
-        raise SystemExit("lib/chart.py has no parseable AS_OF_DATE")
-    return date(*(int(part) for part in match.groups()))
 
 
 def normalize_impact(value: str) -> str:
@@ -139,7 +125,7 @@ def records() -> list[dict]:
                     "reporter": reporter,
                     "impact": normalize_impact(impact or advisory_impact),
                 })
-    cutoff = as_of_date()
+    cutoff = AS_OF_DATE
     kept = [row for row in rows
             if (row["announced"] <= cutoff.isoformat() if row["announced"]
                 else row["year"] <= cutoff.year)]

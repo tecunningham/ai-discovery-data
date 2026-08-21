@@ -42,6 +42,10 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from lib.dates import AS_OF_DATE  # noqa: E402  (matplotlib-free)
+
 PROBLEMS = ROOT / "problems"
 BIB = ROOT / "references.bib"
 README = ROOT / "README.md"
@@ -353,17 +357,7 @@ def bib_keys() -> set[str]:
 
 def check_chart_as_of(problems: list[Problem]) -> None:
     """Fail if vendored data has advanced beyond the chart snapshot date."""
-    chart_text = (ROOT / "lib/chart.py").read_text(encoding="utf-8")
-    match = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)",
-        chart_text,
-        re.M,
-    )
-    if not match:
-        for problem in problems:
-            problem.fail("Figure", "lib/chart.py has no parseable AS_OF_DATE")
-        return
-    as_of = date(*(int(part) for part in match.groups()))
+    as_of = AS_OF_DATE
     date_fields = {"date", "published", "announced", "data_through", "release_date"}
     for problem in problems:
         newest: date | None = None
@@ -385,7 +379,7 @@ def check_chart_as_of(problems: list[Problem]) -> None:
             problem.fail(
                 "Figure",
                 f"{source} contains {newest.isoformat()}, newer than "
-                f"lib/chart.py AS_OF_DATE {as_of.isoformat()}",
+                f"lib/dates.py AS_OF_DATE {as_of.isoformat()}",
             )
 
 
@@ -903,10 +897,8 @@ def main() -> int:
     check_chart_as_of(problems)
     duplicate_names(problems)
     if args.reproduce or args.write_index:
-        # Import lazily: the ordinary document/data check does not need
-        # matplotlib. This also turns a direct host invocation into one clear
-        # instruction instead of 31 near-identical figure.py failures.
-        sys.path.insert(0, str(ROOT))
+        # Checked up front so a direct host invocation gets one clear
+        # instruction instead of 37 near-identical figure.py failures.
         from lib.renderer import assert_canonical_renderer
 
         try:

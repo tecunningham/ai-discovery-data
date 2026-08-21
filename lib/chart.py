@@ -14,9 +14,7 @@ calls save(); it should not restate a colour or re-decide where 2026 starts.
 from __future__ import annotations
 
 import platform
-import re
 import zlib
-from datetime import date
 from pathlib import Path
 
 import matplotlib
@@ -26,41 +24,28 @@ import matplotlib.pyplot as plt
 from matplotlib import ft2font
 from matplotlib.lines import Line2D
 
+# Re-exported so figure code keeps one import surface; the definitions live in
+# matplotlib-free modules the fetchers and checkers can import directly.
+from lib.dates import AS_OF_DATE, NOW, period_bounds, year_fraction  # noqa: F401
+from lib.palette import (  # noqa: F401
+    AI,
+    AI_SOFT,
+    FUZZ,
+    HUMAN,
+    HUMAN_SOFT,
+    NEUTRAL,
+    SEVERITY_RAMP,
+    UNATTRIBUTED,
+    VENDOR,
+)
 from lib.renderer import assert_canonical_renderer
 
 ROOT = Path(__file__).resolve().parents[1]
-
-AI = "#c1442f"
-# Affiliation-only credits: the same family as AI, visibly weaker evidence.
-# Shared here so the PNGs and the interactive pages use one soft red.
-AI_SOFT = "#e09a8c"
-HUMAN = "#2f6cc1"
-FUZZ = "#c98a00"
-VENDOR = "#777777"
-NEUTRAL = "#aaaaaa"
-# For a series with no authorship field at all, which is a different thing from
-# one whose finders are recorded and happen to be human. Blue would claim more
-# than the data says: nobody counted who wrote these artifacts.
-UNATTRIBUTED = "#37474f"
-
-# Severity is ordered, not categorical, so it takes one hue in even lightness
-# steps rather than four separate colours: the reader should see the ordering in
-# the ink without consulting the legend. The steps are spaced so the closest
-# adjacent pair stays about 16 apart in OKLab (×100) under normal, protanopic
-# and deuteranopic vision, and the lightest clears 2:1 against white. The hue is
-# deliberately not the AI red or the fuzzer amber those charts already spend on
-# identity, so a severity bar cannot be misread as a finder band.
-SEVERITY_RAMP = ["#87afc1", "#547d8f", "#234f61", "#002435"]
 
 # The highlighted period is the same everywhere. Annual bar charts start it at
 # 2025.5, the left edge of the 2026 bar on a year-centred categorical axis.
 ERA_START = 2026.0
 ANNUAL_ERA_START = 2025.5
-# A committed snapshot date keeps PNG bytes stable. tools/check.py rejects data
-# newer than this date, so a refetch cannot silently leave standing-record lines
-# ending before their newest observation.
-AS_OF_DATE = date(2026, 8, 20)
-NOW = AS_OF_DATE.year + (AS_OF_DATE.timetuple().tm_yday - 1) / 365.25
 
 
 def stable_jitter(key: str, spread: float = 0.035) -> float:
@@ -70,40 +55,6 @@ def stable_jitter(key: str, spread: float = 0.035) -> float:
     produce a different PNG on every run.
     """
     return (zlib.crc32(key.encode()) % 7 - 3) * spread
-
-
-
-def year_fraction(value: str) -> float:
-    parts = [int(part) for part in value.split("-")]
-    if len(parts) == 1:
-        return float(parts[0])
-    if len(parts) == 2:
-        return parts[0] + (parts[1] - 0.5) / 12
-    day = date(*parts[:3])
-    return day.year + (day.timetuple().tm_yday - 1) / 365.25
-
-
-
-def period_bounds(label: str) -> tuple[float, float]:
-    """Start and end of a period label as year fractions.
-
-    Accepts the three period vocabularies the vendored CSVs use: a year
-    ("2000"), a quarter ("2020-Q1"), or a month ("1991-07"). Shared by the
-    cumulative shapes (whose steps land at period ends) and the periodic bar
-    charts (whose bars span the period).
-    """
-    if re.fullmatch(r"\d{4}", label):
-        year = int(label)
-        return year, year + 1
-    quarter = re.fullmatch(r"(\d{4})-Q([1-4])", label)
-    if quarter:
-        year, q = int(quarter.group(1)), int(quarter.group(2))
-        return year + (q - 1) / 4, year + q / 4
-    month = re.fullmatch(r"(\d{4})-(\d{2})", label)
-    if month:
-        year, m = int(month.group(1)), int(month.group(2))
-        return year + (m - 1) / 12, year + m / 12
-    raise ValueError(f"unrecognized period label: {label!r}")
 
 
 

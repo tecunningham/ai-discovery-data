@@ -37,6 +37,15 @@ import markdown
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from lib.palette import (  # noqa: E402
+    AI,
+    AI_SOFT,
+    FUZZ,
+    HUMAN,
+    HUMAN_SOFT,
+    NEUTRAL,
+    UNATTRIBUTED as DARKGREY,
+)
 from lib.table import read_csv  # noqa: E402
 
 DOCS = ROOT / "docs"
@@ -54,16 +63,6 @@ MATHJAX_CDN = (
     "</script>"
 )
 CHARTS_PLACEHOLDER = "\x00CHARTS\x00"
-
-# lib/chart.py's palette, restated for the web pages so the interactive and
-# static versions of a series read as the same chart.
-AI = "#c1442f"
-AI_SOFT = "#e09a8c"
-HUMAN = "#2f6cc1"
-HUMAN_SOFT = "#8fb3d9"
-FUZZ = "#c98a00"
-NEUTRAL = "#aaaaaa"
-DARKGREY = "#37474f"
 
 VEGA_CDN = (
     '<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>\n'

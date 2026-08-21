@@ -70,7 +70,7 @@ fetch:
 		echo "one or more fetchers reported stale data or failed" >&2; \
 	fi; \
 	echo "problems/math-antedb/fetch.py needs github.com/teorth/expdb and pycddlib<3; run it by hand"; \
-	echo "if any series now reaches past lib/chart.py's AS_OF_DATE, bump it and rerun make index"; \
+	echo "if any series now reaches past lib/dates.py's AS_OF_DATE, bump it and rerun make index"; \
 	exit $$status
 
 fetch-one:

@@ -4,12 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sphere-packing lower-bound ladder — ai-discovery-data</title>
+<meta name="description" content="cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension">
+<meta property="og:title" content="Sphere-packing lower-bound ladder">
+<meta property="og:description" content="cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension">
 <base target="_blank">
-<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@5.33.1/build/vega.min.js" integrity="sha384-NMXhl2TbCXxcN7o4ROC56Funm78m4AylL8gMg/7Kn4YU+wrm23K9l7cY8lDRXQ9d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/vega-lite.min.js" integrity="sha384-D9LYH0esGjcxQJsBuxOuXtCDJGXRWW1+KhluzWPqi0rLJmiR/ygPChefaD+rFFDQ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/vega-embed.min.js" integrity="sha384-M+Ax7e/WFJpxSOF09HzI+Sj4wg9ottVd/uxmV2ItGGh02fLH28t2FAOJx3TJBap5" crossorigin="anonymous"></script>
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" integrity="sha384-AHAnt9ZhGeHIrydA1Kp1L7FN+2UosbF7RQg6C+9Is/a7kDpQ1684C2iH2VWil6r4" crossorigin="anonymous"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
@@ -45,7 +48,8 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Domain:</strong> mathematics</li>
 <li><strong>Role:</strong> control: no-AI baseline</li>
 <li><strong>Metric:</strong> cumulative improvements to the asymptotic lower bound on sphere-packing density in high dimension</li>
-<li><strong>Coverage:</strong> 1905–2025, eight recorded steps</li>
+<li><strong>Coverage:</strong> 1905–2025, eight recorded steps; statuses read
+2026-08-14</li>
 <li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-sphere-packing/sphere-packing-lower-bound-records.csv"><code>sphere-packing-lower-bound-records.csv</code></a></li>
 <li><strong>Upstream:</strong> per-row <code>source_url</code> values, chiefly the survey at <a href="https://arxiv.org/abs/2606.13313">https://arxiv.org/abs/2606.13313</a>, with the two most recent steps at <a href="https://arxiv.org/abs/2312.10026">https://arxiv.org/abs/2312.10026</a> and the Klartag preprint recorded in the same survey</li>
 <li><strong>Verdict:</strong> accelerating — 4 steps over 2011–2025 (2.7/decade) against 4 over 1905–2010 (0.4/decade); 0 steps dated 2026</li>

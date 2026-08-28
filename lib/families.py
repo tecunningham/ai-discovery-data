@@ -37,7 +37,37 @@ from lib.chart import (
     style,
     year_fraction,
 )
+from lib.cumulative import ledger_remaining_chart
 from lib.table import read_csv
+
+
+def ledger_figures(csv_name: str, built_by: str, *,
+                   ai_problem: str | None = None,
+                   ai_caption: str | None = None) -> None:
+    """A problem-list folder's standard pair of figures, from its one CSV.
+
+    Eight ledger folders drew the same two charts with only the CSV name and
+    the AI-attribution arguments varying, so the pair is one call. The folder
+    comes from the calling script's path, and the outputs are the reserved
+    names discovery-<slug>.png and cumulative-<slug>.png (FORMAT.md's Files
+    section), which the calling script's docstring still states.
+    """
+    folder = Path(built_by).resolve().parent
+    slug = folder.name
+    extra = {} if ai_caption is None else {"ai_caption": ai_caption}
+    problem_list_chart(
+        folder / csv_name,
+        folder / f"discovery-{slug}.png",
+        built_by,
+        ai_problem=ai_problem,
+        **extra,
+    )
+    ledger_remaining_chart(
+        folder / csv_name,
+        folder / f"cumulative-{slug}.png",
+        built_by,
+        ai_problem=ai_problem,
+    )
 
 
 

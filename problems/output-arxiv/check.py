@@ -9,6 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.dates import AS_OF_DATE  # noqa: E402
 from lib.prose import missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
@@ -22,19 +23,12 @@ def month_name(month: str) -> str:
 
 
 def as_of_month() -> str:
-    """lib/chart.py's snapshot month, read textually: importing lib.chart would
-    pull in matplotlib, which the host-side checks deliberately do not need."""
-    import re
-
-    text = (HERE.parents[1] / "lib" / "chart.py").read_text(encoding="utf-8")
-    year, month, _ = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)",
-        text, re.M).groups()
-    return f"{year}-{int(month):02d}"
+    """The snapshot month, from the matplotlib-free lib/dates.py."""
+    return f"{AS_OF_DATE.year}-{AS_OF_DATE.month:02d}"
 
 
 def main() -> int:
-    rows = read_csv(HERE / "arxiv-monthly.csv")
+    rows = read_csv(HERE / "arxiv-by-month.csv")
     counts = {row["month"]: int(row["submissions"]) for row in rows}
     # The final row is the month in progress at fetch time, so the last complete
     # month is the one before it. The prose quotes that one. The rule silently
@@ -81,7 +75,7 @@ def main() -> int:
                "chem-ph", "plasm-ph", "supr-con", "mtrl-th"}
     group_totals: dict[tuple[str, str], int] = {}
     subfield_totals: dict[tuple[str, str], int] = {}
-    for row in read_csv(HERE / "arxiv-monthly-by-category.csv"):
+    for row in read_csv(HERE / "arxiv-categories-by-month.csv"):
         category = legacy.get(row["category"], row["category"])
         archive = category.split(".")[0]
         group = "physics" if archive in physics else archive

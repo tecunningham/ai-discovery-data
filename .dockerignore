@@ -1,0 +1,5 @@
+# tools/figures.Dockerfile copies only requirements.txt; without this the
+# whole repository (.git, PNGs, docs — tens of megabytes) is shipped to the
+# Docker daemon as build context on every make figures / check-figures.
+*
+!requirements.txt

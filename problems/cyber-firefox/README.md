@@ -4,7 +4,7 @@
 - **Role:** discovery series
 - **Metric:** distinct CVEs per quarter, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count
 - **Coverage:** 2016–2026, partial through 2026-08-04, the latest advisory in the snapshot
-- **Data:** per-CVE ledger [`firefox-cves.csv`](firefox-cves.csv); quarterly [`firefox-quarterly.csv`](firefox-quarterly.csv); annual [`firefox-advisories.csv`](firefox-advisories.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv); every AI-marked CVE with its credit strings in [`firefox-ai-cves.csv`](firefox-ai-cves.csv)
+- **Data:** per-CVE ledger [`firefox-cves.csv`](firefox-cves.csv); quarterly [`firefox-by-quarter.csv`](firefox-by-quarter.csv); annual [`firefox-by-year.csv`](firefox-by-year.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv); every AI-marked CVE with its credit strings in [`firefox-ai-cves.csv`](firefox-ai-cves.csv)
 - **Upstream:** <https://github.com/mozilla/foundation-security-advisories> (rendered at <https://www.mozilla.org/en-US/security/advisories/>)
 - **Verdict:** accelerating — 342 distinct CVEs through 2026-08-04 against 210 in 2025; the part year alone is 1.6 times the 2025 full year
 
@@ -102,13 +102,13 @@ auditable.
 `firefox-cves.csv` is the ledger the aggregates summarize: one row per
 distinct CVE per year, carrying its earliest announcement date and quarter,
 the most severe impact any of its mentions carries, its credit band and its
-verbatim reporter strings. `firefox-quarterly.csv` sums it by quarter and
+verbatim reporter strings. `firefox-by-quarter.csv` sums it by quarter and
 band; rows with no parseable announcement date appear in the annual counts
 but not in any quarter, and the main and cumulative charts state that
 remainder.
 
 [`figure.py`](figure.py) draws stacked quarterly bars from
-`firefox-quarterly.csv`: `other` in blue, `fuzz` in amber, `ai_affiliated`
+`firefox-by-quarter.csv`: `other` in blue, `fuzz` in amber, `ai_affiliated`
 in pale red and `explicit_ai` in full red, with the `partial_quarter` bar
 outlined. The two red bands are one colour family in two strengths because
 they are two grades of evidence, not two kinds of finder. January 2026

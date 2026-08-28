@@ -33,7 +33,7 @@ def normalized(rows: list[dict], fields: list[str]) -> list[dict[str, str]]:
 
 def main() -> int:
     cves = read_csv(HERE / "openssl-cves.csv")
-    annual = read_csv(HERE / "openssl-vulnerabilities.csv")
+    annual = read_csv(HERE / "openssl-by-year.csv")
     finders = read_csv(HERE / "openssl-finders.csv")
     failures: list[str] = []
 

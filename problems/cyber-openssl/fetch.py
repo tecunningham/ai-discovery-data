@@ -309,7 +309,7 @@ def build_finders(rows: list[dict]) -> list[dict]:
 def outputs(rows: list[dict]) -> dict[str, tuple[list[dict], list[str]]]:
     return {
         "openssl-cves.csv": (rows, CVE_FIELDS),
-        "openssl-vulnerabilities.csv": (build_annual(rows), ANNUAL_FIELDS),
+        "openssl-by-year.csv": (build_annual(rows), ANNUAL_FIELDS),
         "openssl-finders.csv": (build_finders(rows), FINDER_FIELDS),
     }
 

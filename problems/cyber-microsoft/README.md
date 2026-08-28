@@ -4,7 +4,7 @@
 - **Role:** discovery series
 - **Metric:** CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
 - **Coverage:** 2016–2026, partial through 2026-08-11; no February or March 2016 document exists upstream, so the first year is ten months
-- **Data:** annual [`msrc-cves.csv`](msrc-cves.csv); monthly counts by band in [`msrc-monthly.csv`](msrc-monthly.csv); per-credit rows in [`msrc-finders.csv`](msrc-finders.csv); every AI-marked CVE with its full credit strings in [`msrc-ai-cves.csv`](msrc-ai-cves.csv)
+- **Data:** annual [`msrc-cves.csv`](msrc-cves.csv); monthly counts by band in [`msrc-by-month.csv`](msrc-by-month.csv); per-credit rows in [`msrc-finders.csv`](msrc-finders.csv); every AI-marked CVE with its full credit strings in [`msrc-ai-cves.csv`](msrc-ai-cves.csv)
 - **Upstream:** <https://api.msrc.microsoft.com/cvrf/v3.0/updates> (rendered at <https://msrc.microsoft.com/update-guide>)
 - **Verdict:** accelerating — 1,927 CVEs through 2026-08-11 against 1,243 in 2025; the part year annualizes to about 2.5 times 2025
 
@@ -69,7 +69,7 @@ series as cumulative CVEs to date:
 The CSVs are built by [`fetch.py`](fetch.py), which walks every monthly
 security-update document in the CVRF API — matched on document title,
 because the IDs are irregular — and applies the CNA rule above. Documents
-released after `lib/chart.py`'s snapshot date are skipped, so a refetch
+released after `lib/dates.py`'s snapshot date are skipped, so a refetch
 reproduces the committed window; the vendored window ends at the August 2026
 Patch Tuesday, released 2026-08-11. Acknowledgment strings are stripped of
 HTML and classified with the shared markers in
@@ -78,14 +78,14 @@ named system or method, `AI_AFFILIATION` for an employer, `FUZZ` for
 fuzzing, with one CVE's signals unioned across all its credit strings before
 the display precedence — method, then affiliation, then fuzz, then none —
 picks its band. Anonymized hex handles count as credits, since an anonymous
-credit is still a credit. `msrc-monthly.csv` carries the same four bands at
+credit is still a credit. `msrc-by-month.csv` carries the same four bands at
 the monthly grain, banded per CVE by the same rule, so the months of a year
 sum to that year's row in `msrc-cves.csv`. The annual CSV keeps an
 `acknowledged` column beside the bands, and a `no_customer_action` column
 counting the cloud-service CVEs Microsoft patches itself, so both facts stay
 auditable.
 
-[`figure.py`](figure.py) draws stacked monthly bars from `msrc-monthly.csv`:
+[`figure.py`](figure.py) draws stacked monthly bars from `msrc-by-month.csv`:
 `other` in blue, `fuzz` in amber, `ai_affiliated` in pale red and
 `explicit_ai` in full red, in the same bands and colours as the
 [Firefox series](../cyber-firefox/README.md). No bar is drawn partial —

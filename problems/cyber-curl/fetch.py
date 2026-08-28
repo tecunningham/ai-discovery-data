@@ -166,8 +166,8 @@ def build_finders(records: list[dict]) -> list[dict]:
 
 def main() -> None:
     records = entries()
-    write_csv(HERE / "curl-vulnerabilities.csv", build_annual(records))
-    write_csv(HERE / "curl-vulnerabilities-quarterly.csv", build_quarterly(records))
+    write_csv(HERE / "curl-by-year.csv", build_annual(records))
+    write_csv(HERE / "curl-by-quarter.csv", build_quarterly(records))
     write_csv(HERE / "curl-finders.csv", build_finders(records))
 
 

@@ -8,7 +8,7 @@ one record per Linux distribution. This series therefore counts distinct CVE
 identifiers, not OSV records. A CVE is included when at least one non-withdrawn
 OSV record links it to an affected package, and is dated to the earliest
 ``published`` date among those records; CVEs first published after
-lib/chart.py's AS_OF_DATE are dropped so a refetch reproduces the committed
+lib/dates.py's AS_OF_DATE are dropped so a refetch reproduces the committed
 window.
 
 Severity and finder credits are unioned across a CVE's records. Severity is the
@@ -36,6 +36,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.credits import Signals, signals  # noqa: E402
+from lib.dates import AS_OF_DATE  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 
 URL = "https://storage.googleapis.com/osv-vulnerabilities/all.zip"
@@ -47,21 +48,6 @@ CVE = re.compile(r"CVE-\d{4}-\d{4,}")
 SEVERITIES = ["Low", "Moderate", "High", "Critical"]
 SEVERITY_ALIASES = {"LOW": "Low", "MODERATE": "Moderate", "MEDIUM": "Moderate",
                     "HIGH": "High", "CRITICAL": "Critical"}
-
-
-def as_of_date() -> date:
-    """The repository's committed snapshot date, read from lib/chart.py.
-
-    Parsed rather than imported so a fetch does not pull in matplotlib; the
-    same regex tools/check.py uses to enforce the date against every CSV.
-    """
-    text = (HERE.parents[1] / "lib/chart.py").read_text(encoding="utf-8")
-    match = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)", text, re.M
-    )
-    if not match:
-        raise SystemExit("lib/chart.py has no parseable AS_OF_DATE")
-    return date(*(int(part) for part in match.groups()))
 
 
 def severity_rank(label: str) -> int:
@@ -99,7 +85,7 @@ def collect(archive_path: Path) -> dict[str, dict]:
     """One merged entry per active, affected CVE across all its OSV records."""
     cves: dict[str, dict] = {}
     linked_records = 0
-    cutoff = as_of_date()
+    cutoff = AS_OF_DATE
 
     with zipfile.ZipFile(archive_path) as archive:
         for name in archive.namelist():

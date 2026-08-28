@@ -36,12 +36,33 @@ import csv
 import re
 import subprocess
 import sys
-import textwrap
 from collections import Counter
 from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from lib.dates import AS_OF_DATE  # noqa: E402  (matplotlib-free)
+from lib.document import front_matter, title  # noqa: E402
+from tools.tables import (  # noqa: E402
+    CHECKS,
+    CHECKS_BEGIN,
+    CHECKS_END,
+    CUMULATIVE_BEGIN,
+    CUMULATIVE_END,
+    FAIL,
+    HAND,
+    INDEX_BEGIN,
+    INDEX_END,
+    PASS,
+    SKIP,
+    checks_rows,
+    cumulative_thumbnail,
+    index_rows,
+    rewrite,
+)
+
 PROBLEMS = ROOT / "problems"
 BIB = ROOT / "references.bib"
 README = ROOT / "README.md"
@@ -56,51 +77,7 @@ ROLES = {"discovery series", "prestige ledger", "control: no-AI baseline",
          "contrast case: volume", "denominator frame"}
 VERDICTS = {"accelerating", "no acceleration", "declining", "inconclusive",
             "too early", "baseline"}
-# The index separates open-problem ledgers from mathematical records and bounds:
-# the former count discrete status changes, while the latter track numerical
-# quantities. Keeping them in one "mathematics" block made unlike instruments
-# look interchangeable.
-OPEN_PROBLEM_SLUGS = {
-    "math-erdos",
-    "math-erdos-top10",
-    "math-frontiermath-open",
-    "math-green",
-    "math-hilbert",
-    "math-landau",
-    "math-millennium",
-    "math-smale",
-    "math-thurston",
-    "math-topp",
-}
-INDEX_GROUP_ORDER = (
-    "vulnerabilities",
-    "open problems",
-    "mathematical bounds and records",
-    "algorithms",
-    "outside the three domains",
-)
 
-# Arithmetic is separated from Document because the two answer different
-# questions. Document asks whether the apparatus is present; Arithmetic asks
-# whether the numbers the prose prints still follow from the CSV beside it, and
-# only a folder shipping a check.py can answer it. Folding them together would
-# show a tick for "nothing checked the numbers".
-CHECKS = ("Document", "Data", "Figure", "Literature", "Arithmetic", "Refetch",
-          "Reproduces")
-PASS, FAIL, HAND, SKIP = "✅", "❌", "✍️", "➖"
-
-# One mark per verdict, so the index can be read down the column. They answer
-# only "did the rate of discovery change", which is why none of them says
-# anything about AI: a rising series with no AI in it gets the same arrow as one
-# full of it.
-VERDICT_MARK = {
-    "accelerating": "📈",
-    "declining": "📉",
-    "no acceleration": "➡️",
-    "inconclusive": "❓",
-    "too early": "⏳",
-    "baseline": "⚪",
-}
 
 # A folder with no fetch.py has to say how its CSV is maintained, in the section
 # a reader goes to for exactly that, so a series nobody can refetch is a stated
@@ -146,29 +123,13 @@ STYLE_LINT = (
 # end with an attribution line naming its source and carrying a year.
 QUOTE_ATTRIBUTION = re.compile(r"^>\s*[—–-]\s+.*\b(19|20)\d{2}\b")
 
-INDEX_BEGIN = "<!-- BEGIN GENERATED: series-index -->"
-INDEX_END = "<!-- END GENERATED: series-index -->"
-CHECKS_BEGIN = "<!-- BEGIN GENERATED: checks-table -->"
-CHECKS_END = "<!-- END GENERATED: checks-table -->"
 CUMULATIVE = ROOT / "CUMULATIVE.md"
-CUMULATIVE_BEGIN = "<!-- BEGIN GENERATED: cumulative-index -->"
-CUMULATIVE_END = "<!-- END GENERATED: cumulative-index -->"
 
 # Every plottable series also appears on CUMULATIVE.md in one shared step
 # format, drawn by the same figure.py as cumulative-<slug>.png. A folder whose
 # series has no time axis states that instead, in the same way a chartless
 # folder states why there is no figure.
 NO_CUMULATIVE_REASONS = re.compile(r"no cumulative view", re.I)
-
-# GitHub clamps a markdown table to its 838-pixel content column and then
-# squeezes the columns to fit, so an image in a table is only as wide as the
-# prose beside it allows: at five columns of unwrapped prose the charts rendered
-# 67 pixels across, which is no chart at all. Hence two columns, the details
-# hard-wrapped, and a chart that gets its 400 pixels. Both numbers were measured
-# against GitHub's own table CSS rather than guessed; changing either without
-# re-measuring will silently shrink the charts again.
-THUMB_WIDTH = 400
-DETAIL_WRAP = 46
 
 
 class Problem:
@@ -177,11 +138,12 @@ class Problem:
         self.slug = folder.name
         self.doc = folder / "README.md"
         self.text = self.doc.read_text(encoding="utf-8") if self.doc.exists() else ""
-        title = re.search(r"^#\s+(.+)$", self.text, re.M)
-        self.title = title.group(1).strip() if title else ""
+        self.title = title(self.text)
         # Folder-local links only: an embed or a data link reaching outside the
-        # folder means the split is incomplete.
-        self.embedded = set(re.findall(r"!\[[^\]]*\]\(([^)/]+\.png)\)", self.text))
+        # folder means the split is incomplete. Embeds keep document order, so
+        # the index can take "the first figure the page shows" as its primary.
+        self.embed_order = re.findall(r"!\[[^\]]*\]\(([^)/]+\.png)\)", self.text)
+        self.embedded = set(self.embed_order)
         self.linked_csvs = set(re.findall(r"\(([^)/]+\.csv)\)", self.text))
         self.siblings = set(re.findall(r"\(\.\./([a-z0-9-]+)/README\.md\)", self.text))
         # A bracket can hold several keys, `[@a; @b]`. Matching `@key]` would see
@@ -189,11 +151,9 @@ class Problem:
         self.citations = {key
                           for group in re.findall(r"\[@[^\]]*\]", self.text)
                           for key in re.findall(r"@([A-Za-z0-9_:-]+)", group)}
-        self.fields = {}
-        for field in FIELDS:
-            match = re.search(rf"^- \*\*{field}:\*\*\s*(.+)$", self.text, re.M)
-            if match:
-                self.fields[field] = match.group(1).strip()
+        self.fields = {field: value
+                       for field, value in front_matter(self.text).items()
+                       if field in FIELDS and value}
         # Reproduction is off unless asked for, since it redraws every figure.
         self.status = {name: SKIP for name in CHECKS}
         self.failures: dict[str, list[str]] = {}
@@ -224,6 +184,15 @@ class Problem:
         for field in FIELDS:
             if field not in self.fields:
                 self.fail("Document", f"no **{field}:** line")
+        # FORMAT.md: Coverage carries the span, the cadence, and the as-of
+        # date of the last read. Presence of the field is not enough — a
+        # coverage line with no date leaves the reader no way to tell a
+        # current series from an abandoned one.
+        coverage = self.fields.get("Coverage", "")
+        if coverage and not re.search(r"\b20\d{2}-\d{2}-\d{2}\b", coverage):
+            self.fail("Document",
+                      "**Coverage:** carries no as-of date (FORMAT.md: the "
+                      "span, the cadence, and the date of the last read)")
         verdict = self.fields.get("Verdict", "").split(" —")[0].strip()
         if verdict and verdict not in VERDICTS:
             self.fail("Document",
@@ -284,6 +253,17 @@ class Problem:
                 if figure.name not in script_text:
                     self.fail("Figure", f"{figure.name} is not named in figure.py, so "
                                         "nothing rebuilds it")
+                # The two prefixed names are reserved: the index takes
+                # discovery-<slug>.png as the folder's primary figure and
+                # CUMULATIVE.md takes cumulative-<slug>.png, so a near-miss
+                # name silently drops the figure from those pages.
+                for prefix in ("discovery-", "cumulative-"):
+                    expected = f"{prefix}{self.slug}.png"
+                    if figure.name.startswith(prefix) and figure.name != expected:
+                        self.fail("Figure",
+                                  f"{figure.name} does not match {expected}; the "
+                                  f"{prefix}*.png name is reserved for the folder's "
+                                  "own view (FORMAT.md)")
             for name in sorted(self.embedded):
                 if not (self.folder / name).exists():
                     self.fail("Figure", f"embeds {name}, which is not in the folder")
@@ -353,17 +333,7 @@ def bib_keys() -> set[str]:
 
 def check_chart_as_of(problems: list[Problem]) -> None:
     """Fail if vendored data has advanced beyond the chart snapshot date."""
-    chart_text = (ROOT / "lib/chart.py").read_text(encoding="utf-8")
-    match = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)",
-        chart_text,
-        re.M,
-    )
-    if not match:
-        for problem in problems:
-            problem.fail("Figure", "lib/chart.py has no parseable AS_OF_DATE")
-        return
-    as_of = date(*(int(part) for part in match.groups()))
+    as_of = AS_OF_DATE
     date_fields = {"date", "published", "announced", "data_through", "release_date"}
     for problem in problems:
         newest: date | None = None
@@ -385,7 +355,7 @@ def check_chart_as_of(problems: list[Problem]) -> None:
             problem.fail(
                 "Figure",
                 f"{source} contains {newest.isoformat()}, newer than "
-                f"lib/chart.py AS_OF_DATE {as_of.isoformat()}",
+                f"lib/dates.py AS_OF_DATE {as_of.isoformat()}",
             )
 
 
@@ -519,16 +489,42 @@ def duplicate_names(problems: list[Problem]) -> None:
     return None
 
 
+# The root documents also cite the bibliography, so their citekeys join both
+# directions of the bibliography check. FORMAT.md is excluded: its [@citekey]
+# is a literal example, not a citation.
+ROOT_DOCS = ("README.md", "CUMULATIVE.md", "ADDITIONAL-CANDIDATES.md")
+
+
+def root_citations() -> dict[str, str]:
+    """Citekey to the root document that cites it."""
+    cited: dict[str, str] = {}
+    for name in ROOT_DOCS:
+        text = (ROOT / name).read_text(encoding="utf-8")
+        # A `[@citekey]` inside backticks is the syntax being described, not a
+        # citation (README's check-table legend carries one).
+        text = re.sub(r"`[^`]*`", "", text)
+        for group in re.findall(r"\[@[^\]]*\]", text):
+            for key in re.findall(r"@([A-Za-z0-9_:-]+)", group):
+                cited.setdefault(key, name)
+    return cited
+
+
 def unused_bib(problems: list[Problem], keys: set[str]) -> list[str]:
-    """A bibliography entry no document cites.
+    """A bibliography entry no document cites, or a root citation no entry backs.
 
     The reverse of the per-problem citation check, and it catches the residue of
     a rewrite: prose gets reworded, the citation goes with it, and the entry sits
-    in references.bib looking like part of the apparatus.
+    in references.bib looking like part of the apparatus. Root documents were
+    once invisible here, so a key cited only by README.md read as unused, and a
+    root citation with no entry was checked by nothing.
     """
+    rooted = root_citations()
     cited = {key for problem in problems for key in problem.citations}
-    return [f"references.bib: @{key} is cited by no document"
-            for key in sorted(keys - cited)]
+    out = [f"references.bib: @{key} is cited by no document"
+           for key in sorted(keys - cited - set(rooted))]
+    out += [f"{name}: citation @{key} has no bibliography entry"
+            for key, name in sorted(rooted.items()) if key not in keys]
+    return out
 
 
 def dead_links(problems: list[Problem], timeout: float = 25.0) -> list[str]:
@@ -589,178 +585,6 @@ def strays() -> list[str]:
     return out
 
 
-def index_group(problem: Problem) -> str:
-    if problem.slug in OPEN_PROBLEM_SLUGS:
-        return "open problems"
-    if problem.domain == "mathematics" or problem.slug == "matrix-omega":
-        return "mathematical bounds and records"
-    return problem.domain
-
-
-def in_reading_order(problems: list[Problem]) -> list[Problem]:
-    """Index-group order, then slug — the order both generated tables use."""
-    rank = {group: i for i, group in enumerate(INDEX_GROUP_ORDER)}
-    return sorted(
-        problems,
-        key=lambda p: (rank.get(index_group(p), len(rank)), p.slug),
-    )
-
-
-def thumbnails(problem: Problem) -> str:
-    """One primary figure linked into the folder, sized for the index table.
-
-    Problem pages may carry diagnostics and sensitivity figures, but the main
-    index is a scan of series rather than a gallery of every output.  By
-    convention ``discovery-*.png`` is the primary time-series figure; when a
-    folder has no such file, its first (usually only) figure is the fallback.
-    Written as HTML because markdown image syntax has no width.
-    """
-    if not problem.figures:
-        return "<em>document + data only</em>"
-    preferred = [figure for figure in problem.figures
-                 if figure.name.startswith("discovery-")]
-    # The cumulative view is CUMULATIVE.md's panel, never the main index's:
-    # without this exclusion a folder with no discovery-*.png would fall back
-    # to it by alphabetical accident.
-    fallback = [figure for figure in problem.figures
-                if not figure.name.startswith("cumulative-")]
-    figure = (preferred or fallback or problem.figures)[0]
-    return (
-        f'<a href="problems/{problem.slug}/">'
-        f'<img src="problems/{problem.slug}/{figure.name}" width="{THUMB_WIDTH}" '
-        f'alt="{problem.title}"></a>'
-    )
-
-
-def cumulative_thumbnail(problem: Problem) -> str:
-    """The folder's shared-format panel for CUMULATIVE.md, when it has one.
-
-    A folder without a cumulative view is still a row on that page — the page
-    is the whole collection in one format, and a gap in it should be a stated
-    fact rather than a silently missing series.
-    """
-    name = f"cumulative-{problem.slug}.png"
-    if not (problem.folder / name).exists():
-        return "<em>no cumulative view: not a time series</em>"
-    return (
-        f'<a href="problems/{problem.slug}/">'
-        f'<img src="problems/{problem.slug}/{name}" width="{THUMB_WIDTH}" '
-        f'alt="{problem.title}, cumulative view"></a>'
-    )
-
-
-def marked_verdict(problem: Problem) -> str:
-    verdict = problem.fields.get("Verdict", "")
-    mark = VERDICT_MARK.get(verdict.split(" —")[0].strip(), "")
-    return f"{mark} {verdict}".strip()
-
-
-def caption_links(problem: Problem) -> str:
-    """Compact provenance links for a row in the main series index.
-
-    The problem page is the full source ledger.  The index links directly to
-    the first folder-local CSV named on its **Data:** line and the first URL on
-    its **Upstream:** line: those are the primary plotted data and primary
-    upstream source by the repository's documentation convention.  Additional
-    inputs remain linked and explained on the problem page, keeping this strip
-    short enough to scan beside a chart.
-    """
-    links = [f'<a href="problems/{problem.slug}/">Discussion</a>']
-
-    named_csvs = re.findall(
-        r"\(([^()/]+\.csv)\)", problem.fields.get("Data", "")
-    )
-    primary_csv = next(
-        (name for name in named_csvs if (problem.folder / name).exists()),
-        problem.csvs[0].name if problem.csvs else "",
-    )
-    if primary_csv:
-        links.append(
-            f'<a href="problems/{problem.slug}/{primary_csv}">Data</a>'
-        )
-
-    upstream = re.search(
-        r"https?://[^\s<>()\[\]`\"']+", problem.fields.get("Upstream", "")
-    )
-    if upstream:
-        links.append(f'<a href="{upstream.group(0).rstrip(".,;")}">Source</a>')
-
-    # The interactive companion is built by tools/build_docs.py into docs/ and
-    # served by GitHub Pages; the PNG in this table stays the static record.
-    if (ROOT / "docs" / f"{problem.slug}.html").exists():
-        links.append(
-            "<a href=\"https://tecunningham.github.io/ai-discovery-data/"
-            f'{problem.slug}.html">Interactive</a>'
-        )
-
-    return " · ".join(links)
-
-
-def details(problem: Problem) -> str:
-    """Caption metadata and provenance links for the cell beside the chart.
-
-    Wrapped rather than left to the browser because a table column is as wide as
-    its longest unbroken line, and one 90-character sentence would take the width
-    the chart needs.
-    """
-    lines = [f'<b><a href="problems/{problem.slug}/">{problem.title}</a></b>']
-    for label, value in (("Metric:", problem.fields.get("Metric", "")),
-                         ("Coverage:", problem.fields.get("Coverage", "")),
-                         ("Acceleration?", marked_verdict(problem))):
-        wrapped = textwrap.wrap(f"{label} {value}", DETAIL_WRAP) or [label]
-        wrapped[0] = wrapped[0].replace(label, f"<b>{label}</b>", 1)
-        lines += wrapped
-    lines.append(caption_links(problem))
-    return "<br>".join(lines)
-
-
-def index_rows(problems: list[Problem], thumbnail=thumbnails) -> str:
-    out: list[str] = []
-    groups = {index_group(problem) for problem in problems}
-    for group in INDEX_GROUP_ORDER + tuple(sorted(groups - set(INDEX_GROUP_ORDER))):
-        rows = [
-            problem
-            for problem in in_reading_order(problems)
-            if index_group(problem) == group
-        ]
-        if not rows:
-            continue
-        out += [f"### {group[:1].upper()}{group[1:]}", "",
-                "| Series | Chart |", "|---|---|"]
-        out += [f"| {details(problem)} | {thumbnail(problem)} |"
-                for problem in rows]
-        out.append("")
-    return "\n".join(out).rstrip()
-
-
-def checks_rows(problems: list[Problem]) -> str:
-    rows = in_reading_order(problems)
-    out = ["| Problem | " + " | ".join(CHECKS) + " |",
-           "|---|" + "---|" * len(CHECKS)]
-    out += [f"| [{problem.title}](problems/{problem.slug}/) | "
-            + " | ".join(problem.status[group] for group in CHECKS) + " |"
-            for problem in rows]
-
-    fetched = sum(p.status["Refetch"] == PASS for p in problems)
-    hand = sum(p.status["Refetch"] == HAND for p in problems)
-    checked = sum(p.status["Arithmetic"] != SKIP for p in problems)
-    red = sum(p.status[group] == FAIL for p in problems for group in CHECKS)
-    out += ["", f"{len(problems)} problems holding {sum(len(p.figures) for p in problems)} "
-                f"figures and {sum(len(p.csvs) for p in problems)} data files. "
-                f"{fetched} refetch from upstream and {hand} are maintained by hand "
-                f"and say so. {checked} recompute their prose arithmetic; the other "
-                f"{len(problems) - checked} state numbers no check reads. "
-                f"{red or 'No'} failing "
-                f"{'cell' if red == 1 else 'cells'}."]
-    if red:
-        out += ["", "Failing:"]
-        out += [f"- `{problem.slug}` {group}: {message}"
-                for problem in rows
-                for group in CHECKS
-                for message in problem.failures.get(group, [])]
-    return "\n".join(out)
-
-
 def stale_readme(problems: list[Problem]) -> list[str]:
     """The committed generated tables must match what the folders generate now.
 
@@ -808,15 +632,14 @@ def stale_cumulative(problems: list[Problem]) -> list[str]:
 
 
 def stale_docs(problems: list[Problem]) -> list[str]:
-    """Every series needs a registered, current interactive page.
+    """Every series needs a declared, current interactive page.
 
-    `make docs` fails loudly on a missing registry entry, but only when it is
-    run — a series merged without it ships no page, and a CSV refreshed
-    without it leaves a stale one. The pages are deterministic functions of
-    the CSVs and the registry, so staleness is a byte comparison, the same
-    claim `--reproduce` makes for the PNGs. The folder list comes from the
-    same discovery as every other check (not `git ls-files`, which the
-    pinned figure container cannot run).
+    `make docs` fails loudly on a folder with no chart_spec.py, but only when
+    it is run — a series merged without one ships no page, and a CSV
+    refreshed without a rebuild leaves a stale one. The pages are
+    deterministic functions of the CSVs, the READMEs and the folder specs, so
+    staleness is a byte comparison, the same claim `--reproduce` makes for
+    the PNGs.
     """
     import importlib.util
 
@@ -825,21 +648,22 @@ def stale_docs(problems: list[Problem]) -> list[str]:
     build_docs = importlib.util.module_from_spec(spec)
     try:
         spec.loader.exec_module(build_docs)
-    except Exception as error:  # a broken registry is itself the finding
+    except Exception as error:
         return [f"tools/build_docs.py cannot be loaded: {error}"]
 
     folders = sorted(problem.slug for problem in problems if problem.csvs)
     out = []
     for slug in folders:
-        if slug not in build_docs.SERIES:
-            out.append(f"tools/build_docs.py SERIES has no entry for {slug}")
+        if not (PROBLEMS / slug / "chart_spec.py").exists():
+            out.append(f"problems/{slug}/chart_spec.py is missing; declare "
+                       "the page's charts there, using lib/vega.py's shapes")
             continue
         page = ROOT / "docs" / f"{slug}.html"
         if not page.exists():
             out.append(f"docs/{slug}.html is missing; run `make docs`")
             continue
         try:
-            rendered = build_docs.render_page(slug, build_docs.SERIES[slug](slug))
+            rendered = build_docs.render_page(slug, build_docs.charts_for(slug))
         except Exception as error:
             out.append(f"docs builder for {slug} fails: {error}")
             continue
@@ -861,14 +685,6 @@ def stale_docs(problems: list[Problem]) -> list[str]:
         if page.read_text(encoding="utf-8") != rendered:
             out.append(f"docs/{page_name} is stale; run `make docs`")
     return out
-
-
-def rewrite(text: str, begin: str, end: str, body: str) -> str | None:
-    if begin not in text or end not in text:
-        return None
-    head, rest = text.split(begin, 1)
-    _, tail = rest.split(end, 1)
-    return f"{head}{begin}\n{body}\n{end}{tail}"
 
 
 def main() -> int:
@@ -903,10 +719,8 @@ def main() -> int:
     check_chart_as_of(problems)
     duplicate_names(problems)
     if args.reproduce or args.write_index:
-        # Import lazily: the ordinary document/data check does not need
-        # matplotlib. This also turns a direct host invocation into one clear
-        # instruction instead of 31 near-identical figure.py failures.
-        sys.path.insert(0, str(ROOT))
+        # Checked up front so a direct host invocation gets one clear
+        # instruction instead of 37 near-identical figure.py failures.
         from lib.renderer import assert_canonical_renderer
 
         try:

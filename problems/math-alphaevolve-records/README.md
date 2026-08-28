@@ -3,12 +3,13 @@
 - **Domain:** mathematics
 - **Role:** discovery series
 - **Metric:** cumulative record steps in five groups of finite construction and packing problems
-- **Coverage:** 1949–2026, 22 record steps across the five groups
+- **Coverage:** 1949–2026, 22 record steps across the five groups;
+transcription current to 2026-08-12
 - **Data:** [`alphaevolve-records.csv`](alphaevolve-records.csv), with the sampling frame in [`../math-alphaevolve-inventory/alphaevolve-inventory.csv`](../math-alphaevolve-inventory/alphaevolve-inventory.csv)
 - **Upstream:** <https://github.com/google-deepmind/alphaevolve_repository_of_problems> and <https://arxiv.org/abs/2511.02864>, with per-step sources recorded in the CSV's `ref` and `note` columns
 - **Verdict:** inconclusive — 1 record step in 2026 against 9 in 2025 and a 0.2/year mean over 1949–2024
 
-![Cumulative record steps in five finite construction and packing problem groups, with AI steps in red.](discovery-math-alphaevolve-related-records.png)
+![Cumulative record steps in five finite construction and packing problem groups, with AI steps in red.](discovery-math-alphaevolve-records.png)
 
 ## Definition
 

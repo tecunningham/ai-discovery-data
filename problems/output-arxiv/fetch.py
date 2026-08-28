@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild arxiv-monthly.csv from arXiv's own statistics download.
+"""Rebuild arxiv-by-month.csv from arXiv's own statistics download.
 
 Run: python3 problems/output-arxiv/fetch.py
 """
@@ -35,4 +35,4 @@ def build() -> list[dict]:
 
 
 if __name__ == "__main__":
-    write_csv(HERE / "arxiv-monthly.csv", build())
+    write_csv(HERE / "arxiv-by-month.csv", build())

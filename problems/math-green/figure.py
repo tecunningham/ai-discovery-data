@@ -17,19 +17,12 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from lib.cumulative import ledger_remaining_chart  # noqa: E402
-from lib.families import problem_list_chart  # noqa: E402
+from lib.families import ledger_figures  # noqa: E402
 
 
 def main() -> None:
-    problem_list_chart(
-        HERE / "green-problems.csv",
-        HERE / "discovery-math-green.png",
-        __file__,
-    )
-    ledger_remaining_chart(
-        HERE / "green-problems.csv",
-        HERE / "cumulative-math-green.png",
+    ledger_figures(
+        "green-problems.csv",
         __file__,
     )
 

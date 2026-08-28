@@ -73,7 +73,7 @@ applies the same inclusion rule to every JSON record:
 The second step deliberately excludes OSV's malicious-package reports,
 non-security distribution updates, and advisories that have no CVE. CVEs
 first published after the repository's snapshot date (`AS_OF_DATE` in
-[`../../lib/chart.py`](../../lib/chart.py)) are dropped, so a refetch
+[`../../lib/dates.py`](../../lib/dates.py)) are dropped, so a refetch
 reproduces the committed window.
 
 The merged per-CVE entries feed five CSVs: quarterly and annual counts, the

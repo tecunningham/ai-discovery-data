@@ -10,7 +10,7 @@ ENV AI_DISCOVERY_RENDERER=linux-amd64-python-3.12.13 \
     PYTHONDONTWRITEBYTECODE=1
 
 COPY requirements.txt /tmp/ai-discovery-requirements.txt
-RUN python -m pip install --disable-pip-version-check \
+RUN python -m pip install --disable-pip-version-check --no-cache-dir \
         --requirement /tmp/ai-discovery-requirements.txt
 
 WORKDIR /repo

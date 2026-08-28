@@ -74,7 +74,7 @@ def main_chart() -> None:
     for row in rows:
         per_quarter[quarter_of(row["published"])][category(row)] += 1
     quarters = sorted(per_quarter)
-    annual = read_csv(HERE / "openssl-vulnerabilities.csv")
+    annual = read_csv(HERE / "openssl-by-year.csv")
     latest = annual[-1]
     current = [row for row in rows
                if row["published"][:4] == latest["year"]]

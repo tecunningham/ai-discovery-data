@@ -4,7 +4,7 @@
 - **Role:** discovery series
 - **Metric:** vulnerabilities disclosed per quarter, split by whether the finder credit carries an AI marker
 - **Coverage:** 2000–2026, partial through 2026-06-24
-- **Data:** annual [`curl-vulnerabilities.csv`](curl-vulnerabilities.csv) (severity detail in the same file); quarterly [`curl-vulnerabilities-quarterly.csv`](curl-vulnerabilities-quarterly.csv); per-finder [`curl-finders.csv`](curl-finders.csv)
+- **Data:** annual [`curl-by-year.csv`](curl-by-year.csv) (severity detail in the same file); quarterly [`curl-by-quarter.csv`](curl-by-quarter.csv); per-finder [`curl-finders.csv`](curl-finders.csv)
 - **Upstream:** <https://curl.se/docs/vuln.json> (human-readable at <https://curl.se/docs/security.html>)
 - **Verdict:** accelerating — 36 disclosures through 2026-06-24 annualize to roughly 75 against 9 in 2025 and a 13.1/year mean over 2014–2023
 
@@ -64,7 +64,7 @@ credit's text, not the method used.
 
 [`figure.py`](figure.py) calls the shared `periodic_stacked()` shape in
 [`../../lib/families.py`](../../lib/families.py), drawing stacked quarterly
-bars from `curl-vulnerabilities-quarterly.csv`: `other_attributed` in blue,
+bars from `curl-by-quarter.csv`: `other_attributed` in blue,
 `ai_attributed` in red, the final quarter outlined rather than filled and
 annotated with the annual table's `data_through` date. The axis is linear
 and January 2026 onward is shaded, as in every figure here. The severity

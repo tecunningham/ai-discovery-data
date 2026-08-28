@@ -57,7 +57,7 @@ submission that beats the standing record, so the accepted submissions
 already are the record ladder — one row per record, carrying its date,
 official score, the Toffoli and qubit metrics behind it, the solver's
 username, and whether the submission's note names an AI tool. Submissions
-dated after `lib/chart.py`'s `AS_OF_DATE` are dropped so a refetch cannot
+dated after `lib/dates.py`'s `AS_OF_DATE` are dropped so a refetch cannot
 push the vendored CSV past the repository's committed snapshot date.
 
 [`figure.py`](figure.py) plots score on a log axis against calendar day; the

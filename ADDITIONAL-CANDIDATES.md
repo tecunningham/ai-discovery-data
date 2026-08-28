@@ -145,7 +145,7 @@ resolved first.
 
 | Board | Records | Rows / span | Note |
 |---|---|---|---|
-| [Elliptic Curve Rank Leaderboard](https://elliptic-rank.icarm.cloud) | smallest curve — by conductor, naive height, Faltings height, \|Δ\| — at each rank lower bound | 275 curves, 2026-05-27 to 2026-08-20 | Rank bounds are certified by exact 2-descent, no floating point. Its historical rows (Elkies 2006, Elkies–Klagsbrun 2024) are backfilled from Dujella's tables, so the deep history is Dujella's, not the board's. Distinct from the rank-record frontier itself, which is a separate candidate below. |
+| [Elliptic Curve Rank Leaderboard](https://elliptic-rank.icarm.cloud) | smallest curve — by conductor, naive height, Faltings height, \|Δ\| — at each rank lower bound | 275 curves, 2026-05-27 to 2026-08-20 | Rank bounds are certified by exact 2-descent, no floating point. Its historical rows (Elkies 2006, Elkies–Klagsbrun 2024) are backfilled from Dujella's tables, so the deep history is Dujella's, not the board's. Distinct from the rank-record frontier itself, which is built as [problems/math-elliptic-rank/](problems/math-elliptic-rank/). |
 | [Ruzsa's genus-one problem](https://ruzsa-genus-one.icarm.cloud) | largest \|A\| ⊆ ℤ/Nℤ free of nontrivial a + 3b ≡ 2c + 2d, per modulus N | 3,251 witnesses, all 2026-08 | A frontier per N rather than one number; the series would be the exponent log\|A\|/log N against the √N barrier. One month of data. |
 | [Matroid Correlation Constants](https://matroid-correlation-constants.icarm.cloud) | largest verified correlation constant α, per representing field | 19 matroids, all 2026-08 | A named target (4/3) no concrete matroid has reached, with per-field standing records and a provenance field per row. Too few rows to date a rate. |
 | [Equation 677 Database](https://eq677.icarm.cloud) | finite magmas satisfying Equation 677 | activity feed dated from 2026 | Not a frontier: the open question is existence of a magma satisfying 677 but not 255, so the series would be a search-effort count, not a record. Descends from the Equational Theories Project. |
@@ -153,34 +153,11 @@ resolved first.
 
 ## Elliptic-curve rank records
 
-Andrej Dujella's
-[history of elliptic curve rank records](https://web.math.pmf.unizg.hr/~duje/tors/rankhist.html)
-is a 19-step monotone integer frontier running 1938 (Billing, rank ≥ 3) to
-2026 (rank ≥ 30), each step naming its author and linking a subpage with the
-curve and its independent points. The page also carries a second frontier —
-the largest rank known exactly rather than as a lower bound, currently 20
-(Elkies–Klagsbrun, 2020). This is the shape of `problems/matrix-omega`: a
-hand-transcribed record CSV with named steps and one AI-credited 2026 entry.
-
-The 2026 step is the reason to build it now. Curve #273 on the ICARM board,
-rank ≥ 30, was submitted on 2026-08-20 by the pseudonymous account
-`ranksunbounded` and entered Dujella's table the same day. Its commentary
-credits an AI:
-
-> [edit: Hmm not sure where to put this so editing Drew's comment (sorry
-> Drew!): it was Claude, with Levent Alpöge and Ava Howell!]
-> — elliptic-rank.icarm.cloud, curve #273 commentary, edited by
-> `ranksunbounded` 2026-08-20 17:51:36 UTC, read 2026-08-20
-
-The rank bound itself does not rest on that claim — the board's 2-descent
-certificate proves rank ≥ 30 from the 30 witness points regardless of who
-found them. The attribution does rest on it: the commentary field is editable
-by logged-in users, the account is pseudonymous, the edit was written into
-another contributor's comment, and as of 2026-08-20 no paper, preprint or
-statement from a named author corroborates it. Dujella's own table records
-the row with a blank author column. Any folder built on this series has to
-carry the credit as a dated quote from an editable field, not as a settled
-attribution.
+Built as [problems/math-elliptic-rank/](problems/math-elliptic-rank/): the
+folder carries Dujella's lower-bound and exact-rank frontiers, the ICARM
+leaderboard snapshot, and the 2026 rank ≥ 30 step, whose AI attribution is
+held as a dated quote from the board's editable commentary field rather than
+as a settled credit.
 
 ## Cross-domain analyses
 

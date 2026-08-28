@@ -3,7 +3,8 @@
 - **Domain:** mathematics
 - **Role:** discovery series
 - **Metric:** best known lower bounds on two additive-combinatorics constants, $C_{6.44}$ and $C_{6.3}$ in the AlphaEvolve numbering
-- **Coverage:** 2007–2025, twelve record steps across the two ladders
+- **Coverage:** 2007–2025, twelve record steps across the two ladders;
+source bibliography read 2026-08-14
 - **Data:** [`sums-autoconvolution-records.csv`](sums-autoconvolution-records.csv), the problem 6.44 and 6.3 rows of the AlphaEvolve record transcription
 - **Upstream:** <https://arxiv.org/abs/2511.02864> and the follow-on sources recorded per row in the CSV's `ref` and `note` columns
 - **Verdict:** inconclusive — 0 record steps in 2026 against 7 in 2025; the other 5 fall in 2007 and 2010

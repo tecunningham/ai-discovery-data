@@ -59,8 +59,8 @@ def undated_cves() -> int:
 
 
 def main_chart() -> None:
-    rows = read_csv(HERE / "firefox-quarterly.csv")
-    annual = read_csv(HERE / "firefox-advisories.csv")
+    rows = read_csv(HERE / "firefox-by-quarter.csv")
+    annual = read_csv(HERE / "firefox-by-year.csv")
     latest = next((row for row in annual if row["partial_year"] == "yes"), None)
     lines = []
     if latest:
@@ -154,7 +154,7 @@ def sensitivity() -> None:
     plot mentions as its headline. Kept annual: the mention columns live in
     the annual CSV, and the packaging ratio is a per-year fact.
     """
-    rows = read_csv(HERE / "firefox-advisories.csv")
+    rows = read_csv(HERE / "firefox-by-year.csv")
     years = [int(row["year"]) for row in rows]
     unique = [int(row["unique_cves"]) for row in rows]
     mentions = [int(row["total"]) for row in rows]
@@ -193,7 +193,7 @@ def sensitivity() -> None:
 
 
 def cumulative() -> None:
-    rows = read_csv(HERE / "firefox-quarterly.csv")
+    rows = read_csv(HERE / "firefox-by-quarter.csv")
     undated = undated_cves()
     counts_chart(
         HERE / "cumulative-cyber-firefox.png",

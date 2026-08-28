@@ -4,12 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>arXiv submissions — ai-discovery-data</title>
+<meta name="description" content="research output; preprints submitted to arXiv per month">
+<meta property="og:title" content="arXiv submissions">
+<meta property="og:description" content="research output; preprints submitted to arXiv per month">
 <base target="_blank">
-<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@5.33.1/build/vega.min.js" integrity="sha384-NMXhl2TbCXxcN7o4ROC56Funm78m4AylL8gMg/7Kn4YU+wrm23K9l7cY8lDRXQ9d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/vega-lite.min.js" integrity="sha384-D9LYH0esGjcxQJsBuxOuXtCDJGXRWW1+KhluzWPqi0rLJmiR/ygPChefaD+rFFDQ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/vega-embed.min.js" integrity="sha384-M+Ax7e/WFJpxSOF09HzI+Sj4wg9ottVd/uxmV2ItGGh02fLH28t2FAOJx3TJBap5" crossorigin="anonymous"></script>
 <script>window.MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" integrity="sha384-AHAnt9ZhGeHIrydA1Kp1L7FN+2UosbF7RQg6C+9Is/a7kDpQ1684C2iH2VWil6r4" crossorigin="anonymous"></script>
 <style>
 body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial,
        sans-serif; color: #1f2328; margin: 0 auto; max-width: 860px;
@@ -45,8 +48,9 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Domain:</strong> outside the three domains</li>
 <li><strong>Role:</strong> contrast case: volume</li>
 <li><strong>Metric:</strong> research output; preprints submitted to arXiv per month</li>
-<li><strong>Coverage:</strong> 1991-07 to 2026-08, monthly, the last month partial</li>
-<li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly.csv"><code>arxiv-monthly.csv</code></a>; per-category <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly-by-category.csv"><code>arxiv-monthly-by-category.csv</code></a></li>
+<li><strong>Coverage:</strong> 1991-07 to 2026-08, monthly, the last month partial at
+the 2026-08-10 fetch</li>
+<li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-by-month.csv"><code>arxiv-by-month.csv</code></a>; per-category <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-categories-by-month.csv"><code>arxiv-categories-by-month.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://arxiv.org/stats/monthly_submissions">https://arxiv.org/stats/monthly_submissions</a>, with per-category counts from <a href="https://oaipmh.arxiv.org/oai">https://oaipmh.arxiv.org/oai</a></li>
 <li><strong>Verdict:</strong> accelerating — a 28,450 submissions/month mean over 2026-01 to 2026-07 against monthly means of 23,707 in 2025 and 20,336 in 2024</li>
 </ul>
@@ -143,17 +147,17 @@ each, sorted by total volume and scaled independently.
 </ul>
 <h2 id="ai-attribution">AI attribution</h2>
 <p>The dataset carries no authorship field; no AI share can be computed from
-it. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly.csv"><code>arxiv-monthly.csv</code></a> holds a month and a count per
-row, and <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly-by-category.csv"><code>arxiv-monthly-by-category.csv</code></a>
+it. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-by-month.csv"><code>arxiv-by-month.csv</code></a> holds a month and a count per
+row, and <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-categories-by-month.csv"><code>arxiv-categories-by-month.csv</code></a>
 holds a month, a category and a count; no AI credit appears in either
 vendored file or in arXiv's published monthly-submissions series as of the
 2026-08 fetch.</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li><a href="https://arxiv.org/stats/monthly_submissions">https://arxiv.org/stats/monthly_submissions</a> — the monthly totals in
-  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly.csv"><code>arxiv-monthly.csv</code></a>.</li>
+  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-by-month.csv"><code>arxiv-by-month.csv</code></a>.</li>
 <li><a href="https://oaipmh.arxiv.org/oai">https://oaipmh.arxiv.org/oai</a> — the no-credentials harvest behind
-  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-monthly-by-category.csv"><code>arxiv-monthly-by-category.csv</code></a>.</li>
+  <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-arxiv/arxiv-categories-by-month.csv"><code>arxiv-categories-by-month.csv</code></a>.</li>
 <li>[@nist2026cvegrowth] — NIST's report of 263% growth in CVE submissions
   between 2020 and 2025, with its enrichment of nearly 42,000 CVEs in 2025
   failing to keep pace; a submission count in the vulnerabilities domain,

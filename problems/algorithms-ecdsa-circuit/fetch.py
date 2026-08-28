@@ -9,7 +9,7 @@ width, validated over 9024 Fiat-Shamir-derived test shots; lower is better.
 The API only accepts a submission if it improves on the standing record, so
 the accepted submissions ARE the record ladder — one row per record.
 
-Submissions after lib/chart.py's AS_OF_DATE are dropped, so a refetch cannot
+Submissions after lib/dates.py's AS_OF_DATE are dropped, so a refetch cannot
 push the vendored CSV past the repository's committed snapshot date; bump
 AS_OF_DATE and refetch to extend the series.
 
@@ -30,6 +30,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.dates import AS_OF_DATE  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 from lib.web import fetch  # noqa: E402
 
@@ -44,20 +45,12 @@ AI_TOOL = re.compile(
     r"adaevolve|alphaevolve|coding agent|aristotle)\b", re.I)
 
 
-def as_of() -> date:
-    text = (HERE.parents[1] / "lib" / "chart.py").read_text(encoding="utf-8")
-    match = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)",
-        text, re.M)
-    return date(*(int(part) for part in match.groups()))
-
-
 def main() -> None:
     benchmarks = json.loads(fetch(BENCHMARKS))["benchmarks"]
     benchmark = next(b for b in benchmarks if b["name"] == BENCHMARK_NAME)
     submissions = json.loads(
         fetch(SUBMISSIONS.format(benchmark["id"])))["submissions"]
-    cutoff = as_of()
+    cutoff = AS_OF_DATE
     rows = []
     for entry in sorted(submissions, key=lambda s: s["createdAt"]):
         if entry["status"] != "accepted" or not entry.get("officialScore"):

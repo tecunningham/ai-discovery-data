@@ -4,16 +4,42 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+# A superseded push's run proves nothing; cancel it rather than queue it.
+concurrency:
+  group: check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   check:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+
+      # The figure image is a pure function of its Dockerfile and
+      # requirements.txt, so it is cached as a tarball keyed on both; a hit
+      # skips the docker build (and the matplotlib install inside it), which
+      # is most of this job's runtime.
+      - uses: actions/cache@v4
+        id: figure-image
+        with:
+          path: /tmp/figure-image.tar
+          key: figure-image-${{ hashFiles('tools/figures.Dockerfile', 'requirements.txt') }}
+
+      - if: steps.figure-image.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/figure-image.tar
+
       # This is intentionally the same target contributors run locally. The
       # digest-pinned linux/amd64 image makes PNG bytes independent of the host
       # OS, Python installation and system fonts.
       - run: make check-figures
+        env:
+          FIGURE_IMAGE_PRELOADED: ${{ steps.figure-image.outputs.cache-hit == 'true' && '1' || '' }}
+
+      - if: steps.figure-image.outputs.cache-hit != 'true'
+        run: docker save --output /tmp/figure-image.tar ai-discovery-data-figures:python3.12.13

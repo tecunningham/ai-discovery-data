@@ -35,7 +35,7 @@ AI_AFFILIATED = AI_SOFT
 
 
 def cumulative() -> None:
-    rows = read_csv(HERE / "msrc-monthly.csv")
+    rows = read_csv(HERE / "msrc-by-month.csv")
     counts_chart(
         HERE / "cumulative-cyber-microsoft.png",
         title="Microsoft security-update CVEs: cumulative",
@@ -49,7 +49,7 @@ def cumulative() -> None:
 
 
 def main() -> None:
-    monthly = read_csv(HERE / "msrc-monthly.csv")
+    monthly = read_csv(HERE / "msrc-by-month.csv")
     annual = read_csv(HERE / "msrc-cves.csv")
     latest = next(row for row in annual if row["partial_year"] == "yes")
     ai_marked = int(latest["explicit_ai"]) + int(latest["ai_affiliated"])

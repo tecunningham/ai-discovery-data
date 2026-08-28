@@ -112,7 +112,7 @@ LAUNCH_MONTH = "1991-07"
 
 
 def by_field() -> None:
-    rows = read_csv(HERE / "arxiv-monthly-by-category.csv")
+    rows = read_csv(HERE / "arxiv-categories-by-month.csv")
     per_group: dict[str, defaultdict] = {}
     for row in rows:
         group = group_of(row["category"])
@@ -170,7 +170,7 @@ def by_field() -> None:
 
 
 def math_subfields() -> None:
-    rows = read_csv(HERE / "arxiv-monthly-by-category.csv")
+    rows = read_csv(HERE / "arxiv-categories-by-month.csv")
     per_subfield: dict[str, defaultdict] = {}
     for row in rows:
         modern = LEGACY.get(row["category"], row["category"])
@@ -234,21 +234,21 @@ def math_subfields() -> None:
 
 
 def cumulative() -> None:
-    rows = read_csv(HERE / "arxiv-monthly.csv")
+    rows = read_csv(HERE / "arxiv-by-month.csv")
     counts_chart(
         HERE / "cumulative-output-arxiv.png",
         title="arXiv submissions: cumulative",
         ylabel="Submissions to date, millions",
         period_labels=[row["month"] for row in rows],
         counts=[int(row["submissions"]) / 1e6 for row in rows],
-        source_label="arxiv.org/stats download, vendored as arxiv-monthly.csv",
+        source_label="arxiv.org/stats download, vendored as arxiv-by-month.csv",
         source_url="https://arxiv.org/stats/monthly_submissions",
         built_by=__file__,
     )
 
 
 def main() -> None:
-    rows = read_csv(HERE / "arxiv-monthly.csv")
+    rows = read_csv(HERE / "arxiv-by-month.csv")
     counts = {row["month"]: int(row["submissions"]) for row in rows}
     # The last row is the month in progress at fetch time, so every comparison
     # uses the last complete month instead. That rule silently breaks when a
@@ -273,7 +273,7 @@ def main() -> None:
         reading=f"{counts[CHATGPT]:,} in {CHATGPT}, when ChatGPT was released\n"
                 f"{counts[last]:,} in {last} — up {growth:.0%} in {span:.1f} years,\n"
                 f"after decades of steadier growth",
-        source_label="arxiv.org/stats download, vendored as arxiv-monthly.csv",
+        source_label="arxiv.org/stats download, vendored as arxiv-by-month.csv",
         source_url="https://arxiv.org/stats/monthly_submissions",
         built_by=__file__,
         partial_last="part month",

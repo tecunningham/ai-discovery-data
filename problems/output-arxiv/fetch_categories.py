@@ -7,7 +7,7 @@ Run by hand, either way:
     python3 problems/output-arxiv/fetch_categories.py            # OAI harvest
     python3 problems/output-arxiv/fetch_categories.py --resume   # after a crash
 
-Writes arxiv-monthly-by-category.csv: one row per (month, primary category)
+Writes arxiv-categories-by-month.csv: one row per (month, primary category)
 with the count of papers whose first version was submitted that month. The
 month comes from the v1 submission date — not the OAI datestamp or
 update_date, which move on every metadata edit; the category is the primary
@@ -21,7 +21,7 @@ needs a Kaggle login to download, so it is an operator convenience rather
 than the documented rebuild: the no-auth path is the OAI-PMH harvest of
 https://oaipmh.arxiv.org/oai, which walks ~2,400 resumption pages and takes
 the better part of a day at the pace the endpoint meters out. Both paths
-produce the same aggregation; papers first submitted after lib/chart.py's
+produce the same aggregation; papers first submitted after lib/dates.py's
 AS_OF_DATE are dropped, so a re-run reproduces the committed window plus
 whatever upstream recategorized since.
 
@@ -35,7 +35,6 @@ token is still valid on arXiv's side.
 from __future__ import annotations
 
 import json
-import re
 import sys
 import time
 import urllib.error
@@ -43,12 +42,12 @@ import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
-from datetime import date
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
+from lib.dates import AS_OF_DATE  # noqa: E402
 from lib.table import write_csv  # noqa: E402
 
 BASE = "https://oaipmh.arxiv.org/oai"
@@ -63,21 +62,6 @@ CHECKPOINT = HERE.parents[1] / ".cache" / "arxiv-oai-checkpoint.json"
 # and a 503's full Retry-After is honoured up to fifteen minutes.
 PAGE_DELAY_SECONDS = 4.0
 RETRY_AFTER_CAP_SECONDS = 900
-
-
-def as_of_date() -> date:
-    """The repository's committed snapshot date, read from lib/chart.py.
-
-    Parsed rather than imported so a fetch does not pull in matplotlib; the
-    same regex tools/check.py uses to enforce the date against every CSV.
-    """
-    text = (HERE.parents[1] / "lib/chart.py").read_text(encoding="utf-8")
-    match = re.search(
-        r"^AS_OF_DATE\s*=\s*date\((\d{4}),\s*(\d{1,2}),\s*(\d{1,2})\)", text, re.M
-    )
-    if not match:
-        raise SystemExit("lib/chart.py has no parseable AS_OF_DATE")
-    return date(*(int(part) for part in match.groups()))
 
 
 def fetch_page(params: dict[str, str]) -> bytes:
@@ -155,7 +139,7 @@ def load_checkpoint() -> tuple[Counter, str | None, int]:
 
 
 def harvest(resume: bool) -> Counter:
-    cutoff = as_of_date().isoformat()
+    cutoff = AS_OF_DATE.isoformat()
     counts: Counter = Counter()
     token: str | None = None
     pages = 0
@@ -196,7 +180,7 @@ def from_snapshot(path: Path) -> Counter:
     """Aggregate the Kaggle snapshot: same counting rule as the harvest."""
     import email.utils
 
-    cutoff = as_of_date()
+    cutoff = AS_OF_DATE
     counts: Counter = Counter()
     total = 0
     skipped = 0
@@ -238,7 +222,7 @@ def main() -> None:
     print(f"arxiv categories: {len(rows)} month-category rows, "
           f"{len(categories)} primary categories, "
           f"{rows[0]['month']}–{rows[-1]['month']}")
-    write_csv(HERE / "arxiv-monthly-by-category.csv", rows)
+    write_csv(HERE / "arxiv-categories-by-month.csv", rows)
 
 
 if __name__ == "__main__":

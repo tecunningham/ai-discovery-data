@@ -9,13 +9,24 @@ import surface.
 
 from __future__ import annotations
 
+import os
 import re
 from datetime import date
 
 # A committed snapshot date keeps PNG bytes stable. tools/check.py rejects data
 # newer than this date, so a refetch cannot silently leave standing-record lines
 # ending before their newest observation.
-AS_OF_DATE = date(2026, 8, 20)
+#
+# The nightly scan (tools/daily_scan.py) overrides the date through the
+# environment: several fetchers clip at AS_OF_DATE so a refetch reproduces the
+# committed window, which is exactly right for a commit and exactly wrong for a
+# throwaway refetch asking "did anything new appear upstream?". Nothing that
+# produces a committed artifact — figures, index, docs — may set this variable.
+AS_OF_DATE = (
+    date.fromisoformat(os.environ["AI_DISCOVERY_AS_OF"])
+    if os.environ.get("AI_DISCOVERY_AS_OF")
+    else date(2026, 8, 20)
+)
 NOW = AS_OF_DATE.year + (AS_OF_DATE.timetuple().tm_yday - 1) / 365.25
 
 

@@ -29,6 +29,11 @@ on:
     # freshness run's start.
     - cron: "30 5 * * *"
   workflow_dispatch:
+  # TEMPORARY, remove before merge: lets the branch smoke-test the SMTP
+  # secrets end to end, since workflow_dispatch only reaches workflows
+  # already on the default branch.
+  push:
+    branches: [claude/daily-domain-scan-email-w9xypr]
 
 permissions:
   contents: read

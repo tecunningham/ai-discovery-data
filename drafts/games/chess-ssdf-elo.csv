@@ -1,0 +1,20 @@
+date,elo,program,status,note
+1984-12-31,1631,Novag Super Constellation,approx,first SSDF list era; value to confirm against archived lists
+1986-12-31,1827,Mephisto Amsterdam,approx,to confirm against archived lists
+1988-12-31,1965,Mephisto MM4 / Roma,approx,to confirm against archived lists
+1990-12-31,2100,Mephisto Portorose,approx,to confirm against archived lists
+1993-12-31,2250,Mephisto Genius 68030,approx,to confirm against archived lists
+1996-12-31,2350,MChess Pro 5,approx,to confirm against archived lists
+1998-12-31,2450,Fritz 5,approx,to confirm against archived lists
+2000-12-31,2550,Fritz 6,approx,to confirm against archived lists
+2003-12-31,2750,Shredder 7.04,approx,to confirm against archived lists
+2005-12-31,2850,Shredder 9,approx,to confirm against archived lists
+2007-11-15,2935,Rybka 2.3.1,verified,SSDF list 2007-11
+2008-09-15,3238,Deep Rybka 3,verified,SSDF list 2008-09; jump partly from new test hardware
+2010-12-31,3227,Deep Rybka 4,approx,to confirm against archived lists
+2013-12-31,3240,Komodo / Houdini era,approx,to confirm against archived lists
+2015-12-31,3330,Komodo 9,approx,to confirm against archived lists
+2017-02-15,3363,Komodo 9.1 x64,verified,SSDF list 2017-02
+2019-12-31,3440,Stockfish 10,approx,to confirm against archived lists
+2021-12-31,3530,Stockfish 13/14,approx,to confirm against archived lists
+2023-12-31,3580,Stockfish (final list),approx,SSDF discontinued 2023-12-31; final leader to confirm

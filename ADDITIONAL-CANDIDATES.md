@@ -123,6 +123,35 @@ support a time series of runtime, solved count, proof rate or objective gap.
 Without them, a version-by-date chart would measure packaging activity rather
 than algorithmic progress.
 
+## Game records: considered and set aside
+
+Game high-score and rating series (chess and shogi engine Elo, backgammon and
+poker bots, speedrun world records, arcade and NES score records) were
+examined as a possible family and set aside: in most of them the machine
+frontier is already saturated, so there is no live discovery rate left for AI
+to accelerate.
+
+- Where computers play directly, they passed the best humans long ago and the
+  measurement series are winding down rather than bending: the SSDF chess list
+  was discontinued 2023-12-31, backgammon bots have been effectively perfect
+  since the 2000s with the leading engine frozen since ~2011, and the Annual
+  Computer Poker Competition ended in the 2010s.
+- Where the game itself has a maximum, machine play already achieves it: the
+  Super Mario Bros. any% tool-assisted perfect run has been unimproved since
+  ~2011, an AI crashed NES Tetris at a score two orders of magnitude above the
+  old human ceiling back in 2021, and Pac-Man's perfect score dates to 1999.
+- The movement that remains is human: records converging on a fixed machine
+  or game-imposed ceiling (the SMB1 human record is 13 frames above the
+  perfect run; Donkey Kong is pressed against its own kill screen). That
+  measures human practice against a static frontier, not discovery.
+
+The one series worth keeping from this family is engine self-improvement on
+fixed hardware, which is already built as
+[problems/algorithms-stockfish/](problems/algorithms-stockfish/). Draft
+mock-ups of the four best game series (with hand-transcribed CSVs and
+human-vs-machine figures) are preserved in this branch's history under
+`drafts/games/` should the assessment change.
+
 ## ICARM collaborative record boards
 
 The [NSF Institute for Computer-Aided Reasoning in Mathematics](https://icarm.io)

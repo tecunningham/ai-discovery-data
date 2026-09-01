@@ -34,6 +34,27 @@ Billy Mitchell scores (stricken 2018, reinstated 2020); NES Tetris switches
 regime in 2021 when the rolling technique made the 999,999 display cap
 irrelevant; the SMB1 record is 0.216 s above the tool-assisted limit.
 
+## Machine frontiers
+
+`machine-milestones.csv` holds the computer-play side where one is tracked,
+and the figures draw it against the human series:
+
+- **SMB1** — the tool-assisted perfect run (4:54.266 RTA-equivalent) has been
+  flat since ~2011; the human record is now 13 frames above it. The real
+  machine series to fetch is the TASVideos publication history (dated
+  obsoletion chain), which needs consistent re-timing to RTA before it can
+  share an axis with the human records.
+- **NES Tetris** — StackRabbit (Greg Cannon's AI) scored 102,252,920 and
+  crashed the game at level 237 in 2021, pre-dating every human beyond-cap
+  milestone; the human record (40.3M) is closing on it.
+- **Chess (SSDF)** — the series is machine-only already; the figure adds the
+  best-ever human FIDE rating (2882) as an indicative reference, with the
+  caveat that SSDF and FIDE are different rating pools.
+- **Donkey Kong** — no notable machine play is tracked; the binding constraint
+  is the game's own level-22 kill screen. Community perfect-game estimates
+  (e.g. 1,265,000 in the FiveThirtyEight era) have already been exceeded by
+  the human record, so no ceiling line is drawn.
+
 ## Promoting a series
 
 To turn one of these into a real problem folder: re-fetch every `approx*` row

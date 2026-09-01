@@ -83,18 +83,18 @@ def smb1(ax):
     rows = load("speedrun-smb1-anypercent.csv", "time_s")
     base_axes(
         ax,
-        "Super Mario Bros. any% world record",
-        "human real-time record, speedrun.com lineage · filled = verified row, open = approximate",
+        "Super Mario Bros. any%: humans chasing the machine frontier",
+        "human record (blue) vs tool-assisted perfect run (orange, flat since ~2011) · open = approximate row",
     )
     draw(ax, rows, "#2a78d6")
-    ax.set_ylim(294.2, 298.4)
+    ax.set_ylim(294.0, 298.4)
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: fmt_time(v)))
     annotate(ax, rows[0][0], rows[0][1], "andrewg 4:58.092", dx=10, ha="left")
     annotate(ax, rows[-1][0], rows[-1][1], "Niftski 4:54.482", dx=-6, dy=10, ha="right")
-    ax.axhline(294.266, color=MUTED, linewidth=0.8, linestyle=(0, (3, 3)))
+    ax.axhline(294.266, color="#eb6834", linewidth=1.6)
     ax.text(
-        dt.date(2014, 6, 1), 294.31, "tool-assisted limit 4:54.266",
-        fontsize=7.5, color=MUTED, va="bottom",
+        dt.date(2014, 6, 1), 294.22, "machine frontier: TAS perfect run 4:54.266 — humans now 0.216 s (13 frames) above it",
+        fontsize=7.5, color="#eb6834", va="top",
     )
 
 
@@ -102,11 +102,16 @@ def ssdf(ax):
     rows = load("chess-ssdf-elo.csv", "elo")
     base_axes(
         ax,
-        "Best chess program on the SSDF rating list",
+        "Best chess program on the SSDF rating list (machine-only series)",
         "SSDF Elo, 1984 – final list 2023 · mostly approximate pending refetch of archived lists",
     )
     draw(ax, rows, "#eb6834", extend=False)
     ax.set_ylabel("SSDF Elo", fontsize=8, color=MUTED)
+    ax.axhline(2882, color=MUTED, linewidth=0.9, linestyle=(0, (3, 3)))
+    ax.text(
+        dt.date(1984, 6, 1), 2895, "best human ever, FIDE 2882 (different rating pool — indicative)",
+        fontsize=7.5, color=MUTED, va="bottom",
+    )
     annotate(ax, rows[0][0], rows[0][1], "Novag Super\nConstellation", dx=14, dy=2, ha="left")
     annotate(ax, dt.date(2008, 9, 15), 3238, "Deep Rybka 3", dx=0, dy=6)
     annotate(ax, rows[-1][0], rows[-1][1], "list discontinued\n2023-12-31", dx=6, dy=-30, ha="right")
@@ -117,12 +122,19 @@ def tetris(ax):
     rows = load("tetris-nes-score.csv", "score")
     base_axes(
         ax,
-        "NES Tetris highest score",
-        "community-tracked score record (log scale) · filled = verified row, open = approximate",
+        "NES Tetris highest score: humans vs the AI's crash score",
+        "human record (aqua) vs StackRabbit AI (orange, log scale) · filled = verified row, open = approximate",
     )
     draw(ax, rows, "#1baf7a")
     ax.set_yscale("log")
-    ax.set_ylim(8e5, 8e7)
+    ax.set_ylim(8e5, 3e8)
+    ai_date, ai_score = dt.date(2021, 7, 15), 102252920
+    ax.axhline(ai_score, color="#eb6834", linewidth=1.2, linestyle=(0, (5, 3)))
+    ax.plot(ai_date, ai_score, "s", ms=6, color="#eb6834", zorder=4)
+    ax.text(
+        dt.date(2009, 8, 1), 1.18e8, "StackRabbit (AI, 2021): 102.3M, level 237, crashes the game",
+        fontsize=7.5, color="#eb6834", va="bottom",
+    )
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v / 1e6:g}M"))
     ax.axhline(999999, color=MUTED, linewidth=0.8, linestyle=(0, (3, 3)))
     ax.text(dt.date(2009, 8, 1), 1.05e6, "display cap 999,999", fontsize=7.5, color=MUTED, va="bottom")
@@ -134,8 +146,8 @@ def dk(ax):
     rows = load("donkey-kong-score.csv", "score")
     base_axes(
         ax,
-        "Donkey Kong arcade high score",
-        "world record score, 1982–2026 · filled = verified row, open = approximate/disputed",
+        "Donkey Kong arcade high score (no machine frontier tracked)",
+        "world record, 1982–2026, pressed against the level-22 kill screen · open = approximate/disputed",
     )
     draw(ax, rows, "#4a3aa7")
     ax.set_ylim(830000, 1330000)

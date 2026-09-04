@@ -25,7 +25,7 @@ produce the same aggregation; papers first submitted after lib/dates.py's
 AS_OF_DATE are dropped, so a re-run reproduces the committed window plus
 whatever upstream recategorized since.
 
-Not part of `make fetch` and excluded from the weekly freshness workflow by
+Not part of `make fetch` and excluded from the weekly refresh workflow by
 its filename, on both counts: the snapshot needs credentials and the harvest
 needs hours. For the harvest, a checkpoint (counts + resumption token) is
 saved under .cache/ every 25 pages; --resume continues from it while the

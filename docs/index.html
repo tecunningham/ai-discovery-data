@@ -846,11 +846,14 @@ command. <code>make index</code> is containerized too because it performs the fu
 check before rewriting the generated README tables.</p>
 <p>CI runs the same <code>make check-figures</code> target on every push and pull request. A
 second workflow,
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/.github/workflows/freshness.yml"><code>freshness.yml</code></a>, runs weekly, refetches every
-automatable series, and fails if any vendored CSV no longer matches its
-upstream — the one failure mode that is invisible from inside the repository,
-since a stale series passes every other check. It checks the documented URLs in
-the same run.</p>
+<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/.github/workflows/weekly-update.yml"><code>weekly-update.yml</code></a>, runs every Monday:
+it refetches every automatable series, has Claude Code restate the README
+facts the refetched numbers invalidated, re-renders the figures, index and
+docs, and opens a pull request that merges itself when every check passes
+and no judgment call was needed. A stale series is the one failure mode
+invisible from inside the repository, since it passes every other check; the
+weekly run closes that gap by updating rather than by alarming. It checks the
+documented URLs in the same run and emails a digest of what moved.</p>
 <p>The renderer pins the Python base image by digest, forces <code>linux/amd64</code>, and
 installs the exact versions in <code>requirements.txt</code>. Each PNG's <code>Software</code>
 metadata records the Python, matplotlib and FreeType versions plus its generator

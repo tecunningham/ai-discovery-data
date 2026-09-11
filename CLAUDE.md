@@ -32,6 +32,13 @@ page's interactive charts), and the committed PNGs.
   contract for the README, and `tools/check.py` (run by `make check`) will
   list everything missing, including the `discovery-<slug>.png` /
   `cumulative-<slug>.png` names the index pages find figures by.
+- The Monday refresh (`.github/workflows/weekly-update.yml`, driven by
+  `tools/weekly_update.py`) runs the fetch → bump → prose → figures → index →
+  docs sequence unattended and opens a PR named `auto/weekly-refresh-<date>`.
+  It merges itself only when every check passes and no Verdict term moved;
+  otherwise the PR waits for a person. If you are the Claude step inside it,
+  edit only `problems/*/README.md` and write anything that was more than
+  arithmetic to `.weekly/judgment-calls.md`.
 
 ## Layout of the shared code
 

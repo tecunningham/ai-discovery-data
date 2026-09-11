@@ -1,0 +1,284 @@
+name: Weekly refresh and digest
+
+# Once a week: refetch every automatable series, bring the repository up to
+# date with what came back, and email a digest that leads with the findings
+# that matter. It replaces two earlier workflows — the nightly scan that only
+# emailed, and the freshness check that only failed — with one that does the
+# update itself.
+#
+# The pipeline, one step per tools/weekly_update.py subcommand:
+#
+#   fetch        every fetch.py, with AI_DISCOVERY_AS_OF set to today so the
+#                fetchers that clip at the snapshot date see this week's rows
+#   scan         diff the tree against HEAD; tier each change (headline /
+#                notable / routine) and chart the series that moved
+#   bump-as-of   AS_OF_DATE in lib/dates.py becomes today
+#   (Claude)     the refetched numbers invalidate the prose: every folder's
+#                check.py recomputes the sentences its README states and
+#                fails until they agree. Claude Code rewrites those sentences,
+#                edits only problems/*/README.md, and writes anything that was
+#                more than arithmetic to .weekly/judgment-calls.md
+#   render       make figures, make docs, make index — the pinned container,
+#                same as CI; `make index` runs the full check-figures first
+#   review       safe to merge? Holds for a person when a Verdict's controlled
+#                term changed, the prose pass flagged a judgment call, a file
+#                outside the pipeline's remit changed, or a check failed
+#   PR + merge   commit on auto/weekly-refresh-<date>, open the PR; merge it
+#                when the review says so, otherwise leave it open
+#   email        what changed, and whether the repo was updated or is waiting
+#                for a sign-off — sent even when an earlier step failed
+#
+# Secrets and variables (Settings → Secrets and variables → Actions):
+#   CLAUDE_CODE_OAUTH_TOKEN   from `claude setup-token` (or swap the input for
+#                             anthropic_api_key: ANTHROPIC_API_KEY)
+#   SCAN_SMTP_USERNAME / SCAN_SMTP_PASSWORD   a Gmail address and an app
+#                             password from https://myaccount.google.com/apppasswords
+#   SCAN_EMAIL_TO, SCAN_SMTP_HOST, SCAN_SMTP_PORT   optional variables
+# Creating the PR with GITHUB_TOKEN needs Settings → Actions → General →
+# "Allow GitHub Actions to create and approve pull requests". A PR opened
+# with that token does not trigger check.yml; the same `make index` (which
+# runs the full figure check) has already run here, and a held PR shows its
+# result in the body.
+#
+# GitHub disables a schedule after 60 days without repository activity; a
+# merged refresh is activity, so this keeps itself alive while data moves.
+
+on:
+  schedule:
+    # Monday 06:00 UTC, the slot the freshness check used.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      merge:
+        description: "Merge the refresh PR when every check passes and nothing needed a judgment call"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: weekly-update
+
+env:
+  RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --requirement requirements.txt
+
+      - name: Today, in UTC, is the snapshot date this refresh commits
+        run: |
+          echo "TODAY=$(date -u +%F)" >> "$GITHUB_ENV"
+          mkdir -p .weekly
+
+      # Fail here, before any network work, rather than after a ten-minute
+      # fetch. The token is tested through the environment so the value
+      # never appears in a command line.
+      - name: Confirm the Claude credential is configured
+        env:
+          TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::repository secret CLAUDE_CODE_OAUTH_TOKEN is unset; create one with 'claude setup-token' and add it under Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+
+      # The figure image is a pure function of its Dockerfile and
+      # requirements.txt, cached as a tarball keyed on both (as in check.yml).
+      - uses: actions/cache@v4
+        id: figure-image
+        with:
+          path: /tmp/figure-image.tar
+          key: figure-image-${{ hashFiles('tools/figures.Dockerfile', 'requirements.txt') }}
+      - if: steps.figure-image.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/figure-image.tar
+
+      # While the tree is still the committed state: the full consistency
+      # check plus every documented URL. Link rot is reported in the email,
+      # not fatal — it is the one check that can fail for nobody's fault.
+      - name: Check documented URLs
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if ! make check-links > .weekly/check-links.log 2>&1; then
+            grep -E "returns [0-9]+|unreachable \(" .weekly/check-links.log > .weekly/links.log || tail -n 20 .weekly/check-links.log > .weekly/links.log
+            cat .weekly/links.log
+            exit 1
+          fi
+
+      # Several upstreams rate-limit or go down; the tool records which
+      # fetchers failed and exits 0. A CSV a failed fetcher left untouched
+      # simply matches HEAD, so nothing false is reported.
+      - name: Refetch every automatable series
+        env:
+          AI_DISCOVERY_AS_OF: ${{ env.TODAY }}
+        run: python tools/weekly_update.py fetch
+
+      - name: Diff against the committed data, tier and chart what moved
+        id: scan
+        run: python tools/weekly_update.py scan
+
+      - name: Move the snapshot date to today
+        if: steps.scan.outputs.changed == 'true'
+        env:
+          AI_DISCOVERY_AS_OF: ${{ env.TODAY }}
+        run: python tools/weekly_update.py bump-as-of
+
+      # continue-on-error throughout the update: a failed step still ends in
+      # a pushed branch and an open PR (held for review), so the fetch is
+      # not lost and the email can say what went wrong.
+      - name: Bring the prose back in line with the refetched data
+        id: prose
+        if: steps.scan.outputs.changed == 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            You are working in a checkout of the ai-discovery-data repository, a data
+            repository of discovery-rate time series (one folder per problem under
+            problems/<slug>/). Read CLAUDE.md and FORMAT.md first.
+
+            What just happened: every automatable fetcher ran (`make fetch`) and the
+            snapshot date AS_OF_DATE in lib/dates.py was moved to today. `git status`
+            and `git diff --stat` show which CSVs changed; .weekly/digest.md summarises
+            the changes row by row. Nothing has been committed.
+
+            Your task: make `make check` pass again by editing ONLY problems/*/README.md
+            files. Each folder's check.py recomputes the sentences its README states
+            (coverage dates, fact lines, the Verdict clause) from the CSVs and fails
+            until the README contains the recomputed phrasing verbatim. For every
+            failing folder, read its check.py to see the exact phrases it expects, then
+            restate those facts in the README in that phrasing. Keep FORMAT.md's
+            register: facts only, no narrative. lib/prose.py explains the contract.
+
+            Rules:
+            - Edit only problems/*/README.md. Do not touch CSVs, PNGs, check.py,
+              figure.py, fetch.py, lib/, docs/, or the generated blocks between
+              BEGIN/END GENERATED markers in README.md and CUMULATIVE.md.
+            - Never run a figure.py, `make figures`, `make index` or `make docs`; the
+              workflow does that after you. Do not commit or push.
+            - Never invent a fact, a quote, a URL or a source. Everything you write
+              must follow from the CSVs beside the README or from text already in it.
+            - Judgment calls: the Verdict field is one controlled term (accelerating,
+              declining, no acceleration, inconclusive, too early, baseline) plus a
+              numeric clause. If the recomputed numbers change which term is right,
+              a record claim ("topped every quarter before it") is no longer true, a
+              new AI-credited row appeared that the "## AI attribution" register
+              should carry, or a check cannot be satisfied by restating numbers, make
+              your best honest edit (or, for a register entry that would need a source
+              quote you do not have, leave the register alone) AND record it in
+              .weekly/judgment-calls.md as a bullet naming the folder, what changed,
+              and why. Also record anything you could not fix. Create that file only
+              if you have something to put in it.
+            - Finish by running `make check` once more and stating, in your final
+              message, which folders you edited and whether the check passes.
+          claude_args: |
+            --max-turns 80
+            --allowedTools "Read,Glob,Grep,Edit,MultiEdit,Write,Bash(make check),Bash(python3 tools/check.py),Bash(python3 problems/*/check.py),Bash(git status:*),Bash(git diff:*),Bash(git show:*)"
+
+      # `make index` runs the full figure check before rewriting the generated
+      # tables, so its log is the verdict on the whole tree; the tables are
+      # written either way, so a held PR still carries current ones.
+      - name: Redraw figures, rebuild docs and the generated tables
+        id: render
+        if: steps.scan.outputs.changed == 'true'
+        continue-on-error: true
+        env:
+          FIGURE_IMAGE_PRELOADED: ${{ steps.figure-image.outputs.cache-hit == 'true' && '1' || '' }}
+        run: |
+          make figures
+          make docs
+          make index > .weekly/check.log 2>&1 || { tail -n 40 .weekly/check.log; exit 1; }
+
+      - name: Decide whether a person is needed
+        id: review
+        if: steps.scan.outputs.changed == 'true'
+        run: |
+          flags=""
+          [ "${{ steps.prose.outcome }}" = "success" ] || flags="$flags --failed 'prose pass'"
+          [ "${{ steps.render.outcome }}" = "success" ] || flags="$flags --check-failed"
+          eval python tools/weekly_update.py review --check-log .weekly/check.log $flags
+
+      - name: Commit the refresh and open the pull request
+        id: pr
+        if: steps.scan.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="auto/weekly-refresh-$TODAY"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add -A -- problems lib/dates.py README.md CUMULATIVE.md docs
+          git commit -m "Weekly refresh: data through $TODAY"
+          git push --force --set-upstream origin "$branch"
+          python tools/weekly_update.py pr-body > .weekly/pr-body.md
+          url="$(gh pr list --head "$branch" --state open --json url --jq '.[0].url')"
+          if [ -n "$url" ]; then
+            gh pr edit "$url" --body-file .weekly/pr-body.md
+          else
+            url="$(gh pr create --base main --head "$branch" \
+                    --title "Weekly refresh: data through $TODAY" \
+                    --body-file .weekly/pr-body.md)"
+          fi
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "opened $url"
+
+      - name: Merge when nothing needs a person
+        id: merge
+        if: >-
+          steps.scan.outputs.changed == 'true' &&
+          steps.review.outputs.hold == 'false' &&
+          (github.event_name == 'schedule' || inputs.merge)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge "${{ steps.pr.outputs.url }}" --merge --delete-branch
+
+      - name: Keep the charts and logs with the run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-update
+          path: .weekly
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Email the digest
+        if: always()
+        env:
+          AI_DISCOVERY_AS_OF: ${{ env.TODAY }}
+          PR_URL: ${{ steps.pr.outputs.url }}
+          SCAN_SMTP_HOST: ${{ vars.SCAN_SMTP_HOST || 'smtp.gmail.com' }}
+          SCAN_SMTP_PORT: ${{ vars.SCAN_SMTP_PORT || '587' }}
+          SCAN_SMTP_USERNAME: ${{ secrets.SCAN_SMTP_USERNAME }}
+          SCAN_SMTP_PASSWORD: ${{ secrets.SCAN_SMTP_PASSWORD }}
+          SCAN_EMAIL_TO: ${{ vars.SCAN_EMAIL_TO || 'tom.cunningham@gmail.com' }}
+        run: |
+          if [ "${{ steps.scan.outcome }}" != "success" ]; then
+            outcome=failed
+          elif [ "${{ steps.scan.outputs.changed }}" != "true" ]; then
+            outcome=unchanged
+          elif [ "${{ steps.merge.outcome }}" = "success" ]; then
+            outcome=merged
+          elif [ "${{ steps.pr.outcome }}" = "success" ]; then
+            outcome=needs-review
+          else
+            outcome=failed
+          fi
+          echo "outcome: $outcome"
+          UPDATE_OUTCOME="$outcome" python tools/weekly_update.py email
+
+      - if: steps.render.outcome != 'skipped' && steps.figure-image.outputs.cache-hit != 'true'
+        run: docker save --output /tmp/figure-image.tar ai-discovery-data-figures:python3.12.13

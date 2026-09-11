@@ -25,7 +25,7 @@ jobs:
       # requirements.txt, so it is cached as a tarball keyed on both; a hit
       # skips the docker build (and the matplotlib install inside it), which
       # is most of this job's runtime.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         id: figure-image
         with:
           path: /tmp/figure-image.tar

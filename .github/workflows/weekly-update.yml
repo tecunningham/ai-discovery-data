@@ -95,7 +95,7 @@ jobs:
 
       # The figure image is a pure function of its Dockerfile and
       # requirements.txt, cached as a tarball keyed on both (as in check.yml).
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         id: figure-image
         with:
           path: /tmp/figure-image.tar

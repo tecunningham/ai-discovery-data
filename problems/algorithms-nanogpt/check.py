@@ -17,6 +17,7 @@ def main() -> int:
     rows = read_csv(HERE / "nanogpt-records.csv")
     records = [row for row in rows if row["kind"] == "record"]
     retimings = [row for row in rows if row["kind"] == "retiming"]
+    pending = [row for row in rows if row["kind"] == "pending"]
     ai = [row for row in records if row["agent"] == "ai"]
     failures = []
     if len(ai) != 5:
@@ -68,6 +69,14 @@ def main() -> int:
             "verdict clause",
         f"{first['date']} to {last['date']}, all {len(records)} records":
             "coverage field",
+        "**pending:** " + (
+            f"{len(pending)} open pull request{'s' if len(pending) != 1 else ''} "
+            "claiming a time below the standing record: " + ", ".join(
+                f"#{row['record'][2:]} at {row['minutes']} minutes, opened "
+                f"{row['date']}" for row in pending)
+            if pending else
+            "no open pull request claims a time below the standing record"):
+            "pending fact",
     }
     twenty_two = [row for row in records if row["record"] in ("22", "23", "24")]
     claims[f"records 22 to 24 at {twenty_two[0]['minutes']}, "

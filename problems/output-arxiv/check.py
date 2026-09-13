@@ -85,8 +85,14 @@ def main() -> int:
             sub = (category, row["month"])
             subfield_totals[sub] = (subfield_totals.get(sub, 0)
                                     + int(row["submissions"]))
+    # The per-category harvest is hand-run and lags the monthly totals, and
+    # its own last month is partial by the same rule, so its claims quote
+    # the last complete month it covers rather than the totals'.
+    cat_months = sorted({month for _, month in group_totals})
+    complete_cat = max(month for month in cat_months[:-1] if month <= complete)
+    name_cat = month_name(complete_cat)
     months = sorted({month for _, month in group_totals
-                     if "1991-07" <= month <= complete})
+                     if "1991-07" <= month <= complete_cat})
     above = next(
         month for month in months
         if all(group_totals.get(("cs", later), 0)
@@ -96,22 +102,22 @@ def main() -> int:
                         for i in range(1, 13)) / 12)
     math_2024 = sum(group_totals.get(("math", f"2024-{i:02d}"), 0)
                     for i in range(1, 13)) / 12
-    math_ratio = group_totals[("math", complete)] / math_2024
+    math_ratio = group_totals[("math", complete_cat)] / math_2024
     claims.update({
         f"from {group_totals[('cs', '2022-11')]:,} monthly submissions in "
-        f"November 2022 to {group_totals[('cs', complete)]:,} in {name}":
+        f"November 2022 to {group_totals[('cs', complete_cat)]:,} in {name_cat}":
             "computer-science growth",
         f"and above physics every month since {month_name(above)}":
             "cs-physics crossover",
-        f"physics rose {round((group_totals[('physics', complete)] / group_totals[('physics', '2022-11')] - 1) * 100)}% "
-        f"from November 2022 to {name}": "physics growth",
-        f"mathematics {round((group_totals[('math', complete)] / group_totals[('math', '2022-11')] - 1) * 100)}%, "
+        f"physics rose {round((group_totals[('physics', complete_cat)] / group_totals[('physics', '2022-11')] - 1) * 100)}% "
+        f"from November 2022 to {name_cat}": "physics growth",
+        f"mathematics {round((group_totals[('math', complete_cat)] / group_totals[('math', '2022-11')] - 1) * 100)}%, "
         f"from {group_totals[('math', '2022-11')]:,} to "
-        f"{group_totals[('math', complete)]:,}": "mathematics growth",
-        f"math.CO reached {subfield_totals[('math.CO', complete)]:,} "
-        f"submissions in {name} against a 2024 monthly average of {co_2024}":
+        f"{group_totals[('math', complete_cat)]:,}": "mathematics growth",
+        f"math.CO reached {subfield_totals[('math.CO', complete_cat)]:,} "
+        f"submissions in {name_cat} against a 2024 monthly average of {co_2024}":
             "combinatorics surge",
-        f"ran at {math_ratio:.1f} times its 2024 monthly average in {name}":
+        f"ran at {math_ratio:.1f} times its 2024 monthly average in {name_cat}":
             "math vs 2024 baseline",
     })
     return report(failures + missing(prose(HERE), claims))

@@ -3,11 +3,11 @@
 - **Domain:** outside the three domains
 - **Role:** contrast case: volume
 - **Metric:** research output; preprints submitted to arXiv per month
-- **Coverage:** 1991-07 to 2026-08, monthly, the last month partial at
-the 2026-08-10 fetch
+- **Coverage:** 1991-07 to 2026-09, monthly, the last month partial at
+the 2026-09-13 fetch
 - **Data:** [`arxiv-by-month.csv`](arxiv-by-month.csv); per-category [`arxiv-categories-by-month.csv`](arxiv-categories-by-month.csv)
 - **Upstream:** <https://arxiv.org/stats/monthly_submissions>, with per-category counts from <https://oaipmh.arxiv.org/oai>
-- **Verdict:** accelerating — a 28,450 submissions/month mean over 2026-01 to 2026-07 against monthly means of 23,707 in 2025 and 20,336 in 2024
+- **Verdict:** accelerating — a 28,790 submissions/month mean over 2026-01 to 2026-08 against monthly means of 23,707 in 2025 and 20,336 in 2024
 
 ![arXiv submissions per month, 1991 to 2026, with January 2026 onward shaded.](output-arxiv-submissions.png)
 
@@ -30,8 +30,8 @@ field.
 ## Facts
 
 - **span:** from 17,271 submissions in November 2022 (the month ChatGPT
-  was released) to 29,687 in July 2026, the last complete month; 72% growth
-- **2026 rate:** a 28,450 submissions/month mean over 2026-01 to 2026-07
+  was released) to 31,173 in August 2026, the last complete month; 80% growth
+- **2026 rate:** a 28,790 submissions/month mean over 2026-01 to 2026-08
   against monthly means of 23,707 in 2025 and 20,336 in 2024
 - **computer science:** from 5,967 monthly submissions in November 2022 to
   12,409 in July 2026, and above physics every month since August 2023

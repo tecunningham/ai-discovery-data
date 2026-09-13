@@ -33,21 +33,39 @@ from matplotlib.ticker import NullFormatter, ScalarFormatter  # noqa: E402
 
 
 def cumulative() -> None:
-    rows = [row for row in read_csv(HERE / "nanogpt-records.csv")
-            if row["kind"] == "record"]
+    all_rows = read_csv(HERE / "nanogpt-records.csv")
+    rows = [row for row in all_rows if row["kind"] == "record"]
+    pending = [row for row in all_rows if row["kind"] == "pending"]
+
+    def line(entries):
+        return [("", [year_fraction(row["date"]) for row in entries],
+                 [float(row["minutes"]) for row in entries])]
+
+    # The tentative line honours open pull requests that claim a faster
+    # time, each at the date it was opened; a standing record only falls,
+    # so a claim slower than what stood before it adds no step. Written to
+    # the data file for the comparison page, never drawn here.
+    tentative = None
+    if pending:
+        kept, best = [], float("inf")
+        for row in sorted(rows + pending, key=lambda r: (r["date"], r["record"])):
+            if float(row["minutes"]) < best:
+                kept.append(row)
+                best = float(row["minutes"])
+        tentative = line(kept)
     staircase_chart(
         HERE / "cumulative-algorithms-nanogpt.png",
         title="modded-nanogpt speedrun: standing record",
         subtitle="Minutes to the fixed target loss; lower is better",
         ylabel="Training minutes to target loss",
-        series=[("", [year_fraction(row["date"]) for row in rows],
-                 [float(row["minutes"]) for row in rows])],
+        series=line(rows),
         ylog=True,
         source_label="KellerJordan/modded-nanogpt README, vendored as "
                      "nanogpt-records.csv",
         source_url="https://github.com/KellerJordan/modded-nanogpt",
         built_by=__file__,
         note="Lower is better.",
+        tentative=tentative,
     )
 
 

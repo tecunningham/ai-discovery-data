@@ -272,6 +272,7 @@ def remaining_chart(
     built_by: str,
     note: str = "",
     decorate=None,
+    tentative: list[Series] | None = None,
 ) -> None:
     """What remains of a known denominator, declining toward zero.
 
@@ -294,6 +295,7 @@ def remaining_chart(
         caption=f"{title}. Count remaining over time, toward zero.",
         note=note,
         decorate=decorate,
+        tentative=tentative,
     )
 
 
@@ -355,8 +357,15 @@ def ledger_remaining_chart(
     line answers "how much of this list is left" at any date. Rows resolved
     without a dateable year, and contested or partial rows, never move the
     line; a thin stacked bar at the snapshot date splits the terminal
-    remainder into open, contested / partial / vague, and resolved-undated, so
-    what the endpoint hides is drawn rather than only footnoted.
+    remainder into open, claimed, contested / partial / vague, and
+    resolved-undated, so what the endpoint hides is drawn rather than only
+    footnoted.
+
+    A ``claimed`` row — a resolution announced but not yet published,
+    refereed or accepted by the list's steward, with the announcement year
+    in ``resolved_year`` — does not move the drawn line either. It does move
+    the tentative line written beside the PNG for the comparison page, which
+    steps down at the claim year as if the claim held.
 
     ``ai_problem`` marks one row's resolution step in the AI red, the same
     hand-set argument the folder's dated-resolutions chart takes: these CSVs
@@ -376,8 +385,14 @@ def ledger_remaining_chart(
     undated = sum(
         row["status"] == "resolved" and not row["resolved_year"] for row in rows
     )
+    claimed = sorted(
+        ((int(row["resolved_year"]), row)
+         for row in rows
+         if row["status"] == "claimed" and row["resolved_year"]),
+        key=lambda item: (item[0], item[1]["problem_id"]),
+    )
     open_count = sum(row["status"] == "open" for row in rows)
-    other = total - len(dated) - undated - open_count
+    other = total - len(dated) - undated - len(claimed) - open_count
     start = min([list_year, *(year for year, _ in dated)])
     xs = [float(start)]
     ys = [float(total)]
@@ -390,12 +405,26 @@ def ledger_remaining_chart(
         if ai_problem is not None and row["problem_id"] == ai_problem:
             ai_step = (float(year), float(remaining), row["short_name"])
     parts = [f"{open_count} open"]
+    if claimed:
+        parts.append(f"{len(claimed)} claimed, unverified")
     if undated:
         parts.append(f"{undated} resolved undated")
     if other:
         parts.append(f"{other} contested / partial / vague")
     note = (f"{remaining} of {total} rows lack a dated resolution: "
             + ", ".join(parts))
+    # The tentative line: the same staircase with every claim honoured at
+    # its announcement year. Drawn nowhere here; the comparison page offers it.
+    tentative = None
+    if claimed:
+        steps = sorted([(year, "resolved") for year, _ in dated]
+                       + [(year, "claimed") for year, _ in claimed])
+        t_xs, t_ys, left = [float(start)], [float(total)], total
+        for year, _ in steps:
+            left -= 1
+            t_xs.append(float(year))
+            t_ys.append(float(left))
+        tentative = [("", t_xs, t_ys)]
 
     def decorate(ax) -> None:
         # The terminal remainder's composition, as a slim stack at the
@@ -403,6 +432,7 @@ def ledger_remaining_chart(
         # segments say how much of what remains is genuinely open.
         segments = [
             (open_count, OPEN_COLOUR, "open"),
+            (len(claimed), CONTESTED_COLOUR, "claimed, unverified"),
             (other, CONTESTED_COLOUR, "contested / partial / vague"),
             (undated, HUMAN, "resolved, undated"),
         ]
@@ -452,4 +482,5 @@ def ledger_remaining_chart(
         built_by=built_by,
         note=note,
         decorate=decorate,
+        tentative=tentative,
     )

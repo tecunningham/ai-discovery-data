@@ -90,3 +90,4 @@ record,kind,date,minutes,agent,ai_system,note
 87,record,2026-06-11,1.256,ai,Recursive,faster ReLU^2 kernel; credited to @cong_ml and AI System Recursive
 88,record,2026-07-13,1.243,human,,
 89,record,2026-07-17,1.23,human,,
+PR360,pending,2026-08-31,0.665,,,"open pull request #360: New Record: 0.665 minutes (39.9 seconds): ANVIL2, Sampled-softmax, New Embedding Table, Full-stack fp8 (-34.0s, -46% same hardware)"

@@ -14,10 +14,11 @@ name: Finish a weekly refresh
 # it again. A person pushing a fix to the branch does start it, which is
 # the right behaviour: the fix gets checked and, if clean, merged.
 #
-# Judgment calls travel as a PR comment (the session has no .weekly/ to
-# write into): any comment opening with "**Judgment calls**" holds the PR,
-# and its text goes into the email, as the in-workflow prose pass's
-# judgment-calls.md would.
+# Judgment calls travel in the prose commit's message, under a line that
+# reads "Judgment calls:", or as a PR comment opening with
+# "**Judgment calls**" (the session has no .weekly/ to write into). Either
+# holds the PR, and the text goes into the email, as the in-workflow prose
+# pass's judgment-calls.md would.
 
 on:
   push:
@@ -71,7 +72,8 @@ jobs:
           base="$(gh pr view "$url" --json baseRefName --jq .baseRefName)"
           git fetch --no-tags origin "$base"
           echo "base=origin/$base" >> "$GITHUB_OUTPUT"
-          # Judgment calls the prose pass left as a PR comment.
+          # Judgment calls the prose pass left as a PR comment; those in a
+          # commit message on the branch are read by the review step itself.
           gh pr view "$url" --json comments \
             --jq '.comments[].body | select(startswith("**Judgment calls**"))' \
             > .weekly/judgment-calls.md || true

@@ -44,8 +44,9 @@ page's interactive charts), and the committed PNGs.
   rules, but do not run `make index` or `make docs` (no pinned renderer
   there); push the README edits and let
   `.github/workflows/refresh-finish.yml` regenerate, re-check and merge.
-  Put judgment calls in a PR comment that opens with `**Judgment calls**`,
-  which holds the PR for a person.
+  Put judgment calls in the commit message under a `Judgment calls:` line
+  (or in a PR comment opening with `**Judgment calls**`); either holds the
+  PR for a person.
 
 ## Layout of the shared code
 

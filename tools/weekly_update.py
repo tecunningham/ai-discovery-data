@@ -642,7 +642,18 @@ def cmd_review(args: argparse.Namespace) -> int:
             reasons.append(f"{readme.parent.name}: Verdict moved from "
                            f"“{before}” to “{after}”")
     notes = STATE / "judgment-calls.md"
-    if notes.exists() and notes.read_text(encoding="utf-8").strip():
+    judgment = notes.read_text(encoding="utf-8").strip() if notes.exists() else ""
+    if BASE != "HEAD":
+        # A prose pass made outside the workflow has no .weekly/ to write
+        # into; it reports judgment calls in its commit message, under a
+        # "Judgment calls:" line, which the branch carries to this run.
+        log = subprocess.run(["git", "log", "--format=%B%x00", f"{BASE}..HEAD"],
+                             capture_output=True, text=True, cwd=ROOT).stdout
+        for body in log.split("\0"):
+            _, marker, tail = body.partition("Judgment calls:")
+            if marker and tail.strip():
+                judgment = (judgment + "\n\n" + tail.strip()).strip()
+    if judgment:
         reasons.append("the prose pass flagged judgment calls (below)")
     for step in args.failed or []:
         reasons.append(f"the {step} step failed; see the workflow run")
@@ -658,8 +669,7 @@ def cmd_review(args: argparse.Namespace) -> int:
     review = {
         "hold": bool(reasons),
         "reasons": reasons,
-        "judgment_calls": notes.read_text(encoding="utf-8").strip()
-        if notes.exists() else "",
+        "judgment_calls": judgment,
     }
     write_json("review.json", review)
     github_output(hold="true" if reasons else "false")

@@ -202,7 +202,8 @@ jobs:
 
       # `make index` runs the full figure check before rewriting the generated
       # tables, so its log is the verdict on the whole tree; the tables are
-      # written either way, so a held PR still carries current ones.
+      # written either way, so a held PR still carries current ones. Docs come
+      # last: the index page is rendered from the tables index just rewrote.
       - name: Redraw figures, rebuild docs and the generated tables
         id: render
         if: steps.scan.outputs.changed == 'true'
@@ -211,8 +212,8 @@ jobs:
           FIGURE_IMAGE_PRELOADED: ${{ steps.figure-image.outputs.cache-hit == 'true' && '1' || '' }}
         run: |
           make figures
-          make docs
           make index > .weekly/check.log 2>&1 || { tail -n 40 .weekly/check.log; exit 1; }
+          make docs
 
       - name: Decide whether a person is needed
         id: review

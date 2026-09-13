@@ -51,8 +51,8 @@ jobs:
           FIGURE_IMAGE_PRELOADED: ${{ steps.figure-image.outputs.cache-hit == 'true' && '1' || '' }}
         run: |
           make figures
-          make docs
           make index
+          make docs
 
       - name: Commit the outputs back to the branch
         run: |

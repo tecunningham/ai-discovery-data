@@ -53,7 +53,8 @@ Series = tuple[str, list[float], list[float]]
 
 def write_sidecar(out_path: Path, *, kind: str, better: str, title: str,
                   subtitle: str, ylabel: str, series: list[Series], ylog: bool,
-                  source_label: str, source_url: str) -> None:
+                  source_label: str, source_url: str,
+                  tentative: list[Series] | None = None) -> None:
     """The panel's step lines as cumulative-<slug>.json beside the PNG.
 
     docs/compare.html draws every panel on one interactive chart, and the
@@ -72,6 +73,11 @@ def write_sidecar(out_path: Path, *, kind: str, better: str, title: str,
     does not carry float noise; y is left exact. The line is written as
     given, without the flat extension to the snapshot date, which the page
     adds itself from ``now``.
+
+    ``tentative``, when a folder passes it, is the same line redrawn with the
+    entries the panel leaves out as unconfirmed — a pending prize submission,
+    say — so the comparison page can offer them on request. The PNG never
+    draws it; it exists only here.
     """
     data = {
         "kind": kind,
@@ -88,6 +94,11 @@ def write_sidecar(out_path: Path, *, kind: str, better: str, title: str,
             for label, xs, ys in series
         ],
     }
+    if tentative:
+        data["tentative"] = [
+            {"label": label, "x": [round(x, 4) for x in xs], "y": list(ys)}
+            for label, xs, ys in tentative
+        ]
     sidecar = Path(out_path).with_suffix(".json")
     sidecar.write_text(json.dumps(data, indent=1, sort_keys=True,
                                   ensure_ascii=False) + "\n", encoding="utf-8")
@@ -110,6 +121,7 @@ def _draw(
     ylim: tuple[float, float] | None = None,
     note: str = "",
     decorate=None,
+    tentative: list[Series] | None = None,
 ) -> None:
     """The one drawing everything on the cumulative page shares.
 
@@ -125,7 +137,8 @@ def _draw(
     """
     write_sidecar(out_path, kind=kind, better=better, title=title,
                   subtitle=subtitle, ylabel=ylabel, series=series, ylog=ylog,
-                  source_label=source_label, source_url=source_url)
+                  source_label=source_label, source_url=source_url,
+                  tentative=tentative)
     fig, ax = new_chart(title, subtitle)
     for index, (label, xs, ys) in enumerate(series):
         if xs[-1] < NOW:
@@ -296,6 +309,7 @@ def staircase_chart(
     built_by: str,
     ylog: bool = False,
     note: str = "",
+    tentative: list[Series] | None = None,
 ) -> None:
     """A standing record's native value as a step function.
 
@@ -304,6 +318,10 @@ def staircase_chart(
     step. The direction of better differs by series, so the subtitle or note
     must say which way is progress. The data file beside the PNG carries the
     same direction, read from that sentence, so the two cannot disagree.
+
+    ``tentative`` is the same line with the entries the panel excludes as
+    unconfirmed; it goes to the data file for the comparison page and is
+    not drawn.
     """
     better = "down" if re.search(r"\blower\b[^;.]*\bbetter\b",
                                  f"{subtitle} {note}", re.I) else "up"
@@ -321,6 +339,7 @@ def staircase_chart(
         built_by=built_by,
         caption=f"{title}. Standing value over time as a step function.",
         note=note,
+        tentative=tentative,
     )
 
 

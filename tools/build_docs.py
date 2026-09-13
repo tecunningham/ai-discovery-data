@@ -404,6 +404,8 @@ axis, so equal slopes are equal growth rates whatever the units.</p>
   <label>Direction:
     <select id="orient"><option value="up">up = progress</option>
     <option value="native">as recorded</option></select></label>
+  <label><input id="tentative" type="checkbox"> include tentative entries
+    <span style="color:#57606a">(† series)</span></label>
 </div>
 <div class="layout">
   <div class="picker" id="picker"></div>
@@ -421,7 +423,12 @@ series whose progress runs downward — problems still open, seconds to a
 target, an upper bound — is drawn as its reciprocal, the exact mirror on a
 log axis, and marked ⇅ in the list; <em>as recorded</em> shows the native
 value. A series with no value on the reference date is indexed to its first
-value instead and listed under the chart.
+value instead and listed under the chart. A series marked † has entries its
+panel leaves out as unconfirmed (a pending prize submission); <em>include
+tentative entries</em> redraws it with them, dashed. Which entries count as
+confirmed is each folder's decision, stated on its page, and a contested or
+partial problem-list row carries no date, so no toggle can place it on the
+axis.
 Rebuilt by <code>tools/build_docs.py</code>.</footer>
 <script>
 const SERIES = {series};
@@ -443,11 +450,13 @@ function readHash() {{
   if (h.has("s")) state.selected = new Set(h.get("s").split(",").filter(Boolean));
   for (const k of ["scale", "norm", "ref", "from", "colour", "orient"])
     if (h.has(k)) $(k).value = h.get(k);
+  if (h.has("tentative")) $("tentative").checked = h.get("tentative") === "1";
 }}
 function writeHash() {{
   const h = new URLSearchParams();
   if (state.selected.size !== SERIES.length) h.set("s", [...state.selected].join(","));
   for (const k of ["scale", "norm", "ref", "from", "colour", "orient"]) h.set(k, $(k).value);
+  if ($("tentative").checked) h.set("tentative", "1");
   history.replaceState(null, "", "#" + h.toString());
 }}
 
@@ -479,8 +488,14 @@ function buildPicker() {{
       const sw = document.createElement("span");
       sw.className = "swatch"; sw.style.background = s.colour;
       label.appendChild(sw);
-      label.appendChild(document.createTextNode(" " + s.name + (s.better === "down" ? " ⇅" : "")));
-      label.title = s.subtitle + (s.better === "down" ? " (shown inverted when up = progress)" : "");
+      label.appendChild(document.createTextNode(" " + s.name + (s.better === "down" ? " ⇅" : "")
+                                                + (s.tentative ? " †" : "")));
+      label.title = s.subtitle + (s.better === "down" ? " (shown inverted when up = progress)" : "")
+                    + (s.tentative ? " (has tentative entries)" : "");
+      const go = document.createElement("a");
+      go.href = s.url; go.textContent = "↗"; go.title = "open the series page";
+      go.style.marginLeft = "5px"; go.style.textDecoration = "none";
+      label.appendChild(go);
       box.appendChild(label);
     }}
   }}
@@ -506,9 +521,12 @@ function render() {{
   const scale = $("scale").value, norm = $("norm").value;
   const ref = +$("ref").value, from = +$("from").value, byDomain = $("colour").value === "domain";
   const upIsProgress = $("orient").value === "up";
+  const withTentative = $("tentative").checked;
   const values = [], dropped = [];
-  for (const raw of SERIES) {{
-    if (!state.selected.has(raw.key)) continue;
+  for (const chosen of SERIES) {{
+    if (!state.selected.has(chosen.key)) continue;
+    const raw = (withTentative && chosen.tentative)
+      ? {{ ...chosen, x: chosen.tentative.x, y: chosen.tentative.y, dashed: true }} : chosen;
     // Up = progress: a series that advances downward is shown as its
     // reciprocal (zeros cannot be inverted and are dropped), so on a log
     // axis it is the mirror image and on any axis it rises with progress.
@@ -551,7 +569,9 @@ function render() {{
       kept++;
       values.push({{ name: s.name, domain: s.domain, date: toDate(x).toISOString(),
                     value: v, raw: s.inverted ? 1 / y : y, unit: raw.ylabel,
-                    note: s.subtitle + (s.inverted ? " — drawn inverted" : ""), url: s.url,
+                    note: s.subtitle + (s.inverted ? " — drawn inverted" : "")
+                          + (raw.dashed ? " — with tentative entries" : ""),
+                    url: s.url, dashed: !!raw.dashed,
                     colour: byDomain ? DOMAIN_COLOURS[s.domain] : s.colour }});
     }}
     if (!kept) dropped.push(`${{s.name}} has nothing to draw in this window`);
@@ -578,6 +598,8 @@ function render() {{
                scale: {{ domain: names, range: colours }} }},
       opacity: {{ condition: {{ param: "pick", value: 1, empty: true }}, value: 0.18 }},
       strokeWidth: {{ condition: {{ param: "pick", value: 2.6, empty: false }}, value: 1.6 }},
+      strokeDash: {{ field: "dashed", type: "nominal", legend: null,
+                    scale: {{ domain: [false, true], range: [[1, 0], [6, 4]] }} }},
       href: {{ field: "url" }},
       tooltip: [{{ field: "name", title: "series" }},
                 {{ field: "date", type: "temporal", title: "date", format: "%Y-%m-%d" }},
@@ -595,7 +617,7 @@ function render() {{
 
 readHash();
 buildPicker();
-for (const k of ["scale", "norm", "ref", "from", "colour", "orient"]) $(k).onchange = render;
+for (const k of ["scale", "norm", "ref", "from", "colour", "orient", "tentative"]) $(k).onchange = render;
 render();
 </script>
 </body>
@@ -628,9 +650,11 @@ def compare_series() -> list[dict]:
             domain = COMPARE_DOMAINS[-1]
         panel = json.loads(sidecar.read_text(encoding="utf-8"))
         folder_title = document_title(text) or slug
+        tentative = {t["label"]: t for t in panel.get("tentative", [])}
         for line in panel["series"]:
             name = folder_title if not line["label"] else \
                 f"{folder_title} — {line['label']}"
+            alt = tentative.get(line["label"])
             out.append({
                 "key": slug if not line["label"] else f"{slug}:{line['label']}",
                 "slug": slug, "name": name, "domain": domain,
@@ -638,6 +662,7 @@ def compare_series() -> list[dict]:
                 "subtitle": panel["subtitle"],
                 "ylabel": panel["ylabel"], "now": panel["now"],
                 "url": f"{slug}.html", "x": line["x"], "y": line["y"],
+                "tentative": {"x": alt["x"], "y": alt["y"]} if alt else None,
             })
     rank = {d: i for i, d in enumerate(COMPARE_DOMAINS)}
     out.sort(key=lambda s: (rank[s["domain"]], s["name"]))

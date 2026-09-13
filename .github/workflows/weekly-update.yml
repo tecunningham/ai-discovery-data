@@ -49,8 +49,6 @@ name: Weekly refresh and digest
 # merged refresh is activity, so this keeps itself alive while data moves.
 
 on:
-  push:
-    branches: [claude/email-daily-to-weekly-mzc2hx]  # TEMPORARY: trial run, reverted before merge
   schedule:
     # Monday 06:00 UTC, the slot the freshness check used.
     - cron: "0 6 * * 1"

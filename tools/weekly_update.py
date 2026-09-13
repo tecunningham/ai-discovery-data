@@ -133,7 +133,10 @@ DOMAIN_ORDER = ("mathematics", "algorithms", "vulnerabilities",
 TIERS = ("headline", "notable", "routine")
 
 # The fetchers `make fetch` skips, for the same reasons the Makefile gives.
-HAND_RUN_FETCHERS = {"problems/math-antedb/fetch.py"}
+HAND_RUN_FETCHERS = {
+    "problems/math-antedb/fetch.py",               # needs expdb and pycddlib<3
+    "problems/math-alphaevolve-inventory/fetch.py",  # needs --paper-text and --repo
+}
 
 
 # ---------------------------------------------------------------- CSV diffing

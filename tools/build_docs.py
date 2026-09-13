@@ -401,6 +401,9 @@ axis, so equal slopes are equal growth rates whatever the units.</p>
   <label>Colour by:
     <select id="colour"><option value="series">series</option>
     <option value="domain">domain</option></select></label>
+  <label>Direction:
+    <select id="orient"><option value="up">up = progress</option>
+    <option value="native">as recorded</option></select></label>
 </div>
 <div class="layout">
   <div class="picker" id="picker"></div>
@@ -413,8 +416,12 @@ axis, so equal slopes are equal growth rates whatever the units.</p>
 written by the folder's <code>figure.py</code> beside its PNG and compared in
 CI; <em>counts</em> and <em>events</em> rise from zero, <em>remaining</em>
 falls toward zero, and a <em>staircase</em> is a standing record's own value
-(the tooltip says which direction is better). A series with no value on the
-reference date, or a zero there, is listed under the chart instead of drawn.
+(the tooltip says which direction is better). With <em>up = progress</em>, a
+series whose progress runs downward — problems still open, seconds to a
+target, an upper bound — is drawn as its reciprocal, the exact mirror on a
+log axis, and marked ⇅ in the list; <em>as recorded</em> shows the native
+value. A series with no value on the reference date is indexed to its first
+value instead and listed under the chart.
 Rebuilt by <code>tools/build_docs.py</code>.</footer>
 <script>
 const SERIES = {series};
@@ -434,13 +441,13 @@ const state = {{ selected: new Set(SERIES.map(s => s.key)) }};
 function readHash() {{
   const h = new URLSearchParams(location.hash.slice(1));
   if (h.has("s")) state.selected = new Set(h.get("s").split(",").filter(Boolean));
-  for (const k of ["scale", "norm", "ref", "from", "colour"])
+  for (const k of ["scale", "norm", "ref", "from", "colour", "orient"])
     if (h.has(k)) $(k).value = h.get(k);
 }}
 function writeHash() {{
   const h = new URLSearchParams();
   if (state.selected.size !== SERIES.length) h.set("s", [...state.selected].join(","));
-  for (const k of ["scale", "norm", "ref", "from", "colour"]) h.set(k, $(k).value);
+  for (const k of ["scale", "norm", "ref", "from", "colour", "orient"]) h.set(k, $(k).value);
   history.replaceState(null, "", "#" + h.toString());
 }}
 
@@ -472,8 +479,8 @@ function buildPicker() {{
       const sw = document.createElement("span");
       sw.className = "swatch"; sw.style.background = s.colour;
       label.appendChild(sw);
-      label.appendChild(document.createTextNode(" " + s.name));
-      label.title = s.subtitle;
+      label.appendChild(document.createTextNode(" " + s.name + (s.better === "down" ? " ⇅" : "")));
+      label.title = s.subtitle + (s.better === "down" ? " (shown inverted when up = progress)" : "");
       box.appendChild(label);
     }}
   }}
@@ -498,9 +505,20 @@ function buildPicker() {{
 function render() {{
   const scale = $("scale").value, norm = $("norm").value;
   const ref = +$("ref").value, from = +$("from").value, byDomain = $("colour").value === "domain";
+  const upIsProgress = $("orient").value === "up";
   const values = [], dropped = [];
-  for (const s of SERIES) {{
-    if (!state.selected.has(s.key)) continue;
+  for (const raw of SERIES) {{
+    if (!state.selected.has(raw.key)) continue;
+    // Up = progress: a series that advances downward is shown as its
+    // reciprocal (zeros cannot be inverted and are dropped), so on a log
+    // axis it is the mirror image and on any axis it rises with progress.
+    let s = raw;
+    if (upIsProgress && raw.better === "down") {{
+      const keep = raw.y.map((v, i) => i).filter(i => raw.y[i] > 0);
+      s = {{ ...raw, x: keep.map(i => raw.x[i]), y: keep.map(i => 1 / raw.y[i]),
+            ylabel: "1 / " + raw.ylabel, inverted: true }};
+      if (!s.y.length) {{ dropped.push(`${{raw.name}} has no non-zero value to invert`); continue; }}
+    }}
     let base = 1;
     if (norm === "index") {{
       base = valueAt(s, ref + 0.5);  // mid-year of the reference year
@@ -514,7 +532,7 @@ function render() {{
           dropped.push(`${{s.name}} is indexed to its first value (${{Math.floor(s.x[i])}}) instead of ${{ref}}`);
         }} else base = null;
       }}
-    }} else if (norm === "share") base = s.kind === "remaining" ? s.y[0] : s.y[s.y.length - 1];
+    }} else if (norm === "share") base = (s.kind === "remaining" && !s.inverted) ? s.y[0] : s.y[s.y.length - 1];
     if (norm !== "raw" && !(base > 0)) {{
       dropped.push(`${{s.name}} is not drawn (no value to normalise by)`);
       continue;
@@ -532,7 +550,8 @@ function render() {{
       if (scale === "log" && !(v > 0)) continue;
       kept++;
       values.push({{ name: s.name, domain: s.domain, date: toDate(x).toISOString(),
-                    value: v, raw: y, unit: s.ylabel, note: s.subtitle, url: s.url,
+                    value: v, raw: s.inverted ? 1 / y : y, unit: raw.ylabel,
+                    note: s.subtitle + (s.inverted ? " — drawn inverted" : ""), url: s.url,
                     colour: byDomain ? DOMAIN_COLOURS[s.domain] : s.colour }});
     }}
     if (!kept) dropped.push(`${{s.name}} has nothing to draw in this window`);
@@ -576,7 +595,7 @@ function render() {{
 
 readHash();
 buildPicker();
-for (const k of ["scale", "norm", "ref", "from", "colour"]) $(k).onchange = render;
+for (const k of ["scale", "norm", "ref", "from", "colour", "orient"]) $(k).onchange = render;
 render();
 </script>
 </body>
@@ -615,7 +634,8 @@ def compare_series() -> list[dict]:
             out.append({
                 "key": slug if not line["label"] else f"{slug}:{line['label']}",
                 "slug": slug, "name": name, "domain": domain,
-                "kind": panel["kind"], "subtitle": panel["subtitle"],
+                "kind": panel["kind"], "better": panel["better"],
+                "subtitle": panel["subtitle"],
                 "ylabel": panel["ylabel"], "now": panel["now"],
                 "url": f"{slug}.html", "x": line["x"], "y": line["y"],
             })

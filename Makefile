@@ -12,9 +12,11 @@ FIGURE_RUN = docker run --rm --platform $(FIGURE_PLATFORM) \
 # Every problem folder builds itself. There is no central generator, so the
 # target is a loop over the folders rather than a list to keep in sync.
 FIGURE_SCRIPTS := $(wildcard problems/*/figure.py)
-# math-antedb is excluded: it needs a checkout of github.com/teorth/expdb and a
-# cddlib-backed pycddlib<3, so it is run by hand and its output vendored.
-FETCH_SCRIPTS := $(filter-out problems/math-antedb/fetch.py, $(wildcard problems/*/fetch.py))
+# Two are excluded and run by hand, their output vendored: math-antedb needs a
+# checkout of github.com/teorth/expdb and a cddlib-backed pycddlib<3, and
+# math-alphaevolve-inventory needs the paper's text and a repository checkout
+# passed as arguments.
+FETCH_SCRIPTS := $(filter-out problems/math-antedb/fetch.py problems/math-alphaevolve-inventory/fetch.py, $(wildcard problems/*/fetch.py))
 
 # figure and fetch-one operate on one folder; catch a missing PROBLEM= before
 # any docker build starts.
@@ -85,8 +87,9 @@ fetch:
 	if [ $$status -ne 0 ]; then \
 		echo "one or more fetchers reported stale data or failed" >&2; \
 	fi; \
-	echo "three fetchers are hand-run and not covered by this target:"; \
+	echo "four fetchers are hand-run and not covered by this target:"; \
 	echo "  problems/math-antedb/fetch.py            needs github.com/teorth/expdb and pycddlib<3"; \
+	echo "  problems/math-alphaevolve-inventory/fetch.py  needs --paper-text and --repo"; \
 	echo "  problems/math-erdos/fetch_solutions.py   ~560 throttled page fetches"; \
 	echo "  problems/output-arxiv/fetch_categories.py  needs the Kaggle snapshot or a day-long OAI harvest"; \
 	echo "if any series now reaches past lib/dates.py's AS_OF_DATE, bump it and rerun make index"; \

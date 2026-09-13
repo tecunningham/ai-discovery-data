@@ -140,6 +140,7 @@ jobs:
           name: refresh-finish
           path: .weekly
           if-no-files-found: ignore
+          include-hidden-files: true  # .weekly is a dot-directory
           retention-days: 30
 
       - name: Email the outcome

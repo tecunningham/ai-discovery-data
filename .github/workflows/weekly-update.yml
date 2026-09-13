@@ -47,6 +47,11 @@ name: Weekly refresh and digest
 #
 # GitHub disables a schedule after 60 days without repository activity; a
 # merged refresh is activity, so this keeps itself alive while data moves.
+#
+# A workflow_dispatch from a feature branch runs the whole pipeline against
+# that branch (the refresh PR targets it), but only while the branch changes
+# no file under .github/workflows/ relative to main: GITHUB_TOKEN cannot push
+# a branch that adds or edits a workflow, so such a trial fails at the push.
 
 on:
   schedule:
@@ -269,6 +274,7 @@ jobs:
           name: weekly-update
           path: .weekly
           if-no-files-found: ignore
+          include-hidden-files: true  # .weekly is a dot-directory
           retention-days: 30
 
       - name: Email the digest

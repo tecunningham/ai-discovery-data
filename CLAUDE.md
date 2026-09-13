@@ -61,4 +61,8 @@ page's interactive charts), and the committed PNGs.
   renderer; `tools/build_docs.py` — the docs/ builder.
 
 `make check` runs host-side with no matplotlib. Anything that draws or
-byte-compares figures needs Docker for the pinned renderer.
+byte-compares figures needs Docker for the pinned renderer. A checkout
+without Docker (a Claude Code session on the web, for one) gets its outputs
+from `.github/workflows/render.yml`: push the work to a branch named
+`render/<anything>`, wait for the "Render: figures, index and docs" commit it
+pushes back, and pull that commit into the working branch.

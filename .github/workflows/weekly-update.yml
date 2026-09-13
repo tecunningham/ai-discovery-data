@@ -80,7 +80,7 @@ jobs:
     timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -107,7 +107,7 @@ jobs:
 
       # The figure image is a pure function of its Dockerfile and
       # requirements.txt, cached as a tarball keyed on both (as in check.yml).
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         id: figure-image
         with:
           path: /tmp/figure-image.tar
@@ -270,7 +270,7 @@ jobs:
 
       - name: Keep the charts and logs with the run
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: weekly-update
           path: .weekly

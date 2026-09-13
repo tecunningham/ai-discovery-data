@@ -336,6 +336,311 @@ ROOT_PAGES = {
 }
 
 
+# ---------------------------------------------------------------- compare.html
+
+COMPARE_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cumulative series compared — ai-discovery-data</title>
+<meta name="description" content="{description}">
+<meta property="og:title" content="Cumulative series compared">
+<meta property="og:description" content="{description}">
+<base target="_blank">
+{vega}
+<style>{style}
+body {{ max-width: 1180px; }}
+.controls {{ display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center;
+             margin: 0.8em 0; font-size: 0.92em; }}
+.controls label {{ white-space: nowrap; }}
+.controls input[type=number] {{ width: 5.5em; }}
+.layout {{ display: flex; gap: 20px; align-items: flex-start; }}
+.picker {{ flex: 0 0 300px; font-size: 0.86em; max-height: 560px;
+           overflow-y: auto; border: 1px solid #d8dee4; border-radius: 6px;
+           padding: 6px 10px; }}
+.picker h4 {{ margin: 0.7em 0 0.2em; font-size: 1em; display: flex;
+              justify-content: space-between; align-items: baseline; }}
+.picker h4 span {{ font-weight: normal; }}
+.picker h4 span a {{ margin-left: 6px; font-size: 0.85em; }}
+.picker label {{ display: block; line-height: 1.35; margin: 2px 0; }}
+.picker .swatch {{ display: inline-block; width: 10px; height: 10px;
+                   border-radius: 2px; margin-right: 5px; vertical-align: -1px; }}
+.chartwrap {{ flex: 1 1 auto; min-width: 0; }}
+#chart {{ width: 100%; }}
+.dropped {{ color: #9a6700; font-size: 0.85em; margin-top: 0.4em; }}
+@media (max-width: 800px) {{
+  .layout {{ flex-direction: column; }}
+  .picker {{ flex-basis: auto; max-height: 260px; width: 100%;
+             box-sizing: border-box; }}
+}}
+</style>
+</head>
+<body>
+<p class="links"><a href="index.html" target="_self">← all series</a>
+<a href="cumulative.html" target="_self">cumulative index</a></p>
+<h1>Cumulative series compared</h1>
+<p class="metric">Every panel of the <a href="cumulative.html"
+target="_self">cumulative index</a> on one chart: the same step lines the
+committed PNGs draw, from the same numbers. Pick series on the left; the
+defaults index each line to its value on the reference date and use a log
+axis, so equal slopes are equal growth rates whatever the units.</p>
+<div class="controls">
+  <label>Y axis:
+    <select id="scale"><option value="log">log</option>
+    <option value="linear">linear</option></select></label>
+  <label>Normalise:
+    <select id="norm">
+      <option value="index">= 1 on reference date</option>
+      <option value="share">share of latest value</option>
+      <option value="raw">raw values</option></select></label>
+  <label>Reference <input id="ref" type="number" step="1" min="1900"
+    max="2026" value="2020"></label>
+  <label>From <input id="from" type="number" step="1" min="1900" max="2026"
+    value="2000"></label>
+  <label>Colour by:
+    <select id="colour"><option value="series">series</option>
+    <option value="domain">domain</option></select></label>
+</div>
+<div class="layout">
+  <div class="picker" id="picker"></div>
+  <div class="chartwrap">
+    <div id="chart"></div>
+    <p class="dropped" id="dropped"></p>
+  </div>
+</div>
+<footer>Lines are read from each folder's <code>cumulative-&lt;slug&gt;.json</code>,
+written by the folder's <code>figure.py</code> beside its PNG and compared in
+CI; <em>counts</em> and <em>events</em> rise from zero, <em>remaining</em>
+falls toward zero, and a <em>staircase</em> is a standing record's own value
+(the tooltip says which direction is better). A series with no value on the
+reference date, or a zero there, is listed under the chart instead of drawn.
+Rebuilt by <code>tools/build_docs.py</code>.</footer>
+<script>
+const SERIES = {series};
+const DOMAINS = {domains};
+const PALETTE = ["#4e79a7","#f28e2b","#e15759","#76b7b2","#59a14f","#edc948",
+  "#b07aa1","#ff9da7","#9c755f","#bab0ac","#1f77b4","#ff7f0e","#2ca02c",
+  "#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf",
+  "#393b79","#637939","#8c6d31","#843c39","#7b4173","#5254a3","#8ca252",
+  "#bd9e39","#ad494a","#a55194","#6b6ecf","#b5cf6b","#e7ba52","#d6616b",
+  "#ce6dbd","#9c9ede","#cedb9c","#e7cb94","#e7969c","#de9ed6"];
+const DOMAIN_COLOURS = {domain_colours};
+SERIES.forEach((s, i) => {{ s.colour = PALETTE[i % PALETTE.length]; }});
+
+const $ = id => document.getElementById(id);
+const state = {{ selected: new Set(SERIES.map(s => s.key)) }};
+
+function readHash() {{
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (h.has("s")) state.selected = new Set(h.get("s").split(",").filter(Boolean));
+  for (const k of ["scale", "norm", "ref", "from", "colour"])
+    if (h.has(k)) $(k).value = h.get(k);
+}}
+function writeHash() {{
+  const h = new URLSearchParams();
+  if (state.selected.size !== SERIES.length) h.set("s", [...state.selected].join(","));
+  for (const k of ["scale", "norm", "ref", "from", "colour"]) h.set(k, $(k).value);
+  history.replaceState(null, "", "#" + h.toString());
+}}
+
+function toDate(yf) {{
+  const year = Math.floor(yf);
+  return new Date(Date.UTC(year, 0, 1) + (yf - year) * 365.25 * 864e5);
+}}
+function valueAt(s, t) {{  // step-after: the last value observed at or before t
+  let v = null;
+  for (let i = 0; i < s.x.length; i++) {{ if (s.x[i] <= t) v = s.y[i]; else break; }}
+  return v;
+}}
+
+function buildPicker() {{
+  const box = $("picker");
+  box.innerHTML = "";
+  for (const domain of DOMAINS) {{
+    const members = SERIES.filter(s => s.domain === domain);
+    if (!members.length) continue;
+    const h = document.createElement("h4");
+    h.innerHTML = `${{domain}} <span><a href="#" data-all="${{domain}}">all</a>` +
+                  `<a href="#" data-none="${{domain}}">none</a></span>`;
+    box.appendChild(h);
+    for (const s of members) {{
+      const label = document.createElement("label");
+      const cb = document.createElement("input");
+      cb.type = "checkbox"; cb.checked = state.selected.has(s.key); cb.dataset.key = s.key;
+      label.appendChild(cb);
+      const sw = document.createElement("span");
+      sw.className = "swatch"; sw.style.background = s.colour;
+      label.appendChild(sw);
+      label.appendChild(document.createTextNode(" " + s.name));
+      label.title = s.subtitle;
+      box.appendChild(label);
+    }}
+  }}
+  box.onchange = e => {{
+    if (e.target.dataset.key) {{
+      e.target.checked ? state.selected.add(e.target.dataset.key)
+                       : state.selected.delete(e.target.dataset.key);
+      render();
+    }}
+  }};
+  box.onclick = e => {{
+    const all = e.target.dataset.all, none = e.target.dataset.none;
+    if (!all && !none) return;
+    e.preventDefault();
+    for (const s of SERIES) if (s.domain === (all || none))
+      all ? state.selected.add(s.key) : state.selected.delete(s.key);
+    box.querySelectorAll("input").forEach(cb => cb.checked = state.selected.has(cb.dataset.key));
+    render();
+  }};
+}}
+
+function render() {{
+  const scale = $("scale").value, norm = $("norm").value;
+  const ref = +$("ref").value, from = +$("from").value, byDomain = $("colour").value === "domain";
+  const values = [], dropped = [];
+  for (const s of SERIES) {{
+    if (!state.selected.has(s.key)) continue;
+    let base = 1;
+    if (norm === "index") {{
+      base = valueAt(s, ref + 0.5);  // mid-year of the reference year
+      if (!(base > 0)) {{
+        // Nothing stood in the reference year (the series starts later, or
+        // was still at zero): index to its first non-zero value instead,
+        // and say so under the chart.
+        const i = s.y.findIndex(v => v > 0);
+        if (i >= 0 && s.x[i] > ref) {{
+          base = s.y[i];
+          dropped.push(`${{s.name}} is indexed to its first value (${{Math.floor(s.x[i])}}) instead of ${{ref}}`);
+        }} else base = null;
+      }}
+    }} else if (norm === "share") base = s.kind === "remaining" ? s.y[0] : s.y[s.y.length - 1];
+    if (norm !== "raw" && !(base > 0)) {{
+      dropped.push(`${{s.name}} is not drawn (no value to normalise by)`);
+      continue;
+    }}
+    const xs = s.x.slice(), ys = s.y.slice();
+    if (xs[xs.length - 1] < s.now) {{ xs.push(s.now); ys.push(ys[ys.length - 1]); }}
+    // Enter the window on the value already standing at its left edge.
+    const startV = valueAt(s, from);
+    const pts = [];
+    if (startV !== null && xs[0] < from) pts.push([from, startV]);
+    for (let i = 0; i < xs.length; i++) if (xs[i] >= from) pts.push([xs[i], ys[i]]);
+    let kept = 0;
+    for (const [x, y] of pts) {{
+      const v = y / base;
+      if (scale === "log" && !(v > 0)) continue;
+      kept++;
+      values.push({{ name: s.name, domain: s.domain, date: toDate(x).toISOString(),
+                    value: v, raw: y, unit: s.ylabel, note: s.subtitle, url: s.url,
+                    colour: byDomain ? DOMAIN_COLOURS[s.domain] : s.colour }});
+    }}
+    if (!kept) dropped.push(`${{s.name}} has nothing to draw in this window`);
+  }}
+  $("dropped").textContent = dropped.length ? "Note: " + dropped.join("; ") + "." : "";
+  const names = [...new Set(values.map(v => v.name))];
+  const colours = names.map(n => values.find(v => v.name === n).colour);
+  const yTitle = norm === "index" ? `value relative to ${{ref}} (= 1)` :
+                 norm === "share" ? "share of latest value" : "value (mixed units)";
+  const spec = {{
+    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    width: "container", height: 520,
+    data: {{ values }},
+    params: [{{ name: "pick", select: {{ type: "point", fields: ["name"], on: "pointerover",
+                                         clear: "pointerout" }} }}],
+    mark: {{ type: "line", interpolate: "step-after", strokeWidth: 1.7, clip: true }},
+    encoding: {{
+      x: {{ field: "date", type: "temporal", title: null,
+           axis: {{ format: "%Y", labelOverlap: "greedy", tickCount: "year" }} }},
+      y: {{ field: "value", type: "quantitative", title: yTitle,
+           scale: {{ type: scale, nice: scale !== "log", zero: scale !== "log" }},
+           axis: {{ format: norm === "raw" ? "~s" : "~g" }} }},
+      color: {{ field: "name", type: "nominal", title: null, legend: null,
+               scale: {{ domain: names, range: colours }} }},
+      opacity: {{ condition: {{ param: "pick", value: 1, empty: true }}, value: 0.18 }},
+      strokeWidth: {{ condition: {{ param: "pick", value: 2.6, empty: false }}, value: 1.6 }},
+      href: {{ field: "url" }},
+      tooltip: [{{ field: "name", title: "series" }},
+                {{ field: "date", type: "temporal", title: "date", format: "%Y-%m-%d" }},
+                {{ field: "value", type: "quantitative", title: yTitle, format: ".3~g" }},
+                {{ field: "raw", type: "quantitative", title: "value", format: ",.6~g" }},
+                {{ field: "unit", title: "unit" }},
+                {{ field: "note", title: "reading" }}]
+    }},
+    config: {{ view: {{ stroke: null }}, axis: {{ grid: true, gridColor: "#eef1f4" }} }}
+  }};
+  vegaEmbed("#chart", spec, {{ actions: {{ export: true, source: false, compiled: false,
+                                           editor: false }} }});
+  writeHash();
+}}
+
+readHash();
+buildPicker();
+for (const k of ["scale", "norm", "ref", "from", "colour"]) $(k).onchange = render;
+render();
+</script>
+</body>
+</html>
+"""
+
+# The domain vocabulary of FORMAT.md front matter, in the index's order, and
+# one hue each for the colour-by-domain view (the collection's slate for the
+# denominator frames outside the three domains).
+COMPARE_DOMAINS = ("vulnerabilities", "mathematics", "algorithms",
+                   "outside the three domains")
+COMPARE_DOMAIN_COLOURS = {"vulnerabilities": "#e15759", "mathematics": "#4e79a7",
+                          "algorithms": "#59a14f",
+                          "outside the three domains": "#8c96a0"}
+
+
+def compare_series() -> list[dict]:
+    """Every cumulative panel's lines, from the sidecars beside the PNGs.
+
+    One entry per drawn line: a folder whose panel holds two or three ladders
+    contributes each as its own selectable series, named after the folder
+    and the line's own label.
+    """
+    out = []
+    for sidecar in sorted((ROOT / "problems").glob("*/cumulative-*.json")):
+        slug = sidecar.parent.name
+        text = (sidecar.parent / "README.md").read_text(encoding="utf-8")
+        domain = front_matter(text).get("Domain", "").lower()
+        if domain not in COMPARE_DOMAINS:
+            domain = COMPARE_DOMAINS[-1]
+        panel = json.loads(sidecar.read_text(encoding="utf-8"))
+        folder_title = document_title(text) or slug
+        for line in panel["series"]:
+            name = folder_title if not line["label"] else \
+                f"{folder_title} — {line['label']}"
+            out.append({
+                "key": slug if not line["label"] else f"{slug}:{line['label']}",
+                "slug": slug, "name": name, "domain": domain,
+                "kind": panel["kind"], "subtitle": panel["subtitle"],
+                "ylabel": panel["ylabel"], "now": panel["now"],
+                "url": f"{slug}.html", "x": line["x"], "y": line["y"],
+            })
+    rank = {d: i for i, d in enumerate(COMPARE_DOMAINS)}
+    out.sort(key=lambda s: (rank[s["domain"]], s["name"]))
+    return out
+
+
+def render_compare() -> str:
+    series = compare_series()
+    description = (f"{len(series)} cumulative series from the collection on "
+                   "one interactive chart, with a log axis and normalisation "
+                   "to a reference date.")
+    dump = lambda value: json.dumps(value, separators=(",", ":"),  # noqa: E731
+                                    sort_keys=True, ensure_ascii=False)
+    return COMPARE_TEMPLATE.format(
+        description=html.escape(description), vega=VEGA_CDN, style=STYLE,
+        series=dump(series), domains=dump(list(COMPARE_DOMAINS)),
+        domain_colours=dump(COMPARE_DOMAIN_COLOURS))
+
+
+# Pages built from the folders as a whole rather than from one document.
+GENERATED_PAGES = {"compare.html": render_compare}
+
+
 def charts_for(slug: str):
     """The folder's declared interactive charts, from its chart_spec.py.
 
@@ -371,8 +676,10 @@ def main() -> int:
             render_page(slug, charts_for(slug)), encoding="utf-8")
     for page, source in ROOT_PAGES.items():
         (DOCS / page).write_text(render_root(source), encoding="utf-8")
-    print(f"wrote docs/: {len(folders)} series pages and "
-          f"{len(ROOT_PAGES)} root pages")
+    for page, render in GENERATED_PAGES.items():
+        (DOCS / page).write_text(render(), encoding="utf-8")
+    print(f"wrote docs/: {len(folders)} series pages, {len(ROOT_PAGES)} root "
+          f"pages and {len(GENERATED_PAGES)} generated page(s)")
     return 0
 
 

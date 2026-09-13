@@ -163,6 +163,15 @@ class Problem:
         return sorted(self.folder.glob("*.png"))
 
     @property
+    def sidecars(self) -> list[Path]:
+        """cumulative-<slug>.json: the cumulative panel's lines as data.
+
+        Written by lib/cumulative.py beside the PNG, read by the docs
+        comparison page; reproduced and compared like the PNG.
+        """
+        return sorted(self.folder.glob("cumulative-*.json"))
+
+    @property
     def csvs(self) -> list[Path]:
         return sorted(self.folder.glob("*.csv"))
 
@@ -272,6 +281,16 @@ class Problem:
                 self.fail("Figure",
                           f"figure.py draws no cumulative-{self.slug}.png for "
                           "CUMULATIVE.md, and the document does not say why not")
+            # The panel's data file travels with its PNG: docs/compare.html
+            # draws from it, so a PNG without one leaves that page a series
+            # short, and one without a PNG is left over from a removed view.
+            if ((self.folder / f"cumulative-{self.slug}.png").exists()
+                    and not (self.folder / f"cumulative-{self.slug}.json").exists()):
+                self.fail("Figure", f"cumulative-{self.slug}.json is missing; "
+                                    "run `make figures`")
+            for sidecar in self.sidecars:
+                if not sidecar.with_suffix(".png").exists():
+                    self.fail("Figure", f"{sidecar.name} has no matching PNG")
 
         if not self.csvs:
             self.fail("Data", "holds no CSV")
@@ -445,7 +464,10 @@ def reproduce(problems: list[Problem]) -> None:
             else:
                 problem.status["Reproduces"] = FAIL
             continue
-        before = {path: path.read_bytes() for path in problem.figures}
+        # The cumulative panel's data file is an output of the same script
+        # and gets the same treatment as the PNGs.
+        outputs = problem.figures + problem.sidecars
+        before = {path: path.read_bytes() for path in outputs}
         run = subprocess.run([sys.executable, str(script)], cwd=ROOT,
                              capture_output=True, text=True)
         stale = [path for path, data in before.items() if path.read_bytes() != data]
@@ -460,7 +482,7 @@ def reproduce(problems: list[Problem]) -> None:
             problem.fail("Reproduces",
                          f"{', '.join(p.name for p in stale)} differs from what "
                          "figure.py draws today, so the committed figure is stale")
-        for path in problem.figures:
+        for path in problem.figures + problem.sidecars:
             if path not in before:
                 problem.fail("Reproduces", f"figure.py wrote {path.name}, which "
                                            "was not committed")
@@ -681,6 +703,20 @@ def stale_docs(problems: list[Problem]) -> list[str]:
             rendered = build_docs.render_root(source)
         except Exception as error:
             out.append(f"docs builder for {source} fails: {error}")
+            continue
+        if page.read_text(encoding="utf-8") != rendered:
+            out.append(f"docs/{page_name} is stale; run `make docs`")
+    # And the pages built from the folders as a whole (the cumulative
+    # comparison), which move whenever any panel's data file does.
+    for page_name, render in build_docs.GENERATED_PAGES.items():
+        page = ROOT / "docs" / page_name
+        if not page.exists():
+            out.append(f"docs/{page_name} is missing; run `make docs`")
+            continue
+        try:
+            rendered = render()
+        except Exception as error:
+            out.append(f"docs builder for {page_name} fails: {error}")
             continue
         if page.read_text(encoding="utf-8") != rendered:
             out.append(f"docs/{page_name} is stale; run `make docs`")

@@ -1,0 +1,29 @@
+{
+ "kind": "remaining",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    1975.0,
+    1975.0,
+    2016.0,
+    2016.0,
+    2026.0
+   ],
+   "y": [
+    12.0,
+    11.0,
+    10.0,
+    9.0,
+    8.0
+   ]
+  }
+ ],
+ "source_label": "Thomas Bloom's Top 10 Erdős Problems (blog:5)",
+ "source_url": "Thomas Bloom's Top 10 Erdős Problems (blog:5)",
+ "subtitle": "Scored rows minus cumulative dated resolutions; undated statuses do not move the line",
+ "title": "Top 10 Erdős problems",
+ "ylabel": "Rows without a dated resolution",
+ "ylog": false
+}

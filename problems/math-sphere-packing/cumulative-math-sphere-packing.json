@@ -1,0 +1,37 @@
+{
+ "kind": "events",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    1905.0,
+    1905.0,
+    1947.0,
+    1947.0,
+    1992.0,
+    2011.0,
+    2013.0,
+    2023.0,
+    2025.0
+   ],
+   "y": [
+    0.0,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0
+   ]
+  }
+ ],
+ "source_label": "sphere-packing-lower-bound-records.csv; source URLs carried row-by-row",
+ "source_url": "https://arxiv.org/abs/1105.3779",
+ "subtitle": "Cumulative count of published improvements; the bound's changing functional form precludes one numeric axis",
+ "title": "Sphere-packing lower bound: cumulative record steps",
+ "ylabel": "Cumulative improvements to the bound",
+ "ylog": false
+}

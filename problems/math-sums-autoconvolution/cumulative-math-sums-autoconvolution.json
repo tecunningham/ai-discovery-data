@@ -1,0 +1,50 @@
+{
+ "kind": "staircase",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "C_6.44",
+   "x": [
+    2007.0,
+    2007.0,
+    2007.0,
+    2007.0,
+    2025.0,
+    2025.0,
+    2025.0,
+    2025.0
+   ],
+   "y": [
+    1.07921778,
+    1.1078,
+    1.1165,
+    1.14465,
+    1.1479,
+    1.1584,
+    1.17305,
+    1.173077
+   ]
+  },
+  {
+   "label": "C_6.3",
+   "x": [
+    2010.0,
+    2025.0,
+    2025.0,
+    2025.0
+   ],
+   "y": [
+    0.88922,
+    0.8962,
+    0.901564,
+    0.961
+   ]
+  }
+ ],
+ "source_label": "sums-autoconvolution-records.csv, transcribed from the paper and cited follow-ons",
+ "source_url": "arXiv:2511.02864 bibliography ref 138",
+ "subtitle": "Two related standing lower-bound ladders; higher is better",
+ "title": "Sums-and-differences and autoconvolution constants: standing records",
+ "ylabel": "Best known lower bound",
+ "ylog": false
+}

@@ -1,0 +1,23 @@
+{
+ "kind": "remaining",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2000.0,
+    2003.0
+   ],
+   "y": [
+    7.0,
+    6.0
+   ]
+  }
+ ],
+ "source_label": "Clay Mathematics Institute",
+ "source_url": "Clay Mathematics Institute",
+ "subtitle": "Scored rows minus cumulative dated resolutions; undated statuses do not move the line",
+ "title": "Millennium Prize Problems",
+ "ylabel": "Rows without a dated resolution",
+ "ylog": false
+}

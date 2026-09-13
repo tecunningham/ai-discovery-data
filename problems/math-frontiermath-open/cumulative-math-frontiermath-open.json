@@ -1,0 +1,33 @@
+{
+ "kind": "events",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2026.2218,
+    2026.2218,
+    2026.4353,
+    2026.564,
+    2026.5749,
+    2026.6078,
+    2026.6105
+   ],
+   "y": [
+    0.0,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ]
+  }
+ ],
+ "source_label": "epoch.ai problem pages",
+ "source_url": "https://epoch.ai/frontiermath/open-problems",
+ "subtitle": "Cumulative dated solution events; one undated solve omitted",
+ "title": "FrontierMath Open Problems",
+ "ylabel": "Problems marked solved",
+ "ylog": false
+}

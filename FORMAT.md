@@ -112,6 +112,10 @@ rows later; the CSV remains the complete table.
   CUMULATIVE.md panel is `cumulative-<slug>.png`. Both prefixes are reserved
   for exactly those names — the index and the cumulative page find the
   figures by name — and `tools/check.py` rejects a near-miss.
+- Beside the cumulative panel sits `cumulative-<slug>.json`, the panel's
+  step lines as data, written by the same `figure.py` run through
+  `lib/cumulative.py` and reproduced in CI like the PNG. The docs site's
+  comparison page draws from it; it is never hand-edited.
 - Secondary figures in new folders are `<aspect>-<slug>.png`
   (`severity-cyber-openssl.png`); several older folders predate the rule and
   keep their names.

@@ -1,0 +1,31 @@
+{
+ "kind": "remaining",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    1998.0,
+    2002.0,
+    2003.0,
+    2007.0,
+    2016.0,
+    2026.0
+   ],
+   "y": [
+    19.0,
+    18.0,
+    17.0,
+    16.0,
+    15.0,
+    14.0
+   ]
+  }
+ ],
+ "source_label": "Wikipedia Smale's problems",
+ "source_url": "Independent Lean and Isabelle verifications (2026)",
+ "subtitle": "Scored rows minus cumulative dated resolutions; undated statuses do not move the line",
+ "title": "Smale's problems",
+ "ylabel": "Rows without a dated resolution",
+ "ylog": false
+}

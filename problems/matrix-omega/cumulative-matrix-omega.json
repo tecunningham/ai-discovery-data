@@ -1,0 +1,51 @@
+{
+ "kind": "staircase",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    1969.0,
+    1978.0,
+    1979.0,
+    1981.0,
+    1981.0,
+    1981.0,
+    1986.0,
+    1990.0,
+    2010.0,
+    2012.0,
+    2014.0,
+    2020.0,
+    2022.0,
+    2024.0,
+    2024.0,
+    2026.0
+   ],
+   "y": [
+    2.8074,
+    2.796,
+    2.78,
+    2.522,
+    2.517,
+    2.496,
+    2.479,
+    2.3755,
+    2.3737,
+    2.3729,
+    2.3728639,
+    2.3728596,
+    2.371866,
+    2.371552,
+    2.371339,
+    2.371177
+   ]
+  }
+ ],
+ "source_label": "matrix-multiplication-omega.csv, a secondary chronology",
+ "source_url": "https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms",
+ "subtitle": "Best proved asymptotic upper bound; lower is better",
+ "title": "Matrix-multiplication exponent ω: standing record",
+ "ylabel": "Best proved upper bound on ω",
+ "ylog": false
+}

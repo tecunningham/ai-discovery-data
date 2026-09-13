@@ -1,0 +1,45 @@
+{
+ "kind": "remaining",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2025.6626,
+    2025.7447,
+    2025.8296,
+    2025.909,
+    2025.9966,
+    2026.0821,
+    2026.1588,
+    2026.2437,
+    2026.3258,
+    2026.4107,
+    2026.4928,
+    2026.5777,
+    2026.6051
+   ],
+   "y": [
+    637,
+    683,
+    698,
+    698,
+    689,
+    703,
+    696,
+    691,
+    692,
+    673,
+    670,
+    658,
+    658
+   ]
+  }
+ ],
+ "source_label": "teorth/erdosproblems statistics history",
+ "source_url": "https://github.com/teorth/erdosproblems",
+ "subtitle": "Catalogued minus marked solved at each site snapshot; the catalogue itself keeps growing",
+ "title": "Erdős problems: open problems remaining",
+ "ylabel": "Problems open at snapshot",
+ "ylog": false
+}

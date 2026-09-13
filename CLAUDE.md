@@ -11,9 +11,10 @@ page's interactive charts), and the committed PNGs.
 - **Never run a `figure.py` directly.** Committed PNGs are byte-reproducible
   only in the pinned container: `make figure PROBLEM=<slug>` or
   `make figures`. The save helper rejects any other renderer.
-- **Never hand-edit a PNG, `docs/*.html`, or the generated blocks in
-  README.md / CUMULATIVE.md** (between `BEGIN/END GENERATED` markers). They
-  are outputs: `make figures`, `make docs`, `make index`.
+- **Never hand-edit a PNG, a `cumulative-<slug>.json`, `docs/*.html`, or
+  the generated blocks in README.md / CUMULATIVE.md** (between `BEGIN/END
+  GENERATED` markers). They are outputs: `make figures` (PNGs and the JSON
+  beside each cumulative panel), `make docs`, `make index`.
 - **Do not rename CSVs or PNGs casually.** The blog at tecunningham.github.io
   resolves CSVs by bare filename and embeds the PNGs by URL, so a rename here
   needs a matching change there. Filenames are unique across all folders.
@@ -38,7 +39,14 @@ page's interactive charts), and the committed PNGs.
   It merges itself only when every check passes and no Verdict term moved;
   otherwise the PR waits for a person. If you are the Claude step inside it,
   edit only `problems/*/README.md` and write anything that was more than
-  arithmetic to `.weekly/judgment-calls.md`.
+  arithmetic to `.weekly/judgment-calls.md`. If you are instead the
+  scheduled session finishing an open `auto/weekly-refresh-*` PR: same
+  rules, but do not run `make index` or `make docs` (no pinned renderer
+  there); push the README edits and let
+  `.github/workflows/refresh-finish.yml` regenerate, re-check and merge.
+  Put judgment calls in the commit message under a `Judgment calls:` line
+  (or in a PR comment opening with `**Judgment calls**`); either holds the
+  PR for a person.
 
 ## Layout of the shared code
 

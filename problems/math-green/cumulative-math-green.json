@@ -1,0 +1,48 @@
+{
+ "better": "down",
+ "kind": "remaining",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2018.0,
+    2019.0,
+    2019.0,
+    2021.0,
+    2021.0,
+    2022.0,
+    2023.0,
+    2023.0,
+    2023.0,
+    2023.0,
+    2024.0,
+    2025.0,
+    2025.0,
+    2025.0
+   ],
+   "y": [
+    101.0,
+    100.0,
+    99.0,
+    98.0,
+    97.0,
+    96.0,
+    95.0,
+    94.0,
+    93.0,
+    92.0,
+    91.0,
+    90.0,
+    89.0,
+    88.0
+   ]
+  }
+ ],
+ "source_label": "Ben Green's 100 open problems (December 2025 revision)",
+ "source_url": "Ben Green's 100 open problems (December 2025 revision)",
+ "subtitle": "Scored rows minus cumulative dated resolutions; undated statuses do not move the line",
+ "title": "Ben Green's 100 open problems",
+ "ylabel": "Rows without a dated resolution",
+ "ylog": false
+}

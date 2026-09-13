@@ -1,0 +1,30 @@
+{
+ "better": "down",
+ "kind": "staircase",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2019.5038,
+    2021.4107,
+    2023.5366,
+    2024.0876,
+    2024.6735
+   ],
+   "y": [
+    116.673681,
+    115.352938,
+    114.156155,
+    112.578322,
+    110.793128
+   ]
+  }
+ ],
+ "source_label": "prize.hutter1.net and mattmahoney.net/dc/text.html, vendored as enwik9-records.csv",
+ "source_url": "https://prize.hutter1.net/",
+ "subtitle": "Standing CPU-capped records on the 1 GB corpus; lower total size is better",
+ "title": "Hutter Prize enwik9: standing record",
+ "ylabel": "Total size, MB (program + archive)",
+ "ylog": false
+}

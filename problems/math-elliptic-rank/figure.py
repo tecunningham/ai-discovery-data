@@ -112,8 +112,13 @@ def frontier() -> None:
             ax.scatter([p[0] for p in pts], [p[1] for p in pts], color=colour,
                        s=45, edgecolor="white", linewidth=0.6, zorder=4)
     for target, (label, offset, align) in LABELS.items():
-        row = next(row for row in reversed(records)
-                   if row["discoverer"] == target)
+        # A refetch can rename or supersede a labelled discoverer (the
+        # frontier moved past rank 30 in 2026); an absent target loses its
+        # annotation rather than failing the whole render.
+        row = next((row for row in reversed(records)
+                    if row["discoverer"] == target), None)
+        if row is None:
+            continue
         ax.annotate(label, (int(row["year"]), int(row["rank"])),
                     xytext=offset, textcoords="offset points", ha=align,
                     fontsize=7.5, color=colour_of(row))

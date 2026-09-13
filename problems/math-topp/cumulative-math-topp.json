@@ -1,0 +1,56 @@
+{
+ "better": "down",
+ "kind": "remaining",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2000.0,
+    2000.0,
+    2002.0,
+    2003.0,
+    2004.0,
+    2004.0,
+    2004.0,
+    2006.0,
+    2007.0,
+    2008.0,
+    2009.0,
+    2009.0,
+    2009.0,
+    2010.0,
+    2015.0,
+    2019.0,
+    2023.0,
+    2024.0
+   ],
+   "y": [
+    78.0,
+    77.0,
+    76.0,
+    75.0,
+    74.0,
+    73.0,
+    72.0,
+    71.0,
+    70.0,
+    69.0,
+    68.0,
+    67.0,
+    66.0,
+    65.0,
+    64.0,
+    63.0,
+    62.0,
+    61.0
+   ]
+  }
+ ],
+ "source_label": "TOPP GitHub Problems/ (edemaine/topp)",
+ "source_url": "TOPP GitHub Problems/ (edemaine/topp)",
+ "subtitle": "Scored rows minus cumulative dated resolutions; undated statuses do not move the line",
+ "title": "The Open Problems Project",
+ "ylabel": "Rows without a dated resolution",
+ "ylog": false
+}

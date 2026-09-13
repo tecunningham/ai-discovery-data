@@ -15,6 +15,13 @@ Everything between steps lives under .weekly/ (gitignored): fetch.json,
 news.json, review.json, the charts, and the judgment-calls.md the prose pass
 writes when a change was more than arithmetic.
 
+The prose pass has two homes. With a CLAUDE_CODE_OAUTH_TOKEN secret it runs
+inside the Monday workflow. Without one the workflow opens the PR with the
+prose still stale, a scheduled Claude Code session restates the facts and
+pushes to the branch, and .github/workflows/refresh-finish.yml picks up that
+push: `--base origin/main` makes scan and review see the whole branch rather
+than the last commit, and it merges when the review allows.
+
 The diff is against HEAD, not against a previous fetch. The nightly scan this
 replaced kept its own baseline so that a series the repo had not caught up
 with was reported once; now the repository catches up every week, so "what
@@ -126,7 +133,10 @@ DOMAIN_ORDER = ("mathematics", "algorithms", "vulnerabilities",
 TIERS = ("headline", "notable", "routine")
 
 # The fetchers `make fetch` skips, for the same reasons the Makefile gives.
-HAND_RUN_FETCHERS = {"problems/math-antedb/fetch.py"}
+HAND_RUN_FETCHERS = {
+    "problems/math-antedb/fetch.py",               # needs expdb and pycddlib<3
+    "problems/math-alphaevolve-inventory/fetch.py",  # needs --paper-text and --repo
+}
 
 
 # ---------------------------------------------------------------- CSV diffing
@@ -137,8 +147,14 @@ def parse_rows(text: str) -> tuple[list[str], list[dict[str, str]]]:
     return list(fields), [dict(row) for row in reader]
 
 
+# The commit the working tree is compared with. HEAD in the Monday run, where
+# HEAD is main; origin/main in the finishing run, which checks out the refresh
+# branch after the prose pass has been pushed to it (--base sets it).
+BASE = "HEAD"
+
+
 def committed_text(relpath: str) -> str:
-    result = subprocess.run(["git", "show", f"HEAD:{relpath}"],
+    result = subprocess.run(["git", "show", f"{BASE}:{relpath}"],
                             capture_output=True, cwd=ROOT)
     return result.stdout.decode("utf-8") if result.returncode == 0 else ""
 
@@ -587,11 +603,17 @@ ALLOWED_CHANGES = (
 
 
 def changed_paths() -> list[str]:
-    out = subprocess.run(["git", "status", "--porcelain", "--untracked-files=all"],
-                         capture_output=True, text=True, cwd=ROOT, check=True).stdout
+    """Every path that differs from BASE: committed on the branch or not."""
+    status = subprocess.run(["git", "status", "--porcelain", "--untracked-files=all"],
+                            capture_output=True, text=True, cwd=ROOT, check=True).stdout
     # A rename prints "old -> new"; the new path is the one that exists.
-    return [line[3:].split(" -> ")[-1].strip()
-            for line in out.splitlines() if line.strip()]
+    paths = {line[3:].split(" -> ")[-1].strip()
+             for line in status.splitlines() if line.strip()}
+    if BASE != "HEAD":
+        diff = subprocess.run(["git", "diff", "--name-only", BASE],
+                              capture_output=True, text=True, cwd=ROOT, check=True).stdout
+        paths.update(line.strip() for line in diff.splitlines() if line.strip())
+    return sorted(paths)
 
 
 def verdict_term(text: str) -> str:
@@ -620,10 +642,22 @@ def cmd_review(args: argparse.Namespace) -> int:
             reasons.append(f"{readme.parent.name}: Verdict moved from "
                            f"“{before}” to “{after}”")
     notes = STATE / "judgment-calls.md"
-    if notes.exists() and notes.read_text(encoding="utf-8").strip():
+    judgment = notes.read_text(encoding="utf-8").strip() if notes.exists() else ""
+    if BASE != "HEAD":
+        # A prose pass made outside the workflow has no .weekly/ to write
+        # into; it reports judgment calls in its commit message, under a
+        # "Judgment calls:" line, which the branch carries to this run.
+        log = subprocess.run(["git", "log", "--format=%B%x00", f"{BASE}..HEAD"],
+                             capture_output=True, text=True, cwd=ROOT).stdout
+        for body in log.split("\0"):
+            _, marker, tail = body.partition("Judgment calls:")
+            if marker and tail.strip():
+                judgment = (judgment + "\n\n" + tail.strip()).strip()
+    if judgment:
         reasons.append("the prose pass flagged judgment calls (below)")
     for step in args.failed or []:
         reasons.append(f"the {step} step failed; see the workflow run")
+    reasons.extend(args.reason or [])
     if args.check_failed:
         log = Path(args.check_log).read_text(encoding="utf-8") \
             if args.check_log and Path(args.check_log).exists() else ""
@@ -635,8 +669,7 @@ def cmd_review(args: argparse.Namespace) -> int:
     review = {
         "hold": bool(reasons),
         "reasons": reasons,
-        "judgment_calls": notes.read_text(encoding="utf-8").strip()
-        if notes.exists() else "",
+        "judgment_calls": judgment,
     }
     write_json("review.json", review)
     github_output(hold="true" if reasons else "false")
@@ -940,10 +973,14 @@ def cmd_email(args: argparse.Namespace) -> int:
 
 
 def main() -> int:
+    global BASE
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("--base", default="HEAD", metavar="REF",
+                        help="commit to compare the tree with (default HEAD; "
+                             "the finishing run passes origin/main)")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("fetch", help="run every automatable fetcher").set_defaults(func=cmd_fetch)
-    sub.add_parser("scan", help="diff the tree against HEAD, tier and chart").set_defaults(func=cmd_scan)
+    sub.add_parser("scan", help="diff the tree against the base, tier and chart").set_defaults(func=cmd_scan)
     sub.add_parser("bump-as-of", help="move AS_OF_DATE to today").set_defaults(func=cmd_bump_as_of)
     review = sub.add_parser("review", help="decide whether a person is needed")
     review.add_argument("--check-log", help="output of make index / check-figures")
@@ -951,6 +988,8 @@ def main() -> int:
                         help="the check exited non-zero")
     review.add_argument("--failed", action="append", metavar="STEP",
                         help="an earlier step that failed (repeatable)")
+    review.add_argument("--reason", action="append", metavar="TEXT",
+                        help="a further reason to hold the PR (repeatable)")
     review.set_defaults(func=cmd_review)
     sub.add_parser("pr-body", help="print the PR description").set_defaults(func=cmd_pr_body)
     email = sub.add_parser("email", help="send the digest")
@@ -958,6 +997,7 @@ def main() -> int:
                        help="write email.txt and email.html to DIR instead of sending")
     email.set_defaults(func=cmd_email)
     args = parser.parse_args()
+    BASE = args.base
     return args.func(args)
 
 

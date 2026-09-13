@@ -15,6 +15,8 @@ authorship; the folder charts keep the finder splits and the event colouring.
 
 from __future__ import annotations
 
+import json
+import re
 from pathlib import Path
 
 from matplotlib.lines import Line2D
@@ -49,9 +51,53 @@ LINE_STYLES = ("-", "--", ":")
 Series = tuple[str, list[float], list[float]]
 
 
+def write_sidecar(out_path: Path, *, kind: str, better: str, title: str,
+                  subtitle: str, ylabel: str, series: list[Series], ylog: bool,
+                  source_label: str, source_url: str) -> None:
+    """The panel's step lines as cumulative-<slug>.json beside the PNG.
+
+    docs/compare.html draws every panel on one interactive chart, and the
+    only honest source for its lines is the same numbers the PNG was drawn
+    from — computed here, by the folder's own figure.py, not recomputed from
+    the CSVs by a second implementation that could drift. So the drawing
+    writes them out, in the pinned container with the PNG, and
+    tools/check.py --reproduce compares the file the same way it compares
+    the image. tools/build_docs.py reads these without matplotlib.
+
+    ``kind`` says how to read the line: ``counts`` and ``events`` rise from
+    zero, ``remaining`` declines toward zero, ``staircase`` is a standing
+    record's own value. ``better`` is the direction of progress, ``up`` or
+    ``down``, so the comparison page can turn every line the same way. x is
+    a year fraction, rounded to four places (about nine hours) so the file
+    does not carry float noise; y is left exact. The line is written as
+    given, without the flat extension to the snapshot date, which the page
+    adds itself from ``now``.
+    """
+    data = {
+        "kind": kind,
+        "better": better,
+        "title": title,
+        "subtitle": subtitle,
+        "ylabel": ylabel,
+        "ylog": ylog,
+        "now": round(NOW, 4),
+        "source_label": source_label,
+        "source_url": source_url,
+        "series": [
+            {"label": label, "x": [round(x, 4) for x in xs], "y": list(ys)}
+            for label, xs, ys in series
+        ],
+    }
+    sidecar = Path(out_path).with_suffix(".json")
+    sidecar.write_text(json.dumps(data, indent=1, sort_keys=True,
+                                  ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def _draw(
     out_path: Path,
     *,
+    kind: str,
+    better: str,
     title: str,
     subtitle: str,
     ylabel: str,
@@ -77,6 +123,9 @@ def _draw(
     caller (the ledger view) whose chart carries marks the plain line cannot:
     an attribution point and the terminal remainder's composition.
     """
+    write_sidecar(out_path, kind=kind, better=better, title=title,
+                  subtitle=subtitle, ylabel=ylabel, series=series, ylog=ylog,
+                  source_label=source_label, source_url=source_url)
     fig, ax = new_chart(title, subtitle)
     for index, (label, xs, ys) in enumerate(series):
         if xs[-1] < NOW:
@@ -137,6 +186,8 @@ def counts_chart(
         ys.append(running)
     _draw(
         out_path,
+        kind="counts",
+        better="up",
         title=title,
         subtitle=subtitle,
         ylabel=ylabel,
@@ -180,6 +231,8 @@ def events_chart(
         ys.append(running)
     _draw(
         out_path,
+        kind="events",
+        better="up",
         title=title,
         subtitle=subtitle,
         ylabel=ylabel,
@@ -215,6 +268,8 @@ def remaining_chart(
     """
     _draw(
         out_path,
+        kind="remaining",
+        better="down",
         title=title,
         subtitle=subtitle,
         ylabel=ylabel,
@@ -247,10 +302,15 @@ def staircase_chart(
     Used where a series tracks a quantity rather than a count — an Elo, a byte
     total, an exponent — and cumulating events would discard the size of each
     step. The direction of better differs by series, so the subtitle or note
-    must say which way is progress.
+    must say which way is progress. The data file beside the PNG carries the
+    same direction, read from that sentence, so the two cannot disagree.
     """
+    better = "down" if re.search(r"\blower\b[^;.]*\bbetter\b",
+                                 f"{subtitle} {note}", re.I) else "up"
     _draw(
         out_path,
+        kind="staircase",
+        better=better,
         title=title,
         subtitle=subtitle,
         ylabel=ylabel,

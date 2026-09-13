@@ -1,0 +1,81 @@
+{
+ "better": "up",
+ "kind": "staircase",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "rank at least",
+   "x": [
+    1938.0,
+    1945.0,
+    1974.0,
+    1975.0,
+    1977.0,
+    1977.0,
+    1982.0,
+    1986.0,
+    1992.0,
+    1992.0,
+    1992.0,
+    1993.0,
+    1994.0,
+    1997.0,
+    1998.0,
+    2000.0,
+    2006.0,
+    2024.0,
+    2026.0
+   ],
+   "y": [
+    3.0,
+    4.0,
+    6.0,
+    7.0,
+    8.0,
+    9.0,
+    12.0,
+    14.0,
+    15.0,
+    17.0,
+    19.0,
+    20.0,
+    21.0,
+    22.0,
+    23.0,
+    24.0,
+    28.0,
+    29.0,
+    30.0
+   ]
+  },
+  {
+   "label": "rank known exactly",
+   "x": [
+    1986.0,
+    1991.0,
+    1996.0,
+    2002.0,
+    2005.0,
+    2006.0,
+    2009.0,
+    2020.0
+   ],
+   "y": [
+    10.0,
+    11.0,
+    14.0,
+    15.0,
+    17.0,
+    18.0,
+    19.0,
+    20.0
+   ]
+  }
+ ],
+ "source_label": "elliptic-curve-rank-records.csv and elliptic-curve-rank-exact.csv, from Dujella's rank tables",
+ "source_url": "https://web.math.pmf.unizg.hr/~duje/tors/rankhist.html",
+ "subtitle": "Largest rank exhibited for a curve over Q; higher is better",
+ "title": "Elliptic-curve rank records: standing record",
+ "ylabel": "Record rank",
+ "ylog": false
+}

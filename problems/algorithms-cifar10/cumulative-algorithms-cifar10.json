@@ -1,0 +1,44 @@
+{
+ "better": "down",
+ "kind": "staircase",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2022.9911,
+    2023.0383,
+    2023.0794,
+    2023.1177,
+    2023.1369,
+    2023.2902,
+    2023.8487,
+    2024.2574,
+    2024.5366,
+    2024.8597,
+    2025.7858,
+    2026.5175
+   ],
+   "y": [
+    18.1,
+    12.31,
+    9.91,
+    7.68,
+    6.98,
+    6.84,
+    6.29,
+    3.29,
+    2.73,
+    2.59,
+    1.99,
+    1.828
+   ]
+  }
+ ],
+ "source_label": "dates assembled from releases and announcements in cifar-speedrun-records.csv; no official ledger exists",
+ "source_url": "https://github.com/KellerJordan/cifar10-airbench",
+ "subtitle": "Seconds to 94% accuracy on one A100; lower is better",
+ "title": "CIFAR-10 speedrun: standing record",
+ "ylabel": "Seconds to 94% accuracy",
+ "ylog": true
+}

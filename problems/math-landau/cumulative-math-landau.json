@@ -1,0 +1,22 @@
+{
+ "better": "down",
+ "kind": "remaining",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    1912.0
+   ],
+   "y": [
+    4.0
+   ]
+  }
+ ],
+ "source_label": "Wikipedia Landau's problems",
+ "source_url": "Wikipedia Landau's problems",
+ "subtitle": "Scored rows minus cumulative dated resolutions; undated statuses do not move the line",
+ "title": "Landau's problems",
+ "ylabel": "Rows without a dated resolution",
+ "ylog": false
+}

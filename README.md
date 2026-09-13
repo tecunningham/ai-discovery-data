@@ -14,7 +14,10 @@ The collection is browsable at
 [tecunningham.github.io/ai-discovery-data](https://tecunningham.github.io/ai-discovery-data/),
 where each series page renders its folder's full write-up with the interactive
 chart inline — hover any mark for the underlying record, and on several charts
-click through to the original reference. The pages are built from the same
+click through to the original reference — and
+[compare.html](https://tecunningham.github.io/ai-discovery-data/compare.html)
+draws every cumulative panel on one chart, indexed to a reference date on a
+log axis, with the series chosen by the reader. The pages are built from the same
 vendored CSVs and documents by [`tools/build_docs.py`](tools/build_docs.py);
 the PNGs in the table below remain the static record.
 

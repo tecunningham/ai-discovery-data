@@ -1,0 +1,30 @@
+{
+ "better": "up",
+ "kind": "staircase",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2022.0,
+    2022.8679,
+    2023.9227,
+    2024.8843,
+    2025.8789
+   ],
+   "y": [
+    1.0,
+    1.13,
+    1.22718,
+    1.38794058,
+    1.39626822348
+   ]
+  }
+ ],
+ "source_label": "Gurobi release announcements; vendor-run figures, transcribed with URLs in gurobi-milp-speedups.csv",
+ "source_url": "https://www.gurobi.com/whats-new-gurobi-10-0/",
+ "subtitle": "Cumulative vendor-reported speedup over v9.5 on fixed machines; higher is better",
+ "title": "Gurobi MILP speed: cumulative speedup",
+ "ylabel": "Speedup factor vs v9.5",
+ "ylog": false
+}

@@ -1,0 +1,46 @@
+{
+ "better": "up",
+ "kind": "staircase",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    1991.2464,
+    1992.2847,
+    1993.4353,
+    1994.3149,
+    1996.2738,
+    1999.0876,
+    1999.6379,
+    2003.2464,
+    2003.9199,
+    2005.3504,
+    2009.9446,
+    2019.9172,
+    2020.1588
+   ],
+   "y": [
+    100.0,
+    110.0,
+    120.0,
+    129.0,
+    130.0,
+    140.0,
+    155.0,
+    160.0,
+    174.0,
+    200.0,
+    232.0,
+    240.0,
+    250.0
+   ]
+  }
+ ],
+ "source_label": "the RSA Factoring Challenge record list and the record-setters' own announcements",
+ "source_url": "https://en.wikipedia.org/wiki/RSA_numbers",
+ "subtitle": "Largest hard semiprime factored, in decimal digits; higher is better",
+ "title": "Integer factorization: standing record",
+ "ylabel": "Decimal digits of largest factored semiprime",
+ "ylog": false
+}

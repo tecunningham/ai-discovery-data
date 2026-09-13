@@ -1,0 +1,56 @@
+{
+ "better": "up",
+ "kind": "counts",
+ "now": 2026.6324,
+ "series": [
+  {
+   "label": "",
+   "x": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026,
+    2026.6324
+   ],
+   "y": [
+    0.0,
+    5.275965,
+    11.894154,
+    17.952208,
+    24.949454,
+    31.515209,
+    38.02848,
+    45.378144,
+    53.689218,
+    61.834019999999995,
+    70.558695,
+    80.720443,
+    91.000076,
+    101.210901,
+    113.905354,
+    125.210446,
+    138.013088,
+    146.121283
+   ]
+  }
+ ],
+ "source_label": "Crossref REST API by created date, vendored as crossref-dois-by-year.csv",
+ "source_url": "https://api.crossref.org/works",
+ "subtitle": "Cumulative count of events to date",
+ "title": "Crossref DOI records: cumulative",
+ "ylabel": "DOI records to date, millions",
+ "ylog": false
+}

@@ -1,0 +1,167 @@
+name: Finish a weekly refresh
+
+# The second half of a Monday refresh whose prose pass happened outside
+# Actions. weekly-update.yml opens auto/weekly-refresh-<date> with fresh data
+# and figures; when no Claude credential is configured there, a scheduled
+# Claude Code session (a claude.ai/code Routine running under the owner's own
+# login) restates the README facts and pushes to that branch. Its push lands
+# here: the prose changed front-matter fields the generated index tables
+# carry, so `make index` and `make docs` run again in the pinned container,
+# the full check decides, and the PR merges when nothing needs a person.
+#
+# Pushes made with GITHUB_TOKEN never trigger workflows, so weekly-update's
+# own commit does not start this, and the commit this makes does not start
+# it again. A person pushing a fix to the branch does start it, which is
+# the right behaviour: the fix gets checked and, if clean, merged.
+#
+# Judgment calls travel as a PR comment (the session has no .weekly/ to
+# write into): any comment opening with "**Judgment calls**" holds the PR,
+# and its text goes into the email, as the in-workflow prose pass's
+# judgment-calls.md would.
+
+on:
+  push:
+    branches:
+      - "auto/weekly-refresh-*"
+  workflow_dispatch:
+    inputs:
+      merge:
+        description: "Merge when every check passes and nothing needed a judgment call"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-finish-${{ github.ref }}
+
+env:
+  RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+jobs:
+  finish:
+    if: startsWith(github.ref, 'refs/heads/auto/weekly-refresh-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --requirement requirements.txt
+
+      # The PR's base is main on the schedule and a feature branch for a trial
+      # run; the branch is compared with whichever it targets.
+      - name: Find the PR and fetch the branch it targets
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p .weekly
+          echo "TODAY=$(echo "$GITHUB_REF_NAME" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')" >> "$GITHUB_ENV"
+          url="$(gh pr list --head "$GITHUB_REF_NAME" --state open --json url --jq '.[0].url')"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          if [ -z "$url" ]; then
+            echo "::warning::no open pull request for $GITHUB_REF_NAME; nothing to finish"
+            exit 0
+          fi
+          base="$(gh pr view "$url" --json baseRefName --jq .baseRefName)"
+          git fetch --no-tags origin "$base"
+          echo "base=origin/$base" >> "$GITHUB_OUTPUT"
+          # Judgment calls the prose pass left as a PR comment.
+          gh pr view "$url" --json comments \
+            --jq '.comments[].body | select(startswith("**Judgment calls**"))' \
+            > .weekly/judgment-calls.md || true
+
+      - uses: actions/cache@v4
+        if: steps.pr.outputs.url != ''
+        id: figure-image
+        with:
+          path: /tmp/figure-image.tar
+          key: figure-image-${{ hashFiles('tools/figures.Dockerfile', 'requirements.txt') }}
+      - if: steps.pr.outputs.url != '' && steps.figure-image.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/figure-image.tar
+
+      # `make index` runs the full figure check before rewriting the generated
+      # tables, so its log is the verdict; the tables are written either way.
+      - name: Redraw figures, rebuild docs and the generated tables
+        id: render
+        if: steps.pr.outputs.url != ''
+        continue-on-error: true
+        env:
+          FIGURE_IMAGE_PRELOADED: ${{ steps.figure-image.outputs.cache-hit == 'true' && '1' || '' }}
+        run: |
+          make figures
+          make docs
+          make index > .weekly/check.log 2>&1 || { tail -n 40 .weekly/check.log; exit 1; }
+
+      - name: Commit the regenerated files to the branch
+        if: steps.pr.outputs.url != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- problems lib/dates.py README.md CUMULATIVE.md docs
+          if git diff --cached --quiet; then
+            echo "nothing to regenerate"
+          else
+            git commit -m "Weekly refresh: regenerate index and docs after the prose pass"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
+
+      # The whole branch against main: what moved, and whether a person is
+      # needed. scan redraws the email charts; review reads the judgment-call
+      # comment saved above.
+      - name: Review the branch against the branch it targets
+        id: review
+        if: steps.pr.outputs.url != ''
+        run: |
+          python tools/weekly_update.py --base "${{ steps.pr.outputs.base }}" scan
+          flags=""
+          [ "${{ steps.render.outcome }}" = "success" ] || flags="--check-failed"
+          python tools/weekly_update.py --base "${{ steps.pr.outputs.base }}" review --check-log .weekly/check.log $flags
+
+      - name: Merge when nothing needs a person
+        id: merge
+        if: >-
+          steps.pr.outputs.url != '' &&
+          steps.review.outputs.hold == 'false' &&
+          (github.event_name == 'push' || inputs.merge)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge "${{ steps.pr.outputs.url }}" --merge --delete-branch
+
+      - name: Keep the charts and logs with the run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: refresh-finish
+          path: .weekly
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Email the outcome
+        if: always() && steps.pr.outputs.url != ''
+        env:
+          AI_DISCOVERY_AS_OF: ${{ env.TODAY }}
+          PR_URL: ${{ steps.pr.outputs.url }}
+          SCAN_SMTP_HOST: ${{ vars.SCAN_SMTP_HOST || 'smtp.gmail.com' }}
+          SCAN_SMTP_PORT: ${{ vars.SCAN_SMTP_PORT || '587' }}
+          SCAN_SMTP_USERNAME: ${{ secrets.SCAN_SMTP_USERNAME }}
+          SCAN_SMTP_PASSWORD: ${{ secrets.SCAN_SMTP_PASSWORD }}
+          SCAN_EMAIL_TO: ${{ vars.SCAN_EMAIL_TO || 'tom.cunningham@gmail.com' }}
+        run: |
+          if [ "${{ steps.merge.outcome }}" = "success" ]; then
+            outcome=merged
+          elif [ "${{ steps.review.outcome }}" = "success" ]; then
+            outcome=needs-review
+          else
+            outcome=failed
+          fi
+          echo "outcome: $outcome"
+          UPDATE_OUTCOME="$outcome" python tools/weekly_update.py email
+
+      - if: steps.render.outcome != 'skipped' && steps.figure-image.outputs.cache-hit != 'true'
+        run: docker save --output /tmp/figure-image.tar ai-discovery-data-figures:python3.12.13

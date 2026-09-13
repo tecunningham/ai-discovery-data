@@ -38,7 +38,13 @@ page's interactive charts), and the committed PNGs.
   It merges itself only when every check passes and no Verdict term moved;
   otherwise the PR waits for a person. If you are the Claude step inside it,
   edit only `problems/*/README.md` and write anything that was more than
-  arithmetic to `.weekly/judgment-calls.md`.
+  arithmetic to `.weekly/judgment-calls.md`. If you are instead the
+  scheduled session finishing an open `auto/weekly-refresh-*` PR: same
+  rules, but do not run `make index` or `make docs` (no pinned renderer
+  there); push the README edits and let
+  `.github/workflows/refresh-finish.yml` regenerate, re-check and merge.
+  Put judgment calls in a PR comment that opens with `**Judgment calls**`,
+  which holds the PR for a person.
 
 ## Layout of the shared code
 

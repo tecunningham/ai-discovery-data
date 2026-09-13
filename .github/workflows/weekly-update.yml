@@ -17,7 +17,12 @@ name: Weekly refresh and digest
 #                check.py recomputes the sentences its README states and
 #                fails until they agree. Claude Code rewrites those sentences,
 #                edits only problems/*/README.md, and writes anything that was
-#                more than arithmetic to .weekly/judgment-calls.md
+#                more than arithmetic to .weekly/judgment-calls.md. This step
+#                runs here only when a CLAUDE_CODE_OAUTH_TOKEN secret exists;
+#                without one the PR opens with the prose still stale and a
+#                scheduled Claude Code session (a claude.ai/code Routine, no
+#                credential in the repo) does the same pass and pushes to the
+#                branch, which refresh-finish.yml picks up
 #   render       make figures, make docs, make index — the pinned container,
 #                same as CI; `make index` runs the full check-figures first
 #   review       safe to merge? Holds for a person when a Verdict's controlled
@@ -29,8 +34,8 @@ name: Weekly refresh and digest
 #                for a sign-off — sent even when an earlier step failed
 #
 # Secrets and variables (Settings → Secrets and variables → Actions):
-#   CLAUDE_CODE_OAUTH_TOKEN   from `claude setup-token` (or swap the input for
-#                             anthropic_api_key: ANTHROPIC_API_KEY)
+#   CLAUDE_CODE_OAUTH_TOKEN   optional; from `claude setup-token` (or swap the
+#                             input for anthropic_api_key: ANTHROPIC_API_KEY)
 #   SCAN_SMTP_USERNAME / SCAN_SMTP_PASSWORD   a Gmail address and an app
 #                             password from https://myaccount.google.com/apppasswords
 #   SCAN_EMAIL_TO, SCAN_SMTP_HOST, SCAN_SMTP_PORT   optional variables
@@ -81,16 +86,18 @@ jobs:
           echo "TODAY=$(date -u +%F)" >> "$GITHUB_ENV"
           mkdir -p .weekly
 
-      # Fail here, before any network work, rather than after a ten-minute
-      # fetch. The token is tested through the environment so the value
-      # never appears in a command line.
-      - name: Confirm the Claude credential is configured
+      # Decides where the prose pass happens. The token is tested through
+      # the environment so the value never appears in a command line.
+      - name: Is a Claude credential configured?
+        id: claude
         env:
           TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
-          if [ -z "$TOKEN" ]; then
-            echo "::error::repository secret CLAUDE_CODE_OAUTH_TOKEN is unset; create one with 'claude setup-token' and add it under Settings → Secrets and variables → Actions"
-            exit 1
+          if [ -n "$TOKEN" ]; then
+            echo "has_token=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_token=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::no CLAUDE_CODE_OAUTH_TOKEN secret; the prose pass is left to the scheduled Claude Code session"
           fi
 
       # The figure image is a pure function of its Dockerfile and
@@ -139,7 +146,7 @@ jobs:
       # not lost and the email can say what went wrong.
       - name: Bring the prose back in line with the refetched data
         id: prose
-        if: steps.scan.outputs.changed == 'true'
+        if: steps.scan.outputs.changed == 'true' && steps.claude.outputs.has_token == 'true'
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
@@ -207,7 +214,11 @@ jobs:
         if: steps.scan.outputs.changed == 'true'
         run: |
           flags=""
-          [ "${{ steps.prose.outcome }}" = "success" ] || flags="$flags --failed 'prose pass'"
+          case "${{ steps.prose.outcome }}" in
+            success) ;;
+            skipped) flags="$flags --reason 'prose not yet updated: no CLAUDE_CODE_OAUTH_TOKEN secret, so the scheduled Claude Code session restates the README facts and pushes to this branch; refresh-finish.yml then re-checks and merges'" ;;
+            *) flags="$flags --failed 'prose pass'" ;;
+          esac
           [ "${{ steps.render.outcome }}" = "success" ] || flags="$flags --check-failed"
           eval python tools/weekly_update.py review --check-log .weekly/check.log $flags
 
@@ -218,6 +229,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           branch="auto/weekly-refresh-$TODAY"
+          if [ "$GITHUB_REF_NAME" != "main" ]; then
+            branch="$branch-${GITHUB_REF_NAME##*/}"  # a trial from a feature branch
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B "$branch"
@@ -225,11 +239,13 @@ jobs:
           git commit -m "Weekly refresh: data through $TODAY"
           git push --force --set-upstream origin "$branch"
           python tools/weekly_update.py pr-body > .weekly/pr-body.md
+          # The PR targets whatever ref this ran from: main on the schedule,
+          # a feature branch when dispatched there to try the pipeline out.
           url="$(gh pr list --head "$branch" --state open --json url --jq '.[0].url')"
           if [ -n "$url" ]; then
             gh pr edit "$url" --body-file .weekly/pr-body.md
           else
-            url="$(gh pr create --base main --head "$branch" \
+            url="$(gh pr create --base "$GITHUB_REF_NAME" --head "$branch" \
                     --title "Weekly refresh: data through $TODAY" \
                     --body-file .weekly/pr-body.md)"
           fi

@@ -23,7 +23,7 @@ name: Weekly refresh and digest
 #                scheduled Claude Code session (a claude.ai/code Routine, no
 #                credential in the repo) does the same pass and pushes to the
 #                branch, which refresh-finish.yml picks up
-#   render       make figures, make docs, make index — the pinned container,
+#   render       make figures, make index, make docs — the pinned container,
 #                same as CI; `make index` runs the full check-figures first
 #   review       safe to merge? Holds for a person when a Verdict's controlled
 #                term changed, the prose pass flagged a judgment call, a file

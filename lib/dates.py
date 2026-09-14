@@ -27,7 +27,7 @@ from datetime import date
 AS_OF_DATE = (
     date.fromisoformat(os.environ["AI_DISCOVERY_AS_OF"])
     if os.environ.get("AI_DISCOVERY_AS_OF")
-    else date(2026, 8, 20)
+    else date(2026, 9, 14)
 )
 NOW = AS_OF_DATE.year + (AS_OF_DATE.timetuple().tm_yday - 1) / 365.25
 

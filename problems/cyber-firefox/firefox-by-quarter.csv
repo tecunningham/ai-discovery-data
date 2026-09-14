@@ -39,4 +39,4 @@ quarter,unique_cves,explicit_ai,ai_affiliated,fuzz,other,partial_quarter,data_th
 2025-Q4,47,0,1,7,39,no,
 2026-Q1,126,28,0,6,92,no,
 2026-Q2,146,3,1,21,121,no,
-2026-Q3,70,1,4,5,60,yes,2026-08-04
+2026-Q3,164,1,9,17,137,yes,2026-09-08

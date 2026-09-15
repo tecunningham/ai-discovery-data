@@ -13,7 +13,8 @@ sys.path.insert(0, str(HERE.parents[1]))
 from lib.prose import missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
-WORDS = {30: "thirty", 34: "thirty-four", 40: "forty", 13: "thirteen"}
+WORDS = {13: "thirteen", 14: "fourteen", 30: "thirty", 34: "thirty-four",
+         40: "forty", 53: "fifty-three"}
 
 
 def solution_year_claims(failures: list[str]) -> dict[str, str]:
@@ -116,8 +117,8 @@ def main() -> int:
         failures.append(f"no spelled form for a gain of {gained}; extend WORDS")
     if len(rows) not in WORDS:
         failures.append(f"no spelled form for {len(rows)} snapshots; extend WORDS")
-    if not 95 <= days <= 110:
-        failures.append(f"fixed cohort spans {days} days, not 'about a hundred'")
+    day_month = lambda row: (  # noqa: E731
+        date.fromisoformat(row["date"]).strftime("%-d %B"))
     claims = {
         f"**snapshots:** {WORDS.get(len(rows), len(rows))}, monthly, "
         f"{first['date']} to {last['date']}": "snapshots fact",
@@ -130,9 +131,9 @@ def main() -> int:
         f"{last['lean_formalized']}; {last['lean_formalized']} against "
         f"{last['total_solved']} solved statuses at the last snapshot":
             "lean fact",
-        f"**fixed cohort:** solved statuses {start['total_solved']} on 30 "
-        f"April to {end['total_solved']} on 10 August, "
-        f"{WORDS.get(gained, gained)} rows in about a hundred days":
+        f"**fixed cohort:** solved statuses {start['total_solved']} on "
+        f"{day_month(start)} to {end['total_solved']} on {day_month(end)}, "
+        f"{WORDS.get(gained, gained)} rows in {days} days":
             "fixed-cohort fact",
         f"**cohort growth:** the catalogue grew by {grown} rows inside the "
         "snapshot window": "growth fact",

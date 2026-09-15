@@ -3,10 +3,10 @@
 - **Domain:** vulnerabilities
 - **Role:** discovery series
 - **Metric:** vulnerabilities disclosed per quarter, split by whether the finder credit carries an AI marker
-- **Coverage:** 2000–2026, partial through 2026-06-24
+- **Coverage:** 2000–2026, partial through 2026-09-02
 - **Data:** annual [`curl-by-year.csv`](curl-by-year.csv) (severity detail in the same file); quarterly [`curl-by-quarter.csv`](curl-by-quarter.csv); per-finder [`curl-finders.csv`](curl-finders.csv)
 - **Upstream:** <https://curl.se/docs/vuln.json> (human-readable at <https://curl.se/docs/security.html>)
-- **Verdict:** accelerating — 36 disclosures through 2026-06-24 annualize to roughly 75 against 9 in 2025 and a 13.1/year mean over 2014–2023
+- **Verdict:** accelerating — 45 disclosures through 2026-09-02 annualize to roughly 67 against 9 in 2025 and a 13.1/year mean over 2014–2023
 
 ![Quarterly curl vulnerability disclosures, split by explicit AI credit.](discovery-cyber-curl.png)
 
@@ -27,12 +27,12 @@ quarterly tables' `ai_attributed` column.
 
 ## Facts
 
-- **2026 (through 2026-06-24):** 36 disclosures; 15 AI-marked, 21 other
-- **2026 annualized:** roughly 75 disclosures
+- **2026 (through 2026-09-02):** 45 disclosures; 22 AI-marked, 23 other
+- **2026 annualized:** roughly 67 disclosures
 - **prior rate:** 9 disclosures in 2025; a 13.1/year mean over 2014–2023
 - **2026 quarters:** 2026-Q1: 10 · 2026-Q2: 26
-- **ai-band severity (2026):** 12 of 15 AI-marked disclosures rated Low
-  (80%), none High or Critical; 10 of 21 other disclosures rated Low (48%)
+- **ai-band severity (2026):** 19 of 22 AI-marked disclosures rated Low
+  (86%), none High or Critical; 11 of 23 other disclosures rated Low (48%)
 - **severity drift:** 2010–2022 disclosures were 18% Low and 28% High or
   Critical; 2023–2025 non-AI disclosures were 67% Low
 
@@ -77,7 +77,7 @@ CSVs.
 
 - **credit text is not method evidence.** Classification is by textual
   marker and errs in both directions: a researcher who used a model without
-  saying so counts as human, and 14 of the 15 AI-marked credits of 2026 name
+  saying so counts as human, and 21 of the 22 AI-marked credits of 2026 name
   only an employer.
 - **severity is compared across the combined AI band.** The Low-severity
   shares above are computed against `ai_attributed`, so they describe
@@ -96,26 +96,26 @@ CSVs.
 
 ## AI attribution
 
-15 of the 36 disclosures of 2026 (through 2026-06-24) are AI-marked. One
+22 of the 45 disclosures of 2026 (through 2026-09-02) are AI-marked. One
 credit names a system:
 
 > "Andrew Nesbitt (powered by Mythos)"
-> — curl credit string for one 2026 disclosure, vendored in [`curl-finders.csv`](curl-finders.csv), read 2026-08-14
+> — curl credit string for one 2026 disclosure, vendored in [`curl-finders.csv`](curl-finders.csv), read 2026-09-14
 
-The other 14 name an AI-security employer without stating a method: 9
-credit Aisle Research ("Joshua Rogers (Aisle Research)" on 6, "Stanislav
-Fort (Aisle Research)" on 3), 3 credit AntAISecurityLab hackerone handles,
+The other 21 name an AI-security employer without stating a method: 15
+credit Aisle Research ("Stanislav Fort (Aisle Research)" on 9, "Joshua
+Rogers (Aisle Research)" on 6), 3 credit AntAISecurityLab hackerone handles,
 1 credits "Filipe Casal of Trail of Bits in collaboration with OpenAI",
-and 1 credits "Eunsoo Kim (Autonomous Code Security team at Microsoft)",
-all quoted from [`curl-finders.csv`](curl-finders.csv) as read 2026-08-14.
+and 2 credit "Eunsoo Kim (Autonomous Code Security team at Microsoft)",
+all quoted from [`curl-finders.csv`](curl-finders.csv) as read 2026-09-14.
 
 2025 has 2 AI-marked disclosures: one system-naming credit,
 
 > "Google Big Sleep"
-> — curl credit string for one 2025 disclosure, vendored in [`curl-finders.csv`](curl-finders.csv), read 2026-08-14
+> — curl credit string for one 2025 disclosure, vendored in [`curl-finders.csv`](curl-finders.csv), read 2026-09-14
 
 and one affiliation-only credit, "Stanislav Fort (Aisle Research)". No
-AI marker appears in any credit string before 2025, as of the 2026-06-24
+AI marker appears in any credit string before 2025, as of the 2026-09-02
 snapshot. Stanislav Fort of Aisle Research appears in both curl and OpenSSL
 finder tables ([`../cyber-openssl/`](../cyber-openssl/README.md))
 [@googlebigsleep2024; @anthropicmythos2026; @aisle2026].

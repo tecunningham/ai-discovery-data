@@ -52,6 +52,7 @@ LABELS = {
     "genus-2-jacobian-torsion": "genus-2 torsion\n(GPT-5.6 Sol)",
     "inverse-galois": "inverse Galois M$_{23}$\n(scored human)",
     "hadamard": "Hadamard 668\n(Claude)",
+    "elliptic-curve-rank": "elliptic rank ≥ 30\n(Claude)",
 }
 # Hand-placed offsets keep neighbouring labels off each other and off the
 # lane above; (dx, dy) in points.
@@ -62,6 +63,7 @@ OFFSETS = {
     "genus-2-jacobian-torsion": (-6, -30),
     "inverse-galois": (0, 12),
     "hadamard": (-4, 12),
+    "elliptic-curve-rank": (30, -30),
 }
 ANNOUNCED = "2026-02-26"
 
@@ -123,8 +125,8 @@ def main() -> None:
     style(ax, "", xlabel="Month")
     note = (f"{len(problems)} problem pages; "
             f"{len(dated) + len(undated)} recorded solves.\nNot drawn: "
-            f"{len(undated)} undated AI solve on a problem\nwithdrawn from "
-            "the pool.")
+            f"{len(undated)} undated AI solve{'' if len(undated) == 1 else 's'}"
+            "\n(withdrawn from the pool, or pending detail).")
     ax.text(0.03, 0.03, note, transform=ax.transAxes, fontsize=8.2,
             color="#333333", va="bottom", linespacing=1.4)
 
@@ -181,7 +183,7 @@ def main() -> None:
         source_label="epoch.ai problem pages",
         source_url="https://epoch.ai/frontiermath/open-problems",
         built_by=__file__,
-        subtitle="Cumulative dated solution events; one undated solve omitted",
+        subtitle="Cumulative dated solution events; undated solves omitted",
     )
 
 

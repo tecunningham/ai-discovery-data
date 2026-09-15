@@ -3,10 +3,10 @@
 - **Domain:** vulnerabilities
 - **Role:** discovery series
 - **Metric:** distinct CVEs per quarter, split by whether the reporter credit names an AI method, an AI-security employer, a fuzzer, or none of these; advisory–CVE mentions retained as a sensitivity count
-- **Coverage:** 2016–2026, partial through 2026-08-04, the latest advisory in the snapshot
+- **Coverage:** 2016–2026, partial through 2026-09-08, the latest advisory in the snapshot
 - **Data:** per-CVE ledger [`firefox-cves.csv`](firefox-cves.csv); quarterly [`firefox-by-quarter.csv`](firefox-by-quarter.csv); annual [`firefox-by-year.csv`](firefox-by-year.csv); per-reporter rows in [`firefox-finders.csv`](firefox-finders.csv); every AI-marked CVE with its credit strings in [`firefox-ai-cves.csv`](firefox-ai-cves.csv)
 - **Upstream:** <https://github.com/mozilla/foundation-security-advisories> (rendered at <https://www.mozilla.org/en-US/security/advisories/>)
-- **Verdict:** accelerating — 342 distinct CVEs through 2026-08-04 against 210 in 2025; the part year alone is 1.6 times the 2025 full year
+- **Verdict:** accelerating — 436 distinct CVEs through 2026-09-08 against 210 in 2025; the part year alone is 2.1 times the 2025 full year
 
 ![Quarterly Firefox distinct-CVE disclosures, split by AI method, AI affiliation, and fuzzer credit.](discovery-cyber-firefox.png)
 
@@ -33,27 +33,27 @@ than folded into the human or the AI side.
 - **by-year (distinct CVEs):** 2016: 65 · 2017: 187 · 2018: 152 ·
   2019: 139 · 2020: 162 · 2021: 146 · 2022: 177 · 2023: 194 · 2024: 200 ·
   2025: 210
-- **2026 (through 2026-08-04):** 342 distinct CVEs, 1.6 times the 2025 full
-  year; annualizes to about 578
+- **2026 (through 2026-09-08):** 436 distinct CVEs, 2.1 times the 2025 full
+  year; annualizes to about 634
 - **2026 quarters:** 126 distinct CVEs in 2026-Q1 and 146 in 2026-Q2, each
   larger than any complete quarter before them
 - **prior trend:** distinct CVEs rose 44% from 2021 to 2025; AI-marked CVEs
   over those years total 1
-- **ai-marked:** 0 before 2025; 1 in 2025; 37 in 2026, or 11% of the part
-  year — 32 name an AI system or method and 5 name only an AI-security
+- **ai-marked:** 0 before 2025; 1 in 2025; 42 in 2026, or 10% of the part
+  year — 32 name an AI system or method and 10 name only an AI-security
   employer
-- **fuzz band:** 3 distinct CVEs in 2018, 4 in 2022, then 12, 17, 30 and 32
-  across 2023–2026; the part year annualizes to about 54
-- **mentions per distinct CVE:** 1.8 in 2016, 3.0 in 2025, 3.3 in 2026
+- **fuzz band:** 3 distinct CVEs in 2018, 4 in 2022, then 12, 17, 30 and 44
+  across 2023–2026; the part year annualizes to about 64
+- **mentions per distinct CVE:** 1.8 in 2016, 3.0 in 2025, 3.6 in 2026
 - **impact mix (all finders):** 46% of distinct CVEs are rated High or
-  Critical and 15% Low
-- **impact mix (AI-marked):** of the 38 AI-marked CVEs, 19 are High, 15
-  Moderate and 4 Low, with none Critical — 50% Low or Moderate against 54%
+  Critical and 16% Low
+- **impact mix (AI-marked):** of the 43 AI-marked CVEs, 23 are High, 15
+  Moderate and 5 Low, with none Critical — 47% Low or Moderate against 54%
   across all finders
-- **impact mix (fuzz):** 79 of the 100 fuzz-credited CVEs are High or
+- **impact mix (fuzz):** 85 of the 112 fuzz-credited CVEs are High or
   Critical
-- **remainders:** 15 of the ledger's 1,974 rows have no parseable
-  announcement date; 1 of the 1,974 ledger rows carries an Unrated impact
+- **remainders:** 15 of the ledger's 2,068 rows have no parseable
+  announcement date; 2 of the 2,068 ledger rows carries an Unrated impact
 
 ![Firefox CVEs by impact: distinct-CVE counts by Mozilla's impact rating and reporter credit.](impact-cyber-firefox.png)
 
@@ -123,7 +123,7 @@ the ledger, the quarterly sums and the annual bands stop agreeing.
 
 - **the AI share has error in both directions.** A reporter string is free
   text, so a researcher who used a model and did not say so counts as human;
-  equally, the 5 affiliation-only CVEs name an employer and not a method.
+  equally, the 10 affiliation-only CVEs name an employer and not a method.
   Only the 32 method-naming CVEs are evidence about how a bug was found.
 - **distinct CVEs still depend on Mozilla's process.** Deduplicating by CVE
   ID removes the product-packaging inflation but not the question of when
@@ -139,23 +139,23 @@ the ledger, the quarterly sums and the annual bands stop agreeing.
 - **the codebase is fixed but the effort is not.** Nothing here gives a
   denominator of search effort, and Mozilla's security investment grew over
   the period.
-- **2026 is a part-year** through the latest advisory on 2026-08-04, so the
+- **2026 is a part-year** through the latest advisory on 2026-09-08, so the
   final quarter's bar is outlined and is not comparable with the complete
   quarters beside it.
 
 ## AI attribution
 
-Of the 37 AI-marked distinct CVEs in 2026, 31 are credited to a single
+Of the 42 AI-marked distinct CVEs in 2026, 31 are credited to a single
 seven-person team using Claude; the credit string is identical on all 31
 rows of [`firefox-ai-cves.csv`](firefox-ai-cves.csv):
 
 > "Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel
 > Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
-> — Mozilla advisory reporter string for CVE-2026-2763 and 30 further CVEs, vendored in [`firefox-ai-cves.csv`](firefox-ai-cves.csv), read 2026-08-14
+> — Mozilla advisory reporter string for CVE-2026-2763 and 30 further CVEs, vendored in [`firefox-ai-cves.csv`](firefox-ai-cves.csv), read 2026-09-14
 
-Those 31 CVEs are roughly 9% of everything Firefox disclosed in 2026 through
-2026-08-04. The remaining 6 AI-marked CVEs of 2026, with credit strings
-quoted from the same file as read 2026-08-14: 3 credit "Amy Burnett of
+Those 31 CVEs are roughly 7% of everything Firefox disclosed in 2026 through
+2026-09-08. The remaining 11 AI-marked CVEs of 2026, with credit strings
+quoted from the same file as read 2026-09-14: 8 credit "Amy Burnett of
 OpenAI", 1 credits "Artur Cygan of Trail of Bits in partnership with
 OpenAI", 1 credits "OpenAI Preparedness, Bill Demirkapi" — all affiliation
 credits naming no method — and 1 carries the method-naming credit "Claude,
@@ -164,7 +164,7 @@ Kai Engert" (CVE-2026-14899).
 The single AI-marked CVE of 2025 is CVE-2025-13016, whose reporter strings
 are "Aisle Research | Igor Morgenstern" in the vendored ledger — an
 affiliation with no method stated. No reporter string carries an AI marker
-before 2025, as of the 2026-08-04 snapshot. Alex Gaynor also appears in
+before 2025, as of the 2026-09-08 snapshot. Alex Gaynor also appears in
 OpenSSL's finder table ([`../cyber-openssl/`](../cyber-openssl/README.md))
 [@anthropicmythos2026; @aisle2026].
 

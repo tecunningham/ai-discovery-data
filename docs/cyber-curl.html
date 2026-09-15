@@ -48,10 +48,10 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Domain:</strong> vulnerabilities</li>
 <li><strong>Role:</strong> discovery series</li>
 <li><strong>Metric:</strong> vulnerabilities disclosed per quarter, split by whether the finder credit carries an AI marker</li>
-<li><strong>Coverage:</strong> 2000–2026, partial through 2026-06-24</li>
+<li><strong>Coverage:</strong> 2000–2026, partial through 2026-09-02</li>
 <li><strong>Data:</strong> annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-by-year.csv"><code>curl-by-year.csv</code></a> (severity detail in the same file); quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-by-quarter.csv"><code>curl-by-quarter.csv</code></a>; per-finder <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://curl.se/docs/vuln.json">https://curl.se/docs/vuln.json</a> (human-readable at <a href="https://curl.se/docs/security.html">https://curl.se/docs/security.html</a>)</li>
-<li><strong>Verdict:</strong> accelerating — 36 disclosures through 2026-06-24 annualize to roughly 75 against 9 in 2025 and a 13.1/year mean over 2014–2023</li>
+<li><strong>Verdict:</strong> accelerating — 45 disclosures through 2026-09-02 annualize to roughly 67 against 9 in 2025 and a 13.1/year mean over 2014–2023</li>
 </ul>
 <h3>CVEs disclosed</h3>
 <div id="chart0" class="chart"></div>
@@ -70,12 +70,12 @@ employer; the two signals are recorded separately in
 quarterly tables' <code>ai_attributed</code> column.</p>
 <h2 id="facts">Facts</h2>
 <ul>
-<li><strong>2026 (through 2026-06-24):</strong> 36 disclosures; 15 AI-marked, 21 other</li>
-<li><strong>2026 annualized:</strong> roughly 75 disclosures</li>
+<li><strong>2026 (through 2026-09-02):</strong> 45 disclosures; 22 AI-marked, 23 other</li>
+<li><strong>2026 annualized:</strong> roughly 67 disclosures</li>
 <li><strong>prior rate:</strong> 9 disclosures in 2025; a 13.1/year mean over 2014–2023</li>
 <li><strong>2026 quarters:</strong> 2026-Q1: 10 · 2026-Q2: 26</li>
-<li><strong>ai-band severity (2026):</strong> 12 of 15 AI-marked disclosures rated Low
-  (80%), none High or Critical; 10 of 21 other disclosures rated Low (48%)</li>
+<li><strong>ai-band severity (2026):</strong> 19 of 22 AI-marked disclosures rated Low
+  (86%), none High or Critical; 11 of 23 other disclosures rated Low (48%)</li>
 <li><strong>severity drift:</strong> 2010–2022 disclosures were 18% Low and 28% High or
   Critical; 2023–2025 non-AI disclosures were 67% Low</li>
 </ul>
@@ -113,7 +113,7 @@ CSVs.</p>
 <ul>
 <li><strong>credit text is not method evidence.</strong> Classification is by textual
   marker and errs in both directions: a researcher who used a model without
-  saying so counts as human, and 14 of the 15 AI-marked credits of 2026 name
+  saying so counts as human, and 21 of the 22 AI-marked credits of 2026 name
   only an employer.</li>
 <li><strong>severity is compared across the combined AI band.</strong> The Low-severity
   shares above are computed against <code>ai_attributed</code>, so they describe
@@ -131,25 +131,25 @@ CSVs.</p>
   [@stenberg2026bounty].</li>
 </ul>
 <h2 id="ai-attribution">AI attribution</h2>
-<p>15 of the 36 disclosures of 2026 (through 2026-06-24) are AI-marked. One
+<p>22 of the 45 disclosures of 2026 (through 2026-09-02) are AI-marked. One
 credit names a system:</p>
 <blockquote>
 <p>"Andrew Nesbitt (powered by Mythos)"
-— curl credit string for one 2026 disclosure, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>, read 2026-08-14</p>
+— curl credit string for one 2026 disclosure, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>, read 2026-09-14</p>
 </blockquote>
-<p>The other 14 name an AI-security employer without stating a method: 9
-credit Aisle Research ("Joshua Rogers (Aisle Research)" on 6, "Stanislav
-Fort (Aisle Research)" on 3), 3 credit AntAISecurityLab hackerone handles,
+<p>The other 21 name an AI-security employer without stating a method: 15
+credit Aisle Research ("Stanislav Fort (Aisle Research)" on 9, "Joshua
+Rogers (Aisle Research)" on 6), 3 credit AntAISecurityLab hackerone handles,
 1 credits "Filipe Casal of Trail of Bits in collaboration with OpenAI",
-and 1 credits "Eunsoo Kim (Autonomous Code Security team at Microsoft)",
-all quoted from <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a> as read 2026-08-14.</p>
+and 2 credit "Eunsoo Kim (Autonomous Code Security team at Microsoft)",
+all quoted from <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a> as read 2026-09-14.</p>
 <p>2025 has 2 AI-marked disclosures: one system-naming credit,</p>
 <blockquote>
 <p>"Google Big Sleep"
-— curl credit string for one 2025 disclosure, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>, read 2026-08-14</p>
+— curl credit string for one 2025 disclosure, vendored in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-curl/curl-finders.csv"><code>curl-finders.csv</code></a>, read 2026-09-14</p>
 </blockquote>
 <p>and one affiliation-only credit, "Stanislav Fort (Aisle Research)". No
-AI marker appears in any credit string before 2025, as of the 2026-06-24
+AI marker appears in any credit string before 2025, as of the 2026-09-02
 snapshot. Stanislav Fort of Aisle Research appears in both curl and OpenSSL
 finder tables (<a href="cyber-openssl.html"><code>../cyber-openssl/</code></a>)
 [@googlebigsleep2024; @anthropicmythos2026; @aisle2026].</p>

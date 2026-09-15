@@ -12,7 +12,8 @@
     2026.564,
     2026.5749,
     2026.6078,
-    2026.6105
+    2026.6105,
+    2026.6324
    ],
    "y": [
     0.0,
@@ -21,13 +22,14 @@
     3.0,
     4.0,
     5.0,
-    6.0
+    6.0,
+    7.0
    ]
   }
  ],
  "source_label": "epoch.ai problem pages",
  "source_url": "https://epoch.ai/frontiermath/open-problems",
- "subtitle": "Cumulative dated solution events; one undated solve omitted",
+ "subtitle": "Cumulative dated solution events; undated solves omitted",
  "title": "FrontierMath Open Problems",
  "ylabel": "Problems marked solved",
  "ylog": false

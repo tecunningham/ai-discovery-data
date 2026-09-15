@@ -48,7 +48,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Domain:</strong> outside the three domains</li>
 <li><strong>Role:</strong> contrast case: volume</li>
 <li><strong>Metric:</strong> formal publishing volume; DOI records deposited with Crossref per year, by created date</li>
-<li><strong>Coverage:</strong> 2010 to 2026, annual, the last year partial through 2026-08-10</li>
+<li><strong>Coverage:</strong> 2010 to 2026, annual, the last year partial through 2026-09-14</li>
 <li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-crossref/crossref-dois-by-year.csv"><code>crossref-dois-by-year.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://api.crossref.org/works">https://api.crossref.org/works</a></li>
 <li><strong>Verdict:</strong> no acceleration — 2026 annualizes to roughly 13.3 million records against 12.80 million in 2025 and an 8.63 million/year mean over 2010–2025</li>
@@ -65,7 +65,7 @@ records fall in any created-date range.</p>
 its <code>created</code> date. The count is by registration date, not by publication
 date, so a backfile deposit of older work lands in the year it was
 registered. The last row is the year in progress at fetch time,
-year-to-date through 2026-08-10. The CSV holds the yearly totals the API
+year-to-date through 2026-09-14. The CSV holds the yearly totals the API
 reports; the records behind them are not vendored. The dataset carries no
 authorship field.</p>
 <h2 id="facts">Facts</h2>
@@ -74,9 +74,9 @@ authorship field.</p>
   143%</li>
 <li><strong>falls:</strong> six of the fifteen year-on-year changes over 2010–2025 are
   falls</li>
-<li><strong>2024 dip:</strong> deposits fell to 11.31 million from 12.69 million in 2023,
+<li><strong>2024 dip:</strong> deposits fell to 11.30 million from 12.69 million in 2023,
   then rose to 12.80 million in 2025</li>
-<li><strong>2026 year-to-date:</strong> 8,108,195 records through 2026-08-10, annualizing
+<li><strong>2026 year-to-date:</strong> 9,344,897 records through 2026-09-14, annualizing
   to roughly 13.3 million</li>
 </ul>
 <p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
@@ -120,7 +120,7 @@ annualization uses the shared day-count rule in
 <p>The dataset carries no authorship field; no AI share can be computed from
 it. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/output-crossref/crossref-dois-by-year.csv"><code>crossref-dois-by-year.csv</code></a> holds a year,
 a count and a part-year note per row; no AI credit appears in it as of the
-2026-08-10 fetch.</p>
+2026-09-14 fetch.</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li><a href="https://api.crossref.org/works">https://api.crossref.org/works</a> — the REST API the yearly counts are

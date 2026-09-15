@@ -18,6 +18,21 @@
  "source_label": "Clay Mathematics Institute",
  "source_url": "Clay Mathematics Institute",
  "subtitle": "Scored rows minus cumulative dated resolutions; undated statuses do not move the line",
+ "tentative": [
+  {
+   "label": "",
+   "x": [
+    2000.0,
+    2003.0,
+    2026.0
+   ],
+   "y": [
+    7.0,
+    6.0,
+    5.0
+   ]
+  }
+ ],
  "title": "Millennium Prize Problems",
  "ylabel": "Rows without a dated resolution",
  "ylog": false

@@ -1,0 +1,74 @@
+name: Render on demand
+
+# Regenerates every committed output in the pinned renderer and commits the
+# result back to the branch that asked: PNGs and the cumulative-<slug>.json
+# beside each panel (`make figures`), the interactive pages (`make docs`),
+# and README's and CUMULATIVE.md's generated tables (`make index`, which
+# runs the full figure check first and writes the tables either way).
+#
+# For a checkout without Docker — a Claude Code session on the web, a laptop
+# without the daemon — this is how a data or figure-code change gets its
+# outputs: push the work to a branch named render/<anything>, wait for the
+# commit this makes, pull it, and carry on. The commit is made with
+# GITHUB_TOKEN, so it triggers nothing further, and the branch is otherwise
+# left alone: no PR, no merge, no email.
+
+on:
+  push:
+    branches:
+      - "render/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-${{ github.ref }}
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --requirement requirements.txt
+
+      - uses: actions/cache@v4
+        id: figure-image
+        with:
+          path: /tmp/figure-image.tar
+          key: figure-image-${{ hashFiles('tools/figures.Dockerfile', 'requirements.txt') }}
+      - if: steps.figure-image.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/figure-image.tar
+
+      - name: Redraw figures, rebuild docs and the generated tables
+        id: render
+        continue-on-error: true
+        env:
+          FIGURE_IMAGE_PRELOADED: ${{ steps.figure-image.outputs.cache-hit == 'true' && '1' || '' }}
+        run: |
+          make figures
+          make docs
+          make index
+
+      - name: Commit the outputs back to the branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- problems README.md CUMULATIVE.md docs
+          if git diff --cached --quiet; then
+            echo "outputs already current"
+          else
+            git commit -m "Render: figures, index and docs"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
+          if [ "${{ steps.render.outcome }}" != "success" ]; then
+            echo "::error::make index reported failures; the outputs above are committed, the check is not green"
+            exit 1
+          fi
+
+      - if: steps.figure-image.outputs.cache-hit != 'true'
+        run: docker save --output /tmp/figure-image.tar ai-discovery-data-figures:python3.12.13

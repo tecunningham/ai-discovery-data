@@ -50,7 +50,7 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Metric:</strong> minutes of training to a fixed target validation loss, per
 accepted record</li>
 <li><strong>Coverage:</strong> 2024-05-28 to 2026-07-17, all 89 records listed in the
-repository README</li>
+repository README; open pull requests claiming a faster time read 2026-09-13</li>
 <li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/nanogpt-records.csv"><code>nanogpt-records.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://github.com/KellerJordan/modded-nanogpt">https://github.com/KellerJordan/modded-nanogpt</a> (record table
 in the README at
@@ -91,15 +91,27 @@ machine.</p>
   over the vendored series, not figures the README prints</li>
 <li><strong>deep human steps (README figures):</strong> the Muon optimizer at about 21% and
   U-Net skip connections at about 8%</li>
+<li><strong>pending:</strong> 1 open pull request claiming a time below the standing
+  record: #360 at 0.665 minutes, opened 2026-08-31 — a claim, not a record,
+  until the maintainer accepts it into the table</li>
 </ul>
 <p>The collection-wide <a href="cumulative.html">cumulative index</a> redraws this
 series as the standing record's value over time:</p>
 <p><img alt="Standing record for training minutes over time." src="https://raw.githubusercontent.com/tecunningham/ai-discovery-data/main/problems/algorithms-nanogpt/cumulative-algorithms-nanogpt.png" /></p>
 <h2 id="method">Method</h2>
-<p>The rows are transcribed by hand, since attributing a record needs judgment
-the README states only in prose. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/fetch.py"><code>fetch.py</code></a> is therefore a
-staleness probe rather than a fetcher: it reads the upstream README and
-reports if a record past the vendored series has been accepted.
+<p>The record rows are transcribed by hand, since attributing a record needs
+judgment the README states only in prose. For those, <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/fetch.py"><code>fetch.py</code></a>
+is a staleness probe rather than a fetcher: it reads the upstream README and
+reports if a record past the vendored series has been accepted. Rows with
+<code>kind=pending</code> it does write: every open pull request on the repository
+whose title claims a time below the standing record, opened on or before the
+snapshot date, becomes a row whose <code>record</code> is <code>PR&lt;number&gt;</code>, whose <code>date</code> is
+the day the request was opened and whose <code>agent</code> and <code>ai_system</code> are empty,
+since attribution waits for acceptance. A claim that is merged becomes a
+transcribed record row; one that is closed drops out at the next run. Pending
+rows enter no fact line other than <strong>pending</strong> and no figure in this folder;
+the collection's cumulative comparison page draws them on request as a
+tentative extension of the standing-record line.
 <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/check.py"><code>check.py</code></a> recomputes the fact lines above from the CSV.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-nanogpt/figure.py"><code>figure.py</code></a> reads <code>nanogpt-records.csv</code>, converts each <code>date</code> to
 a year fraction, and draws <code>minutes</code> as a step function through all 89 rows

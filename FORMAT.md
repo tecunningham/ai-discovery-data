@@ -77,6 +77,14 @@ matching the CSV's `problem_id`/`short_name` (or slug/title), holding
 the upstream wording the status rests on. The register may expand to more
 rows later; the CSV remains the complete table.
 
+Ledger statuses are `open`, `resolved`, `contested`, `partial`, `vague` and
+`claimed`. A `claimed` row is a resolution its authors have announced that
+is not yet published, refereed or accepted by the list's steward; it carries
+the announcement year in `resolved_year` and a register entry quoting the
+claim, contributes nothing to the series or the figures, and is the one
+status the docs comparison page's tentative view steps on. It moves to
+`resolved` or `contested` when the steward's own status does.
+
 ```markdown
 ### 90 — unit distances
 - **status:** disproved

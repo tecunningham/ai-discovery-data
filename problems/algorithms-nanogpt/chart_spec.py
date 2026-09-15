@@ -26,7 +26,7 @@ def charts(slug: str):
                "record": r["record"], "agent": r["agent"],
                "ai_system": r["ai_system"] or "—", "note": r["note"]}
               for r in load(slug, "nanogpt-records.csv")
-              if num(r["minutes"]) is not None]
+              if num(r["minutes"]) is not None and r["kind"] != "pending"]
     spec = record_steps(
         values, x="date", x_type="temporal", y="minutes",
         y_title="Training minutes to target loss (log scale)", log=True,

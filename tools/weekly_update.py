@@ -32,7 +32,8 @@ news until it lands.
 What the email leads with is decided by tiering each changed row:
 
     headline  a status flip (unsolved -> solved_ai), a new row in a record
-              ledger, a new or changed AI credit, an is_record flip
+              ledger, a new or changed AI credit, an is_record flip, a
+              tentative entry (a claimed resolution, a pending record)
     notable   any other change in a mathematics or algorithms series
     routine   count series ticking along: vulnerability tallies, arXiv and
               Crossref volumes, data_through dates advancing
@@ -252,6 +253,8 @@ class CsvDiff:
         return "routine", "count revision"
 
     def tier_of_addition(self, row: dict[str, str]) -> tuple[str, str]:
+        if row.get("kind") == "pending" or row.get("status") == "claimed":
+            return "headline", "tentative entry: claimed, not yet verified"
         if "-ai-" in self.name:
             return "headline", "new AI-credited entry"
         if row_shows_ai(self.fields, row):

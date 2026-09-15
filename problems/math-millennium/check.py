@@ -18,6 +18,7 @@ def main() -> int:
     dated = sorted(int(row["resolved_year"]) for row in rows
                    if row["status"] == "resolved" and row["resolved_year"])
     open_ids = [row["problem_id"] for row in rows if row["status"] == "open"]
+    claimed = [row for row in rows if row["status"] == "claimed"]
     by_year = " · ".join(f"{year}: {dated.count(year)}"
                          for year in sorted(set(dated)))
     list_year = rows[0]["list_year"]
@@ -29,10 +30,17 @@ def main() -> int:
     if dated and dated[-1] > 2025:
         failures.append("a dated resolution in 2026 exists; the verdict "
                         "clause stating 0 in 2026 is stale")
+    for row in claimed:
+        if not row["resolved_year"]:
+            failures.append(f"{row['problem_id']} is claimed without the "
+                            "announcement year in resolved_year")
 
     claims = {
         f"**rows:** {len(rows)} scored; {len(dated)} resolved with a dated "
-        f"year; {len(open_ids)} open": "rows fact",
+        f"year; {len(claimed)} claimed; {len(open_ids)} open": "rows fact",
+        "**claimed rows:** " + (", ".join(
+            f"{row['problem_id']} ({row['resolved_year']})" for row in claimed)
+            or "none"): "claimed-rows fact",
         f"**by-year:** {by_year}": "by-year fact",
         f"**ai-attributed:** 0 of {len(dated)} dated resolutions": "AI fact",
         "**open rows:** " + ", ".join(open_ids): "open-rows fact",

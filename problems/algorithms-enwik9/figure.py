@@ -20,23 +20,29 @@ from lib.table import read_csv  # noqa: E402
 
 
 def cumulative() -> None:
-    rows = [
-        row for row in read_csv(HERE / "enwik9-records.csv")
-        if row["series"] == "hutter_enwik9" and row["award"] != "pending"
-    ]
+    prize = [row for row in read_csv(HERE / "enwik9-records.csv")
+             if row["series"] == "hutter_enwik9"]
+    rows = [row for row in prize if row["award"] != "pending"]
+
+    def line(entries):
+        return [("", [year_fraction(row["date"]) for row in entries],
+                 [int(row["total_bytes"]) / 1e6 for row in entries])]
+
     staircase_chart(
         HERE / "cumulative-algorithms-enwik9.png",
         title="Hutter Prize enwik9: standing record",
         subtitle="Standing CPU-capped records on the 1 GB corpus; "
                  "lower total size is better",
         ylabel="Total size, MB (program + archive)",
-        series=[("", [year_fraction(row["date"]) for row in rows],
-                 [int(row["total_bytes"]) / 1e6 for row in rows])],
+        series=line(rows),
         source_label="prize.hutter1.net and mattmahoney.net/dc/text.html, "
                      "vendored as enwik9-records.csv",
         source_url="https://prize.hutter1.net/",
         built_by=__file__,
         note="Lower is better; pending entries excluded.",
+        # The comparison page can show the pending entries on request; the
+        # PNG keeps to awarded records.
+        tentative=line(prize) if len(prize) > len(rows) else None,
     )
 
 

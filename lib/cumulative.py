@@ -53,7 +53,8 @@ Series = tuple[str, list[float], list[float]]
 
 def write_sidecar(out_path: Path, *, kind: str, better: str, title: str,
                   subtitle: str, ylabel: str, series: list[Series], ylog: bool,
-                  source_label: str, source_url: str) -> None:
+                  source_label: str, source_url: str,
+                  tentative: list[Series] | None = None) -> None:
     """The panel's step lines as cumulative-<slug>.json beside the PNG.
 
     docs/compare.html draws every panel on one interactive chart, and the
@@ -72,6 +73,11 @@ def write_sidecar(out_path: Path, *, kind: str, better: str, title: str,
     does not carry float noise; y is left exact. The line is written as
     given, without the flat extension to the snapshot date, which the page
     adds itself from ``now``.
+
+    ``tentative``, when a folder passes it, is the same line redrawn with the
+    entries the panel leaves out as unconfirmed — a pending prize submission,
+    say — so the comparison page can offer them on request. The PNG never
+    draws it; it exists only here.
     """
     data = {
         "kind": kind,
@@ -88,6 +94,11 @@ def write_sidecar(out_path: Path, *, kind: str, better: str, title: str,
             for label, xs, ys in series
         ],
     }
+    if tentative:
+        data["tentative"] = [
+            {"label": label, "x": [round(x, 4) for x in xs], "y": list(ys)}
+            for label, xs, ys in tentative
+        ]
     sidecar = Path(out_path).with_suffix(".json")
     sidecar.write_text(json.dumps(data, indent=1, sort_keys=True,
                                   ensure_ascii=False) + "\n", encoding="utf-8")
@@ -110,6 +121,7 @@ def _draw(
     ylim: tuple[float, float] | None = None,
     note: str = "",
     decorate=None,
+    tentative: list[Series] | None = None,
 ) -> None:
     """The one drawing everything on the cumulative page shares.
 
@@ -125,7 +137,8 @@ def _draw(
     """
     write_sidecar(out_path, kind=kind, better=better, title=title,
                   subtitle=subtitle, ylabel=ylabel, series=series, ylog=ylog,
-                  source_label=source_label, source_url=source_url)
+                  source_label=source_label, source_url=source_url,
+                  tentative=tentative)
     fig, ax = new_chart(title, subtitle)
     for index, (label, xs, ys) in enumerate(series):
         if xs[-1] < NOW:
@@ -259,6 +272,7 @@ def remaining_chart(
     built_by: str,
     note: str = "",
     decorate=None,
+    tentative: list[Series] | None = None,
 ) -> None:
     """What remains of a known denominator, declining toward zero.
 
@@ -281,6 +295,7 @@ def remaining_chart(
         caption=f"{title}. Count remaining over time, toward zero.",
         note=note,
         decorate=decorate,
+        tentative=tentative,
     )
 
 
@@ -296,6 +311,7 @@ def staircase_chart(
     built_by: str,
     ylog: bool = False,
     note: str = "",
+    tentative: list[Series] | None = None,
 ) -> None:
     """A standing record's native value as a step function.
 
@@ -304,6 +320,10 @@ def staircase_chart(
     step. The direction of better differs by series, so the subtitle or note
     must say which way is progress. The data file beside the PNG carries the
     same direction, read from that sentence, so the two cannot disagree.
+
+    ``tentative`` is the same line with the entries the panel excludes as
+    unconfirmed; it goes to the data file for the comparison page and is
+    not drawn.
     """
     better = "down" if re.search(r"\blower\b[^;.]*\bbetter\b",
                                  f"{subtitle} {note}", re.I) else "up"
@@ -321,6 +341,7 @@ def staircase_chart(
         built_by=built_by,
         caption=f"{title}. Standing value over time as a step function.",
         note=note,
+        tentative=tentative,
     )
 
 
@@ -336,8 +357,15 @@ def ledger_remaining_chart(
     line answers "how much of this list is left" at any date. Rows resolved
     without a dateable year, and contested or partial rows, never move the
     line; a thin stacked bar at the snapshot date splits the terminal
-    remainder into open, contested / partial / vague, and resolved-undated, so
-    what the endpoint hides is drawn rather than only footnoted.
+    remainder into open, claimed, contested / partial / vague, and
+    resolved-undated, so what the endpoint hides is drawn rather than only
+    footnoted.
+
+    A ``claimed`` row — a resolution announced but not yet published,
+    refereed or accepted by the list's steward, with the announcement year
+    in ``resolved_year`` — does not move the drawn line either. It does move
+    the tentative line written beside the PNG for the comparison page, which
+    steps down at the claim year as if the claim held.
 
     ``ai_problem`` marks one row's resolution step in the AI red, the same
     hand-set argument the folder's dated-resolutions chart takes: these CSVs
@@ -357,8 +385,14 @@ def ledger_remaining_chart(
     undated = sum(
         row["status"] == "resolved" and not row["resolved_year"] for row in rows
     )
+    claimed = sorted(
+        ((int(row["resolved_year"]), row)
+         for row in rows
+         if row["status"] == "claimed" and row["resolved_year"]),
+        key=lambda item: (item[0], item[1]["problem_id"]),
+    )
     open_count = sum(row["status"] == "open" for row in rows)
-    other = total - len(dated) - undated - open_count
+    other = total - len(dated) - undated - len(claimed) - open_count
     start = min([list_year, *(year for year, _ in dated)])
     xs = [float(start)]
     ys = [float(total)]
@@ -371,12 +405,26 @@ def ledger_remaining_chart(
         if ai_problem is not None and row["problem_id"] == ai_problem:
             ai_step = (float(year), float(remaining), row["short_name"])
     parts = [f"{open_count} open"]
+    if claimed:
+        parts.append(f"{len(claimed)} claimed, unverified")
     if undated:
         parts.append(f"{undated} resolved undated")
     if other:
         parts.append(f"{other} contested / partial / vague")
     note = (f"{remaining} of {total} rows lack a dated resolution: "
             + ", ".join(parts))
+    # The tentative line: the same staircase with every claim honoured at
+    # its announcement year. Drawn nowhere here; the comparison page offers it.
+    tentative = None
+    if claimed:
+        steps = sorted([(year, "resolved") for year, _ in dated]
+                       + [(year, "claimed") for year, _ in claimed])
+        t_xs, t_ys, left = [float(start)], [float(total)], total
+        for year, _ in steps:
+            left -= 1
+            t_xs.append(float(year))
+            t_ys.append(float(left))
+        tentative = [("", t_xs, t_ys)]
 
     def decorate(ax) -> None:
         # The terminal remainder's composition, as a slim stack at the
@@ -384,6 +432,7 @@ def ledger_remaining_chart(
         # segments say how much of what remains is genuinely open.
         segments = [
             (open_count, OPEN_COLOUR, "open"),
+            (len(claimed), CONTESTED_COLOUR, "claimed, unverified"),
             (other, CONTESTED_COLOUR, "contested / partial / vague"),
             (undated, HUMAN, "resolved, undated"),
         ]
@@ -433,4 +482,5 @@ def ledger_remaining_chart(
         built_by=built_by,
         note=note,
         decorate=decorate,
+        tentative=tentative,
     )

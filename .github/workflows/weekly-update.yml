@@ -213,6 +213,9 @@ jobs:
           make figures
           make docs
           make index > .weekly/check.log 2>&1 || { tail -n 40 .weekly/check.log; exit 1; }
+          # make index may have rewritten the generated tables; rebuild the
+          # two index pages so the committed docs match them byte-for-byte.
+          make docs
 
       - name: Decide whether a person is needed
         id: review

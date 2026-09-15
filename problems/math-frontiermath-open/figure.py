@@ -52,6 +52,7 @@ LABELS = {
     "genus-2-jacobian-torsion": "genus-2 torsion\n(GPT-5.6 Sol)",
     "inverse-galois": "inverse Galois M$_{23}$\n(scored human)",
     "hadamard": "Hadamard 668\n(Claude)",
+    "elliptic-curve-rank": "elliptic rank ≥ 30\n(Claude)",
 }
 # Hand-placed offsets keep neighbouring labels off each other and off the
 # lane above; (dx, dy) in points.
@@ -62,6 +63,7 @@ OFFSETS = {
     "genus-2-jacobian-torsion": (-6, -30),
     "inverse-galois": (0, 12),
     "hadamard": (-4, 12),
+    "elliptic-curve-rank": (30, -30),
 }
 ANNOUNCED = "2026-02-26"
 

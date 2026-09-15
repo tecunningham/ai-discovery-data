@@ -53,6 +53,9 @@ jobs:
           make figures
           make docs
           make index
+          # make index may have rewritten the generated tables; rebuild the
+          # two index pages so the committed docs match them byte-for-byte.
+          make docs
 
       - name: Commit the outputs back to the branch
         run: |

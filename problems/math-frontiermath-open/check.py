@@ -61,7 +61,7 @@ def main() -> int:
 
     claims = {
         f"**pages:** {len(problems)} problem pages in the sitemap read of "
-        f"2026-08-14; {ai_solves} marked solved by AI, {human_solves} by "
+        f"2026-09-14; {ai_solves} marked solved by AI, {human_solves} by "
         f"humans, {unsolved} unsolved": "pages fact",
         f"**tiers:** {tier_counts['Moderately interesting']} moderately "
         f"interesting · {tier_counts['Solid result']} solid result · "

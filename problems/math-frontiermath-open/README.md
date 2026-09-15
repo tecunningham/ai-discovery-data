@@ -3,10 +3,10 @@
 - **Domain:** mathematics
 - **Role:** discovery series
 - **Metric:** dated solution events on Epoch AI's pool of open research problems, placed by curator-assigned notability tier
-- **Coverage:** benchmark announced 2026-02-26; pages read 2026-08-14, with recorded solves from 2026-03-23 to 2026-08-12
+- **Coverage:** benchmark announced 2026-02-26; pages read 2026-09-14, with recorded solves from 2026-03-23 to 2026-08-20
 - **Data:** [`frontiermath-open-problems.csv`](frontiermath-open-problems.csv), [`frontiermath-open-solutions.csv`](frontiermath-open-solutions.csv)
 - **Upstream:** <https://epoch.ai/frontiermath/open-problems>
-- **Verdict:** too early — 6 dated solves between 2026-03-23 and 2026-08-12; the pool was announced 2026-02-26 and no prior-year rate exists
+- **Verdict:** too early — 7 dated solves between 2026-03-23 and 2026-08-20; the pool was announced 2026-02-26 and no prior-year rate exists
 
 ![Dated solution events by notability tier, with the surviving pool per tier.](discovery-math-frontiermath-open.png)
 
@@ -42,16 +42,17 @@ solved by AI or solved by humans. Solve dates come from the pages'
 solution-update prose and Epoch's announcement posts: the ramsey-hypergraphs
 row is dated by the announcement post because its page states no solve date,
 the hadamard row by the day of the public report its page links, and the
-withdrawn explicit-deformations row carries no date. The pool is edited as
+withdrawn explicit-deformations row and the genus-2-rational-points row
+carry no date. The pool is edited as
 events arrive: problems are added, retired after solves, and in one case
 withdrawn.
 
 ## Facts
 
-- **pages:** 54 problem pages in the sitemap read of 2026-08-14; 6 marked solved by AI, 1 by humans, 47 unsolved
+- **pages:** 54 problem pages in the sitemap read of 2026-09-14; 8 marked solved by AI, 1 by humans, 45 unsolved
 - **tiers:** 23 moderately interesting · 20 solid result · 6 major advance · 4 breakthrough; 1 withdrawn page badged Novel example
-- **events:** 7 recorded solves; 6 carry a date, running 2026-03-23 to 2026-08-12
-- **placement:** 4 solves in moderately interesting, 2 in solid result, 1 on the Novel-example page; 0 in major advance and 0 in breakthrough
+- **events:** 9 recorded solves; 7 carry a date, running 2026-03-23 to 2026-08-20
+- **placement:** 6 solves in moderately interesting, 2 in solid result, 1 on the Novel-example page; 0 in major advance and 0 in breakthrough
 - **front-page tally:** AI solves of 3/22, 1/18, 0/6 and 0/3 across the four tiers, under the headline "Recently expanded to 50 problems", read 2026-08-14
 
 The front-page tally differs from the page-by-page sitemap read the CSVs
@@ -60,7 +61,7 @@ the active pool, and the withdrawal. The
 [Erdős catalogue](../math-erdos/README.md) records the same
 one-stock-several-counts pattern on its corpus.
 
-The collection-wide [cumulative index](../../CUMULATIVE.md) redraws the six
+The collection-wide [cumulative index](../../CUMULATIVE.md) redraws the seven
 dated events as a running count:
 
 ![Cumulative dated solution events.](cumulative-math-frontiermath-open.png)
@@ -165,6 +166,27 @@ dated events as a running count:
 > contributed significantly to the core mathematical ideas."
 > — Epoch AI, hadamard problem page, read 2026-08-14 [@epoch2026openproblems]
 
+### elliptic-curve-rank — Elliptic Curves over \(\mathbb{Q}\) of Large Rank
+- **event:** solved_ai
+- **date:** 2026-08-20
+- **system:** Claude
+- **elicited by:** Levent Alpöge and Ava Howell
+- **tier:** Moderately interesting
+- **notes:** The problem asked for rank at least 30; ICARM leaderboard curve #273 reached it on 2026-08-20 credited to Claude with Alpöge and Howell in the submitting account's commentary; self-reported with no paper as of the 2026-09-14 refetch; the same team posted a rank ≥ 31 curve on 2026-08-23
+
+The same event is this collection's
+[elliptic-curve rank record](../math-elliptic-rank/README.md), where the
+submission history, the leaderboard rows and the self-reported status of
+the credit are documented in full.
+
+### genus-2-rational-points — Many Rational Points on a Genus-2 Curve
+- **event:** solved_ai
+- **date:**
+- **system:**
+- **elicited by:**
+- **tier:** Moderately interesting
+- **notes:** Marked Solved (AI) at the 2026-09-14 refetch; no public announcement or credited system found as of 2026-09-15 and no new rational-points record beyond Elkies–Stoll's 642 located; the problem page is unreachable from this environment and the entry awaits detail
+
 ## Method
 
 [`fetch.py`](fetch.py) reads the site's sitemap, fetches each problem page,
@@ -184,8 +206,9 @@ the folder rather than passing silently.
 [`figure.py`](figure.py) places each dated event at its date and tier lane,
 and beside the timeline draws the whole pool as one stacked bar per tier —
 open, solved by AI, solved by humans — with each bar's label stating how
-much of the tier remains unsolved. The one undated solve — the withdrawn
-explicit-deformations page — is stated in a corner note rather than drawn.
+much of the tier remains unsolved. Undated solves — the withdrawn explicit-deformations page and the
+genus-2-rational-points page — are stated in a corner note rather than
+drawn.
 It also draws the cumulative count of dated solves for
 [CUMULATIVE.md](../../CUMULATIVE.md).
 
@@ -206,7 +229,7 @@ It also draws the cumulative count of dated solves for
   this folder's page count is one day's read of a moving pool.
 - **solve dates are announcement dates.** Pre-release solves are dated by
   when Epoch tested or announced them, not when a model first produced the
-  answer; one solve has no recoverable date at all.
+  answer; two solves have no recoverable date at all.
 - **the AI/human line is an editorial call.** The inverse-galois solve
   involved AI heavily and is scored human; the hadamard solve is
   provisionally scored AI pending detail on the human share (both scoring
@@ -216,17 +239,19 @@ It also draws the cumulative count of dated solves for
 
 ## AI attribution
 
-6 of the 7 recorded solves are credited to AI systems in the event ledger:
+8 of the 9 recorded solves are credited to AI systems in the event ledger:
 GPT-5.4 Pro (ramsey-hypergraphs), Claude Fable 5 (q2-absolute-galois),
 GPT-5.6 Sol (superpermutations and genus-2-jacobian-torsion), Claude
-(hadamard), and one solve on the withdrawn explicit-deformations page for
-which the event ledger records no date and no system
-[@epoch2026openproblems]. The seventh, inverse-galois, is scored
+(hadamard and elliptic-curve-rank), one solve on the withdrawn
+explicit-deformations page for which the event ledger records no date and
+no system, and the genus-2-rational-points solve, marked Solved (AI) at
+the 2026-09-14 refetch with no public detail found yet
+[@epoch2026openproblems]. The ninth, inverse-galois, is scored
 solved-by-humans under the bar quoted in its register entry. The
 genus-2-jacobian-torsion solve is a literature-search result: the page
 states the solving curve was already in a public database (quoted above).
 No solve is recorded in the major-advance or breakthrough tiers as of the
-2026-08-14 read.
+2026-09-14 read.
 
 ## Sources
 

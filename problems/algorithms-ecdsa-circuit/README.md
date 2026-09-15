@@ -4,13 +4,13 @@
 - **Role:** discovery series
 - **Metric:** best validated score (average executed Toffoli count × peak qubit
 width) for a reversible secp256k1 point-addition circuit; lower is better
-- **Coverage:** 2026-05-30 to 2026-08-10, 433 accepted records
+- **Coverage:** 2026-05-30 to 2026-09-11, 520 accepted records
 - **Data:** [`ecdsa-circuit-records.csv`](ecdsa-circuit-records.csv)
 - **Upstream:** <https://ecdsa.fail/>, challenge harness and results at
 <https://github.com/ecdsafail/ecdsafail-challenge>, record ladder from the
 challenge API at <https://api.ecdsa.fail/api/benchmarks>
 - **Verdict:** too early — first record 2026-05-30, so no prior-year rate
-exists; the 2026 series is a 7.3× fall over 72 days
+exists; the 2026 series is a 9.5× fall over 104 days
 
 ![Record ladder for the ecdsa.fail secp256k1 point-addition circuit challenge.](discovery-algorithms-ecdsa-circuit.png)
 
@@ -34,15 +34,15 @@ challenge opened on 2026-05-30, inside the agent era.
 ## Facts
 
 - **span:** from the challenge's starting circuit at 1.08 × 10¹⁰ on
-  2026-05-30 to 1.48 × 10⁹ on 2026-08-10, about 7.3× lower over 72 days
-- **records:** 433 accepted records from 63 distinct solvers
+  2026-05-30 to 1.14 × 10⁹ on 2026-09-11, about 9.5× lower over 104 days
+- **records:** 520 accepted records from 71 distinct solvers
 - **largest step:** on 2026-05-31, from 9.59 × 10⁹ to 8.45 × 10⁹
-- **ai-noted:** 389 of 433 notes name an AI tool; 12 rows carry no note; 32
+- **ai-noted:** 457 of 520 notes name an AI tool; 12 rows carry no note; 51
   carry a note naming no tool
 - **prior frontier:** the best circuit published before the challenge,
   Google's low-qubit Pareto point at roughly 3.0 × 10⁹ as quoted in the
-  challenge README, was passed in June 2026; the standing record is about 2×
-  below it [@ecdsafail2026challenge]
+  challenge README, was passed in June 2026; the standing record is about
+  2.6× below it [@ecdsafail2026challenge]
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
 series as the standing record's value over time:
@@ -73,12 +73,12 @@ CSV.
 - **no pre-era baseline exists.** The challenge opened in the agent era, so
   this series cannot compare an agent-era rate against a human one.
 - **a record ladder is not a discovery rate.** The API stores only improving
-  submissions, so the 433 rows are the winners, not the attempts; rejected
+  submissions, so the 520 rows are the winners, not the attempts; rejected
   and failed submissions are not counted here, and a front-loaded shape is
   what any bounded optimization contest produces.
 - **the AI-tool flag is a lower bound from free text.** It is a regex over
   submitter-written notes, blank where no note was left (12 rows) and "no"
-  where a note exists but names no tool (32 rows). It records what solvers
+  where a note exists but names no tool (51 rows). It records what solvers
   chose to disclose, not an audited provenance.
 - **the score is a benchmark metric, not a broken cipher.** A leaner
   point-addition circuit lowers the resource estimate for a future
@@ -90,7 +90,7 @@ CSV.
 
 ## AI attribution
 
-Of 433 accepted records, 389 carry notes naming an AI tool. Counted from the
+Of 520 accepted records, 457 carry notes naming an AI tool. Counted from the
 free-text notes the challenge API returned at the 2026-08-10 read — the
 vendored CSV carries only the per-row yes/no flag — 374 notes include an
 explicit `Model:` line: Claude Opus 4.8 leads at 150, followed by GPT-5 Codex

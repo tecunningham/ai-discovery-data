@@ -69,17 +69,26 @@ def main() -> int:
     if sec_2025 != len(ai_by_year["2025"]):
         failures.append("not every 2025 AI-marked CVE carries a SEC-agent "
                         "credit; the 'All ... of 2025' sentence is wrong")
-    # The OpenAI remainder bullet states a date and a shared credit string;
-    # both are claims about every row in that remainder.
+    # The OpenAI remainder bullet states dates and credit strings; each is
+    # a claim about a named row in that remainder.
     remainder = [row for row in ai_by_year["2026"]
                  if not any(k in row["credits"]
                             for k in ("SEC-agent", "XBOW", "Claude",
                                       "Anthropic"))]
-    if any(row["date"] != "2026-08-11"
-           or "Thomas Neil James Shadwell (zemnmez) with OpenAI"
-           not in row["credits"] for row in remainder):
-        failures.append("the OpenAI remainder rows no longer share the "
-                        "quoted credit string and 2026-08-11 date")
+    zemnmez = "Thomas Neil James Shadwell (zemnmez) with OpenAI"
+    august = [row for row in remainder if row["date"] == "2026-08-11"]
+    september = [row for row in remainder if row["date"] == "2026-09-08"]
+    if (len(august) != 2 or len(september) != 3
+            or len(remainder) != len(august) + len(september)
+            or any(row["credits"] != zemnmez for row in august)
+            or sum(zemnmez in row["credits"] for row in september) != 1
+            or sum("Khai Tran with OpenAI" in row["credits"]
+                   for row in september) != 1
+            or sum("OpenAI Codex Security" in row["credits"]
+                   for row in september) != 1):
+        failures.append("the OpenAI remainder rows no longer match the "
+                        "bullet's two solo 2026-08-11 zemnmez rows and "
+                        "three 2026-09-08 rows; rewrite the OpenAI bullet")
     warp = [row for row in ai_by_year["2026"] if "WARP" in row["credits"]]
     if len(warp) != 1 or warp[0]["cve"] != "CVE-2026-33096":
         failures.append("the WARP & MORSE co-credit no longer sits on "
@@ -145,9 +154,10 @@ def main() -> int:
         f"{claude_2026} of 2026's AI-marked CVEs credit Claude or Anthropic":
             "2026 Claude count",
         f'{xbow_2026} CVEs credit "XBOW"': "2026 XBOW count",
-        (f"The remaining {other_2026} CVEs, both dated 2026-08-11"
-         if other_2026 == 2 else
-         "OPENAI REMAINDER IS NOT TWO; REWRITE THE OPENAI BULLET"):
+        (f"The remaining {other_2026} CVEs each carry a credit naming "
+         "OpenAI"
+         if other_2026 == 5 else
+         "OPENAI REMAINDER IS NOT FIVE; REWRITE THE OPENAI BULLET"):
             "2026 OpenAI remainder",
     }
     return report(failures + missing(prose(HERE), claims))

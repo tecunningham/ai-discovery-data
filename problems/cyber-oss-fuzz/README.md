@@ -3,10 +3,10 @@
 - **Domain:** vulnerabilities
 - **Role:** control: no-AI baseline
 - **Metric:** vulnerability records published per quarter by an automated fuzzing programme
-- **Coverage:** 2020–2026, partial through 2026-08-10
+- **Coverage:** 2020–2026, partial through 2026-09-14
 - **Data:** quarterly [`ossfuzz-by-quarter.csv`](ossfuzz-by-quarter.csv); annual [`ossfuzz-by-year.csv`](ossfuzz-by-year.csv)
 - **Upstream:** <https://osv-vulnerabilities.storage.googleapis.com/OSS-Fuzz/all.zip> (browsable at <https://osv.dev/list?q=ecosystem%3AOSS-Fuzz>, programme at <https://google.github.io/oss-fuzz/>)
-- **Verdict:** declining — 1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 396
+- **Verdict:** declining — 1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 368
 
 ![Quarterly OSS-Fuzz vulnerability records, falling from a 2020 peak to a few dozen per quarter by 2025.](discovery-cyber-oss-fuzz.png)
 
@@ -28,10 +28,10 @@ and no severity field.
 
 ## Facts
 
-- **by-year (record id):** 2020: 1,041 · 2021: 739 · 2022: 710 · 2023: 581 · 2024: 388 · 2025: 244 · 2026 (through 2026-08-10): 241
-- **2026 annualized:** roughly 396 records
-- **total:** 3,944 records over 2020–2026
-- **clock gap:** quarters by published date sum to 247 records in 2026 against 241 by record id
+- **by-year (record id):** 2020: 1,041 · 2021: 739 · 2022: 710 · 2023: 581 · 2024: 388 · 2025: 244 · 2026 (through 2026-09-14): 259
+- **2026 annualized:** roughly 368 records
+- **total:** 3,962 records over 2020–2026
+- **clock gap:** quarters by published date sum to 265 records in 2026 against 259 by record id
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this series
 as cumulative vulnerability records to date:
@@ -82,7 +82,7 @@ annual CSV.
 ## AI attribution
 
 No OSS-Fuzz record names a finder, so no record carries an AI credit, as of
-the 2026-08-10 read of the archive. One adjacent fact: OSS-Fuzz-Gen, an
+the 2026-09-14 read of the archive. One adjacent fact: OSS-Fuzz-Gen, an
 LLM-assisted generator of fuzzing harnesses, appears by name in OpenSSL
 credit strings vendored in [`../cyber-openssl/`](../cyber-openssl/README.md),
 and this collection classifies those CVEs as fuzzing because the credit

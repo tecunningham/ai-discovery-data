@@ -14,7 +14,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 from lib.prose import missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
-WORDS = {8: "eight", 18: "eighteen", 19: "nineteen"}
+WORDS = {8: "eight", 18: "eighteen", 19: "nineteen", 20: "twenty"}
 
 
 def main() -> int:
@@ -103,7 +103,8 @@ def main() -> int:
         f"{submitted['date']}, {latency} days later": "challenge-gap fact",
         f"On {challenge['date']}, fifteen days before the curve was submitted":
             "challenge-gap lead",
-        f"inconclusive — {count(2026)} record step in 2026 against "
+        f"inconclusive — {count(2026)} record "
+        f"step{'' if count(2026) == 1 else 's'} in 2026 against "
         f"{count(2025)} in 2025 and {count(2024)} in 2024; {len(late)} steps "
         f"over 2001–2026 against {len(early)} over 1974–2000": "verdict clause",
         f"Coverage:** {WORDS[len(records)]} record steps, {first['year']} to "

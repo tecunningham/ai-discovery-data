@@ -17,4 +17,5 @@ year,rank,discoverer,credit,credit_evidence,source_url,note
 2000,24,Martin–McMillen,human,published,https://web.math.pmf.unizg.hr/~duje/tors/rk24.html,
 2006,28,Elkies,human,published,https://web.math.pmf.unizg.hr/~duje/tors/rk28.html,
 2024,29,Elkies–Klagsbrun,human,published,https://web.math.pmf.unizg.hr/~duje/tors/rk29.html,
-2026,30,ranksunbounded,ai,self-reported,https://web.math.pmf.unizg.hr/~duje/tors/rk30.html,"Credited to Claude with Levent Alpoge and Ava Howell in the leaderboard commentary, edited by the submitting account; no paper or named-author statement as of 2026-08-20"
+2026,30,Alp&ouml;ge–Howell,ai,self-reported,https://web.math.pmf.unizg.hr/~duje/tors/rk30.html,"Credited to Claude with Levent Alpoge and Ava Howell in the leaderboard commentary, edited by the submitting account; no paper or named-author statement as of 2026-08-20"
+2026,31,Alp&ouml;ge–Howell,human,published,https://web.math.pmf.unizg.hr/~duje/tors/rk31.html,

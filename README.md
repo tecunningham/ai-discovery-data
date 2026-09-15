@@ -130,11 +130,11 @@ zero where the series has a known denominator.
 | [modded-nanogpt training speedrun](problems/algorithms-nanogpt/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Stockfish development builds on fixed hardware](problems/algorithms-stockfish/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Integer factorization records](problems/integer-factorization/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
-| [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| [arXiv submissions](problems/output-arxiv/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. 13 failing cells.
+37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. 12 failing cells.
 
 Failing:
 - `cyber-curl` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2000–2026, partial through 2026-09-02'
@@ -229,15 +229,6 @@ Failing:
 - `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2026-05-30 to 2026-09-11, 520 accepted records'
 - `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed AI-attribution counts: 'Of 520 accepted records, 457 carry notes naming an AI tool'
 - `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed no-tool count: '"no" where a note exists but names no tool (51 rows)'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed latest complete month: 'to 31,173 in August 2026, the last complete month'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed growth since 2022-11: '80% growth'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed 2026 rate against 2025 and 2024: 'a 28,790 submissions/month mean over 2026-01 to 2026-08 against monthly means of 23,707 in 2025 and 20,336 in 2024'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 1991-07 to 2026-09, monthly, the last month partial'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed computer-science growth: 'from 5,967 monthly submissions in November 2022 to 2,893 in August 2026'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed physics growth: 'physics rose -76% from November 2022 to August 2026'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed mathematics growth: 'mathematics -66%, from 3,143 to 1,055'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed combinatorics surge: 'math.CO reached 151 submissions in August 2026 against a 2024 monthly average of 342'
-- `output-arxiv` Arithmetic: check.py: README lacks recomputed math vs 2024 baseline: 'ran at 0.3 times its 2024 monthly average in August 2026'
 - `output-crossref` Arithmetic: check.py: README lacks recomputed 2024 dip: 'deposits fell to 11.30 million from 12.69 million in 2023, then rose to 12.80 million in 2025'
 - `output-crossref` Arithmetic: check.py: README lacks recomputed year-to-date fact: '9,344,897 records through 2026-09-14, annualizing to roughly 13.3 million'
 - `output-crossref` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2010 to 2026, annual, the last year partial through 2026-09-14'

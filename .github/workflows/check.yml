@@ -19,13 +19,13 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # The figure image is a pure function of its Dockerfile and
       # requirements.txt, so it is cached as a tarball keyed on both; a hit
       # skips the docker build (and the matplotlib install inside it), which
       # is most of this job's runtime.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         id: figure-image
         with:
           path: /tmp/figure-image.tar

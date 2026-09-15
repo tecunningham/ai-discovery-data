@@ -1973,3 +1973,97 @@ CVE-2026-16410,2026,2026-Q3,2026-07-21,Low,ai_affiliated,Amy Burnett of OpenAI
 CVE-2026-16411,2026,2026-Q3,2026-07-21,High,fuzz,"C.M.Chang, Christian Holler, David Parks, Dennis Jackson, Gabriele Svelto, Hafiizh, Henrik Skupin, Jan de Mooij, Jens Stutte, Paul Theriault, Randell Jesup, Rob Wu, Tom Ritter, Tom Schuster and the Mozilla Fuzzing Team"
 CVE-2026-16412,2026,2026-Q3,2026-07-21,High,fuzz,"Christian Holler, Frederik Braun, Justin Link, Simon Friedberger, Tom Ritter, Tom Schuster and the Mozilla Fuzzing Team"
 CVE-2026-18809,2026,2026-Q3,2026-08-04,High,fuzz,The Mozilla Fuzzing Team
+CVE-2026-74934,2026,2026-Q3,2026-08-18,High,other,satyamasd
+CVE-2026-74935,2026,2026-Q3,2026-08-18,High,other,Yaqoub Aldurayhim
+CVE-2026-74936,2026,2026-Q3,2026-08-18,High,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-74937,2026,2026-Q3,2026-08-18,High,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-74938,2026,2026-Q3,2026-08-18,High,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-74939,2026,2026-Q3,2026-08-18,High,other,choeseyeong
+CVE-2026-74940,2026,2026-Q3,2026-08-18,High,other,kiyong
+CVE-2026-74941,2026,2026-Q3,2026-08-18,High,other,Jacolon Walker
+CVE-2026-74942,2026,2026-Q3,2026-08-18,High,other,Gal Ankonina
+CVE-2026-74943,2026,2026-Q3,2026-08-18,High,other,Abdulaziz Alasaiqah
+CVE-2026-74944,2026,2026-Q3,2026-08-18,High,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-74945,2026,2026-Q3,2026-08-18,High,other,Abdulaziz Alasaiqah
+CVE-2026-74946,2026,2026-Q3,2026-08-18,High,other,locust1b
+CVE-2026-74947,2026,2026-Q3,2026-08-18,High,other,navapon
+CVE-2026-74948,2026,2026-Q3,2026-08-18,High,other,Yaqoub Aldurayhim
+CVE-2026-74949,2026,2026-Q3,2026-08-18,High,other,r00tdaddy
+CVE-2026-74950,2026,2026-Q3,2026-08-18,Moderate,other,Frederik Braun
+CVE-2026-74951,2026,2026-Q3,2026-08-18,Moderate,other,Hafiizh
+CVE-2026-74952,2026,2026-Q3,2026-08-18,Moderate,other,Tomoya Nakanishi
+CVE-2026-74953,2026,2026-Q3,2026-08-18,Moderate,other,Satoki Tsuji
+CVE-2026-74954,2026,2026-Q3,2026-08-18,Moderate,other,Tomoya Nakanishi
+CVE-2026-74955,2026,2026-Q3,2026-08-18,Moderate,other,jmwebdevelopement
+CVE-2026-74956,2026,2026-Q3,2026-08-18,Moderate,other,pakhunov.anton.n
+CVE-2026-74957,2026,2026-Q3,2026-08-18,Moderate,other,Tomoya Nakanishi
+CVE-2026-74958,2026,2026-Q3,2026-08-18,Moderate,other,Tomoya Nakanishi
+CVE-2026-74959,2026,2026-Q3,2026-08-18,Moderate,other,David Bors at Snyk Security Labs
+CVE-2026-74960,2026,2026-Q3,2026-08-18,Moderate,other,Khanh Nguyen
+CVE-2026-74961,2026,2026-Q3,2026-08-18,Moderate,other,Rintaro Kawasugi
+CVE-2026-74962,2026,2026-Q3,2026-08-18,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-74963,2026,2026-Q3,2026-08-18,Moderate,other,5up3rh3i
+CVE-2026-74964,2026,2026-Q3,2026-08-18,Moderate,other,5up3rh3i
+CVE-2026-74965,2026,2026-Q3,2026-08-18,Moderate,other,Khanh Nguyen
+CVE-2026-74966,2026,2026-Q3,2026-08-18,Moderate,fuzz,The Mozilla Fuzzing Team
+CVE-2026-74967,2026,2026-Q3,2026-08-18,Moderate,fuzz,The Mozilla Fuzzing Team
+CVE-2026-74968,2026,2026-Q3,2026-08-18,Moderate,other,kiyong
+CVE-2026-74969,2026,2026-Q3,2026-08-18,Moderate,other,Hyeonjun Ahn
+CVE-2026-74970,2026,2026-Q3,2026-08-18,Moderate,other,Abdulaziz Alasaiqah
+CVE-2026-74971,2026,2026-Q3,2026-08-18,Moderate,other,avlidienbrunn
+CVE-2026-74972,2026,2026-Q3,2026-08-18,Moderate,other,Kagami Rosylight
+CVE-2026-74973,2026,2026-Q3,2026-08-18,Moderate,other,r00tdaddy
+CVE-2026-74974,2026,2026-Q3,2026-08-18,Moderate,fuzz,The Mozilla Fuzzing Team
+CVE-2026-74975,2026,2026-Q3,2026-08-18,Low,other,Hafiizh
+CVE-2026-74976,2026,2026-Q3,2026-08-18,Low,other,anbu
+CVE-2026-74977,2026,2026-Q3,2026-08-18,Low,other,Vladimir Meier
+CVE-2026-74978,2026,2026-Q3,2026-08-18,Low,other,hafidzaulia28
+CVE-2026-74979,2026,2026-Q3,2026-08-18,Low,other,Tomoya Nakanishi
+CVE-2026-74980,2026,2026-Q3,2026-08-18,Low,other,Hafiizh
+CVE-2026-74981,2026,2026-Q3,2026-08-18,Low,other,5up3rh3i
+CVE-2026-74982,2026,2026-Q3,2026-08-18,Low,other,Riski Muhammad Ivan
+CVE-2026-74983,2026,2026-Q3,2026-08-18,Low,other,5up3rh3i
+CVE-2026-74984,2026,2026-Q3,2026-08-18,Low,ai_affiliated,Amy Burnett of OpenAI
+CVE-2026-74985,2026,2026-Q3,2026-08-18,Low,fuzz,The Mozilla Fuzzing Team
+CVE-2026-74986,2026,2026-Q3,2026-08-18,Low,other,5up3rh3i
+CVE-2026-74987,2026,2026-Q3,2026-08-18,High,fuzz,"Nicolas Silva, Tom Ritter and the Mozilla Fuzzing Team"
+CVE-2026-74988,2026,2026-Q3,2026-08-18,High,fuzz,"Gabriele Svelto, Tom Ritter, Tom Schuster and the Mozilla Fuzzing Team"
+CVE-2026-74989,2026,2026-Q3,2026-08-18,Moderate,fuzz,"Christian Holler, Ryan Hunt, Tom Ritter and the Mozilla Fuzzing Team"
+CVE-2026-74990,2026,2026-Q3,2026-08-18,High,fuzz,"Christian Holler, Jan de Mooij, Tom Ritter and the Mozilla Fuzzing Team"
+CVE-2026-75874,2026,2026-Q3,2026-08-18,High,other,crixer
+CVE-2026-84637,2026,2026-Q3,2026-08-18,Low,other,Trung Nguyen
+CVE-2026-81267,2026,2026-Q3,2026-08-31,Moderate,other,Azza Tegar Naufal Ataullah
+CVE-2026-84117,2026,2026-Q3,2026-09-01,High,other,HiWorld
+CVE-2026-84118,2026,2026-Q3,2026-09-01,High,other,x0e
+CVE-2026-84119,2026,2026-Q3,2026-09-01,High,other,Yaqoub Aldurayhim
+CVE-2026-84120,2026,2026-Q3,2026-09-01,High,other,Ukyo Akai
+CVE-2026-84121,2026,2026-Q3,2026-09-01,High,other,Yaqoub Aldurayhim
+CVE-2026-84122,2026,2026-Q3,2026-09-01,High,other,Hyeonjun Ahn
+CVE-2026-84123,2026,2026-Q3,2026-09-01,High,other,Yaqoub Aldurayhim
+CVE-2026-84124,2026,2026-Q3,2026-09-01,High,other,Hyeonjun Ahn
+CVE-2026-84125,2026,2026-Q3,2026-09-01,High,other,Yaqoub Aldurayhim
+CVE-2026-84126,2026,2026-Q3,2026-09-01,High,other,Irvan Kurniawan
+CVE-2026-84127,2026,2026-Q3,2026-09-01,Moderate,other,Wladimir Palant
+CVE-2026-84128,2026,2026-Q3,2026-09-01,Moderate,other,Tomoya Nakanishi
+CVE-2026-84129,2026,2026-Q3,2026-09-01,Moderate,other,Yaqoub Aldurayhim
+CVE-2026-84130,2026,2026-Q3,2026-09-01,Moderate,other,5up3rh3i
+CVE-2026-84131,2026,2026-Q3,2026-09-01,Moderate,other,navapon
+CVE-2026-84132,2026,2026-Q3,2026-09-01,Moderate,other,Shu Takahashi
+CVE-2026-84133,2026,2026-Q3,2026-09-01,Low,other,pakhunov.anton.n
+CVE-2026-84134,2026,2026-Q3,2026-09-01,Low,other,5up3rh3i
+CVE-2026-84135,2026,2026-Q3,2026-09-01,Low,other,Atsushi Sada
+CVE-2026-84136,2026,2026-Q3,2026-09-01,Low,other,Apentota
+CVE-2026-84137,2026,2026-Q3,2026-09-01,Low,other,Riski Muhammad Ivan
+CVE-2026-84138,2026,2026-Q3,2026-09-01,Low,other,Uwez Khan
+CVE-2026-84139,2026,2026-Q3,2026-09-01,Low,other,Long Nguyen
+CVE-2026-84140,2026,2026-Q3,2026-09-01,Low,other,Mohamed Mbarek
+CVE-2026-84141,2026,2026-Q3,2026-09-01,Low,other,nguyentuanhung1149
+CVE-2026-84142,2026,2026-Q3,2026-09-01,Moderate,fuzz,"Alexandre Poirot, Christian Holler, Sebastian Hengst and the Mozilla Fuzzing Team"
+CVE-2026-84143,2026,2026-Q3,2026-09-01,High,fuzz,"Jan de Mooij, Tom Ritter and the Mozilla Fuzzing Team"
+CVE-2026-84144,2026,2026-Q3,2026-09-01,High,fuzz,"Leo Tenenbaum, Tom Ritter and the Mozilla Fuzzing Team"
+CVE-2026-84145,2026,2026-Q3,2026-09-01,High,fuzz,"Leo Tenenbaum, Tom Ritter and the Mozilla Fuzzing Team"
+CVE-2026-84639,2026,2026-Q3,2026-09-01,High,other,"Ramesh Adhikari, Dr. Faruk Kazi (CoE-CNDS Lab, VJTI, Mumbai, India)"
+CVE-2026-84640,2026,2026-Q3,2026-09-01,Unrated,other,"Ramesh Adhikari, Dr. Faruk Kazi (CoE-CNDS Lab, VJTI, Mumbai, India)"
+CVE-2026-84641,2026,2026-Q3,2026-09-01,Low,other,ABDULAZIZ ALASAIQAH
+CVE-2026-84642,2026,2026-Q3,2026-09-01,Low,other,"ChinhNguyen, Lowk3yz"
+CVE-2026-86853,2026,2026-Q3,2026-09-08,Low,other,Amit Gajbhare

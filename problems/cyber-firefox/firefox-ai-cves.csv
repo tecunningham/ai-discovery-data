@@ -36,4 +36,9 @@ year,cve,band,reporters
 2026,CVE-2026-6746,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
 2026,CVE-2026-6757,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
 2026,CVE-2026-6758,explicit_ai,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
+2026,CVE-2026-74936,ai_affiliated,Amy Burnett of OpenAI
+2026,CVE-2026-74937,ai_affiliated,Amy Burnett of OpenAI
+2026,CVE-2026-74938,ai_affiliated,Amy Burnett of OpenAI
+2026,CVE-2026-74944,ai_affiliated,Amy Burnett of OpenAI
+2026,CVE-2026-74984,ai_affiliated,Amy Burnett of OpenAI
 2026,CVE-2026-8390,ai_affiliated,"OpenAI Preparedness, Bill Demirkapi"

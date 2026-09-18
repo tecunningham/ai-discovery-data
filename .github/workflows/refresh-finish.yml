@@ -78,7 +78,7 @@ jobs:
             --jq '.comments[].body | select(startswith("**Judgment calls**"))' \
             > .weekly/judgment-calls.md || true
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         if: steps.pr.outputs.url != ''
         id: figure-image
         with:

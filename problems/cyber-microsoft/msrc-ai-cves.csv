@@ -26,8 +26,8 @@ CVE-2026-27909,2026-04-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team"
 CVE-2026-32195,2026-04-14,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Gwanhyun Lee | Dongjun Kim | Anonymous | 0rb1t with None | Qanux with None"
 CVE-2026-33096,2026-04-14,explicit_ai,WARP & MORSE teams at Microsoft | Milad Nasr (Anthropic) and Calif.io with Claude
 CVE-2026-35420,2026-05-12,explicit_ai,"Jongseong Kim (nevul37), SEC-agent team | Hwiwon Lee (hwiwonl), SEC-agent team | Younggi Park (grill66), SEC-agent team"
-CVE-2026-40380,2026-05-12,explicit_ai,Calif.io in collaboration with Claude and Anthropic Research
 CVE-2026-40369,2026-05-12,explicit_ai,Théo DUTEIS | Calif.io in collaboration with Claude and Anthropic Research | Adrian Denkiewicz at Doyensec in collaboration with Anthropic Research | Len Sadowski (lytnc) and Oguz Bektas (_ozb_)
+CVE-2026-40380,2026-05-12,explicit_ai,Calif.io in collaboration with Claude and Anthropic Research
 CVE-2026-40398,2026-05-12,explicit_ai,Calif.io in collaboration with Claude and Anthropic Research
 CVE-2026-40403,2026-05-12,explicit_ai,Calif.io and Milad Nasr (Anthropic) with Claude with Calif.io and Anthropic
 CVE-2026-42915,2026-06-09,explicit_ai,Linzishan & Anemone & Zhiniang Peng (HUST) | Daniel Friedl | Anonymous | Calif.io and Milad Nasr (Anthropic) with Claude with Calif.io and Anthropic | Wongi Lee with Theori | Jungwoo Lee with KAIST SoftSec Lab

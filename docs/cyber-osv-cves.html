@@ -48,10 +48,10 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Domain:</strong> vulnerabilities</li>
 <li><strong>Role:</strong> discovery series</li>
 <li><strong>Metric:</strong> distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date</li>
-<li><strong>Coverage:</strong> 2016–2026, partial through 2026-09-14</li>
+<li><strong>Coverage:</strong> 2016–2026, partial through 2026-09-21</li>
 <li><strong>Data:</strong> quarterly <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-cves-by-quarter.csv"><code>osv-cves-by-quarter.csv</code></a>; annual <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-cves-by-year.csv"><code>osv-cves-by-year.csv</code></a>; severity labels in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-severity-by-year.csv"><code>osv-severity-by-year.csv</code></a>; finder credits in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-credits-by-year.csv"><code>osv-credits-by-year.csv</code></a>; every AI-marked CVE with its credit strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://storage.googleapis.com/osv-vulnerabilities/all.zip">https://storage.googleapis.com/osv-vulnerabilities/all.zip</a> (documentation at <a href="https://google.github.io/osv.dev/data/">https://google.github.io/osv.dev/data/</a>)</li>
-<li><strong>Verdict:</strong> accelerating — 27,740 distinct CVEs through 2026-09-14 annualize to about 39,400, 2.6 times 2025's 15,157</li>
+<li><strong>Verdict:</strong> accelerating — 29,769 distinct CVEs through 2026-09-21 annualize to about 41,200, 2.7 times 2025's 15,158</li>
 </ul>
 <h3>Distinct CVEs</h3>
 <div id="chart0" class="chart"></div>
@@ -76,15 +76,15 @@ one event; an advisory naming several CVEs contributes one event per CVE.</p>
 <h2 id="facts">Facts</h2>
 <ul>
 <li><strong>by-year:</strong> 2016: 1,472 · 2017: 4,588 · 2018: 4,877 · 2019: 5,161 ·
-  2020: 5,323 · 2021: 6,913 · 2022: 10,838 · 2023: 8,831 · 2024: 12,290 ·
-  2025: 15,157</li>
-<li><strong>2026 (through 2026-09-14):</strong> 27,740 distinct CVEs; annualizes to about
-  39,400, or 2.6 times the 2025 count</li>
-<li><strong>peak quarter:</strong> 2026-Q3 alone holds 11,113 distinct CVEs, more than any
+  2020: 5,323 · 2021: 6,913 · 2022: 10,838 · 2023: 8,833 · 2024: 12,294 ·
+  2025: 15,158</li>
+<li><strong>2026 (through 2026-09-21):</strong> 29,769 distinct CVEs; annualizes to about
+  41,200, or 2.7 times the 2025 count</li>
+<li><strong>peak quarter:</strong> 2026-Q3 alone holds 13,118 distinct CVEs, more than any
   full year before 2022</li>
-<li><strong>severity coverage:</strong> 35,743 of the 103,190 CVEs (35%) carry an ecosystem
+<li><strong>severity coverage:</strong> 36,021 of the 105,226 CVEs (34%) carry an ecosystem
   severity label</li>
-<li><strong>credit coverage:</strong> 1,344 CVEs (1.3%) carry any credit</li>
+<li><strong>credit coverage:</strong> 1,366 CVEs (1.3%) carry any credit</li>
 <li><strong>ai-marked:</strong> 32 CVEs — 2 whose credits state an AI method and 30
   carrying an AI-lab affiliation only — each kept with its full credit
   strings in <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/cyber-osv-cves/osv-ai-cves.csv"><code>osv-ai-cves.csv</code></a></li>
@@ -177,7 +177,7 @@ among its credits, all quoted from
 same credit strings appear in the curl series' finder table
 (<a href="cyber-curl.html">curl</a>), which counts the same projects'
 disclosures at the project level. No other CVE in the export carries any AI
-marker in its credits, as of the 2026-09-14 read.</p>
+marker in its credits, as of the 2026-09-21 read.</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li>[@osv2026data] — OSV's documentation of the full export and its mix of

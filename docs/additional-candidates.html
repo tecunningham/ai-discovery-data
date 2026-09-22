@@ -235,6 +235,39 @@ ties keep the earlier ordering. The criteria are:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="candidate-algorithmic-progress-series">Candidate algorithmic-progress series</h2>
+<h3 id="sat-museum">SAT Museum</h3>
+<p>The <a href="https://cca.informatik.uni-freiburg.de/satmuseum/">SAT Museum</a> is an
+unusually strong candidate because it has already done most of the controlled
+rerunning that annual solver competitions normally lack. Biere, Fleury,
+Froleyks and Heule collected and patched historically important SAT solvers and
+SAT Competition winners, then ran them on the same 2016-era hardware with the
+same 5,000-second timeout across several fixed competition benchmark sets. The
+<a href="https://cca.informatik.uni-freiburg.de/papers/BiereFleuryFroleyksHeule-POS23.pdf">paper</a>
+and <a href="https://doi.org/10.5281/zenodo.10037737">archived artifact</a> cover solver
+vintages from 1992 through 2022. This is much closer to a genuine
+algorithmic-progress series than joining each competition's published score.</p>
+<p>A problem folder could date each solver snapshot by release or competition year
+and measure solved count, PAR-2, or runtime at common solved-instance quantiles.
+It should choose a primary frozen benchmark panel before inspecting the result,
+report SAT and UNSAT instances separately, and use the other benchmark-year
+panels as sensitivity checks. The main remaining audit issues are the
+winner-focused solver selection, missing or patched historical code, developers'
+exposure to earlier competition sets, and choosing one summary statistic from
+the full runtime distributions.</p>
+<p>The public landing page still stops at 2022, but the original authors did extend
+the experiment once. Their May 2024 LPAR talk,
+<a href="https://cca.informatik.uni-freiburg.de/biere/talks/Biere-LPAR24-talk.pdf">“30 Years of Faster and Faster SAT Solving”</a>,
+reports 25 all-time winners through 2023 and seven benchmark cohorts including
+the 2023 set; it adds the 2023 winner <code>sbva-cadical-2023</code>. That extension does
+not appear to have been released as machine-readable Museum data: the landing
+page, per-year CSV controls and POS'23 artifact remain capped at 2022. No public
+Museum-style rerun through the 2024 or 2025 solver generations was located as of
+2026-08-17. The <a href="https://satcompetition.github.io/2024/">2024</a> and
+<a href="https://satcompetition.github.io/2025/">2025</a> competitions do publish solver
+sources, benchmarks and detailed results, so the inputs for extending it exist;
+their official annual scores are not themselves comparable substitutes for the
+same-hardware Museum reruns.</p>
 <h2 id="deferred-algorithm-benchmark-reconstructions">Deferred algorithm benchmark reconstructions</h2>
 <p>These three sources have unusually good historical artifacts, but they do not
 yet provide clean time series of algorithmic progress. Their official annual

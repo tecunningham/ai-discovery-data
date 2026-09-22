@@ -3,10 +3,10 @@
 - **Domain:** vulnerabilities
 - **Role:** discovery series
 - **Metric:** CVEs issued by Microsoft's own CNA per month, dated by first publication in the Security Update Guide, split by whether an acknowledgment credit names an AI method, an AI-security employer, a fuzzer, or none of these
-- **Coverage:** 2016–2026, partial through 2026-09-11; no February or March 2016 document exists upstream, so the first year is ten months
+- **Coverage:** 2016–2026, partial through 2026-09-18; no February or March 2016 document exists upstream, so the first year is ten months
 - **Data:** annual [`msrc-cves.csv`](msrc-cves.csv); monthly counts by band in [`msrc-by-month.csv`](msrc-by-month.csv); per-credit rows in [`msrc-finders.csv`](msrc-finders.csv); every AI-marked CVE with its full credit strings in [`msrc-ai-cves.csv`](msrc-ai-cves.csv)
 - **Upstream:** <https://api.msrc.microsoft.com/cvrf/v3.0/updates> (rendered at <https://msrc.microsoft.com/update-guide>)
-- **Verdict:** accelerating — 2,938 CVEs through 2026-09-11 against 1,243 in 2025; the part year annualizes to about 3.4 times 2025
+- **Verdict:** accelerating — 2,960 CVEs through 2026-09-18 against 1,243 in 2025; the part year annualizes to about 3.3 times 2025
 
 ![Monthly Microsoft security-update CVEs, split by AI method, AI affiliation, and fuzzer credit.](discovery-cyber-microsoft.png)
 
@@ -46,8 +46,8 @@ remaining.
 - **2016 span:** 371 CVEs across ten documented months
 - **plateau and growth:** between 863 and 961 a year from 2019 through
   2023; 14% growth in each of 2024 and 2025
-- **2026 (through 2026-09-11):** 2,938 CVEs, 2.36 times the 2025 full year;
-  annualizes to about 3.4 times 2025
+- **2026 (through 2026-09-18):** 2,960 CVEs, 2.38 times the 2025 full year;
+  annualizes to about 3.3 times 2025
 - **record months:** 220 CVEs dated June 2026, then 662 CVEs dated July
   2026, 3.0 times the June figure
 - **ai-marked:** 0 before 2025; 17 in 2025; 30 in 2026, or 1.0% of the part
@@ -56,7 +56,7 @@ remaining.
 - **fuzz band:** never exceeds 2 CVEs in any year
 - **acknowledgments:** 87% of 2016's CVEs carry at least one named credit,
   rising to 97% in the 2026 part year
-- **no-customer-action CVEs:** 23 in 2024, 68 in 2025 and 158 in the 2026
+- **no-customer-action CVEs:** 23 in 2024, 68 in 2025 and 176 in the 2026
   part year
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
@@ -70,8 +70,8 @@ The CSVs are built by [`fetch.py`](fetch.py), which walks every monthly
 security-update document in the CVRF API — matched on document title,
 because the IDs are irregular — and applies the CNA rule above. Documents
 released after `lib/dates.py`'s snapshot date are skipped, so a refetch
-reproduces the committed window; the vendored window ends 2026-09-11, just
-after the September 2026 Patch Tuesday, released 2026-09-08. Acknowledgment strings are stripped of
+reproduces the committed window; the vendored window ends 2026-09-18, ten
+days after the September 2026 Patch Tuesday, released 2026-09-08. Acknowledgment strings are stripped of
 HTML and classified with the shared markers in
 [`../../lib/credits.py`](../../lib/credits.py): `EXPLICIT_AI_METHOD` for a
 named system or method, `AI_AFFILIATION` for an employer, `FUZZ` for
@@ -105,7 +105,7 @@ above and fails when the monthly, annual and per-CVE files stop agreeing.
   anyone's rate of finding.
 - **vendor policy moves the count.** In mid-2024 Microsoft began issuing
   CVEs for cloud-service flaws it patches itself, with no customer action
-  required: 23 CVEs in 2024, 68 in 2025 and 158 in the 2026 part year.
+  required: 23 CVEs in 2024, 68 in 2025 and 176 in the 2026 part year.
   Removing that column entirely leaves the 2026 rise in place; other policy
   shifts would not be so visible.
 - **the AI share has error in both directions.** Acknowledgments are free
@@ -123,8 +123,8 @@ above and fails when the monthly, annual and per-CVE files stop agreeing.
   effort.
 - **edges of coverage.** The first year is ten months; a month with no
   bar — February 2017, for one — is a month in which no CVE has its
-  earliest publication; 2026 is a part year through 2026-09-11, ending just
-  after the September Patch Tuesday rather than on a complete calendar
+  earliest publication; 2026 is a part year through 2026-09-18, ending ten
+  days after the September Patch Tuesday rather than on a complete calendar
   month. The rare
   Microsoft-product CVE issued by another CNA — a 2022 Windows SMB flaw
   issued by Rapid7's CNA, for instance — is excluded by the counting rule.
@@ -134,7 +134,7 @@ above and fails when the monthly, annual and per-CVE files stop agreeing.
 Every AI-marked CVE is itemized with its full credit strings in
 [`msrc-ai-cves.csv`](msrc-ai-cves.csv); the quotes below are read from that
 file as vendored, 2026-09-14. No AI marker appears in any acknowledgment
-before 2025, as of the 2026-09-11 snapshot.
+before 2025, as of the 2026-09-18 snapshot.
 
 - **SEC-agent team.** All 17 AI-marked CVEs of 2025 carry a SEC-agent
   credit, 14 of them jointly with ENKI WhiteHat, and 15 of 2026's 30

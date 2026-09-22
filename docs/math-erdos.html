@@ -48,10 +48,10 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Domain:</strong> mathematics</li>
 <li><strong>Role:</strong> discovery series</li>
 <li><strong>Metric:</strong> problems catalogued, statuses marked solved, and statements formalized in Lean, at monthly site snapshots; plus an imputed solution year per solved problem</li>
-<li><strong>Coverage:</strong> fourteen monthly snapshots, 2025-08-31 to 2026-09-09; imputed solution years 1940–2026</li>
+<li><strong>Coverage:</strong> fourteen monthly snapshots, 2025-08-31 to 2026-09-21; imputed solution years 1940–2026</li>
 <li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos/erdos-database-history.csv"><code>erdos-database-history.csv</code></a>, <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos/erdos-solution-years.csv"><code>erdos-solution-years.csv</code></a>, <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos/erdos-solution-year-overrides.csv"><code>erdos-solution-year-overrides.csv</code></a></li>
 <li><strong>Upstream:</strong> <a href="https://www.erdosproblems.com/">https://www.erdosproblems.com/</a>, with the snapshot statistics and Lean counts from <a href="https://github.com/teorth/erdosproblems">https://github.com/teorth/erdosproblems</a> and the AI-resolution count from <a href="https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems">https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems</a></li>
-<li><strong>Verdict:</strong> inconclusive — 55 imputed resolutions in 2026 through 2026-09-09, against 33 in 2025 and a 5.9/year mean over 2000–2023</li>
+<li><strong>Verdict:</strong> inconclusive — 55 imputed resolutions in 2026 through 2026-09-21, against 33 in 2025 and a 5.9/year mean over 2000–2023</li>
 </ul>
 <h3>Imputed solution years</h3>
 <div id="chart0" class="chart"></div>
@@ -91,14 +91,14 @@ review ledger behind it are stated under Method.</p>
 <p>Snapshot series, from
 <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos/erdos-database-history.csv"><code>erdos-database-history.csv</code></a>:</p>
 <ul>
-<li><strong>snapshots:</strong> fourteen, monthly, 2025-08-31 to 2026-09-09</li>
-<li><strong>catalogue:</strong> 992 problems at the first snapshot to 1,217 at the last; the count is unchanged from the 2026-04-30 snapshot on</li>
-<li><strong>solved statuses:</strong> 355 to 578</li>
-<li><strong>lean-formalized:</strong> 148 to 671; 671 against 578 solved statuses at the last snapshot</li>
-<li><strong>fixed cohort:</strong> solved statuses 525 on 30 April to 578 on 9 September, fifty-three rows in 132 days</li>
-<li><strong>cohort growth:</strong> the catalogue grew by 225 rows inside the snapshot window</li>
-<li><strong>ai-standalone stock:</strong> about 13 full AI-standalone resolutions in the wiki at its 2026-06-30 freeze, against 578 solved statuses</li>
-<li><strong>three counts:</strong> 556 solved rows in the solution-years read, 578 in the 2026-09-09 statistics snapshot, 565 on the site's headline of 8 August</li>
+<li><strong>snapshots:</strong> fourteen, monthly, 2025-08-31 to 2026-09-21</li>
+<li><strong>catalogue:</strong> 992 problems at the first snapshot to 1,221 at the last; the count is unchanged from the 2026-09-21 snapshot on</li>
+<li><strong>solved statuses:</strong> 355 to 579</li>
+<li><strong>lean-formalized:</strong> 148 to 771; 771 against 579 solved statuses at the last snapshot</li>
+<li><strong>fixed cohort:</strong> solved statuses 525 on 30 April to 564 on 31 August, thirty-nine rows in 123 days</li>
+<li><strong>cohort growth:</strong> the catalogue grew by 229 rows inside the snapshot window</li>
+<li><strong>ai-standalone stock:</strong> about 13 full AI-standalone resolutions in the wiki at its 2026-06-30 freeze, against 579 solved statuses</li>
+<li><strong>three counts:</strong> 556 solved rows in the solution-years read, 579 in the 2026-09-21 statistics snapshot, 565 on the site's headline of 8 August</li>
 </ul>
 <p>The project publishes its own running chart of the same statistics history
 this folder's fetcher reads. Unlike the PNG above, the image below is
@@ -112,7 +112,7 @@ and its counts are the project's own.</p>
 <li><strong>imputed rows:</strong> of the 556 solved problems, 502 carry an imputed year and 54 state no dateable resolution</li>
 <li><strong>imputed span:</strong> 1940 to 2026</li>
 <li><strong>imputed mean:</strong> 5.9 dated resolutions per year over 2000–2023</li>
-<li><strong>imputed recent:</strong> 34 in 2024, 33 in 2025, and 55 in 2026 through 2026-09-09</li>
+<li><strong>imputed recent:</strong> 34 in 2024, 33 in 2025, and 55 in 2026 through 2026-09-21</li>
 <li><strong>2024 anatomy:</strong> the 34 rows of 2024 trace to 31 distinct works, with 25 dated by arXiv preprints and 9 by published papers</li>
 <li><strong>2025 anatomy:</strong> 30 of the 33 rows are preprint-dated and 1 published</li>
 <li><strong>2026 anatomy:</strong> 45 of the 55 rows are dated only by the AI wiki, against 10 preprints</li>
@@ -135,10 +135,11 @@ new problems are catalogued faster than problems fall:</p>
 <p>Every point in the snapshot series comes from one source, the project's
 GitHub statistics history, which is what <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos/fetch.py"><code>fetch.py</code></a> rebuilds the
 whole file from: one row per calendar month, the last snapshot in that
-month. The <code>catalogue_count_unchanged</code> column flags the snapshots from April
-2026 on, where the catalogue count holds at 1,217; over that fixed cohort a
-rise in solved statuses cannot be caused by adding an already-solved
-problem. An earlier version of this series set its last point by hand from
+month. The <code>catalogue_count_unchanged</code> column flags the snapshots since the
+count last moved — from September 2026 on, at 1,221. The fixed cohort in
+the fact line is the last completed stretch at one count, April to August
+2026 at 1,217; over such a stretch a rise in solved statuses cannot be
+caused by adding an already-solved problem. An earlier version of this series set its last point by hand from
 the live website's solved-status headline; the two sources disagree — on 8
 August the headline read 565 where the statistics history recorded 559 — and
 a hand-set endpoint the folder's own fetcher overwrites cannot be rebuilt,
@@ -148,7 +149,7 @@ so the fetcher's value stands and the disagreement is recorded in the
 which is run by hand rather than by <code>make fetch</code> because it downloads the
 LaTeX source of every solved problem's page — about 560 throttled requests.
 It enumerates the problems whose <code>problems.yaml</code> status read proved,
-disproved or solved on the day it ran (556 rows, against 578 in the same
+disproved or solved on the day it ran (556 rows, against 579 in the same
 week's statistics snapshot), and imputes each a year by three rules, in
 order. First, review overrides:
 <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/math-erdos/erdos-solution-year-overrides.csv"><code>erdos-solution-year-overrides.csv</code></a>
@@ -176,7 +177,7 @@ a dashed grey line, <code>total_solved</code> in blue with markers, and
 in every figure here. The AI-standalone stock is drawn as a boxed callout
 rather than a fourth line: it comes from a different source, frozen on a
 different date, under its own definition of standalone contribution, and at
-about 13 against stocks of 578 and 1,217 it would not resolve on the linear
+about 13 against stocks of 579 and 1,221 it would not resolve on the linear
 axis. The second chart bars the <code>solution_year</code> column of
 <code>erdos-solution-years.csv</code> by year, blue where the year comes from a
 reference on the problem's page and red where the only dated resolution is
@@ -214,12 +215,13 @@ open-problems-remaining shape.</p>
 <li><strong>the snapshot window is about a year.</strong> No snapshots exist before
   2025-08-31.</li>
 <li><strong>the two stocks are not an AI-versus-human flow.</strong> The roughly 13
-  AI-standalone resolutions and the 578 solved statuses are counted on
+  AI-standalone resolutions and the 579 solved statuses are counted on
   different dates under different definitions, so subtracting one from the
   other does not estimate human output.</li>
-<li><strong>the cohort grew by 225 rows inside the window,</strong> and problems can enter
-  the catalogue already solved, so a rise in solved statuses before
-  2026-04-30 does not separate new resolutions from catalogue additions.</li>
+<li><strong>the cohort grew by 229 rows inside the window,</strong> and problems can enter
+  the catalogue already solved, so a rise in solved statuses outside the
+  2026-04-30 to 2026-08-31 fixed cohort does not separate new resolutions
+  from catalogue additions.</li>
 <li><strong>Lean formalization counts statements, not proofs,</strong> and is driven by a
   separate volunteer effort.</li>
 <li><strong>the AI-attribution wiki is frozen and downstream — the catalogue is

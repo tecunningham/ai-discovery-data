@@ -123,7 +123,7 @@ zero where the series has a known denominator.
 | [Matrix-multiplication exponent ω](problems/matrix-omega/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [CIFAR-10 speedrun](problems/algorithms-cifar10/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [CVRPLIB X-instance record frontier](problems/algorithms-cvrplib/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [ECDSA.fail secp256k1 point-addition circuit](problems/algorithms-ecdsa-circuit/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [ECDSA.fail secp256k1 point-addition circuit](problems/algorithms-ecdsa-circuit/) | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | [Hutter Prize compression: enwik9](problems/algorithms-enwik9/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [Gurobi mixed-integer programming speed](problems/algorithms-gurobi/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✍️ | ✅ |
 | [MIPLIB 2017 solution frontier](problems/algorithms-miplib/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -134,7 +134,7 @@ zero where the series has a known denominator.
 | [DOI records deposited with Crossref](problems/output-crossref/) | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | [Git pushes to GitHub](problems/output-github-pushes/) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. 9 failing cells.
+37 problems holding 87 figures and 63 data files. 23 refetch from upstream and 14 are maintained by hand and say so. 37 recompute their prose arithmetic. 10 failing cells.
 
 Failing:
 - `cyber-firefox` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2016–2026, partial through 2026-09-16'
@@ -149,52 +149,62 @@ Failing:
 - `cyber-firefox` Arithmetic: check.py: README lacks recomputed team share of the year: 'Those 31 CVEs are roughly 6% of everything Firefox disclosed in 2026'
 - `cyber-firefox` Arithmetic: check.py: README lacks recomputed undated remainder: "15 of the ledger's 2,146 rows have no parseable announcement date"
 - `cyber-firefox` Arithmetic: check.py: README lacks recomputed unrated remainder: '4 of the 2,146 ledger rows carries an Unrated impact'
-- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed coverage field: "Coverage:** 2021–2026, from the catalogue's November 2021 launch, partial through 2026-09-21"
-- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed verdict clause: '232 additions through 2026-09-21 annualize to about 321 against 245 in 2025 and a 206/year mean over 2023–2025'
-- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-21):** 232 additions; annualizes to about 321, +31% on 2025'
-- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed total fact: '**total:** 1,716 entries through 2026-09-21'
-- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed comparator, KEV side: 'additions annualize to +31% growth in 2026'
-- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed comparator, NVD side: 'annualize to +95%'
-- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed complete read: 'read complete at 1,716 entries on 2026-09-21'
-- `cyber-microsoft` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2016–2026, partial through 2026-09-18'
-- `cyber-microsoft` Arithmetic: check.py: README lacks recomputed verdict clause: '2,960 CVEs through 2026-09-18 against 1,243 in 2025; the part year annualizes to about 3.3 times 2025'
-- `cyber-microsoft` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-18):** 2,960 CVEs, 2.38 times the 2025 full year; annualizes to about 3.3 times 2025'
+- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed coverage field: "Coverage:** 2021–2026, from the catalogue's November 2021 launch, partial through 2026-09-28"
+- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed verdict clause: '244 additions through 2026-09-28 annualize to about 329 against 245 in 2025 and a 206/year mean over 2023–2025'
+- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-28):** 244 additions; annualizes to about 329, +34% on 2025'
+- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed total fact: '**total:** 1,728 entries through 2026-09-28'
+- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed comparator, KEV side: 'additions annualize to +34% growth in 2026'
+- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed comparator, NVD side: 'annualize to +98%'
+- `cyber-kev-exploited` Arithmetic: check.py: README lacks recomputed complete read: 'read complete at 1,728 entries on 2026-09-28'
+- `cyber-microsoft` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2016–2026, partial through 2026-09-23'
+- `cyber-microsoft` Arithmetic: check.py: README lacks recomputed verdict clause: '2,961 CVEs through 2026-09-23 against 1,243 in 2025; the part year annualizes to about 3.3 times 2025'
+- `cyber-microsoft` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-23):** 2,961 CVEs, 2.38 times the 2025 full year; annualizes to about 3.3 times 2025'
 - `cyber-microsoft` Arithmetic: check.py: README lacks recomputed cloud-CVE fact: '**no-customer-action CVEs:** 23 in 2024, 68 in 2025 and 176 in the 2026 part year'
-- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2016–2026, partial through 2026-09-21'
-- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed verdict clause: "70,439 CVEs through 2026-09-21 annualize to about 97,000, roughly 1.9 times 2025's 49,972, after +32% growth into 2024 and +23% into 2025"
-- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-21):** 70,439 CVEs, day 264 of the year; annualizes to about 97,000, roughly 1.9 times 2025'
-- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed growth fact: '**growth:** +32% into 2024 and +23% into 2025, against about +95% annualized for 2026'
-- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed doubling fact: '**doubling arithmetic:** a 2026 double of 2025 would require about 99,900 disclosures; the annualized pace is about 97,000, or roughly 1.9 times'
-- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed by-year fact: '**by-year (record id):** 2020: 1,041 · 2021: 739 · 2022: 710 · 2023: 581 · 2024: 388 · 2025: 244 · 2026 (through 2026-09-21): 269'
-- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed annualized fact: '**2026 annualized:** roughly 372 records'
-- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed total fact: '**total:** 3,972 records over 2020–2026'
-- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed clock-gap fact: '**clock gap:** quarters by published date sum to 275 records in 2026 against 269 by record id'
-- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed verdict clause: '1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 372'
-- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2020–2026, partial through 2026-09-21'
-- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2016–2026, partial through 2026-09-21'
-- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed verdict clause: "29,769 distinct CVEs through 2026-09-21 annualize to about 41,200, 2.7 times 2025's 15,158"
-- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed by-year fact: '**by-year:** 2016: 1,472 · 2017: 4,588 · 2018: 4,877 · 2019: 5,161 · 2020: 5,323 · 2021: 6,913 · 2022: 10,838 · 2023: 8,833 · 2024: 12,294 · 2025: 15,158'
-- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-21):** 29,769 distinct CVEs; annualizes to about 41,200, or 2.7 times the 2025 count'
-- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed peak-quarter fact: '**peak quarter:** 2026-Q3 alone holds 13,118 distinct CVEs, more than any full year before 2022'
-- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed severity-coverage fact: '**severity coverage:** 36,021 of the 105,226 CVEs (34%) carry an ecosystem severity label'
-- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed credit-coverage fact: '**credit coverage:** 1,366 CVEs (1.3%) carry any credit'
+- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2016–2026, partial through 2026-09-28'
+- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed verdict clause: "73,400 CVEs through 2026-09-28 annualize to about 99,000, roughly 2.0 times 2025's 49,972, after +32% growth into 2024 and +23% into 2025"
+- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-28):** 73,400 CVEs, day 271 of the year; annualizes to about 99,000, roughly 2.0 times 2025'
+- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed growth fact: '**growth:** +32% into 2024 and +23% into 2025, against about +98% annualized for 2026'
+- `cyber-nvd-disclosed` Arithmetic: check.py: README lacks recomputed doubling fact: '**doubling arithmetic:** a 2026 double of 2025 would require about 99,900 disclosures; the annualized pace is about 99,000, or roughly 2.0 times'
+- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed by-year fact: '**by-year (record id):** 2020: 1,041 · 2021: 739 · 2022: 710 · 2023: 581 · 2024: 388 · 2025: 244 · 2026 (through 2026-09-28): 278'
+- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed annualized fact: '**2026 annualized:** roughly 374 records'
+- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed total fact: '**total:** 3,981 records over 2020–2026'
+- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed clock-gap fact: '**clock gap:** quarters by published date sum to 284 records in 2026 against 278 by record id'
+- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed verdict clause: '1,041 records in 2020 to 244 in 2025; 2026 annualizes to roughly 374'
+- `cyber-oss-fuzz` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2020–2026, partial through 2026-09-28'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2016–2026, partial through 2026-09-28'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed verdict clause: "31,599 distinct CVEs through 2026-09-28 annualize to about 42,600, 2.8 times 2025's 15,163"
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed by-year fact: '**by-year:** 2016: 1,472 · 2017: 4,588 · 2018: 4,877 · 2019: 5,161 · 2020: 5,327 · 2021: 6,914 · 2022: 10,838 · 2023: 8,833 · 2024: 12,296 · 2025: 15,163'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed part-year fact: '**2026 (through 2026-09-28):** 31,599 distinct CVEs; annualizes to about 42,600, or 2.8 times the 2025 count'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed peak-quarter fact: '**peak quarter:** 2026-Q3 alone holds 14,910 distinct CVEs, more than any full year before 2022'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed severity-coverage fact: '**severity coverage:** 36,332 of the 107,068 CVEs (34%) carry an ecosystem severity label'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed credit-coverage fact: '**credit coverage:** 1,415 CVEs (1.3%) carry any credit'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed ai-marked fact: '**ai-marked:** 33 CVEs — 2 whose credits state an AI method and 31 carrying an AI-lab affiliation only'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed AI register lead: 'The AI-marked ledger holds 33 CVEs. 2 carry credits stating an AI method'
+- `cyber-osv-cves` Arithmetic: check.py: README lacks recomputed affiliation split: 'The other 31 carry an AI-lab affiliation with no method stated: 23 name Aisle Research, 3 name AntAISecurityLab hackerone handles'
 - `math-erdos` Arithmetic: check.py: no spelled form for a gain of 0; extend WORDS
-- `math-erdos` Arithmetic: check.py: README lacks recomputed snapshots fact: '**snapshots:** fourteen, monthly, 2025-08-31 to 2026-09-21'
-- `math-erdos` Arithmetic: check.py: README lacks recomputed catalogue fact: '**catalogue:** 992 problems at the first snapshot to 1,221 at the last; the count is unchanged from the 2026-09-21 snapshot on'
+- `math-erdos` Arithmetic: check.py: README lacks recomputed snapshots fact: '**snapshots:** fourteen, monthly, 2025-08-31 to 2026-09-28'
+- `math-erdos` Arithmetic: check.py: README lacks recomputed catalogue fact: '**catalogue:** 992 problems at the first snapshot to 1,221 at the last; the count is unchanged from the 2026-09-28 snapshot on'
 - `math-erdos` Arithmetic: check.py: README lacks recomputed solved fact: '**solved statuses:** 355 to 579'
-- `math-erdos` Arithmetic: check.py: README lacks recomputed lean fact: '**lean-formalized:** 148 to 771; 771 against 579 solved statuses at the last snapshot'
-- `math-erdos` Arithmetic: check.py: README lacks recomputed fixed-cohort fact: '**fixed cohort:** solved statuses 579 on 21 September to 579 on 21 September, 0 rows in 0 days'
+- `math-erdos` Arithmetic: check.py: README lacks recomputed lean fact: '**lean-formalized:** 148 to 786; 786 against 579 solved statuses at the last snapshot'
+- `math-erdos` Arithmetic: check.py: README lacks recomputed fixed-cohort fact: '**fixed cohort:** solved statuses 579 on 28 September to 579 on 28 September, 0 rows in 0 days'
 - `math-erdos` Arithmetic: check.py: README lacks recomputed growth fact: '**cohort growth:** the catalogue grew by 229 rows inside the snapshot window'
 - `math-erdos` Arithmetic: check.py: README lacks recomputed AI-stock fact: '**ai-standalone stock:** about 13 full AI-standalone resolutions in the wiki at its 2026-06-30 freeze, against 579 solved statuses'
-- `math-erdos` Arithmetic: check.py: README lacks recomputed three-counts fact: "**three counts:** 556 solved rows in the solution-years read, 579 in the 2026-09-21 statistics snapshot, 565 on the site's headline of 8 August"
+- `math-erdos` Arithmetic: check.py: README lacks recomputed three-counts fact: "**three counts:** 556 solved rows in the solution-years read, 579 in the 2026-09-28 statistics snapshot, 565 on the site's headline of 8 August"
 - `math-erdos` Arithmetic: check.py: README lacks recomputed callout scale: 'stocks of 579 and 1,221'
-- `math-erdos` Arithmetic: check.py: README lacks recomputed imputed-recent fact: '**imputed recent:** 34 in 2024, 33 in 2025, and 55 in 2026 through 2026-09-21'
-- `math-erdos` Arithmetic: check.py: README lacks recomputed verdict clause: '55 imputed resolutions in 2026 through 2026-09-21, against 33 in 2025 and a 5.9/year mean over 2000–2023'
+- `math-erdos` Arithmetic: check.py: README lacks recomputed imputed-recent fact: '**imputed recent:** 34 in 2024, 33 in 2025, and 55 in 2026 through 2026-09-28'
+- `math-erdos` Arithmetic: check.py: README lacks recomputed verdict clause: '55 imputed resolutions in 2026 through 2026-09-28, against 33 in 2025 and a 5.9/year mean over 2000–2023'
 - `math-erdos` Arithmetic: check.py: README lacks recomputed enumeration count: "(556 rows, against 579 in the same week's statistics snapshot)"
-- `math-elliptic-rank` Arithmetic: check.py: README lacks recomputed board-rows fact: '**board rows:** 814 curves, 2026-05-27 to 2026-09-21, from 36 submitters, covering ranks 1 to 31'
-- `math-elliptic-rank` Arithmetic: check.py: README lacks recomputed board-cadence fact: '**board cadence:** 71 curves in 2026-05 · 171 in 2026-06 · 22 in 2026-07 · 210 in 2026-08 · 340 in 2026-09'
-- `output-crossref` Arithmetic: check.py: README lacks recomputed year-to-date fact: '9,587,058 records through 2026-09-21, annualizing to roughly 13.3 million'
-- `output-crossref` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2010 to 2026, annual, the last year partial through 2026-09-21'
+- `math-elliptic-rank` Arithmetic: check.py: README lacks recomputed board-rows fact: '**board rows:** 3558 curves, 2026-05-27 to 2026-09-28, from 46 submitters, covering ranks 0 to 31'
+- `math-elliptic-rank` Arithmetic: check.py: README lacks recomputed board-cadence fact: '**board cadence:** 71 curves in 2026-05 · 171 in 2026-06 · 22 in 2026-07 · 210 in 2026-08 · 3084 in 2026-09'
+- `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed span fact: "**span:** from the challenge's starting circuit at 1.08 × 10¹⁰ on 2026-05-30 to 1.11 × 10⁹ on 2026-09-28, about 9.7× lower over 121 days"
+- `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed records fact: '**records:** 537 accepted records from 72 distinct solvers'
+- `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed ai-noted fact: '**ai-noted:** 474 of 537 notes name an AI tool; 12 rows carry no note; 51 carry a note naming no tool'
+- `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed verdict clause: 'too early — first record 2026-05-30, so no prior-year rate exists; the 2026 series is a 9.7× fall over 121 days'
+- `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2026-05-30 to 2026-09-28, 537 accepted records'
+- `algorithms-ecdsa-circuit` Arithmetic: check.py: README lacks recomputed AI-attribution counts: 'Of 537 accepted records, 474 carry notes naming an AI tool'
+- `output-crossref` Arithmetic: check.py: README lacks recomputed year-to-date fact: '9,834,247 records through 2026-09-28, annualizing to roughly 13.2 million'
+- `output-crossref` Arithmetic: check.py: README lacks recomputed verdict clause: '2026 annualizes to roughly 13.2 million records against 12.80 million in 2025 and an 8.63 million/year mean over 2010–2025'
+- `output-crossref` Arithmetic: check.py: README lacks recomputed coverage field: 'Coverage:** 2010 to 2026, annual, the last year partial through 2026-09-28'
 <!-- END GENERATED: checks-table -->
 
 ## How to read the series

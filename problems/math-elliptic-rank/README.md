@@ -69,10 +69,10 @@ are certified before a curve is recorded:
 
 ![Conductor against proved rank for every curve on the ICARM leaderboard.](leaderboard-math-elliptic-rank.png)
 
-- **board rows:** 729 curves, 2026-05-27 to 2026-09-14, from 34 submitters,
-  covering ranks 1 to 31
+- **board rows:** 3558 curves, 2026-05-27 to 2026-09-28, from 46 submitters,
+  covering ranks 0 to 31
 - **board cadence:** 71 curves in 2026-05 · 171 in 2026-06 · 22 in 2026-07 ·
-  210 in 2026-08 · 255 in 2026-09
+  210 in 2026-08 · 3084 in 2026-09
 - **board record curve:** curve #302, rank ≥ 31, log conductor 375.2224, naive
   height 468.2771, submitted 2026-08-23
 - **timeline:** 5 dated events, 2024-08-29 to 2026-08-20

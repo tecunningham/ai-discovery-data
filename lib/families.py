@@ -14,6 +14,7 @@ the folder that owns them.
 from __future__ import annotations
 
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 from matplotlib import pyplot as plt
@@ -481,11 +482,15 @@ def compression_chart(
         ax.annotate(
             f"{row['program']}, pending",
             (xs[i], ys[i]),
-            xytext=(-5, 8),
+            # Off to the left on a leader line, clear of the steps that
+            # crowd the last few months before the snapshot.
+            xytext=(-60, 30),
             textcoords="offset points",
             ha="right",
+            va="center",
             fontsize=8,
             color=HUMAN,
+            arrowprops={"arrowstyle": "-", "color": HUMAN, "linewidth": 0.8, "shrinkB": 5},
         )
     if series == "hutter_enwik9":
         ltcb = [row for row in all_rows if row["series"] == "ltcb_enwik9"]
@@ -501,14 +506,15 @@ def compression_chart(
                 linestyle="--",
                 label="uncapped leaderboard (LTCB)",
             )
+            since = date.fromisoformat(ltcb[-1]["date"]).strftime("%b %Y")
             ax.text(
-                0.98,
-                0.28,
-                f"uncapped frontier flat since Oct 2023\nat {lys[-1]:.1f} MB",
+                0.02,
+                0.20,
+                f"uncapped frontier {lys[-1]:.1f} MB since {since}",
                 transform=ax.transAxes,
                 fontsize=8,
                 color="#666666",
-                ha="right",
+                ha="left",
             )
     right = NOW + 0.5
     ax.set_xlim(min(xs) - 0.7, right)

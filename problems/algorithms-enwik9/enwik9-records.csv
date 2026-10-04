@@ -4,10 +4,16 @@ hutter_enwik9,2021-05-31,starlit,Artemiy Margaritov,115352938,yes,5th winner
 hutter_enwik9,2023-07-16,fast cmix,Saurabh Kumar,114156155,yes,6th winner
 hutter_enwik9,2024-02-02,fx-cmix,Kaido Orav,112578322,yes,7th winner
 hutter_enwik9,2024-09-03,fx2-cmix,Kaido Orav & Byron Knoll,110793128,yes,8th winner
-hutter_enwik9,2026-06-26,cmix-lex,Ibrahim Marcouch,109190109,pending,announced on LTCB; not yet an awarded record on the prize site as of 2026-07-28
+hutter_enwik9,2026-06-26,cmix-lex,Ibrahim Marcouch & Kaido Orav,109671639,yes,9th winner; awarded 2026-09-30
+hutter_enwik9,2026-07-19,cmix-obias,David Freelan,108521870,yes,10th winner; awarded 2026-09-30
+hutter_enwik9,2026-07-24,fx2-cmix-transformer,Vladimir Ivanov,100424672,yes,11th winner; awarded 2026-09-30; listed as fx2-cmix-T on the prize site
+hutter_enwik9,2026-09-14,zmix 1.0,James Byrne,99312424,pending,archive plus compressor as listed on LTCB; undergoing prize testing as of LTCB's 2026-09-30 update
 ltcb_enwik9,2019-07-04,phda9 1.8,Alexander Rhatushnyak,116587793,,LTCB total incl. decompressor
 ltcb_enwik9,2021-01-03,nncp v2,Fabrice Bellard,114317255,,as printed on LTCB; likely omits the 99671-byte decompressor
 ltcb_enwik9,2021-02-06,nncp v2.1,Fabrice Bellard,112319355,,
 ltcb_enwik9,2021-04-24,nncp v3,Fabrice Bellard,110231784,,
 ltcb_enwik9,2021-06-01,nncp v3.1,Fabrice Bellard,108579652,,
-ltcb_enwik9,2023-10-23,nncp v3.2,Fabrice Bellard,107261318,,still ranked 1 as of the page's 2026-07-08 update
+ltcb_enwik9,2023-10-23,nncp v3.2,Fabrice Bellard,107261318,,
+ltcb_enwik9,2026-07-24,fx2-cmix-transformer,Vladimir Ivanov,96996198,,self-extracting archive9; no separate decompressor
+ltcb_enwik9,2026-09-12,rata-cmix 1.0.0,Dharmesh Patel & Naveen Bijalwan,96849689,,self-extracting archive9; not a prize candidate
+ltcb_enwik9,2026-09-14,zmix 1.0,James Byrne,96096261,,self-extracting archive9; ranked 2 as of the page's 2026-09-30 update behind an entry dated 2026-09-27

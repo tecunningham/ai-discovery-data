@@ -20,8 +20,8 @@ def main() -> int:
     awarded = [row for row in hutter if row["award"] == "yes"]
     pending = [row for row in hutter if row["award"] == "pending"]
     failures = []
-    if len(awarded) != 4:
-        failures.append(f"{len(awarded)} awarded records; the page states four")
+    if len(awarded) != 7:
+        failures.append(f"{len(awarded)} awarded records; the page states seven")
     if len(pending) != 1:
         failures.append(f"{len(pending)} pending rows; the page states one")
 
@@ -29,43 +29,49 @@ def main() -> int:
     ladder = [baseline] + awarded
     steps = [100 * (1 - int(cur["total_bytes"]) / int(prev["total_bytes"]))
              for prev, cur in zip(ladder, ladder[1:])]
+    early = [row for row in awarded if row["date"] < "2025"]
+    recent = [row for row in awarded if row["date"].startswith("2026")]
+    drop_early = 100 * (1 - int(early[-1]["total_bytes"]) / int(baseline["total_bytes"]))
+    drop_2026 = 100 * (1 - int(recent[-1]["total_bytes"]) / int(early[-1]["total_bytes"]))
     total = 100 * (1 - int(awarded[-1]["total_bytes"]) / int(baseline["total_bytes"]))
     hurdle = int(int(awarded[-1]["total_bytes"]) * 0.99)
     claim = pending[0]
     further = 100 * (1 - int(claim["total_bytes"]) / int(awarded[-1]["total_bytes"]))
-    awards_2024 = sum(row["date"].startswith("2024") for row in awarded)
-    awards_2026 = sum(row["date"].startswith("2026") for row in awarded)
+    awards_2025 = sum(row["date"].startswith("2025") for row in awarded)
     uncapped = ltcb[-1]
     if int(uncapped["total_bytes"]) != min(int(row["total_bytes"]) for row in ltcb):
         failures.append("the last LTCB row is not the series minimum, so the "
-                        "'unchanged since' reading no longer holds")
+                        "standing-frontier reading no longer holds")
+    nncp = [row for row in ltcb if row["program"] == "nncp v3.2"][0]
+
+    def award(row):
+        return f"{row['program']} by {row['author']} on {row['date']}"
 
     claims = {
         f"**baseline:** {int(baseline['total_bytes']):,} bytes at the 2019 "
         f"{baseline['program']} baseline": "baseline fact",
-        f"{awarded[0]['program']} by {awarded[0]['author']} on "
-        f"{awarded[0]['date']}": "first award",
-        f"{awarded[1]['program']} by {awarded[1]['author']} on "
-        f"{awarded[1]['date']}": "second award",
-        f"{awarded[2]['program']} by {awarded[2]['author']} on "
-        f"{awarded[2]['date']}": "third award",
-        f"on {awarded[3]['date']} at {int(awarded[3]['total_bytes']):,} bytes":
-            "fourth award",
-        f"those steps are {steps[0]:.2f}%, {steps[1]:.2f}%, {steps[2]:.2f}% "
-        f"and {steps[3]:.2f}%": "step sizes",
-        f"down {total:.1f}% from the 2019 baseline": "total improvement",
+        **{award(row): f"award {n}" for n, row in enumerate(awarded, 1)},
+        f"at {int(early[-1]['total_bytes']):,} bytes": "last pre-2026 award",
+        f"at {int(recent[-1]['total_bytes']):,} bytes": "standing record",
+        "the steps are " + ", ".join(f"{x:.2f}%" for x in steps[:-1])
+        + f" and {steps[-1]:.2f}%": "step sizes",
+        f"the four awards of 2021–2024 take the total down {drop_early:.1f}%":
+            "2019-2024 improvement",
+        f"the three awards of 2026 take it down a further {drop_2026:.1f}%":
+            "2026 improvement",
+        f"{total:.1f}% below the 2019 baseline": "total improvement",
         f"on {claim['date']} at {int(claim['total_bytes']):,} bytes":
             "pending claim",
         f"a further {further:.2f}%": "pending step",
         f"inside the {hurdle:,} needed to clear the 1% hurdle": "hurdle",
+        f"nncp v3.2 reached {int(nncp['total_bytes']):,} bytes on "
+        f"{nncp['date']}": "nncp frontier",
         f"{uncapped['program']} reached {int(uncapped['total_bytes']):,} "
         f"bytes on {uncapped['date']}": "uncapped frontier",
-        f"flat since October 2023 at {int(uncapped['total_bytes']) / 1e6:.1f} "
-        "MB": "uncapped corner note",
-        f"no acceleration — {awards_2026} awarded records in 2026 (one "
-        f"pending claim of {claim['date']}) against {awards_2024} in 2024 "
-        f"and {len(awarded)} over 2021–2024; the uncapped comparator is "
-        f"unchanged since {uncapped['date']}": "verdict clause",
+        f"accelerating — {len(recent)} awarded records in 2026 against "
+        f"{awards_2025} in 2025 and {len(early)} over 2021–2024; the 2026 "
+        f"awards cut the record {drop_2026:.1f}% against {drop_early:.1f}% "
+        "over 2019–2024": "verdict clause",
     }
     return report(failures + missing(prose(HERE), claims))
 

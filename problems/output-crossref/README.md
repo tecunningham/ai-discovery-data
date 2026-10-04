@@ -3,7 +3,7 @@
 - **Domain:** outside the three domains
 - **Role:** contrast case: volume
 - **Metric:** formal publishing volume; DOI records deposited with Crossref per year, by created date
-- **Coverage:** 2010 to 2026, annual, the last year partial through 2026-09-14
+- **Coverage:** 2010 to 2026, annual, the last year partial through 2026-09-21
 - **Data:** [`crossref-dois-by-year.csv`](crossref-dois-by-year.csv)
 - **Upstream:** <https://api.crossref.org/works>
 - **Verdict:** no acceleration — 2026 annualizes to roughly 13.3 million records against 12.80 million in 2025 and an 8.63 million/year mean over 2010–2025
@@ -21,7 +21,7 @@ An event in this series is one DOI record, counted in the calendar year of
 its `created` date. The count is by registration date, not by publication
 date, so a backfile deposit of older work lands in the year it was
 registered. The last row is the year in progress at fetch time,
-year-to-date through 2026-09-14. The CSV holds the yearly totals the API
+year-to-date through 2026-09-21. The CSV holds the yearly totals the API
 reports; the records behind them are not vendored. The dataset carries no
 authorship field.
 
@@ -33,7 +33,7 @@ authorship field.
   falls
 - **2024 dip:** deposits fell to 11.30 million from 12.69 million in 2023,
   then rose to 12.80 million in 2025
-- **2026 year-to-date:** 9,344,897 records through 2026-09-14, annualizing
+- **2026 year-to-date:** 9,587,058 records through 2026-09-21, annualizing
   to roughly 13.3 million
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
@@ -83,7 +83,7 @@ annualization uses the shared day-count rule in
 The dataset carries no authorship field; no AI share can be computed from
 it. [`crossref-dois-by-year.csv`](crossref-dois-by-year.csv) holds a year,
 a count and a part-year note per row; no AI credit appears in it as of the
-2026-09-14 fetch.
+2026-09-21 fetch.
 
 ## Sources
 

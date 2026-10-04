@@ -3,10 +3,10 @@
 - **Domain:** vulnerabilities
 - **Role:** discovery series
 - **Metric:** CVEs published per quarter in the US National Vulnerability Database
-- **Coverage:** 2016–2026, partial through 2026-09-14
+- **Coverage:** 2016–2026, partial through 2026-09-21
 - **Data:** quarterly [`nvd-by-quarter.csv`](nvd-by-quarter.csv); annual totals in [`nvd-by-year.csv`](nvd-by-year.csv)
 - **Upstream:** <https://services.nvd.nist.gov/rest/json/cves/2.0> (human-readable at <https://nvd.nist.gov/vuln>)
-- **Verdict:** accelerating — 65,704 CVEs through 2026-09-14 annualize to about 93,000, roughly 1.9 times 2025's 49,972, after +32% growth into 2024 and +23% into 2025
+- **Verdict:** accelerating — 70,439 CVEs through 2026-09-21 annualize to about 97,000, roughly 1.9 times 2025's 49,972, after +32% growth into 2024 and +23% into 2025
 
 ![Quarterly CVE disclosures in the US National Vulnerability Database.](discovery-cyber-nvd-disclosed.png)
 
@@ -28,14 +28,14 @@ numbering authorities — so the series is comparable only from about 2018.
 - **by-year:** 2016: 6,517 · 2017: 18,113 · 2018: 18,154 · 2019: 18,938 ·
   2020: 19,222 · 2021: 21,950 · 2022: 26,431 · 2023: 30,949 ·
   2024: 40,704 · 2025: 49,972
-- **2026 (through 2026-09-14):** 65,704 CVEs, day 257 of the year;
-  annualizes to about 93,000, roughly 1.9 times 2025
-- **growth:** +32% into 2024 and +23% into 2025, against about +87%
+- **2026 (through 2026-09-21):** 70,439 CVEs, day 264 of the year;
+  annualizes to about 97,000, roughly 1.9 times 2025
+- **growth:** +32% into 2024 and +23% into 2025, against about +95%
   annualized for 2026
 - **2026 quarters:** Q1's 16,255 topped every quarter before it; Q2's
   20,871 is another 28% above Q1 and 59% above 2025's largest quarter
 - **doubling arithmetic:** a 2026 double of 2025 would require about 99,900
-  disclosures; the annualized pace is about 93,000, or roughly 1.9 times
+  disclosures; the annualized pace is about 97,000, or roughly 1.9 times
 
 The annualization, the growth rates and the doubling arithmetic are this
 repository's calculations over the vendored counts, not figures any source
@@ -90,7 +90,7 @@ as separate figures because they differ by two orders of magnitude.
 ## AI attribution
 
 No CVE record in this series carries a finder credit; nothing here can be
-attributed to AI, to a human, or to a tool, as of the 2026-09-14 read of the
+attributed to AI, to a human, or to a tool, as of the 2026-09-21 read of the
 API [@nvd2026api]. Claims connecting the 2026 records to AI sit outside the
 series: Anthropic's Mythos preview claims "thousands" of previously unknown
 vulnerabilities, an unaudited vendor figure [@anthropicmythos2026], and

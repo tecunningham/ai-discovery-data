@@ -61,6 +61,44 @@ ties keep the earlier ordering. The criteria are:
 | **Gravitational waves — [GWOSC](https://gwosc.org/eventapi/)** · catalog events per observing day | ✅ | ✅ | ✅ | ❌ | ❌ | **6** | Clean, machine-readable events, but discovery is strongly detector-sensitivity constrained and AI exposure is low. Include it explicitly as a negative / low-exposure control (designs #2, #10), not as a positive AI series. |
 | **Weakness classes — [CWE](https://cwe.mitre.org/) composition of CVE series** · NVD's per-CVE CWE assignments as a composition cut | ❌ | ✅ | ✅ | ❌ | 🟡 | **4** | Not a discovery series of its own: CWE is a taxonomy, and its value here is as a dimension on the existing CVE series — whether agent-era disclosures differ in *kind* (use-after-free vs injection vs XSS), a depth signal orthogonal to severity. Would extend the NVD folder with per-year counts for the top weakness classes; assignment coverage and NVD's analysis backlog are the caveats. |
 
+## Candidate algorithmic-progress series
+
+### SAT Museum
+
+The [SAT Museum](https://cca.informatik.uni-freiburg.de/satmuseum/) is an
+unusually strong candidate because it has already done most of the controlled
+rerunning that annual solver competitions normally lack. Biere, Fleury,
+Froleyks and Heule collected and patched historically important SAT solvers and
+SAT Competition winners, then ran them on the same 2016-era hardware with the
+same 5,000-second timeout across several fixed competition benchmark sets. The
+[paper](https://cca.informatik.uni-freiburg.de/papers/BiereFleuryFroleyksHeule-POS23.pdf)
+and [archived artifact](https://doi.org/10.5281/zenodo.10037737) cover solver
+vintages from 1992 through 2022. This is much closer to a genuine
+algorithmic-progress series than joining each competition's published score.
+
+A problem folder could date each solver snapshot by release or competition year
+and measure solved count, PAR-2, or runtime at common solved-instance quantiles.
+It should choose a primary frozen benchmark panel before inspecting the result,
+report SAT and UNSAT instances separately, and use the other benchmark-year
+panels as sensitivity checks. The main remaining audit issues are the
+winner-focused solver selection, missing or patched historical code, developers'
+exposure to earlier competition sets, and choosing one summary statistic from
+the full runtime distributions.
+
+The public landing page still stops at 2022, but the original authors did extend
+the experiment once. Their May 2024 LPAR talk,
+[“30 Years of Faster and Faster SAT Solving”](https://cca.informatik.uni-freiburg.de/biere/talks/Biere-LPAR24-talk.pdf),
+reports 25 all-time winners through 2023 and seven benchmark cohorts including
+the 2023 set; it adds the 2023 winner `sbva-cadical-2023`. That extension does
+not appear to have been released as machine-readable Museum data: the landing
+page, per-year CSV controls and POS'23 artifact remain capped at 2022. No public
+Museum-style rerun through the 2024 or 2025 solver generations was located as of
+2026-08-17. The [2024](https://satcompetition.github.io/2024/) and
+[2025](https://satcompetition.github.io/2025/) competitions do publish solver
+sources, benchmarks and detailed results, so the inputs for extending it exist;
+their official annual scores are not themselves comparable substitutes for the
+same-hardware Museum reruns.
+
 ## Deferred algorithm benchmark reconstructions
 
 These three sources have unusually good historical artifacts, but they do not

@@ -14,7 +14,7 @@ from lib.prose import missing, prose, report  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
 WORDS = {13: "thirteen", 14: "fourteen", 30: "thirty", 34: "thirty-four",
-         40: "forty", 53: "fifty-three"}
+         39: "thirty-nine", 40: "forty", 53: "fifty-three"}
 
 
 def solution_year_claims(failures: list[str]) -> dict[str, str]:
@@ -107,7 +107,19 @@ def solution_year_claims(failures: list[str]) -> dict[str, str]:
 def main() -> int:
     rows = read_csv(HERE / "erdos-database-history.csv")
     first, last = rows[0], rows[-1]
-    fixed = [row for row in rows if row["catalogue_count_unchanged"] == "yes"]
+    anchor = next(row for row in rows
+                  if row["catalogue_count_unchanged"] == "yes")
+    # The fixed cohort is the last completed stretch of snapshots sharing one
+    # catalogue count: the solve counter moved while the pool stood still.
+    # The trailing run can be a single fresh snapshot (the count just moved),
+    # so fall back through earlier runs until one spans at least two.
+    runs: list[list[dict]] = []
+    for row in rows:
+        if runs and runs[-1][-1]["total_problems"] == row["total_problems"]:
+            runs[-1].append(row)
+        else:
+            runs.append([row])
+    fixed = next((run for run in reversed(runs) if len(run) > 1), [last])
     start, end = fixed[0], fixed[-1]
     gained = int(end["total_solved"]) - int(start["total_solved"])
     grown = int(last["total_problems"]) - int(first["total_problems"])
@@ -124,7 +136,7 @@ def main() -> int:
         f"{first['date']} to {last['date']}": "snapshots fact",
         f"**catalogue:** {first['total_problems']} problems at the first "
         f"snapshot to {int(last['total_problems']):,} at the last; the count "
-        f"is unchanged from the {start['date']} snapshot on": "catalogue fact",
+        f"is unchanged from the {anchor['date']} snapshot on": "catalogue fact",
         f"**solved statuses:** {first['total_solved']} to "
         f"{last['total_solved']}": "solved fact",
         f"**lean-formalized:** {first['lean_formalized']} to "

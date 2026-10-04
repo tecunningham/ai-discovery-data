@@ -49,7 +49,7 @@ Snapshot series, from
 - **catalogue:** 992 problems at the first snapshot to 1,221 at the last; the count is unchanged from the 2026-09-28 snapshot on
 - **solved statuses:** 355 to 579
 - **lean-formalized:** 148 to 786; 786 against 579 solved statuses at the last snapshot
-- **fixed cohort:** solved statuses 579 on 28 September to 579 on 28 September, 0 rows in 0 days
+- **fixed cohort:** solved statuses 525 on 30 April to 564 on 31 August, thirty-nine rows in 123 days
 - **cohort growth:** the catalogue grew by 229 rows inside the snapshot window
 - **ai-standalone stock:** about 13 full AI-standalone resolutions in the wiki at its 2026-06-30 freeze, against 579 solved statuses
 - **three counts:** 556 solved rows in the solution-years read, 579 in the 2026-09-28 statistics snapshot, 565 on the site's headline of 8 August

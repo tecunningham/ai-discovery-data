@@ -50,14 +50,15 @@ footer { margin-top: 3em; color: #57606a; font-size: 0.85em;
 <li><strong>Metric:</strong> total size in bytes of decompressor plus archive for a fixed 1 GB
 text corpus, under a CPU-time and memory cap, per awarded record</li>
 <li><strong>Coverage:</strong> 2019 baseline to 2026; the prize moved to enwik9 on 2020-02-21;
-prize site read 2026-07-28, benchmark page's own update dated 2026-07-08</li>
+prize site read 2026-10-03, benchmark page's own update dated 2026-09-30;
+rows through the 2026-09-21 snapshot date</li>
 <li><strong>Data:</strong> <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/enwik9-records.csv"><code>enwik9-records.csv</code></a>, holding both the
 <code>hutter_enwik9</code> and <code>ltcb_enwik9</code> series</li>
 <li><strong>Upstream:</strong> <a href="http://prize.hutter1.net/">http://prize.hutter1.net/</a> and
 <a href="http://mattmahoney.net/dc/text.html">http://mattmahoney.net/dc/text.html</a></li>
-<li><strong>Verdict:</strong> no acceleration — 0 awarded records in 2026 (one pending claim
-of 2026-06-26) against 2 in 2024 and 4 over 2021–2024; the uncapped
-comparator is unchanged since 2023-10-23</li>
+<li><strong>Verdict:</strong> accelerating — 3 awarded records in 2026 against 0 in 2025 and
+4 over 2021–2024; the 2026 awards cut the record 9.4% against 5.0% over
+2019–2024</li>
 </ul>
 <h3>Hutter Prize enwik9 record</h3>
 <div id="chart0" class="chart"></div>
@@ -73,30 +74,52 @@ loophole of hiding the model in the program.</p>
 HDD on our test machine"
 — Hutter Prize rules, prize.hutter1.net, read 2026 [@hutter2026prize]</p>
 </blockquote>
-<p>The cap excludes GPUs, so two series are plotted rather than one: the prize
-is the constrained series, and Matt Mahoney's Large Text Compression
-Benchmark is the same corpus with no cap, admitting GPU and TPU compressors
-[@mahoney2026ltcb].</p>
-<p>A "discovery" is an awarded record, dated by the award. The prize pays only
-for improvements of at least 1% over the standing record, so the ledger
-records steps that cleared a hurdle, not every improvement made.</p>
+<p>The cap excludes GPUs at run time, so two series are plotted rather than one:
+the prize is the constrained series, and Matt Mahoney's Large Text
+Compression Benchmark is the same corpus with no cap, admitting GPU and TPU
+compressors [@mahoney2026ltcb].</p>
+<p>A "discovery" is an awarded record, dated by the date the prize site's record
+table gives it, which is the submission date; the award itself can come
+months later. The prize pays only for improvements of at least 1% over the
+standing record, so the ledger records steps that cleared a hurdle, not every
+improvement made.</p>
 <h2 id="facts">Facts</h2>
 <ul>
 <li><strong>baseline:</strong> 116,673,681 bytes at the 2019 phda9v1.8 baseline</li>
-<li><strong>awards:</strong> starlit by Artemiy Margaritov on 2021-05-31 · fast cmix by
-  Saurabh Kumar on 2023-07-16 · fx-cmix by Kaido Orav on 2024-02-02 ·
-  fx2-cmix by Kaido Orav and Byron Knoll on 2024-09-03 at 110,793,128 bytes</li>
-<li><strong>steps:</strong> measured against the record each displaced, those steps are
-  1.13%, 1.04%, 1.38% and 1.59%; together the four awards take the total
-  down 5.0% from the 2019 baseline</li>
-<li><strong>pending:</strong> cmix-lex by Ibrahim Marcouch, announced on the benchmark page
-  on 2026-06-26 at 109,190,109 bytes, a further 1.45% and inside the
-  109,685,196 needed to clear the 1% hurdle; not an awarded record on the
-  prize site as of 2026-07-28</li>
-<li><strong>uncapped:</strong> nncp v3.2 reached 107,261,318 bytes on 2023-10-23 and is
-  still ranked 1 as of the benchmark page's 2026-07-08 update, with active
-  submissions below it through 2024 to 2026</li>
+<li><strong>awards to 2024:</strong> starlit by Artemiy Margaritov on 2021-05-31 · fast cmix
+  by Saurabh Kumar on 2023-07-16 · fx-cmix by Kaido Orav on 2024-02-02 ·
+  fx2-cmix by Kaido Orav &amp; Byron Knoll on 2024-09-03 at 110,793,128 bytes</li>
+<li><strong>awards of 2026:</strong> cmix-lex by Ibrahim Marcouch &amp; Kaido Orav on
+  2026-06-26 · cmix-obias by David Freelan on 2026-07-19 ·
+  fx2-cmix-transformer by Vladimir Ivanov on 2026-07-24 at 100,424,672
+  bytes; all three awarded together on 2026-09-30</li>
+<li><strong>steps:</strong> measured against the record each displaced, the steps are 1.13%,
+  1.04%, 1.38%, 1.59%, 1.01%, 1.05% and 7.46%; the four awards of 2021–2024
+  take the total down 5.0% from the 2019 baseline, the three awards of 2026
+  take it down a further 9.4%, and the standing record is 13.9% below the
+  2019 baseline</li>
+<li><strong>pending:</strong> zmix 1.0 by James Byrne, listed on the benchmark page on
+  2026-09-14 at 99,312,424 bytes of archive plus compressor, a further 1.11%
+  and inside the 99,420,425 needed to clear the 1% hurdle; undergoing prize
+  testing as of the benchmark page's 2026-09-30 update</li>
+<li><strong>uncapped:</strong> nncp v3.2 reached 107,261,318 bytes on 2023-10-23 and stood
+  until 2026-07-24; zmix 1.0 reached 96,096,261 bytes on 2026-09-14, the
+  lowest uncapped entry dated on or before the 2026-09-21 snapshot</li>
 </ul>
+<p>The 2026-07-24 step replaced a hand-built model with a small pretrained one:</p>
+<blockquote>
+<p>"It is derived from fx2-cmix by replacing the LSTM model with a transformer
+with 6M parameters pre-trained on enwik9 on 8 RTX 5090 GPUs for 26 hours,
+adding 2.9 MB to the compressor and decompressor. It does not need a GPU to
+run."
+— Large Text Compression Benchmark, fx2-cmix-transformer entry, read 2026-10-03 [@mahoney2026ltcb]</p>
+</blockquote>
+<p>The award announcement:</p>
+<blockquote>
+<p>"Ibrahim Marcouch &amp; Kaido Orav are the ninth Winners! David Freelan is the
+tenth Winner! Vladimir Ivanov is the eleventh Winner!"
+— Hutter Prize, prize.hutter1.net, news banner, read 2026-10-03 [@hutter2026prize]</p>
+</blockquote>
 <p>The retired 100 MB enwik8 prize is a different corpus and is not joined to
 the curve. Its complete five-row chronology:</p>
 <table>
@@ -149,9 +172,14 @@ series as the standing record's value over time:</p>
 <h2 id="method">Method</h2>
 <p>The rows are transcribed by hand from the two upstream pages, so there is no
 fetcher that rebuilds them. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/fetch.py"><code>fetch.py</code></a> is a staleness probe
-instead: it reads the prize page and reports if the standing awarded record
-has been displaced, leaving the CSV and this document to be updated by hand.
-<a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/check.py"><code>check.py</code></a> recomputes the fact lines above from the CSV.</p>
+instead: it reads the prize page's record table and reports if its top
+awarded row is smaller than the CSV's standing record, leaving the CSV and
+this document to be updated by hand. <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/check.py"><code>check.py</code></a> recomputes the
+fact lines above from the CSV.</p>
+<p>Prize rows carry the totals the prize site scores, which add the compressor
+to the self-extracting archive; the pending row carries the same sum as the
+benchmark page lists it. Benchmark rows carry the benchmark's own total and
+keep only entries that set a new uncapped low.</p>
 <p><a href="https://github.com/tecunningham/ai-discovery-data/blob/main/problems/algorithms-enwik9/figure.py"><code>figure.py</code></a> calls the shared <code>compression_chart()</code> in
 <a href="https://github.com/tecunningham/ai-discovery-data/blob/main/lib/families.py"><code>../../lib/families.py</code></a>, which reads
 <code>enwik9-records.csv</code>, keeps the rows whose <code>series</code> column matches, and plots
@@ -159,49 +187,62 @@ has been displaced, leaving the CSV and this document to be updated by hand.
 function. Rows whose <code>award</code> column is anything other than <code>pending</code> are
 drawn filled and joined by the solid line, which therefore includes the
 unawarded 2019 baseline; the pending row is drawn as an open marker labelled
-from its <code>program</code> column, "cmix-lex, pending". When the series is
+from its <code>program</code> column, "zmix 1.0, pending". When the series is
 <code>hutter_enwik9</code>, the function additionally selects the <code>ltcb_enwik9</code> rows and
-draws them in grey dashes, with a corner note reporting the uncapped frontier
-as flat since October 2023 at 107.3 MB. The axis is linear and in megabytes;
-January 2026 onward is shaded, as in every figure here.</p>
+draws them in grey dashes, with a corner note reporting the last uncapped
+row's size and month. The axis is linear and in megabytes; January 2026
+onward is shaded, as in every figure here.</p>
 <h2 id="limitations">Limitations</h2>
 <ul>
 <li><strong>a hurdle censors the small steps.</strong> The prize pays only above 1%, so
   improvements below that threshold are invisible here whether or not they
-  happened, and the observed 1.0–1.6% cadence is partly an artefact of the
-  rule.</li>
-<li><strong>neural is not AI-authored.</strong> The uncapped leader nncp uses a transformer
-  architecture and cmix has carried an LSTM since 2016, but a hand-written
-  neural compressor is not a model-written one.</li>
+  happened, and the 1.0–1.6% steps before 2026-07 are partly an artefact of
+  the rule.</li>
+<li><strong>neural is not AI-authored.</strong> fx2-cmix-transformer and the uncapped
+  entries below it carry a transformer trained offline, nncp has used a
+  transformer since 2021, and cmix has carried an LSTM since 2016; a trained
+  model inside a compressor is not a model-written compressor.</li>
+<li><strong>training compute sits outside the cap.</strong> The cap binds the run on the
+  test machine; the 26 GPU-hours on 8 RTX 5090s that trained the
+  fx2-cmix-transformer weights are not counted, only the weights' bytes.</li>
+<li><strong>the snapshot date leaves out a later entry.</strong> The benchmark page lists
+  cmix-lex-transformer lexth11c, dated 2026-09-27, below zmix 1.0 at
+  95,836,613 bytes; it postdates the 2026-09-21 snapshot and is not in the
+  CSV.</li>
 <li><strong>the two pages do not agree on every byte count.</strong> fx2-cmix is
-  110,793,128 on the prize site and 110,351,665 on the benchmark, because
-  the archives and measurement conventions differ, and the benchmark's nncp
-  v2 row prints a total equal to its archive-only size, apparently omitting
-  a 99,671-byte decompressor.</li>
+  110,793,128 on the prize site and 110,351,665 on the benchmark, because the
+  prize adds the compressor and the benchmark does not, and the benchmark's
+  nncp v2 row prints a total equal to its archive-only size, apparently
+  omitting a 99,671-byte decompressor.</li>
 <li><strong>the rows were transcribed by hand from prose pages.</strong> Neither upstream
   is a feed; both are HTML tables read and typed into the CSV, and the prize
   site was read over plain HTTP because its TLS certificate has expired.</li>
 <li><strong>the capped and uncapped series are not comparable in level.</strong> They are
   different rules on the same corpus, which is why they share an axis but
   not a line style.</li>
-<li><strong>a flat frontier is not a measured absence of effort.</strong> Submissions
-  continued below the uncapped leader, but nothing in the data counts how
-  much search went into them.</li>
+<li><strong>the 2026 awards came out together.</strong> The three 2026 records were dated
+  by submission across four weeks but awarded on one day, 2026-09-30, after
+  a 2025 with no award; the dating rule spreads one announcement across
+  three dates.</li>
 </ul>
 <h2 id="ai-attribution">AI attribution</h2>
 <p>No record on either the capped or the uncapped series credits a language
-model or an agent, as of the prize-site read of 2026-07-28 and the benchmark
-page's update of 2026-07-08. The nearby AI-credited results in this domain
-are not compression records: the 23% GPU kernel speedup reported in the
-AlphaEvolve paper [@novikov2025alphaevolve], and GPU kernels found by
+model or an agent as the author of a compressor, as of the prize-site read of
+2026-10-03 and the benchmark page's update of 2026-09-30; entry write-ups and
+source repositories were not read. The nearby AI-credited results in this
+domain are not compression records: the 23% GPU kernel speedup reported in
+the AlphaEvolve paper [@novikov2025alphaevolve], and GPU kernels found by
 test-time training that beat the best human submissions by 15 to 51%
 [@yuksekgonul2026learning].</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li>[@hutter2026prize] — the prize site: the record table, the resource cap
-  quoted above, and the 1% improvement hurdle.</li>
+<li>[@hutter2026prize] — the prize site: the record table and award dates,
+  the resource cap quoted above, the 1% improvement hurdle, and the award
+  announcement.</li>
 <li>[@mahoney2026ltcb] — the Large Text Compression Benchmark: the uncapped
-  rows, the pending cmix-lex announcement, and the enwik8 chronology.</li>
+  rows, the pending zmix 1.0 entry and its compressor size, the
+  fx2-cmix-transformer description, the lexth11c entry named in Limitations,
+  and the enwik8 chronology.</li>
 <li>[@novikov2025alphaevolve] — the AlphaEvolve kernel speedup cited in the
   AI-attribution register.</li>
 <li>[@yuksekgonul2026learning] — the test-time-training kernel result cited in
@@ -216,7 +257,7 @@ chart inline; the PNGs committed in the repository remain the archival
 record, drawn from the same CSVs. Rebuilt by
 <code>tools/build_docs.py</code>.</footer>
 <script>
-vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"author":"Alexander Rhatushnyak","bytes":116673681,"date":"2019-07-04","note":"pre-prize baseline for the 2020 10x expansion","program":"phda9v1.8","series":"hutter_enwik9"},{"author":"Artemiy Margaritov","bytes":115352938,"date":"2021-05-31","note":"5th winner","program":"starlit","series":"hutter_enwik9"},{"author":"Saurabh Kumar","bytes":114156155,"date":"2023-07-16","note":"6th winner","program":"fast cmix","series":"hutter_enwik9"},{"author":"Kaido Orav","bytes":112578322,"date":"2024-02-02","note":"7th winner","program":"fx-cmix","series":"hutter_enwik9"},{"author":"Kaido Orav & Byron Knoll","bytes":110793128,"date":"2024-09-03","note":"8th winner","program":"fx2-cmix","series":"hutter_enwik9"},{"author":"Ibrahim Marcouch","bytes":109190109,"date":"2026-06-26","note":"announced on LTCB; not yet an awarded record on the prize site as of 2026-07-28","program":"cmix-lex","series":"hutter_enwik9"},{"author":"Alexander Rhatushnyak","bytes":116587793,"date":"2019-07-04","note":"LTCB total incl. decompressor","program":"phda9 1.8","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":114317255,"date":"2021-01-03","note":"as printed on LTCB; likely omits the 99671-byte decompressor","program":"nncp v2","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":112319355,"date":"2021-02-06","note":"","program":"nncp v2.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":110231784,"date":"2021-04-24","note":"","program":"nncp v3","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":108579652,"date":"2021-06-01","note":"","program":"nncp v3.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":107261318,"date":"2023-10-23","note":"still ranked 1 as of the page's 2026-07-08 update","program":"nncp v3.2","series":"ltcb_enwik9"}]},"height":340,"layer":[{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
+vegaEmbed('#chart0', {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"axis":{"gridColor":"#e3e3e3","labelFontSize":12,"titleFontSize":12},"legend":{"labelFontSize":12,"titleFontSize":12},"view":{"stroke":null}},"data":{"values":[{"author":"Alexander Rhatushnyak","bytes":116673681,"date":"2019-07-04","note":"pre-prize baseline for the 2020 10x expansion","program":"phda9v1.8","series":"hutter_enwik9"},{"author":"Artemiy Margaritov","bytes":115352938,"date":"2021-05-31","note":"5th winner","program":"starlit","series":"hutter_enwik9"},{"author":"Saurabh Kumar","bytes":114156155,"date":"2023-07-16","note":"6th winner","program":"fast cmix","series":"hutter_enwik9"},{"author":"Kaido Orav","bytes":112578322,"date":"2024-02-02","note":"7th winner","program":"fx-cmix","series":"hutter_enwik9"},{"author":"Kaido Orav & Byron Knoll","bytes":110793128,"date":"2024-09-03","note":"8th winner","program":"fx2-cmix","series":"hutter_enwik9"},{"author":"Ibrahim Marcouch & Kaido Orav","bytes":109671639,"date":"2026-06-26","note":"9th winner; awarded 2026-09-30","program":"cmix-lex","series":"hutter_enwik9"},{"author":"David Freelan","bytes":108521870,"date":"2026-07-19","note":"10th winner; awarded 2026-09-30","program":"cmix-obias","series":"hutter_enwik9"},{"author":"Vladimir Ivanov","bytes":100424672,"date":"2026-07-24","note":"11th winner; awarded 2026-09-30; listed as fx2-cmix-T on the prize site","program":"fx2-cmix-transformer","series":"hutter_enwik9"},{"author":"James Byrne","bytes":99312424,"date":"2026-09-14","note":"archive plus compressor as listed on LTCB; undergoing prize testing as of LTCB's 2026-09-30 update","program":"zmix 1.0","series":"hutter_enwik9"},{"author":"Alexander Rhatushnyak","bytes":116587793,"date":"2019-07-04","note":"LTCB total incl. decompressor","program":"phda9 1.8","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":114317255,"date":"2021-01-03","note":"as printed on LTCB; likely omits the 99671-byte decompressor","program":"nncp v2","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":112319355,"date":"2021-02-06","note":"","program":"nncp v2.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":110231784,"date":"2021-04-24","note":"","program":"nncp v3","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":108579652,"date":"2021-06-01","note":"","program":"nncp v3.1","series":"ltcb_enwik9"},{"author":"Fabrice Bellard","bytes":107261318,"date":"2023-10-23","note":"","program":"nncp v3.2","series":"ltcb_enwik9"},{"author":"Vladimir Ivanov","bytes":96996198,"date":"2026-07-24","note":"self-extracting archive9; no separate decompressor","program":"fx2-cmix-transformer","series":"ltcb_enwik9"},{"author":"Dharmesh Patel & Naveen Bijalwan","bytes":96849689,"date":"2026-09-12","note":"self-extracting archive9; not a prize candidate","program":"rata-cmix 1.0.0","series":"ltcb_enwik9"},{"author":"James Byrne","bytes":96096261,"date":"2026-09-14","note":"self-extracting archive9; ranked 2 as of the page's 2026-09-30 update behind an entry dated 2026-09-27","program":"zmix 1.0","series":"ltcb_enwik9"}]},"height":340,"layer":[{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"interpolate":"step-after","strokeWidth":1.6,"type":"line"}},{"encoding":{"color":{"field":"series","legend":{"orient":"top"},"scale":{"domain":["hutter_enwik9","ltcb_enwik9"],"range":["#2f6cc1","#37474f"]},"title":null,"type":"nominal"},"tooltip":[{"field":"date","title":"date","type":"temporal"},{"field":"bytes","title":"bytes","type":"quantitative"},{"field":"program","title":"program","type":"nominal"},{"field":"author","title":"author","type":"nominal"},{"field":"note","title":"note","type":"nominal"}],"x":{"axis":{"format":"%Y","labelAngle":-40},"field":"date","title":"Date","type":"temporal"},"y":{"field":"bytes","title":"Decompressor + archive bytes","type":"quantitative"}},"mark":{"cursor":"default","filled":true,"size":70,"type":"point"}}],"width":"container"}, {actions: {export: true, source: false, compiled: false, editor: false}});
 </script>
 </body>
 </html>

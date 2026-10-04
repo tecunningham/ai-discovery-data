@@ -594,11 +594,13 @@ def cmd_bump_as_of(args: argparse.Namespace) -> int:
 
 # Files the pipeline is allowed to have changed by the time the PR opens. The
 # fetch writes CSVs, bump-as-of writes lib/dates.py, the prose pass writes
-# folder READMEs, and the render writes PNGs, docs and the generated tables.
+# folder READMEs, and the render writes PNGs (with the JSON beside each
+# cumulative panel), docs and the generated tables.
 ALLOWED_CHANGES = (
     re.compile(r"^problems/[^/]+/[^/]+\.csv$"),
     re.compile(r"^problems/[^/]+/README\.md$"),
     re.compile(r"^problems/[^/]+/[^/]+\.png$"),
+    re.compile(r"^problems/[^/]+/cumulative-[^/]+\.json$"),
     re.compile(r"^lib/dates\.py$"),
     re.compile(r"^(README|CUMULATIVE)\.md$"),
     re.compile(r"^docs/.*"),

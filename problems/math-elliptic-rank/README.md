@@ -8,7 +8,7 @@ frontier of ranks known exactly; a third table holds every curve on the ICARM
 leaderboard with its rank and its size, and a fourth dates the posts around the
 2026 rank ≥ 30 record
 - **Coverage:** twenty record steps, 1938 to 2026, dated by year; the
-leaderboard snapshot spans 2026-05-27 to 2026-09-14, read 2026-09-14
+leaderboard snapshot spans 2026-05-27 to 2026-09-21, read 2026-09-21
 - **Data:**
 [`elliptic-curve-rank-records.csv`](elliptic-curve-rank-records.csv),
 [`elliptic-curve-rank-exact.csv`](elliptic-curve-rank-exact.csv),
@@ -69,10 +69,10 @@ are certified before a curve is recorded:
 
 ![Conductor against proved rank for every curve on the ICARM leaderboard.](leaderboard-math-elliptic-rank.png)
 
-- **board rows:** 729 curves, 2026-05-27 to 2026-09-14, from 34 submitters,
+- **board rows:** 814 curves, 2026-05-27 to 2026-09-21, from 36 submitters,
   covering ranks 1 to 31
 - **board cadence:** 71 curves in 2026-05 · 171 in 2026-06 · 22 in 2026-07 ·
-  210 in 2026-08 · 255 in 2026-09
+  210 in 2026-08 · 340 in 2026-09
 - **board record curve:** curve #302, rank ≥ 31, log conductor 375.2224, naive
   height 468.2771, submitted 2026-08-23
 - **timeline:** 5 dated events, 2024-08-29 to 2026-08-20
@@ -121,7 +121,7 @@ curve, its independent points and a centred author-and-year line. The fetcher
 parses the table and also reads every subpage, keeping the table's author
 string where the two differ and failing if the years disagree. At the
 2026-08-20 read the rank ≥ 30 row's author column in the table was empty and
-its credit string came from its subpage; the 2026-09-14 read carries
+its credit string came from its subpage; the 2026-09-21 read carries
 Alp&ouml;ge–Howell for both 2026 rows. The exact frontier has no table at all: its records are named in the
 page's prose, and the fetcher collects the `rkeq<r>.html` links and reads the
 author and year from each subpage.
@@ -193,7 +193,7 @@ both frontiers on one panel.
 One of the 20 record steps carries an AI credit: the `credit` column is `ai`
 for the 2026 row and `human` for the other 19 — the credit sits on the rank
 ≥ 30 step, and the rank ≥ 31 step that followed it is credited human. No AI
-credit appears anywhere in Dujella's tables or subpages as of the 2026-09-14
+credit appears anywhere in Dujella's tables or subpages as of the 2026-09-21
 read.
 
 ### 2026 — rank ≥ 30, Alp&ouml;ge–Howell

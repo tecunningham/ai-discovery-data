@@ -3,10 +3,10 @@
 - **Domain:** mathematics
 - **Role:** discovery series
 - **Metric:** problems catalogued, statuses marked solved, and statements formalized in Lean, at monthly site snapshots; plus an imputed solution year per solved problem
-- **Coverage:** fourteen monthly snapshots, 2025-08-31 to 2026-09-21; imputed solution years 1940–2026
+- **Coverage:** fourteen monthly snapshots, 2025-08-31 to 2026-09-28; imputed solution years 1940–2026
 - **Data:** [`erdos-database-history.csv`](erdos-database-history.csv), [`erdos-solution-years.csv`](erdos-solution-years.csv), [`erdos-solution-year-overrides.csv`](erdos-solution-year-overrides.csv)
 - **Upstream:** <https://www.erdosproblems.com/>, with the snapshot statistics and Lean counts from <https://github.com/teorth/erdosproblems> and the AI-resolution count from <https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems>
-- **Verdict:** inconclusive — 55 imputed resolutions in 2026 through 2026-09-21, against 33 in 2025 and a 5.9/year mean over 2000–2023
+- **Verdict:** inconclusive — 55 imputed resolutions in 2026 through 2026-09-28, against 33 in 2025 and a 5.9/year mean over 2000–2023
 
 ![Monthly Erdős catalogue snapshots: problems catalogued, statuses marked solved, and statements formalized in Lean.](discovery-math-erdos.png)
 
@@ -45,14 +45,14 @@ review ledger behind it are stated under Method.
 Snapshot series, from
 [`erdos-database-history.csv`](erdos-database-history.csv):
 
-- **snapshots:** fourteen, monthly, 2025-08-31 to 2026-09-21
-- **catalogue:** 992 problems at the first snapshot to 1,221 at the last; the count is unchanged from the 2026-09-21 snapshot on
+- **snapshots:** fourteen, monthly, 2025-08-31 to 2026-09-28
+- **catalogue:** 992 problems at the first snapshot to 1,221 at the last; the count is unchanged from the 2026-09-28 snapshot on
 - **solved statuses:** 355 to 579
-- **lean-formalized:** 148 to 771; 771 against 579 solved statuses at the last snapshot
+- **lean-formalized:** 148 to 786; 786 against 579 solved statuses at the last snapshot
 - **fixed cohort:** solved statuses 525 on 30 April to 564 on 31 August, thirty-nine rows in 123 days
 - **cohort growth:** the catalogue grew by 229 rows inside the snapshot window
 - **ai-standalone stock:** about 13 full AI-standalone resolutions in the wiki at its 2026-06-30 freeze, against 579 solved statuses
-- **three counts:** 556 solved rows in the solution-years read, 579 in the 2026-09-21 statistics snapshot, 565 on the site's headline of 8 August
+- **three counts:** 556 solved rows in the solution-years read, 579 in the 2026-09-28 statistics snapshot, 565 on the site's headline of 8 August
 
 The project publishes its own running chart of the same statistics history
 this folder's fetcher reads. Unlike the PNG above, the image below is
@@ -69,7 +69,7 @@ Imputed series, from
 - **imputed rows:** of the 556 solved problems, 502 carry an imputed year and 54 state no dateable resolution
 - **imputed span:** 1940 to 2026
 - **imputed mean:** 5.9 dated resolutions per year over 2000–2023
-- **imputed recent:** 34 in 2024, 33 in 2025, and 55 in 2026 through 2026-09-21
+- **imputed recent:** 34 in 2024, 33 in 2025, and 55 in 2026 through 2026-09-28
 - **2024 anatomy:** the 34 rows of 2024 trace to 31 distinct works, with 25 dated by arXiv preprints and 9 by published papers
 - **2025 anatomy:** 30 of the 33 rows are preprint-dated and 1 published
 - **2026 anatomy:** 45 of the 55 rows are dated only by the AI wiki, against 10 preprints
@@ -97,11 +97,13 @@ new problems are catalogued faster than problems fall:
 Every point in the snapshot series comes from one source, the project's
 GitHub statistics history, which is what [`fetch.py`](fetch.py) rebuilds the
 whole file from: one row per calendar month, the last snapshot in that
-month. The `catalogue_count_unchanged` column flags the snapshots since the
-count last moved — from September 2026 on, at 1,221. The fixed cohort in
-the fact line is the last completed stretch at one count, April to August
-2026 at 1,217; over such a stretch a rise in solved statuses cannot be
-caused by adding an already-solved problem. An earlier version of this series set its last point by hand from
+month. The `catalogue_count_unchanged` column flags snapshots where the
+catalogue count holds steady from the previous one; the catalogue count
+moved again at this month's snapshot (to 1,221), so the flagged run resets
+to that single snapshot, 2026-09-28, and the fixed-cohort comparison below
+has no elapsed window yet — once the count holds flat across snapshots
+again, a rise in solved statuses over that run cannot be caused by adding an
+already-solved problem. An earlier version of this series set its last point by hand from
 the live website's solved-status headline; the two sources disagree — on 8
 August the headline read 565 where the statistics history recorded 559 — and
 a hand-set endpoint the folder's own fetcher overwrites cannot be rebuilt,
@@ -185,9 +187,8 @@ open-problems-remaining shape.
   different dates under different definitions, so subtracting one from the
   other does not estimate human output.
 - **the cohort grew by 229 rows inside the window,** and problems can enter
-  the catalogue already solved, so a rise in solved statuses outside the
-  2026-04-30 to 2026-08-31 fixed cohort does not separate new resolutions
-  from catalogue additions.
+  the catalogue already solved, so a rise in solved statuses before
+  2026-09-28 does not separate new resolutions from catalogue additions.
 - **Lean formalization counts statements, not proofs,** and is driven by a
   separate volunteer effort.
 - **the AI-attribution wiki is frozen and downstream — the catalogue is

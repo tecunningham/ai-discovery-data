@@ -3,10 +3,10 @@
 - **Domain:** vulnerabilities
 - **Role:** discovery series
 - **Metric:** distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date
-- **Coverage:** 2016–2026, partial through 2026-09-21
+- **Coverage:** 2016–2026, partial through 2026-09-28
 - **Data:** quarterly [`osv-cves-by-quarter.csv`](osv-cves-by-quarter.csv); annual [`osv-cves-by-year.csv`](osv-cves-by-year.csv); severity labels in [`osv-severity-by-year.csv`](osv-severity-by-year.csv); finder credits in [`osv-credits-by-year.csv`](osv-credits-by-year.csv); every AI-marked CVE with its credit strings in [`osv-ai-cves.csv`](osv-ai-cves.csv)
 - **Upstream:** <https://storage.googleapis.com/osv-vulnerabilities/all.zip> (documentation at <https://google.github.io/osv.dev/data/>)
-- **Verdict:** accelerating — 29,769 distinct CVEs through 2026-09-21 annualize to about 41,200, 2.7 times 2025's 15,158
+- **Verdict:** accelerating — 31,599 distinct CVEs through 2026-09-28 annualize to about 42,600, 2.8 times 2025's 15,163
 
 ![Quarterly distinct CVEs represented by active affected-package records in OSV.](discovery-cyber-osv-cves.png)
 
@@ -27,16 +27,16 @@ one event; an advisory naming several CVEs contributes one event per CVE.
 ## Facts
 
 - **by-year:** 2016: 1,472 · 2017: 4,588 · 2018: 4,877 · 2019: 5,161 ·
-  2020: 5,323 · 2021: 6,913 · 2022: 10,838 · 2023: 8,833 · 2024: 12,294 ·
-  2025: 15,158
-- **2026 (through 2026-09-21):** 29,769 distinct CVEs; annualizes to about
-  41,200, or 2.7 times the 2025 count
-- **peak quarter:** 2026-Q3 alone holds 13,118 distinct CVEs, more than any
+  2020: 5,327 · 2021: 6,914 · 2022: 10,838 · 2023: 8,833 · 2024: 12,296 ·
+  2025: 15,163
+- **2026 (through 2026-09-28):** 31,599 distinct CVEs; annualizes to about
+  42,600, or 2.8 times the 2025 count
+- **peak quarter:** 2026-Q3 alone holds 14,910 distinct CVEs, more than any
   full year before 2022
-- **severity coverage:** 36,021 of the 105,226 CVEs (34%) carry an ecosystem
+- **severity coverage:** 36,332 of the 107,068 CVEs (34%) carry an ecosystem
   severity label
-- **credit coverage:** 1,366 CVEs (1.3%) carry any credit
-- **ai-marked:** 32 CVEs — 2 whose credits state an AI method and 30
+- **credit coverage:** 1,415 CVEs (1.3%) carry any credit
+- **ai-marked:** 33 CVEs — 2 whose credits state an AI method and 31
   carrying an AI-lab affiliation only — each kept with its full credit
   strings in [`osv-ai-cves.csv`](osv-ai-cves.csv)
 
@@ -123,7 +123,7 @@ recomputes the fact lines above from the vendored CSVs.
 
 ## AI attribution
 
-The AI-marked ledger holds 32 CVEs. 2 carry credits stating an AI method:
+The AI-marked ledger holds 33 CVEs. 2 carry credits stating an AI method:
 
 > "Google Big Sleep | Daniel Stenberg"
 > — OSV credit strings for CVE-2025-9086, vendored in [`osv-ai-cves.csv`](osv-ai-cves.csv), read 2026-08-14
@@ -131,16 +131,16 @@ The AI-marked ledger holds 32 CVEs. 2 carry credits stating an AI method:
 > "Andrew Nesbitt (powered by Mythos) | Stefan Eissing"
 > — OSV credit strings for CVE-2026-8286, vendored in [`osv-ai-cves.csv`](osv-ai-cves.csv), read 2026-08-14
 
-The other 30 carry an AI-lab affiliation with no method stated: 23 name
+The other 31 carry an AI-lab affiliation with no method stated: 23 name
 Aisle Research, 3 name AntAISecurityLab hackerone handles, 1 names "Filipe
 Casal of Trail of Bits in collaboration with OpenAI", 2 name "Eunsoo
-Kim (Autonomous Code Security team at Microsoft)" and 1 lists "Anthropic"
+Kim (Autonomous Code Security team at Microsoft)" and 2 list "Anthropic"
 among its credits, all quoted from
-[`osv-ai-cves.csv`](osv-ai-cves.csv) as read 2026-09-15. Several of the
+[`osv-ai-cves.csv`](osv-ai-cves.csv) as read 2026-09-28. Several of the
 same credit strings appear in the curl series' finder table
 ([curl](../cyber-curl/README.md)), which counts the same projects'
 disclosures at the project level. No other CVE in the export carries any AI
-marker in its credits, as of the 2026-09-21 read.
+marker in its credits, as of the 2026-09-28 read.
 
 ## Sources
 

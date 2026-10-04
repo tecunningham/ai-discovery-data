@@ -151,11 +151,11 @@ rows of [`firefox-ai-cves.csv`](firefox-ai-cves.csv):
 
 > "Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel
 > Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic"
-> — Mozilla advisory reporter string for CVE-2026-2763 and 30 further CVEs, vendored in [`firefox-ai-cves.csv`](firefox-ai-cves.csv), read 2026-09-21
+> — Mozilla advisory reporter string for CVE-2026-2763 and 30 further CVEs, vendored in [`firefox-ai-cves.csv`](firefox-ai-cves.csv), read 2026-09-16
 
 Those 31 CVEs are roughly 6% of everything Firefox disclosed in 2026 through
 2026-09-16. The remaining 12 AI-marked CVEs of 2026, with credit strings
-quoted from the same file as read 2026-09-21: 9 credit "Amy Burnett of
+quoted from the same file as read 2026-09-16: 9 credit "Amy Burnett of
 OpenAI", 1 credits "Artur Cygan of Trail of Bits in partnership with
 OpenAI", 1 credits "OpenAI Preparedness, Bill Demirkapi" — all affiliation
 credits naming no method — and 1 carries the method-naming credit "Claude,

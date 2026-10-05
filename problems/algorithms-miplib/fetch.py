@@ -10,7 +10,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.table import read_csv  # noqa: E402
-from lib.web import fetch  # noqa: E402
+from lib.web import NEEDS_PERSON, fetch  # noqa: E402
 
 URL = "https://miplib.zib.de/news.html"
 
@@ -22,11 +22,11 @@ def main() -> int:
     version = latest["solufile"]
     if not re.search(rf"solufile(?: version)?\s+{re.escape(version)}\b", text, re.I):
         print(f"vendored solufile {version} is absent from the live news log")
-        return 1
+        return NEEDS_PERSON
     newer = [int(x) for x in re.findall(r"solufile(?: version)?\s+(\d+)", text, re.I)]
     if newer and max(newer) > int(version):
         print(f"live news has solufile {max(newer)} after vendored {version}")
-        return 1
+        return NEEDS_PERSON
     print(f"miplib-solution-releases.csv is current through solufile {version}")
     return 0
 

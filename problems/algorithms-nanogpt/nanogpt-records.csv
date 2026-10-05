@@ -82,7 +82,7 @@ record,kind,date,minutes,agent,ai_system,note
 79,record,2026-04-04,1.411,human,,
 80,record,2026-04-08,1.406,human,,
 81,record,2026-04-22,1.363,human,,
-82,record,2026-04-29,1.353,human,,
+82,record,2026-04-29,1.353,ai_assisted,Claude Opus 4.7,learnable XSA gated layers; merge commit of PR #264 carries a Co-authored-by: Claude Opus 4.7 trailer
 83,record,2026-05-20,1.328,human,,
 84,record,2026-05-21,1.320,human,,
 85,record,2026-05-27,1.271,human,,
@@ -90,4 +90,7 @@ record,kind,date,minutes,agent,ai_system,note
 87,record,2026-06-11,1.256,ai,Recursive,faster ReLU^2 kernel; credited to @cong_ml and AI System Recursive
 88,record,2026-07-13,1.243,human,,
 89,record,2026-07-17,1.23,human,,
-PR360,pending,2026-08-31,0.665,,,"open pull request #360: New Record: 0.665 minutes (39.9 seconds): ANVIL2, Sampled-softmax, New Embedding Table, Full-stack fp8 (-34.0s, -46% same hardware)"
+90,record,2026-08-03,1.13,human,,reduced-width QK and packed FP8 attention (PR #344); listed 2026-09-17
+91,record,2026-08-06,1.126,ai_assisted,Claude Opus 5,canonical token masking at validation (PR #350); merge commit carries a Co-authored-by: Claude Opus 5 trailer; listed 2026-09-18
+92,record,2026-08-30,0.665,ai_assisted,Claude Fable 5,"ANVIL2: sampled softmax, 84.6M-row hashed n-gram table, full FP8 (PR #360, merged 2026-09-28); the author reports building it with Claude Fable 5 (personal communication, 2026-10-05)"
+PR367,pending,2026-09-17,0.359,,,open pull request #367: Track 1: Longest exact-match retrieval (40.0s → 21.56s / -46.1%)

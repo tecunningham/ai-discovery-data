@@ -4,14 +4,15 @@
 - **Role:** discovery series
 - **Metric:** better feasible incumbents, first feasible solutions and
 optimality updates announced in MIPLIB 2017 solufile releases
-- **Coverage:** 2019-08-26 through 2026-01-26, 28 releases with explicit
+- **Coverage:** 2019-08-26 through 2026-09-24, 29 releases with explicit
 solution counts
 - **Data:** [`miplib-solution-releases.csv`](miplib-solution-releases.csv), one
 public solufile release per row
 - **Upstream:** <https://miplib.zib.de/news.html> and
 <https://miplib.zib.de/download.html>
-- **Verdict:** no acceleration — 40 announced updates in the single 2026
-release against 13 in 2025 and a 90.1/year mean over 2019–2025
+- **Verdict:** no acceleration — 91 announced updates across 2 releases in
+2026 through 2026-09-24 against 13 in 2025 and a 90.1/year mean over
+2019–2025
 
 ![Annual MIPLIB incumbent, first-feasible and optimality updates.](discovery-algorithms-miplib.png)
 
@@ -32,14 +33,14 @@ number of changed lines in a downloaded solution file.
 
 ## Facts
 
-- **releases:** 28 releases with explicit solution counts, 2019-08-26
-  through 2026-01-26
-- **totals:** 599 better incumbents, 44 optimality updates and 28 first
+- **releases:** 29 releases with explicit solution counts, 2019-08-26
+  through 2026-09-24
+- **totals:** 650 better incumbents, 44 optimality updates and 28 first
   feasible solutions
 - **by-year (all update kinds):** 2019: 146 · 2020: 227 · 2021: 11 ·
-  2022: 49 · 2023: 40 · 2024: 145 · 2025: 13 · 2026: 40
+  2022: 49 · 2023: 40 · 2024: 145 · 2025: 13 · 2026: 91
 - **2024:** 137 better incumbents across 7 releases
-- **2026:** the single 2026 release, solufile 36 of 2026-01-26, reports 40
+- **2026:** 2 releases, solufiles 36 and 37, through 2026-09-24 report 91
   better incumbents
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
@@ -61,7 +62,7 @@ optima. Open-to-hard/easy status changes are counted as first feasible;
 update kinds without treating them as the same event type.
 [`fetch.py`](fetch.py) is a staleness probe rather than a fetcher, because
 the classification depends on prose; it checks whether the live log has
-advanced beyond solufile 36. [`check.py`](check.py) recomputes the fact lines
+advanced beyond the last vendored solufile. [`check.py`](check.py) recomputes the fact lines
 above from the CSV.
 
 ## Limitations
@@ -76,6 +77,12 @@ above from the CSV.
 - **the collection is substantially but not perfectly fixed.** Corrected
   instances and status tags exist; the library is cleaner than annual
   benchmark scores, not immutable.
+- **status changes without an origin are not counted.** Solufile 37's
+  announcement reports "2 instances updated to easy" without saying from
+  what; its changelog shows one of the two, neos-5045105-creuse, had been
+  open, which the rules above would count as a first feasible solution. The
+  CSV keeps the announcement's own count, as for solufile 36's status
+  changes, so that release carries none.
 - **category overlap.** A newly optimal solution can overlap conceptually
   with an improved incumbent; the CSV makes categories disjoint to avoid
   double-counting.
@@ -83,7 +90,7 @@ above from the CSV.
 ## AI attribution
 
 No AI system or language model is credited in the release-log entries
-transcribed here, through the 2026-01-26 release. Submitters and solver
+transcribed here, through the 2026-09-24 release. Submitters and solver
 provenance are not recorded consistently enough in these aggregate
 announcements to infer whether an AI tool contributed, so the absence of an
 AI label is not evidence of absence.

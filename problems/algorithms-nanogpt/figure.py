@@ -15,6 +15,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.chart import (  # noqa: E402
     AI,
+    AI_SOFT,
     HUMAN,
     NEUTRAL,
     NOW,
@@ -29,7 +30,13 @@ from lib.chart import (  # noqa: E402
 )
 from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
+from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.ticker import NullFormatter, ScalarFormatter  # noqa: E402
+
+# A record the README credits to an AI-agent company is `ai`; one whose own
+# merged commits carry an AI co-author trailer, or whose author reports the
+# model they worked with, is `ai_assisted`: a human entry made with a model.
+COLOURS = {"ai": AI, "ai_assisted": AI_SOFT}
 
 
 def cumulative() -> None:
@@ -94,22 +101,27 @@ def main() -> None:
         ax.annotate("timing rules changed", (year_fraction(retimings[0]["date"]), 20),
                     xytext=(4, 0), textcoords="offset points", fontsize=7, color=VENDOR)
     for x, y, row in zip(xs, ys, rows):
-        colour = AI if row["agent"] == "ai" else HUMAN
-        ax.scatter([x], [y], color=colour, s=48 if colour == AI else 20, edgecolor="white", linewidth=0.5, zorder=4)
+        colour = COLOURS.get(row["agent"], HUMAN)
+        ax.scatter([x], [y], color=colour, s=20 if colour == HUMAN else 48, edgecolor="white", linewidth=0.5, zorder=4)
         if row["ai_system"]:
-            ax.annotate(row["ai_system"], (x, y), xytext=(3, 7), textcoords="offset points", fontsize=7, color=AI)
+            ax.annotate(row["ai_system"], (x, y), xytext=(3, 7), textcoords="offset points", fontsize=7, color=colour)
     right = NOW + 0.12
     ax.set_xlim(min(xs) - 0.08, right)
     ax.set_yscale("log")
-    ax.set_yticks([1.5, 2, 3, 5, 10, 20, 45])
+    ax.set_yticks([0.7, 1, 1.5, 2, 3, 5, 10, 20, 45])
     ax.yaxis.set_major_formatter(ScalarFormatter())
     ax.yaxis.set_minor_formatter(NullFormatter())
     shade_era(ax, right)
     style(ax, "Minutes to target loss (log scale)", "Date of run")
-    ax.legend(handles=common_legend(), frameon=False, fontsize=8)
+    legend = common_legend()
+    legend.insert(2, Line2D([], [], marker="o", linestyle="", color=AI_SOFT,
+                            label="AI-assisted (human entry)"))
+    ax.legend(handles=legend, frameon=False, fontsize=8)
     ai_count = sum(1 for row in rows if row["agent"] == "ai")
+    assisted = sum(1 for row in rows if row["agent"] == "ai_assisted")
     ax.text(0.02, 0.13,
-            f"45 → {ys[-1]:g} minutes; {ai_count} of {len(rows)} listed runs are AI-credited.",
+            f"45 → {ys[-1]:g} minutes; {ai_count} of {len(rows)} listed runs are "
+            f"AI-credited, {assisted} more AI-assisted.",
             transform=ax.transAxes, fontsize=8.5)
     source_note(fig, "Source: KellerJordan/modded-nanogpt README, vendored as nanogpt-records.csv.")
     save(

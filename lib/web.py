@@ -22,6 +22,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".cache"
 
+# The exit status a fetcher returns when the upstream answered and has news
+# only a person can vendor: a staleness probe that found a record, release or
+# build past the hand-transcribed series, or a page whose format it no longer
+# parses. Exit 1 stays "the fetch failed", which the weekly refresh treats as
+# transient; this one holds the refresh PR and leads the digest instead.
+NEEDS_PERSON = 3
+
 
 def _cache_path(url: str, accept: str | None = None) -> Path:
     key = hashlib.sha256(

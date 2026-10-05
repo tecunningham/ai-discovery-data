@@ -33,9 +33,9 @@ def main() -> int:
         [year for year in years if year <= "2025"])
     last = rows[-1]
     failures: list[str] = []
-    if releases_by_year["2026"] != 1:
-        failures.append(f"{releases_by_year['2026']} releases dated 2026; "
-                        "the verdict clause counts a single 2026 release")
+    in_2026 = [row for row in rows if row["release_date"].startswith("2026")]
+    plural = "s" if len(in_2026) != 1 else ""
+    numbers = " and ".join(row["solufile"] for row in in_2026)
 
     claims = {
         f"**releases:** {len(rows)} releases with explicit solution counts, "
@@ -49,12 +49,13 @@ def main() -> int:
             f"{year}: {by_year[year]}" for year in years): "by-year fact",
         f"**2024:** {incumbents_by_year['2024']} better incumbents across "
         f"{releases_by_year['2024']} releases": "2024 fact",
-        f"**2026:** the single 2026 release, solufile {last['solufile']} of "
-        f"{last['release_date']}, reports {incumbents_by_year['2026']} "
-        "better incumbents": "2026 fact",
-        f"no acceleration — {by_year['2026']} announced updates in the "
-        f"single 2026 release against {by_year['2025']} in 2025 and a "
-        f"{mean:.1f}/year mean over 2019–2025": "verdict clause",
+        f"**2026:** {len(in_2026)} release{plural}, solufile{plural} "
+        f"{numbers}, through {last['release_date']} report "
+        f"{incumbents_by_year['2026']} better incumbents": "2026 fact",
+        f"no acceleration — {by_year['2026']} announced updates across "
+        f"{len(in_2026)} release{plural} in 2026 through {last['release_date']} "
+        f"against {by_year['2025']} in 2025 and a {mean:.1f}/year mean over "
+        "2019–2025": "verdict clause",
         f"{rows[0]['release_date']} through {last['release_date']}":
             "coverage dates",
     }

@@ -283,13 +283,13 @@ check before rewriting the generated README tables.
 CI runs the same `make check-figures` target on every push and pull request. A
 second workflow,
 [`weekly-update.yml`](.github/workflows/weekly-update.yml), runs every Monday:
-it refetches every automatable series, has Claude Code restate the README
-facts the refetched numbers invalidated, re-renders the figures, index and
-docs, and opens a pull request that merges itself when every check passes
-and no judgment call was needed. A stale series is the one failure mode
-invisible from inside the repository, since it passes every other check; the
-weekly run closes that gap by updating rather than by alarming. It checks the
-documented URLs in the same run and emails a digest of what moved.
+it refetches every automatable series, compares the result with the
+committed data, checks the documented URLs, and emails a digest that leads
+with what needs a person — a new record to transcribe, an AI credit, a
+pending claim. A stale series is the one failure mode invisible from inside
+the repository, since it passes every other check; the digest makes it
+visible. It commits nothing: the repository is brought up to date by hand,
+following [CLAUDE.md](CLAUDE.md), when the news warrants it.
 
 The renderer pins the Python base image by digest, forces `linux/amd64`, and
 installs the exact versions in `requirements.txt`. Each PNG's `Software`

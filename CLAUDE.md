@@ -33,20 +33,37 @@ page's interactive charts), and the committed PNGs.
   contract for the README, and `tools/check.py` (run by `make check`) will
   list everything missing, including the `discovery-<slug>.png` /
   `cumulative-<slug>.png` names the index pages find figures by.
-- The Monday refresh (`.github/workflows/weekly-update.yml`, driven by
-  `tools/weekly_update.py`) runs the fetch → bump → prose → figures → index →
-  docs sequence unattended and opens a PR named `auto/weekly-refresh-<date>`.
-  It merges itself only when every check passes and no Verdict term moved;
-  otherwise the PR waits for a person. If you are the Claude step inside it,
-  edit only `problems/*/README.md` and write anything that was more than
-  arithmetic to `.weekly/judgment-calls.md`. If you are instead the
-  scheduled session finishing an open `auto/weekly-refresh-*` PR: same
-  rules, but do not run `make index` or `make docs` (no pinned renderer
-  there); push the README edits and let
-  `.github/workflows/refresh-finish.yml` regenerate, re-check and merge.
-  Put judgment calls in the commit message under a `Judgment calls:` line
-  (or in a PR comment opening with `**Judgment calls**`); either holds the
-  PR for a person.
+- The Monday digest (`.github/workflows/weekly-update.yml`, driven by
+  `tools/weekly_update.py`) refetches everything, diffs it against the
+  committed data and emails what moved. It commits nothing and opens no PR;
+  the refetched CSVs are in the run's artifact.
+
+## Bringing the repository up to date
+
+Done on request, usually after a digest. On a branch from main:
+
+1. `python3 tools/weekly_update.py fetch` with `AI_DISCOVERY_AS_OF=<today>`
+   in the environment, then `python3 tools/weekly_update.py bump-as-of`
+   (same variable) so `AS_OF_DATE` matches the fetch day.
+2. Anything the fetch reports as needing a person (exit `NEEDS_PERSON`, the
+   ⚠️ lines) is a staleness probe: transcribe the new rows by hand from the
+   upstream it names, and attribute any AI credit from primary sources.
+3. `make check`; restate every README fact it reports, in the phrasing the
+   folder's `check.py` recomputes. A changed Verdict term, a new AI credit,
+   or a coding choice the folder's rules don't settle is a judgment call:
+   list it in the commit message under `Judgment calls:` and in the PR body.
+4. `make figures`, `make docs`, `make index`, `make docs` (index rewrites
+   tables the index pages embed), `make check`; commit and open one PR.
+
+In a Claude Code cloud session the pinned renderer works once Docker is
+started (`dockerd &`). The image build needs the sandbox proxy's CA for pip,
+passed as a build secret so it never lands in the image: build from a copy
+of `tools/figures.Dockerfile` whose `RUN pip install` line is prefixed with
+`--mount=type=secret,id=ca PIP_CERT=/run/secrets/ca`, with
+`docker build --network host --secret id=ca,src=$CA_BUNDLE --tag
+ai-discovery-data-figures:python3.12.13 ...`, then run the Make targets with
+`FIGURE_IMAGE_PRELOADED=1`. If the untouched folders' PNGs byte-compare
+clean under `make index`, the image is right.
 
 ## Layout of the shared code
 

@@ -17,13 +17,14 @@ from datetime import date
 # newer than this date, so a refetch cannot silently leave standing-record lines
 # ending before their newest observation.
 #
-# The weekly refresh (tools/weekly_update.py) overrides the date through the
+# The weekly digest (tools/weekly_update.py) overrides the date through the
 # environment for its fetch step only: several fetchers clip at AS_OF_DATE so a
 # refetch reproduces the committed window, which is exactly right for a commit
-# and exactly wrong for a fetch asking "what appeared upstream this week?". The
-# refresh then moves the literal below to the same day before anything is
-# committed. Nothing that produces a committed artifact — figures, index, docs
-# — may set this variable.
+# and exactly wrong for a fetch asking "what appeared upstream this week?". A
+# person bringing the repository up to date moves the literal below to the
+# fetch day (`tools/weekly_update.py bump-as-of`) before anything is committed.
+# Nothing that produces a committed artifact — figures, index, docs — may set
+# this variable.
 AS_OF_DATE = (
     date.fromisoformat(os.environ["AI_DISCOVERY_AS_OF"])
     if os.environ.get("AI_DISCOVERY_AS_OF")

@@ -3822,59 +3822,59 @@ year,finder,category,cves
 2025,Bob Bracke with The Collective Consulting,other,1
 2025,"Garrett Foster with SpecterOps, Inc.",other,1
 2025,Eduardo Braun Prado working with Trend Zero Day Initiative,other,1
-2025,QWangWang,other,1
-2025,haowei yan with jingdong dawnslab,other,1
-2025,HAO LI with Venustech,other,1
-2025,Bryan De Houwer with Crimson7,other,1
-2025,Dennis Carlson with Abacus Group LLC,other,1
-2025,Bighound,other,1
 2025,Barath Stalin,other,1
+2025,QWangWang,other,1
+2025,Mingi Jung with WebSec,other,1
 2025,Zhiniang Peng,other,1
 2025,Rutuja Shirali with Microsoft,other,1
 2025,Yesayi Hovnanyan with Microsoft,other,1
 2025,Matthew Cox with Microsoft,other,1
 2025,Tamas Jos (@skelsec),other,1
+2025,haowei yan with jingdong dawnslab,other,1
 2025,Eric Lawrence with Microsoft Defender for Endpoint,other,1
 2025,her0m4nt,other,1
+2025,HAO LI with Venustech,other,1
 2025,wh1tc with Kunlun lab & devoke & Zhiniang Peng with HUST,other,1
-2025,Ben Lichtman,other,1
-2025,Martin Rakhmanov and Albin Vattakattu,other,1
-2025,Mingi Jung with WebSec,other,1
-2025,cixtor.com with Big Tech,other,1
 2025,Ziv Somech with Microsoft,other,1
 2025,Shimi Gersner with Microsoft,other,1
 2025,Shahar Zelig with Microsoft,other,1
-2025,Aonan Guan,other,1
-2025,Lei Wang,other,1
+2025,Ben Lichtman,other,1
+2025,Bryan De Houwer with Crimson7,other,1
+2025,Martin Rakhmanov and Albin Vattakattu,other,1
+2025,Dennis Carlson with Abacus Group LLC,other,1
+2025,cixtor.com with Big Tech,other,1
+2025,Bighound,other,1
 2025,Ruben Gutierrez with Sky,other,1
 2025,Talon Uptain,other,1
-2026,Anonymous,other,484
+2025,Aonan Guan,other,1
+2025,Lei Wang,other,1
+2026,Anonymous,other,485
 2026,0ccbbf129444eb66344ccafb92b00df4,other,185
 2026,yhw & txz,other,165
 2026,AIフィジカルインターフェイス二号機,other,70
 2026,Seung Chan Kim,other,68
 2026,Kugelblitz with Microsoft,other,63
 2026,Pwnforr777,other,62
+2026,k0shl,other,61
 2026,Microsoft,other,61
-2026,k0shl,other,60
 2026,41ae55e9310ff27fa6f26af4727e5590,other,51
 2026,pwn2addr,other,46
-2026,Jmini,other,43
+2026,Jmini,other,44
 2026,R4nger with Kunlun Lab & Zhiniang Peng with HUST,other,40
 2026,Jeongmin Choi,other,38
 2026,Thanatos Tian (HKPolyU) & wgg & @2st__ with Diffract & Zhiniang Peng with HUST,other,38
 2026,Haein Lee with KAIST Hacking Lab,other,37
 2026,Minjea Park,other,32
+2026,haowei yan & xiaozun tang,other,31
 2026,Thanatos Tian (HKPolyU) & wgg & @2st__ with Diffract,other,31
 2026,Kyeongmin Kim (@hareh4ru) with KAIST Hacking Lab,other,30
 2026,Angelboy (@scwuaptx) with DEVCORE,other,29
-2026,haowei yan & xiaozun tang,other,29
 2026,P1hcn,other,27
+2026,"Kentaro Kawane with GMO Cybersecurity by Ierae, Inc.",other,27
 2026,hazard,other,26
 2026,Minwoo Jeong (P1nkjelly) with KAIST Hacking Lab,other,26
-2026,"Kentaro Kawane with GMO Cybersecurity by Ierae, Inc.",other,26
+2026,h4urek with secsys lab,other,25
 2026,Jonghoi Kim,other,25
-2026,h4urek with secsys lab,other,24
 2026,Donghyeon Oh with Patchpoint,other,23
 2026,Howard McGreehan with MSRC V&M,other,22
 2026,Souhail Hammou,other,19
@@ -3885,14 +3885,14 @@ year,finder,category,cves
 2026,David Zhu with Microsoft,other,16
 2026,Aobo Wang,other,16
 2026,Ky0toFu,other,16
+2026,grass341 with Viettel Cyber Security,other,15
 2026,Brandon Fisher,other,15
 2026,Dongjun Lee (m0nd2y) with KAIST Hacking Lab,other,15
+2026,Thanatos Tian (HKPolyU) & wgg with Diffract,other,15
 2026,Hwiwon Lee (hwiwonl) with UIUC,other,15
 2026,"Jongseong Kim (nevul37), SEC-agent team",explicit_ai,14
 2026,Varun Goel,other,14
 2026,Henrique Pereira with Microsoft,other,14
-2026,grass341 with Viettel Cyber Security,other,14
-2026,Thanatos Tian (HKPolyU) & wgg with Diffract,other,14
 2026,Dan Reynolds with MSRC Vulnerabilities & Mitigations,other,14
 2026,f7d8c52bec79e42795cf15888b85cbad,other,13
 2026,ChenJian with Sea Security Orca Team,other,13
@@ -3902,14 +3902,15 @@ year,finder,category,cves
 2026,Matthew Franklin,other,13
 2026,"Hwiwon Lee (hwiwonl), SEC-agent team",explicit_ai,12
 2026,Sharath Unni,other,12
+2026,haowei yan,other,12
 2026,namnp with Viettel Cyber Security,other,12
 2026,DongJun Kim (smlijun) with UIUC,other,12
 2026,Alon Leviev with Microsoft (STORM),other,11
-2026,haowei yan,other,11
 2026,goodbyeselene,other,11
 2026,Fabiano Amorim with Pythian,other,11
 2026,cyanbamboo and b2ahex,other,10
 2026,f4 & Zhiniang Peng with HUST,other,10
+2026,yhw,other,10
 2026,YuilMuil(Yoon Jung Hyun),other,10
 2026,Azure Yang with Kunlun Lab,other,10
 2026,WARP and ACS teams at Microsoft,other,10
@@ -3917,11 +3918,11 @@ year,finder,category,cves
 2026,Hay Mizrachi with Microsoft,other,9
 2026,Haifei Li with EXPMON,other,9
 2026,tiebuchen,other,9
-2026,yhw,other,9
 2026,"Younggi Park (grill66), SEC-agent team",explicit_ai,9
 2026,Byzero with Kunlun Lab & Zhiniang Peng with HUST,other,9
 2026,Jeongmin Choi with S2W,other,9
 2026,Grant Hume,other,8
+2026,sweetchip,other,8
 2026,Owen McCullough with MSRC V&M,other,8
 2026,Rajesh Kumar,other,8
 2026,Ofek Levin with Enclave,other,8
@@ -3930,11 +3931,11 @@ year,finder,category,cves
 2026,Thanatos Tian & wgg & @2st__ with Diffract,other,8
 2026,Haein Lee,other,8
 2026,Joe Desimone with Elastic Security,other,7
+2026,Anonymous working with TrendAI Zero Day Initiative,other,7
 2026,Erik Egsgard with Field Effect,other,7
 2026,hamayanhamayan,other,7
 2026,"Jongseong Kim (nevul37), UIUC",other,7
 2026,Thanatos Tian (HKPolyU) & npc0vo & @2st__ with Diffract,other,7
-2026,sweetchip,other,7
 2026,pwnky,other,7
 2026,Michal Kamensky with Microsoft,other,7
 2026,Kn1ght,other,7
@@ -3944,7 +3945,6 @@ year,finder,category,cves
 2026,Lewis Lee,other,7
 2026,Killer Queen,other,7
 2026,Andrew Ruddick with Microsoft Red Team,other,6
-2026,Anonymous working with TrendAI Zero Day Initiative,other,6
 2026,Sriharsha Pallekonda with Microsoft,other,6
 2026,Marcin Wiazowski working with TrendAI Zero Day Initiative,other,6
 2026,Mohit_Negi with Bugcrowd,other,6
@@ -3971,6 +3971,7 @@ year,finder,category,cves
 2026,"Dongjun Kim (smlijun), UIUC",other,5
 2026,wisi,other,5
 2026,Alex Plaskett with NCC Group,other,5
+2026,Daejin Lee,other,5
 2026,Minjea Park and Jmini,other,5
 2026,Lian Owen,other,5
 2026,wtm with Offensi,other,5
@@ -3989,6 +3990,7 @@ year,finder,category,cves
 2026,Ezrak1e,other,5
 2026,Pranjal Varshney,other,5
 2026,Thanatos Tian (HKPolyU) & npc0vo with https://diffract-ai.com/,other,5
+2026,boolgombear,other,5
 2026,HeeChan Kim with TeamH4C,other,5
 2026,ChengBin Wang with ZheJiang Guoli Security Technology,other,4
 2026,"JaGoTu with DCIT, a.s.",other,4
@@ -4002,10 +4004,10 @@ year,finder,category,cves
 2026,Spandan Pokhrel,other,4
 2026,Charlie Vogt,other,4
 2026,"Hwiwon Lee (hwiwonl), UIUC",other,4
-2026,Daejin Lee,other,4
 2026,wxz,other,4
 2026,Rutuja Shirali with Microsoft,other,4
 2026,kai63001,other,4
+2026,Yongha Lee,other,4
 2026,Miha Zupan with Microsoft,other,4
 2026,vietnq,other,4
 2026,John Nzyuko,other,4
@@ -4027,7 +4029,6 @@ year,finder,category,cves
 2026,Oleksandr Mirosh,other,4
 2026,wenqunwang with China Telecom Research Institute,other,4
 2026,Windows Attack Research & Protection (WARP) with Microsoft,other,4
-2026,boolgombear,other,4
 2026,zoemurmure with Qingteng,other,4
 2026,Thanatos Tian (HKPolyU) & npc0vo,other,4
 2026,Satyanarayana Oruganti with Microsoft,other,4
@@ -4057,7 +4058,6 @@ year,finder,category,cves
 2026,BochengXiang(@Crispr) with FDU,other,3
 2026,Zeze with TXOne,other,3
 2026,Rafael Resende,other,3
-2026,Yongha Lee,other,3
 2026,Navapon Premkasem,other,3
 2026,khoadha,other,3
 2026,Rayhan Destian,other,3
@@ -4079,6 +4079,7 @@ year,finder,category,cves
 2026,CrowdStrike Advanced Research Team with CrowdStrike,other,3
 2026,0nid with ENKI WhiteHat,other,3
 2026,Anonymous with SSD Secure Disclosure,other,3
+2026,r0keb with Calif,other,3
 2026,Mateusz Garncarek with Digital-Missiles,other,3
 2026,kunlun Lab & GLM,other,3
 2026,Batuhan Er with HawkTrace,other,3
@@ -4122,6 +4123,7 @@ year,finder,category,cves
 2026,"Malcolm Stagg with SODIUM-24, LLC",other,2
 2026,PuH4ck3rX,other,2
 2026,Damian Regulski,other,2
+2026,Amar Khatri,other,2
 2026,Gal Weizman (weizmangal@gmail.com / https://x.com/weizmangal),other,2
 2026,Mathias Vorreiter Pedersen with Microsoft,other,2
 2026,Thanatos Tian (HKPolyU) & PB18 & @2st__ with Diffract,other,2
@@ -4193,7 +4195,6 @@ year,finder,category,cves
 2026,"Jongseong Kim (nevul37), UIUC , Dongjun Kim (smlijun), UIUC and Hwiwon Lee (hwiwonl), UIUC",other,2
 2026,Noam Pomerantz with Cyberwallglobal,other,2
 2026,Andrea Bocchetti,other,2
-2026,r0keb with Calif,other,2
 2026,Vishal Chauhan,other,2
 2026,Thanatos Tian (HKPolyU) & wgg & npc0vo with Diffract,other,2
 2026,Karol Nieckarz with independent security research,other,2
@@ -4319,7 +4320,6 @@ year,finder,category,cves
 2026,Joseph Semaan,other,1
 2026,Michael Curtis,other,1
 2026,Vadim Drobinin (@valzevul) with Drobinin Limited,other,1
-2026,Amar Khatri,other,1
 2026,murloc,other,1
 2026,Theodor N. Engøy,other,1
 2026,Yogi Atram,other,1
@@ -4520,6 +4520,7 @@ year,finder,category,cves
 2026,Hank Chen with InnoEdge Labs,other,1
 2026,Noam Pomerantz with CyberWallGlobal LTD,other,1
 2026,nerty with Theori,other,1
+2026,Thanatos Tian (HKPolyU) & PB18,other,1
 2026,Jmini with Stealien,other,1
 2026,Divya,other,1
 2026,Nils Holten,other,1
@@ -4773,7 +4774,9 @@ year,finder,category,cves
 2026,nxhoang99 and hoangha with VCSLab of Viettel Cyber Security,other,1
 2026,xzyhellsing (Saidina Hikam),other,1
 2026,Muhammad Abdul Rehman,other,1
+2026,Jan Mitchell from Microsoft,other,1
 2026,"Kim Dowon, Kang Minju, Kim Donggeon, Park Seungyeon with Best of the Best 14th",other,1
+2026,Thanatos Tian & wgg,other,1
 2026,Nguyen Hoang Quoc An with Lien Phat Technology Corporation,other,1
 2026,Álvaro Muñoz,other,1
 2026,Weeraphat Srisutham,other,1
@@ -4814,6 +4817,7 @@ year,finder,category,cves
 2026,Hung Nguyen (mov) of Calif.io in collaboration with OpenAI Codex Security,ai_affiliated,1
 2026,Ashish Kunwar,other,1
 2026,Muntadher hasan (Dark River),other,1
+2026,Matthew Eidelberg with Black Hills Information Security,other,1
 2026,Bhaswanth Chigurupati,other,1
 2026,Leo Kao,other,1
 2026,VictorV of Kunlun Lab,other,1

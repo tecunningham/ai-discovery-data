@@ -989,34 +989,37 @@ year,finder,category,cves
 2025,Yannis Juglaret and Steven Michaud,other,1
 2025,alayersattackers,other,1
 2025,msd,other,1
-2026,Mozilla,other,229
+2026,Mozilla,other,492
 2026,"Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, Daniel Freeman, Alex Gaynor, and Joel Weinberger using Claude from Anthropic",explicit_ai,121
+2026,Yaqoub Aldurayhim,other,112
 2026,Sajeeb Lohani,other,95
-2026,Yaqoub Aldurayhim,other,90
-2026,Tomoya Nakanishi,other,49
-2026,5up3rh3i,other,47
+2026,5up3rh3i,other,65
+2026,Tomoya Nakanishi,other,53
+2026,Amy Burnett of OpenAI,ai_affiliated,47
 2026,Oskar L,other,46
-2026,Amy Burnett of OpenAI,ai_affiliated,39
+2026,Rintaro Kawasugi,other,37
 2026,The Mozilla Fuzzing Team,fuzz,36
-2026,Rintaro Kawasugi,other,25
-2026,Hyeonjun Ahn,other,24
+2026,Hyeonjun Ahn,other,26
+2026,Khanh Nguyen,other,24
 2026,Quy Pham,other,23
 2026,Atsushi Sada,other,21
 2026,Steven Julian,other,21
 2026,Satoki Tsuji,other,20
 2026,Shu Takahashi,other,19
 2026,Abdulaziz Alasaiqah,other,18
-2026,Khanh Nguyen,other,18
+2026,Finn Westendorf,other,18
 2026,pakhunov.anton.n,other,18
 2026,satyamasd,other,18
 2026,choeseyeong,other,17
 2026,r00tdaddy,other,17
 2026,Gary Kwong,other,15
+2026,Mohamed Mbarek,other,15
 2026,Zijie Zhao,other,15
 2026,jmwebdevelopement,other,15
 2026,kiyong,other,15
 2026,Jacolon Walker,other,14
 2026,Mihalis Haatainen,other,14
+2026,x0e,other,14
 2026,Inseo An,other,13
 2026,crixer,other,13
 2026,ggwhyp,other,13
@@ -1025,27 +1028,28 @@ year,finder,category,cves
 2026,Haruto Kimura,other,11
 2026,"Leo Tenenbaum, Tom Ritter and the Mozilla Fuzzing Team",fuzz,11
 2026,Richard Belisle,other,11
+2026,Tran Quac,other,11
 2026,lebr0nli,other,11
 2026,navapon,other,11
 2026,Nan Wang,other,10
 2026,Xuehao Guo,other,10
-2026,x0e,other,10
 2026,zx,other,10
 2026,"Brian Grinstead, Christian Holler, Tom Schuster and the Mozilla Fuzzing Team",fuzz,9
 2026,Nebula Security,other,9
 2026,Ameen Basha M K,other,8
-2026,Finn Westendorf,other,8
 2026,Hafiizh,other,8
 2026,Josh Aas,other,8
-2026,Mohamed Mbarek,other,8
 2026,Riski Muhammad Ivan,other,8
+2026,Tomer Fichman,other,8
 2026,ABDULAZIZ ALASAIQAH,other,7
 2026,"Christian Holler, Jan de Mooij, Tom Ritter and the Mozilla Fuzzing Team",fuzz,7
 2026,Gal Ankonina,other,7
+2026,Nguyen Thanh Nguyen,other,7
 2026,Seohyeon Maeng,other,7
 2026,Ukyo Akai,other,7
 2026,jayjayjazz,other,7
 2026,locust1b,other,7
+2026,Carlo Di Dato,other,6
 2026,Cody,other,6
 2026,David Bors at Snyk Security Labs,other,6
 2026,Frederik Braun,other,6
@@ -1055,6 +1059,7 @@ year,finder,category,cves
 2026,Muneaki Nishimura,other,6
 2026,"Nicolas Silva, Tom Ritter and the Mozilla Fuzzing Team",fuzz,6
 2026,Qi Qin,other,6
+2026,Rintaro Kobayashi,other,6
 2026,Surya Dev Singh,other,6
 2026,anas cherni,other,6
 2026,anbu,other,6
@@ -1081,7 +1086,6 @@ year,finder,category,cves
 2026,Securin,other,5
 2026,Sota Wada,other,5
 2026,Tom Ritter,other,5
-2026,Tran Quac,other,5
 2026,fedek,other,5
 2026,maxpl0it working with Trend Micro Zero Day Initiative,other,5
 2026,sseehra,other,5
@@ -1124,7 +1128,6 @@ year,finder,category,cves
 2026,Nikola Kojic,other,4
 2026,Pwn2addr,other,4
 2026,Rayhan Hanaputra,other,4
-2026,Rintaro Kobayashi,other,4
 2026,"Ryan Hunt, Steve Fink and the Mozilla Fuzzing Team",fuzz,4
 2026,RyotaK of GMO Flatt Security Inc.,other,4
 2026,Souma Ohsawa,other,4
@@ -1134,6 +1137,7 @@ year,finder,category,cves
 2026,Tyler Maclachlan,other,4
 2026,Vladimir Meier,other,4
 2026,Vladislav Plyatsok,other,4
+2026,WinD39,other,4
 2026,barbarossa404,other,4
 2026,evyatar,other,4
 2026,hafidzaulia28,other,4
@@ -1142,6 +1146,7 @@ year,finder,category,cves
 2026,q1,other,4
 2026,sak,other,4
 2026,Ahmed Albalawi,other,3
+2026,Ahmed Albalawi <ahmedalbalawij@gmail.com>,other,3
 2026,Christian Holler,other,3
 2026,Mozilla Fuzzing Team,fuzz,3
 2026,Qadhafy Muhammad Tera,other,3
@@ -1183,9 +1188,10 @@ year,finder,category,cves
 2026,Nithissh,other,2
 2026,Pier Angelo Vendrame,other,2
 2026,Renwa Hiwa,other,2
+2026,"SecBuddyF, Tencent KeenLab (CodeBuddy Security)",other,2
+2026,Shaheen Fazim,other,2
 2026,Shihab Mirza,other,2
 2026,Skywarp,other,2
-2026,Tomer Fichman,other,2
 2026,Trung Nguyen,other,2
 2026,Uwez Khan,other,2
 2026,Yuki Umemura,other,2
@@ -1195,6 +1201,7 @@ year,finder,category,cves
 2026,hafiizh & kang ali,other,2
 2026,paranoidmoth,other,2
 2026,superhei,other,2
+2026,Abdul Samad,other,1
 2026,Amit Gajbhare,other,1
 2026,Barath Stalin K,other,1
 2026,"Christian Holler, Gabriele Svelto, Greg Stoll and the Mozilla Fuzzing Team",fuzz,1

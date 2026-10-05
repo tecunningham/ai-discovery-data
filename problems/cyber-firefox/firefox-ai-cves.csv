@@ -1,5 +1,7 @@
 year,cve,band,reporters
 2025,CVE-2025-13016,ai_affiliated,Aisle Research | Igor Morgenstern
+2026,CVE-2026-100792,ai_affiliated,Amy Burnett of OpenAI
+2026,CVE-2026-100793,ai_affiliated,Amy Burnett of OpenAI
 2026,CVE-2026-14899,explicit_ai,"Claude, Kai Engert"
 2026,CVE-2026-16355,ai_affiliated,Amy Burnett of OpenAI
 2026,CVE-2026-16369,ai_affiliated,Amy Burnett of OpenAI

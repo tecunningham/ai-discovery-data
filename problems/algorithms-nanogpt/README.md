@@ -5,7 +5,10 @@
 - **Metric:** minutes of training to a fixed target validation loss, per
 accepted record
 - **Coverage:** 2024-05-28 to 2026-07-17, all 89 records listed in the
-repository README; open pull requests claiming a faster time read 2026-09-13
+repository README; open pull requests claiming a faster time read 2026-10-05.
+The repository README has since accepted a faster record (0.665 minutes,
+2026-08-31) as record 92, which is not yet vendored here pending a
+hand-attribution judgment call (see Method)
 - **Data:** [`nanogpt-records.csv`](nanogpt-records.csv)
 - **Upstream:** <https://github.com/KellerJordan/modded-nanogpt> (record table
 in the README at
@@ -49,9 +52,9 @@ machine.
   over the vendored series, not figures the README prints
 - **deep human steps (README figures):** the Muon optimizer at about 21% and
   U-Net skip connections at about 8%
-- **pending:** 1 open pull request claiming a time below the standing
-  record: #360 at 0.665 minutes, opened 2026-08-31 — a claim, not a record,
-  until the maintainer accepts it into the table
+- **pending:** no open pull request claims a time below the standing
+  record — the prior #360 claim at 0.665 minutes was accepted upstream as
+  record 92 on 2026-08-31 but is not yet vendored into this CSV
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
 series as the standing record's value over time:
@@ -72,7 +75,12 @@ since attribution waits for acceptance. A claim that is merged becomes a
 transcribed record row; one that is closed drops out at the next run. Pending
 rows enter no fact line other than **pending** and no figure in this folder;
 the collection's cumulative comparison page draws them on request as a
-tentative extension of the standing-record line.
+tentative extension of the standing-record line. A claim that is merged is
+not written automatically: the 2026-10-05 refetch found that the former
+#360 claim is now record 92 in the upstream table at 0.665 minutes, but
+transcribing it needs a human judgment call on authorship (the upstream
+entry's agent and AI-system attribution are not yet settled here), so the
+vendored series still ends at record 89 until that call is made by hand.
 [`check.py`](check.py) recomputes the fact lines above from the CSV.
 
 [`figure.py`](figure.py) reads `nanogpt-records.csv`, converts each `date` to

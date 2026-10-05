@@ -4,13 +4,13 @@
 - **Role:** discovery series
 - **Metric:** best validated score (average executed Toffoli count × peak qubit
 width) for a reversible secp256k1 point-addition circuit; lower is better
-- **Coverage:** 2026-05-30 to 2026-09-28, 537 accepted records
+- **Coverage:** 2026-05-30 to 2026-10-04, 574 accepted records
 - **Data:** [`ecdsa-circuit-records.csv`](ecdsa-circuit-records.csv)
 - **Upstream:** <https://ecdsa.fail/>, challenge harness and results at
 <https://github.com/ecdsafail/ecdsafail-challenge>, record ladder from the
 challenge API at <https://api.ecdsa.fail/api/benchmarks>
 - **Verdict:** too early — first record 2026-05-30, so no prior-year rate
-exists; the 2026 series is a 9.7× fall over 121 days
+exists; the 2026 series is a 9.7× fall over 127 days
 
 ![Record ladder for the ecdsa.fail secp256k1 point-addition circuit challenge.](discovery-algorithms-ecdsa-circuit.png)
 
@@ -34,10 +34,10 @@ challenge opened on 2026-05-30, inside the agent era.
 ## Facts
 
 - **span:** from the challenge's starting circuit at 1.08 × 10¹⁰ on
-  2026-05-30 to 1.11 × 10⁹ on 2026-09-28, about 9.7× lower over 121 days
-- **records:** 537 accepted records from 72 distinct solvers
+  2026-05-30 to 1.11 × 10⁹ on 2026-10-04, about 9.7× lower over 127 days
+- **records:** 574 accepted records from 73 distinct solvers
 - **largest step:** on 2026-05-31, from 9.59 × 10⁹ to 8.45 × 10⁹
-- **ai-noted:** 474 of 537 notes name an AI tool; 12 rows carry no note; 51
+- **ai-noted:** 511 of 574 notes name an AI tool; 12 rows carry no note; 51
   carry a note naming no tool
 - **prior frontier:** the best circuit published before the challenge,
   Google's low-qubit Pareto point at roughly 3.0 × 10⁹ as quoted in the
@@ -90,7 +90,7 @@ CSV.
 
 ## AI attribution
 
-Of 537 accepted records, 474 carry notes naming an AI tool. Counted from the
+Of 574 accepted records, 511 carry notes naming an AI tool. Counted from the
 free-text notes the challenge API returned at the 2026-08-10 read — the
 vendored CSV carries only the per-row yes/no flag — 374 notes include an
 explicit `Model:` line: Claude Opus 4.8 leads at 150, followed by GPT-5 Codex

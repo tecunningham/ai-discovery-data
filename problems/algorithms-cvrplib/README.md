@@ -4,11 +4,11 @@
 - **Role:** discovery series
 - **Metric:** better best-known objectives and later optimality proofs recorded
 for a fixed cohort of 100 CVRP X instances, one event per posting
-- **Coverage:** 2015–2026, 289 event rows posted through 2026-07-04
+- **Coverage:** 2015–2026, 292 event rows posted through 2026-09-20
 - **Data:** [`cvrplib-x-frontier.csv`](cvrplib-x-frontier.csv), one
 instance–posting-date–objective–event tuple per row
 - **Upstream:** <https://galgos.inf.puc-rio.br/cvrplib/index.php/en/updates/>
-- **Verdict:** declining — 3 events in 2026 against 3 in 2025; 264 of the 267
+- **Verdict:** declining — 6 events in 2026 against 3 in 2025; 264 of the 270
 better-objective events were posted 2015–2021
 
 ![Annual better objectives and optimality proofs in the fixed CVRPLIB X cohort.](discovery-algorithms-cvrplib.png)
@@ -29,17 +29,19 @@ date; receipt, paper and posting dates are not mixed.
 
 ## Facts
 
-- **events:** 289 event rows: 267 better-objective events and 22
+- **events:** 292 event rows: 270 better-objective events and 22
   optimality-proof events over 2015–2026
 - **objectives by-year:** 2015: 56 · 2016: 65 · 2017: 6 · 2018: 13 ·
-  2019: 5 · 2020: 117 · 2021: 2 · 2026: 3
+  2019: 5 · 2020: 117 · 2021: 2 · 2026: 6
 - **proofs by-year:** 2015: 2 · 2016: 4 · 2019: 5 · 2021: 2 · 2022: 1 ·
   2023: 5 · 2025: 3
 - **2024:** 2024 has no event for an X instance
 - **last pre-2026 objective:** the last X-objective change before 2026 was
   posted 2021-06-30
-- **2026 posting:** three objective rows in the 2026-07-04 posting: one for
-  X-n979-k58 and two successive values for X-n1001-k43
+- **2026 postings:** three objective rows in the 2026-07-04 posting (one for
+  X-n979-k58 and two successive values for X-n1001-k43), then three more in
+  a 2026-09-20 posting: X-n536-k96, X-n716-k35, and a third successive value
+  for X-n979-k58
 - **proofs:** the 22 optimality-proof events cover 22 distinct instances
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
@@ -81,7 +83,7 @@ objective changes without treating them as the same event type.
 ## AI attribution
 
 No AI system or language model is identified in the update text for this
-fixed cohort in the entries vendored through 2026-07-04. The 2026 entries are
+fixed cohort in the entries vendored through 2026-09-20. The 2026 entries are
 attributed to named optimization researchers. This is an authorship statement
 about the ledger's text, not a claim that no AI component was used anywhere
 inside a solver.

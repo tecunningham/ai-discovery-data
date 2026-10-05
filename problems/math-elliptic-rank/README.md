@@ -8,7 +8,7 @@ frontier of ranks known exactly; a third table holds every curve on the ICARM
 leaderboard with its rank and its size, and a fourth dates the posts around the
 2026 rank ≥ 30 record
 - **Coverage:** twenty record steps, 1938 to 2026, dated by year; the
-leaderboard snapshot spans 2026-05-27 to 2026-09-14, read 2026-09-14
+leaderboard snapshot spans 2026-05-27 to 2026-10-05, read 2026-10-05
 - **Data:**
 [`elliptic-curve-rank-records.csv`](elliptic-curve-rank-records.csv),
 [`elliptic-curve-rank-exact.csv`](elliptic-curve-rank-exact.csv),
@@ -69,10 +69,10 @@ are certified before a curve is recorded:
 
 ![Conductor against proved rank for every curve on the ICARM leaderboard.](leaderboard-math-elliptic-rank.png)
 
-- **board rows:** 3558 curves, 2026-05-27 to 2026-09-28, from 46 submitters,
+- **board rows:** 4027 curves, 2026-05-27 to 2026-10-05, from 48 submitters,
   covering ranks 0 to 31
 - **board cadence:** 71 curves in 2026-05 · 171 in 2026-06 · 22 in 2026-07 ·
-  210 in 2026-08 · 3084 in 2026-09
+  210 in 2026-08 · 3263 in 2026-09 · 290 in 2026-10
 - **board record curve:** curve #302, rank ≥ 31, log conductor 375.2224, naive
   height 468.2771, submitted 2026-08-23
 - **timeline:** 5 dated events, 2024-08-29 to 2026-08-20

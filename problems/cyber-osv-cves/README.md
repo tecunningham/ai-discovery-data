@@ -3,10 +3,10 @@
 - **Domain:** vulnerabilities
 - **Role:** discovery series
 - **Metric:** distinct CVE IDs linked to at least one active affected-package record in OSV, per quarter by earliest OSV publication date
-- **Coverage:** 2016–2026, partial through 2026-09-28
+- **Coverage:** 2016–2026, partial through 2026-10-05
 - **Data:** quarterly [`osv-cves-by-quarter.csv`](osv-cves-by-quarter.csv); annual [`osv-cves-by-year.csv`](osv-cves-by-year.csv); severity labels in [`osv-severity-by-year.csv`](osv-severity-by-year.csv); finder credits in [`osv-credits-by-year.csv`](osv-credits-by-year.csv); every AI-marked CVE with its credit strings in [`osv-ai-cves.csv`](osv-ai-cves.csv)
 - **Upstream:** <https://storage.googleapis.com/osv-vulnerabilities/all.zip> (documentation at <https://google.github.io/osv.dev/data/>)
-- **Verdict:** accelerating — 31,599 distinct CVEs through 2026-09-28 annualize to about 42,600, 2.8 times 2025's 15,163
+- **Verdict:** accelerating — 32,487 distinct CVEs through 2026-10-05 annualize to about 42,700, 2.8 times 2025's 15,169
 
 ![Quarterly distinct CVEs represented by active affected-package records in OSV.](discovery-cyber-osv-cves.png)
 
@@ -27,15 +27,15 @@ one event; an advisory naming several CVEs contributes one event per CVE.
 ## Facts
 
 - **by-year:** 2016: 1,472 · 2017: 4,588 · 2018: 4,877 · 2019: 5,161 ·
-  2020: 5,327 · 2021: 6,914 · 2022: 10,838 · 2023: 8,833 · 2024: 12,296 ·
-  2025: 15,163
-- **2026 (through 2026-09-28):** 31,599 distinct CVEs; annualizes to about
-  42,600, or 2.8 times the 2025 count
-- **peak quarter:** 2026-Q3 alone holds 14,910 distinct CVEs, more than any
+  2020: 5,327 · 2021: 6,915 · 2022: 10,838 · 2023: 8,833 · 2024: 12,332 ·
+  2025: 15,169
+- **2026 (through 2026-10-05):** 32,487 distinct CVEs; annualizes to about
+  42,700, or 2.8 times the 2025 count
+- **peak quarter:** 2026-Q3 alone holds 15,401 distinct CVEs, more than any
   full year before 2022
-- **severity coverage:** 36,332 of the 107,068 CVEs (34%) carry an ecosystem
+- **severity coverage:** 36,680 of the 107,999 CVEs (34%) carry an ecosystem
   severity label
-- **credit coverage:** 1,415 CVEs (1.3%) carry any credit
+- **credit coverage:** 1,419 CVEs (1.3%) carry any credit
 - **ai-marked:** 33 CVEs — 2 whose credits state an AI method and 31
   carrying an AI-lab affiliation only — each kept with its full credit
   strings in [`osv-ai-cves.csv`](osv-ai-cves.csv)

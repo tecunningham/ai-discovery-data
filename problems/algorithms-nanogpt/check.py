@@ -24,10 +24,10 @@ def main() -> int:
     failures = []
     if len(ai) != 5:
         failures.append(f"{len(ai)} AI-credited records; the page states five")
-    if len(assisted) != 2:
-        failures.append(f"{len(assisted)} AI-assisted records; the page states two")
+    if len(assisted) != 3:
+        failures.append(f"{len(assisted)} AI-assisted records; the page states three")
     if len(retimings) != 2:
-        failures.append(f"{len(retimings)} re-timing rows; the page states two")
+        failures.append(f"{len(retimings)} re-timing rows; the page states three")
 
     first, last = records[0], records[-1]
     # Each AI record is measured against the record it displaced, in table order.
@@ -66,7 +66,7 @@ def main() -> int:
             "ai-step-sizes fact",
         "**ai-assisted records:** " + "; ".join(
             f"record {row['record']} at {row['minutes']} minutes "
-            f"({row['date']}), co-authored with {row['ai_system']}"
+            f"({row['date']}) with {row['ai_system']}"
             for row in assisted): "ai-assisted fact",
         f"at {retimings[0]['minutes']} minutes and again on the then-current "
         f"torch at {retimings[1]['minutes']}": "re-timing values",

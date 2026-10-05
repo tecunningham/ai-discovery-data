@@ -15,7 +15,7 @@ in the README at
 records through 2026-08-30) against 1.9× in 2025 (39 records) and 12.6× in
 2024 (17 records)
 
-![All 92 modded-nanogpt records on a log time axis, with the five AI-credited records in red, the two AI-assisted records in pale red, and the post-record-21 re-timings marked.](discovery-algorithms-nanogpt.png)
+![All 92 modded-nanogpt records on a log time axis, with the five AI-credited records in red, the three AI-assisted records in pale red, and the post-record-21 re-timings marked.](discovery-algorithms-nanogpt.png)
 
 ## Definition
 
@@ -48,10 +48,11 @@ machine.
 - **ai-step-sizes:** measured against the record each displaced, the five AI
   steps are 1.2%, 0.9%, 0.5%, 1.3% and 0.8% — this repository's arithmetic
   over the vendored series, not figures the README prints
-- **ai-assisted records:** record 82 at 1.353 minutes (2026-04-29),
-  co-authored with Claude Opus 4.7; record 91 at 1.126 minutes (2026-08-06),
-  co-authored with Claude Opus 5 — read from a `Co-authored-by` trailer on
-  each record's merge commit, not from the README table
+- **ai-assisted records:** record 82 at 1.353 minutes (2026-04-29) with
+  Claude Opus 4.7; record 91 at 1.126 minutes (2026-08-06) with Claude Opus
+  5; record 92 at 0.665 minutes (2026-08-30) with Claude Fable 5 — the first
+  two read from a `Co-authored-by` trailer on the record's merge commit, the
+  third from its author, none from the README table
 - **largest 2026 step:** record 92 at 0.665 minutes, 41% below record 91's
   1.126, from a sampled-softmax training loss, an 84.6M-row hashed n-gram
   embedding table and full-stack FP8
@@ -123,8 +124,9 @@ acknowledged holder.
   records on one training task say nothing about the value of the
   improvement, or about how much of it transfers to a model anybody ships.
 - **the AI share is a floor.** The `agent` column reflects the README's own
-  labels and the co-author trailers on each record's merge commit, so a
-  record set with undisclosed model assistance counts as human.
+  labels, the co-author trailers on each record's merge commit and, for
+  record 92, its author's account, so a record set with undisclosed model
+  assistance counts as human.
 - **the step sizes are this repository's arithmetic.** The README prints
   standing times, not per-record deltas; only the Muon and U-Net figures
   come from the source log.
@@ -148,13 +150,15 @@ Recursive". hiverge.ai also holds the first acknowledged AI record on the
 on the two ML speedruns partly belong to the same small set of firms. No
 other record in the CSV carries an `agent` value of `ai`.
 
-Two more are `ai_assisted`: entries by named people whose merge commit names
-a model as co-author. Record 82 (learnable XSA gated layers, PR #264) carries
-`Co-authored-by: Claude Opus 4.7`, and record 91 (canonical token masking,
-PR #350) carries `Co-authored-by: Claude Opus 5`. Record 92's merge commit
-carries the same Claude Opus 5 trailer, but it came in with PR #350's
-commits when the two were merged together; record 92's own commit names no
-model, so it stays `human`.
+Three more are `ai_assisted`: entries by named people who worked with a
+model. Record 82 (learnable XSA gated layers, PR #264) carries
+`Co-authored-by: Claude Opus 4.7` on its merge commit, and record 91
+(canonical token masking, PR #350) carries `Co-authored-by: Claude Opus 5`.
+Record 92 (ANVIL2, PR #360), the largest step of 2026, names no model in its
+own commit — the Claude Opus 5 trailer on its merge commit came in with PR
+#350's commits — but its author reports having built it with Claude Fable 5
+(personal communication to this repository's maintainer, 2026-10-05). It is
+the one attribution here not readable from the public record.
 
 Two adjacent results are AI-credited off this leaderboard. TTT-Discover's
 test-time-training harness, running the open gpt-oss-120b model, found TriMul

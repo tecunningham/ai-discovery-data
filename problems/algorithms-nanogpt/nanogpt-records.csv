@@ -92,5 +92,5 @@ record,kind,date,minutes,agent,ai_system,note
 89,record,2026-07-17,1.23,human,,
 90,record,2026-08-03,1.13,human,,reduced-width QK and packed FP8 attention (PR #344); listed 2026-09-17
 91,record,2026-08-06,1.126,ai_assisted,Claude Opus 5,canonical token masking at validation (PR #350); merge commit carries a Co-authored-by: Claude Opus 5 trailer; listed 2026-09-18
-92,record,2026-08-30,0.665,human,,"ANVIL2: sampled softmax, 84.6M-row hashed n-gram table, full FP8 (PR #360, merged 2026-09-28); its Claude trailer came with PR #350's commits, not its own"
+92,record,2026-08-30,0.665,ai_assisted,Claude Fable 5,"ANVIL2: sampled softmax, 84.6M-row hashed n-gram table, full FP8 (PR #360, merged 2026-09-28); the author reports building it with Claude Fable 5 (personal communication, 2026-10-05)"
 PR367,pending,2026-09-17,0.359,,,open pull request #367: Track 1: Longest exact-match retrieval (40.0s → 21.56s / -46.1%)

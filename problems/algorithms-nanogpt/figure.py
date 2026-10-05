@@ -34,8 +34,8 @@ from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.ticker import NullFormatter, ScalarFormatter  # noqa: E402
 
 # A record the README credits to an AI-agent company is `ai`; one whose own
-# merged commits carry an AI co-author trailer is `ai_assisted`: a human entry
-# that names the model it worked with.
+# merged commits carry an AI co-author trailer, or whose author reports the
+# model they worked with, is `ai_assisted`: a human entry made with a model.
 COLOURS = {"ai": AI, "ai_assisted": AI_SOFT}
 
 
@@ -115,7 +115,7 @@ def main() -> None:
     style(ax, "Minutes to target loss (log scale)", "Date of run")
     legend = common_legend()
     legend.insert(2, Line2D([], [], marker="o", linestyle="", color=AI_SOFT,
-                            label="AI co-author on the commit"))
+                            label="AI-assisted (human entry)"))
     ax.legend(handles=legend, frameon=False, fontsize=8)
     ai_count = sum(1 for row in rows if row["agent"] == "ai")
     assisted = sum(1 for row in rows if row["agent"] == "ai_assisted")

@@ -26,7 +26,7 @@ CACHE = ROOT / ".cache"
 # only a person can vendor: a staleness probe that found a record, release or
 # build past the hand-transcribed series, or a page whose format it no longer
 # parses. Exit 1 stays "the fetch failed", which the weekly refresh treats as
-# transient; this one holds the refresh PR and leads the digest instead.
+# transient; this one marks the weekly digest's subject and leads its body.
 NEEDS_PERSON = 3
 
 

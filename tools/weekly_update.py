@@ -1,33 +1,30 @@
 #!/usr/bin/env python3
-"""Weekly refresh: refetch, rank what moved, and report how the repo was updated.
+"""Weekly digest: refetch, rank what moved, and email it. Nothing is committed.
 
-Driven by .github/workflows/weekly-update.yml, one subcommand per step so the
-workflow can put its own decisions (open a PR, merge it) between them:
+Driven by .github/workflows/weekly-update.yml, one subcommand per step:
 
     python3 tools/weekly_update.py fetch        # every automatable fetcher, per-script status
     python3 tools/weekly_update.py scan         # diff the tree against HEAD; tier and chart it
-    python3 tools/weekly_update.py bump-as-of   # move lib/dates.py's AS_OF_DATE to today
-    python3 tools/weekly_update.py review       # after the prose pass: does this need a person?
-    python3 tools/weekly_update.py pr-body      # the pull request description, on stdout
     python3 tools/weekly_update.py email        # the digest, over SMTP
 
+and, for a person bringing the repository up to date by hand:
+
+    python3 tools/weekly_update.py bump-as-of   # move lib/dates.py's AS_OF_DATE to today
+
 Everything between steps lives under .weekly/ (gitignored): fetch.json,
-news.json, review.json, the charts, and the judgment-calls.md the prose pass
-writes when a change was more than arithmetic.
+news.json, attention.md and the charts.
 
-The prose pass has two homes. With a CLAUDE_CODE_OAUTH_TOKEN secret it runs
-inside the Monday workflow. Without one the workflow opens the PR with the
-prose still stale, a scheduled Claude Code session restates the facts and
-pushes to the branch, and .github/workflows/refresh-finish.yml picks up that
-push: `--base origin/main` makes scan and review see the whole branch rather
-than the last commit, and it merges when the review allows.
+The digest is for judgment, not for merging. An earlier version opened a PR
+each week and merged it when the numbers were only arithmetic; in practice
+every week that mattered needed a person anyway (a new record to attribute, a
+verdict that moved, a probe that found news only a person can transcribe),
+and a PR left open conflicted with the hand edits made the same week. Now the
+workflow only reports, and the repository moves when someone runs the
+sequence in CLAUDE.md ("Bringing the repository up to date").
 
-The diff is against HEAD, not against a previous fetch. The nightly scan this
-replaced kept its own baseline so that a series the repo had not caught up
-with was reported once; now the repository catches up every week, so "what
-changed since the last commit" is exactly the question, and a week whose PR
-was held for review reports the same news again, which is right: it is still
-news until it lands.
+The diff is against HEAD, the committed data, so a week that nobody acts on
+reports the same news again the next week, which is right: it is still news
+until it lands.
 
 What the email leads with is decided by tiering each changed row:
 
@@ -53,8 +50,8 @@ Email is plain SMTP (STARTTLS), configured through the environment:
     SCAN_EMAIL_TO       recipient
     SCAN_EMAIL_FROM     optional, defaults to SCAN_SMTP_USERNAME
 
-and the outcome the workflow reached comes in as UPDATE_OUTCOME (merged,
-needs-review, unchanged, failed), with PR_URL and RUN_URL for the links.
+and the outcome the workflow reached comes in as UPDATE_OUTCOME (news,
+unchanged, failed), with RUN_URL for the link to the run and its artifact.
 """
 
 from __future__ import annotations
@@ -149,14 +146,8 @@ def parse_rows(text: str) -> tuple[list[str], list[dict[str, str]]]:
     return list(fields), [dict(row) for row in reader]
 
 
-# The commit the working tree is compared with. HEAD in the Monday run, where
-# HEAD is main; origin/main in the finishing run, which checks out the refresh
-# branch after the prose pass has been pushed to it (--base sets it).
-BASE = "HEAD"
-
-
 def committed_text(relpath: str) -> str:
-    result = subprocess.run(["git", "show", f"{BASE}:{relpath}"],
+    result = subprocess.run(["git", "show", f"HEAD:{relpath}"],
                             capture_output=True, cwd=ROOT)
     return result.stdout.decode("utf-8") if result.returncode == 0 else ""
 
@@ -525,8 +516,8 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     A fetcher that exits NEEDS_PERSON is not a failure: the upstream answered
     with something only a person can vendor (a staleness probe found a record
     past the hand-transcribed series). That is news, so it is recorded as
-    `attention` and holds the PR, rather than joining the failures a reader
-    learns to skim past.
+    `attention`, marks the email's subject and leads its body, rather than
+    joining the failures a reader learns to skim past.
     """
     results = []
     for script in sorted(ROOT.glob("problems/*/fetch.py")):
@@ -546,6 +537,9 @@ def cmd_fetch(args: argparse.Namespace) -> int:
             "seconds": round(time.time() - started), "tail": tail,
         })
     write_json("fetch.json", results)
+    (STATE / "attention.md").write_text(
+        "".join(f"- `{r['script']}`: {attention_line(r)}\n"
+                for r in results if r["attention"]), encoding="utf-8")
     failed = [r["slug"] for r in results if not r["ok"]]
     attention = [r["slug"] for r in results if r.get("attention")]
     print(f"{len(results)} fetchers ran; failed: {', '.join(failed) or 'none'}; "
@@ -602,108 +596,6 @@ def cmd_bump_as_of(args: argparse.Namespace) -> int:
     return 0
 
 
-# Files the pipeline is allowed to have changed by the time the PR opens. The
-# fetch writes CSVs, bump-as-of writes lib/dates.py, the prose pass writes
-# folder READMEs, and the render writes PNGs (with the JSON beside each
-# cumulative panel), docs and the generated tables.
-ALLOWED_CHANGES = (
-    re.compile(r"^problems/[^/]+/[^/]+\.csv$"),
-    re.compile(r"^problems/[^/]+/README\.md$"),
-    re.compile(r"^problems/[^/]+/[^/]+\.png$"),
-    re.compile(r"^problems/[^/]+/cumulative-[^/]+\.json$"),
-    re.compile(r"^lib/dates\.py$"),
-    re.compile(r"^(README|CUMULATIVE)\.md$"),
-    re.compile(r"^docs/.*"),
-)
-
-
-def changed_paths() -> list[str]:
-    """Every path that differs from BASE: committed on the branch or not."""
-    status = subprocess.run(["git", "status", "--porcelain", "--untracked-files=all"],
-                            capture_output=True, text=True, cwd=ROOT, check=True).stdout
-    # A rename prints "old -> new"; the new path is the one that exists.
-    paths = {line[3:].split(" -> ")[-1].strip()
-             for line in status.splitlines() if line.strip()}
-    if BASE != "HEAD":
-        diff = subprocess.run(["git", "diff", "--name-only", BASE],
-                              capture_output=True, text=True, cwd=ROOT, check=True).stdout
-        paths.update(line.strip() for line in diff.splitlines() if line.strip())
-    return sorted(paths)
-
-
-def verdict_term(text: str) -> str:
-    return front_matter(text).get("Verdict", "").split(" —")[0].strip()
-
-
-def cmd_review(args: argparse.Namespace) -> int:
-    """Decide whether the refresh can merge on its own.
-
-    Anything that is not arithmetic holds the PR for a person: a Verdict
-    whose controlled term changed, a note the prose pass left in
-    judgment-calls.md, a file outside the pipeline's remit, or a failing
-    check. The reasons are written for the PR body and the email.
-    """
-    reasons: list[str] = []
-    for path in changed_paths():
-        if path.startswith(".weekly/"):
-            continue
-        if not any(p.match(path) for p in ALLOWED_CHANGES):
-            reasons.append(f"unexpected file changed: `{path}`")
-    for readme in sorted(ROOT.glob("problems/*/README.md")):
-        rel = readme.relative_to(ROOT).as_posix()
-        before = verdict_term(committed_text(rel))
-        after = verdict_term(readme.read_text(encoding="utf-8"))
-        if before and after and before != after:
-            reasons.append(f"{readme.parent.name}: Verdict moved from "
-                           f"“{before}” to “{after}”")
-    notes = STATE / "judgment-calls.md"
-    judgment = notes.read_text(encoding="utf-8").strip() if notes.exists() else ""
-    if BASE != "HEAD":
-        # A prose pass made outside the workflow has no .weekly/ to write
-        # into; it reports judgment calls in its commit message, under a
-        # "Judgment calls:" line, which the branch carries to this run.
-        log = subprocess.run(["git", "log", "--format=%B%x00", f"{BASE}..HEAD"],
-                             capture_output=True, text=True, cwd=ROOT).stdout
-        for body in log.split("\0"):
-            _, marker, tail = body.partition("Judgment calls:")
-            if marker and tail.strip():
-                judgment = (judgment + "\n\n" + tail.strip()).strip()
-    if judgment:
-        reasons.append("the prose pass flagged judgment calls (below)")
-    attention = fetch_attention()
-    for r in attention:
-        reasons.append(f"{r['slug']}: upstream has news to transcribe by hand — "
-                       f"{attention_line(r)}")
-    # The finishing run (refresh-finish.yml) has no fetch.json; it reads the
-    # PR's "**Judgment calls**" comments instead, so the workflow posts this
-    # file as one and the hold survives the prose pass.
-    (STATE / "attention.md").write_text(
-        "".join(f"- `{r['script']}`: {attention_line(r)}\n" for r in attention),
-        encoding="utf-8")
-    for step in args.failed or []:
-        reasons.append(f"the {step} step failed; see the workflow run")
-    reasons.extend(args.reason or [])
-    if args.check_failed:
-        log = Path(args.check_log).read_text(encoding="utf-8") \
-            if args.check_log and Path(args.check_log).exists() else ""
-        failing = [line for line in log.splitlines()
-                   if line.startswith(("FAIL", "ERROR")) or ": " in line][-30:]
-        reasons.append("the checks failed:\n```\n"
-                       + "\n".join(failing or log.splitlines()[-30:]
-                                   or ["no log captured"]) + "\n```")
-    review = {
-        "hold": bool(reasons),
-        "reasons": reasons,
-        "judgment_calls": judgment,
-    }
-    write_json("review.json", review)
-    github_output(hold="true" if reasons else "false")
-    print("hold for review" if reasons else "safe to merge")
-    for reason in reasons:
-        print(f"- {reason.splitlines()[0]}")
-    return 0
-
-
 # ---------------------------------------------------------------- reporting
 
 def fetch_failures() -> list[dict]:
@@ -756,79 +648,43 @@ def digest_markdown(news: list[dict]) -> str:
     return "\n".join(out).strip() + "\n"
 
 
-def cmd_pr_body(args: argparse.Namespace) -> int:
-    news = read_json("news.json", [])
-    review = read_json("review.json", {"hold": False, "reasons": [], "judgment_calls": ""})
-    as_of = read_json("as_of.json", {})
-    out = ["Weekly refresh by the "
-           f"[weekly-update workflow]({REPO_URL}/actions/workflows/weekly-update.yml): "
-           "`make fetch`, prose brought back in line with the data, then "
-           "`make figures`, `make index` and `make docs`."]
-    if as_of:
-        out.append(f"`AS_OF_DATE` {as_of['old']} → {as_of['new']}.")
-    out.append("")
-    if review["hold"]:
-        out += ["## Needs a person", ""]
-        out += [f"- {reason}" for reason in review["reasons"]]
-        out.append("")
-        if review["judgment_calls"]:
-            out += ["### Judgment calls recorded by the prose pass", "",
-                    review["judgment_calls"], ""]
-    else:
-        out += ["Every change is arithmetic and every check passes; merged "
-                "automatically.", ""]
-    out.append(digest_markdown(news))
-    run_url = os.environ.get("RUN_URL")
-    if run_url:
-        out.append(f"\nCharts and logs: [workflow run]({run_url}).")
-    print("\n".join(out))
-    return 0
-
-
 def esc(text: str) -> str:
     # Quotes included: escaped text also lands in attributes (img alt).
     return (text.replace("&", "&amp;").replace("<", "&lt;")
             .replace(">", "&gt;").replace("'", "&#39;").replace('"', "&quot;"))
 
 
-def status_text(outcome: str, review: dict, pr_url: str, run_url: str) -> tuple[str, str]:
+def status_text(outcome: str, run_url: str) -> tuple[str, str]:
     """(plain, html) for the box at the top of the email."""
-    if outcome == "merged":
-        plain = f"Repository updated: the refresh PR was merged. {pr_url}"
-        html = (f"<b>Repository updated.</b> The refresh "
-                f"<a href='{esc(pr_url)}'>pull request</a> passed every check "
-                "and was merged.")
-    elif outcome == "needs-review":
-        why = review.get("reasons") or [
-            "nothing needed a judgment call, but the merge was switched off "
-            "or did not go through; merge it yourself"]
-        plain = ("SIGN-OFF NEEDED: the refresh PR is open and waiting for you. "
-                 f"{pr_url}\n" + "\n".join(f"  - {r.splitlines()[0]}" for r in why))
-        html = (f"<b>Sign-off needed.</b> The refresh "
-                f"<a href='{esc(pr_url)}'>pull request</a> is open and waiting "
-                "for you:<ul style='margin:4px 0'>"
-                + "".join(f"<li>{esc(r.splitlines()[0])}</li>" for r in why)
-                + "</ul>")
-        if review.get("judgment_calls"):
-            plain += "\n\nJudgment calls recorded:\n" + review["judgment_calls"]
-            html += ("<p style='margin:4px 0'><b>Judgment calls recorded:</b></p>"
-                     f"<pre style='white-space:pre-wrap;font-size:12px'>"
-                     f"{esc(review['judgment_calls'])}</pre>")
+    attention = fetch_attention()
+    if outcome == "news":
+        plain = ("Upstream moved since the committed data. Nothing was committed: "
+                 "the repository changes when you ask a session to bring it up "
+                 "to date (CLAUDE.md, \"Bringing the repository up to date\").")
+        html = ("<b>Upstream moved</b> since the committed data. Nothing was "
+                "committed; the repository changes when you ask a session to "
+                "bring it up to date.")
     elif outcome == "unchanged":
-        plain = "No upstream changes since the last commit; nothing to update."
-        html = "<b>No upstream changes</b> since the last commit; nothing to update."
+        plain = "No vendored series moved upstream since the committed data."
+        html = "<b>No vendored series moved</b> upstream since the committed data."
     else:
-        plain = f"The refresh FAILED before it could open a PR. See the run: {run_url}"
-        html = (f"<b>The refresh failed</b> before it could open a PR. See the "
+        plain = f"The digest run FAILED partway. See the run: {run_url}"
+        html = (f"<b>The digest run failed</b> partway. See the "
                 f"<a href='{esc(run_url)}'>workflow run</a>.")
+    if attention:
+        n = len(attention)
+        plain += (f"\n{n} series need{'s' if n == 1 else ''} hand transcription "
+                  "(listed below).")
+        html += (f" <b>{n} series need{'s' if n == 1 else ''} hand "
+                 "transcription</b> (listed below).")
     if run_url and outcome != "failed":
-        html += f" <a href='{esc(run_url)}' style='color:#888'>(run)</a>"
+        html += (f" <a href='{esc(run_url)}' style='color:#888'>(run, with the "
+                 "refetched CSVs)</a>")
     return plain, html
 
 
-def text_report(news: list[dict], today: str, outcome: str, review: dict,
-                pr_url: str, run_url: str) -> str:
-    plain, _ = status_text(outcome, review, pr_url, run_url)
+def text_report(news: list[dict], today: str, outcome: str, run_url: str) -> str:
+    plain, _ = status_text(outcome, run_url)
     out = [f"AI discovery data — week of {today}", "", plain, ""]
     for tier, heading in (("headline", "HEADLINE FINDINGS"),
                           ("notable", "ALSO MOVED"),
@@ -866,10 +722,11 @@ def text_report(news: list[dict], today: str, outcome: str, review: dict,
 
 
 def html_report(news: list[dict], today: str, cids: dict[str, str],
-                outcome: str, review: dict, pr_url: str, run_url: str) -> str:
-    _, status_html = status_text(outcome, review, pr_url, run_url)
-    tone = {"merged": "#e8f4ea", "needs-review": "#fff4d6",
-            "unchanged": "#f1f1f1", "failed": "#fbe3e3"}.get(outcome, "#f1f1f1")
+                outcome: str, run_url: str) -> str:
+    _, status_html = status_text(outcome, run_url)
+    tone = ("#fff4d6" if fetch_attention() and outcome != "failed" else
+            {"news": "#e8f4ea", "unchanged": "#f1f1f1",
+             "failed": "#fbe3e3"}.get(outcome, "#f1f1f1"))
     out = [
         '<div style="font-family:-apple-system,Segoe UI,Helvetica,Arial,'
         'sans-serif;max-width:680px;color:#1a1a1a">',
@@ -965,9 +822,7 @@ def html_report(news: list[dict], today: str, cids: dict[str, str],
 
 def cmd_email(args: argparse.Namespace) -> int:
     news = read_json("news.json", [])
-    review = read_json("review.json", {"hold": False, "reasons": [], "judgment_calls": ""})
     outcome = os.environ.get("UPDATE_OUTCOME", "failed")
-    pr_url = os.environ.get("PR_URL", "")
     run_url = os.environ.get("RUN_URL", "")
     today = os.environ.get("AI_DISCOVERY_AS_OF") or date.today().isoformat()
 
@@ -978,12 +833,13 @@ def cmd_email(args: argparse.Namespace) -> int:
             f"{notable} series moved" if notable else
             f"{len(news)} routine update{'s' if len(news) != 1 else ''}"
             if news else "no upstream changes")
-    prefix = {"needs-review": "[sign-off needed] ", "failed": "[failed] "}.get(outcome, "")
+    prefix = ("[failed] " if outcome == "failed" else
+              "[transcribe by hand] " if fetch_attention() else "")
     subject = f"{prefix}AI discovery weekly: {what} ({today})"
 
     cids = {p["slug"]: f"chart-{p['slug']}" for p in news if p.get("chart")}
-    text = text_report(news, today, outcome, review, pr_url, run_url)
-    html = html_report(news, today, cids, outcome, review, pr_url, run_url)
+    text = text_report(news, today, outcome, run_url)
+    html = html_report(news, today, cids, outcome, run_url)
     if args.dry_run:
         Path(args.dry_run).mkdir(parents=True, exist_ok=True)
         (Path(args.dry_run) / "email.txt").write_text(f"Subject: {subject}\n\n{text}",
@@ -1029,31 +885,16 @@ def cmd_email(args: argparse.Namespace) -> int:
 
 
 def main() -> int:
-    global BASE
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("--base", default="HEAD", metavar="REF",
-                        help="commit to compare the tree with (default HEAD; "
-                             "the finishing run passes origin/main)")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("fetch", help="run every automatable fetcher").set_defaults(func=cmd_fetch)
     sub.add_parser("scan", help="diff the tree against the base, tier and chart").set_defaults(func=cmd_scan)
     sub.add_parser("bump-as-of", help="move AS_OF_DATE to today").set_defaults(func=cmd_bump_as_of)
-    review = sub.add_parser("review", help="decide whether a person is needed")
-    review.add_argument("--check-log", help="output of make index / check-figures")
-    review.add_argument("--check-failed", action="store_true",
-                        help="the check exited non-zero")
-    review.add_argument("--failed", action="append", metavar="STEP",
-                        help="an earlier step that failed (repeatable)")
-    review.add_argument("--reason", action="append", metavar="TEXT",
-                        help="a further reason to hold the PR (repeatable)")
-    review.set_defaults(func=cmd_review)
-    sub.add_parser("pr-body", help="print the PR description").set_defaults(func=cmd_pr_body)
     email = sub.add_parser("email", help="send the digest")
     email.add_argument("--dry-run", metavar="DIR",
                        help="write email.txt and email.html to DIR instead of sending")
     email.set_defaults(func=cmd_email)
     args = parser.parse_args()
-    BASE = args.base
     return args.func(args)
 
 

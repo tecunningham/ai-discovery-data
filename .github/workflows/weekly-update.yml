@@ -259,6 +259,15 @@ jobs:
           fi
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "opened $url"
+          # A probe that found upstream news only a person can vendor holds
+          # this PR. refresh-finish.yml re-reviews without this run's
+          # .weekly/, but reads "**Judgment calls**" comments, so say it there.
+          if [ -s .weekly/attention.md ]; then
+            { echo "**Judgment calls** — upstream news the fetchers cannot vendor; transcribe it by hand before merging:"
+              echo
+              cat .weekly/attention.md; } > .weekly/attention-comment.md
+            gh pr comment "$url" --body-file .weekly/attention-comment.md
+          fi
 
       - name: Merge when nothing needs a person
         id: merge

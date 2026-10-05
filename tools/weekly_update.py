@@ -81,6 +81,7 @@ sys.path.insert(0, str(ROOT))
 from lib.dates import period_bounds  # noqa: E402  (matplotlib-free)
 from lib.document import front_matter, title  # noqa: E402
 from lib.palette import AI, UNATTRIBUTED  # noqa: E402
+from lib.web import NEEDS_PERSON  # noqa: E402
 
 STATE = ROOT / ".weekly"
 REPO_URL = "https://github.com/tecunningham/ai-discovery-data"
@@ -520,6 +521,12 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     the aggregate exit status cannot. Exit status is 0 regardless: several
     upstreams rate-limit or go down, and a transient failure is not news.
     A CSV a failed fetcher left untouched simply matches HEAD.
+
+    A fetcher that exits NEEDS_PERSON is not a failure: the upstream answered
+    with something only a person can vendor (a staleness probe found a record
+    past the hand-transcribed series). That is news, so it is recorded as
+    `attention` and holds the PR, rather than joining the failures a reader
+    learns to skim past.
     """
     results = []
     for script in sorted(ROOT.glob("problems/*/fetch.py")):
@@ -534,12 +541,15 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         print(tail, flush=True)
         results.append({
             "script": rel, "slug": script.parent.name,
-            "ok": run.returncode == 0, "seconds": round(time.time() - started),
-            "tail": tail,
+            "ok": run.returncode in (0, NEEDS_PERSON),
+            "attention": run.returncode == NEEDS_PERSON,
+            "seconds": round(time.time() - started), "tail": tail,
         })
     write_json("fetch.json", results)
     failed = [r["slug"] for r in results if not r["ok"]]
-    print(f"{len(results)} fetchers ran; failed: {', '.join(failed) or 'none'}")
+    attention = [r["slug"] for r in results if r.get("attention")]
+    print(f"{len(results)} fetchers ran; failed: {', '.join(failed) or 'none'}; "
+          f"need a person: {', '.join(attention) or 'none'}")
     return 0
 
 
@@ -660,6 +670,16 @@ def cmd_review(args: argparse.Namespace) -> int:
                 judgment = (judgment + "\n\n" + tail.strip()).strip()
     if judgment:
         reasons.append("the prose pass flagged judgment calls (below)")
+    attention = fetch_attention()
+    for r in attention:
+        reasons.append(f"{r['slug']}: upstream has news to transcribe by hand — "
+                       f"{attention_line(r)}")
+    # The finishing run (refresh-finish.yml) has no fetch.json; it reads the
+    # PR's "**Judgment calls**" comments instead, so the workflow posts this
+    # file as one and the hold survives the prose pass.
+    (STATE / "attention.md").write_text(
+        "".join(f"- `{r['script']}`: {attention_line(r)}\n" for r in attention),
+        encoding="utf-8")
     for step in args.failed or []:
         reasons.append(f"the {step} step failed; see the workflow run")
     reasons.extend(args.reason or [])
@@ -690,6 +710,17 @@ def fetch_failures() -> list[dict]:
     return [r for r in read_json("fetch.json", []) if not r["ok"]]
 
 
+def fetch_attention() -> list[dict]:
+    return [r for r in read_json("fetch.json", []) if r.get("attention")]
+
+
+def attention_line(r: dict) -> str:
+    """The probe's own message: its last line marked ⚠️, else its last line."""
+    lines = r["tail"].splitlines() if r["tail"] else []
+    flagged = [line for line in lines if line.startswith("⚠")]
+    return (flagged or lines or ["no output"])[-1].lstrip("⚠️ ").strip()
+
+
 def digest_markdown(news: list[dict]) -> str:
     out = []
     for tier, heading in (("headline", "Headline findings"),
@@ -710,6 +741,11 @@ def digest_markdown(news: list[dict]) -> str:
                 if len(items) > limit:
                     out.append(f"    - `{diff['name']}` — … and "
                                f"{len(items) - limit} more")
+        out.append("")
+    attention = fetch_attention()
+    if attention:
+        out += ["### Upstream news to transcribe by hand", ""]
+        out += [f"- `{r['script']}` — {attention_line(r)}" for r in attention]
         out.append("")
     failed = fetch_failures()
     if failed:
@@ -811,6 +847,11 @@ def text_report(news: list[dict], today: str, outcome: str, review: dict,
                 if len(items) > limit:
                     out.append(f"    {diff['name']} — … and {len(items) - limit} more")
             out.append("")
+    attention = fetch_attention()
+    if attention:
+        out += ["UPSTREAM NEWS TO TRANSCRIBE BY HAND (series behind upstream)", ""]
+        out += [f"* {r['slug']}: {attention_line(r)}" for r in attention]
+        out.append("")
     failed = fetch_failures()
     if failed:
         out += ["FETCHERS THAT FAILED (series not refreshed this week)", ""]
@@ -888,6 +929,16 @@ def html_report(news: list[dict], today: str, cids: dict[str, str],
         out.append("</ul>")
     if not news:
         out.append("<p style='color:#666'>No series changed.</p>")
+    attention = fetch_attention()
+    if attention:
+        out.append("<h3 style='border-bottom:1px solid #ddd;padding-bottom:3px'>"
+                   "Upstream news to transcribe by hand</h3>")
+        out.append("<p style='color:#666;font-size:12px;margin-top:0'>The "
+                   "upstream has moved past the hand-vendored series.</p>")
+        out.append("<ul style='font-size:12.5px;color:#444'>")
+        out += [f"<li><code>{esc(r['slug'])}</code>: {esc(attention_line(r))}</li>"
+                for r in attention]
+        out.append("</ul>")
     failed = fetch_failures()
     if failed:
         out.append("<h3 style='border-bottom:1px solid #ddd;padding-bottom:3px;"

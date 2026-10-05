@@ -4,17 +4,18 @@
 - **Role:** discovery series
 - **Metric:** minutes of training to a fixed target validation loss, per
 accepted record
-- **Coverage:** 2024-05-28 to 2026-07-17, all 89 records listed in the
-repository README; open pull requests claiming a faster time read 2026-09-13
+- **Coverage:** 2024-05-28 to 2026-08-30, all 92 records listed in the
+repository README, read 2026-10-05; open pull requests claiming a faster time
+as of 2026-09-28
 - **Data:** [`nanogpt-records.csv`](nanogpt-records.csv)
 - **Upstream:** <https://github.com/KellerJordan/modded-nanogpt> (record table
 in the README at
 <https://github.com/KellerJordan/modded-nanogpt/blob/master/README.md>)
-- **Verdict:** no acceleration — the standing record fell 1.5× in 2026 (33
-records through 2026-07-17) against 1.9× in 2025 (39 records) and 12.6× in
+- **Verdict:** accelerating — the standing record fell 2.8× in 2026 (36
+records through 2026-08-30) against 1.9× in 2025 (39 records) and 12.6× in
 2024 (17 records)
 
-![All 89 modded-nanogpt records on a log time axis, with the five AI-credited records in red and the post-record-21 re-timings marked.](discovery-algorithms-nanogpt.png)
+![All 92 modded-nanogpt records on a log time axis, with the five AI-credited records in red, the two AI-assisted records in pale red, and the post-record-21 re-timings marked.](discovery-algorithms-nanogpt.png)
 
 ## Definition
 
@@ -34,24 +35,33 @@ machine.
 
 ## Facts
 
-- **span:** 45.0 minutes at the llm.c baseline of 2024-05-28, down to 1.23
-  minutes at record 89 on 2026-07-17 — a reduction of about 37 times
-- **records per period:** 17 records in 2024, 39 in 2025, and 33 in the
-  first seven months of 2026
+- **span:** 45.0 minutes at the llm.c baseline of 2024-05-28, down to 0.665
+  minutes at record 92 on 2026-08-30 — a reduction of about 68 times
+- **records per period:** 17 records in 2024, 39 in 2025, and 36 in 2026
+  through 2026-08-30
 - **standing-record falls:** over the same three periods the standing record
-  fell by a factor of 12.6, then 1.9, then 1.5
-- **ai-records:** 5 records out of 89: record 32 to hiverge.ai at 2.625
+  fell by a factor of 12.6, then 1.9, then 2.8
+- **ai-records:** 5 records out of 92: record 32 to hiverge.ai at 2.625
   minutes (2025-09-11), record 60 to Locus at 1.765 (2026-01-16), record 69
   to Aster at 1.528 (2026-02-02), record 72 to Station at 1.496
   (2026-02-10), and record 87 to Recursive at 1.256 (2026-06-11)
 - **ai-step-sizes:** measured against the record each displaced, the five AI
   steps are 1.2%, 0.9%, 0.5%, 1.3% and 0.8% — this repository's arithmetic
   over the vendored series, not figures the README prints
+- **ai-assisted records:** record 82 at 1.353 minutes (2026-04-29),
+  co-authored with Claude Opus 4.7; record 91 at 1.126 minutes (2026-08-06),
+  co-authored with Claude Opus 5 — read from a `Co-authored-by` trailer on
+  each record's merge commit, not from the README table
+- **largest 2026 step:** record 92 at 0.665 minutes, 41% below record 91's
+  1.126, from a sampled-softmax training loss, an 84.6M-row hashed n-gram
+  embedding table and full-stack FP8
 - **deep human steps (README figures):** the Muon optimizer at about 21% and
   U-Net skip connections at about 8%
-- **pending:** 1 open pull request claiming a time below the standing
-  record: #360 at 0.665 minutes, opened 2026-08-31 — a claim, not a record,
-  until the maintainer accepts it into the table
+- **pending:** 1 open pull request claiming a time below the standing record
+  with the evidence the rules ask for: #367 at 0.359 minutes, opened
+  2026-09-17 — a claim, not a record, until the maintainer accepts it into
+  the table
+- **unvetted claims:** none
 
 The collection-wide [cumulative index](../../CUMULATIVE.md) redraws this
 series as the standing record's value over time:
@@ -63,24 +73,34 @@ series as the standing record's value over time:
 The record rows are transcribed by hand, since attributing a record needs
 judgment the README states only in prose. For those, [`fetch.py`](fetch.py)
 is a staleness probe rather than a fetcher: it reads the upstream README and
-reports if a record past the vendored series has been accepted. Rows with
-`kind=pending` it does write: every open pull request on the repository
-whose title claims a time below the standing record, opened on or before the
+reports if a record past the vendored series has been accepted. Open claims
+it does write: every open Track 1 pull request whose title claims a time —
+in minutes or seconds — below the standing record, opened on or before the
 snapshot date, becomes a row whose `record` is `PR<number>`, whose `date` is
 the day the request was opened and whose `agent` and `ai_system` are empty,
 since attribution waits for acceptance. A claim that is merged becomes a
-transcribed record row; one that is closed drops out at the next run. Pending
-rows enter no fact line other than **pending** and no figure in this folder;
-the collection's cumulative comparison page draws them on request as a
-tentative extension of the standing-record line.
+transcribed record row; one that is closed drops out at the next run.
+
+Which kind of row a claim becomes follows the leaderboard's own acceptance
+rules, read from the files the pull request adds. It is `kind=pending` if a
+statistics file states p < 0.01 that mean validation loss is at most 3.28,
+the runs are on 8xH100, its baseline file names a merged record rather than
+another open pull request, and no reviewer's latest review requests changes;
+otherwise it is `kind=claim`, with the tests it failed in `note`. The size of
+the claimed step is deliberately not a test, since record 92 cut the time by
+41% and was accepted. Neither kind enters a fact line other than **pending**
+and **unvetted claims**, or any figure in this folder; the collection's
+cumulative comparison page draws the pending rows on request as a tentative
+extension of the standing-record line.
 [`check.py`](check.py) recomputes the fact lines above from the CSV.
 
 [`figure.py`](figure.py) reads `nanogpt-records.csv`, converts each `date` to
-a year fraction, and draws `minutes` as a step function through all 89 rows
+a year fraction, and draws `minutes` as a step function through all 92 rows
 with `kind=record`. Each record is a point coloured by the `agent` column,
-red where it is `ai` and blue where it is `human`, with the AI points drawn
-larger and labelled from the `ai_system` column. The y axis is logarithmic,
-with ticks set explicitly at 1.5, 2, 3, 5, 10, 20 and 45; a linear axis would
+red where it is `ai`, pale red where it is `ai_assisted` and blue where it is
+`human`, with the AI points drawn larger and labelled from the `ai_system`
+column. The y axis is logarithmic, with ticks set explicitly at 0.7, 1, 1.5,
+2, 3, 5, 10, 20 and 45; a linear axis would
 compress the whole 2025–2026 stretch into the bottom of the frame. January
 2026 onward is shaded, as in every figure here.
 
@@ -99,11 +119,12 @@ acknowledged holder.
 
 ## Limitations
 
-- **a leaderboard measures what people chose to optimize.** Eighty-nine
+- **a leaderboard measures what people chose to optimize.** Ninety-two
   records on one training task say nothing about the value of the
   improvement, or about how much of it transfers to a model anybody ships.
 - **the AI share is a floor.** The `agent` column reflects the README's own
-  labels, so a record set with undisclosed model assistance counts as human.
+  labels and the co-author trailers on each record's merge commit, so a
+  record set with undisclosed model assistance counts as human.
 - **the step sizes are this repository's arithmetic.** The README prints
   standing times, not per-record deltas; only the Muon and U-Net figures
   come from the source log.
@@ -116,7 +137,7 @@ acknowledged holder.
 
 ## AI attribution
 
-Five of the 89 records are credited to AI-agent companies: hiverge.ai,
+Five of the 92 records are credited to AI-agent companies: hiverge.ai,
 Locus, Aster, Station and Recursive, at the dates and times listed in the
 fact lines above, each measuring roughly one percent against the record it
 displaced. The README's entry for record 60 (Locus) is an explicit fused
@@ -126,6 +147,14 @@ Recursive". hiverge.ai also holds the first acknowledged AI record on the
 [CIFAR-10 speedrun](../algorithms-cifar10/README.md), so the AI-set records
 on the two ML speedruns partly belong to the same small set of firms. No
 other record in the CSV carries an `agent` value of `ai`.
+
+Two more are `ai_assisted`: entries by named people whose merge commit names
+a model as co-author. Record 82 (learnable XSA gated layers, PR #264) carries
+`Co-authored-by: Claude Opus 4.7`, and record 91 (canonical token masking,
+PR #350) carries `Co-authored-by: Claude Opus 5`. Record 92's merge commit
+carries the same Claude Opus 5 trailer, but it came in with PR #350's
+commits when the two were merged together; record 92's own commit names no
+model, so it stays `human`.
 
 Two adjacent results are AI-credited off this leaderboard. TTT-Discover's
 test-time-training harness, running the open gpt-oss-120b model, found TriMul

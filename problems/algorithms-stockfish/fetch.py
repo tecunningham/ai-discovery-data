@@ -19,7 +19,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from lib.table import read_csv  # noqa: E402
-from lib.web import fetch  # noqa: E402
+from lib.web import NEEDS_PERSON, fetch  # noqa: E402
 
 URL = "https://nextchessmove.com/dev-builds"
 
@@ -44,7 +44,7 @@ def main() -> int:
     message = probe()
     if message:
         print(f"⚠️  {message}")
-        return 1
+        return NEEDS_PERSON
     print("stockfish-ncm-elo.csv: no build on the page past the vendored series")
     return 0
 

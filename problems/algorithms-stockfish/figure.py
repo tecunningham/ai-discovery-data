@@ -27,10 +27,13 @@ from lib.chart import (  # noqa: E402
 from lib.cumulative import staircase_chart  # noqa: E402
 from lib.table import read_csv  # noqa: E402
 
-# The date of the commit the red marker records; see the README's LLM section.
-# Pinned here so a refetch that appends newer builds cannot silently drag the
-# marker to whatever the new last row happens to be.
-LLM_COMMIT_DATE = "2026-07-26"
+# The dates of the commits the red markers record; see the README's AI
+# attribution section. Pinned here so a refetch that appends newer builds
+# cannot silently drag a marker to whatever the new last row happens to be.
+# Six days apart, the two markers overlap at this scale, so one label serves.
+LLM_COMMIT_DATES = ("2026-07-26", "2026-08-01")
+LLM_LABEL = ("first LLM-credited changes to play:\n0.6% speed patch (Jul 26),\n"
+             "Elo patch an LLM found in another engine (Aug 1)")
 
 
 def cumulative() -> None:
@@ -55,13 +58,10 @@ def main() -> None:
     rows = read_csv(HERE / "stockfish-ncm-elo.csv")
     xs = [year_fraction(row["date"]) for row in rows]
     ys = [float(row["elo_vs_sf15"]) for row in rows]
-    # Eight builds share the commit's date, spanning about three Elo, so "the
-    # build to mark" is a choice rather than a lookup. The file keeps upstream's
-    # test order, and the last row on that date is the last build tested; taking
-    # the maximum instead would report whichever run got the luckiest 20,000
-    # games.
-    latest = [row for row in rows if row["date"] == LLM_COMMIT_DATE][-1]
-    latest_elo = float(latest["elo_vs_sf15"])
+    # Several builds share each commit's date, spanning a few Elo, so "the build
+    # to mark" is a choice rather than a lookup. The file keeps upstream's test
+    # order, and the last row on that date is the last build tested; taking the
+    # maximum instead would report whichever run got the luckiest 20,000 games.
     fig, ax = new_chart(
         "Stockfish development builds on fixed hardware",
         "20,000 games per build against Stockfish 15; releases are marked",
@@ -69,17 +69,15 @@ def main() -> None:
     ax.plot(xs, ys, color="#9fb3cc", linewidth=1, zorder=2)
     releases = [(x, y, row["release"]) for x, y, row in zip(xs, ys, rows) if row["release"]]
     ax.scatter([row[0] for row in releases], [row[1] for row in releases], color=HUMAN, s=35, edgecolor="white", linewidth=0.5, zorder=4)
-    llm_x = year_fraction(latest["date"])
-    ax.scatter([llm_x], [latest_elo], s=70, facecolor="none", edgecolor=AI, linewidth=1.6, zorder=5)
-    ax.annotate(
-        "first LLM-credited master commit:\n0.6% speed patch, not an Elo record",
-        (llm_x, latest_elo),
-        xytext=(-8, -35),
-        textcoords="offset points",
-        ha="right",
-        fontsize=8,
-        color=AI,
-    )
+    marks = []
+    for day in LLM_COMMIT_DATES:
+        build = [row for row in rows if row["date"] == day][-1]
+        marks.append((year_fraction(build["date"]), float(build["elo_vs_sf15"])))
+        ax.scatter([marks[-1][0]], [marks[-1][1]], s=70, facecolor="none", edgecolor=AI,
+                   linewidth=1.6, zorder=5)
+    ax.annotate(LLM_LABEL, marks[0], xytext=(-8, -150), textcoords="offset points",
+                ha="right", fontsize=8, color=AI,
+                arrowprops={"arrowstyle": "-", "color": AI, "linewidth": 0.8})
     right = 2027
     ax.set_xlim(2013, right)
     shade_era(ax, right)
@@ -89,7 +87,7 @@ def main() -> None:
     save(
         fig,
         HERE / "discovery-algorithms-stockfish.png",
-        "Stockfish fixed-hardware Elo progression with the first LLM-credited commit marked.",
+        "Stockfish fixed-hardware Elo progression with the first two LLM-credited changes to play marked.",
         ["https://nextchessmove.com/dev-builds"],
         __file__,
     )
